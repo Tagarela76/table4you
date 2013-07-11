@@ -1,0 +1,7 @@
+parameters:
+#    table_main.example.class: Table\MainBundle\Example
+
+services:
+#    table_main.example:
+#        class: %table_main.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
