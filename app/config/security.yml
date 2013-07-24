@@ -19,16 +19,16 @@ security:
 
         # -> custom firewall for the admin area of the URL
         admin:
-            pattern:            /admin(.*)
+            pattern:            /table_admin(.*)
             context:            user
             form_login:
                 provider:       fos_userbundle
-                login_path:     /admin/login
+                login_path:     /table_admin/login
                 use_forward:    false
-                check_path:     /admin/login_check
+                check_path:     /table_admin/login_check
                 failure_path:   null
             logout:
-                path:           /admin/logout
+                path:           /table_admin/logout
             anonymous:          true
 
         # -> end custom configuration
@@ -54,12 +54,12 @@ security:
         - { path: ^/_profiler, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
-        - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/login-check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/table_admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/table_admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/table_admin/login-check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
-        - { path: ^/admin, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
+        - { path: ^/table_admin, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
         - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }

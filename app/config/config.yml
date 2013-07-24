@@ -102,10 +102,19 @@ sonata_media:
             directory:  %kernel.root_dir%/../web/uploads/media
             create:     false
 
+services:
+    table.registration.form.type:
+        class: Application\Sonata\UserBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: table_user_registration }        
 fos_user:
     db_driver:      orm
     firewall_name:  main
     user_class:     Application\Sonata\UserBundle\Entity\User
+    registration:
+        form:
+            type: table_user_registration
 
 sonata_block:
     default_contexts: [cms]
@@ -171,3 +180,4 @@ sonata_doctrine_orm_admin:
                 bigint:     SonataAdminBundle:CRUD:base_show_field.html.twig
                 integer:    SonataAdminBundle:CRUD:base_show_field.html.twig
                 decimal:    SonataAdminBundle:CRUD:base_show_field.html.twig
+gregwar_captcha: ~
