@@ -14,7 +14,6 @@ class RegistrationFormType extends BaseType
         $builder
             ->add('phone', 'text', array(
                     'label'=>'form.phone',
-		    'translation_domain' => 'FOSUserBundle',
                     'required' => false,
                 ))  
             ->add('captcha', 'captcha')

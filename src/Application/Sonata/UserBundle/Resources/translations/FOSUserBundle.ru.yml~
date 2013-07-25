@@ -1,7 +1,7 @@
 # Registration
-form:
-    phone: Номер телефона
 registration:
+    profile:
+        phone: Номер телефона
     check_email: На Ваш email отправлено письмо для подтверждения регистрации.
     confirmed: Спасибо, что выбрали наш сайт. Ваш аакаунт успешно зарегистрирован.
     email:

@@ -1,0 +1,4 @@
+Sonata\UserBundle\Entity\User:
+    properties:
+        plainPassword:
+            - Regex: "/^\w+/"
