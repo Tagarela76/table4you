@@ -1,0 +1,19 @@
+restaurant: Ресторан
+restaurants: Рестораны
+additionalServices: Дополнительные услуги
+kitchens: Кухни
+categories: Категории
+Name: Название
+City: Город
+Street: Улица
+House: Номер дома
+Work Hours From: Часы работы(от)
+Work Hours To: Часы работы(до)
+Kitchen Id: Кухня
+Category Id: Категория
+Photo: Фото
+Additional Services: Дополнительные услуги
+Restaurant List: Список ресторанов
+Restaurant Category List: Список категорий ресторана
+Restaurant Kitchen List: Список кухонь
+Restaurant Additional Services List: Список дополнительных услуг

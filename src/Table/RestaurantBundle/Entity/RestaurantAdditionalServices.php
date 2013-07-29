@@ -61,4 +61,12 @@ class RestaurantAdditionalServices
     {
         return $this->name;
     }
+    
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return strval($this->getName());
+    }
 }

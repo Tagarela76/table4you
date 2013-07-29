@@ -54,9 +54,16 @@ class Restaurant
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="work_hours", type="time")
+     * @ORM\Column(name="work_hours_from", type="time")
      */
-    private $workHours;
+    private $workHoursFrom;
+    
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="work_hours_to", type="time")
+     */
+    private $workHoursTo;
 
     /**
      * @var Table\RestaurantBundle\Entity\RestaurantKitchen $kitchenId
@@ -198,26 +205,49 @@ class Restaurant
     }
 
     /**
-     * Set workHours
+     * Set workHoursFrom
      *
-     * @param \DateTime $workHours
+     * @param \DateTime $workHoursFrom
      * @return Restaurant
      */
-    public function setWorkHours($workHours)
+    public function setWorkHoursFrom($workHoursFrom)
     {
-        $this->workHours = $workHours;
+        $this->workHoursFrom = $workHoursFrom;
     
         return $this;
     }
 
     /**
-     * Get workHours
+     * Get workHoursFrom
      *
      * @return \DateTime 
      */
-    public function getWorkHours()
+    public function getWorkHoursFrom()
     {
-        return $this->workHours;
+        return $this->workHoursFrom;
+    }
+    
+    /**
+     * Set workHoursTo
+     *
+     * @param \DateTime $workHoursTo
+     * @return Restaurant
+     */
+    public function setWorkHoursTo($workHoursTo)
+    {
+        $this->workHoursTo = $workHoursTo;
+    
+        return $this;
+    }
+
+    /**
+     * Get workHoursTo
+     *
+     * @return \DateTime 
+     */
+    public function getWorkHoursTo()
+    {
+        return $this->workHoursTo;
     }
 
     /**
@@ -285,5 +315,53 @@ class Restaurant
     public function setPhoto($photo)
     {
         $this->photo = $photo;
+    }
+    
+    /**
+     * Get additionalServices
+     *
+     * @return Table\RestaurantBundle\Entity\RestaurantAdditionalServices[] 
+     */
+    public function getAdditionalServices()
+    {
+        return $this->additionalServices;
+    }
+
+    /**
+     * Add additionalServices
+     * 
+     * @param Table\RestaurantBundle\Entity\RestaurantAdditionalServices $additionalServices
+     */
+    public function addAdditionalServices($additionalServices)
+    {
+        $this->additionalServices[] = $additionalServices;
+    }
+
+    /**
+     * Set additionalServices
+     *
+     * @param Table\RestaurantBundle\Entity\RestaurantAdditionalServices $additionalServices
+     * @return Restaurant
+     */
+    public function setAdditionalServices($additionalServices)
+    {
+        $this->additionalServices = $additionalServices;
+    }
+
+    /**
+     * Remove additionalServices
+     * 
+     * @param Table\RestaurantBundle\Entity\RestaurantAdditionalServices $additionalServices
+     */
+    public function removeAdditionalServices($additionalServices) {
+        $this->additionalServices->removeElement($additionalServices);
+    }
+    
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return strval($this->getName());
     }
 }
