@@ -19,12 +19,13 @@
                     <value>Profile</value>
                 </option>
             </constraint>
-            <constraint name="Regex">
-                <option name="pattern">/^[A-Za-z0-9]$/</option>
-                <option name="match">false</option>
+            <constraint name="Application\Sonata\UserBundle\Validator\Constraints\CustomPasswordStrength">
+                <option name="length">7</option>
                 <option name="message">fos_user.password.password_mismatch</option>
-            </constraint>
+                <option name="groups">Registration</option>
+            </constraint>    
         </property>
+        
     </class>
 
 </constraint-mapping>

@@ -30,6 +30,7 @@ class AppKernel extends Kernel
             new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
             new Table\MainBundle\TableMainBundle(),
             new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
+            new Rollerworks\Bundle\PasswordStrengthBundle\RollerworksPasswordStrengthBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -35,36 +35,9 @@ class User extends BaseUser
      * @return integer $id
      */
     
-    /**
-     * @var string $phone
-     *
-     * @ORM\Column(name="phone", type="integer", nullable=true)
-     */
-    protected $phone;
-    
     public function getId()
     {
         return $this->id;
-    }
-    
-    /**
-     * Get phone
-     * 
-     * @return integer
-     */
-    public function getPhone()
-    {
-        return $this->phone;
-    }
-
-    /**
-     * Set phone
-     * 
-     * @param integer $phone
-     */
-    public function setPhone($phone)
-    {
-        $this->phone = $phone;
     }
     
 }

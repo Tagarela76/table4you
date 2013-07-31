@@ -3,7 +3,7 @@ table_main:
     prefix:   /
 
 sonata_admin_dashboard_custom:
-    pattern:  /admin
+    pattern:  /table_admin/
     defaults: { _controller: SonataAdminBundle:Core:dashboard }
 
 sonata_user:
