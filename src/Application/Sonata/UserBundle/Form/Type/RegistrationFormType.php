@@ -7,17 +7,18 @@ use FOS\UserBundle\Form\Type\RegistrationFormType as BaseType;
 
 class RegistrationFormType extends BaseType
 {
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('phone', 'text', array(
-                    'label'=>'form.phone',
-		    'translation_domain' => 'FOSUserBundle',
+                ->add('phone', 'text', array(
+                    'label' => 'form.phone',
+                    'translation_domain' => 'FOSUserBundle',
                     'required' => true,
-                ))  
-            ->add('captcha', 'captcha')
+                ))
+                ->add('captcha', 'captcha')
         ;
     }
 
@@ -25,4 +26,5 @@ class RegistrationFormType extends BaseType
     {
         return 'table_user_registration';
     }
+
 }

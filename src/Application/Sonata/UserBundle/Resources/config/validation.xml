@@ -21,7 +21,7 @@
             </constraint>
             <constraint name="Application\Sonata\UserBundle\Validator\Constraints\CustomPasswordStrength">
                 <option name="length">7</option>
-                <option name="message">fos_user.password.password_mismatch</option>
+                <option name="message">fos_user.password.password_not_fit_format</option>
                 <option name="groups">Registration</option>
             </constraint>    
         </property>
