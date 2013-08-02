@@ -1,1 +1,20 @@
-Hello!
+{% extends 'TableMainBundle::layout.html.twig' %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+{% endblock %}      
+{% block content %}
+    <a class="btn btn-primary" data-toggle="modal" data-target="#register" href="{{ path('fos_user_registration_register') }}">
+        {% trans %}main.register{% endtrans %}
+    </a>
+    <div class="modal hide" data-backdrop="static" id="register">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">×</a>
+            <h3>{% trans %}main.registerFormTitle{% endtrans %}</h3>
+        </div>
+        <div class="modal-body" >
+
+        </div>
+    </div>
+{% endblock %}    

@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "0bd0c81755997d140b5e43b15f86179d",
+    "hash": "a2260a03fdc502df9b4fb8bf30dd3218",
     "packages": [
         {
             "name": "doctrine/common",
@@ -276,6 +276,60 @@
                 "orm"
             ],
             "time": "2013-05-11 07:51:12"
+        },
+        {
+            "name": "friendsofsymfony/jsrouting-bundle",
+            "version": "1.2.0",
+            "target-dir": "FOS/JsRoutingBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfSymfony/FOSJsRoutingBundle.git",
+                "reference": "1.2.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/1.2.0",
+                "reference": "1.2.0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/console": "~2.0",
+                "symfony/framework-bundle": "~2.0",
+                "symfony/serializer": "~2.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "FOS\\JsRoutingBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "William Durand",
+                    "email": "william.durand1@gmail.com",
+                    "homepage": "http://www.willdurand.fr"
+                },
+                {
+                    "name": "FriendsOfSymfony Community",
+                    "homepage": "https://github.com/friendsofsymfony/FOSJsRoutingBundle/contributors"
+                }
+            ],
+            "description": "Symfony FOSJsRoutingBundle",
+            "homepage": "http://friendsofsymfony.github.com",
+            "keywords": [
+                "Js Routing"
+            ],
+            "time": "2013-07-15 09:21:37"
         },
         {
             "name": "friendsofsymfony/user-bundle",
@@ -1207,12 +1261,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "78878870d21653e2710500f01320ab2c52127811"
+                "reference": "2430d870e8af11f35500f5a5645ae9b3b60c5699"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/78878870d21653e2710500f01320ab2c52127811",
-                "reference": "78878870d21653e2710500f01320ab2c52127811",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/2430d870e8af11f35500f5a5645ae9b3b60c5699",
+                "reference": "2430d870e8af11f35500f5a5645ae9b3b60c5699",
                 "shasum": ""
             },
             "require": {
@@ -1273,7 +1327,7 @@
                 "bootstrap",
                 "sonata"
             ],
-            "time": "2013-07-29 19:51:32"
+            "time": "2013-08-01 22:34:22"
         },
         {
             "name": "sonata-project/block-bundle",
@@ -1658,12 +1712,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataMediaBundle.git",
-                "reference": "ecf91655db15751fd8d5a65677edcf91b7afd7bc"
+                "reference": "2.2.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/ecf91655db15751fd8d5a65677edcf91b7afd7bc",
-                "reference": "ecf91655db15751fd8d5a65677edcf91b7afd7bc",
+                "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/2.2.3",
+                "reference": "2.2.3",
                 "shasum": ""
             },
             "require": {
@@ -1725,21 +1779,21 @@
                 "vimeo",
                 "youtube"
             ],
-            "time": "2013-07-15 08:36:55"
+            "time": "2013-07-30 17:01:02"
         },
         {
             "name": "sonata-project/notification-bundle",
-            "version": "2.2.0",
+            "version": "2.2.1",
             "target-dir": "Sonata/NotificationBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataNotificationBundle.git",
-                "reference": "2.2.0"
+                "reference": "2.2.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataNotificationBundle/zipball/2.2.0",
-                "reference": "2.2.0",
+                "url": "https://api.github.com/repos/sonata-project/SonataNotificationBundle/zipball/2.2.1",
+                "reference": "2.2.1",
                 "shasum": ""
             },
             "require": {
@@ -1747,13 +1801,15 @@
                 "symfony/symfony": ">=2.1,<2.4-dev"
             },
             "require-dev": {
-                "liip/monitor-bundle": "0.4.*",
+                "guzzle/guzzle": "3.*",
+                "liip/monitor": "0.5.*@dev",
+                "liip/monitor-bundle": "0.5.*@dev",
                 "sonata-project/doctrine-orm-admin-bundle": "2.2.*",
                 "videlalvaro/php-amqplib": "2.0.*"
             },
             "suggest": {
                 "guzzle/guzzle": "3.*",
-                "liip/monitor-bundle": "0.4.*",
+                "liip/monitor-bundle": "0.5.*@dev",
                 "sonata-project/doctrine-orm-admin-bundle": "2.2.*",
                 "videlalvaro/php-amqplib": "2.0.*"
             },
@@ -1790,7 +1846,7 @@
                 "page",
                 "sonata"
             ],
-            "time": "2013-06-01 13:34:36"
+            "time": "2013-07-26 08:51:13"
         },
         {
             "name": "sonata-project/user-bundle",

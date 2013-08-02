@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+        <title>{% block title %}{% endblock %}</title>
+
+        <meta name="keywords" content="{% block keywords %}{% endblock %}">
+        <meta name="description" content="{% block description %}{% endblock %}">
+
+        {% block stylesheets %}
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/bootstrap.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/bootstrap-responsive.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/jquery-ui.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/main.css') }}">
+            <!--[if lt IE 9]>
+                <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/ie-css.css') }}">
+            <![endif]-->
+        {% endblock %}
+
+        {% block javascripts %}
+            <script src="{{ asset('bundles/tablemain/js/jquery.min.js') }}"></script>
+            <script src="{{ asset('bundles/tablemain/js/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('bundles/tablemain/js/bootstrap-dropdown.js') }}"></script>
+            <script src="{{ asset('bundles/tablemain/js/respond.min.js') }}"></script>
+        {% endblock %}
+
+    </head>
+    <body>
+    {% block content %}
+
+    {% endblock %}        
+    </body>
+</html>

@@ -31,7 +31,8 @@
         "sonata-project/user-bundle": "2.2.x-dev",
         "sonata-project/media-bundle": "2.2.*@dev",
         "gregwar/captcha-bundle": "dev-master",
-        "rollerworks/password-strength-bundle": "master-dev"
+        "rollerworks/password-strength-bundle": "master-dev",
+        "friendsofsymfony/jsrouting-bundle": "~1.1"
     },
     "scripts": {
         "post-install-cmd": [
