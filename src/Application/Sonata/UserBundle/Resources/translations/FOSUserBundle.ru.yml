@@ -1,6 +1,7 @@
 # Registration
 form:
-    phone: Телефон
+    phone: 'Телефон:'
+    lastname: 'Фамилия:'
 registration:
     check_email: На Ваш email отправлено письмо для подтверждения регистрации.
     confirmed: Спасибо, что выбрали наш сайт. Ваш аакаунт успешно зарегистрирован.
