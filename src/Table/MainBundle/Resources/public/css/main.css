@@ -1,8 +1,21 @@
 
-/* MODAL WINDOW REGISTRATION */ 
+/* MODAL WINDOW REGISTRATION */
 
+.modal{
+    width: 470px;
+    top: 5%;
+}
+.modal-body {
+    background: #f1efed;
+    max-height: 655px;
+    padding: 0px;
+    padding-top: 15px;
+    -moz-border-radius: 0px 0px 5px 5px;
+    -webkit-border-radius: 0px 0px 5px 5px;
+    -o-border-radius: 0px 0px 5px 5px;
+    border-radius: 0px 0px 5px 5px;
+}
 .modal-registration{
-	width: 470px;
 	background: #f1efed;
 	-moz-border-radius: 5px 5px 5px 5px;
 	-webkit-border-radius: 5px 5px 5px 5px;
@@ -10,20 +23,27 @@
 	border-radius: 5px 5px 5px 5px;
 }
 .modal-registration-title{
-	background: #e4e3e2;
-	padding-left: 14px;
-	margin-bottom: 40px;
-	-moz-border-radius: 5px 5px 0px 0px;
-	-webkit-border-radius: 5px 5px 0px 0px;
-	-o-border-radius: 5px 5px 0px 0px;
-	border-radius: 5px 5px 0px 0px;
+    background: #e4e3e2;
+    border: 0px;
+    padding-left: 14px;
+    -moz-border-radius: 5px 5px 0px 0px;
+    -webkit-border-radius: 5px 5px 0px 0px;
+    -o-border-radius: 5px 5px 0px 0px;
+    border-radius: 5px 5px 0px 0px;
+    height: 27px;
+}
+.modal-header .close{
+    background: url(../images/close-modal.png) no-repeat;
+    display: block;
+    width: 14px;
+    height: 14px;
+    margin-top: 6px;
 }
 .modal-registration-title h3 {
 	font-size: 18px;
 	color: #353535;
 	font-family: Trebuchet MS;
 	margin: 0px;
-	padding: 11px 0px;
 }
 .modal-registration #fos_user_registration_form div{
 	margin: 0px 29px 19px 31px;
@@ -49,7 +69,6 @@
 	color: #353535;
 	width: 92%;
 	padding: 8px 0px 8px 30px;
-	background: #e2e0e0;
 	background: -moz-linear-gradient(top, #e2e0e0 0%, #f1f0f0 99%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e2e0e0), color-stop(99%,#f1f0f0));
 	background: -webkit-linear-gradient(top, #e2e0e0 0%,#f1f0f0 99%);
@@ -67,7 +86,7 @@
 	box-shadow: inset 1px 0px 3px rgba(238, 238, 238, 0.7), inset -2px 0px 3px rgba(238, 238, 238,0.7), inset 0px 2px 1px rgba(0, 0, 0, 0.7);
 }
 .button-registration{
-	padding: 26px 0px 35px 0px;
+	padding: 26px 0px 20px 0px;
 }
 .button-registration input{
 	background: #feb200;
