@@ -1,5 +1,5 @@
 fos_user:
     password:
-        not_fit_format: Password should consist 6 digits and one letter
+        password_not_fit_format: Password should consist 6 digits and one letter
     phone:
         mismatch: Phone should have format +7 ххх ххххххх
