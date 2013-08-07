@@ -48,4 +48,4 @@ fos_user_change_password:
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"    
 gregwar_captcha_routing:
-    resource: "@GregwarCaptchaBundle/Resources/config/routing/routing.yml"    
+    resource: "@GregwarCaptchaBundle/Resources/config/routing/routing.yml"
