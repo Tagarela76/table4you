@@ -4,6 +4,9 @@
     width: 470px;
     top: 5%;
 }
+.modal, .modal label, .modal input, .modal ul li, .modal h3 {
+    font-family: Trebuchet MS;
+}
 .modal-body {
     background: #f1efed;
     max-height: 561px;
@@ -48,7 +51,6 @@
 .modal-registration-title h3 {
     font-size: 18px;
     color: #353535;
-    font-family: Trebuchet MS;
     margin: 0px;
 }
 .modal-registration #fos-registration-form{
@@ -63,13 +65,9 @@
     font-size: 11px;
     color: #ff0000;
 }
-.modal-registration #fos_user_registration_form div:last-child{
-    height: 131px;
-}
 .modal-registration #fos_user_registration_form div label{
     width: 100%;
     float: left;
-    font-family: Trebuchet MS;
     font-size: 18px;
     color: #9c9a9a;
     margin-bottom: 1%;
@@ -79,7 +77,6 @@
     overflow: hidden;
 }
 .modal-registration #fos_user_registration_form div input{
-    font-family: Trebuchet MS;
     font-size: 18px;
     color: #353535;
     width: 92%;
@@ -117,7 +114,6 @@
     padding: 7px 0px;
     color: #fffefe;
     font-size: 20px;
-    font-family: Trebuchet MS;
     -moz-border-radius: 8px 8px 8px 8px;
     -webkit-border-radius: 8px 8px 8px 8px;
     -o-border-radius: 8px 8px 8px 8px;
@@ -136,25 +132,24 @@
 }
 .modal-registration #fos_user_registration_form div.text-capcha {
     color: #161616;
-    font-family: "Trebuchet MS";  /* ТЕКСТ ПЕРЕД КАПЧЕЙ */
     font-size: 15px;
-    margin: 0px!important;
+    margin: 0px;
     padding: 0px;
     height: 100px;
 }
 
-.password-registration #fos_user_registration_form_plainPassword, .password-registration #fos_user_registration_form_plainPassword div{
-    margin: 0px!important;
+#fos_user_registration_form .password-registration #fos_user_registration_form_plainPassword, #fos_user_registration_form .password-registration #fos_user_registration_form_plainPassword div{
+    margin: 0px;
 }
 
 .password-registration #fos_user_registration_form_plainPassword div+div{
     width: 100%;
-    height: 62px!important;
+    height: 62px;
     float: left;
 }
 
-.error-form-registration{
-    border: 1px solid #ff0000!important;
+.modal-registration #fos_user_registration_form div input.error-form-registration{
+    border: 1px solid #ff0000;
 }
 .modal-registration #fos_user_registration_form div input:focus, .modal-registration #fos_user_registration_form div input#fos_user_registration_form_captcha:focus{
     border: 1px solid #fe8504;
