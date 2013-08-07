@@ -8,6 +8,7 @@ use FOS\UserBundle\Controller\RegistrationController as BaseController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\Form\FormError;
 
 class RegistrationController extends BaseController
 {
@@ -17,11 +18,8 @@ class RegistrationController extends BaseController
         $formHandler = $this->container->get('fos_user.registration.form.handler');
         $confirmationEnabled = $this->container->getParameter('fos_user.registration.confirmation.enabled');
 
-        $resettingUrl = $this->container->get('router')->generate('fos_user_resetting_check_email');
-        $this->container->get('session')->set('resettingUrl', $resettingUrl);
-        
         $process = $formHandler->process($confirmationEnabled);
-        if ($process) {
+        if ($process) { 
             $user = $form->getData();
 
             $authUser = false;
@@ -52,7 +50,20 @@ class RegistrationController extends BaseController
 
             return $response;
         }
+        $emailErrors = $form->createView()->children['email']->vars['errors'];
         
+        // We process only email Errors
+        if (!empty($emailErrors)) {
+            $emailError = $emailErrors[0];
+            // only for template fos_user.email.already_used
+            if ($emailError->getMessageTemplate() == "fos_user.email.already_used") {
+                // Get resseting URL
+                $resettingUrl = $this->container->get('router')->generate('fos_user_resetting_check_email');
+                //Add resset url to form
+                $form->get('email')->addError(new FormError($resettingUrl));
+            } 
+        }
+
         return $this->container->get('templating')->renderResponse('ApplicationSonataUserBundle:Registration:register.html.'.$this->getEngine(), array(
             'form' => $form->createView(),
         ));
