@@ -2,14 +2,19 @@
 
 .modal{
     width: 470px;
-    top: 5%;
+    top: 9%;
+}
+@media (max-height:768px) {
+    .modal{
+        top: 1%;
+    }
 }
 .modal, .modal label, .modal input, .modal ul li, .modal h3 {
     font-family: Trebuchet MS;
 }
 .modal-body {
     background: #f1efed;
-    max-height: 561px;
+    max-height: 552px;
     padding: 0px;
     padding-top: 15px;
     -moz-border-radius: 0px 0px 5px 5px;
@@ -154,6 +159,7 @@
 .modal-registration #fos_user_registration_form div input:focus, .modal-registration #fos_user_registration_form div input#fos_user_registration_form_captcha:focus{
     border: 1px solid #fe8504;
     outline: none;
+    box-shadow: none;
 }
 /* end MODAL */
 
