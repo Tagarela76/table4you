@@ -34,7 +34,7 @@
             {% endif %}
         </div>
 
-        <div>
+        <div class="password-registration">
             {{ form_errors(form.plainPassword) }}
             {% if form.plainPassword.vars.errors|length %}
                 {{ form_widget(form.plainPassword, {'attr':{'class':'error-form-registration'} }) }}
