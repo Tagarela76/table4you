@@ -7,10 +7,6 @@
     <class name="FOS\UserBundle\Model\User">
 
         <property name="plainPassword">
-            <constraint name="NotBlank">
-                <option name="message">fos_user.password.blank</option>
-                <option name="groups">Registration</option>
-            </constraint>
             <constraint name="Length">
                 <option name="min">7</option>
                 <option name="minMessage">fos_user.password.short</option>
