@@ -26,7 +26,10 @@ class RegistrationFormType extends BaseType
                     'translation_domain' => 'FOSUserBundle',
                     'required' => true,
                 ))
-                ->add('captcha', 'captcha')
+                ->add('captcha', 'captcha', array(
+                    'reload' => true,
+                    'as_url' => true
+                ))
         ;
     }
 
