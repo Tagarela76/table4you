@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "dd1741428c7bde95af2ccc89ed019516",
+    "hash": "a2260a03fdc502df9b4fb8bf30dd3218",
     "packages": [
         {
             "name": "doctrine/common",
@@ -278,6 +278,60 @@
             "time": "2013-05-11 07:51:12"
         },
         {
+            "name": "friendsofsymfony/jsrouting-bundle",
+            "version": "1.2.0",
+            "target-dir": "FOS/JsRoutingBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfSymfony/FOSJsRoutingBundle.git",
+                "reference": "1.2.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/1.2.0",
+                "reference": "1.2.0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/console": "~2.0",
+                "symfony/framework-bundle": "~2.0",
+                "symfony/serializer": "~2.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "FOS\\JsRoutingBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "William Durand",
+                    "email": "william.durand1@gmail.com",
+                    "homepage": "http://www.willdurand.fr"
+                },
+                {
+                    "name": "FriendsOfSymfony Community",
+                    "homepage": "https://github.com/friendsofsymfony/FOSJsRoutingBundle/contributors"
+                }
+            ],
+            "description": "Symfony FOSJsRoutingBundle",
+            "homepage": "http://friendsofsymfony.github.com",
+            "keywords": [
+                "Js Routing"
+            ],
+            "time": "2013-07-15 09:21:37"
+        },
+        {
             "name": "friendsofsymfony/user-bundle",
             "version": "1.3.x-dev",
             "target-dir": "FOS/UserBundle",
@@ -347,17 +401,17 @@
         },
         {
             "name": "gregwar/captcha",
-            "version": "v1.0.5",
+            "version": "v1.0.7",
             "target-dir": "Gregwar/Captcha",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Gregwar/Captcha.git",
-                "reference": "v1.0.5"
+                "reference": "v1.0.7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Gregwar/Captcha/zipball/v1.0.5",
-                "reference": "v1.0.5",
+                "url": "https://api.github.com/repos/Gregwar/Captcha/zipball/v1.0.7",
+                "reference": "v1.0.7",
                 "shasum": ""
             },
             "require": {
@@ -392,7 +446,7 @@
                 "captcha",
                 "spam"
             ],
-            "time": "2013-04-24 16:00:57"
+            "time": "2013-06-19 13:56:05"
         },
         {
             "name": "gregwar/captcha-bundle",
@@ -401,16 +455,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Gregwar/CaptchaBundle.git",
-                "reference": "c21bbf13c5576b4a40093ad10060c08b8f580894"
+                "reference": "v1.0.7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Gregwar/CaptchaBundle/zipball/c21bbf13c5576b4a40093ad10060c08b8f580894",
-                "reference": "c21bbf13c5576b4a40093ad10060c08b8f580894",
+                "url": "https://api.github.com/repos/Gregwar/CaptchaBundle/zipball/v1.0.7",
+                "reference": "v1.0.7",
                 "shasum": ""
             },
             "require": {
-                "gregwar/captcha": "v1.0.5",
+                "gregwar/captcha": "v1.0.7",
                 "php": ">=5.3.0"
             },
             "type": "captcha-bundle",
@@ -445,7 +499,7 @@
                 "spam",
                 "visual"
             ],
-            "time": "2013-04-24 16:11:08"
+            "time": "2013-07-24 20:54:51"
         },
         {
             "name": "imagine/imagine",
@@ -910,26 +964,26 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.5.0",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "1.5.0"
+                "reference": "1.6.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/1.5.0",
-                "reference": "1.5.0",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/1.6.0",
+                "reference": "1.6.0",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0",
-                "psr/log": ">=1.0,<2.0"
+                "psr/log": "~1.0"
             },
             "require-dev": {
                 "doctrine/couchdb": "dev-master",
                 "mlehner/gelf-php": "1.0.*",
-                "raven/raven": "0.3.*"
+                "raven/raven": "0.5.*"
             },
             "suggest": {
                 "doctrine/couchdb": "Allow sending log messages to a CouchDB server",
@@ -941,7 +995,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.4.x-dev"
+                    "dev-master": "1.6.x-dev"
                 }
             },
             "autoload": {
@@ -968,7 +1022,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2013-04-23 10:09:48"
+            "time": "2013-07-28 22:38:30"
         },
         {
             "name": "psr/log",
@@ -1007,6 +1061,57 @@
                 "psr-3"
             ],
             "time": "2012-12-21 11:40:51"
+        },
+        {
+            "name": "rollerworks/password-strength-bundle",
+            "version": "dev-master",
+            "target-dir": "Rollerworks/Bundle/PasswordStrengthBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rollerworks/PasswordStrengthBundle.git",
+                "reference": "5db557095b60f44790209587cef58fe1572946b2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rollerworks/PasswordStrengthBundle/zipball/5db557095b60f44790209587cef58fe1572946b2",
+                "reference": "5db557095b60f44790209587cef58fe1572946b2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "symfony/console": "~2.1",
+                "symfony/framework-bundle": "~2.1",
+                "symfony/validator": "~2.1"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Rollerworks\\Bundle\\PasswordStrengthBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastiaan Stok",
+                    "email": "s.stok@rollercapes.net"
+                }
+            ],
+            "description": "Password-strength validator for Symfony 2",
+            "keywords": [
+                "bundle",
+                "password",
+                "symfony",
+                "validator"
+            ],
+            "time": "2013-07-23 11:10:45"
         },
         {
             "name": "sensio/distribution-bundle",
@@ -1156,12 +1261,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "b90b666cf2904895f37ce79b70936210188a1b16"
+                "reference": "2430d870e8af11f35500f5a5645ae9b3b60c5699"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/b90b666cf2904895f37ce79b70936210188a1b16",
-                "reference": "b90b666cf2904895f37ce79b70936210188a1b16",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/2430d870e8af11f35500f5a5645ae9b3b60c5699",
+                "reference": "2430d870e8af11f35500f5a5645ae9b3b60c5699",
                 "shasum": ""
             },
             "require": {
@@ -1222,7 +1327,7 @@
                 "bootstrap",
                 "sonata"
             ],
-            "time": "2013-07-23 08:24:07"
+            "time": "2013-08-01 22:34:22"
         },
         {
             "name": "sonata-project/block-bundle",
@@ -1231,12 +1336,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataBlockBundle.git",
-                "reference": "676cae96966d8ea4d2dfcc85107a143fea8216d8"
+                "reference": "03ff77585eaff60058b33a98793168b4d3865c2c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataBlockBundle/zipball/676cae96966d8ea4d2dfcc85107a143fea8216d8",
-                "reference": "676cae96966d8ea4d2dfcc85107a143fea8216d8",
+                "url": "https://api.github.com/repos/sonata-project/SonataBlockBundle/zipball/03ff77585eaff60058b33a98793168b4d3865c2c",
+                "reference": "03ff77585eaff60058b33a98793168b4d3865c2c",
                 "shasum": ""
             },
             "require": {
@@ -1286,7 +1391,7 @@
                 "block",
                 "sonata"
             ],
-            "time": "2013-07-11 16:16:11"
+            "time": "2013-07-29 08:28:01"
         },
         {
             "name": "sonata-project/doctrine-extensions",
@@ -1343,12 +1448,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle.git",
-                "reference": "edb395a003715d51836edd6ca8a9729908ad9eec"
+                "reference": "2.2.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/edb395a003715d51836edd6ca8a9729908ad9eec",
-                "reference": "edb395a003715d51836edd6ca8a9729908ad9eec",
+                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/2.2.2",
+                "reference": "2.2.2",
                 "shasum": ""
             },
             "require": {
@@ -1607,12 +1712,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataMediaBundle.git",
-                "reference": "ecf91655db15751fd8d5a65677edcf91b7afd7bc"
+                "reference": "2.2.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/ecf91655db15751fd8d5a65677edcf91b7afd7bc",
-                "reference": "ecf91655db15751fd8d5a65677edcf91b7afd7bc",
+                "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/2.2.3",
+                "reference": "2.2.3",
                 "shasum": ""
             },
             "require": {
@@ -1674,21 +1779,21 @@
                 "vimeo",
                 "youtube"
             ],
-            "time": "2013-07-15 08:36:55"
+            "time": "2013-07-30 17:01:02"
         },
         {
             "name": "sonata-project/notification-bundle",
-            "version": "2.2.0",
+            "version": "2.2.1",
             "target-dir": "Sonata/NotificationBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataNotificationBundle.git",
-                "reference": "2.2.0"
+                "reference": "2.2.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataNotificationBundle/zipball/2.2.0",
-                "reference": "2.2.0",
+                "url": "https://api.github.com/repos/sonata-project/SonataNotificationBundle/zipball/2.2.1",
+                "reference": "2.2.1",
                 "shasum": ""
             },
             "require": {
@@ -1696,13 +1801,15 @@
                 "symfony/symfony": ">=2.1,<2.4-dev"
             },
             "require-dev": {
-                "liip/monitor-bundle": "0.4.*",
+                "guzzle/guzzle": "3.*",
+                "liip/monitor": "0.5.*@dev",
+                "liip/monitor-bundle": "0.5.*@dev",
                 "sonata-project/doctrine-orm-admin-bundle": "2.2.*",
                 "videlalvaro/php-amqplib": "2.0.*"
             },
             "suggest": {
                 "guzzle/guzzle": "3.*",
-                "liip/monitor-bundle": "0.4.*",
+                "liip/monitor-bundle": "0.5.*@dev",
                 "sonata-project/doctrine-orm-admin-bundle": "2.2.*",
                 "videlalvaro/php-amqplib": "2.0.*"
             },
@@ -1739,7 +1846,7 @@
                 "page",
                 "sonata"
             ],
-            "time": "2013-06-01 13:34:36"
+            "time": "2013-07-26 08:51:13"
         },
         {
             "name": "sonata-project/user-bundle",
@@ -1748,12 +1855,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataUserBundle.git",
-                "reference": "f3cf2fda0b1a884e64d74944622c29796c2e16c3"
+                "reference": "13947b7ebcf1050991e68f32e5ff575d86a9a7df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/f3cf2fda0b1a884e64d74944622c29796c2e16c3",
-                "reference": "f3cf2fda0b1a884e64d74944622c29796c2e16c3",
+                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/13947b7ebcf1050991e68f32e5ff575d86a9a7df",
+                "reference": "13947b7ebcf1050991e68f32e5ff575d86a9a7df",
                 "shasum": ""
             },
             "require": {
@@ -1805,7 +1912,7 @@
                 "sonata",
                 "user"
             ],
-            "time": "2013-06-23 13:41:53"
+            "time": "2013-07-29 15:14:52"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -2303,7 +2410,8 @@
         "sonata-project/doctrine-orm-admin-bundle": 20,
         "sonata-project/user-bundle": 20,
         "sonata-project/media-bundle": 20,
-        "gregwar/captcha-bundle": 20
+        "gregwar/captcha-bundle": 20,
+        "rollerworks/password-strength-bundle": 20
     },
     "platform": {
         "php": ">=5.3.3"

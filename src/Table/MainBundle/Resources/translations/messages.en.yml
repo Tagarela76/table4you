@@ -1,0 +1,3 @@
+main:
+  register: Registration
+  registerFormTitle: Registration

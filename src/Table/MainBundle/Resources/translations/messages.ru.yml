@@ -1,0 +1,3 @@
+main:
+  register: Регистрация
+  registerFormTitle: Регистрация
