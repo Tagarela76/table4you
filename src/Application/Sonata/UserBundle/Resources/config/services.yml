@@ -1,6 +1,10 @@
 services:
-    table.registration.form.type:
+    table_user.registration.form.type:
         class: Application\Sonata\UserBundle\Form\Type\RegistrationFormType
         arguments: [%fos_user.model.user.class%]
         tags:
-            - { name: form.type, alias: table_user_registration }
+            - { name: form.type, alias: table_user_registration }   
+            
+    security.authentication.provider.dao:
+        class:  Application\Sonata\UserBundle\Security\Core\Authentication\Provider\CustomDaoAuthenticationProvider
+        arguments: ["", "@security.user_checker", "", "@security.encoder_factory", "%security.authentication.hide_user_not_found%"]

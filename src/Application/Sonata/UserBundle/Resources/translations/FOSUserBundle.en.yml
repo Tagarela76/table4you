@@ -1,0 +1,8 @@
+# Registration
+form:
+    phone: 'Phone:'
+    lastname: 'Last name:'
+# Security
+"Bad credentials userName": Incorrect Login Name.
+"Bad credentials password": Incorrect Password.
+   

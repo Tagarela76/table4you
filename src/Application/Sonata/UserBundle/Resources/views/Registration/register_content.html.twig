@@ -1,0 +1,78 @@
+{% for type, messages in app.session.flashBag.all %}
+    {% for message in messages %}
+        <div class="{{ type }}">
+            {{ message|trans({}, 'FOSUserBundle') }}
+        </div>
+    {% endfor %}
+{% endfor %}
+<form novalidate id="fos-registration-form" action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+    <div id="fos_user_registration_form">
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        <div>
+            {{ form_label(form.username) }}
+            {{ form_errors(form.username) }}
+            {% if form.username.vars.errors|length %}
+                {{ form_widget(form.username, {'attr':{'class':'error-form-registration'} }) }}
+            {%  else %}
+                {{ form_widget(form.username) }}
+            {% endif %}
+        </div>
+
+        <div>
+            {{ form_label(form.lastname) }}
+            {{ form_errors(form.lastname) }}
+            {% if form.lastname.vars.errors|length %}
+                {{ form_widget(form.lastname, {'attr':{'class':'error-form-registration'} }) }}
+            {%  else %}
+                {{ form_widget(form.lastname) }}
+            {% endif %}
+        </div>
+
+        <div>
+            {{ form_label(form.email) }}
+            {{ form_errors(form.email) }}
+            {% if form.email.vars.errors|length %}
+                {{ form_widget(form.email, {'attr':{'class':'error-form-registration'} }) }}
+            {%  else %}
+                {{ form_widget(form.email) }}
+            {% endif %}
+        </div>
+
+        <div class="password-registration">
+            {{ form_errors(form.plainPassword) }}
+            {% if form.plainPassword.vars.errors|length %}
+                {{ form_widget(form.plainPassword, {'attr':{'class':'error-form-registration'} }) }}
+            {%  else %}
+                {{ form_widget(form.plainPassword) }}
+            {% endif %}
+        </div>
+
+        <div>
+            {{ form_label(form.phone) }}
+            {{ form_errors(form.phone) }}
+            {% if form.phone.vars.errors|length %}
+                {{ form_widget(form.phone, {'attr':{'class':'error-form-registration'} }) }}
+            {%  else %}
+                {{ form_widget(form.phone) }}
+            {% endif %}
+        </div>
+
+        <div class="captcha-img">
+            {{ form_label(form.captcha) }}
+            {{ form_errors(form.captcha) }}
+            {% if form.captcha.vars.errors|length %}
+                {{ form_widget(form.captcha, {'attr':{'class':'error-form-registration'} }) }}
+            {%  else %}
+                {{ form_widget(form.captcha) }}
+            {% endif %}
+        </div>
+
+        <div class="button-registration">
+            <input type="submit" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" />
+            <img id="registrationPreloader" style="display: none;" src="{{ asset('bundles/tablemain/images/ajax-loader.gif') }}" />
+        </div>
+        {{ form_end(form) }}
+    </div>
+</form>
