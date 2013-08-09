@@ -68,7 +68,7 @@ class Restaurant
     /**
      * @var Table\RestaurantBundle\Entity\RestaurantKitchen $kitchen
      * 
-     * @ORM\ManyToOne(targetEntity="RestaurantKitchen", inversedBy="restaurant")
+     * @ORM\ManyToOne(targetEntity="RestaurantKitchen", inversedBy="restaurants")
      * @ORM\JoinColumn(name="kitchen_id", referencedColumnName="id")
      * */
     private $kitchen;
@@ -76,7 +76,7 @@ class Restaurant
     /**
      * @var Table\RestaurantBundle\Entity\RestaurantCategory $category
      * 
-     * @ORM\ManyToOne(targetEntity="RestaurantCategory", inversedBy="restaurant")
+     * @ORM\ManyToOne(targetEntity="RestaurantCategory", inversedBy="restaurants")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      * */
     private $category;

@@ -31,7 +31,7 @@ class RestaurantCategory
     private $name;
 
     /**
-     * @var Table\RestaurantBundle\Entity\Restaurant[] $restaurant
+     * @var Table\RestaurantBundle\Entity\Restaurant[] $restaurants
      * 
      * @ORM\OneToMany(targetEntity="Table\RestaurantBundle\Entity\Restaurant", mappedBy="restaurantCategory", cascade={"persist", "refresh"})
      */
@@ -39,7 +39,7 @@ class RestaurantCategory
 
     public function __construct()
     {
-        $this->restaurant = new ArrayCollection();
+        $this->restaurants = new ArrayCollection();
     }
 
     /**
