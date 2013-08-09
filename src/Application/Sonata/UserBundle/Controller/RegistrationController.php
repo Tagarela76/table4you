@@ -60,7 +60,9 @@ class RegistrationController extends BaseController
                 // Get resseting URL
                 $resettingUrl = $this->container->get('router')->generate('fos_user_resetting_check_email');
                 //Add resset url to form
-                $form->get('email')->addError(new FormError($resettingUrl));
+                $translated = $this->container->get('translator')->trans('fos_user.email.restore_password', array(), 'validators');
+                $emailAlreadyUsedErrorText = "<a href='{$resettingUrl}'>{$translated}</a>";
+                $form->get('email')->addError(new FormError($emailAlreadyUsedErrorText));
             } 
         }
 

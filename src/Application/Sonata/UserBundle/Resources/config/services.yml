@@ -8,3 +8,11 @@ services:
     security.authentication.provider.dao:
         class:  Application\Sonata\UserBundle\Security\Core\Authentication\Provider\CustomDaoAuthenticationProvider
         arguments: ["", "@security.user_checker", "", "@security.encoder_factory", "%security.authentication.hide_user_not_found%"]
+
+    fos_user.mailer.default:
+        class: Application\Sonata\UserBundle\Mailer\CustomMailer
+        arguments:
+            - @mailer
+            - @router
+            - @templating
+            - { site_name: %site_name%, confirmation.template: %fos_user.registration.confirmation.template%,resetting.template: %fos_user.resetting.email.template%,from_email: { confirmation: %fos_user.registration.confirmation.from_email%, resetting: %fos_user.resetting.email.from_email% } }
