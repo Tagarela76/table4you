@@ -13,14 +13,26 @@ class RestaurantAdmin extends Admin
     {
         $formMapper 
             ->add('name')    
-            ->add('city') 
-            ->add('street')  
-            ->add('house')
-            ->add('workHoursFrom', 'time')
-            ->add('workHoursTo', 'time')    
-            ->add('kitchenId', 'sonata_type_model', array(
+            ->add('city', null, array(
+                'label' => 'address.city'
+            )) 
+            ->add('street', null, array(
+                'label' => 'address.street'
+            )) 
+            ->add('house', null, array(
+                'label' => 'address.house'
+            ))
+            ->add('workHoursFrom', 'time', array(
+                'label' => 'workHours.from'
+            ))
+            ->add('workHoursTo', 'time', array(
+                'label' => 'workHours.to'
+            ))    
+            ->add('kitchen', 'sonata_type_model', array(
+                'label' => 'restaurant.kitchen.kitchen',
                 'required' => true))   
-            ->add('categoryId', 'sonata_type_model', array(
+            ->add('category', 'sonata_type_model', array(
+                'label' => 'restaurant.category.category',
                 'required' => true)) 
             ->add('photo', 'sonata_type_model_list', array(
                 ), array('link_parameters' => array('context' => 'image'))) 
@@ -40,8 +52,8 @@ class RestaurantAdmin extends Admin
             ->add('city') 
             ->add('street') 
             ->add('house')     
-            ->add('kitchenId')
-            ->add('categoryId')      
+            ->add('kitchen')
+            ->add('category')      
         ;
     }
 
@@ -53,8 +65,8 @@ class RestaurantAdmin extends Admin
             ->add('city') 
             ->add('street') 
             ->add('house')     
-            ->add('kitchenId', 'sonata_type_model')
-            ->add('categoryId', 'sonata_type_model')         
+            ->add('kitchen', 'sonata_type_model')
+            ->add('category', 'sonata_type_model')         
         ;
     }
     

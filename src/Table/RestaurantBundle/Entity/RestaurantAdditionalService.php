@@ -5,12 +5,12 @@ namespace Table\RestaurantBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * RestaurantAdditionalServices
+ * RestaurantAdditionalService
  *
- * @ORM\Table(name="restaurant_additional_services")
- * @ORM\Entity(repositoryClass="Table\RestaurantBundle\Entity\Repository\RestaurantAdditionalServicesRepository")
+ * @ORM\Table(name="restaurant_additional_service")
+ * @ORM\Entity(repositoryClass="Table\RestaurantBundle\Entity\Repository\RestaurantAdditionalServiceRepository")
  */
-class RestaurantAdditionalServices
+class RestaurantAdditionalService
 {
     /**
      * @var integer
@@ -43,7 +43,7 @@ class RestaurantAdditionalServices
      * Set name
      *
      * @param string $name
-     * @return RestaurantAdditionalServices
+     * @return RestaurantAdditionalService
      */
     public function setName($name)
     {

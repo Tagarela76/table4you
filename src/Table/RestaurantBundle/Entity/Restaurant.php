@@ -3,7 +3,6 @@
 namespace Table\RestaurantBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -14,6 +13,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Restaurant
 {
+
     /**
      * @var integer
      *
@@ -57,7 +57,7 @@ class Restaurant
      * @ORM\Column(name="work_hours_from", type="time")
      */
     private $workHoursFrom;
-    
+
     /**
      * @var \DateTime
      *
@@ -66,20 +66,20 @@ class Restaurant
     private $workHoursTo;
 
     /**
-     * @var Table\RestaurantBundle\Entity\RestaurantKitchen $kitchenId
+     * @var Table\RestaurantBundle\Entity\RestaurantKitchen $kitchen
      * 
      * @ORM\ManyToOne(targetEntity="RestaurantKitchen", inversedBy="restaurant")
      * @ORM\JoinColumn(name="kitchen_id", referencedColumnName="id")
      * */
-    private $kitchenId;
+    private $kitchen;
 
     /**
-     * @var Table\RestaurantBundle\Entity\RestaurantCategory $categoryId
+     * @var Table\RestaurantBundle\Entity\RestaurantCategory $category
      * 
      * @ORM\ManyToOne(targetEntity="RestaurantCategory", inversedBy="restaurant")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      * */
-    private $categoryId;
+    private $category;
 
     /**
      * @var Application\Sonata\MediaBundle\Entity\Media $photo
@@ -90,15 +90,16 @@ class Restaurant
     private $photo;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Table\RestaurantBundle\Entity\RestaurantAdditionalServices")
-     * @ORM\JoinTable(name="restaurant2additional_services",
+     * @ORM\ManyToMany(targetEntity="Table\RestaurantBundle\Entity\RestaurantAdditionalService")
+     * @ORM\JoinTable(name="restaurant2additional_service",
      *   joinColumns={@ORM\JoinColumn(name="restaurant_id", referencedColumnName="id")},
-     *   inverseJoinColumns={@ORM\JoinColumn(name="additional_services_id", referencedColumnName="id")}
+     *   inverseJoinColumns={@ORM\JoinColumn(name="additional_service_id", referencedColumnName="id")}
      * )
      */
     protected $additionalServices;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->additionalServices = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -121,7 +122,7 @@ class Restaurant
     public function setName($name)
     {
         $this->name = $name;
-    
+
         return $this;
     }
 
@@ -144,7 +145,7 @@ class Restaurant
     public function setCity($city)
     {
         $this->city = $city;
-    
+
         return $this;
     }
 
@@ -167,7 +168,7 @@ class Restaurant
     public function setStreet($street)
     {
         $this->street = $street;
-    
+
         return $this;
     }
 
@@ -190,7 +191,7 @@ class Restaurant
     public function setHouse($house)
     {
         $this->house = $house;
-    
+
         return $this;
     }
 
@@ -213,7 +214,7 @@ class Restaurant
     public function setWorkHoursFrom($workHoursFrom)
     {
         $this->workHoursFrom = $workHoursFrom;
-    
+
         return $this;
     }
 
@@ -226,7 +227,7 @@ class Restaurant
     {
         return $this->workHoursFrom;
     }
-    
+
     /**
      * Set workHoursTo
      *
@@ -236,7 +237,7 @@ class Restaurant
     public function setWorkHoursTo($workHoursTo)
     {
         $this->workHoursTo = $workHoursTo;
-    
+
         return $this;
     }
 
@@ -251,49 +252,49 @@ class Restaurant
     }
 
     /**
-     * Set categoryId
+     * Set category
      *
-     * @param Table\RestaurantBundle\Entity\RestaurantCategory $categoryId
+     * @param Table\RestaurantBundle\Entity\RestaurantCategory $category
      * @return Property
      */
-    public function setCategoryId($categoryId)
+    public function setCategory($category)
     {
-        $this->categoryId = $categoryId;
+        $this->category = $category;
 
         return $this;
     }
 
     /**
-     * Get categoryId
+     * Get category
      *
      * @return Table\RestaurantBundle\Entity\RestaurantCategory
      */
-    public function getCategoryId()
+    public function getCategory()
     {
-        return $this->categoryId;
+        return $this->category;
     }
 
     /**
-     * Set kitchenId
+     * Set kitchen
      *
-     * @param Table\RestaurantBundle\Entity\RestaurantKitchen $kitchenId
+     * @param Table\RestaurantBundle\Entity\RestaurantKitchen $kitchen
      * @return Property
      */
-    public function setKitchenId($kitchenId)
+    public function setKitchen($kitchen)
     {
-        $this->kitchenId = $kitchenId;
+        $this->kitchen = $kitchen;
 
         return $this;
     }
 
     /**
-     * Get kitchenId
+     * Get kitchen
      *
      * @return Table\RestaurantBundle\Entity\RestaurantKitchen
      */
-    public function getKitchenId()
+    public function getKitchen()
     {
-        return $this->kitchenId;
+        return $this->kitchen;
     }
 
     /**
@@ -316,11 +317,11 @@ class Restaurant
     {
         $this->photo = $photo;
     }
-    
+
     /**
      * Get additionalServices
      *
-     * @return Table\RestaurantBundle\Entity\RestaurantAdditionalServices[] 
+     * @return Table\RestaurantBundle\Entity\RestaurantAdditionalService[] 
      */
     public function getAdditionalServices()
     {
@@ -330,7 +331,7 @@ class Restaurant
     /**
      * Add additionalServices
      * 
-     * @param Table\RestaurantBundle\Entity\RestaurantAdditionalServices $additionalServices
+     * @param Table\RestaurantBundle\Entity\RestaurantAdditionalService $additionalServices
      */
     public function addAdditionalServices($additionalServices)
     {
@@ -340,7 +341,7 @@ class Restaurant
     /**
      * Set additionalServices
      *
-     * @param Table\RestaurantBundle\Entity\RestaurantAdditionalServices $additionalServices
+     * @param Table\RestaurantBundle\Entity\RestaurantAdditionalService $additionalServices
      * @return Restaurant
      */
     public function setAdditionalServices($additionalServices)
@@ -351,12 +352,13 @@ class Restaurant
     /**
      * Remove additionalServices
      * 
-     * @param Table\RestaurantBundle\Entity\RestaurantAdditionalServices $additionalServices
+     * @param Table\RestaurantBundle\Entity\RestaurantAdditionalService $additionalServices
      */
-    public function removeAdditionalServices($additionalServices) {
+    public function removeAdditionalServices($additionalServices)
+    {
         $this->additionalServices->removeElement($additionalServices);
     }
-    
+
     /**
      * @return string
      */
@@ -364,4 +366,5 @@ class Restaurant
     {
         return strval($this->getName());
     }
+
 }
