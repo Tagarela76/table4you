@@ -49,11 +49,21 @@ class RestaurantAdmin extends Admin
     {
         $datagridMapper 
             ->add('name')  
-            ->add('city') 
-            ->add('street') 
-            ->add('house')     
-            ->add('kitchen')
-            ->add('category')      
+            ->add('city', null , array(
+                'label' => 'address.city'
+            )) 
+            ->add('street', null , array(
+                'label' => 'address.street'
+            )) 
+            ->add('house', null , array(
+                'label' => 'address.house'
+            ))     
+            ->add('kitchen', null , array(
+                'label' => 'restaurant.kitchen.kitchen'
+            ))
+            ->add('category', null , array(
+                'label' => 'restaurant.category.category'
+            ))      
         ;
     }
 
@@ -62,11 +72,21 @@ class RestaurantAdmin extends Admin
         $listMapper
             ->addIdentifier('id') 
             ->add('name')  
-            ->add('city') 
-            ->add('street') 
-            ->add('house')     
-            ->add('kitchen', 'sonata_type_model')
-            ->add('category', 'sonata_type_model')         
+            ->add('city', null , array(
+                'label' => 'address.city'
+            )) 
+            ->add('street', null , array(
+                'label' => 'address.street'
+            )) 
+            ->add('house', null , array(
+                'label' => 'address.house'
+            ))     
+            ->add('kitchen', 'sonata_type_model', array(
+                'label' => 'restaurant.kitchen.kitchen'
+            ))
+            ->add('category', 'sonata_type_model', array(
+                'label' => 'restaurant.category.category'
+            ))         
         ;
     }
     
