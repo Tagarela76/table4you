@@ -5,7 +5,7 @@
 {% endblock %}
 {% block body_text %}
     {% autoescape false %}
-        {{ 'registration.email.message'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl}, 'FOSUserBundle') }}
+        {{ 'registration.email.message'|trans({'%site_name%': siteName, '%username%': user.username, '%password%': user.plainPassword, '%confirmationUrl%': confirmationUrl}, 'FOSUserBundle') }}
     {% endautoescape %}
 {% endblock %}
 {% block body_html %}{% endblock %}
