@@ -4,3 +4,5 @@ main:
   labels:
     kitchen: 'Кухня:'
     address: 'Aдрес:'
+  login: Войти
+  loginFormTitle: Авторизация

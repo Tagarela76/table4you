@@ -1,0 +1,28 @@
+{% extends "TableMainBundle::layout.html.twig" %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/applicationsonatauser/js/jquery.form.js') }}"></script>
+    <script>
+        $(function() { 
+            $('#fos-login-form').submit(function() { 
+                $(this).ajaxSubmit({
+                    type: 'post',
+                    beforeSubmit: function() {
+                       $("#loginPreloader").show();
+                    },
+                    success: function(response) { 
+                        $("#loginPreloader").hide();
+                        $("#modal-login").html(response);
+                    }
+                });
+                return false;
+            });    
+        });  
+    </script>
+{% endblock %}   
+{% block content %}
+    <div class="modal-login" id="modal-login">
+        {% include "SonataUserBundle:Security:login_content.html.twig" %}
+    </div>   
+{% endblock content %}
+

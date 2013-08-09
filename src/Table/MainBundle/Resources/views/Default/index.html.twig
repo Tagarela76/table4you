@@ -25,8 +25,13 @@
 {% block content %}
 <a class="btn btn-primary" data-toggle="modal" data-target="#register" href="{{ path('fos_user_registration_register') }}">
         {% trans %}main.register{% endtrans %}
-</a>
-<div class="modal hide modal-registration" data-backdrop="static" id="register">
+    </a>
+    <a class="btn btn-primary" data-toggle="modal" data-target="#login" href="{{ path('fos_user_security_login') }}">
+        {% trans %}main.login{% endtrans %}
+    </a>
+    
+    {# ==Modal Window for registration==#}
+    <div class="modal hide modal-registration" data-backdrop="static" id="register">
 
     <div class="modal-header modal-registration-title">
         <a class="close" data-dismiss="modal"></a>
@@ -36,13 +41,28 @@
     <div class="modal-body" >
 
     </div>
-</div>
-<div class="container-fluid">
-    {% include 'TableRestaurantBundle:Default:restaurantList.html.twig' %}
-</div>
+    {# ==Modal Window for registration==#}
+    
+    {# ==Modal Window for login==#}
+    <div class="modal hide modal-login" data-backdrop="static" id="login">
 
-    {# display navigation #}
-<div class="navigation">
-        {{ knp_pagination_render(restaurantsList) }}
-</div>
+        <div class="modal-header modal-login-title">
+            <a class="close" data-dismiss="modal"></a>
+            <img id="loginPreloader" style="display: none;" src="{{ asset('bundles/tablemain/images/ajax-loader.gif') }}" />
+            <h3>{% trans %}main.loginFormTitle{% endtrans %}</h3>
+        </div>
+        <div class="modal-body" >
+
+        </div>
+    </div>
+    {# ==Modal Window for login==#}
+
+    <div class="container-fluid">
+        {% include 'TableRestaurantBundle:Default:restaurantList.html.twig' %}
+    </div>
+
+        {# display navigation #}
+    <div class="navigation">
+            {{ knp_pagination_render(restaurantsList) }}
+    </div>    
 {% endblock %}    
