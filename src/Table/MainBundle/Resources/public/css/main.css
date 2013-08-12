@@ -2,26 +2,28 @@
 
 .modal{
     width: 470px;
-    top: 9%;
+    /*height: 868px;*/
+    position: absolute;
+    top: 0px;
 }
-@media (max-height:768px) {
+/*@media (max-height:768px) {
     .modal{
         top: 1%;
     }
-}
+}*/
 .modal, .modal label, .modal input, .modal ul li, .modal h3 {
     font-family: Trebuchet MS;
 }
 .modal-body {
+    max-height: 100%;
     background: #f1efed;
-    max-height: 552px;
     padding: 0px;
-    padding-top: 15px;
+    padding-top: 40px;
     -moz-border-radius: 0px 0px 5px 5px;
     -webkit-border-radius: 0px 0px 5px 5px;
     -o-border-radius: 0px 0px 5px 5px;
     border-radius: 0px 0px 5px 5px;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 .modal-registration{
     background: #f1efed;
@@ -62,8 +64,18 @@
     margin-bottom: 1%;
 }
 .modal-registration #fos_user_registration_form div{
-    margin: 0px 29px 1% 31px;
-    /*height: 68px;*/
+    margin: 0px 29px 0px 31px;
+   /* height: 85px;*/
+}
+.modal-registration #fos_user_registration_form div+div+div{
+    margin-top: 16px;
+}
+.modal-registration #fos_user_registration_form div+div+div+div.password-registration{
+    margin-top: 3px;
+    /*min-height: 180px;*/
+}
+.modal-registration #fos_user_registration_form div+div+div+div.password-registration+div, .modal-registration #fos_user_registration_form div.captcha-img{
+    margin-top: 0px;
 }
 .modal-registration #fos_user_registration_form div ul li{
     list-style: none;
@@ -75,17 +87,23 @@
     float: left;
     font-size: 18px;
     color: #9c9a9a;
-    margin-bottom: 1%;
+    margin-bottom: 15px;
     cursor: default;
+    line-height: 13px;
 }
 #fos_user_registration_form{
     overflow: hidden;
 }
+.modal-registration #fos_user_registration_form ul{
+    margin: 0px;
+    margin-bottom: 10px;
+}
 .modal-registration #fos_user_registration_form div input{
     font-size: 18px;
     color: #353535;
-    width: 92%;
-    padding: 1% 0px 1% 30px;
+    width: 396px;
+    padding: 9px 0px 9px 12px;
+    margin-bottom: 19px;
     background: -moz-linear-gradient(top, #e2e0e0 0%, #f1f0f0 99%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e2e0e0), color-stop(99%,#f1f0f0));
     background: -webkit-linear-gradient(top, #e2e0e0 0%,#f1f0f0 99%);
@@ -103,8 +121,8 @@
     box-shadow: inset 1px 0px 3px rgba(238, 238, 238, 0.7), inset -2px 0px 3px rgba(238, 238, 238,0.7), inset 0px 2px 1px rgba(0, 0, 0, 0.7);
 }
 .modal-registration #fos_user_registration_form div.button-registration{
-    padding: 4% 0px 2% 0px;
-    margin-top: 70px;
+    padding: 9px 0px 0px 0px;
+    margin-top: 90px;
 }
 .modal-registration #fos_user_registration_form div.button-registration input{
     background: #feb200;
@@ -117,7 +135,7 @@
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feb200', endColorstr='#e2601b',GradientType=0 );
     border: 0px;
     width: 410px;
-    padding: 7px 0px;
+    padding: 10px 0px;
     color: #fffefe;
     font-size: 20px;
     -moz-border-radius: 8px 8px 8px 8px;
@@ -141,11 +159,12 @@
     font-size: 15px;
     margin: 0px;
     padding: 0px;
-    height: 100px;
+    height: 85px;
 }
 
 #fos_user_registration_form .password-registration #fos_user_registration_form_plainPassword, #fos_user_registration_form .password-registration #fos_user_registration_form_plainPassword div{
     margin: 0px;
+    height: 100%;
 }
 
 .password-registration #fos_user_registration_form_plainPassword div+div{
