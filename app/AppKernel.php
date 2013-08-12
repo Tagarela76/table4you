@@ -30,8 +30,11 @@ class AppKernel extends Kernel
             new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
             new Table\MainBundle\TableMainBundle(),
             new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
+            new Table\RestaurantBundle\TableRestaurantBundle(),
+            new WhiteOctober\BreadcrumbsBundle\WhiteOctoberBreadcrumbsBundle(),
             new Rollerworks\Bundle\PasswordStrengthBundle\RollerworksPasswordStrengthBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

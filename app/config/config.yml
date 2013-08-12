@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: @ApplicationSonataAdminBundle/Resources/config/admin.xml }
 
 framework:
     #esi:             ~
@@ -93,6 +94,14 @@ sonata_media:
                 small: { width: 100 , quality: 70}
                 big:   { width: 500 , quality: 70}
 
+        image:
+            providers:
+                - sonata.media.provider.image
+
+            formats:
+                small: { width: 150 , quality: 95}
+                big:   { width: 500 , quality: 90}
+
     cdn:
         server:
             path: /uploads/media # http://media.sonata-project.org/
@@ -120,7 +129,7 @@ sonata_block:
         sonata.block.service.rss:
 
 sonata_admin:
-    title:      Sonata Project
+    title:      Admin Panel
     title_logo: /bundles/sonataadmin/logo_title.png
     templates:
         # default global templates
@@ -182,3 +191,11 @@ services:
         arguments: [%fos_user.model.user.class%]
         tags:
             - { name: form.type, alias: table_user_registration }  
+white_october_breadcrumbs:
+    separator:          '/'
+    separatorClass:     'divider'
+    listId:             'wo-breadcrumbs'
+    listClass:          'breadcrumb'
+    itemClass:          'nofollow'
+    locale:             %locale%
+    translation_domain: messages

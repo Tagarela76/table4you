@@ -1,6 +1,6 @@
 # Registration
 form:
-    phone: 'Phone:'
+    phone: 'Phone Number:'
     lastname: 'Last name:'
 # Security
 "Bad credentials userName": Incorrect Login Name.

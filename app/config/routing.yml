@@ -1,3 +1,7 @@
+table_restaurant:
+    resource: "@TableRestaurantBundle/Resources/config/routing.yml"
+    prefix:   /
+
 table_main:
     resource: "@TableMainBundle/Resources/config/routing.yml"
     prefix:   /
@@ -10,7 +14,7 @@ sonata_user:
     resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
     prefix: /table_admin
 
-admin:
+table_admin:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
     prefix: /table_admin
 

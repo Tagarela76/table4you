@@ -1,0 +1,96 @@
+default: По умолчанию
+sonata:
+    media:
+        provider:
+            file: Файл
+            image: Изображение
+            vimeo: Vimeo
+            youtube: YouTube
+            dailymotion: DailyMotion
+media: Медиа
+gallery: Галереи
+title_select_provider: Выберите тип медиа
+no_provider_available: Нет определённых типов медиа
+sonata_media: Библиотека медиа
+news: Новости
+
+sidemenu:
+    link_edit_media: Редактировать
+    link_media_view: Просмотр
+breadcrumb:
+    link_media_create: Создать
+    link_media_list: Медиа
+    link_media_edit: Редактировать
+    link_media_view: Просмотр
+    link_media_delete: Удалить
+    link_gallery_create: Создать
+    link_gallery_list: Галереи
+    link_gallery_edit: Редактировать
+    link_gallery_delete: Удалить
+title:
+    media_preview: Предпросмотр
+    media_thumbnail: Миниатюра
+    informations: Информация
+    formats: Форматы
+label:
+    size: Размер
+    width: Ширина
+    height: Высота
+    content_type: Тип контента
+    copyright: Copyright
+    author_name: Автор
+    cdn: CDN
+    to_be_flushed: Flushable
+    flushed_at: Flushed at
+    public_url: Общедоступный адрес URL
+    name: Имя
+    file: Файл
+    author: Автор
+    enabled: Доступно
+    cdn_is_flushable: Flush CDN
+    video_reference: Изменить видео
+    description: Описание
+    select_context: Контекст :
+    select_provider: Тип :
+    protected_download_url: Защищенный URL
+    protected_download_url_notice: Предупреждение
+    edit_with_pixlr: Редактирование медиа с помощью Pixlr pixlr_warning: <![CDATA[<span class="label important">Important</span> you are going to expose the media to an <strong>external service</strong>. <br />If you are working on confidentiel materials, please do not use this service.]]>
+    pixlr_express_editor:<![CDATA[ <strong style="color: white">Express Editor</strong> <br /> Simple interface for quick editing]]>
+    pixlr_advanced_editor: <![CDATA[<strong style="color: white">Advanced Editor</strong> <br />Experimented users only]]>
+
+link:
+    all_providers: Все
+    test_protected_url: Ссылка предпросмотра
+
+description:
+    roles_download_strategy: Медиа доступны пользователям с ролями : %roles%.
+    public_download_strategy: Медиа доступны всем.
+    forbidden_download_strategy: Медиа недоступны никому.
+form:
+    label_enabled: Доступно
+    label_media: Средний
+    label_position: Позиция
+    label_context: Контекст
+    label_name: Имя
+    label_default_format: Формат
+    label_gallery_has_medias: Медиа
+    label_author_name: Автор
+    label_cdn_is_flushable: Flush CDN
+    label_description: Описание
+    label_copyright: Copyright
+    label_binary_content: Файл
+list:
+    label_enabled: Доступно
+    label_name: Имя
+    label_context: Контекст
+    label_default_format: Формат
+    label__action: Действие
+    label_custom: Ресурс
+filter:
+    label_name: Имя
+    label_provider_reference: Ссылка провайдера
+    label_enabled: Доступно
+    label_context: Контекст
+    label_provider_name: Название провайдера
+    label_binary_content: Файл
+bank: Банки
