@@ -104,7 +104,7 @@ sonata_media:
 
     cdn:
         server:
-            path: /uploads/media # http://media.sonata-project.org/
+            path: %base_url%uploads/media # http://media.sonata-project.org/
 
     filesystem:
         local:
@@ -130,7 +130,7 @@ sonata_block:
 
 sonata_admin:
     title:      Admin Panel
-    title_logo: /bundles/sonataadmin/logo_title.png
+    title_logo:  %base_url%bundles/sonataadmin/logo_title.png
     templates:
         # default global templates
         layout:  SonataAdminBundle::standard_layout.html.twig

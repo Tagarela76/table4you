@@ -11,6 +11,9 @@ parameters:
     mailer_user: null
     mailer_password: null
 
+    base_url: /
+
     locale: ru
     secret: ThisTokenIsNotSoSecretChangeIt
     site_name: table4You
+
