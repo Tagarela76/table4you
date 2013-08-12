@@ -143,6 +143,7 @@
     -o-border-radius: 8px 8px 8px 8px;
     border-radius: 8px 8px 8px 8px;
     cursor: pointer;
+    box-shadow: none;
 }
 .modal-registration #fos_user_registration_form div input#fos_user_registration_form_captcha{
     width: 152px;
