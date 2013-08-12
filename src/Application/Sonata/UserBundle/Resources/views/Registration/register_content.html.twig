@@ -69,6 +69,7 @@
 
         <div class="captcha-img">
             {{ form_label(form.captcha) }}
+            <div class="text-capcha">{{ "form.captcha.description"|trans({}, 'FOSUserBundle') }}</div>
             {{ form_errors(form.captcha) }}
             {% if form.captcha.vars.errors|length %}
                 {{ form_widget(form.captcha, {'attr':{'class':'error-form-registration'} }) }}

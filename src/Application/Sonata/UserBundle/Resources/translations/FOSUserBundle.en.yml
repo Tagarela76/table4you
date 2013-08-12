@@ -2,6 +2,9 @@
 form:
     phone: 'Phone Number:'
     lastname: 'Last name:'
+    captcha:
+          label: Проверочный код:
+          description: Пожалуйста введите буквы, которые показаны на рисунке ниже.
 # Security
 "Bad credentials userName": Incorrect Login Name.
 "Bad credentials password": Incorrect Password.

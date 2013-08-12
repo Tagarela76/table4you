@@ -158,8 +158,8 @@
     color: #161616;
     font-size: 15px;
     margin: 0px;
-    padding: 0px;
-    height: 85px;
+    padding: 10px 0px 0px 0px;
+    height: 75px;
 }
 
 #fos_user_registration_form .password-registration #fos_user_registration_form_plainPassword, #fos_user_registration_form .password-registration #fos_user_registration_form_plainPassword div{

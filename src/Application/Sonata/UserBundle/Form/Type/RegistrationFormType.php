@@ -27,6 +27,8 @@ class RegistrationFormType extends BaseType
                     'required' => true,
                 ))
                 ->add('captcha', 'captcha', array(
+                    'label' => 'form.captcha.label',
+                    'translation_domain' => 'FOSUserBundle',
                     'reload' => true,
                     'as_url' => true
                 ))
