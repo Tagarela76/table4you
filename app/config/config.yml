@@ -109,7 +109,11 @@ sonata_media:
     filesystem:
         local:
             directory:  %kernel.root_dir%/../web/uploads/media
-            create:     false      
+            create:     false
+    providers:
+        image:
+            allowed_extensions: ['jpg', 'png', 'gif', 'jpeg', 'bmp']
+            allowed_mime_types: ['image/jpg','image/jpeg','image/png','image/x-png', 'image/gif', 'image/bmp']
 fos_user:
     db_driver:      orm
     firewall_name:  main
@@ -190,7 +194,7 @@ services:
         class: Application\Sonata\UserBundle\Form\Type\RegistrationFormType
         arguments: [%fos_user.model.user.class%]
         tags:
-            - { name: form.type, alias: table_user_registration }  
+            - { name: form.type, alias: table_user_registration }
 white_october_breadcrumbs:
     separator:          '/'
     separatorClass:     'divider'
