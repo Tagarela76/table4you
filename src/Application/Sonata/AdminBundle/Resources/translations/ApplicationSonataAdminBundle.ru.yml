@@ -18,7 +18,7 @@ workHours:
   to: Часы работы(до)
 
 Category Id: Категория
-Photo: Фото
+Photo: Фото * # HTML5 validation does not show error on this field. See #5512 in Redmine
 Additional Services: Дополнительные услуги
 Restaurant List: Список ресторанов
 Restaurant Category List: Список категорий ресторана

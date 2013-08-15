@@ -4,6 +4,7 @@ namespace Table\RestaurantBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Restaurant
@@ -86,6 +87,8 @@ class Restaurant
      * 
      * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
      * @ORM\JoinColumn(name="photo", referencedColumnName="id")
+     *
+     * @Assert\NotBlank
      * */
     private $photo;
 

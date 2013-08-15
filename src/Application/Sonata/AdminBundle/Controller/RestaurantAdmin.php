@@ -33,9 +33,11 @@ class RestaurantAdmin extends Admin
                 'required' => true))   
             ->add('category', 'sonata_type_model', array(
                 'label' => 'restaurant.category.category',
-                'required' => true)) 
+                'required' => true))
+            // html5 validation does not show error here
+            // falling back to server validation. See #5512 in redmine
             ->add('photo', 'sonata_type_model_list', array(
-                ), array('link_parameters' => array('context' => 'image'))) 
+                'required' => false), array('link_parameters' => array('context' => 'image')))
             ->add('additionalServices', 'sonata_type_model', array(
                       'by_reference' => true, 
                       'multiple' => true, 
