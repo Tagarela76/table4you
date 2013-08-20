@@ -1,0 +1,21 @@
+profile:
+  username:
+    label: 'Name:'
+    form: 'Name:'
+  lastname:
+    label: 'Lastname:'
+    form: 'Lastname:'
+  email:
+    label: 'E-mail:'
+    form: 'E-mail:' 
+  phone:
+    label: 'Phone:'
+    form: 'Phone:' 
+  currentPassword:
+    form: 'Current Password'
+  edit:
+    link: 'Edit Profile'  
+  save:
+    button:
+      label: 'Save'  
+  

@@ -23,22 +23,24 @@
     {# infinitive scrolling #}
 {% endblock %}    
 {% block content %}
-<a class="btn btn-primary" data-toggle="modal" data-target="#register" href="{{ path('fos_user_registration_register') }}">
-        {% trans %}main.register{% endtrans %}
+    <a class="btn btn-primary" data-toggle="modal" data-target="#register" href="{{ path('fos_user_registration_register') }}">
+        {% trans %}main.register.buttonLabel{% endtrans %}
     </a>
     <a class="btn btn-primary" data-toggle="modal" data-target="#login" href="{{ path('fos_user_security_login') }}">
-        {% trans %}main.login{% endtrans %}
+        {% trans %}main.login.buttonLabel{% endtrans %}
+    </a>
+    <a class="btn btn-primary" href="{{ path('sonata_user_profile_show') }}">
+        {% trans %}main.profile.buttonLabel{% endtrans %}
     </a>
     
     {# ==Modal Window for registration==#}
     <div class="modal hide modal-registration" data-backdrop="static" id="register">
-
-    <div class="modal-header modal-registration-title">
-        <a class="close" data-dismiss="modal"></a>
-        <img id="registrationPreloader" style="display: none;" src="{{ asset('bundles/tablemain/images/ajax-loader.gif') }}" />
-        <h3>{% trans %}main.registerFormTitle{% endtrans %}</h3>
-    </div>
-    <div class="modal-body" >
+        <div class="modal-header modal-registration-title">
+            <a class="close" data-dismiss="modal"></a>
+            <img id="registrationPreloader" style="display: none;" src="{{ asset('bundles/tablemain/images/ajax-loader.gif') }}" />
+            <h3>{% trans %}main.register.form.title{% endtrans %}</h3>
+        </div>
+        <div class="modal-body" >
 
     </div>
     {# ==Modal Window for registration==#}
@@ -49,7 +51,7 @@
         <div class="modal-header modal-login-title">
             <a class="close" data-dismiss="modal"></a>
             <img id="loginPreloader" style="display: none;" src="{{ asset('bundles/tablemain/images/ajax-loader.gif') }}" />
-            <h3>{% trans %}main.loginFormTitle{% endtrans %}</h3>
+            <h3>{% trans %}main.login.form.title{% endtrans %}</h3>
         </div>
         <div class="modal-body" >
 

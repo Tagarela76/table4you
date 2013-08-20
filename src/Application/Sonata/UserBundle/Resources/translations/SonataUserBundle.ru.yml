@@ -1,2 +1,21 @@
-## YAML Template.
----
+profile:
+  username:
+    label: 'Имя:'
+    form: 'Имя:'
+  lastname:
+    label: 'Фамилия:'
+    form: 'Фамилия:'
+  email:
+    label: 'E-mail:'   
+    form: 'E-mail:' 
+  phone:
+    label: 'Телефон:'   
+    form: 'Телефон:' 
+  currentPassword:
+    form: 'Пароль'  
+  edit:
+    link: 'Редактировать профиль'
+  save:
+    button:
+      label: 'Сохранить'
+  

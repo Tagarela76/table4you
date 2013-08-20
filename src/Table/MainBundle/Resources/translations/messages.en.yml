@@ -1,6 +1,14 @@
 main:
-  register: Registration
-  registerFormTitle: Registration
   labels:
     kitchen: 'Kitchen:'
     address: 'Address:'
+  register:
+    buttonLabel: Registration
+    form:
+      title: Registration
+  login: 
+    buttonLabel: Login
+    form:
+      title: Authentication
+  profile:
+    buttonLabel: Profile
