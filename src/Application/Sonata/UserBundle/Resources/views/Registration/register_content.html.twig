@@ -56,7 +56,11 @@
                     {{ form_row(form.plainPassword.second, {'attr':{'class':'error-form-registration'} }) }}
                 </div>    
             {%  else %}
-                {{ form_widget(form.plainPassword) }}
+                <div id="fos_user_registration_form_plainPassword">
+                    {{ form_row(form.plainPassword.first) }}
+                    {{ form_row(form.plainPassword.second) }}
+                    <lable id="bothPasswordsMatch"><img src="#" alt="passwordMatch"/></lable>
+                </div> 
             {% endif %}
         </div>
 

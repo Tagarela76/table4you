@@ -200,3 +200,7 @@
 }
 /* end MODAL */
 
+#bothPasswordsMatch {
+    display: none;
+}
+
