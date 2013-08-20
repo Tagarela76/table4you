@@ -187,7 +187,8 @@ sonata_doctrine_orm_admin:
                 bigint:     SonataAdminBundle:CRUD:base_show_field.html.twig
                 integer:    SonataAdminBundle:CRUD:base_show_field.html.twig
                 decimal:    SonataAdminBundle:CRUD:base_show_field.html.twig
-gregwar_captcha: ~
+gregwar_captcha: 
+    charset: '123456789'
 
 services:
     table_user.registration.form.type:
