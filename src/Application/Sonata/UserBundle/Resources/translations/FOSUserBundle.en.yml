@@ -1,9 +1,11 @@
 # Registration
 form:
-    phone: 'Phone Number:'
+    phone: 
+      label: 'Phone Number:'
+      placeholder: '+7(ххх)(ххххххх)'
     lastname: 'Last name:'
     captcha:
-          label: Проверочный код:
+          label: 'Проверочный код:'
           description: Пожалуйста введите буквы, которые показаны на рисунке ниже.
 # Security
 "Bad credentials userName": Incorrect Login Name.

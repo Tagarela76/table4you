@@ -8,15 +8,22 @@
 
         <property name="plainPassword">
             <constraint name="Length">
-                <option name="min">7</option>
+                <option name="min">5</option>
                 <option name="minMessage">fos_user.password.short</option>
                 <option name="groups">
                     <value>Registration</value>
                     <value>Profile</value>
                 </option>
             </constraint>
+            <constraint name="Length">
+                <option name="max">12</option>
+                <option name="maxMessage">fos_user.password.long</option>
+                <option name="groups">
+                    <value>Registration</value>
+                    <value>Profile</value>
+                </option>
+            </constraint>
             <constraint name="Application\Sonata\UserBundle\Validator\Constraints\CustomPasswordStrength">
-                <option name="length">7</option>
                 <option name="message">fos_user.password.password_not_fit_format</option>
                 <option name="groups">Registration</option>
             </constraint>    

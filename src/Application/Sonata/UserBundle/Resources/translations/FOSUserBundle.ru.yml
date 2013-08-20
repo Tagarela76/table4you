@@ -1,9 +1,11 @@
 # Registration
 form:
-    phone: 'Телефон:'
+    phone: 
+      label: 'Телефон:'
+      placeholder: '+7(ххх)(ххххххх)'
     lastname: 'Фамилия:'
     captcha:
-      label: Проверочный код:
+      label: 'Проверочный код:'
       description: Пожалуйста введите буквы, которые показаны на рисунке ниже.
 registration:
     check_email: На Ваш email отправлено письмо для подтверждения регистрации.

@@ -22,7 +22,10 @@ class RegistrationFormType extends BaseType
                     'invalid_message' => 'fos_user.password.mismatch',
                 ))
                 ->add('phone', 'text', array(
-                    'label' => 'form.phone',
+                    'attr'=> array(
+                        'placeholder'=>'form.phone.placeholder'
+                     ),
+                    'label' => 'form.phone.label',
                     'translation_domain' => 'FOSUserBundle',
                     'required' => true,
                 ))
