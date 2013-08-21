@@ -50,10 +50,17 @@
 
         <div class="password-registration">
             {{ form_errors(form.plainPassword) }}
-            {% if form.plainPassword.vars.errors|length %}
-                {{ form_widget(form.plainPassword, {'attr':{'class':'error-form-registration'} }) }}
+            {% if form.plainPassword.first.vars.errors|length or form.plainPassword.second.vars.errors|length %}
+                <div id="fos_user_registration_form_plainPassword">
+                    {{ form_row(form.plainPassword.first, {'attr':{'class':'error-form-registration'} }) }}
+                    {{ form_row(form.plainPassword.second, {'attr':{'class':'error-form-registration'} }) }}
+                </div>    
             {%  else %}
-                {{ form_widget(form.plainPassword) }}
+                <div id="fos_user_registration_form_plainPassword">
+                    {{ form_row(form.plainPassword.first) }}
+                    {{ form_row(form.plainPassword.second) }}
+                    <lable id="bothPasswordsMatch"><img src="#" alt="passwordMatch"/></lable>
+                </div> 
             {% endif %}
         </div>
 
@@ -69,7 +76,6 @@
 
         <div class="captcha-img">
             {{ form_label(form.captcha) }}
-            <div class="text-capcha">{{ "form.captcha.description"|trans({}, 'FOSUserBundle') }}</div>
             {{ form_errors(form.captcha) }}
             {% if form.captcha.vars.errors|length %}
                 {{ form_widget(form.captcha, {'attr':{'class':'error-form-registration'} }) }}
