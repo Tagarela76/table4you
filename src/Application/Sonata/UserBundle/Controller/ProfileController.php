@@ -1,14 +1,5 @@
 <?php
 
-/*
- * This file is part of the FOSUserBundle package.
- *
- * (c) FriendsOfSymfony <http://friendsofsymfony.github.com/>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Application\Sonata\UserBundle\Controller;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -38,38 +29,16 @@ class ProfileController extends BaseSecurityController
     {
         $user = $this->container->get('security.context')->getToken()->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
+            
+            // redirect on homepage
+            return $this->redirect(
+                $this->generateUrl("table_main_homepage")
+            );
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
         return $this->render('ApplicationSonataUserBundle:Profile:show.html.twig', array(
             'user' => $user
-        ));
-    }
-
-    /**
-     * @return Response
-     *
-     * @throws AccessDeniedException
-     */
-    public function editAuthenticationAction()
-    {
-        $user = $this->container->get('security.context')->getToken()->getUser();
-        if (!is_object($user) || !$user instanceof UserInterface) {
-            throw new AccessDeniedException('This user does not have access to this section.');
-        }
-
-        $form = $this->container->get('sonata_user_authentication_form');
-        $formHandler = $this->container->get('sonata_user_authentication_form_handler');
-
-        $process = $formHandler->process($user);
-        if ($process) {
-            $this->setFlash('fos_user_success', 'profile.flash.updated');
-
-            return new RedirectResponse($this->generateUrl('sonata_user_profile_show'));
-        }
-
-        return $this->render('SonataUserBundle:Profile:edit_authentication.html.twig', array(
-            'form' => $form->createView(),
         ));
     }
 
@@ -86,7 +55,7 @@ class ProfileController extends BaseSecurityController
         }
 
         $form = $this->container->get('sonata.user.profile.form');
-        
+  // var_dump($form); die();     
         $formHandler = $this->container->get('sonata.user.profile.form.handler');
 
         $process = $formHandler->process($user);

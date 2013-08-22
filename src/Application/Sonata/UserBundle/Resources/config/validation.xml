@@ -12,7 +12,6 @@
                 <option name="minMessage">fos_user.password.short</option>
                 <option name="groups">
                     <value>Registration</value>
-                    <value>Profile</value>
                 </option>
             </constraint>
             <constraint name="Length">
@@ -30,5 +29,6 @@
         </property>
         
     </class>
+
 
 </constraint-mapping>

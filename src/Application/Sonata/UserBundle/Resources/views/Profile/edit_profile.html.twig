@@ -50,16 +50,28 @@ file that was distributed with this source code.
                 {%  else %}
                     {{ form_widget(form.email) }}
                 {% endif %}
-            </div>  
+            </div>
             <div>
-                {{ form_errors(form.password) }}
-                {% if form.password.vars.errors|length %}
-                    {{ form_widget(form.password, {'attr':{'class':'error-form-registration'} }) }}
-                {%  else %}
-                    {{ form_widget(form.password) }}
+                {{ form_errors(form.new) }}
+                {% if form.new.first.vars.errors|length or form.new.second.vars.errors|length %}
+                    <div>
+                        {{ form_label(form.new.first) }}
+                        {{ form_widget(form.new.first, {'attr':{'class':'error-form-registration'} }) }}
+                        
+                        {{ form_label(form.new.second) }}
+                        {{ form_widget(form.new.second, {'attr':{'class':'error-form-registration'} }) }}
+                    </div>    
+                {% else %}
+                    <div>
+                        {{ form_label(form.new.first) }}
+                        {{ form_widget(form.new.first) }}
+                        
+                        {{ form_label(form.new.second) }}
+                        {{ form_widget(form.new.second) }}
+                        <lable id="bothPasswordsMatch"><img src="#" alt="passwordMatch"/></lable>
+                    </div> 
                 {% endif %}
             </div>
-
             <div>
                 {{ form_label(form.phone) }}
                 {{ form_errors(form.phone) }}
@@ -71,7 +83,7 @@ file that was distributed with this source code.
             </div>
 
             {{ form_rest(form) }}
-            <input type="submit" name="submit" value="{{ 'profile.save.button.label'|trans({}, 'SonataUserBundle') }}" />
+            <input type="submit" name="submit" value="{{ 'profile.edit.button.label'|trans({}, 'SonataUserBundle') }}" />
         </form>
     </div>
 {% endblock content %}

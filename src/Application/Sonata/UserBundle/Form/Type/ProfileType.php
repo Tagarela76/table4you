@@ -37,27 +37,27 @@ class ProfileType extends BaseProfileType
     {
         $builder
             ->add('username', null, array(
-                'label' => 'profile.username.form',
+                'label' => 'profile.edit.username.label',
                 'translation_domain' => 'SonataUserBundle'
             ))
             ->add('lastname', null, array(
-                'label' => 'profile.lastname.form', 
+                'label' => 'profile.edit.lastname.label', 
                 'translation_domain' => 'SonataUserBundle'
             ))
             ->add('email', 'email', array(
-                'label' => 'profile.email.form', 
+                'label' => 'profile.edit.email.label', 
                 'translation_domain' => 'SonataUserBundle'
             ))
-            ->add('password', 'repeated', array(
+            ->add('new', 'repeated', array(
                 'type' => 'password',
-                'invalid_message' => 'Password fields do not match',
-                'first_options' => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),
+                'options' => array('translation_domain' => 'SonataUserBundle'),
+                'first_options' => array('label' => 'profile.edit.new_password.label'),
+                'second_options' => array('label' => 'profile.edit.new_password_confirmation.label')
             ))
             ->add('phone', 'text', array(
-                'label' => 'profile.phone.form',
+                'label' => 'profile.edit.phone.label',
                 'translation_domain' => 'SonataUserBundle',
-                'required' => true,
+                'required' => true
             ))    
         ;
     }

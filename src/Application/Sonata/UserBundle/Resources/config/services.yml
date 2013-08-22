@@ -22,3 +22,8 @@ services:
         arguments: [%fos_user.model.user.class%]
         tags:
             - { name: form.type, alias: sonata_user_profile }  
+    sonata.user.profile.form.handler.default:
+        class: Application\Sonata\UserBundle\Form\Handler\ProfileFormHandler
+        arguments: ["@sonata.user.profile.form", "@request", "@fos_user.user_manager"]
+        scope: request
+        public: false       

@@ -1,21 +1,30 @@
 profile:
-  username:
-    label: 'Name:'
-    form: 'Name:'
-  lastname:
-    label: 'Lastname:'
-    form: 'Lastname:'
-  email:
-    label: 'E-mail:'
-    form: 'E-mail:' 
-  phone:
-    label: 'Phone:'
-    form: 'Phone:' 
-  currentPassword:
-    form: 'Current Password'
-  edit:
-    link: 'Edit Profile'  
-  save:
+  show:
+    username:
+      label: 'Name:'
+    lastname:
+      label: 'Lasname:' 
+    email:
+      label: 'E-mail:' 
+    phone:
+      label: 'Phone:' 
     button:
-      label: 'Save'  
+      label: 'Edit profile'
+  edit:
+    username:
+      label: 'Name:'
+    lastname:
+      label: 'Lastname:'  
+    email:
+      label: 'E-mail:'   
+    phone:
+      label: 'Phone:' 
+    currentPassword:
+      form: 'Password'  
+    new_password:
+      label: 'Password'
+    new_password_confirmation:
+      label: 'Repeat password'  
+    button:
+      label: 'Save'
   
