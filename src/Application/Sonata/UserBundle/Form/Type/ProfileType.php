@@ -51,7 +51,8 @@ class ProfileType extends BaseProfileType
             ->add('new', 'repeated', array(
                 'type' => 'password',
                 'options' => array('translation_domain' => 'SonataUserBundle'),
-                'first_options' => array('label' => 'profile.edit.new_password.label'),
+                'invalid_message' => 'fos_user.password.mismatch',
+                'first_options' => array('label' => 'profile.edit.new_password.label', 'error_bubbling' => true),
                 'second_options' => array('label' => 'profile.edit.new_password_confirmation.label')
             ))
             ->add('phone', 'text', array(

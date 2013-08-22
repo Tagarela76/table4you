@@ -13,6 +13,9 @@
                     success: function(response) { 
                         $("#loginPreloader").hide();
                         $("#modal-login").html(response);
+                        $('#login').modal('hide');
+
+                        return false;
                     }
                 });
                 return false;
