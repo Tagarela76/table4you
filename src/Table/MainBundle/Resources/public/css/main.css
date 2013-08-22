@@ -1,6 +1,10 @@
+/*.container, .navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
+width: 870px;
+}*/
+
 /* MODAL WINDOW REGISTRATION */
 
-.modal{
+.modal-registration, .modal-login{
     width: 345px;
     /*height: 868px;
     position: absolute;
@@ -32,7 +36,7 @@
     -o-border-radius: 5px 5px 5px 5px;
     border-radius: 5px 5px 5px 5px;
 }
-.modal-registration-title{
+.modal-registration-title, .modal-login-title{
     background: #e4e3e2;
     border: 0px;
     padding-left: 14px;
@@ -44,20 +48,20 @@
     padding-top: 3px;
     padding-bottom: 16px;
 }
-.modal-registration-title img#registrationPreloader{
+.modal-registration-title img#registrationPreloader, .modal-login-title img#loginPreloader{
     width: 25px;
     height: 25px;
     position: absolute;
     right: 40px;
 }
-.modal-header .close{
+.modal-registration-title .close, .modal-login-title .close{
     background: url(../images/close-modal.png) no-repeat;
     display: block;
     width: 14px;
     height: 14px;
     margin-top: 6px;
 }
-.modal-registration-title h3 {
+.modal-registration-title h3, .modal-login-title  h3{
     font-size: 15.31px;
     color: #353535;
     margin: 0px;
@@ -65,7 +69,7 @@
 .modal-registration #fos-registration-form{
     margin-bottom: 1%;
 }
-.modal-registration #fos_user_registration_form div{
+.modal-registration #fos_user_registration_form div, .modal-login #fos-login-form div{
     margin: 0px 21px 0px 17px;
    /* height: 85px;*/
 }
@@ -79,12 +83,15 @@
 .modal-registration #fos_user_registration_form div+div+div+div.password-registration+div, .modal-registration #fos_user_registration_form div.captcha-img{
     margin-top: 0px;
 }
-.modal-registration #fos_user_registration_form div ul li{
+.modal-registration #fos_user_registration_form div ul li, .error-text-login{
     list-style: none;
     font-size: 11px;
     color: #ff0000;
 }
-.modal-registration #fos_user_registration_form div label{
+.error-text-login{
+    margin: 0px 21px 0px 17px;
+}
+.modal-registration #fos_user_registration_form div label, .modal-login #fos-login-form label{
     width: 100%;
     float: left;
     font-size: 14px;
@@ -100,7 +107,7 @@
     margin: 0px;
     margin-bottom: 10px;
 }
-.modal-registration #fos_user_registration_form div input{
+.modal-registration #fos_user_registration_form div input, .modal-login #fos-login-form div input{
     font-size: 14px;
     color: #353535;
     width: 292px;
@@ -122,6 +129,23 @@
     -webkit-box-shadow: inset 1px 0px 3px rgba(238, 238, 238, 0.7), inset -2px 0px 3px rgba(238, 238, 238,0.7), inset 0px 2px 1px rgba(0, 0, 0, 0.7);
     box-shadow: inset 1px 0px 3px rgba(238, 238, 238, 0.7), inset -2px 0px 3px rgba(238, 238, 238,0.7), inset 0px 2px 1px rgba(0, 0, 0, 0.7);
 }
+.modal-login #fos-login-form div.checkbox-login input{
+    width: 13px;
+    float: left;
+    margin: 0px;
+    margin-top: -1px;
+    border-radius: 50%;
+}
+.modal-login #fos-login-form{
+    margin:0px;
+}
+.modal-login #fos-login-form div.boxChecked label, .modal-login #fos-login-form div.boxUnchecked label{
+    float: none;
+    font-size: 13.6px;
+    color: #353535;
+    margin-left: 20px;
+    width: 105px;
+}
 .modal-registration #fos_user_registration_form div input#fos_user_registration_form_phone{
     color: #858181;
     font-size: 12px;
@@ -130,7 +154,10 @@
     padding: 9px 0px 0px 0px;
     margin-top: 63px;
 }
-.modal-registration #fos_user_registration_form div.button-registration input{
+.modal-login #fos-login-form .button-login input{
+    margin-bottom: 20px;
+}
+.modal-registration #fos_user_registration_form div.button-registration input, .modal-login #fos-login-form .button-login input{
     background: #feb200;
     background: -moz-linear-gradient(top, #feb200 0%, #e2601b 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#feb200), color-stop(100%,#e2601b));
@@ -181,11 +208,11 @@
     float: left;
 }
 
-.modal-registration #fos_user_registration_form div input.error-form-registration{
+.modal-registration #fos_user_registration_form div input.error-form-registration, #fos-login-form div input.error-form-login{
     border: 1px solid #ff0000;
     box-shadow: none;
 }
-.modal-registration #fos_user_registration_form div input:focus, .modal-registration #fos_user_registration_form div input#fos_user_registration_form_captcha:focus{
+.modal-registration #fos_user_registration_form div input:focus, .modal-registration #fos_user_registration_form div input#fos_user_registration_form_captcha:focus, .modal-login #fos-login-form div input:focus{
     border: 1px solid #fe8504;
     outline: none;
     box-shadow: none;
@@ -206,6 +233,28 @@
     margin: 0px;
     margin-left: 25px;
 }
+
+div.boxChecked {
+    background: url(../images/checkbox-sprite.png) no-repeat 0 -2px;
+}
+div.boxUnchecked {
+    background: url(../images/checkbox-sprite.png) no-repeat 0 -26px;float: left;
+}
+div.boxChecked input, div.boxUnchecked input {
+    cursor: pointer;
+    margin: 0px;
+    margin-right: 5px;
+    padding: 0px!important;
+    width: 16px!important;
+    height: 13px;
+    opacity: 0;
+    float: left;
+}
+.modal-login #fos-login-form div.boxChecked label, .modal-login #fos-login-form div.boxUnchecked label {
+    cursor: pointer;
+    float: none!important;
+    width: 125px!important;
+  }
 /* end MODAL */
 
 #bothPasswordsMatch {

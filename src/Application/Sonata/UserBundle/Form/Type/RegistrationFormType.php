@@ -33,7 +33,9 @@ class RegistrationFormType extends BaseType
                     'label' => 'form.captcha.label',
                     'translation_domain' => 'FOSUserBundle',
                     'reload' => true,
-                    'as_url' => true
+                    'as_url' => true,
+                    'width' => 125,
+                    'height' => 30,
                 ))
         ;
     }
