@@ -33,7 +33,9 @@
         "gregwar/captcha-bundle": "dev-master",
         "rollerworks/password-strength-bundle": "master-dev",
         "friendsofsymfony/jsrouting-bundle": "~1.1",
-        "whiteoctober/breadcrumbs-bundle": "dev-master"
+        "whiteoctober/breadcrumbs-bundle": "dev-master",
+        "behat/symfony2-extension": "*",
+        "knplabs/knp-paginator-bundle": "2.3.*@dev"
     },
     "scripts": {
         "post-install-cmd": [

@@ -2,12 +2,29 @@
 
 namespace Table\MainBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Table\MainBundle\Controller\Controller;
+
+use Table\RestaurantBundle\Entity\Restaurant;
 
 class DefaultController extends Controller
 {
-    public function indexAction()
+
+    /**
+     * 
+     * Render main page
+     * 
+     * @param type $page
+     * @return array[]
+     */
+    public function indexAction($page)
     {
-        return $this->render('TableMainBundle:Default:index.html.twig');
+        return $this->render(
+                'TableMainBundle:Default:index.html.twig', array(
+                    'restaurantsList' => $this->getPaginator()->paginate(
+                            $this->getRestaurantManager()->getRestaurants(), $page, Restaurant::PER_PAGE_COUNT
+                    ),
+                )
+        );
     }
+
 }

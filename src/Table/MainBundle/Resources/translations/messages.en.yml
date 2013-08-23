@@ -1,3 +1,6 @@
 main:
   register: Registration
   registerFormTitle: Registration
+  labels:
+    kitchen: 'Kitchen:'
+    address: 'Address:'

@@ -1,0 +1,30 @@
+<div class="restaurantList-container">
+    {% for restaurant in restaurantsList %}
+        <div class="restaurant-container">
+            <div class="span4">
+                {% thumbnail restaurant.photo, 'reference' %}
+            </div>
+            <div class="span8">
+                <p>
+                    {{ restaurant.name }}
+                </p>
+                <p>
+                    {{ restaurant.category.name }}
+                </p>
+                <p>
+                    {% trans %}main.labels.kitchen{% endtrans %}
+                    {% for kitchen in restaurant.kitchens %}
+                        {{ kitchen.name }}
+                        {% if loop.index < restaurant.kitchens|length %}
+                            ,
+                        {% endif %}
+                    {% endfor %}
+                </p>
+                <p>
+                     {% trans %}main.labels.address{% endtrans %}
+                    {{ restaurant.city }}, {{ restaurant.street }}, {{ restaurant.house }}
+                </p>
+            </div>
+        </div>        
+    {% endfor %}
+</div> 

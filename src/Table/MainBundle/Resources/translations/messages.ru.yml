@@ -1,3 +1,6 @@
 main:
   register: Регистрация
   registerFormTitle: Регистрация
+  labels:
+    kitchen: 'Кухня:'
+    address: 'Aдрес:'
