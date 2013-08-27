@@ -11,9 +11,12 @@
                        $("#loginPreloader").show();
                     },
                     success: function(response) { 
+             
+                       // $('#login').modal('hide')
+                         //$('.modal').hide();
                         $("#loginPreloader").hide();
                         $("#modal-login").html(response);
-                        $('#login').modal('hide');
+                        
 
                         return false;
                     }
