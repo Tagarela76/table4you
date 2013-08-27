@@ -48,25 +48,23 @@ file that was distributed with this source code.
                     {% endif %}
                 </div>
                 <div>
-                    {{ form_errors(form.new) }}
-                    {% if form.new.vars.errors|length %}
+                    {{ form_errors(form.newPassword) }}
+                    {% if form.newPassword.vars.errors|length %}
                         <div>
-                            {{ form_label(form.new.first) }}
-                            {{ form_widget(form.new.first, {'attr':{'class':'error-form-profile'} }) }}
+                            {{ form_label(form.newPassword.first) }}
+                            {{ form_widget(form.newPassword.first, {'attr':{'class':'error-form-profile'} }) }}
 
-                            {{ form_label(form.new.second) }}
-                            {{ form_widget(form.new.second, {'attr':{'class':'error-form-profile'} }) }}
+                            {{ form_label(form.newPassword.second) }}
+                            {{ form_widget(form.newPassword.second, {'attr':{'class':'error-form-profile'} }) }}
                         </div>    
                     {% else %}
                         <div>
-                            {{ form_label(form.new.first) }}
-                            {{ form_widget(form.new.first) }}
+                            {{ form_label(form.newPassword.first) }}
+                            {{ form_widget(form.newPassword.first) }}
 
-                            {{ form_label(form.new.second) }}
-                            {{ form_widget(form.new.second) }}
-                            <label id="bothPasswordsMatchInProfile" style="display: none;">
-                                <img src="#" alt="passwordMatch"/>
-                            </label>
+                            {{ form_label(form.newPassword.second) }}
+                            {{ form_widget(form.newPassword.second) }}
+                            {% include "TableMainBundle:Component:ajaxPreloader.html.twig" %}
                         </div> 
                     {% endif %}
                 </div>

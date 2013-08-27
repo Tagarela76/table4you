@@ -56,10 +56,7 @@ class ProfileController extends BaseSecurityController
         }
 
         $form = $this->container->get('sonata.user.profile.form');
-        foreach ($form as $child) {
-            
-        }
-           
+
         $formHandler = $this->container->get('sonata.user.profile.form.handler');
 
         $process = $formHandler->process($user);
@@ -70,11 +67,10 @@ class ProfileController extends BaseSecurityController
         } 
         foreach ($form->getErrors() as $formError) {
            if ($formError->getMessageTemplate() == "fos_user.password.password_not_fit_format") {
-               $form->get('new')->addError(new FormError($formError->getMessage()));
+               $form->get('newPassword')->addError(new FormError($formError->getMessage()));
            } 
         }
-       // $translated = $this->container->get('translator')->trans('fos_user.email.restore_password', array(), 'validators');
-            
+ 
         return $this->render('ApplicationSonataUserBundle:Profile:edit_profile.html.twig', array(
             'form' => $form->createView(),
         ));

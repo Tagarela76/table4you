@@ -27,7 +27,7 @@ class User extends BaseUser
     /**
      * @var string
      */
-    public $new;
+    public $newPassword;
     
     /**
      * @var integer $id

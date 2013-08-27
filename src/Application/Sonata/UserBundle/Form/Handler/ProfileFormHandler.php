@@ -48,7 +48,7 @@ class ProfileFormHandler extends BaseProfileFormHandler
      */
     public function getNewPassword()
     {
-        return $this->form->getData()->new;
+        return $this->form->getData()->newPassword;
     }
 
     /**
