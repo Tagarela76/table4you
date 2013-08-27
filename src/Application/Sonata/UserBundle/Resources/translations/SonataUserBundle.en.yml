@@ -1,0 +1,30 @@
+profile:
+  show:
+    username:
+      label: 'Name:'
+    lastname:
+      label: 'Lasname:' 
+    email:
+      label: 'E-mail:' 
+    phone:
+      label: 'Phone:' 
+    button:
+      label: 'Edit profile'
+  edit:
+    username:
+      label: 'Name:'
+    lastname:
+      label: 'Lastname:'  
+    email:
+      label: 'E-mail:'   
+    phone:
+      label: 'Phone:' 
+    currentPassword:
+      form: 'Password'  
+    new_password:
+      label: 'Password'
+    new_password_confirmation:
+      label: 'Repeat password'  
+    button:
+      label: 'Save'
+  

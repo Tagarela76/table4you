@@ -1,6 +1,14 @@
 main:
-  register: Регистрация
-  registerFormTitle: Регистрация
   labels:
     kitchen: 'Кухня:'
     address: 'Aдрес:'
+  register:
+    buttonLabel: Регистрация
+    form:
+      title: Регистрация
+  login: 
+    buttonLabel: Войти
+    form:
+      title: Авторизация
+  profile:
+    buttonLabel: Мой профиль

@@ -1,0 +1,87 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+{% extends "TableMainBundle::layout.html.twig" %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/applicationsonatauser/js/profile-password-validation.js') }}"></script>
+{% endblock %}  
+{% block content %}
+    <div class="sonata-user-edit-profile">
+        <form novalidate action="{{ path('sonata_user_profile_edit') }}" method="POST" class="form-horizontal">
+            <div>
+            {{ form_start(form) }}
+                <div>
+                    {{ form_label(form.username) }}
+                    {{ form_errors(form.username) }}
+                    {% if form.username.vars.errors|length %}
+                        {{ form_widget(form.username, {'attr':{'class':'error-form-profile'} }) }}
+                    {%  else %}
+                        {{ form_widget(form.username) }}
+                    {% endif %}
+                </div>
+
+                <div>
+                    {{ form_label(form.lastname) }}
+                    {{ form_errors(form.lastname) }}
+                    {% if form.lastname.vars.errors|length %}
+                        {{ form_widget(form.lastname, {'attr':{'class':'error-form-profile'} }) }}
+                    {%  else %}
+                        {{ form_widget(form.lastname) }}
+                    {% endif %}
+                </div>
+
+                <div>
+                    {{ form_label(form.email) }}
+                    {{ form_errors(form.email) }}
+                    {% if form.email.vars.errors|length %}
+                        {{ form_widget(form.email, {'attr':{'class':'error-form-profile'} }) }}
+                    {%  else %}
+                        {{ form_widget(form.email) }}
+                    {% endif %}
+                </div>
+                <div>
+                    {{ form_errors(form.newPassword) }}
+                    {% if form.newPassword.vars.errors|length %}
+                        <div>
+                            {{ form_label(form.newPassword.first) }}
+                            {{ form_widget(form.newPassword.first, {'attr':{'class':'error-form-profile'} }) }}
+
+                            {{ form_label(form.newPassword.second) }}
+                            {{ form_widget(form.newPassword.second, {'attr':{'class':'error-form-profile'} }) }}
+                        </div>    
+                    {% else %}
+                        <div>
+                            {{ form_label(form.newPassword.first) }}
+                            {{ form_widget(form.newPassword.first) }}
+
+                            {{ form_label(form.newPassword.second) }}
+                            {{ form_widget(form.newPassword.second) }}
+                            {% include "TableMainBundle:Component:ajaxPreloader.html.twig" %}
+                        </div> 
+                    {% endif %}
+                </div>
+                <div>
+                    {{ form_label(form.phone) }}
+                    {{ form_errors(form.phone) }}
+                    {% if form.phone.vars.errors|length %}
+                        {{ form_widget(form.phone, {'attr':{'class':'error-form-profile'} }) }}
+                    {%  else %}
+                        {{ form_widget(form.phone) }}
+                    {% endif %}
+                </div>
+
+                {{ form_rest(form) }}
+                <input type="submit" name="submit" value="{{ 'profile.edit.button.label'|trans({}, 'SonataUserBundle') }}" />
+                {{ form_end(form) }}
+            </div>        
+        </form>
+    </div>
+{% endblock content %}

@@ -25,6 +25,11 @@ use Doctrine\ORM\Mapping as ORM;
 class User extends BaseUser
 {
     /**
+     * @var string
+     */
+    public $newPassword;
+    
+    /**
      * @var integer $id
      */
     protected $id;

@@ -25,10 +25,14 @@
             </constraint>
             <constraint name="Application\Sonata\UserBundle\Validator\Constraints\CustomPasswordStrength">
                 <option name="message">fos_user.password.password_not_fit_format</option>
-                <option name="groups">Registration</option>
+                <option name="groups">
+                    <value>Registration</value>
+                    <value>Profile</value>
+                </option>
             </constraint>    
         </property>
         
     </class>
+
 
 </constraint-mapping>
