@@ -3,8 +3,9 @@
 namespace Table\MainBundle\Controller;
 
 use Table\MainBundle\Controller\Controller;
-
 use Table\RestaurantBundle\Entity\Restaurant;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class DefaultController extends Controller
 {
@@ -12,18 +13,17 @@ class DefaultController extends Controller
     /**
      * 
      * Render main page
+     * @Template()
      * 
      * @param type $page
      * @return array[]
      */
     public function indexAction($page)
     {
-        return $this->render(
-                'TableMainBundle:Default:index.html.twig', array(
-                    'restaurantsList' => $this->getPaginator()->paginate(
-                            $this->getRestaurantManager()->getRestaurants(), $page, Restaurant::PER_PAGE_COUNT
-                    ),
-                )
+        return array(
+            'restaurantsList' => $this->getPaginator()->paginate(
+                    $this->getRestaurantManager()->getRestaurants(), $page, Restaurant::PER_PAGE_COUNT
+            )
         );
     }
 

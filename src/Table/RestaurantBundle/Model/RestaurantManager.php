@@ -89,4 +89,14 @@ class RestaurantManager
     {
         return $this->getRestaurantRepo()->getRestaurants();
     }
+    
+    /**
+     * @param integer $name
+     *
+     * @return Table\RestaurantBundle\Entity\Restaurant
+     */
+    public function findOneByName($name)
+    {
+        return $this->getRestaurantRepo()->findOneByName($name);
+    }
 }

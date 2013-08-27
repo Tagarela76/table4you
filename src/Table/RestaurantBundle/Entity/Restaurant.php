@@ -261,7 +261,7 @@ class Restaurant
      * Set category
      *
      * @param Table\RestaurantBundle\Entity\RestaurantCategory $category
-     * @return Rest
+     * @return Restaurant
      */
     public function setCategory($category)
     {

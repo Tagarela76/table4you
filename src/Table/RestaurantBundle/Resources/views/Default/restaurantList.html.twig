@@ -13,12 +13,7 @@
                 </p>
                 <p>
                     {% trans %}main.labels.kitchen{% endtrans %}
-                    {% for kitchen in restaurant.kitchens %}
-                        {{ kitchen.name }}
-                        {% if loop.index < restaurant.kitchens|length %}
-                            ,
-                        {% endif %}
-                    {% endfor %}
+                    {{ restaurant.kitchens|join(',') }}
                 </p>
                 <p>
                      {% trans %}main.labels.address{% endtrans %}
