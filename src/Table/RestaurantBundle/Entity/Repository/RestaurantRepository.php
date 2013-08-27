@@ -12,4 +12,17 @@ use Doctrine\ORM\EntityRepository;
  */
 class RestaurantRepository extends EntityRepository
 {
+    /**
+     * 
+     * Get Restaurants
+     * 
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function getRestaurants() 
+    {
+        $query = $this->createQueryBuilder('restaurant');
+        $query->orderBy('restaurant.name', 'ASC');
+ 
+        return $query;
+    }
 }

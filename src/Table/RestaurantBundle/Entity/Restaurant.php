@@ -14,6 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Restaurant
 {
+    const PER_PAGE_COUNT = 10;
 
     /**
      * @var integer
@@ -67,12 +68,13 @@ class Restaurant
     private $workHoursTo;
 
     /**
-     * @var Table\RestaurantBundle\Entity\RestaurantKitchen $kitchen
-     * 
-     * @ORM\ManyToOne(targetEntity="RestaurantKitchen", inversedBy="restaurants")
-     * @ORM\JoinColumn(name="kitchen_id", referencedColumnName="id")
-     * */
-    private $kitchen;
+     * @ORM\ManyToMany(targetEntity="Table\RestaurantBundle\Entity\RestaurantKitchen")
+     * @ORM\JoinTable(name="restaurant2kitchen",
+     *   joinColumns={@ORM\JoinColumn(name="restaurant_id", referencedColumnName="id")},
+     *   inverseJoinColumns={@ORM\JoinColumn(name="kitchen_id", referencedColumnName="id")}
+     * )
+     */
+    private $kitchens;
 
     /**
      * @var Table\RestaurantBundle\Entity\RestaurantCategory $category
@@ -103,7 +105,8 @@ class Restaurant
 
     public function __construct()
     {
-        $this->additionalServices = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->additionalServices = new ArrayCollection();
+        $this->kitchens = new ArrayCollection();
     }
 
     /**
@@ -258,7 +261,7 @@ class Restaurant
      * Set category
      *
      * @param Table\RestaurantBundle\Entity\RestaurantCategory $category
-     * @return Property
+     * @return Restaurant
      */
     public function setCategory($category)
     {
@@ -278,29 +281,6 @@ class Restaurant
     }
 
     /**
-     * Set kitchen
-     *
-     * @param Table\RestaurantBundle\Entity\RestaurantKitchen $kitchen
-     * @return Property
-     */
-    public function setKitchen($kitchen)
-    {
-        $this->kitchen = $kitchen;
-
-        return $this;
-    }
-
-    /**
-     * Get kitchen
-     *
-     * @return Table\RestaurantBundle\Entity\RestaurantKitchen
-     */
-    public function getKitchen()
-    {
-        return $this->kitchen;
-    }
-
-    /**
      * Get photo
      *
      * @return Application\Sonata\MediaBundle\Entity\Media 
@@ -314,7 +294,7 @@ class Restaurant
      * Set photo
      *
      * @param Application\Sonata\MediaBundle\Entity\Media $photo
-     * @return Property
+     * @return Restaurant
      */
     public function setPhoto($photo)
     {
@@ -360,6 +340,47 @@ class Restaurant
     public function removeAdditionalServices($additionalServices)
     {
         $this->additionalServices->removeElement($additionalServices);
+    }
+    
+    /**
+     * Get kitchens
+     *
+     * @return Table\RestaurantBundle\Entity\RestaurantKitchen[] 
+     */
+    public function getKitchens()
+    {
+        return $this->kitchens;
+    }
+
+    /**
+     * Add kitchens
+     * 
+     * @param Table\RestaurantBundle\Entity\RestaurantKitchen $kitchens
+     */
+    public function addKitchens($kitchens)
+    {
+        $this->kitchens[] = $kitchens;
+    }
+
+    /**
+     * Set kitchens
+     *
+     * @param Table\RestaurantBundle\Entity\RestaurantKitchen $kitchens
+     * @return Restaurant
+     */
+    public function setKitchens($kitchens)
+    {
+        $this->kitchens = $kitchens;
+    }
+
+    /**
+     * Remove kitchens
+     * 
+     * @param Table\RestaurantBundle\Entity\RestaurantKitchen $kitchens
+     */
+    public function removeKitchens($kitchens)
+    {
+        $this->kitchens->removeElement($kitchens);
     }
 
     /**

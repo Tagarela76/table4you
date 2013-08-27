@@ -2,7 +2,7 @@
 
 namespace Table\RestaurantBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Table\MainBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {

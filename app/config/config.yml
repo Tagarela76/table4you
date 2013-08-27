@@ -54,7 +54,7 @@ doctrine:
         driver:   %database_driver%
         host:     %database_host%
         port:     %database_port%
-        dbname:   %database_name%
+        dbname:   %database_name%_%kernel.environment%
         user:     %database_user%
         password: %database_password%
         charset:  UTF8
@@ -204,3 +204,14 @@ white_october_breadcrumbs:
     itemClass:          'nofollow'
     locale:             %locale%
     translation_domain: messages
+    
+knp_paginator:
+    page_range: 10                      # default page range used in pagination control
+    default_options:
+        page_name: page                # page query parameter name
+        sort_field_name: sort          # sort field query parameter name
+        sort_direction_name: direction # sort direction query parameter name
+        distinct: true                 # ensure distinct results, useful when ORM queries are using GROUP BY statements
+    template:
+        pagination: KnpPaginatorBundle:Pagination:sliding.html.twig     # sliding pagination controls template
+        sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template     

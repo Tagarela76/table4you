@@ -33,7 +33,13 @@
         "gregwar/captcha-bundle": "dev-master",
         "rollerworks/password-strength-bundle": "master-dev",
         "friendsofsymfony/jsrouting-bundle": "~1.1",
-        "whiteoctober/breadcrumbs-bundle": "dev-master"
+        "whiteoctober/breadcrumbs-bundle": "dev-master",
+        "knplabs/knp-paginator-bundle": "2.3.*@dev",
+        
+        "behat/symfony2-extension": "1.0.*@dev",
+        "behat/mink-extension": "1.2.*@dev",
+        "behat/mink-browserkit-driver": "1.1.*@dev",
+        "behat/mink-goutte-driver": "1.0.*@dev"
     },
     "scripts": {
         "post-install-cmd": [

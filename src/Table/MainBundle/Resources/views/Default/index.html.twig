@@ -1,22 +1,48 @@
 {% extends 'TableMainBundle::layout.html.twig' %}
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-{% endblock %}      
+<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+{# infinitive scrolling #}
+<script src="{{ asset('bundles/tablemain/infinite-ajax-scroll/js/jquery-ias.min.js') }}"></script>
+<script>
+    jQuery.ias({
+        container : '.restaurantList-container',
+        item: '.restaurant-container',
+        pagination: '.navigation',
+        next: '.next a',
+        loader: '<img src="{{ asset('bundles/tablemain/infinite-ajax-scroll/images/loader.gif') }}"/>'
+    });
+</script>    
+{# infinitive scrolling #}
+{% endblock %}    
+{% block stylesheets %}
+    {{ parent() }}
+    {# infinitive scrolling #}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/infinite-ajax-scroll/css/jquery.ias.css') }}">
+    {# infinitive scrolling #}
+{% endblock %}    
 {% block content %}
-    <a class="btn btn-primary" data-toggle="modal" data-target="#register" href="{{ path('fos_user_registration_register') }}">
+<a class="btn btn-primary" data-toggle="modal" data-target="#register" href="{{ path('fos_user_registration_register') }}">
         {% trans %}main.register{% endtrans %}
-    </a>
-    <div class="modal hide modal-registration" data-backdrop="static" id="register">
+</a>
+<div class="modal hide modal-registration" data-backdrop="static" id="register">
 
-        <div class="modal-header modal-registration-title">
-            <a class="close" data-dismiss="modal"></a>
-            <img id="registrationPreloader" style="display: none;" src="{{ asset('bundles/tablemain/images/ajax-loader.gif') }}" />
-            <h3>{% trans %}main.registerFormTitle{% endtrans %}</h3>
-        </div>
-        <div class="modal-body" >
-
-        </div>
+    <div class="modal-header modal-registration-title">
+        <a class="close" data-dismiss="modal"></a>
+        <img id="registrationPreloader" style="display: none;" src="{{ asset('bundles/tablemain/images/ajax-loader.gif') }}" />
+        <h3>{% trans %}main.registerFormTitle{% endtrans %}</h3>
     </div>
+    <div class="modal-body" >
+
+    </div>
+</div>
+<div class="container-fluid">
+    {% include 'TableRestaurantBundle:Default:restaurantList.html.twig' %}
+</div>
+
+    {# display navigation #}
+<div class="navigation">
+        {{ knp_pagination_render(restaurantsList) }}
+</div>
 {% endblock %}    
