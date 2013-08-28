@@ -12,21 +12,21 @@ file that was distributed with this source code.
 {% block content %}
     <div class="sonata-user-show">
         <p>
-            <h4>{{ 'profile.show.username.label'|trans({}, 'SonataUserBundle') }}</h4>
-            <b>{{ app.user.username }}</b>
+            <span class="user-profile-label">{{ 'profile.show.username.label'|trans({}, 'SonataUserBundle') }}</span>
+            <span>{{ app.user.username }}</span>
         </p>
         <p>
-            <h4>{{ 'profile.show.lastname.label'|trans({}, 'SonataUserBundle') }}</h4>
-            <b>{{ app.user.lastname }}</b>
+            <span class="user-profile-label">{{ 'profile.show.lastname.label'|trans({}, 'SonataUserBundle') }}</span>
+            <span>{{ app.user.lastname }}</span>
         </p>
         <p>
-            <h4>{{ 'profile.show.email.label'|trans({}, 'SonataUserBundle') }}</h4>
-            <b>{{ app.user.email }}</b>
+            <span class="user-profile-label">{{ 'profile.show.email.label'|trans({}, 'SonataUserBundle') }}</span>
+            <span>{{ app.user.email }}</span>
         </p>
         <p>
-            <h4>{{ 'profile.show.phone.label'|trans({}, 'SonataUserBundle') }}</h4>
-            <b>{{ app.user.phone }}</b>
+            <span class="user-profile-label">{{ 'profile.show.phone.label'|trans({}, 'SonataUserBundle') }}</span>
+            <span>{{ app.user.phone }}</span>
         </p>
-        <a href="{{ path('sonata_user_profile_edit') }}">{{ "profile.show.button.label" | trans({}, 'SonataUserBundle')}}</a>
+        <a class="user-profile-but" href="{{ path('sonata_user_profile_edit') }}">{{ "profile.show.button.label" | trans({}, 'SonataUserBundle')}}</a>
     </div>
 {% endblock content %}

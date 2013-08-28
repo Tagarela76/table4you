@@ -1,6 +1,4 @@
-/*.container, .navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
-width: 870px;
-}*/
+body{font-family: Trebuchet MS, sans-serif;}
 
 /* MODAL WINDOW REGISTRATION */
 
@@ -10,11 +8,6 @@ width: 870px;
     position: absolute;
     top: 0px;*/
 }
-/*@media (max-height:768px) {
-    .modal{
-        top: 1%;
-    }
-}*/
 .modal, .modal label, .modal input, .modal ul li, .modal h3 {
     font-family: Trebuchet MS;
 }
@@ -83,7 +76,7 @@ width: 870px;
 .modal-registration #fos_user_registration_form div+div+div+div.password-registration+div, .modal-registration #fos_user_registration_form div.captcha-img{
     margin-top: 0px;
 }
-.modal-registration #fos_user_registration_form div ul li, .error-text-login{
+.modal-registration #fos_user_registration_form div ul li, .error-text-login, .sonata-user-edit-profile .user-edit-profile div ul li{
     list-style: none;
     font-size: 11px;
     color: #ff0000;
@@ -103,7 +96,7 @@ width: 870px;
 #fos_user_registration_form{
     overflow: hidden;
 }
-.modal-registration #fos_user_registration_form ul{
+.modal-registration #fos_user_registration_form ul,.sonata-user-edit-profile .user-edit-profile div ul {
     margin: 0px;
     margin-bottom: 10px;
 }
@@ -208,17 +201,18 @@ width: 870px;
     float: left;
 }
 
-.modal-registration #fos_user_registration_form div input.error-form-registration, #fos-login-form div input.error-form-login{
+.modal-registration #fos_user_registration_form div input.error-form-registration, #fos-login-form div input.error-form-login, .sonata-user-edit-profile .user-edit-profile div input.error-form-profile{
     border: 1px solid #ff0000;
     box-shadow: none;
 }
-.modal-registration #fos_user_registration_form div input:focus, .modal-registration #fos_user_registration_form div input#fos_user_registration_form_captcha:focus, .modal-login #fos-login-form div input:focus{
+.modal-registration #fos_user_registration_form div input:focus, .modal-registration #fos_user_registration_form div input#fos_user_registration_form_captcha:focus, .modal-login #fos-login-form div input:focus, .sonata-user-edit-profile .user-edit-profile div input:focus{
     border: 1px solid #fe8504;
     outline: none;
     box-shadow: none;
 }
 .captcha-img img{
     float: left;
+    height: 36px;
 }
 .captcha-img a{
     display: block;
@@ -264,3 +258,94 @@ div.boxChecked input, div.boxUnchecked input {
     right: 10px;
 }
 
+/* User Profile */
+.sonata-user-show .user-profile-label {
+    display: block;
+    font-size: 14px;
+    color: #9c9a9a;
+    margin-bottom: 13px;
+}
+.sonata-user-show .user-profile-label+span {
+    display: block;
+    font-size: 15px;
+    color: #353535;
+    width: 336px;
+    height: 26px;
+    padding: 6px 0px 0px 12px;
+    background: -moz-linear-gradient(top, #e2e0e0 0%, #f1f0f0 99%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e2e0e0), color-stop(99%,#f1f0f0));
+    background: -webkit-linear-gradient(top, #e2e0e0 0%,#f1f0f0 99%);
+    background: -o-linear-gradient(top, #e2e0e0 0%,#f1f0f0 99%);
+    background: -ms-linear-gradient(top, #e2e0e0 0%,#f1f0f0 99%);
+    background: linear-gradient(to bottom, #e2e0e0 0%,#f1f0f0 99%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e0e0', endColorstr='#f1f0f0',GradientType=0 );
+    border: 1px solid #cccdcf;
+    -moz-border-radius: 8px 8px 8px 8px;
+    -webkit-border-radius: 8px 8px 8px 8px;
+    -o-border-radius: 8px 8px 8px 8px;
+    border-radius: 8px 8px 8px 8px;
+    -moz-box-shadow: inset 1px 0px 3px rgba(238, 238, 238, 0.7), inset -2px 0px 3px rgba(238, 238, 238,0.7), inset 0px 2px 1px rgba(0, 0, 0, 0.7);
+    -webkit-box-shadow: inset 1px 0px 3px rgba(238, 238, 238, 0.7), inset -2px 0px 3px rgba(238, 238, 238,0.7), inset 0px 2px 1px rgba(0, 0, 0, 0.7);
+    box-shadow: inset 1px 0px 3px rgba(238, 238, 238, 0.7), inset -2px 0px 3px rgba(238, 238, 238,0.7), inset 0px 2px 1px rgba(0, 0, 0, 0.7);
+}
+.sonata-user-show a.user-profile-but, .user-edit-profile .user-profile-but{
+    width: 350px;
+    padding: 7px 0px;
+    margin-top: 16px;
+    text-align: center;
+    display: block;
+    color: #fffefe;
+    font-size: 15px;
+    -moz-border-radius: 8px 8px 8px 8px;
+    -webkit-border-radius: 8px 8px 8px 8px;
+    -o-border-radius: 8px 8px 8px 8px;
+    border-radius: 8px 8px 8px 8px;
+    background: #feb200;
+    background: -moz-linear-gradient(top, #feb200 0%, #e2601b 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#feb200), color-stop(100%,#e2601b));
+    background: -webkit-linear-gradient(top, #feb200 0%,#e2601b 100%);
+    background: -o-linear-gradient(top, #feb200 0%,#e2601b 100%);
+    background: -ms-linear-gradient(top, #feb200 0%,#e2601b 100%);
+    background: linear-gradient(to bottom, #feb200 0%,#e2601b 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feb200', endColorstr='#e2601b',GradientType=0 );
+    border: 0px;
+    cursor: pointer;
+}
+.user-edit-profile .user-profile-but{
+    margin-top: 21px;
+}
+.sonata-user-show a.user-profile-but:hover{text-decoration: none;}
+
+.sonata-user-edit-profile .user-edit-profile div, .sonata-user-edit-profile .user-edit-profile div > div input#sonata_user_profile_form_newPassword_first{
+    margin-bottom: 12px;
+}
+.sonata-user-edit-profile .user-edit-profile div label{
+    width: 130px;
+    font-size: 14px;
+    color: #9c9a9a;
+    margin: 0px 0px 13px 1px;
+}
+.sonata-user-edit-profile .user-edit-profile div input{
+    width: 381px;
+    height: 18px;
+    padding-left: 10px;
+    background: -moz-linear-gradient(top, #e2e0e0 0%, #f1f0f0 99%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e2e0e0), color-stop(99%,#f1f0f0));
+    background: -webkit-linear-gradient(top, #e2e0e0 0%,#f1f0f0 99%);
+    background: -o-linear-gradient(top, #e2e0e0 0%,#f1f0f0 99%);
+    background: -ms-linear-gradient(top, #e2e0e0 0%,#f1f0f0 99%);
+    background: linear-gradient(to bottom, #e2e0e0 0%,#f1f0f0 99%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e0e0', endColorstr='#f1f0f0',GradientType=0 );
+    border: 1px solid #cccdcf;
+    -moz-border-radius: 8px 8px 8px 8px;
+    -webkit-border-radius: 8px 8px 8px 8px;
+    -o-border-radius: 8px 8px 8px 8px;
+    border-radius: 8px 8px 8px 8px;
+    -moz-box-shadow: inset 1px 0px 3px rgba(238, 238, 238, 0.7), inset -2px 0px 3px rgba(238, 238, 238,0.7), inset 0px 2px 1px rgba(0, 0, 0, 0.7);
+    -webkit-box-shadow: inset 1px 0px 3px rgba(238, 238, 238, 0.7), inset -2px 0px 3px rgba(238, 238, 238,0.7), inset 0px 2px 1px rgba(0, 0, 0, 0.7);
+    box-shadow: inset 1px 0px 3px rgba(238, 238, 238, 0.7), inset -2px 0px 3px rgba(238, 238, 238,0.7), inset 0px 2px 1px rgba(0, 0, 0, 0.7);
+}
+.sonata-user-edit-profile .user-edit-profile .user-edit-profile-telephone input{
+    color:#858181;
+}
+.user-edit-profile .user-profile-but{width: 397px;}
