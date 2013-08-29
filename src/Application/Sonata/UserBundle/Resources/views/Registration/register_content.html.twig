@@ -59,9 +59,9 @@
                 <div id="fos_user_registration_form_plainPassword">
                     {{ form_row(form.plainPassword.first) }}
                     {{ form_row(form.plainPassword.second) }}
-                    <lable id="bothPasswordsMatch"><img src="#" alt="passwordMatch"/></lable>
-                </div>
+                </div> 
             {% endif %}
+            {% include "TableMainBundle:Component:ajaxPreloader.html.twig" %}
         </div>
 
         <div>

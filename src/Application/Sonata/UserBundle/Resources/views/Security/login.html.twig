@@ -10,13 +10,24 @@
                     beforeSubmit: function() {
                        $("#loginPreloader").show();
                     },
-                    success: function(response) { 
-             
-                       // $('#login').modal('hide')
-                         //$('.modal').hide();
-                        $("#loginPreloader").hide();
-                        $("#modal-login").html(response);
+                    success: function(response) {  
                         
+                        var error = $(response).find('.error-text-login').html();
+                
+                        if (typeof error !== "undefined") { 
+                            // Error
+                            $("#loginPreloader").hide();
+                            $("#modal-login").html(response);
+                        } else {
+                            $("#loginPreloader").hide();
+                         //   $('body').find('.modal-open').remove();
+                          //  $('body').removeClass("modal-open");
+    
+                           // $('body').find('.modal-backdrop').remove();
+                            $('div').removeClass("in");
+                            $('body').find('.modal-backdrop').hide();
+                            $('#login').hide();
+                        }
 
                         return false;
                     }

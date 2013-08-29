@@ -19,14 +19,23 @@ class CustomPasswordStrengthValidator extends ConstraintValidator
         if (null !== $password && !is_scalar($password) && !(is_object($password) && method_exists($password, '__toString'))) {
             throw new UnexpectedTypeException($password, 'string');
         }
-        
+      
         // Get password
         $password = (string) $password;
+        $passwordCanBeBalnk = false;
 
-        if (!preg_match('/^[a-zA-Z0-9:.,?!@]{5,12}[#$^]?$/', $password)) {
-            $this->context->addViolation($constraint->message);
+        // Password can be blank for canBeBlankGroup
+        if ($password == "") {
+            if (in_array($constraint->canBeBlankGroup, $constraint->groups) ) {
+                $passwordCanBeBalnk = true;
+            }
+        } 
+        if (!$passwordCanBeBalnk) {
+            if (!preg_match('/^[a-zA-Z0-9:.,?!@]{5,12}[#$^]?$/', $password) ) {
+                $this->context->addViolation($constraint->message);
 
-            return;
+                return;
+            }
         }
     }
 }

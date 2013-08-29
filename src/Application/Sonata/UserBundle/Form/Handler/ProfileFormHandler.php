@@ -83,7 +83,10 @@ class ProfileFormHandler extends BaseProfileFormHandler
      */
     protected function onSuccess(UserInterface $user)
     {
-        $user->setPlainPassword($this->getNewPassword());
-        $this->userManager->updateUser($user);
+        if ($this->getNewPassword() != "") {
+            $user->setPlainPassword($this->getNewPassword());
+            $this->userManager->updateUser($user); 
+        }
+            
     }
 }
