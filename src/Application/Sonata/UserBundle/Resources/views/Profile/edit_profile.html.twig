@@ -12,11 +12,11 @@ file that was distributed with this source code.
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('bundles/applicationsonatauser/js/profile-password-validation.js') }}"></script>
-{% endblock %}  
+{% endblock %}
 {% block content %}
     <div class="sonata-user-edit-profile">
         <form novalidate action="{{ path('sonata_user_profile_edit') }}" method="POST" class="form-horizontal">
-            <div>
+            <div class="user-edit-profile">
             {{ form_start(form) }}
                 <div>
                     {{ form_label(form.username) }}
@@ -56,7 +56,7 @@ file that was distributed with this source code.
 
                             {{ form_label(form.newPassword.second) }}
                             {{ form_widget(form.newPassword.second, {'attr':{'class':'error-form-profile'} }) }}
-                        </div>    
+                        </div>
                     {% else %}
                         <div>
                             {{ form_label(form.newPassword.first) }}
@@ -65,10 +65,10 @@ file that was distributed with this source code.
                             {{ form_label(form.newPassword.second) }}
                             {{ form_widget(form.newPassword.second) }}
                             {% include "TableMainBundle:Component:ajaxPreloader.html.twig" %}
-                        </div> 
+                        </div>
                     {% endif %}
                 </div>
-                <div>
+                <div class="user-edit-profile-telephone">
                     {{ form_label(form.phone) }}
                     {{ form_errors(form.phone) }}
                     {% if form.phone.vars.errors|length %}
@@ -79,9 +79,9 @@ file that was distributed with this source code.
                 </div>
 
                 {{ form_rest(form) }}
-                <input type="submit" name="submit" value="{{ 'profile.edit.button.label'|trans({}, 'SonataUserBundle') }}" />
+                    <input class="user-profile-but" type="submit" name="submit" value="{{ 'profile.edit.button.label'|trans({}, 'SonataUserBundle') }}" />
                 {{ form_end(form) }}
-            </div>        
+            </div>
         </form>
     </div>
 {% endblock content %}
