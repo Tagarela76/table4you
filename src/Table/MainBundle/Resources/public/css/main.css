@@ -4,9 +4,6 @@ body{font-family: Trebuchet MS, sans-serif;}
 
 .modal-registration, .modal-login{
     width: 345px;
-    /*height: 868px;
-    position: absolute;
-    top: 0px;*/
 }
 .modal, .modal label, .modal input, .modal ul li, .modal h3 {
     font-family: Trebuchet MS;
@@ -254,8 +251,8 @@ div.boxChecked input, div.boxUnchecked input {
 #bothPasswordsMatch {
     display: none;
     position: absolute;
-    top: 60px;
-    right: 10px;
+    top: 96px;
+    right: 5px;
 }
 
 /* User Profile */
@@ -349,3 +346,10 @@ div.boxChecked input, div.boxUnchecked input {
     color:#858181;
 }
 .user-edit-profile .user-profile-but{width: 397px;}
+.sonata-user-edit-profile .user-edit-profile div>div{position: relative;}
+#bothPasswordsMatchInProfile{
+    display: none;
+    position: absolute;
+    top: 110px;
+    right: 5px;
+}
