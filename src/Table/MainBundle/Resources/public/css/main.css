@@ -1,5 +1,67 @@
 body{font-family: Trebuchet MS, sans-serif;}
 
+/* Main page */
+.container-fluid{padding:0px;}
+.restaurantList-container .restaurant-container{
+    border-bottom: 1px solid #ccc;
+    height: 195px;
+    margin-top: 24px;
+}
+.restaurantList-container .restaurant-container .restaurant-img-container{
+    width: 180px;
+    height: 150px;
+    float: left;
+}
+.restaurant-container .restaurant-img-container .restaurant-img{
+    width: 152px;
+    height: 150px;
+    margin: 0px 0px 0px 17px;
+    border-radius: 3px;
+}
+.restaurantList-container .restaurant-container .restaurant-content{
+    width: 346px;
+    float: left;
+    color:#454545;
+}
+.restaurantList-container .restaurant-container .restaurant-content p{font-size: 13px;margin-bottom: 2px;}
+.restaurantList-container .restaurant-container .restaurant-content .restaurant-content-name{
+    margin-bottom: 26px;
+    font-size: 24px;
+}
+.restaurantList-container .restaurant-container .restaurant-content .restaurant-content-name a{color:#454545;}
+.restaurantList-container .restaurant-container .restaurant-content .restaurant-content-font{
+    font-size: 11.9px;
+    font-style: italic;
+}
+.restaurantList-container .restaurant-container .restaurant-content-reserve{
+    width: 120px;
+    height: 60px;
+    float: right;
+}
+.restaurantList-container .restaurant-container .restaurant-content-reserve input{
+    background: #feb200;
+    background: -moz-linear-gradient(top, #feb200 0%, #e2601b 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#feb200), color-stop(100%,#e2601b));
+    background: -webkit-linear-gradient(top, #feb200 0%,#e2601b 100%);
+    background: -o-linear-gradient(top, #feb200 0%,#e2601b 100%);
+    background: -ms-linear-gradient(top, #feb200 0%,#e2601b 100%);
+    background: linear-gradient(to bottom, #feb200 0%,#e2601b 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feb200', endColorstr='#e2601b',GradientType=0 );
+    border: 0px;
+    width: 100%;
+    padding: 5px 0px;
+    color: #fffefe;
+    font-size: 15px;
+    -moz-border-radius: 4px 4px 4px 4px;
+    -webkit-border-radius: 4px 4px 4px 4px;
+    -o-border-radius: 4px 4px 4px 4px;
+    border-radius: 4px 4px 4px 4px;
+    cursor: pointer;
+    box-shadow: none;
+    margin-top: 9px;
+}
+/* end main page */
+
 /* MODAL WINDOW REGISTRATION */
 
 .modal-registration, .modal-login{
@@ -353,3 +415,4 @@ div.boxChecked input, div.boxUnchecked input {
     top: 110px;
     right: 5px;
 }
+/* end user profile  */
