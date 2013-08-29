@@ -32,7 +32,7 @@
 
         <div>
             {{ form_label(form.email) }}
-            
+
             {% if form.email.vars.errors|length > 0 %}
             <ul>
                 {% for error in form.email.vars.errors %}
@@ -40,7 +40,7 @@
                 {% endfor %}
             </ul>
             {% endif %}
-            
+
             {% if form.email.vars.errors|length %}
                 {{ form_widget(form.email, {'attr':{'class':'error-form-registration'} }) }}
             {%  else %}
@@ -54,13 +54,13 @@
                 <div id="fos_user_registration_form_plainPassword">
                     {{ form_row(form.plainPassword.first, {'attr':{'class':'error-form-registration'} }) }}
                     {{ form_row(form.plainPassword.second, {'attr':{'class':'error-form-registration'} }) }}
-                </div>    
+                </div>
             {%  else %}
                 <div id="fos_user_registration_form_plainPassword">
                     {{ form_row(form.plainPassword.first) }}
                     {{ form_row(form.plainPassword.second) }}
                     <lable id="bothPasswordsMatch"><img src="#" alt="passwordMatch"/></lable>
-                </div> 
+                </div>
             {% endif %}
         </div>
 

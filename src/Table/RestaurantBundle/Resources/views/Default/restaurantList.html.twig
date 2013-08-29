@@ -1,25 +1,33 @@
 <div class="restaurantList-container">
     {% for restaurant in restaurantsList %}
         <div class="restaurant-container">
-            <div class="span4">
-                {% thumbnail restaurant.photo, 'reference' %}
+            <div class="restaurant-img-container">
+                <div class="restaurant-img">{% thumbnail restaurant.photo, 'reference' %}</div>
             </div>
-            <div class="span8">
-                <p>
-                    {{ restaurant.name }}
+            <div class="restaurant-content">
+                <p class="restaurant-content-name">
+                    <a href="#" >{{ restaurant.name }}</a>
                 </p>
                 <p>
                     {{ restaurant.category.name }}
                 </p>
                 <p>
                     {% trans %}main.labels.kitchen{% endtrans %}
+                </p>
+                <p class="restaurant-content-font">
                     {{ restaurant.kitchens|join(',') }}
                 </p>
                 <p>
                      {% trans %}main.labels.address{% endtrans %}
+                </p>
+                <p class="restaurant-content-font">
                     {{ restaurant.city }}, {{ restaurant.street }}, {{ restaurant.house }}
                 </p>
             </div>
-        </div>        
+            <div class="restaurant-content-reserve">
+                <img src="../bundles/applicationsonatauser/images/stars.png" title="" alt="">
+                <input type="submit" value="Reserve">
+            </div>
+        </div>
     {% endfor %}
-</div> 
+</div>
