@@ -123,15 +123,10 @@ body{font-family: Trebuchet MS, sans-serif;}
 }
 .modal-registration #fos_user_registration_form div, .modal-login #fos-login-form div{
     margin: 0px 21px 0px 17px;
-   /* height: 85px;*/
 }
-/*.modal-registration #fos_user_registration_form div+div+div{
-    margin-top: 16px;
+.modal-registration #fos_user_registration_form div.password-registration{
+    position: relative;
 }
-.modal-registration #fos_user_registration_form div+div+div+div.password-registration{
-    margin-top: 3px;
-
-}*/
 .modal-registration #fos_user_registration_form div+div+div+div.password-registration+div, .modal-registration #fos_user_registration_form div.captcha-img{
     margin-top: 0px;
 }
@@ -310,11 +305,13 @@ div.boxChecked input, div.boxUnchecked input {
   }
 /* end MODAL */
 
-#bothPasswordsMatch {
+.modal-registration #fos_user_registration_form div label.check-passwords {
     display: none;
     position: absolute;
-    top: 96px;
+    top: 99px;
     right: 5px;
+    width: 12px;
+    height: 13px;
 }
 
 /* User Profile */
@@ -378,11 +375,23 @@ div.boxChecked input, div.boxUnchecked input {
 .sonata-user-edit-profile .user-edit-profile div, .sonata-user-edit-profile .user-edit-profile div > div input#sonata_user_profile_form_newPassword_first{
     margin-bottom: 12px;
 }
+.sonata-user-edit-profile .user-edit-profile div{
+    width: 400px;
+    position: relative;
+}
 .sonata-user-edit-profile .user-edit-profile div label{
     width: 130px;
     font-size: 14px;
     color: #9c9a9a;
     margin: 0px 0px 13px 1px;
+}
+.sonata-user-edit-profile .user-edit-profile div label.check-passwords{
+    display: none;
+    position: absolute;
+    top: 115px;
+    right: 5px;
+    width: 12px;
+    height: 13px;
 }
 .sonata-user-edit-profile .user-edit-profile div input{
     width: 381px;
