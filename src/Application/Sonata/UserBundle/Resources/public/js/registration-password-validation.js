@@ -11,7 +11,7 @@ function checkPasswordFit() {
     var passwordFirst = $("#fos_user_registration_form_plainPassword_first").val();
     var passwordSecond = $("#fos_user_registration_form_plainPassword_second").val();
 
-    if (passwordSecond == passwordFirst) {
+    if (passwordSecond == passwordFirst && passwordFirst != "") {
         $("#bothPasswordsMatch").css("display", "block");
     } else {
         $("#bothPasswordsMatch").css("display", "none");
