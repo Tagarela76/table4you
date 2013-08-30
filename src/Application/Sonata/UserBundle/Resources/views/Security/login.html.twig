@@ -10,13 +10,17 @@
                     beforeSubmit: function() {
                        $("#loginPreloader").show();
                     },
-                    success: function(response) { 
-             
-                       // $('#login').modal('hide')
-                         //$('.modal').hide();
-                        $("#loginPreloader").hide();
-                        $("#modal-login").html(response);
+                    success: function(response) {  
                         
+                        var error = $(response).find('.error-text-login').html();
+                
+                        if (typeof error !== "undefined") { 
+                            // Error
+                            $("#loginPreloader").hide();
+                            $("#modal-login").html(response);
+                        } else {
+                            window.location.reload();                     
+                        }
 
                         return false;
                     }

@@ -12,8 +12,8 @@ function checkPasswordFit() {
     var passwordSecond = $("#sonata_user_profile_form_newPassword_second").val();
 
     if (passwordSecond == passwordFirst) {
-        $("#bothPasswordsMatchInProfile").css("display", "block");
+        $("#bothPasswordsMatch").css("display", "block");
     } else {
-        $("#bothPasswordsMatchInProfile").css("display", "none");
+        $("#bothPasswordsMatch").css("display", "none");
     }
 }

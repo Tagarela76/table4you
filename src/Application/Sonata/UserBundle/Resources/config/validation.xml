@@ -12,7 +12,6 @@
                 <option name="minMessage">fos_user.password.short</option>
                 <option name="groups">
                     <value>Registration</value>
-                    <value>Profile</value>
                 </option>
             </constraint>
             <constraint name="Length">
@@ -20,13 +19,24 @@
                 <option name="maxMessage">fos_user.password.long</option>
                 <option name="groups">
                     <value>Registration</value>
-                    <value>Profile</value>
                 </option>
             </constraint>
             <constraint name="Application\Sonata\UserBundle\Validator\Constraints\CustomPasswordStrength">
                 <option name="message">fos_user.password.password_not_fit_format</option>
                 <option name="groups">
                     <value>Registration</value>
+                </option>
+            </constraint>    
+        </property>
+        
+    </class>
+    
+    <class name="Application\Sonata\UserBundle\Entity\User">
+
+        <property name="newPassword">
+            <constraint name="Application\Sonata\UserBundle\Validator\Constraints\CustomPasswordStrength">
+                <option name="message">fos_user.password.password_not_fit_format</option>
+                <option name="groups">
                     <value>Profile</value>
                 </option>
             </constraint>    
