@@ -63,6 +63,10 @@ body{font-family: Trebuchet MS, sans-serif;}
 /* end main page */
 
 /* MODAL WINDOW REGISTRATION */
+.modal{
+    width: 345px;
+    position: absolute;
+}
 
 .modal-registration, .modal-login{
     width: 345px;
@@ -242,19 +246,16 @@ body{font-family: Trebuchet MS, sans-serif;}
     padding: 10px 0px 0px 0px;
     height: 75px;
 }
-
 #fos_user_registration_form .password-registration #fos_user_registration_form_plainPassword, #fos_user_registration_form .password-registration #fos_user_registration_form_plainPassword div{
     margin: 0px;
     height: 100%;
     position: relative;
 }
-
 .password-registration #fos_user_registration_form_plainPassword div+div{
     width: 100%;
     height: 62px;
     float: left;
 }
-
 .modal-registration #fos_user_registration_form div input.error-form-registration, #fos-login-form div input.error-form-login, .sonata-user-edit-profile .user-edit-profile div input.error-form-profile{
     border: 1px solid #ff0000;
     box-shadow: none;
@@ -397,6 +398,7 @@ div.boxChecked input, div.boxUnchecked input {
     width: 381px;
     height: 18px;
     padding-left: 10px;
+    color: #353535;
     background: -moz-linear-gradient(top, #e2e0e0 0%, #f1f0f0 99%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e2e0e0), color-stop(99%,#f1f0f0));
     background: -webkit-linear-gradient(top, #e2e0e0 0%,#f1f0f0 99%);
@@ -425,3 +427,11 @@ div.boxChecked input, div.boxUnchecked input {
     right: 5px;
 }
 /* end user profile  */
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) { /*ie10*/
+   .modal-registration #fos_user_registration_form div input, .modal-login #fos-login-form div input{
+    color:#353535!important;
+   }
+   .sonata-user-edit-profile .user-edit-profile div input{
+     color:#353535!important;
+   }
+}
