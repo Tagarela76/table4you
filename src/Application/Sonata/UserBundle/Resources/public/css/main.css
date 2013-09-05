@@ -2,6 +2,7 @@
 
 .modal{
     width: 345px;
+    position: absolute;
     /*height: 868px;
     position: absolute;
     top: 0px;*/

@@ -3,28 +3,27 @@ profile:
     username:
       label: 'Имя:'
     lastname:
-      label: 'Фамилия:' 
+      label: 'Фамилия:'
     email:
-      label: 'E-mail:' 
+      label: 'E-mail:'
     phone:
-      label: 'Телефон:' 
+      label: 'Телефон:'
     button:
       label: 'Редактировать профиль'
   edit:
     username:
       label: 'Имя:'
     lastname:
-      label: 'Фамилия:'  
+      label: 'Фамилия:'
     email:
-      label: 'E-mail:'   
+      label: 'E-mail:'
     phone:
-      label: 'Телефон:' 
+      label: 'Телефон:'
     currentPassword:
       form: 'Пароль'
     new_password:
-      label: 'Пароль'
+      label: 'Пароль:'
     new_password_confirmation:
-      label: 'Повторите пароль'
+      label: 'Повторите пароль:'
     button:
       label: 'Сохранить'
-  
