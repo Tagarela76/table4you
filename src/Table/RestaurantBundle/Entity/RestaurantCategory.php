@@ -51,7 +51,7 @@ class RestaurantCategory
     {
         return $this->id;
     }
-
+    
     /**
      * Set name
      *

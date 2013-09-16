@@ -1,0 +1,30 @@
+Table\RestaurantBundle\Entity\DTO\Restaurant:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            inline: true
+        name:
+            expose: true
+            serialized_name: name
+        photo:     
+            expose: true
+            serialized_name: photo   
+        category:     
+            expose: true
+            serialized_name: category   
+        kitchens:     
+            expose: true
+            serialized_name: kitchens      
+        address:     
+            expose: true
+            serialized_name: address   
+        latitude:     
+            expose: true
+            serialized_name: latitude   
+        longitude:     
+            expose: true
+            serialized_name: longitude    
+        additionalServices:
+            expose: true
+            serialized_name: additionalServices    

@@ -1,0 +1,12 @@
+Table\CoreDomain\TableOrder\TableOrder:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            inline: true
+        restaurantMap:
+            expose: true
+            serialized_name: restaurantMap
+        floors:
+            expose: true
+            serialized_name: floors

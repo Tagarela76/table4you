@@ -190,12 +190,6 @@ sonata_doctrine_orm_admin:
 gregwar_captcha: 
     charset: '123456789'
 
-services:
-    table_user.registration.form.type:
-        class: Application\Sonata\UserBundle\Form\Type\RegistrationFormType
-        arguments: [%fos_user.model.user.class%]
-        tags:
-            - { name: form.type, alias: table_user_registration }
 white_october_breadcrumbs:
     separator:          '/'
     separatorClass:     'divider'
@@ -215,3 +209,28 @@ knp_paginator:
     template:
         pagination: KnpPaginatorBundle:Pagination:sliding.html.twig     # sliding pagination controls template
         sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template     
+
+fos_rest:
+    param_fetcher_listener: true
+    body_listener: true
+    view:
+        view_response_listener: force
+    format_listener:
+        default_priorities: ['json', 'html', '*/*']
+        fallback_format: json
+        prefer_extension: true
+    param_fetcher_listener: true
+    allowed_methods_listener: true    
+
+sensio_framework_extra:
+    view:    { annotations: false }
+          
+jms_serializer:
+    metadata:
+        directories:
+            CoreDomain:
+                namespace_prefix: "Table\\CoreDomain"
+                path: "@TableApiBundle/Resources/config/serializer/"
+            RestaurantBundle:
+                namespace_prefix: "Table\\RestaurantBundle"
+                path: "@TableApiBundle/Resources/config/serializer/"    

@@ -25,4 +25,44 @@ class RestaurantRepository extends EntityRepository
  
         return $query;
     }
+    
+    /**
+     *  Get regions
+     * 
+     * @return Table\RestaurantBundle\Entity\Repository[]
+     */
+    public function getCitiesList()
+    {
+        $query = $this->createQueryBuilder('restaurant')
+            ->select('DISTINCT(restaurant.city)') 
+            ->orderBy('restaurant.name', 'ASC')
+            ->getQuery();
+        
+        return $query->getResult();
+    }
+    
+    /**
+     * 
+     * Search Restaurants
+     * 
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function searchRestaurants($request) 
+    { 
+        // collect parametres
+        $requestParametres = $request->request->all();  
+        $query = $this->createQueryBuilder('restaurant');
+        $searchStr = $requestParametres['searchStr'];
+        $categoriesList = $requestParametres['categoriesList'];
+        $kitchensList = $requestParametres['kitchensList'];
+        if (!is_null($searchStr)) {
+            $query->where('restaurant.name like "%:operation%"')
+            ->setParameter('operation', $propertyOperation);
+        }
+        
+        
+        $query->orderBy('restaurant.name', 'ASC');
+
+        return $query;
+    }
 }

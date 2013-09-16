@@ -1,0 +1,9 @@
+Table\RestaurantBundle\Entity\RestaurantKitchen:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            inline: true
+        name:
+            expose: true
+            serialized_name: name

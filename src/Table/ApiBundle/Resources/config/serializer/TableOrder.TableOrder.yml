@@ -1,0 +1,18 @@
+Table\CoreDomain\TableOrder\TableOrder:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            inline: true
+        date:
+            expose: true
+            serialized_name: date
+        time:
+            expose: true
+            serialized_name: time
+        name:
+            expose: true
+            serialized_name: name
+        address:
+            expose: true
+            serialized_name: address    

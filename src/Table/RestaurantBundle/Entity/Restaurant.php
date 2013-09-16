@@ -102,6 +102,24 @@ class Restaurant
      * )
      */
     protected $additionalServices;
+    
+    /**
+     *
+     * @var string 
+     */
+    protected $address;
+    
+    /**
+     *
+     * @var float 
+     */
+    protected $latitude;
+
+    /**
+     *
+     * @var float 
+     */
+    protected $longitude;
 
     public function __construct()
     {
@@ -117,6 +135,19 @@ class Restaurant
     public function getId()
     {
         return $this->id;
+    }
+    
+    /**
+     * Set id
+     *
+     * @param integer $id
+     * @return Restaurant
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     /**
@@ -383,6 +414,106 @@ class Restaurant
         $this->kitchens->removeElement($kitchens);
     }
 
+    /**
+     * Get address
+     * 
+     * @return string
+     */
+    public function getAddress()
+    {
+        if (is_null($this->address)) {
+            $address = $this->getHouse() . " " . $this->getStreet() . " " .
+                    $this->getCity(); 
+            $address = str_replace(' ', '+', $address);
+            $this->setAddress($address);
+            return $address;
+        } else {
+            return $this->address;
+        }
+    }
+
+    /**
+     * 
+     * @param string $address
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+    }
+    
+    /**
+     * Get latitude
+     * 
+     * @return float
+     */
+    public function getLatitude()
+    {
+        if (is_null($this->getAddress())) {
+            return false;
+        } 
+        if (is_null($this->latitude)) {
+            $geocode = file_get_contents('http://maps.google.com/maps/api/geocode/json?address=' . $this->getAddress() . '&sensor=false');
+            //weak internet connection
+            if (!$geocode) {
+                return false;
+            }
+            $output = json_decode($geocode);
+            if (empty($output->results)) {
+                return false;
+            }
+            $latitude = $output->results[0]->geometry->location->lat;
+            $this->setLatitude($latitude); 
+            return $latitude;
+        } else {
+            return $this->latitude;
+        }
+    }
+
+    /**
+     * 
+     * @param float $latitude
+     */
+    public function setLatitude($latitude)
+    {
+        $this->latitude = $latitude;
+    }
+
+    /**
+     * 
+     * @return float
+     */
+    public function getLongitude()
+    {
+        if (is_null($this->getAddress())) {
+            return false;
+        }
+        if (is_null($this->longitude)) {
+            $geocode = file_get_contents('http://maps.google.com/maps/api/geocode/json?address=' . $this->getAddress() . '&sensor=false');
+            //weak internet connection
+            if (!$geocode) {
+                return false;
+            }
+            $output = json_decode($geocode);
+            if (empty($output->results)) {
+                return false;
+            }
+            $longitude = $output->results[0]->geometry->location->lng;
+            $this->setLongitude($longitude);
+            return $longitude;
+        } else {
+            return $this->longitude;
+        }
+    }
+
+    /**
+     * 
+     * @param float $longitude
+     */
+    public function setLongitude($longitude)
+    {
+        $this->longitude = $longitude;
+    }
+    
     /**
      * @return string
      */

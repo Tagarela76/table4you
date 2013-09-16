@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="table_order_repository.in_memory.class">Table\CoreDomainBundle\Repository\InMemoryTableOrderRepository</parameter>
+        <parameter key="table_reserve_repository.in_memory.class">Table\CoreDomainBundle\Repository\InMemoryTableReserveRepository</parameter>
+        <parameter key="restaurant_repository.in_memory.class">Table\CoreDomainBundle\Repository\InMemoryRestaurantRepository</parameter>
+    </parameters>
+
+    <services>
+        <!-- Exposed Services -->
+        <service id="table_order_repository" alias="table_order_repository.in_memory"></service>
+
+        <!-- Concrete Implementations -->
+        <service id="table_order_repository.in_memory" public="false" class="%table_order_repository.in_memory.class%"></service>
+        
+        <!-- Reserve -->
+        <!-- Exposed Services -->
+        <service id="table_reserve_repository" alias="table_reserve_repository.in_memory"></service>
+
+        <!-- Concrete Implementations -->
+        <service id="table_reserve_repository.in_memory" public="false" class="%table_reserve_repository.in_memory.class%"></service>
+        
+        <!-- Restaurant -->
+        <!-- Exposed Services -->
+        <service id="restaurant_repository" alias="restaurant_repository.in_memory"></service>
+
+        <!-- Concrete Implementations -->
+        <service id="restaurant_repository.in_memory" public="false" class="%restaurant_repository.in_memory.class%"></service>
+    </services>
+</container>

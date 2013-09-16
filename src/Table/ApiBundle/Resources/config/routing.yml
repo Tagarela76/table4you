@@ -1,0 +1,91 @@
+# Api for user
+table_api.login:
+    pattern: /api/rest/login/
+    defaults: { _controller: TableApiBundle:User:postTokenCreate, _format: ~ }
+    requirements:
+        _method: GET  
+        
+table_api.forgotPassword:
+    pattern:  /api/rest/forgotPassword/{email}
+    defaults: { _controller: TableApiBundle:User:forgotPassword, _format: ~ }
+    requirements:
+        _method: GET   
+        
+table_api_register:
+    pattern:  /api/rest/register/
+    defaults: { _controller: TableApiBundle:User:register, _format: ~ }
+    requirements:
+        _method: POST   
+        
+table_api.getUserInfo:
+    pattern:  /api/rest/wsse/getUserInfo/{sessionId}
+    defaults: { _controller: TableApiBundle:User:getUserInfo, _format: ~ }
+    requirements:
+        _method: GET           
+
+# Api for Restaurnat
+table_api.cities_all:
+    pattern:  /api/rest/getCitiesList
+    defaults: { _controller: TableApiBundle:Restaurant:getCitiesList, _format: ~ }
+    requirements:
+        _method: GET  
+        
+table_api.restaurant_all:
+    pattern:  /api/rest/getRestaurants/{city}
+    defaults: { _controller: TableApiBundle:Restaurant:getRestaurants, city: null, _format: ~ }
+    requirements:
+        _method: GET    
+
+table_api.restaurant_one:
+    pattern:  /api/rest/getRestaurantById/{id}
+    defaults: { _controller: TableApiBundle:Restaurant:getRestaurantById, _format: ~ }
+    requirements:
+        _method: GET   
+        id: "\d+"
+        
+table_api.restaurant_geo_all:
+    pattern:  /api/rest/geoSearch/{city}
+    defaults: { _controller: TableApiBundle:Restaurant:geoSearch, city: null, _format: ~ }
+    requirements:
+        _method: GET   
+
+table_api.restaurant_search:
+    pattern:  /api/rest/search
+    defaults: { _controller: TableApiBundle:Restaurant:search, _format: ~ }
+    requirements:
+        _method: POST           
+        
+# Api for Restaurant category
+table_api.restaurant_categories_all:
+    pattern:  /api/rest/getCategoriesList
+    defaults: { _controller: TableApiBundle:RestaurantCategory:getCategoriesList, _format: ~ }
+    requirements:
+        _method: GET    
+        
+# Api for Restaurant kitchen
+table_api.restaurant_kitchens_all:
+    pattern:  /api/rest/getKitchensList
+    defaults: { _controller: TableApiBundle:RestaurantKitchen:getKitchensList, _format: ~ }
+    requirements:
+        _method: GET        
+        
+# Api for Restaurant additional service
+table_api.restaurant_additional_services_all:
+    pattern:  /api/rest/getAdditionalServicesList
+    defaults: { _controller: TableApiBundle:RestaurantAdditionalService:getAdditionalServicesList, _format: ~ }
+    requirements:
+        _method: GET     
+ 
+# Api for Order History      
+table_api.orders_all:
+    pattern:  /api/rest/getOrderHistory/{sessionId}
+    defaults: { _controller: TableApiBundle:TableOrder:getOrderHistory, _format: ~ }
+    requirements:
+        _method: GET    
+  
+# Api for Reserve   
+table_api.view_reserve:
+    pattern:  /api/rest/viewReserve/{sessionId}/{restaurantId}
+    defaults: { _controller: TableApiBundle:TableReserve:viewReserve, _format: ~ }
+    requirements:
+        _method: GET            
