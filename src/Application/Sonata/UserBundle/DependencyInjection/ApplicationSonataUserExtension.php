@@ -26,7 +26,7 @@ class ApplicationSonataUserExtension extends Extension
         $loader->load('services.yml');
         
         // load xml
-        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.xml');
+    //    $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+      //  $loader->load('services.xml');
     }
 }
