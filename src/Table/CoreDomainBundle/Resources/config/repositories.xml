@@ -7,6 +7,7 @@
         <parameter key="table_order_repository.in_memory.class">Table\CoreDomainBundle\Repository\InMemoryTableOrderRepository</parameter>
         <parameter key="table_reserve_repository.in_memory.class">Table\CoreDomainBundle\Repository\InMemoryTableReserveRepository</parameter>
         <parameter key="restaurant_repository.in_memory.class">Table\CoreDomainBundle\Repository\InMemoryRestaurantRepository</parameter>
+        <parameter key="table_news_repository.in_memory.class">Table\CoreDomainBundle\Repository\InMemoryTableNewsRepository</parameter>
     </parameters>
 
     <services>
@@ -29,5 +30,12 @@
 
         <!-- Concrete Implementations -->
         <service id="restaurant_repository.in_memory" public="false" class="%restaurant_repository.in_memory.class%"></service>
+        
+        <!-- News -->
+        <!-- Exposed Services -->
+        <service id="table_news_repository" alias="table_news_repository.in_memory"></service>
+
+        <!-- Concrete Implementations -->
+        <service id="table_news_repository.in_memory" public="false" class="%table_news_repository.in_memory.class%"></service>
     </services>
 </container>

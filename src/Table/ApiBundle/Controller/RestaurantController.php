@@ -13,6 +13,8 @@ use Table\RestaurantBundle\Entity\DTO\GeoSearchDTO;
 class RestaurantController extends Controller
 {
     /**
+     * Get all restaurnats (if city is not null -> get by city)
+     * 
      * @param string $city
      * 
      * @Rest\View
@@ -38,6 +40,8 @@ class RestaurantController extends Controller
     }
     
     /**
+     * Get one restaurant
+     * 
      * @param integer $id
      * 
      * @Rest\View
@@ -54,6 +58,8 @@ class RestaurantController extends Controller
     }
     
     /**
+     * Geo search. Get restaurants on map
+     * 
      * @param string $city
      * 
      * @Rest\View
@@ -78,6 +84,8 @@ class RestaurantController extends Controller
     }
     
     /**
+     * Get city list. It will be array of strings
+     * 
      * @Rest\View
      */
     public function getCitiesListAction()
@@ -94,18 +102,48 @@ class RestaurantController extends Controller
     }
     
     /**
-     * @param Request $request
+     * Search restaurants
+     * 
      * 
      * @Rest\View
      */
-    public function searchAction(Request $request)
+    public function searchAction()
     {
-        $restaurants = $this->getRestaurantManager()->searchRestaurants($request);
+        $request = $this->getRequest();
+        $restaurants = $restaurant = $this->get('restaurant_repository')->findAll();
         if (!$restaurants) {
             throw $this->createNotFoundException('Unable to find restaurants');
         }
         return array(
             'restaurants' => $restaurants
         );
+    }
+    
+    /**
+     * Get menu photos. Every photo obj should consist big and small
+     * 
+     * @param integer $restaurantId
+     * 
+     * @Rest\View
+     */
+    public function getMenuPhotosAction($restaurantId)
+    {
+        $restaurant = $this->get('restaurant_repository')->findOneById($restaurantId);
+        
+        return array('response' => $restaurant->getMenusPhotos());
+    }
+    
+    /**
+     * Get additional photos. Every photo obj should consist big and small
+     * 
+     * @param integer $restaurantId
+     * 
+     * @Rest\View
+     */
+    public function getAdditionalPhotosAction($restaurantId)
+    {
+        $restaurant = $this->get('restaurant_repository')->findOneById($restaurantId);
+        
+        return array('response' => $restaurant->getAdditionalPhotos());
     }
 }

@@ -26,13 +26,12 @@ services:
         class: Application\Sonata\UserBundle\Form\Handler\ProfileFormHandler
         arguments: ["@sonata.user.profile.form", "@request", "@fos_user.user_manager"]
         scope: request
-        public: false     
+        public: false  
         
-    #WSSE configuration
     wsse.security.authentication.provider:
         class:  Application\Sonata\UserBundle\Security\Authentication\Provider\WsseProvider
         arguments: ["", "%kernel.cache_dir%/security/nonces"]
 
     wsse.security.authentication.listener:
         class:  Application\Sonata\UserBundle\Security\Firewall\WsseListener
-        arguments: ["@security.context", "@security.authentication.manager"]
+        arguments: ["@security.context", "@security.authentication.manager"]    

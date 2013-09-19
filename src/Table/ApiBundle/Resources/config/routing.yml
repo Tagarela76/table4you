@@ -1,27 +1,34 @@
 # Api for user
 table_api.login:
-    pattern: /api/rest/login/
-    defaults: { _controller: TableApiBundle:User:postTokenCreate, _format: ~ }
+    pattern: /api/rest/login
+    defaults: { _controller: TableApiBundle:User:login, _format: ~ }
     requirements:
-        _method: GET  
+        _method: POST  
+ 
+table_api.logout:
+    pattern: /api/rest/logout
+    defaults: { _controller: TableApiBundle:User:logout, _format: ~ }
+    requirements:
+        _method: POST  
+      
+table_api.getUserInfo:
+    pattern:  /api/rest/wsse/getUserInfo
+    defaults: { _controller: TableApiBundle:User:getUserInfo, _format: ~ }
+    requirements:
+        _method: GET         
         
 table_api.forgotPassword:
-    pattern:  /api/rest/forgotPassword/{email}
+    pattern:  /api/rest/forgotPassword
     defaults: { _controller: TableApiBundle:User:forgotPassword, _format: ~ }
     requirements:
-        _method: GET   
+        _method: POST   
         
 table_api_register:
     pattern:  /api/rest/register/
     defaults: { _controller: TableApiBundle:User:register, _format: ~ }
     requirements:
         _method: POST   
-        
-table_api.getUserInfo:
-    pattern:  /api/rest/wsse/getUserInfo/{sessionId}
-    defaults: { _controller: TableApiBundle:User:getUserInfo, _format: ~ }
-    requirements:
-        _method: GET           
+                  
 
 # Api for Restaurnat
 table_api.cities_all:
@@ -53,7 +60,21 @@ table_api.restaurant_search:
     pattern:  /api/rest/search
     defaults: { _controller: TableApiBundle:Restaurant:search, _format: ~ }
     requirements:
-        _method: POST           
+        _method: POST   
+
+table_api.restaurant_get_menu_photos:
+    pattern:  /api/rest/getMenuPhotos/{restaurantId}
+    defaults: { _controller: TableApiBundle:Restaurant:getMenuPhotos, _format: ~ }
+    requirements:
+        _method: GET   
+        id: "\d+" 
+  
+table_api.restaurant_get_additional_photos:
+    pattern:  /api/rest/getAdditionalPhotos/{restaurantId}
+    defaults: { _controller: TableApiBundle:Restaurant:getAdditionalPhotos, _format: ~ }
+    requirements:
+        _method: GET   
+        id: "\d+"         
         
 # Api for Restaurant category
 table_api.restaurant_categories_all:
@@ -78,14 +99,34 @@ table_api.restaurant_additional_services_all:
  
 # Api for Order History      
 table_api.orders_all:
-    pattern:  /api/rest/getOrderHistory/{sessionId}
+    pattern:  /api/rest/wsse/getOrderHistory
     defaults: { _controller: TableApiBundle:TableOrder:getOrderHistory, _format: ~ }
     requirements:
         _method: GET    
   
 # Api for Reserve   
 table_api.view_reserve:
-    pattern:  /api/rest/viewReserve/{sessionId}/{restaurantId}
+    pattern:  /api/rest/wsse/viewReserve/{restaurantId}
     defaults: { _controller: TableApiBundle:TableReserve:viewReserve, _format: ~ }
     requirements:
-        _method: GET            
+        _method: GET
+        
+table_api.view_reserve:
+    pattern:  /api/rest/wsse/reserve
+    defaults: { _controller: TableApiBundle:TableReserve:reserve, _format: ~ }
+    requirements:
+        _method: POST        
+        
+# Api for News     
+table_api.news_all:
+    pattern:  /api/rest/getNewsList/{restaurantId}
+    defaults: { _controller: TableApiBundle:TableNews:getNewsList, _format: ~ }
+    requirements:
+        _method: GET   
+        
+table_api.news_one:
+    pattern:  /api/rest/getNewsById/{id}
+    defaults: { _controller: TableApiBundle:TableNews:getNewsById, _format: ~ }
+    requirements:
+        _method: GET   
+        id: "\d+"        

@@ -33,10 +33,12 @@ class Restaurant
     private $longitude;
     
     private $menusPhotos=array();
+    
+    private $additionalPhotos=array();
 
     public function __construct($id, $name, $city, $street, $house, 
             $workHoursFrom, $workHoursTo, $kitchens, $category, $photo, 
-            $additionalServices, $address, $latitude, $longitude, $menusPhotos)
+            $additionalServices, $address, $latitude, $longitude, $menusPhotos, $additionalPhotos)
     {
         $this->id = $id;
         $this->name = $name;
@@ -53,6 +55,7 @@ class Restaurant
         $this->latitude = $latitude;
         $this->longitude  = $longitude;
         $this->menusPhotos  = $menusPhotos;
+        $this->additionalPhotos  = $additionalPhotos;
     }
 
     public function getId()
@@ -133,6 +136,11 @@ class Restaurant
     public function getMenusPhotos()
     {
         return $this->menusPhotos;
+    }
+    
+    public function getAdditionalPhotos()
+    {
+        return $this->additionalPhotos;
     }
 
 }

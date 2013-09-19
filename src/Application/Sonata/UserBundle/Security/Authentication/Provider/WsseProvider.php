@@ -38,12 +38,12 @@ class WsseProvider implements AuthenticationProviderInterface
     {
         // Check created time is not in the future
         if (strtotime($created) > time()) {
-            throw new AuthenticationException("Back to the future...");
+            return false;
         }
 
         // Expire timestamp after 5 minutes
         if (time() - strtotime($created) > 300) {
-            throw new AuthenticationException("Too late for this timestamp... Watch your watch.");
+            return false;
         }
 
         // Validate nonce is unique within 5 minutes
@@ -54,15 +54,11 @@ class WsseProvider implements AuthenticationProviderInterface
         if (!is_dir($this->cacheDir)) {
             mkdir($this->cacheDir, 0777, true);
         }
-        file_put_contents($this->cacheDir.'/'.$nonce, time());
+        @file_put_contents($this->cacheDir.'/'.$nonce, time());
 
         // Validate Secret
         $expected = base64_encode(sha1(base64_decode($nonce).$created.$secret, true));
 
-        if($digest !== $expected){
-            throw new AuthenticationException("Bad credentials ! Digest is not as expected.");
-          }
-        
         return $digest === $expected;
     }
 

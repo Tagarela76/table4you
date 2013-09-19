@@ -15,18 +15,12 @@
             </argument>
         </service>
 
-        <service id="fos_user.registration.form.type" class="Application\Sonata\UserBundle\Form\Type\RegistrationApiFormType">
-            <tag name="form.type" alias="fos_user_registration" />
+        <service id="fos_user.registration.form.type" class="Application\Sonata\UserBundle\Form\Type\RestRegistrationFormType">
+            <tag name="form.type" alias="rest_user_registration" />
             <argument>%fos_user.model.user.class%</argument>
         </service>
 
-        <service id="fos_user.registration.form.handler.default" class="Application\Sonata\UserBundle\Form\Handler\CustomRegistrationFormHandler" scope="request" public="false">
-            <argument type="service" id="fos_user.registration.form" />
-            <argument type="service" id="request" />
-            <argument type="service" id="fos_user.user_manager" />
-            <argument type="service" id="fos_user.mailer" />
-            <argument type="service" id="fos_user.util.token_generator" />
-        </service>
+
 
     </services>
 

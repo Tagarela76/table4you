@@ -8,7 +8,7 @@ use Symfony\Component\Security\Http\Firewall\ListenerInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterface;
-use Application\Sonata\UserBundleAcme\DemoBundle\Security\Authentication\Token\WsseUserToken;
+use Application\Sonata\UserBundle\Security\Authentication\Token\WsseUserToken;
 
 class WsseListener implements ListenerInterface
 {
@@ -38,24 +38,15 @@ class WsseListener implements ListenerInterface
         $token->created  = $matches[4];
 
         try {
-            $authToken = $this->authenticationManager->authenticate($token);
+            $authToken = $this->authenticationManager->authenticate($token); 
             $this->securityContext->setToken($authToken);
 
             return;
         } catch (AuthenticationException $failed) {
-            // ... you might log something here
 
-            // To deny the authentication clear the token. This will redirect to the login page.
-            // Make sure to only clear your token, not those of other authentication listeners.
-            // $token = $this->securityContext->getToken();
-            // if ($token instanceof WsseUserToken && $this->providerKey === $token->getProviderKey()) {
-            //     $this->securityContext->setToken(null);
-            // }
-            // return;
-
-            // Deny authentication with a '403 Forbidden' HTTP response
             $response = new Response();
             $response->setStatusCode(403);
+            
             $event->setResponse($response);
 
         }

@@ -12,7 +12,6 @@ security:
             id: fos_user.user_manager
 
     firewalls:
-        # For WSSE  
         wsse_secured:
           pattern:   ^/api/rest/wsse/.*
           stateless:    true

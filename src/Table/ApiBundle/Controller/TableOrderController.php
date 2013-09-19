@@ -10,12 +10,17 @@ use Table\CoreDomain\TableOrder\TableOrder;
 class TableOrderController extends Controller
 {
     /**
-     * @param string $sessionId
+     * Get Order History
      * 
      * @Rest\View
      */
-    public function getOrderHistoryAction($sessionId)
+    public function getOrderHistoryAction()
     {
+        $user = $this->get('security.context')->getToken()->getUser(); 
+        // user can be anon.
+        if ($user == "anon.") {
+            return array('success'=>false, 'error'=>"You should auth at first");
+        }
         $orders = $this->get('table_order_repository')->findAll();
       // var_dump($orders); 
         $response = array();

@@ -35,7 +35,7 @@ class RestRegistrationFormType extends BaseType
     
     public function getName()
     {
-        return 'table_user_rest_registration';
+        return 'rest_user_registration';
     }
 
 }
