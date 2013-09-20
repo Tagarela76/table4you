@@ -17,21 +17,21 @@ class InMemoryRestaurantRepository implements RestaurantRepository
                 "Днепропетровск, Артема, 13", 12.23123, 11.124234,
                 array(
                     array(
-                        "big" => "http://menu1",
-                        "small" => "http://menu2"
+                        "big" => "http://www.woknrollonline.com/menu1.jpg",
+                        "small" => "http://www.upspringpr.com/wp-content/uploads/2013/05/menu-image.jpg"
                     ),
                     array(
-                        "big" => "http://menu11",
-                        "small" => "http://menu22"
+                        "big" => "http://www.iskconwales.org.uk/wp-content/uploads/Cafe-Menu-Meals.jpg",
+                        "small" => "http://livesitedemo.com/wp-content/uploads/2013/06/menu1.jpg"
                     )
                 ), array(
                     array(
-                        "big" => "http://1",
-                        "small" => "http://2"
+                        "big" => "http://all-hotels.ru/photos/94350.jpg",
+                        "small" => "http://www.rokos.ru/netcat_files/userfiles/Articles/11_48.jpg"
                     ),
                     array(
-                        "big" => "http://11",
-                        "small" => "http://22"
+                        "big" => "http://sdap.ru/wp-content/uploads/2011/05/restoran.jpg",
+                        "small" => "http://www.vashdom.ru/articles/image/nevadadom_1_03.jpg"
                     )
                 )
         );
@@ -41,21 +41,21 @@ class InMemoryRestaurantRepository implements RestaurantRepository
                 "Днепропетровск, Московкая, 12", 11.3213, 1.1244234,
                 array(
                     array(
-                        "big" => "http://menu1",
-                        "small" => "http://menu2"
+                        "big" => "http://www.woknrollonline.com/menu1.jpg",
+                        "small" => "http://www.upspringpr.com/wp-content/uploads/2013/05/menu-image.jpg"
                     ),
                     array(
-                        "big" => "http://menu11",
-                        "small" => "http://menu22"
+                        "big" => "http://www.iskconwales.org.uk/wp-content/uploads/Cafe-Menu-Meals.jpg",
+                        "small" => "http://livesitedemo.com/wp-content/uploads/2013/06/menu1.jpg"
                     )
                 ), array(
                     array(
-                        "big" => "http://1",
-                        "small" => "http://2"
+                        "big" => "http://all-hotels.ru/photos/94350.jpg",
+                        "small" => "http://www.rokos.ru/netcat_files/userfiles/Articles/11_48.jpg"
                     ),
                     array(
-                        "big" => "http://11",
-                        "small" => "http://22"
+                        "big" => "http://sdap.ru/wp-content/uploads/2011/05/restoran.jpg",
+                        "small" => "http://www.vashdom.ru/articles/image/nevadadom_1_03.jpg"
                     )
                 )
         );
@@ -74,21 +74,21 @@ class InMemoryRestaurantRepository implements RestaurantRepository
                 "Днепропетровск, Московкая, 12", 11.3213, 1.1244234,
                 array(
                     array(
-                        "big" => "http://menu1",
-                        "small" => "http://menu2"
+                        "big" => "http://www.woknrollonline.com/menu1.jpg",
+                        "small" => "http://www.upspringpr.com/wp-content/uploads/2013/05/menu-image.jpg"
                     ),
                     array(
-                        "big" => "http://menu11",
-                        "small" => "http://menu22"
+                        "big" => "http://www.iskconwales.org.uk/wp-content/uploads/Cafe-Menu-Meals.jpg",
+                        "small" => "http://livesitedemo.com/wp-content/uploads/2013/06/menu1.jpg"
                     )
                 ), array(
                     array(
-                        "big" => "http://1",
-                        "small" => "http://2"
+                        "big" => "http://all-hotels.ru/photos/94350.jpg",
+                        "small" => "http://www.rokos.ru/netcat_files/userfiles/Articles/11_48.jpg"
                     ),
                     array(
-                        "big" => "http://11",
-                        "small" => "http://22"
+                        "big" => "http://sdap.ru/wp-content/uploads/2011/05/restoran.jpg",
+                        "small" => "http://www.vashdom.ru/articles/image/nevadadom_1_03.jpg"
                     )
                 )
         );
