@@ -18,11 +18,11 @@
                             // Error
                             $("#loginPreloader").hide();
                             $("#modal-login").html(response);
+                            return false;
                         } else {
-                            window.location.reload();                     
+                            window.location.reload();   
+                            return false;
                         }
-
-                        return false;
                     }
                 });
                 return false;
