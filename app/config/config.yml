@@ -217,7 +217,6 @@ fos_rest:
         view_response_listener: force
     format_listener:
         default_priorities: ['json', 'html', '*/*']
-        fallback_format: json
         prefer_extension: true
     param_fetcher_listener: true
     allowed_methods_listener: true    

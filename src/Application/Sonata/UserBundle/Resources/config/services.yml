@@ -1,4 +1,10 @@
 services:
+    table_user_rest.registration.form.type:
+        class: Application\Sonata\UserBundle\Form\Type\RestRegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: table_user_rest_registration }   
+            
     table_user.registration.form.type:
         class: Application\Sonata\UserBundle\Form\Type\RegistrationFormType
         arguments: [%fos_user.model.user.class%]

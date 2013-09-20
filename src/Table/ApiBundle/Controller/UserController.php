@@ -13,6 +13,9 @@ use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
+use Application\Sonata\UserBundle\Form\Type\RestRegistrationFormType;
+use Application\Sonata\UserBundle\Entity\User as BaseUser;
+
 class UserController extends Controller
 {
     const SESSION_EMAIL = 'fos_user_send_resetting_email/email';
@@ -244,26 +247,46 @@ class UserController extends Controller
      * @Rest\View
      */
     public function registerAction()
-    {  /*     
-        $form = $this->container->get('fos_user.rest_registration.form');
-        $formHandler = $this->container->get('fos_user.registration.form.handler');
-        $confirmationEnabled = $this->container->getParameter('fos_user.registration.confirmation.enabled');
-
-        $process = $formHandler->process($confirmationEnabled);// var_dump($process); die();
-        if ($process) { 
+    {  
+        $form = $this->createForm(
+            new RestRegistrationFormType(new BaseUser())
+        );
+        $form->bind($this->getRequest());
+var_dump($form); 
+        if ($form->isValid()) {
+            die('1');
+        } else {
+            die('2');
+        }
+        if ($process) {
             $user = $form->getData();
+            $authUser = false;
+
+            if ($confirmationEnabled) {
+            } else {
+                $authUser = true;
+            }
 
             $response = new Response();
-            $response->setStatusCode(201);
-            $response->headers->set('Location',
+
+            if ($authUser) {
+                /* @todo Implement authentication */
+                //$this->authenticateUser($user, $response);
+            }
+
+            $response->setStatusCode(Codes::HTTP_CREATED);
+            $response->headers->set(
+                'Location',
                 $this->generateUrl(
-                    'table_main_homepage', true // absolute
+                    'api_users_get_user',
+                    array('user' => $user->getId()),
+                    true
                 )
             );
-            
+
             return $response;
         }
-        
-        return \FOS\RestBundle\View\View::create($form, 400);*/
+
+        return \FOS\RestBundle\View\View::create($form, 400);
     }
 }
