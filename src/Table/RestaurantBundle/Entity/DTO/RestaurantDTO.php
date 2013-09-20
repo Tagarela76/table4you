@@ -31,8 +31,8 @@ class RestaurantDTO
 
         $formatSmall = $provider->getFormatName($restaurant->getPhoto(), "small");
         $formatBig = $provider->getFormatName($restaurant->getPhoto(), "big");
-        $smallImageURL = $provider->generatePublicUrl($restaurant->getPhoto(), $formatSmall);
-        $bigImageURL = $provider->generatePublicUrl($restaurant->getPhoto(), $formatBig);
+        $smallImageURL = $container->getParameter('site_host') . $provider->generatePublicUrl($restaurant->getPhoto(), $formatSmall);
+        $bigImageURL = $container->getParameter('site_host') . $provider->generatePublicUrl($restaurant->getPhoto(), $formatBig);
         
         $photo = array(
             "small" => $smallImageURL,
