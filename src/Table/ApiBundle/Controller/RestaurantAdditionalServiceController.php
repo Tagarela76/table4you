@@ -14,11 +14,15 @@ class RestaurantAdditionalServiceController extends Controller
     {
         $restaurantAdditionalServices = $this->getRestaurantAdditionalServiceManager()->findAll();
         if (!$restaurantAdditionalServices) {
-            throw $this->createNotFoundException('Unable to find restaurant additional service');
+            return array(
+                'success' => false,
+                'errorStr' => 'Unable to find restaurant additional service'
+            );
         }
            
         return array(
-            'restaurantAdditionalServices' => $restaurantAdditionalServices
+            'success' => true,
+            'response' => $restaurantAdditionalServices
         );
     }
 }

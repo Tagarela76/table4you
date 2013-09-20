@@ -14,9 +14,15 @@ class RestaurantCategoryController extends Controller
     {
         $restaurantCategories = $this->getRestaurantCategoryManager()->findAll();
         if (!$restaurantCategories) {
-            throw $this->createNotFoundException('Unable to find restaurant categories');
+            return array(
+                "success" => false,
+                "errorStr" => 'Unable to find restaurant categories'
+            );
         }
 
-        return $restaurantCategories;
+        return array(
+            "success" => true,
+            "response" => $restaurantCategories
+        );
     }
 }

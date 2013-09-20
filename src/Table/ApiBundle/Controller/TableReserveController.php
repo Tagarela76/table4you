@@ -28,7 +28,10 @@ class TableReserveController extends Controller
         $response['id'] = $reserve->getId();
         $response['restaurantMap'] = $reserve->getRestaurantMap();
         $response['floors'] = $reserve->getFloors();
-        return array('response' => $response);
+        return array(
+            "success" => true,
+            "response" => $response
+        );
     }
     
     /**
@@ -49,6 +52,6 @@ class TableReserveController extends Controller
         $comments = $request->get('comments');
         
         $reserve = new TableReserve();
-        return array('status' => true);
+        return array('success' => true);
     }
 }

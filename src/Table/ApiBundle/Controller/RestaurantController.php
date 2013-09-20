@@ -27,7 +27,10 @@ class RestaurantController extends Controller
             $restaurants = $this->getRestaurantManager()->findAll();
         }
         if (!$restaurants) {
-            throw $this->createNotFoundException('Unable to find restaurants');
+            return array(
+                "success" => false,
+                "errorStr" => 'Unable to find restaurants'
+            );
         }
         
         $response = array();
@@ -36,7 +39,10 @@ class RestaurantController extends Controller
             $response[] = $dtoRestaurant;
         }
    
-        return $response;
+        return array(
+            "success" => true,
+            "response" => $response
+        );
     }
     
     /**
@@ -50,11 +56,17 @@ class RestaurantController extends Controller
     {
         $restaurant = $this->getRestaurantManager()->find($id);
         if (!$restaurant instanceof Restaurant) {
-            throw new NotFoundHttpException('Restaurant not found');
+            return array(
+                "success" => false,
+                "errorStr" => 'Restaurant not found'
+            );
         }
         $dtoRestaurant = new RestaurantDTO($restaurant, $this->container);
 
-        return $dtoRestaurant;
+        return array(
+            "success" => true,
+            "response" => $dtoRestaurant
+        );
     }
     
     /**
@@ -72,7 +84,10 @@ class RestaurantController extends Controller
             $restaurants = $this->getRestaurantManager()->findAll();
         }
         if (!$restaurants) {
-            throw $this->createNotFoundException('Unable to find restaurants');
+            return array(
+                "success" => false,
+                "errorStr" => 'Unable to find restaurants'
+            );
         }
         $response = array();
         foreach ($restaurants as $restaurant) {
@@ -80,7 +95,10 @@ class RestaurantController extends Controller
             $response[] = $dtoGeoSearch;
         }
         
-        return $response;
+        return array(
+            "success" => true,
+            "response" => $response
+        );
     }
     
     /**
@@ -92,13 +110,19 @@ class RestaurantController extends Controller
     {
         $citiesList = $this->getRestaurantManager()->getCitiesList();
         if (!$citiesList) {
-            throw $this->createNotFoundException('Unable to find cities');
+            return array(
+                "success" => false,
+                "errorStr" => 'Unable to find cities'
+            );
         }
-        $responce = array();
+        $response = array();
         foreach($citiesList as $city) { 
-            $responce[] = $city['city'];
+            $response[] = $city['city'];
         }
-        return $responce;
+        return array(
+            "success" => true,
+            "response" => $response
+        );
     }
     
     /**
@@ -112,10 +136,15 @@ class RestaurantController extends Controller
         $request = $this->getRequest();
         $restaurants = $restaurant = $this->get('restaurant_repository')->findAll();
         if (!$restaurants) {
-            throw $this->createNotFoundException('Unable to find restaurants');
+            return array(
+                "success" => false,
+                "errorStr" => 'Unable to find restaurants'
+            );
         }
+
         return array(
-            'restaurants' => $restaurants
+            "success" => true,
+            "response" => $restaurants
         );
     }
     
@@ -129,8 +158,11 @@ class RestaurantController extends Controller
     public function getMenuPhotosAction($restaurantId)
     {
         $restaurant = $this->get('restaurant_repository')->findOneById($restaurantId);
-        
-        return array('response' => $restaurant->getMenusPhotos());
+
+        return array(
+            "success" => true,
+            "response" => $restaurant->getMenusPhotos()
+        );
     }
     
     /**
@@ -143,7 +175,10 @@ class RestaurantController extends Controller
     public function getAdditionalPhotosAction($restaurantId)
     {
         $restaurant = $this->get('restaurant_repository')->findOneById($restaurantId);
-        
-        return array('response' => $restaurant->getAdditionalPhotos());
+
+        return array(
+            "success" => true,
+            "response" => $restaurant->getAdditionalPhotos()
+        );
     }
 }

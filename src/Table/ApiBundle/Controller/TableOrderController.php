@@ -27,6 +27,10 @@ class TableOrderController extends Controller
         foreach ($orders as $order) {
             $response[] = new TableOrder($order->getId(), $order->getDate(), $order->getTime(), $order->getName(), $order->getAddress());
         }
-        return array('response' => $response);
+
+        return array(
+            "success" => true,
+            "response" => $response
+        );
     }
 }

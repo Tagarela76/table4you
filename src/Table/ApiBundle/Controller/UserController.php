@@ -105,15 +105,24 @@ class UserController extends Controller
             $user = $um->findUserByEmail($username);
         } 
         if(!$user instanceof User){
-            return array('success'=>false, 'error'=>"User not found");
+            return array(
+                'success'=>false, 
+                'errorStr'=>"User not found"
+            );
         }
         if(!$this->checkUserPassword($user, $password)){
-            return array('success'=>false, 'error'=>"Wrong password");
+            return array(
+                'success'=>false, 
+                'errorStr'=>"Wrong password"
+            );
         } 
         $this->loginUser($user);
         // get wsse token
         $token = $this->createBaseWsse($user, $password);
-        return array('success' => true, 'user' => $user, 'token' => $token);
+        return array('success' => true,
+            'user' => $user, 
+            'token' => $token
+        );
     }
     
     /**
@@ -139,13 +148,22 @@ class UserController extends Controller
         $user = $this->get('security.context')->getToken()->getUser(); 
         // user can be anon.
         if ($user == "anon.") {
-            return array('success'=>false, 'error'=>"You should auth at first");
+            return array(
+                'success'=>false, 
+                'errorStr'=>"You should auth at first"
+            );
         }
        
         if (!is_object($user) || !$user instanceof User) {
-            return array('success'=>false, 'error'=>"This user does not have access to this section");
+            return array(
+                'success'=>false,
+                'errorStr'=>"This user does not have access to this section"
+            );
         } else {
-            return array('success'=>true, 'user'=>$user);
+            return array(
+                'success'=>true,
+                'user'=>$user
+            );
         }
     }
     
@@ -162,11 +180,17 @@ class UserController extends Controller
         $user = $this->container->get('fos_user.user_manager')->findUserByUsernameOrEmail($email);
 
         if (null === $user) {
-            return array('success'=>false, 'error'=>"User not found");
+            return array(
+                'success'=>false,
+                'errorStr'=>"User not found"
+            );
         }
 
         if ($user->isPasswordRequestNonExpired($this->container->getParameter('fos_user.resetting.token_ttl'))) {
-            return array('success'=>false, 'error'=>"Password already requested");
+            return array(
+                'success'=>false,
+                'errorStr'=>"Password already requested"
+            );
         }
 
         if (null === $user->getConfirmationToken()) {

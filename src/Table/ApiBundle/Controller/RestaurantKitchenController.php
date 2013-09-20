@@ -14,9 +14,15 @@ class RestaurantKitchenController extends Controller
     {
         $restaurantKitchens = $this->getRestaurantKitchenManager()->findAll();
         if (!$restaurantKitchens) {
-            throw $this->createNotFoundException('Unable to find restaurant kitchens');
+            return array(
+                "success" => false,
+                "errorStr" => 'Unable to find restaurant kitchens'
+            );
         }
-           
-        return $restaurantKitchens;
+        
+        return array(
+            "success" => true,
+            "response" => $restaurantKitchens
+        );
     }
 }

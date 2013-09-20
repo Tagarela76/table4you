@@ -11,7 +11,7 @@
                     beforeSubmit: function() {
                        $("#registrationPreloader").show();
                     },
-                    success: function(response) { 
+                    success: function(response) {  alert(response);
                         $("#registrationPreloader").hide();
                         $("#modal-registration").html(response);
                     }
