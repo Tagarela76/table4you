@@ -14,13 +14,16 @@ class TableNews
     
     private $pictureURL;
 
-    public function __construct($id, $dateTime, $title, $content, $pictureURL)
+    private $restaurantId;
+
+    public function __construct($id, $dateTime, $title, $content, $pictureURL, $restaurantId)
     {
         $this->id = $id;
         $this->dateTime = $dateTime;
         $this->title  = $title;
         $this->content = $content;
         $this->pictureURL = $pictureURL;
+	$this->restaurantId = $restaurantId;
     }
 
     public function getId()
@@ -66,6 +69,16 @@ class TableNews
     public function setPictureURL($pictureURL)
     {
         $this->pictureURL = $pictureURL;
+    }
+
+    public function getRestaurantId()
+    {
+        return $this->restaurantId;
+    }
+
+    public function setRestaurantId($restaurantId)
+    {
+        $this->restaurantId = $restaurantId;
     }
 
 }

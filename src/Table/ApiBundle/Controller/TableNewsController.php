@@ -16,7 +16,7 @@ class TableNewsController extends Controller
      */
     public function getNewsListAction($restaurantId)
     {
-        if (is_null($restaurantId)) {
+        if (!is_null($restaurantId)) {
             $newsList = $this->get('table_news_repository')->findByRestaurantId($restaurantId);
         } else {
             $newsList = $this->get('table_news_repository')->findAll();
