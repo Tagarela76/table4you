@@ -21,14 +21,10 @@ class TableNewsController extends Controller
         } else {
             $newsList = $this->get('table_news_repository')->findAll();
         }
-        
-        $response = array();
-        foreach ($newsList as $news) {
-            $response[] = new TableNews($news->getId(), $news->getDateTime(), $news->getTitle(), $news->getContent());
-        }
+
         return array(
             "success" => true,
-            "response" => $response
+            "response" => $newsList
         );
     }
     
@@ -40,12 +36,10 @@ class TableNewsController extends Controller
     public function getNewsByIdAction($id)
     {
         $news = $this->get('table_news_repository')->findOneById($id);
-        $response = array();
-        $response = new TableNews($news->getId(), $news->getDateTime(), $news->getTitle(), $news->getContent());
-
+        
         return array(
             "success" => true,
-            "response" => $response
+            "response" => $news
         );
     }
 }

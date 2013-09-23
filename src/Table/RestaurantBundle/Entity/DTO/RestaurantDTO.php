@@ -20,6 +20,7 @@ class RestaurantDTO
     private $longitude;
     private $latitude;
     private $additionalServices;
+    private $schedule;
 
     public function __construct(Restaurant $restaurant, $container)
     {
@@ -61,6 +62,11 @@ class RestaurantDTO
             $additionalServices[] = $additionalService->getId();
         }
         $this->additionalServices = $additionalServices;
+        
+        $schedule = array();
+        $schedule['openTime'] = $restaurant->getWorkHoursFrom();
+        $schedule['endTime'] = $restaurant->getWorkHoursTo();
+        $this->schedule = $schedule;
     }
     
     public function getId()
@@ -107,6 +113,17 @@ class RestaurantDTO
     {
         return $this->additionalServices;
     }
+    
+    public function getSchedule()
+    {
+        return $this->schedule;
+    }
+
+    public function setSchedule($schedule)
+    {
+        $this->schedule = $schedule;
+    }
+
 
 }
 
