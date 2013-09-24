@@ -1,3 +1,8 @@
+
+table_api:
+    resource: "@TableApiBundle/Resources/config/routing.yml"
+    prefix:   /
+    
 table_restaurant:
     resource: "@TableRestaurantBundle/Resources/config/routing.yml"
     prefix:   /

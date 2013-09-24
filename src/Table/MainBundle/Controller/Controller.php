@@ -26,4 +26,34 @@ class Controller extends BaseController
     {
         return $this->get('sonata.media.pool');
     }
+    
+    public function getUserRepository()
+    {
+        return $this->get('user_repository');
+    }
+    
+    /**
+     * @return Table\RestaurantBundle\Model\RestaurantCategoryManager
+     */
+    public function getRestaurantCategoryManager()
+    {
+        return $this->get('restaurant_category_manager');
+    }
+    
+    /**
+     * @return Table\RestaurantBundle\Model\RestaurantKitchenManager
+     */
+    public function getRestaurantKitchenManager()
+    {
+        return $this->get('restaurant_kitchen_manager');
+    }
+    
+     /**
+     * @return Table\RestaurantBundle\Model\RestaurantKitchenManager
+     */
+    
+    public function getRestaurantAdditionalServiceManager()
+    {
+        return $this->get('restaurant_additional_service_manager');
+    }
 }

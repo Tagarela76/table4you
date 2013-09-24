@@ -35,6 +35,10 @@ class AppKernel extends Kernel
             new Rollerworks\Bundle\PasswordStrengthBundle\RollerworksPasswordStrengthBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
+            new Table\ApiBundle\TableApiBundle(),
+            new Table\CoreDomainBundle\TableCoreDomainBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

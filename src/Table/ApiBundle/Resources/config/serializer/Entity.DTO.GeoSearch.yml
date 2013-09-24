@@ -1,0 +1,15 @@
+Table\RestaurantBundle\Entity\DTO\GeoSearch:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            inline: true
+        name:
+            expose: true
+            serialized_name: name   
+        latitude:     
+            expose: true
+            serialized_name: latitude   
+        longitude:     
+            expose: true
+            serialized_name: longitude      

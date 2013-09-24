@@ -1,4 +1,10 @@
 services:
+    table_user_rest.registration.form.type:
+        class: Application\Sonata\UserBundle\Form\Type\RestRegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: table_user_rest_registration }   
+            
     table_user.registration.form.type:
         class: Application\Sonata\UserBundle\Form\Type\RegistrationFormType
         arguments: [%fos_user.model.user.class%]
@@ -26,4 +32,12 @@ services:
         class: Application\Sonata\UserBundle\Form\Handler\ProfileFormHandler
         arguments: ["@sonata.user.profile.form", "@request", "@fos_user.user_manager"]
         scope: request
-        public: false       
+        public: false  
+        
+    wsse.security.authentication.provider:
+        class:  Application\Sonata\UserBundle\Security\Authentication\Provider\WsseProvider
+        arguments: ["", "%kernel.cache_dir%/security/nonces"]
+
+    wsse.security.authentication.listener:
+        class:  Application\Sonata\UserBundle\Security\Firewall\WsseListener
+        arguments: ["@security.context", "@security.authentication.manager"]    

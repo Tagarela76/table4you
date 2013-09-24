@@ -9,15 +9,18 @@ security:
 
     providers:
         fos_userbundle:
-            id: fos_user.user_manager
+            id: fos_user.user_provider.username_email
 
     firewalls:
-        # Disabling the security for the web debug toolbar, the profiler and Assetic.
+        wsse_secured:
+          pattern:   ^/api/rest/wsse/.*
+          stateless:    true
+          wsse: true
+          anonymous : false
+          
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
-        # -> custom firewall for the admin area of the URL
         admin:
             pattern:            /table_admin(.*)
             context:            user
@@ -30,13 +33,6 @@ security:
             logout:
                 path:           /table_admin/logout
             anonymous:          true
-
-        # -> end custom configuration
-
-        # defaut login area for standard users
-
-        # This firewall is used to handle the public login area
-        # This part is handled by the FOS User Bundle
         main:
             pattern:             .*
             context:             user
@@ -47,7 +43,7 @@ security:
                 check_path:     /login_check
                 failure_path:   null
             logout:             true
-            anonymous:          true
+            anonymous:          true 
 
     access_control:
         - { path: ^/_wdt, role: IS_AUTHENTICATED_ANONYMOUSLY }

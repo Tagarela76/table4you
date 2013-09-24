@@ -16,4 +16,5 @@ parameters:
     locale: ru
     secret: ThisTokenIsNotSoSecretChangeIt
     site_name: table4You
+    site_host: 5.9.156.3
 

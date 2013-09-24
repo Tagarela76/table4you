@@ -99,4 +99,34 @@ class RestaurantManager
     {
         return $this->getRestaurantRepo()->findOneByName($name);
     }
+    
+    /**
+     * @param integer $city
+     * 
+     * @return Table\RestaurantBundle\Entity\Restaurant[]
+     */
+    public function findByCity($city)
+    {
+        return $this->getRestaurantRepo()->findByCity($city);
+    }
+    
+    /**
+     * @return string[]
+     */
+    public function getCitiesList()
+    {
+        return $this->getRestaurantRepo()->getCitiesList();
+    }
+    
+    /**
+     * Search Restaurants
+     * 
+     * @param Request $request
+     * 
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function searchRestaurants($request)
+    {
+        return $this->getRestaurantRepo()->searchProperty($request);
+    }
 }
