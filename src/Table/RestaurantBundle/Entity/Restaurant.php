@@ -120,6 +120,16 @@ class Restaurant
      * @var float 
      */
     protected $longitude;
+    
+    /**
+     * @var Application\Sonata\MediaBundle\Entity\Media $mapPhoto
+     * 
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
+     * @ORM\JoinColumn(name="map_photo", referencedColumnName="id")
+     *
+     * @Assert\NotBlank
+     * */
+    private $mapPhoto;
 
     public function __construct()
     {
@@ -512,6 +522,27 @@ class Restaurant
     public function setLongitude($longitude)
     {
         $this->longitude = $longitude;
+    }
+    
+    /**
+     * Get mapPhoto
+     *
+     * @return Application\Sonata\MediaBundle\Entity\Media 
+     */
+    public function getMapPhoto()
+    {
+        return $this->mapPhoto;
+    }
+
+    /**
+     * Set mapPhoto
+     *
+     * @param Application\Sonata\MediaBundle\Entity\Media $mapPhoto
+     * @return Restaurant
+     */
+    public function setMapPhoto($mapPhoto)
+    {
+        $this->mapPhoto = $mapPhoto;
     }
     
     /**

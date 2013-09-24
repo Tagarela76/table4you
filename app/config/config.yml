@@ -101,6 +101,14 @@ sonata_media:
             formats:
                 small: { width: 150 , quality: 95}
                 big:   { width: 500 , quality: 90}
+       
+        map_photo:
+            providers:
+                - sonata.media.provider.image
+
+            formats:
+                small: { width: 150 , quality: 95}
+                big:   { width: 500 , quality: 90}         
 
     cdn:
         server:
@@ -112,8 +120,8 @@ sonata_media:
             create:     false
     providers:
         image:
-            allowed_extensions: ['jpg', 'png', 'gif', 'jpeg', 'bmp']
-            allowed_mime_types: ['image/jpg','image/jpeg','image/png','image/x-png', 'image/gif', 'image/bmp']
+            allowed_extensions: ['jpg', 'png', 'gif', 'jpeg']
+            allowed_mime_types: ['image/jpg','image/jpeg','image/png','image/x-png', 'image/gif']   
 fos_user:
     db_driver:      orm
     firewall_name:  main

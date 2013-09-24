@@ -43,6 +43,8 @@ class RestaurantAdmin extends Admin
                 // falling back to server validation. See #5512 in redmine
                 ->add('photo', 'sonata_type_model_list', array(
                     'required' => false), array('link_parameters' => array('context' => 'image')))
+                ->add('mapPhoto', 'sonata_type_model_list', array(
+                    'required' => false), array('link_parameters' => array('context' => 'map_photo')))
                 ->add('additionalServices', 'sonata_type_model', array(
                     'by_reference' => true,
                     'multiple' => true,
