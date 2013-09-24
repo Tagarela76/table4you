@@ -43,7 +43,8 @@ class RestRegistrationFormType extends BaseType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'csrf_protection' => false
+            'csrf_protection' => false,
+            'data_class' => 'Application\Sonata\UserBundle\Entity\User'
         ));
     }
 

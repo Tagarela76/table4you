@@ -248,45 +248,17 @@ class UserController extends Controller
      */
     public function registerAction()
     {  
-        $form = $this->createForm(
-            new RestRegistrationFormType(new BaseUser())
-        );
-        $form->bind($this->getRequest());
-var_dump($form); 
-        if ($form->isValid()) {
-            die('1');
-        } else {
-            die('2');
-        }
+        $form = $this->container->get('table_user_rest.registration.form');
+        $formHandler = $this->container->get('fos_user.registration.form.handler');
+        $confirmationEnabled = $this->container->getParameter('fos_user.registration.confirmation.enabled');
+
+        $process = $formHandler->process($confirmationEnabled);
+
         if ($process) {
-            $user = $form->getData();
-            $authUser = false;
-
-            if ($confirmationEnabled) {
-            } else {
-                $authUser = true;
-            }
-
-            $response = new Response();
-
-            if ($authUser) {
-                /* @todo Implement authentication */
-                //$this->authenticateUser($user, $response);
-            }
-
-            $response->setStatusCode(Codes::HTTP_CREATED);
-            $response->headers->set(
-                'Location',
-                $this->generateUrl(
-                    'api_users_get_user',
-                    array('user' => $user->getId()),
-                    true
-                )
-            );
-
+            $response['success'] = true;
             return $response;
         }
 
-        return \FOS\RestBundle\View\View::create($form, 400);
+        return \FOS\RestBundle\View\View::create($form, \FOS\Rest\Util\Codes::HTTP_BAD_REQUEST);
     }
 }
