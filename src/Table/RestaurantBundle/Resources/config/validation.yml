@@ -1,0 +1,4 @@
+Table\RestaurantBundle\Entity\TableOrder:
+    properties:
+        floor:
+            - NotBlank: ~

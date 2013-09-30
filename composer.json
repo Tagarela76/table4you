@@ -41,7 +41,8 @@
         "behat/mink-browserkit-driver": "1.1.*@dev",
         "behat/mink-goutte-driver": "1.0.*@dev",
         "friendsofsymfony/rest-bundle": "0.13.*@dev",
-        "jms/serializer-bundle": "0.12.*@dev"
+        "jms/serializer-bundle": "0.12.*@dev",
+        "genemu/form-bundle": "2.1.*"
     },
     "scripts": {
         "post-install-cmd": [

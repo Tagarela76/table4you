@@ -12,3 +12,7 @@ main:
       title: Авторизация
   profile:
     buttonLabel: Мой профиль
+  order:
+      button: Reserve
+      form:
+        title: Заказ столика

@@ -240,4 +240,7 @@ jms_serializer:
                 path: "@TableApiBundle/Resources/config/serializer/"
             RestaurantBundle:
                 namespace_prefix: "Table\\RestaurantBundle"
-                path: "@TableApiBundle/Resources/config/serializer/"    
+                path: "@TableApiBundle/Resources/config/serializer/"  
+                
+genemu_form:
+    date: ~                

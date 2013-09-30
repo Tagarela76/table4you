@@ -26,8 +26,23 @@
             </div>
             <div class="restaurant-content-reserve">
                 <img src="{{ asset('bundles/tablerestaurant/images/stars.png') }}" title="" alt="">
+                <a class="btn btn-primary" data-toggle="modal" data-target="#reserve_{{ restaurant.id }}" href="{{ path('table_order_reserve', {'id': restaurant.id}) }}">
+                    {% trans %}main.order.button{% endtrans %}
+                </a>
                 <input type="submit" value="Reserve">
             </div>
+        </div>
+        {# ==Modal Window for reserve==#}
+        <div style="width: 800px; height: 800px;" class="modal hide modal-reserve" data-backdrop="static" id="reserve_{{ restaurant.id }}">
+            <div class="modal-header modal-reserve-title">
+                <a class="close" data-dismiss="modal"></a>
+                <img id="registrationPreloader" style="display: none;" src="{{ asset('bundles/tablemain/images/ajax-loader.gif') }}" />
+                <h3>{% trans %}main.order.form.title{% endtrans %}</h3>
+            </div>
+            <div class="modal-body" >
+
+            </div>    
+
         </div>
     {% endfor %}
 </div>

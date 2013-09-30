@@ -12,3 +12,8 @@ main:
       title: Authentication
   profile:
     buttonLabel: Profile
+  order:
+    reserve:
+      button: Reserve
+      form:
+        title: Table reserve

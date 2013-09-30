@@ -10,4 +10,15 @@ validation:
       Restaurant not found: Ресторан не найден
       kitchen:
         Unable to find restaurant kitchens: Нет результата
-  
+main:
+  order:
+      form:
+        label:
+          captcha: Captcha
+          reserveDate: "Дата:"
+          reserveTime: "Время:"
+          tableNumber: "Номер столика:"
+          peopleCount: "Количество человек:"
+          isSmokingZone: "Курящая зона"
+        placeholder:
+          wish: "Ваши пожелания"

@@ -1,0 +1,12 @@
+main:
+  order:
+      form:
+        label:
+          captcha: Captcha
+          reserveDate: "Date:"
+          reserveTime: "Time:"
+          tableNumber: "Table number:"
+          peopleCount: "People count:"
+          isSmokingZone: "Smoking zone"
+        placeholder:
+          wish: "Your wishes"
