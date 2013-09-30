@@ -29,7 +29,7 @@ class RestaurantController extends Controller
         if (!$restaurants) {
             return array(
                 "success" => false,
-                "errorStr" => 'Unable to find restaurants'
+                "errorStr" => $this->get('translator')->trans('validation.errors.restaurant.Unable to find restaurants')
             );
         }
         
@@ -58,7 +58,7 @@ class RestaurantController extends Controller
         if (!$restaurant instanceof Restaurant) {
             return array(
                 "success" => false,
-                "errorStr" => 'Restaurant not found'
+                "errorStr" => $this->get('translator')->trans('validation.errors.restaurant.Restaurant not found')
             );
         }
         $dtoRestaurant = new RestaurantDTO($restaurant, $this->container);
@@ -86,7 +86,7 @@ class RestaurantController extends Controller
         if (!$restaurants) {
             return array(
                 "success" => false,
-                "errorStr" => 'Unable to find restaurants'
+                "errorStr" => $this->get('translator')->trans('validation.errors.restaurant.Unable to find restaurants')
             );
         }
         $response = array();
@@ -112,7 +112,7 @@ class RestaurantController extends Controller
         if (!$citiesList) {
             return array(
                 "success" => false,
-                "errorStr" => 'Unable to find cities'
+                "errorStr" => $this->get('translator')->trans('validation.errors.restaurant.Unable to find cities')
             );
         }
         $response = array();
@@ -135,16 +135,32 @@ class RestaurantController extends Controller
     {
         $request = $this->getRequest();
         $restaurants = $restaurant = $this->get('restaurant_repository')->findAll();
+        $response = array();
+        $newObj = array();
+        foreach ($restaurants as $restaurant) {
+            $newObj['id'] = $restaurant->getId();
+            $newObj['name'] = $restaurant->getName();
+            $newObj['photo'] = $restaurant->getPhoto();
+            $newObj['category'] = $restaurant->getCategory();
+            $newObj['kitchens'] = $restaurant->getKitchens();
+            $newObj['address'] = $restaurant->getAddress();
+            $newObj['longitude'] = $restaurant->getLongitude();
+            $newObj['latitude'] = $restaurant->getLatitude();
+            $newObj['additional_services'] = $restaurant->getAdditionalServices();
+            $scedule['openTime'] = $restaurant->getWorkHoursFrom();
+            $scedule['endTime'] = $restaurant->getWorkHoursTo();
+            $newObj['scedule'] = $scedule;
+        }
         if (!$restaurants) {
             return array(
                 "success" => false,
-                "errorStr" => 'Unable to find restaurants'
+                "errorStr" => $this->get('translator')->trans('validation.errors.restaurant.Unable to find restaurants')
             );
         }
 
         return array(
             "success" => true,
-            "response" => $restaurants
+            "response" => $newObj
         );
     }
     

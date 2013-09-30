@@ -109,14 +109,14 @@ class UserController extends Controller
         } 
         if(!$user instanceof User){
             return array(
-                'success'=>false, 
-                'errorStr'=>"User not found"
+                'success' => false, 
+                'errorStr' => $this->get('translator')->trans('validation.errors.user.User not found')
             );
         }
         if(!$this->checkUserPassword($user, $password)){
             return array(
-                'success'=>false, 
-                'errorStr'=>"Wrong password"
+                'success' => false, 
+                'errorStr' => $this->get('translator')->trans("validation.errors.user.Wrong password")
             );
         } 
         $this->loginUser($user);
@@ -152,15 +152,15 @@ class UserController extends Controller
         // user can be anon.
         if ($user == "anon.") {
             return array(
-                'success'=>false, 
-                'errorStr'=>"You should auth at first"
+                'success' => false, 
+                'errorStr' => $this->get('translator')->trans("validation.errors.user.You should auth at first")
             );
         }
        
         if (!is_object($user) || !$user instanceof User) {
             return array(
-                'success'=>false,
-                'errorStr'=>"This user does not have access to this section"
+                'success' => false,
+                'errorStr' => $this->get('translator')->trans("validation.errors.user.This user does not have access to this section")
             );
         } else {
             return array(
@@ -184,15 +184,15 @@ class UserController extends Controller
 
         if (null === $user) {
             return array(
-                'success'=>false,
-                'errorStr'=>"User not found"
+                'success' => false,
+                'errorStr' => $this->get('translator')->trans("validation.errors.user.User not found")
             );
         }
 
         if ($user->isPasswordRequestNonExpired($this->container->getParameter('fos_user.resetting.token_ttl'))) {
             return array(
-                'success'=>false,
-                'errorStr'=>"Password already requested"
+                'success' => false,
+                'errorStr' => $this->get('translator')->trans("validation.errors.user.Password already requested")
             );
         }
 
@@ -248,14 +248,45 @@ class UserController extends Controller
      */
     public function registerAction()
     {  
-        $form = $this->container->get('table_user_rest.registration.form');
-        $formHandler = $this->container->get('fos_user.registration.form.handler');
-        $confirmationEnabled = $this->container->getParameter('fos_user.registration.confirmation.enabled');
+        $user = new User();
+        $form = $this->createForm(new RestRegistrationFormType(), $user);
 
-        $process = $formHandler->process($confirmationEnabled);
+        $form->bind(array(
+            "username" => $this->getRequest()->request->get('username'),
+            "lastname" => $this->getRequest()->request->get('lastname'),
+            "email" => $this->getRequest()->request->get('email'),
+            "plainPassword" => $this->getRequest()->request->get('plainPassword'),
+            "phone" => $this->getRequest()->request->get('phone')
+        ));
+     /*   $form->bind(array(
+            "username" => "test4restApi14",
+            "lastname" => "By By",
+            "email" => "test4restApi14@mail.ru",
+            "plainPassword" => array(
+                "first" => "12345",
+                "second" => "12345"
+            ),
+            "phone" => "321"
+        ));*/
+        if ($form->isValid()) {
+            
+            $user = $form->getData();
+            $user->setEnabled(false);
+            
+            // send confirmation
+            $token = sha1(uniqid(mt_rand(), true)); // Or whatever you prefer to generate a token
+            
+            $user->setConfirmationToken($token);
 
-        if ($process) {
-            $response['success'] = true;
+            $mailer = $this->container->get('fos_user.mailer');
+            $mailer->sendConfirmationEmailMessage($user);
+           
+            // add user
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush(); 
+            $response = array();
+            $response['success'] = true; 
             return $response;
         }
 

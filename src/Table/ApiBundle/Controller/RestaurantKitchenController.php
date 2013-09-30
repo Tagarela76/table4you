@@ -16,7 +16,7 @@ class RestaurantKitchenController extends Controller
         if (!$restaurantKitchens) {
             return array(
                 "success" => false,
-                "errorStr" => 'Unable to find restaurant kitchens'
+                "errorStr" => $this->get('translator')->trans('validation.errors.restaurant.kitchen.Unable to find restaurant kitchens')
             );
         }
         

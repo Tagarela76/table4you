@@ -16,7 +16,7 @@ class RestaurantAdditionalServiceController extends Controller
         if (!$restaurantAdditionalServices) {
             return array(
                 'success' => false,
-                'errorStr' => 'Unable to find restaurant additional service'
+                'errorStr' => $this->get('translator')->trans('validation.errors.restaurant.additionalServices.Unable to find restaurant additional service')
             );
         }
            

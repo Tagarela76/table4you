@@ -29,3 +29,11 @@ registration:
 "Bad credentials userName": Вы указали неверное имя пользователя. Попробуйте ввести логин еще раз.
 "Bad credentials password": Вы указали неверный пароль. Попробуйте ввести пароль еще раз.
    
+validation:
+  errors:
+    user:
+      User not found: Пользователь не найден
+      Wrong password: Неправильный пароль
+      You should auth at first: Вы должны сначала залогиниться
+      This user does not have access to this section: Этот пользователь не имеет доступа к этой области
+      Password already requested: Пароль уже запрашивали
