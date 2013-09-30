@@ -16,7 +16,7 @@ class RestaurantCategoryController extends Controller
         if (!$restaurantCategories) {
             return array(
                 "success" => false,
-                "errorStr" => 'Unable to find restaurant categories'
+                "errorStr" => $this->get('translator')->trans('validation.errors.restaurant.category.Unable to find restaurant categories')
             );
         }
 

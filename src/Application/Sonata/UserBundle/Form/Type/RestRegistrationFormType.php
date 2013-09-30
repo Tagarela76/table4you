@@ -3,9 +3,9 @@ namespace Application\Sonata\UserBundle\Form\Type;
 
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\FormBuilderInterface;
-use FOS\UserBundle\Form\Type\RegistrationFormType as BaseType;
+use Symfony\Component\Form\AbstractType;
 
-class RestRegistrationFormType extends BaseType
+class RestRegistrationFormType extends AbstractType
 {
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -44,7 +44,8 @@ class RestRegistrationFormType extends BaseType
     {
         $resolver->setDefaults(array(
             'csrf_protection' => false,
-            'data_class' => 'Application\Sonata\UserBundle\Entity\User'
+            'data_class' => 'Application\Sonata\UserBundle\Entity\User',
+            'validation_groups' => array('rest')
         ));
     }
 

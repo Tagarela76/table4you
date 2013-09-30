@@ -4,26 +4,26 @@ namespace Table\CoreDomain\TableNews;
 
 class TableNews
 {
+
     private $id;
-
-    private $dateTime;
-
+    private $startDateTime;
+    private $endDateTime;
     private $title;
-    
     private $content;
-    
     private $pictureURL;
-
     private $restaurantId;
+    private $city;
 
-    public function __construct($id, $dateTime, $title, $content, $pictureURL, $restaurantId)
+    public function __construct($id, $startDateTime, $endDateTime, $title, $content, $pictureURL, $restaurantId, $city)
     {
         $this->id = $id;
-        $this->dateTime = $dateTime;
-        $this->title  = $title;
+        $this->startDateTime = $startDateTime;
+        $this->endDateTime = $endDateTime;
+        $this->title = $title;
         $this->content = $content;
         $this->pictureURL = $pictureURL;
-	$this->restaurantId = $restaurantId;
+        $this->restaurantId = $restaurantId;
+        $this->city = $city;
     }
 
     public function getId()
@@ -31,9 +31,9 @@ class TableNews
         return $this->id;
     }
 
-    public function getDateTime()
+    public function getStartDateTime()
     {
-        return $this->dateTime;
+        return $this->startDateTime;
     }
 
     public function getTitle()
@@ -46,9 +46,9 @@ class TableNews
         return $this->content;
     }
 
-    public function setDateTime($dateTime)
+    public function setStartDateTime($startDateTime)
     {
-        $this->dateTime = $dateTime;
+        $this->startDateTime = $startDateTime;
     }
 
     public function setTitle($title)
@@ -60,7 +60,7 @@ class TableNews
     {
         $this->content = $content;
     }
-    
+
     public function getPictureURL()
     {
         return $this->pictureURL;
@@ -80,5 +80,26 @@ class TableNews
     {
         $this->restaurantId = $restaurantId;
     }
+    
+    public function getEndDateTime()
+    {
+        return $this->endDateTime;
+    }
+
+    public function setEndDateTime($endDateTime)
+    {
+        $this->endDateTime = $endDateTime;
+    }
+
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    public function setCity($city)
+    {
+        $this->city = $city;
+    }
+
 
 }

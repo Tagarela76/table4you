@@ -27,7 +27,7 @@ table_api_register:
     pattern:  /api/rest/register
     defaults: { _controller: TableApiBundle:User:register, _format: json }
     requirements:
-        _method: GET   
+        _method: POST   
                   
 
 # Api for Restaurnat
@@ -119,8 +119,8 @@ table_api.view_reserve:
         
 # Api for News     
 table_api.news_all:
-    pattern:  /api/rest/getNewsList/{restaurantId}
-    defaults: { _controller: TableApiBundle:TableNews:getNewsList, restaurantId: null, _format: json }
+    pattern:  /api/rest/getNewsList/{city}
+    defaults: { _controller: TableApiBundle:TableNews:getNewsList, city: null, _format: json }
     requirements:
         _method: GET   
         

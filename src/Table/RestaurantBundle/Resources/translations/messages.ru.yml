@@ -1,0 +1,13 @@
+validation:
+  errors:
+    restaurant:
+      additionalServices:
+        Unable to find restaurant additional service: Нет результата
+      category:
+        Unable to find restaurant categories: Нет результата
+      Unable to find restaurants: Нет результата
+      Unable to find cities: Нет результата
+      Restaurant not found: Ресторан не найден
+      kitchen:
+        Unable to find restaurant kitchens: Нет результата
+  

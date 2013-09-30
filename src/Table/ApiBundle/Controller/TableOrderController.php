@@ -19,7 +19,10 @@ class TableOrderController extends Controller
         $user = $this->get('security.context')->getToken()->getUser(); 
         // user can be anon.
         if ($user == "anon.") {
-            return array('success'=>false, 'error'=>"You should auth at first");
+            return array(
+                'success' => false, 
+                'errorString' => $this->get('translator')->trans("validation.errors.user.You should auth at first")
+            );
         }
         $orders = $this->get('table_order_repository')->findAll();
       // var_dump($orders); 

@@ -7,4 +7,5 @@ interface TableNewsRepository
     public function findAll();
     public function findOneById($id);
     public function findByRestaurantId($restaurnatId);
+    public function findByCity($city);
 }

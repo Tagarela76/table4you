@@ -64,8 +64,8 @@ class RestaurantDTO
         $this->additionalServices = $additionalServices;
         
         $schedule = array();
-        $schedule['openTime'] = $restaurant->getWorkHoursFrom();
-        $schedule['endTime'] = $restaurant->getWorkHoursTo();
+        $schedule['openTime'] = $restaurant->getWorkHoursFrom()->format('H:s');
+        $schedule['endTime'] = $restaurant->getWorkHoursTo()->format("H:s");
         $this->schedule = $schedule;
     }
     
