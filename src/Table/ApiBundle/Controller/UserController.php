@@ -255,7 +255,10 @@ class UserController extends Controller
             "username" => $this->getRequest()->request->get('username'),
             "lastname" => $this->getRequest()->request->get('lastname'),
             "email" => $this->getRequest()->request->get('email'),
-            "plainPassword" => $this->getRequest()->request->get('plainPassword'),
+	    "plainPassword" => array(
+                "first" => $this->getRequest()->request->get('firstPassword'),
+                "second" => $this->getRequest()->request->get('secondPassword')
+            ),	
             "phone" => $this->getRequest()->request->get('phone')
         ));
      /*   $form->bind(array(
