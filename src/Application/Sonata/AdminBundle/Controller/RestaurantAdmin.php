@@ -51,6 +51,9 @@ class RestaurantAdmin extends Admin
                     'expanded' => true,
                     'required' => false
                 ))
+                ->add('floors', 'text', array(
+                    'label' => 'restaurant.floors'
+                ))
         ;
     }
 

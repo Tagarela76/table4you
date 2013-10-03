@@ -68,7 +68,7 @@ class TableOrder
     /**
      * @var integer
      *
-     * @ORM\Column(name="status", type="integer")
+     * @ORM\Column(name="status", type="integer", options={"default" = 0}, nullable=true)
      */
     private $status;
 
@@ -92,6 +92,20 @@ class TableOrder
      * @ORM\Column(name="is_smoking_zone", type="boolean")
      */
     private $isSmokingZone;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_sms", type="boolean")
+     */
+    private $isSms;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_email", type="boolean")
+     */
+    private $isEmail;
     
     protected $restaurantName;
     
@@ -429,6 +443,48 @@ class TableOrder
     public function setWish($wish)
     {
         $this->wish = $wish;
+    }
+    
+    /**
+     * Get isSms
+     *
+     * @return boolean 
+     */
+    public function getIsSms()
+    {
+        return $this->isSms;
+    }
+
+    /**
+     * Get isEmail
+     *
+     * @return boolean 
+     */
+    public function getIsEmail()
+    {
+        return $this->isEmail;
+    }
+
+    /**
+     * Set isSms
+     *
+     * @param boolean $isSms
+     * @return TableOrder
+     */
+    public function setIsSms($isSms)
+    {
+        $this->isSms = $isSms;
+    }
+
+    /**
+     * Set isEmail
+     *
+     * @param boolean $isEmail
+     * @return TableOrder
+     */
+    public function setIsEmail($isEmail)
+    {
+        $this->isEmail = $isEmail;
     }
           
     /**

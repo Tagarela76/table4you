@@ -21,6 +21,7 @@ restaurant:
     isSmokingZone: Курящая зона
     wish: Пожелания  
     status: Статус заказа 
+  floors: Количество этажей  
 Name: Название
 address:
   city: Город

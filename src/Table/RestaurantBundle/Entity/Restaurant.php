@@ -130,6 +130,13 @@ class Restaurant
      * @Assert\NotBlank
      * */
     private $mapPhoto;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="floors", type="integer")
+     */
+    private $floors;
 
     public function __construct()
     {
@@ -543,6 +550,29 @@ class Restaurant
     public function setMapPhoto($mapPhoto)
     {
         $this->mapPhoto = $mapPhoto;
+    }
+    
+    /**
+     * Set floors
+     *
+     * @param integer $floors
+     * @return Restaurant
+     */
+    public function setFloors($floors)
+    {
+        $this->floors = $floors;
+    
+        return $this;
+    }
+
+    /**
+     * Get floors
+     *
+     * @return integer 
+     */
+    public function getFloors()
+    {
+        return $this->floors;
     }
     
     /**

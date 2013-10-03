@@ -4,7 +4,6 @@ namespace Table\ApiBundle\Controller;
 
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Table\MainBundle\Controller\Controller;
-
 use Application\Sonata\UserBundle\Entity\User;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -12,14 +11,14 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-
 use Application\Sonata\UserBundle\Form\Type\RestRegistrationFormType;
 use Application\Sonata\UserBundle\Entity\User as BaseUser;
 
 class UserController extends Controller
 {
+
     const SESSION_EMAIL = 'fos_user_send_resetting_email/email';
-    
+
     /**
      * Get the truncated email displayed when requesting the resetting.
      *
@@ -38,7 +37,7 @@ class UserController extends Controller
 
         return $email;
     }
-    
+
     /**
      * Get user manager
      * 
@@ -48,7 +47,7 @@ class UserController extends Controller
     {
         return $this->get('fos_user.user_manager');
     }
-    
+
     /**
      * Login User
      * 
@@ -62,7 +61,7 @@ class UserController extends Controller
         $token = new UsernamePasswordToken($user, null, $providerKey, $roles);
         $security->setToken($token);
     }
-    
+
     /**
      * Logout current user using random token
      */
@@ -73,7 +72,7 @@ class UserController extends Controller
         $security->setToken($token);
         $this->get('session')->invalidate();
     }
-    
+
     /**
      * Check user password
      * 
@@ -85,12 +84,12 @@ class UserController extends Controller
     {
         $factory = $this->get('security.encoder_factory');
         $encoder = $factory->getEncoder($user);
-        if(!$encoder){
+        if (!$encoder) {
             return false;
         }
         return $encoder->isPasswordValid($user->getPassword(), $password, $user->getSalt());
     }
-    
+
     /**
      * Login controller. We should sent username/password in POST
      * 
@@ -103,31 +102,31 @@ class UserController extends Controller
         $password = $request->get('password');
 
         $um = $this->getUserManager();
-        $user = $um->findUserByUsername($username);        
-        if(!$user){
+        $user = $um->findUserByUsername($username);
+        if (!$user) {
             $user = $um->findUserByEmail($username);
-        } 
-        if(!$user instanceof User){
+        }
+        if (!$user instanceof User) {
             return array(
-                'success' => false, 
+                'success' => false,
                 'errorStr' => $this->get('translator')->trans('validation.errors.user.User not found')
             );
         }
-        if(!$this->checkUserPassword($user, $password)){
+        if (!$this->checkUserPassword($user, $password)) {
             return array(
-                'success' => false, 
+                'success' => false,
                 'errorStr' => $this->get('translator')->trans("validation.errors.user.Wrong password")
             );
-        } 
+        }
         $this->loginUser($user);
         // get wsse token
         $token = $this->createBaseWsse($user, $password);
         return array('success' => true,
-            'user' => $user, 
+            'user' => $user,
             'token' => $token
         );
     }
-    
+
     /**
      * Logout 
      * 
@@ -136,9 +135,9 @@ class UserController extends Controller
     public function logoutAction()
     {
         $this->logoutUser();
-        return array('success'=>true);
+        return array('success' => true);
     }
-    
+
     /**
      * Get user information
      * 
@@ -148,15 +147,15 @@ class UserController extends Controller
      */
     public function getUserInfoAction()
     {
-        $user = $this->get('security.context')->getToken()->getUser(); 
+        $user = $this->get('security.context')->getToken()->getUser();
         // user can be anon.
         if ($user == "anon.") {
             return array(
-                'success' => false, 
+                'success' => false,
                 'errorStr' => $this->get('translator')->trans("validation.errors.user.You should auth at first")
             );
         }
-       
+
         if (!is_object($user) || !$user instanceof User) {
             return array(
                 'success' => false,
@@ -164,12 +163,12 @@ class UserController extends Controller
             );
         } else {
             return array(
-                'success'=>true,
-                'user'=>$user
+                'success' => true,
+                'user' => $user
             );
         }
     }
-    
+
     /**
      * Resset password and sent it to emmail
      * 
@@ -206,9 +205,9 @@ class UserController extends Controller
         $this->container->get('fos_user.mailer')->sendResettingEmailMessage($user);
         $user->setPasswordRequestedAt(new \DateTime());
         $this->container->get('fos_user.user_manager')->updateUser($user);
-        return array('success'=>true);
+        return array('success' => true);
     }
-    
+
     /**
      * Create token
      * 
@@ -218,36 +217,36 @@ class UserController extends Controller
      * 
      * @return string
      */
-    public function createBaseWsse(User $user, $palinPassword) 
-    {   
-      $username = $user->getUsername();
-      $password = $palinPassword;
-      
-      $created = date('c');
-      $nonce = substr(md5(uniqid('nonce_', true)), 0, 16);
-      $nonceHigh = base64_encode($nonce);
+    public function createBaseWsse(User $user, $palinPassword)
+    {
+        $username = $user->getUsername();
+        $password = $palinPassword;
 
-      $factory = $this->get('security.encoder_factory');
-      $encoder = $factory->getEncoder($user);
-      $password = $encoder->encodePassword($password, $user->getSalt());
-      $passwordDigest = base64_encode(sha1($nonce . $created . $password, true));
-      
-      $token = "UsernameToken Username=\"{$username}\", " . 
-              "PasswordDigest=\"{$passwordDigest}\", Nonce=\"{$nonceHigh}\","
-              . " Created=\"{$created}\"";
-                
-      
-              
-      return $token;
+        $created = date('c');
+        $nonce = substr(md5(uniqid('nonce_', true)), 0, 16);
+        $nonceHigh = base64_encode($nonce);
+
+        $factory = $this->get('security.encoder_factory');
+        $encoder = $factory->getEncoder($user);
+        $password = $encoder->encodePassword($password, $user->getSalt());
+        $passwordDigest = base64_encode(sha1($nonce . $created . $password, true));
+
+        $token = "UsernameToken Username=\"{$username}\", " .
+                "PasswordDigest=\"{$passwordDigest}\", Nonce=\"{$nonceHigh}\","
+                . " Created=\"{$created}\"";
+
+
+
+        return $token;
     }
-    
+
     /**
      * User registration
      * 
      * @Rest\View
      */
     public function registerAction()
-    {  
+    {
         $user = new User();
         $form = $this->createForm(new RestRegistrationFormType(), $user);
 
@@ -255,44 +254,45 @@ class UserController extends Controller
             "username" => $this->getRequest()->request->get('username'),
             "lastname" => $this->getRequest()->request->get('lastname'),
             "email" => $this->getRequest()->request->get('email'),
-	    "plainPassword" => array(
+            "plainPassword" => array(
                 "first" => $this->getRequest()->request->get('firstPassword'),
                 "second" => $this->getRequest()->request->get('secondPassword')
-            ),	
+            ),
             "phone" => $this->getRequest()->request->get('phone')
         ));
-     /*   $form->bind(array(
-            "username" => "test4restApi14",
-            "lastname" => "By By",
-            "email" => "test4restApi14@mail.ru",
-            "plainPassword" => array(
-                "first" => "12345",
-                "second" => "12345"
-            ),
-            "phone" => "321"
-        ));*/
+        /*   $form->bind(array(
+          "username" => "test4restApi14",
+          "lastname" => "By By",
+          "email" => "test4restApi14@mail.ru",
+          "plainPassword" => array(
+          "first" => "12345",
+          "second" => "12345"
+          ),
+          "phone" => "321"
+          )); */
         if ($form->isValid()) {
-            
+
             $user = $form->getData();
             $user->setEnabled(false);
-            
+
             // send confirmation
             $token = sha1(uniqid(mt_rand(), true)); // Or whatever you prefer to generate a token
-            
+
             $user->setConfirmationToken($token);
 
             $mailer = $this->container->get('fos_user.mailer');
             $mailer->sendConfirmationEmailMessage($user);
-           
+
             // add user
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
-            $em->flush(); 
+            $em->flush();
             $response = array();
-            $response['success'] = true; 
+            $response['success'] = true;
             return $response;
         }
 
         return \FOS\RestBundle\View\View::create($form, \FOS\Rest\Util\Codes::HTTP_BAD_REQUEST);
     }
+
 }

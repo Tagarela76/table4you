@@ -9,15 +9,20 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 use Table\RestaurantBundle\Entity\TableOrder;
 
+use Sonata\AdminBundle\Route\RouteCollection;
+
 class TableOrderAdmin extends Admin
 {
 
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-                ->add('userName', 'entity', array(
+              /*  ->add('userName', 'entity', array(
                     'class' => 'ApplicationSonataUserBundle:User',
                     'property' => 'username',
+                    'label' => 'restaurant.tableOrder.userName'
+                ))*/
+                ->add('user', null, array(
                     'label' => 'restaurant.tableOrder.userName'
                 ))
                 ->add('restaurantName', 'entity', array(
@@ -25,7 +30,7 @@ class TableOrderAdmin extends Admin
                     'property' => 'name',
                     'label' => 'restaurant.tableOrder.restaurantName'
                 ))
-                ->add('reserveDate', 'date', array(
+                ->add('reserveDate', 'genemu_jquerydate', array(
                     'label' => 'restaurant.tableOrder.date'
                 ))
                 ->add('reserveTime', 'time', array(
@@ -79,7 +84,20 @@ class TableOrderAdmin extends Admin
     {
         $listMapper
                 ->addIdentifier('id')
+		->add('restaurantName')
+		->add('reserveDate')
+		->add('reserveTime')
+		->add('tableNumber')
+		->add('peopleCount')
+		->add('userEmail')
+		->add('status')
         ;
+    }
+    
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        //Only `list` and `edit` route will be active
+        $collection->clearExcept(array('list', 'edit'));
     }
 
 }

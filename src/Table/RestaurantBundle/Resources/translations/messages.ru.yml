@@ -20,5 +20,9 @@ main:
           tableNumber: "Номер столика:"
           peopleCount: "Количество человек:"
           isSmokingZone: "Курящая зона"
+          floor: Этаж
+          isSms: Получать уведомления через sms
+          isEmail: Получать уведомления через e-mail
+          submit: Бронировать
         placeholder:
           wish: "Ваши пожелания"

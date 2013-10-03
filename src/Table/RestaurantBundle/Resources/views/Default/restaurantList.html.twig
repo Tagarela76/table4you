@@ -33,16 +33,15 @@
             </div>
         </div>
         {# ==Modal Window for reserve==#}
-        <div style="width: 800px; height: 800px;" class="modal hide modal-reserve" data-backdrop="static" id="reserve_{{ restaurant.id }}">
-            <div class="modal-header modal-reserve-title">
+        <div class="modal fade hide modal-reserve" data-backdrop="static" id="reserve_{{ restaurant.id }}">
+
+            <div class="modal-header modal-login-title">
                 <a class="close" data-dismiss="modal"></a>
-                <img id="registrationPreloader" style="display: none;" src="{{ asset('bundles/tablemain/images/ajax-loader.gif') }}" />
                 <h3>{% trans %}main.order.form.title{% endtrans %}</h3>
             </div>
             <div class="modal-body" >
 
-            </div>    
-
+            </div>
         </div>
     {% endfor %}
 </div>

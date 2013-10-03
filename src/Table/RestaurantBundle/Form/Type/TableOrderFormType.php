@@ -13,30 +13,39 @@ class TableOrderFormType extends AbstractType
         $builder
                 ->add('reserveTime', 'time', array(
                     'translation_domain' => 'messages',
-                    'label' => 'main.order.form.label.dateTime'
+                    'label' => 'main.order.form.label.reserveTime'
                 ))
                 ->add('reserveDate', 'genemu_jquerydate', array(
+                    'widget' => 'single_text',
                     'translation_domain' => 'messages',
-                    'label' => 'main.order.form.label.date'
+                    'label' => 'main.order.form.label.reserveDate'
                 ))
-                ->add('floor', null, array(
-                    'translation_domain' => 'TableRestaurantBundle',
+                ->add('floor', 'hidden', array(
+                    'translation_domain' => 'messages',
                     'label' => 'main.order.form.label.floor'
                 ))
-                ->add('tableNumber', null, array(
+                ->add('tableNumber', 'text', array(
                     'translation_domain' => 'messages',
                     'label' => 'main.order.form.label.tableNumber'
                 ))
-                ->add('peopleCount', null, array(
-                    'translation_domain' => 'TableRestaurantBundle',
+                ->add('peopleCount', 'text', array(
+                    'translation_domain' => 'messages',
                     'label' => 'main.order.form.label.peopleCount'
                 ))
                 ->add('isSmokingZone', 'checkbox', array(
-                    'translation_domain' => 'TableRestaurantBundle',
+                    'translation_domain' => 'messages',
                     'label' => 'main.order.form.label.isSmokingZone'
                 ))
+                ->add('isSms', 'checkbox', array(
+                    'translation_domain' => 'messages',
+                    'label' => 'main.order.form.label.isSms'
+                ))
+                ->add('isEmail', 'checkbox', array(
+                    'translation_domain' => 'messages',
+                    'label' => 'main.order.form.label.isEmail'
+                ))
                 ->add('wish', 'textarea', array(
-                    'translation_domain' => 'TableRestaurantBundle',
+                    'translation_domain' => 'messages',
                     'attr' => array(
                         'cols' => '5', 
                         'rows' => '5',
@@ -44,8 +53,8 @@ class TableOrderFormType extends AbstractType
                      )
                 ))
                 ->add('captcha', 'captcha', array(
-                    'label' => 'main.order.form.captcha',
-                    'translation_domain' => 'TableRestaurantBundle',
+                    'label' => 'main.order.form.label.captcha',
+                    'translation_domain' => 'messages',
                     'reload' => true,
                     'as_url' => true,
                     'width' => 125,
