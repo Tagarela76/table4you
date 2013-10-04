@@ -19,10 +19,10 @@ main:
           reserveTime: "Время:"
           tableNumber: "Номер столика:"
           peopleCount: "Количество человек:"
-          isSmokingZone: "Курящая зона"
+          isSmokingZone: "Зал для курящих"
           floor: Этаж
-          isSms: Получать уведомления через sms
-          isEmail: Получать уведомления через e-mail
-          submit: Бронировать
+          isSms: Уведомления sms
+          isEmail: Уведомления e-mail
+          submit: Reserve
         placeholder:
           wish: "Ваши пожелания"

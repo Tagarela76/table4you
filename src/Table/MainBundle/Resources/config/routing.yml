@@ -3,3 +3,6 @@ table_main_homepage:
     defaults: { _controller: TableMainBundle:Default:index, page: 1 }
     requirements:
         page: \d+         
+table_main_auth_page:
+    pattern:  /viewAuthPage
+    defaults: { _controller: TableMainBundle:Default:viewAuthPage }

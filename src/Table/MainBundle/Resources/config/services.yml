@@ -13,4 +13,7 @@ services:
         arguments: [@doctrine.orm.entity_manager, @service_container] 
   restaurant_additional_service_manager:
         class: Table\RestaurantBundle\Model\RestaurantAdditionalServiceManager
-        arguments: [@doctrine.orm.entity_manager, @service_container]        
+        arguments: [@doctrine.orm.entity_manager, @service_container]     
+  table_order_manager:
+        class: Table\RestaurantBundle\Model\TableOrderManager
+        arguments: [@doctrine.orm.entity_manager, @service_container]      

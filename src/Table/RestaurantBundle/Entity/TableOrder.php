@@ -116,8 +116,9 @@ class TableOrder
     protected $userEmail;
 
     public static $STATUS_LIST = array(
-        "0" => "Не выполнено",
-        "1" => "Выполнено"
+        "0" => "Не обработано",
+        "1" => "Не выполнено",
+        "2" => "Выполнено"
     );
     
     const PER_PAGE_COUNT = 10;
@@ -347,7 +348,17 @@ class TableOrder
      */
     public function getRestaurantName()
     {
-        return $this->restaurantName;
+        // We can get restaurant name only if we have restaurant
+        if (is_null($this->getRestaurant())) {
+            return null;
+        }
+        if (is_null($this->restaurantName)) {
+            $restaurantName = $this->getRestaurant()->getName();
+            $this->setRestaurantName($restaurantName);
+            return $restaurantName;
+        } else {
+            return $this->restaurantName;
+        }        
     }
 
     /**
@@ -368,7 +379,17 @@ class TableOrder
      */
     public function getUserName()
     {
-        return $this->userName;
+        // We can get user name only if we have user
+        if (is_null($this->getUser())) {
+            return null;
+        }
+        if (is_null($this->userName)) {
+            $userName = $this->getUser()->getUsername(); 
+            $this->setUserName($userName);
+            return $userName;
+        } else {
+            return $this->userName;
+        }  
     }
 
     /**
@@ -378,7 +399,17 @@ class TableOrder
      */
     public function getUserPhone()
     {
-        return $this->userPhone;
+        // We can get user phone only if we have user
+        if (is_null($this->getUser())) {
+            return null;
+        }
+        if (is_null($this->userPhone)) {
+            $userPhone = $this->getUser()->getPhone();
+            $this->setUserPhone($userPhone);
+            return $userPhone;
+        } else {
+            return $this->userPhone;
+        } 
     }
 
     /**
@@ -388,7 +419,17 @@ class TableOrder
      */
     public function getUserEmail()
     {
-        return $this->userEmail;
+        // We can get user email only if we have user
+        if (is_null($this->getUser())) {
+            return null;
+        }
+        if (is_null($this->userEmail)) {
+            $userEmail = $this->getUser()->getEmail();
+            $this->setUserEmail($userEmail);
+            return $userEmail;
+        } else {
+            return $this->userEmail;
+        } 
     }
 
     /**

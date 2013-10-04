@@ -48,12 +48,19 @@ class Controller extends BaseController
         return $this->get('restaurant_kitchen_manager');
     }
     
-     /**
-     * @return Table\RestaurantBundle\Model\RestaurantKitchenManager
+    /**
+     * @return Table\RestaurantBundle\Model\RestaurantAdditionalServiceManager
      */
-    
     public function getRestaurantAdditionalServiceManager()
     {
         return $this->get('restaurant_additional_service_manager');
+    }
+    
+    /**
+     * @return Table\RestaurantBundle\Model\TableOrderManager
+     */
+    public function getTableOrderManager()
+    {
+        return $this->get('table_order_manager');
     }
 }

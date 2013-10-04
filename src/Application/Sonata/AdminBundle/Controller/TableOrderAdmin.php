@@ -17,48 +17,45 @@ class TableOrderAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-              /*  ->add('userName', 'entity', array(
-                    'class' => 'ApplicationSonataUserBundle:User',
-                    'property' => 'username',
-                    'label' => 'restaurant.tableOrder.userName'
-                ))*/
-                ->add('user', null, array(
+                ->add('userName', 'genemu_plain', array(
                     'label' => 'restaurant.tableOrder.userName'
                 ))
-                ->add('restaurantName', 'entity', array(
-                    'class' => 'TableRestaurantBundle:Restaurant',
-                    'property' => 'name',
+                ->add('restaurantName', 'genemu_plain', array(
                     'label' => 'restaurant.tableOrder.restaurantName'
                 ))
-                ->add('reserveDate', 'genemu_jquerydate', array(
+                ->add('reserveDate', 'date', array(
+                    'widget' => 'single_text',
                     'label' => 'restaurant.tableOrder.date'
                 ))
                 ->add('reserveTime', 'time', array(
-                    'label' => 'restaurant.tableOrder.time'
+                    'label' => 'restaurant.tableOrder.time',
+                    'widget' => 'single_text',
                 ))
-                ->add('floor', null, array(
+                ->add('floor', 'text', array(
                     'label' => 'restaurant.tableOrder.floor'
                 ))
-                ->add('tableNumber', null, array(
+                ->add('tableNumber', 'text', array(
                     'label' => 'restaurant.tableOrder.tableNumber'
                 ))
-                ->add('peopleCount', null, array(
+                ->add('peopleCount', 'text', array(
                     'label' => 'restaurant.tableOrder.peopleCount'
                 ))
                 ->add('isSmokingZone', 'checkbox', array(
                     'label'     => 'restaurant.tableOrder.isSmokingZone'
                 ))
-                ->add('userPhone', 'entity', array(
-                    'class' => 'ApplicationSonataUserBundle:User',
-                    'property' => 'phone',
+                ->add('userPhone', 'genemu_plain', array(
                     'label' => 'restaurant.tableOrder.phone'
                 ))
-                ->add('userEmail', 'entity', array(
-                    'class' => 'ApplicationSonataUserBundle:User',
-                    'property' => 'email',
+                ->add('userEmail', 'genemu_plain', array(
                     'label' => 'restaurant.tableOrder.email'
                 ))
-                ->add('wish', 'textarea', array(
+                ->add('isSms', 'checkbox', array(
+                    'label'     => 'restaurant.tableOrder.isSms'
+                ))
+                ->add('isEmail', 'checkbox', array(
+                    'label'     => 'restaurant.tableOrder.isEmail'
+                ))
+                ->add('wish', 'genemu_plain', array(
                     'attr' => array(
                         'cols' => '5', 'rows' => '5'
                      ),
@@ -74,8 +71,26 @@ class TableOrderAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
+                ->add('restaurant.name', null, array(
+                    'label' => 'restaurant.tableOrder.restaurantName'
+                ))
+                ->add('reserveDate', "doctrine_orm_string", array(
+                    'label' => 'restaurant.tableOrder.date'
+                ))
+                ->add('reserveTime', null, array(
+                    'label' => 'restaurant.tableOrder.time',
+                ))
                 ->add('floor', null, array(
                     'label' => 'restaurant.tableOrder.floor'
+                ))
+                ->add('tableNumber', null, array(
+                    'label' => 'restaurant.tableOrder.tableNumber'
+                ))
+                ->add('peopleCount', null, array(
+                    'label' => 'restaurant.tableOrder.peopleCount'
+                ))
+                ->add('status', null, array(
+                    'label'     => 'restaurant.tableOrder.status'
                 ))
         ;
     }
@@ -84,20 +99,33 @@ class TableOrderAdmin extends Admin
     {
         $listMapper
                 ->addIdentifier('id')
-		->add('restaurantName')
-		->add('reserveDate')
-		->add('reserveTime')
-		->add('tableNumber')
-		->add('peopleCount')
-		->add('userEmail')
-		->add('status')
+                ->add('restaurantName', null, array(
+                    'label' => 'restaurant.tableOrder.restaurantName'
+                ))
+                ->add('reserveDate', null, array(
+                    'label' => 'restaurant.tableOrder.date'
+                ))
+                ->add('reserveTime', null, array(
+                    'label' => 'restaurant.tableOrder.time',
+                ))
+                ->add('tableNumber', null, array(
+                    'label' => 'restaurant.tableOrder.tableNumber'
+                ))
+                ->add('peopleCount', null, array(
+                    'label' => 'restaurant.tableOrder.peopleCount'
+                ))
+                ->add('userEmail', null, array(
+                    'label' => 'restaurant.tableOrder.email'
+                ))
+                ->add('status', null, array(
+                    'label'     => 'restaurant.tableOrder.status'
+                ))
         ;
     }
     
     protected function configureRoutes(RouteCollection $collection)
     {
-        //Only `list` and `edit` route will be active
-        $collection->clearExcept(array('list', 'edit'));
+         $collection->remove('create');
     }
 
 }
