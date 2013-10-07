@@ -1,8 +1,9 @@
-{% extends "TableMainBundle::layout.html.twig" %}
+{% extends "TableMainBundle::layout4modal.html.twig" %}
 {% block javascripts %}
     {{ parent() }}
 <script src="{{ asset('bundles/tablemain/js/jquery-ui-1.10.3.custom.js') }}"></script>
 <script src="{{ asset('bundles/applicationsonatauser/js/jquery.form.js') }}"></script>
+<script src="{{ asset('bundles/tablemain/js/bootstrap-select.min.js') }}"></script>
 <script>
     $(function() {
         $('#table-order-form').submit(function() {
@@ -14,13 +15,35 @@
             });
             return false;
         });
+        $("#tableOrderForm_isSmokingZone").addClass("boxCheckbox");
+        $("#tableOrderForm_isSms").addClass("boxCheckbox");
+        $("#tableOrderForm_isEmail").addClass("boxCheckbox");
+        /*$('.boxCheckbox').click(function() {
+            $(this).doCheckbox((elem) {
+            if (elem.className=='boxCheckbox' && elem.parentNode.tagName.toLowerCase()=='div') {
+              elem.parentNode.className='box'+(elem.checked?'Checked':'Unchecked');
+            }
+          }
+          var css=document.styleSheets[0];
+          try {
+            css.addRule('.boxCheckbox', 'filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);');
+          }
+          catch(e) {
+            css.insertRule('.boxCheckbox { -moz-opacity: 0; -khtml-opacity: 0; }', css.cssRules.length);
+          });
+        });*/
+        $("#tableOrderForm_reserveTime_hour").addClass("selectpicker");
+        $("#tableOrderForm_reserveTime_minute").addClass("selectpicker");
+        $('.selectpicker').selectpicker();
     });
 </script>
+
     {{ form_javascript(form) }}
 {% endblock %}      
 {% block stylesheets %}
     {{ parent() }}
 <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/jquery-ui-1.10.3.custom.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/bootstrap-select.min.css') }}">
     {{ form_stylesheet(form) }}
 {% endblock %}
 {% block content %}
@@ -30,16 +53,7 @@
     {{ form_errors(form) }}
         <div class="container-fluid">
             <div class="row-fluid">
-                <div class="span6">
-                    <div class="row-fluid">
-                {{ form_label(form.reserveTime) }}
-                {{ form_errors(form.reserveTime) }}
-                {% if form.reserveTime.vars.errors|length %}
-                    {{ form_widget(form.reserveTime, {'attr':{'class':'error-form-reserve'} }) }}
-                {%  else %}
-                    {{ form_widget(form.reserveTime) }}
-                {% endif %}
-                    </div>
+                <div class="span5">
                     <div class="row-fluid">
                 {{ form_label(form.reserveDate) }}
                 {{ form_errors(form.reserveDate) }}
@@ -49,108 +63,124 @@
                     {{ form_widget(form.reserveDate) }}
                 {% endif %}
                     </div>
-                </div>
-                <div class="span6">
-            {% thumbnail restaurant.mapPhoto, 'reference' %}
-                </div>
-            </div>    
-            <div class="row-fluid">
-                <div class="span6">
                     <div class="row-fluid">
-                        <div class="span6">
-                    {{ form_label(form.tableNumber) }}
-                    {{ form_errors(form.tableNumber) }}
-                    {% if form.tableNumber.vars.errors|length %}
-                        {{ form_widget(form.tableNumber, {'attr':{'class':'error-form-reserve'} }) }}
-                    {%  else %}
-                        {{ form_widget(form.tableNumber) }}
-                    {% endif %}
-                        </div>
-                        <div class="span6">
-                    {{ form_label(form.peopleCount) }}
-                    {{ form_errors(form.peopleCount) }}
-                    {% if form.peopleCount.vars.errors|length %}
-                        {{ form_widget(form.peopleCount, {'attr':{'class':'error-form-reserve'} }) }}
-                    {%  else %}
-                        {{ form_widget(form.peopleCount) }}
-                    {% endif %}
-                        </div>
+                {{ form_label(form.reserveTime) }}
+                {{ form_errors(form.reserveTime) }}
+                {% if form.reserveTime.vars.errors|length %}
+                    {{ form_widget(form.reserveTime, {'attr':{'class':'error-form-reserve'} }) }}
+                {%  else %}
+                    {{ form_widget(form.reserveTime) }}
+                {% endif %}
                     </div>
                 </div>
                 <div class="span6">
-                    <ul>
-                {% for i in 1..restaurant.floors %}
+                    <div class="restaurant-photo-modal">
+                        {% thumbnail restaurant.mapPhoto, 'reference' %}
+                    </div>
+                </div>
+            </div>    
+            <div class="row-fluid">
+                <div class="span5">
+                    <div class="span3">
+                        {{ form_label(form.tableNumber) }}
+                        {{ form_errors(form.tableNumber) }}
+                        {% if form.tableNumber.vars.errors|length %}
+                            {{ form_widget(form.tableNumber, {'attr':{'class':'error-form-reserve'} }) }}
+                        {%  else %}
+                            {{ form_widget(form.tableNumber) }}
+                        {% endif %}
+                     </div>
+                    <div class="span3">
+                       {{ form_label(form.peopleCount) }}
+                       {{ form_errors(form.peopleCount) }}
+                       {% if form.peopleCount.vars.errors|length %}
+                           {{ form_widget(form.peopleCount, {'attr':{'class':'error-form-reserve'} }) }}
+                       {%  else %}
+                           {{ form_widget(form.peopleCount) }}
+                       {% endif %}
+                     </div>
+                   </div>
+                  <div class="span6">
+                    <ul class="floor-tabs">
+                        {% for i in 1..restaurant.floors %}
                         <li>
                             <a href="#" onclick="$('#tableOrderForm_floor').val({{ i }});
                                 return false;">
                             {{ i }} {% trans %}main.order.form.label.floor{% endtrans %}
                             </a>
                         </li>
-                {% endfor %}                   
-            {{ form_errors(form.floor) }}
-            {% if form.floor.vars.errors|length %}
-                {{ form_widget(form.floor, {'attr':{'class':'error-form-reserve'} }) }}
-            {%  else %}
-                {{ form_widget(form.floor) }}
-            {% endif %}
+                        {% endfor %}                   
+                            {{ form_errors(form.floor) }}
+                            {% if form.floor.vars.errors|length %}
+                                {{ form_widget(form.floor, {'attr':{'class':'error-form-reserve'} }) }}
+                            {%  else %}
+                                {{ form_widget(form.floor) }}
+                        {% endif %}
                     </ul>    
-                </div>
-            </div> 
+                </div>  
+             </div>
             <div class="row-fluid">
-                <div class="span7">
-                    <div class="row-fluid">
-                        <div class="span6">
-                    {{ form_label(form.isSms) }}
-                    {{ form_errors(form.isSms) }}
-                    {% if form.isSms.vars.errors|length %}
-                        {{ form_widget(form.isSms, {'attr':{'class':'error-form-reserve'} }) }}
-                    {%  else %}
-                        {{ form_widget(form.isSms) }}
-                    {% endif %}
-                        </div>
-                        <div class="span6">
-                    {{ form_label(form.isSmokingZone) }}
-                    {{ form_errors(form.isSmokingZone) }}
-                    {% if form.isSmokingZone.vars.errors|length %}
-                        {{ form_widget(form.isSmokingZone, {'attr':{'class':'error-form-reserve'} }) }}
-                    {%  else %}
-                        {{ form_widget(form.isSmokingZone) }}
-                    {% endif %}
-                        </div>
-                    </div>
-                    <div class="row-fluid">
-                        <div class="span12">
-                    {{ form_label(form.isEmail) }}
-                    {{ form_errors(form.isEmail) }}
-                    {% if form.isEmail.vars.errors|length %}
-                        {{ form_widget(form.isEmail, {'attr':{'class':'error-form-reserve'} }) }}
-                    {%  else %}
-                        {{ form_widget(form.isEmail) }}
-                    {% endif %}
-                        </div>
-                    </div>
-                </div>
                 <div class="span5">
-            {{ form_errors(form.wish) }}
-            {% if form.wish.vars.errors|length %}
-                {{ form_widget(form.wish, {'attr':{'class':'error-form-reserve'} }) }}
-            {%  else %}
-                {{ form_widget(form.wish) }}
-            {% endif %}
+                    <div class="boxChecked">
+                        
+                                {{ form_errors(form.isSms) }}
+                                {% if form.isSms.vars.errors|length %}
+                                    {{ form_widget(form.isSms, {'attr':{'class':'error-form-reserve'} }) }}
+                                {%  else %}
+                                    {{ form_widget(form.isSms) }}
+                                {% endif %}
+                                {{ form_label(form.isSms) }}
+                        
+                        
+                                {{ form_errors(form.isSmokingZone) }}
+                                {% if form.isSmokingZone.vars.errors|length %}
+                                 {{ form_widget(form.isSmokingZone, {'attr':{'class':'error-form-reserve'} }) }}
+                                {%  else %}
+                                        {{ form_widget(form.isSmokingZone) }}
+                                 {% endif %}
+                                 {{ form_label(form.isSmokingZone) }}
+                     
+                        
+                                {{ form_errors(form.isEmail) }}
+                                {% if form.isEmail.vars.errors|length %}
+                                    {{ form_widget(form.isEmail, {'attr':{'class':'error-form-reserve'} }) }}
+                                {%  else %}
+                                    {{ form_widget(form.isEmail) }}
+                                {% endif %}
+                                {{ form_label(form.isEmail) }}
+                         
+                    </div>
                 </div>
+                    <div class="span6">
+                        {{ form_errors(form.wish) }}
+                        {% if form.wish.vars.errors|length %}
+                            {{ form_widget(form.wish, {'attr':{'class':'error-form-reserve'} }) }}
+                        {%  else %}
+                            {{ form_widget(form.wish) }}
+                        {% endif %}
+                    </div>
             </div> 
             <div class="row-fluid">
-                <div class="span10">
-            {{ form_label(form.captcha) }}
-            {{ form_errors(form.captcha) }}
-            {% if form.captcha.vars.errors|length %}
-                {{ form_widget(form.captcha, {'attr':{'class':'error-form-reserve'} }) }}
-            {%  else %}
-                {{ form_widget(form.captcha) }}
-            {% endif %}
-                </div>
-                <div class="span2">
-                    <input type="submit" value="{% trans %}main.order.form.label.submit{% endtrans %}" />
+                <div class="span12">
+                    <div class="captcha-img">
+                        <div class="span3">
+                            {{ form_label(form.captcha) }}
+                        </div>
+                        <div class="span5">
+                        {{ form_errors(form.captcha) }}
+                        
+                        {% if form.captcha.vars.errors|length %}
+                        {{ form_widget(form.captcha, {'attr':{'class':'error-form-reserve'} }) }}
+                        {%  else %}
+                            {{ form_widget(form.captcha) }}
+                        {% endif %}
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="button-reserve">
+                            <input type="submit" value="{% trans %}main.order.form.label.submit{% endtrans %}" />
+                        </div>
+                     </div>
                 </div>
             </div> 
         </div>
