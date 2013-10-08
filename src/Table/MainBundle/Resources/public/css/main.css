@@ -59,7 +59,7 @@ body{font-family: Trebuchet MS, sans-serif;}
 
 /* MODAL WINDOW REGISTRATION */
 .modal{
-    width: 960px;
+    width: 816px;
     position: absolute;
 }
 
@@ -298,8 +298,8 @@ body{font-family: Trebuchet MS, sans-serif;}
     float: left;
 }
 .restaurant-photo-modal img{
-    width: 476px;
-    height: 380px;
+    width: 404px;
+    height: 324px;
 }
 .modal-registration #fos_user_registration_form div input.error-form-registration, #fos-login-form div input.error-form-login, .sonata-user-edit-profile .user-edit-profile div input.error-form-profile{
     border: 1px solid #ff0000;
@@ -353,6 +353,23 @@ div.boxChecked input, div.boxUnchecked input {
     cursor: pointer;
     float: none!important;
     width: 100%;
+}
+.choose-zone{
+    height: 50px;
+}
+.choose-zone p{
+    display: block;
+    width: 50%;
+    float: left;
+}
+.choose-zone p input[type="checkbox"]{
+    float: left;
+    margin-right: 10px;
+}
+.choose-zone p label{
+    display: inline;
+    font-size: 13px !important;
+    color: #353535 !important;
 }
 /* end MODAL */
 
@@ -513,7 +530,10 @@ input#tableOrderForm_peopleCount:focus{
 .floor-tabs li{
     float: left;
     font-size: 24px;
-    margin-right: 22px;
+    margin-left: 22px;
+}
+.floor-tabs li:first-of-type{
+    margin-left: 0;
 }
 .floor-tabs li a{
     color: #4a4a4c;
@@ -522,6 +542,10 @@ input#tableOrderForm_peopleCount:focus{
 .floor-tabs li a.active,
 .floor-tabs li a:hover{
     color: #eb7200;
+}
+#register,
+#login{
+    margin-left: -172px !important;
 }
 /* end user profile  */
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) { /*ie10*/
