@@ -6,7 +6,6 @@
 {# FANCYBOX #}
 <script src="{{ asset('bundles/tablemain/js/jquery.fancybox-1.3.4.js') }}"></script>
 {# FANCYBOX #}
-<script src="{{ asset('bundles/tablemain/js/bootstrap-select.min.js') }}"></script>
 <script src="{{ asset('bundles/tablemain/js/cusel-min-2.5.js') }}"></script>
 <script>
     $(function() {
@@ -20,10 +19,9 @@
             });
             return false;
         });
-        $('.table-order-form select').attr('id', 'coolsel'); 
         var params = {
-	        changedEl: "#coolsel",
-                visRows: 10,
+	        changedEl: ".table-order-form select",
+                visRows: 8,
                 scrollArrows: true 
 	    }
 	    cuSel(params);
@@ -46,7 +44,6 @@
 {# FANCYBOX #}
 <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/jquery.fancybox-1.3.4.css') }}">
 {# FANCYBOX #}
-<link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/bootstrap-select.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/cusel.css') }}">
     {{ form_stylesheet(form) }}
 {% endblock %}

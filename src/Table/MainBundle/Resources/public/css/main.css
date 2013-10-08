@@ -73,7 +73,6 @@ body{font-family: Trebuchet MS, sans-serif;}
     max-height: 100%;
     background: #f1efed;
     padding: 0px;
-    padding-top: 20px;
     -moz-border-radius: 0px 0px 5px 5px;
     -webkit-border-radius: 0px 0px 5px 5px;
     -o-border-radius: 0px 0px 5px 5px;
@@ -529,7 +528,7 @@ input#tableOrderForm_peopleCount:focus{
 }
 .floor-tabs li{
     float: left;
-    font-size: 24px;
+    font-size: 18px;
     margin-left: 22px;
 }
 .floor-tabs li:first-of-type{
@@ -546,6 +545,9 @@ input#tableOrderForm_peopleCount:focus{
 #register,
 #login{
     margin-left: -172px !important;
+}
+.table-order-form select{
+    width: 180px;
 }
 /* end user profile  */
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) { /*ie10*/

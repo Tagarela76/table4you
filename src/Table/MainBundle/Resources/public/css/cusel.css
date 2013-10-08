@@ -10,7 +10,7 @@
 	background: url(images/selects-2.png) no-repeat;
 }
 .cusel { /* общий вид селекта включая стрелку справа */
-	height: 26px;
+	height: 30px;
 	background-position: left top;
 	display: inline-block;
 	position: relative;
@@ -29,16 +29,16 @@
 }
 
 .cuselText { /* контейнер для отображенного текста селект */
-	height: 14px;
-	padding: 6px 0 0 7px; /* подбираем отступы и высоту для видимого текста в селекте */
-	cursor: pointer;
-	overflow: hidden;
-	position: relative;
-	z-index: 1;
-	font: 12px Arial, "Helvetica CY", "Nimbus Sans L", sans-serif; /* шрифты */
-	position: absolute;
-	top: 0;
-	left: 0;
+	color: #353535;
+        cursor: pointer;
+        font-size: 14px;
+        height: 18px;
+        left: 0;
+        overflow: hidden;
+        padding: 6px 0 0 8px;
+        position: absolute;
+        top: 0;
+        z-index: 1;
 }
 * html .cuselText { /* высота блока для текста для ие6 */
 	height: 22px;
@@ -47,16 +47,16 @@
 	display: block;
 	cursor: pointer;
 	white-space: nowrap;
-	padding: 2px 15px 2px 5px; /* паддинг справа - это отступ текста от ползунка */
+	padding: 3px 15px 3px 7px; /* паддинг справа - это отступ текста от ползунка */
 	zoom: 1;
 }
 .cusel span:hover,
 .cusel .cuselOptHover { /* реакция оптиона на наведение */
-	background: #003399;
+	background: #fe8504;
 	color: #fff;
 }
 .cusel .cuselActive { /* оформление активного оптиона в списке */
-	background: #CC0000;
+	background: #fe8504;
 	color: #fff;
 	cursor: default;
 }
@@ -82,7 +82,6 @@
 */
 .classDisCusel,
 .classDisCusel .cuselFrameRight {
-	background-image: url(images/selects-2-dis.png) !important;
 	cursor: default;
 	color: #ccc;
 }
@@ -100,7 +99,7 @@
 	position: absolute;
 	left: 0;
 	top: 100%;
-	background: #fff; /* фон выпадающего списка */
+	background: #ECEAEA; /* фон выпадающего списка */
 	min-width: 100%;
 	width: auto;
 }
@@ -108,7 +107,8 @@
 	position: relative;
 	overflow: hidden;
 	z-index: 5;
-	border: 1px solid #999; /* границы выпадающего спиcка */
+        border-radius: 3px;
+	border: 1px solid #fe8504; /* границы выпадающего спиcка */
 }
 
 .cusel .jScrollPaneTrack { /* трек для ползунка прокрутки */
@@ -148,7 +148,7 @@
 	width: 26px;
 	height: 12px;
 	cursor: pointer;
-	background-position: -2px -26px;
+	background-position: -2px -30px;
 	overflow: hidden;
 }
 .cusel .jScrollArrowDown { /* стрелка вниз */
@@ -159,6 +159,6 @@
 	bottom: 0;
 	right: 3px;
 	cursor: pointer;
-	background-position: -21px -26px;
+	background-position: -20px -30px;
 	overflow: hidden;
 }
