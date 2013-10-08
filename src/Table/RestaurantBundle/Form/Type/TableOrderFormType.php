@@ -15,8 +15,14 @@ class TableOrderFormType extends AbstractType
                     'translation_domain' => 'messages',
                     'label' => 'main.order.form.label.reserveTime'
                 ))
-                ->add('reserveDate', 'genemu_jquerydate', array(
+              /*  ->add('reserveDate', 'genemu_jquerydate', array(
                     'widget' => 'single_text',
+                    'translation_domain' => 'messages',
+                    'label' => 'main.order.form.label.reserveDate'
+                ))
+               * 
+               */
+                ->add('reserveDate','hidden',array(
                     'translation_domain' => 'messages',
                     'label' => 'main.order.form.label.reserveDate'
                 ))

@@ -1,0 +1,45 @@
+{% extends 'TableMainBundle::layout.html.twig' %}
+{% block javascripts %}
+    {{ parent() }}   
+{# infinitive scrolling #}
+{% endblock %}    
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}    
+{% block content %}
+    <a data-toggle="modal" data-target="#login" href="{{ path('fos_user_security_login') }}">
+        {% trans %}main.auth.text{% endtrans %}
+    </a>
+    {% trans %}main.please{% endtrans %} {% trans %}main.or{% endtrans %}
+    <a data-toggle="modal" data-target="#register" href="{{ path('fos_user_registration_register') }}">
+        {% trans %}main.register.text{% endtrans %}
+    </a>
+    
+    {# ==Modal Window for registration==#}
+    <div class="modal hide modal-registration" data-backdrop="static" id="register">
+        <div class="modal-header modal-registration-title">
+            <a class="close" data-dismiss="modal"></a>
+            <img id="registrationPreloader" style="display: none;" src="{{ asset('bundles/tablemain/images/ajax-loader.gif') }}" />
+            <h3>{% trans %}main.register.form.title{% endtrans %}</h3>
+        </div>
+        <div class="modal-body" >
+            
+        </div>    
+
+    </div>
+    {# ==Modal Window for registration==#}
+    
+    {# ==Modal Window for login==#}
+    <div class="modal fade hide modal-login" data-backdrop="static" id="login">
+
+        <div class="modal-header modal-login-title">
+            <a class="close" data-dismiss="modal"></a>
+            <img id="loginPreloader" style="display: none;" src="{{ asset('bundles/tablemain/images/ajax-loader.gif') }}" />
+            <h3>{% trans %}main.login.form.title{% endtrans %}</h3>
+        </div>
+        <div class="modal-body" >
+
+        </div>
+    </div>
+    {# ==Modal Window for login==#}
+{% endblock %}    

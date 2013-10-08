@@ -3,6 +3,9 @@
     {{ parent() }}
 <script src="{{ asset('bundles/tablemain/js/jquery-ui-1.10.3.custom.js') }}"></script>
 <script src="{{ asset('bundles/applicationsonatauser/js/jquery.form.js') }}"></script>
+{# FANCYBOX #}
+<script src="{{ asset('bundles/tablemain/js/jquery.fancybox-1.3.4.js') }}"></script>
+{# FANCYBOX #}
 <script src="{{ asset('bundles/tablemain/js/bootstrap-select.min.js') }}"></script>
 <script src="{{ asset('bundles/tablemain/js/cusel-min-2.5.js') }}"></script>
 <script>
@@ -10,7 +13,8 @@
         $('#table-order-form').submit(function() {
             $(this).ajaxSubmit({
                 type: 'post',
-                success: function(response) {
+                success: function(response) { 
+                    window.location.href = "/";
                     $("#table-order-form-container").html(response);
                 }
             });
@@ -23,6 +27,14 @@
                 scrollArrows: true 
 	    }
 	    cuSel(params);
+        $("a#restaurantMap").fancybox({
+            
+        });
+        $('.reserveDate').datepicker({ 
+            dateFormat: 'dd-mm-yy', 
+            altField: "#tableOrderForm_reserveDate",
+            altFormat: "dd-mm-yy"
+        }) 
     });
 </script>
 
@@ -31,6 +43,9 @@
 {% block stylesheets %}
     {{ parent() }}
 <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/jquery-ui-1.10.3.custom.css') }}">
+{# FANCYBOX #}
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/jquery.fancybox-1.3.4.css') }}">
+{# FANCYBOX #}
 <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/bootstrap-select.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/cusel.css') }}">
     {{ form_stylesheet(form) }}
@@ -44,7 +59,9 @@
             <div class="row-fluid">
                 <div class="span5">
                     <div class="row-fluid">
-                {{ form_label(form.reserveDate) }}
+                        {{ form_label(form.reserveDate) }}
+                        <div class="reserveDate">
+                        </div>        
                 {{ form_errors(form.reserveDate) }}
                 {% if form.reserveDate.vars.errors|length %}
                     {{ form_widget(form.reserveDate, {'attr':{'class':'error-form-reserve'} }) }}
@@ -64,7 +81,9 @@
                 </div>
                 <div class="span6">
                     <div class="restaurant-photo-modal">
-                        {% thumbnail restaurant.mapPhoto, 'reference' %}
+                        <a id="restaurantMap" href="{{ publicMapURL }}">
+                            {% thumbnail restaurant.mapPhoto, 'reference' %}
+                        </a>     
                     </div>
                 </div>
             </div>    

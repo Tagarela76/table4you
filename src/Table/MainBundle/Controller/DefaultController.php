@@ -26,5 +26,19 @@ class DefaultController extends Controller
             )
         );
     }
+    
+    /**
+     * 
+     * Render auth page
+     * @Template()
+     * 
+     * @return array[]
+     */
+    public function viewAuthPageAction()
+    {
+        return array(
+
+        );
+    }
 
 }

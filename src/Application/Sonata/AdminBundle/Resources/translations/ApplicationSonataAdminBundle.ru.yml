@@ -12,15 +12,18 @@ restaurant:
     label: Заказ столика 
     floor: Этаж
     userName: Имя клиента
-    email: e-mail
+    email: E-mail
     phone: Номер телефона
     restaurantName: Название заведения
-    dateTime: Дата/время брони
+    date: Дата бронирования
+    time: Время бронирования
     tableNumber: Номер столика
-    peopleCount: Количество человек
+    peopleCount: Кол-во человек
     isSmokingZone: Курящая зона
     wish: Пожелания  
     status: Статус заказа 
+    isSms: Уведомление через sms
+    isEmail: Уведомление через e-mail
   floors: Количество этажей  
 Name: Название
 address:
