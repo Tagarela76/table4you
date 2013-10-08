@@ -25,25 +25,12 @@
         $("#tableOrderForm_isSmokingZone").addClass("boxCheckbox");
         $("#tableOrderForm_isSms").addClass("boxCheckbox");
         $("#tableOrderForm_isEmail").addClass("boxCheckbox");
-        /*$('.boxCheckbox').click(function() {
-            $(this).doCheckbox((elem) {
-            if (elem.className=='boxCheckbox' && elem.parentNode.tagName.toLowerCase()=='div') {
-              elem.parentNode.className='box'+(elem.checked?'Checked':'Unchecked');
-            }
-          }
-          var css=document.styleSheets[0];
-          try {
-            css.addRule('.boxCheckbox', 'filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);');
-          }
-          catch(e) {
-            css.insertRule('.boxCheckbox { -moz-opacity: 0; -khtml-opacity: 0; }', css.cssRules.length);
-          });
-        })
-        $("#tableOrderForm_reserveTime_hour").addClass("selectpicker");
-        $("#tableOrderForm_reserveTime_minute").addClass("selectpicker");
 
-        $('.selectpicker').selectpicker();;*/
-
+        $('.reserveDate').datepicker({ 
+            dateFormat: 'dd-mm-yy', 
+            altField: "#tableOrderForm_reserveDate",
+            altFormat: "dd-mm-yy"
+        }) 
     });
 </script>
 
@@ -67,7 +54,9 @@
             <div class="row-fluid">
                 <div class="span5">
                     <div class="row-fluid">
-                {{ form_label(form.reserveDate) }}
+                        {{ form_label(form.reserveDate) }}
+                        <div class="reserveDate">
+                        </div>        
                 {{ form_errors(form.reserveDate) }}
                 {% if form.reserveDate.vars.errors|length %}
                     {{ form_widget(form.reserveDate, {'attr':{'class':'error-form-reserve'} }) }}
