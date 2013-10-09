@@ -12,6 +12,8 @@ class TableOrderFormType extends AbstractType
     {
         $builder
                 ->add('reserveTime', 'time', array(
+                    'widget' => 'choice',
+                    'minutes' => array("0", "30"),
                     'translation_domain' => 'messages',
                     'label' => 'main.order.form.label.reserveTime'
                 ))
