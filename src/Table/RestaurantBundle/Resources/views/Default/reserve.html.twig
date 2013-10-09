@@ -58,7 +58,6 @@
     {% endfor %}
     <form novalidate id="table-order-form" action="{{ path('table_order_reserve', {'id': restaurant.id}) }}" {{ form_enctype(form) }} method="POST" class="table-order-form">       
 {{ form_start(form) }}
-    {{ form_errors(form) }}
         <div class="container-fluid">
             <div class="row-fluid">
                 <div class="span5">
@@ -122,7 +121,7 @@
                     <ul class="floor-tabs">
                         {% for i in 1..restaurant.floors %}
                         <li>
-                            <a class="floors" href="#" onclick="page.tableOrder.selectRestaurantFloor(this, i); return false;">
+                            <a class="floors" href="#" onclick="page.tableOrder.selectRestaurantFloor(this, {{i}}); return false;">
                             {{ i }} {% trans %}main.order.form.label.floor{% endtrans %}
                             </a>
                         </li>

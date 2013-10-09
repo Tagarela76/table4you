@@ -27,6 +27,8 @@ class DefaultController extends Controller
      */
     public function reserveAction($id, Request $request)
     {            
+        $a = $this->getTableOrderManager()->findOneById(4);
+
         $tableOrder = new TableOrder();
         $form = $this->createForm(new TableOrderFormType(), $tableOrder);
         $restaurant = $this->getRestaurantManager()->findOneById($id);
@@ -56,10 +58,16 @@ class DefaultController extends Controller
                 // set Restaurant Data
                 $tableOrder->setRestaurant($restaurant);
                 
+                // format reserve date
+                $tableOrder->setReserveDate(new \DateTime($tableOrder->getReserveDate()));
+                // set status 0
+                if (is_null($tableOrder->getStatus())) {
+                    $tableOrder->setStatus(0);
+                }
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($tableOrder);
                 $em->flush();
-                 
+         
                 $request->getSession()->getFlashBag()->add('success', $this->get('translator')->trans('main.order.form.message.success'));
             } 
         }
