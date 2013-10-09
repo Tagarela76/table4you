@@ -65,7 +65,7 @@ file that was distributed with this source code.
                 {% block table_body %}
                     <tbody>
                         {% for object in admin.datagrid.results %}
-                            <tr style="background-color: {{object.statusColor}} !important;">
+                            <tr {#style="background-color: {{object.statusColor}} !important;"#}>
                                 {% include admin.getTemplate('inner_list_row') %}
                             </tr>
                         {% endfor %}
