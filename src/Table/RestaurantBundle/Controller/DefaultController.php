@@ -35,11 +35,16 @@ class DefaultController extends Controller
         $user = $this->container->get('security.context')->getToken()->getUser();
         
         // Generate public URL for restaurant map
-        $provider = $this->getMediaService()
-           ->getProvider($restaurant->getMapPhoto()->getProviderName());
+        if (!is_null($restaurant->getMapPhoto())) {
+            $provider = $this->getMediaService()
+               ->getProvider($restaurant->getMapPhoto()->getProviderName());
 
-        $format = $provider->getFormatName($restaurant->getMapPhoto(), "reference");
-        $publicMapURL = $provider->generatePublicUrl($restaurant->getMapPhoto(), $format);
+            $format = $provider->getFormatName($restaurant->getMapPhoto(), "reference");
+            $publicMapURL = $provider->generatePublicUrl($restaurant->getMapPhoto(), $format);
+        } else {
+            $publicMapURL = false;
+        }
+            
        
         if ($request->isMethod('POST')) {
             $form->bind($request);
