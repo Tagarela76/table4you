@@ -7,6 +7,9 @@ use Table\RestaurantBundle\Entity\Restaurant;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
+
+use FOS\UserBundle\Model\UserInterface;
+
 class DefaultController extends Controller
 {
 
@@ -20,10 +23,19 @@ class DefaultController extends Controller
      */
     public function indexAction($page)
     {
+        // get Current user
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        
+        // Check if user auth in app
+        $anonim = false;
+        if (!is_object($user) || !$user instanceof UserInterface) {         
+            $anonim = true;
+        } 
         return array(
             'restaurantsList' => $this->getPaginator()->paginate(
                     $this->getRestaurantManager()->getRestaurants(), $page, Restaurant::PER_PAGE_COUNT
-            )
+            ),
+            'anonim' => $anonim
         );
     }
     

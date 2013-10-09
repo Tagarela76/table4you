@@ -24,19 +24,23 @@ class TableOrderFormType extends AbstractType
                */
                 ->add('reserveDate','hidden',array(
                     'translation_domain' => 'messages',
-                    'label' => 'main.order.form.label.reserveDate'
+                    'label' => 'main.order.form.label.reserveDate',
+                    'required' => true
                 ))
                 ->add('floor', 'hidden', array(
                     'translation_domain' => 'messages',
-                    'label' => 'main.order.form.label.floor'
+                    'label' => 'main.order.form.label.floor',
+                    'required' => true
                 ))
                 ->add('tableNumber', 'text', array(
                     'translation_domain' => 'messages',
-                    'label' => 'main.order.form.label.tableNumber'
+                    'label' => 'main.order.form.label.tableNumber',
+                    'required' => true
                 ))
                 ->add('peopleCount', 'text', array(
                     'translation_domain' => 'messages',
-                    'label' => 'main.order.form.label.peopleCount'
+                    'label' => 'main.order.form.label.peopleCount',
+                    'required' => true
                 ))
                 ->add('isSmokingZone', 'checkbox', array(
                     'translation_domain' => 'messages',
