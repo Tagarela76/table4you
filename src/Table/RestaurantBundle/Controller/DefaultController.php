@@ -26,8 +26,7 @@ class DefaultController extends Controller
      * @Template()
      */
     public function reserveAction($id, Request $request)
-    {    
-        
+    {            
         $tableOrder = new TableOrder();
         $form = $this->createForm(new TableOrderFormType(), $tableOrder);
         $restaurant = $this->getRestaurantManager()->findOneById($id);
@@ -60,10 +59,9 @@ class DefaultController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($tableOrder);
                 $em->flush();
-                $request->getSession()->getFlashBag()->add('success', 'Ваше запрос отправлен на рассмотрение! Спасибо!');
-            } else {
-                var_dump($form->getErrorsAsString()); die();
-            }
+                 
+                $request->getSession()->getFlashBag()->add('success', $this->get('translator')->trans('main.order.form.message.success'));
+            } 
         }
         return array(
             'form' => $form,
