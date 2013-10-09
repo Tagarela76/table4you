@@ -184,6 +184,9 @@ body{font-family: Trebuchet MS, sans-serif;}
 .modal-login #fos-login-form{
     margin:0px;
 }
+#table-order-form-container .container-fluid{
+    padding: 20px 20px 0 !important;
+}
 #table-order-form-container label{
     font-size: 18px;
     color: #9c9a9a;

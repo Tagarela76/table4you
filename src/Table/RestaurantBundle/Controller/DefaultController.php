@@ -62,7 +62,7 @@ class DefaultController extends Controller
                 $em->flush();
                 $request->getSession()->getFlashBag()->add('success', 'Ваше запрос отправлен на рассмотрение! Спасибо!');
             } else {
-                var_dump($form->getErrorsAsString()); die();
+                //var_dump($form->getErrorsAsString()); die();
             }
         }
         return array(
