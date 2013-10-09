@@ -77,7 +77,7 @@ class TableOrderAdmin extends Admin
                 ->add('reserveDate', "doctrine_orm_string", array(
                     'label' => 'restaurant.tableOrder.date'
                 ))
-                ->add('reserveTime', null, array(
+                ->add('reserveTime', "doctrine_orm_string", array(
                     'label' => 'restaurant.tableOrder.time',
                 ))
                 ->add('floor', null, array(
@@ -117,8 +117,14 @@ class TableOrderAdmin extends Admin
                 ->add('userEmail', null, array(
                     'label' => 'restaurant.tableOrder.email'
                 ))
-                ->add('status', null, array(
+                ->add('statusName', null, array(
                     'label'     => 'restaurant.tableOrder.status'
+                ))
+                ->add('userName', null, array(
+                    'label' => 'restaurant.tableOrder.userName'
+                ))
+                ->add('userPhone', null, array(
+                    'label' => 'restaurant.tableOrder.phone'
                 ))
         ;
     }

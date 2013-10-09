@@ -107,6 +107,10 @@ class TableOrder
      */
     private $isEmail;
     
+    protected $statusColor;
+    
+    protected $statusName;
+    
     protected $restaurantName;
     
     protected $userName;
@@ -119,6 +123,12 @@ class TableOrder
         "0" => "Не обработано",
         "1" => "Не выполнено",
         "2" => "Выполнено"
+    );
+    
+    public static $STATUS_COLOR_LIST = array(
+        "0" => "#fff",
+        "1" => "#66ccff",
+        "2" => "#ff9900"
     );
     
     const PER_PAGE_COUNT = 10;
@@ -275,7 +285,7 @@ class TableOrder
     /**
      * Set status
      *
-     * @param integer $status
+     * @param #s $status
      * @return TableOrder
      */
     public function setStatus($status)
@@ -527,7 +537,71 @@ class TableOrder
     {
         $this->isEmail = $isEmail;
     }
-          
+        
+    /**
+     * Set statusColor
+     *
+     * @param string $statusColor
+     * @return TableOrder
+     */
+    public function setStatusColor($statusColor)
+    {
+        $this->statusColor = $statusColor;
+    
+        return $this;
+    }
+
+    /**
+     * Get statusColor (depend on color list)
+     *
+     * @return string 
+     */
+    public function getStatusColor()
+    {
+        if (is_null($this->getStatus())) {
+            return false;
+        }
+        if (is_null($this->statusColor)) {
+            $statusColor = self::$STATUS_COLOR_LIST[$this->getStatus()]; 
+            $this->setStatusColor($statusColor);
+            return $statusColor;
+        } else {
+            return $this->statusColor;
+        }
+    }
+    
+    /**
+     * Set statusName
+     *
+     * @param string $statusName
+     * @return TableOrder
+     */
+    public function setStatusName($statusName)
+    {
+        $this->statusName = $statusName;
+    
+        return $this;
+    }
+
+    /**
+     * Get statusName (depend on status list)
+     *
+     * @return string 
+     */
+    public function getStatusName()
+    {
+        if (is_null($this->getStatus())) {
+            return false;
+        }
+        if (is_null($this->statusName)) {
+            $statusName = self::$STATUS_LIST[$this->getStatus()]; 
+            $this->setStatusName($statusName);
+            return $statusName;
+        } else {
+            return $this->statusName;
+        }
+    }
+    
     /**
      * @return string
      */

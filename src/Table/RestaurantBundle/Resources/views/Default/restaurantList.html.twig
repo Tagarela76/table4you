@@ -26,9 +26,16 @@
             </div>
             <div class="restaurant-content-reserve">
                 <img src="{{ asset('bundles/tablerestaurant/images/stars.png') }}" title="" alt="">
-                <a class="btn btn-primary" data-toggle="modal" data-target="#reserve_{{ restaurant.id }}" href="{{ path('table_order_reserve', {'id': restaurant.id}) }}">
-                    {% trans %}main.order.button{% endtrans %}
-                </a>
+                {% if anonim %}
+                    <a class="btn btn-primary"  href="{{ path('table_main_auth_page') }}">
+                        {% trans %}main.order.button{% endtrans %}
+                    </a>
+                {% else %}
+                    <a class="btn btn-primary" data-toggle="modal" data-target="#reserve_{{ restaurant.id }}" href="{{ path('table_order_reserve', {'id': restaurant.id}) }}">
+                        {% trans %}main.order.button{% endtrans %}
+                    </a>
+                {% endif %}
+                    
             </div>
         </div>
         {# ==Modal Window for reserve==#}

@@ -26,20 +26,13 @@ class DefaultController extends Controller
      * @Template()
      */
     public function reserveAction($id, Request $request)
-    {   
-        // get Current user
-        $user = $this->container->get('security.context')->getToken()->getUser();
+    {    
         
-        if (!is_object($user) || !$user instanceof UserInterface) {
-            
-            // redirect on homepage
-            return $this->redirect(
-                $this->generateUrl("table_main_auth_page")
-            );
-        }
         $tableOrder = new TableOrder();
         $form = $this->createForm(new TableOrderFormType(), $tableOrder);
         $restaurant = $this->getRestaurantManager()->findOneById($id);
+        // get Current user
+        $user = $this->container->get('security.context')->getToken()->getUser();
         
         // Generate public URL for restaurant map
         $provider = $this->getMediaService()
@@ -62,10 +55,9 @@ class DefaultController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($tableOrder);
                 $em->flush();
-                // redirect on homepage
-                return $this->redirect(
-                    $this->generateUrl("table_main_homepage")
-                );
+                $request->getSession()->getFlashBag()->add('success', 'Ваше запрос отправлен на рассмотрение! Спасибо!');
+            } else {
+                var_dump($form->getErrorsAsString()); die();
             }
         }
         return array(
