@@ -9,15 +9,6 @@
 <script src="{{ asset('bundles/tablemain/js/cusel-min-2.5.js') }}"></script>
 <script>
     $(function() {
-        $('#table-order-form').submit(function() {
-            $(this).ajaxSubmit({
-                type: 'post',
-                success: function(response) {
-                    $("#table-order-form-container").html(response);
-                }
-            });
-            return false;
-        });
         var params = {
             changedEl: ".table-order-form select",
             visRows: 8,
@@ -30,7 +21,17 @@
             dateFormat: 'yy-mm-dd',
             altField: "#tableOrderForm_reserveDate",
             altFormat: "yy-mm-dd"
-        })
+        }) 
+         $('#table-order-form').submit(function() {
+            $(this).ajaxSubmit({
+                type: 'post',
+                success: function(response) { 
+                    window.location.href = "/";
+                    $("#table-order-form-container").html(response);
+                }
+            });
+            return false;
+        });
     });
 </script>
 
