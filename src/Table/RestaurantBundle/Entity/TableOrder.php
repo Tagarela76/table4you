@@ -107,16 +107,46 @@ class TableOrder
      */
     private $isEmail;
     
+    /**
+     * Status color
+     *
+     * @var string 
+     */
     protected $statusColor;
     
+    /**
+     * Status name
+     *
+     * @var string 
+     */
     protected $statusName;
     
+    /**
+     * Restaurant name
+     *
+     * @var string 
+     */
     protected $restaurantName;
     
+    /**
+     * User Name
+     *
+     * @var string 
+     */
     protected $userName;
     
+    /**
+     * User Phone
+     *
+     * @var string 
+     */
     protected $userPhone;
     
+    /**
+     * User Email
+     *
+     * @var string 
+     */
     protected $userEmail;
 
     public static $STATUS_LIST = array(

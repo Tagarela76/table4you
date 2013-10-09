@@ -26,3 +26,5 @@ main:
           submit: Reserve
         placeholder:
           wish: "Ваши пожелания"
+        message:
+          success: Ваше запрос отправлен на рассмотрение! Спасибо!  

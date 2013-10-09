@@ -1,6 +1,8 @@
 function TableOrder() {
     
     this.selectRestaurantFloor = function(obj, floor) {
+        // remove active class from all
+        $(".floors").removeClass('active'); 
         $('#tableOrderForm_floor').val(floor);
         $(obj).addClass('active');                            
     }
