@@ -12,3 +12,13 @@ main:
       title: Authentication
   profile:
     buttonLabel: Profile
+  order:
+      button: Reserve
+      form:
+        title: Table Reserve
+  auth:
+    text: Auth
+  register:
+    text: Register
+  please: please
+  or: or

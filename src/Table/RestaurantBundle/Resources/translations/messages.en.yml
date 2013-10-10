@@ -1,0 +1,18 @@
+main:
+  order:
+      form:
+        label:
+          captcha: Captcha
+          reserveDate: "Date:"
+          reserveTime: "Time:"
+          tableNumber: "Table number:"
+          peopleCount: "People count:"
+          isSmokingZone: "Smoking zone"
+          floor: Floor
+          isSms: Get notifications through sms
+          isEmail: Get notifications through e-mail
+          submit: Reserve
+        placeholder:
+          wish: "Your wishes"
+        message:
+          success: Your request is processing. Thanks!

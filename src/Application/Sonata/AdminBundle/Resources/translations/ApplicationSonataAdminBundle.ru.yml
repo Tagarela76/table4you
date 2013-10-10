@@ -8,6 +8,23 @@ restaurant:
   category:
     category: Категория
     categories: Категории
+  tableOrder:
+    label: Заказ столика 
+    floor: Этаж
+    userName: Имя клиента
+    email: E-mail
+    phone: Номер телефона
+    restaurantName: Название заведения
+    date: Дата бронирования
+    time: Время бронирования
+    tableNumber: Номер столика
+    peopleCount: Кол-во человек
+    isSmokingZone: Курящая зона
+    wish: Пожелания  
+    status: Статус заказа 
+    isSms: Уведомление через sms
+    isEmail: Уведомление через e-mail
+  floors: Количество этажей  
 Name: Название
 address:
   city: Город
@@ -25,3 +42,4 @@ Restaurant Category List: Список категорий ресторана
 Restaurant Kitchen List: Список кухонь
 Restaurant Additional Service List: Список дополнительных услуг
 Map Photo:  Карта ресторана
+Table Order List: Заказ столиков

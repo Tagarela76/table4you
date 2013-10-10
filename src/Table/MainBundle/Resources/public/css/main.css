@@ -23,11 +23,6 @@ body{font-family: Trebuchet MS, sans-serif;}
     float: left;
     color:#454545;
 }
-.restaurantList-container .restaurant-container .restaurant-content p{font-size: 13px;margin-bottom: 2px;}
-.restaurantList-container .restaurant-container .restaurant-content .restaurant-content-name{
-    margin-bottom: 26px;
-    font-size: 24px;
-}
 .restaurantList-container .restaurant-container .restaurant-content .restaurant-content-name a{color:#454545;}
 .restaurantList-container .restaurant-container .restaurant-content .restaurant-content-font{
     font-size: 11.9px;
@@ -64,7 +59,7 @@ body{font-family: Trebuchet MS, sans-serif;}
 
 /* MODAL WINDOW REGISTRATION */
 .modal{
-    width: 345px;
+    width: 816px;
     position: absolute;
 }
 
@@ -78,7 +73,6 @@ body{font-family: Trebuchet MS, sans-serif;}
     max-height: 100%;
     background: #f1efed;
     padding: 0px;
-    padding-top: 20px;
     -moz-border-radius: 0px 0px 5px 5px;
     -webkit-border-radius: 0px 0px 5px 5px;
     -o-border-radius: 0px 0px 5px 5px;
@@ -134,7 +128,7 @@ body{font-family: Trebuchet MS, sans-serif;}
 .modal-registration #fos_user_registration_form div+div+div+div.password-registration+div, .modal-registration #fos_user_registration_form div.captcha-img{
     margin-top: 0px;
 }
-.modal-registration #fos_user_registration_form div ul li, .error-text-login, .sonata-user-edit-profile .user-edit-profile div ul li{
+.modal-registration #fos_user_registration_form div ul li, .error-text-login, .sonata-user-edit-profile .user-edit-profile div ul li, .table-order-form .container-fluid ul li{
     list-style: none;
     font-size: 11px;
     color: #ff0000;
@@ -190,9 +184,58 @@ body{font-family: Trebuchet MS, sans-serif;}
 .modal-login #fos-login-form{
     margin:0px;
 }
-.modal-login #fos-login-form div.boxChecked label, .modal-login #fos-login-form div.boxUnchecked label{
+#table-order-form-container .container-fluid{
+    padding: 15px 20px 0 !important;
+}
+#table-order-form-container label{
+    font-size: 18px;
+    color: #9c9a9a;
+    margin-bottom: 10px !important;
+}
+#table-order-form div.captcha-img label{
+    display: inline;
+    float: left;
+}
+#table-order-form div.captcha-img input{
+    width: 130px;
+    margin-top: 3px;
+    margin-left: 50px;
+}
+#table-order-form-container textarea{
+    display: block;
+    resize: none;
+    width: 350px;
+    float: right;
+    position: relative;
+    height: 50px;
+}
+#table-order-form-container div.button-reserve{
+    float: right;
+}
+#table-order-form-container div.button-reserve input{
+    background: #feb200;
+    background: -moz-linear-gradient(top, #feb200 0%, #e2601b 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#feb200), color-stop(100%,#e2601b));
+    background: -webkit-linear-gradient(top, #feb200 0%,#e2601b 100%);
+    background: -o-linear-gradient(top, #feb200 0%,#e2601b 100%);
+    background: -ms-linear-gradient(top, #feb200 0%,#e2601b 100%);
+    background: linear-gradient(to bottom, #feb200 0%,#e2601b 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feb200', endColorstr='#e2601b',GradientType=0 );
+    border: 0px;
+    width: 170px;
+    padding: 8px 0px;
+    color: #fffefe;
+    font-size: 15px;
+    -moz-border-radius: 8px 8px 8px 8px;
+    -webkit-border-radius: 8px 8px 8px 8px;
+    -o-border-radius: 8px 8px 8px 8px;
+    border-radius: 8px 8px 8px 8px;
+    cursor: pointer;
+    box-shadow: none;
+}
+.modal-login #fos-login-form div.boxChecked label, .modal-login #fos-login-form div.boxUnchecked label, .table-order-form div.boxChecked label, .table-order-form div.boxUnchecked label{
     float: none;
-    font-size: 13.6px;
+    font-size: 13.6px !important;
     color: #353535;
     margin-left: 20px;
     width: 105px;
@@ -256,7 +299,11 @@ body{font-family: Trebuchet MS, sans-serif;}
     height: 62px;
     float: left;
 }
-.modal-registration #fos_user_registration_form div input.error-form-registration, #fos-login-form div input.error-form-login, .sonata-user-edit-profile .user-edit-profile div input.error-form-profile{
+.restaurant-photo-modal img{
+    width: 404px;
+    height: 324px;
+}
+.modal-registration #fos_user_registration_form div input.error-form-registration, #fos-login-form div input.error-form-login, .sonata-user-edit-profile .user-edit-profile div input.error-form-profile, .table-order-form .captcha-img .error-form-reserve{
     border: 1px solid #ff0000;
     box-shadow: none;
 }
@@ -299,11 +346,33 @@ div.boxChecked input, div.boxUnchecked input {
     opacity: 0;
     float: left;
 }
-.modal-login #fos-login-form div.boxChecked label, .modal-login #fos-login-form div.boxUnchecked label {
+.modal-login #fos-login-form div.boxChecked label, .modal-login #fos-login-form div.boxUnchecked label{
     cursor: pointer;
     float: none!important;
     width: 125px!important;
   }
+ .table-order-form div.boxChecked label, .table-order-form div.boxUnchecked label{
+    cursor: pointer;
+    float: none!important;
+    width: 100%;
+}
+.choose-zone{
+    height: 50px;
+}
+.choose-zone p{
+    display: block;
+    width: 50%;
+    float: left;
+}
+.choose-zone p input[type="checkbox"]{
+    float: left;
+    margin-right: 10px;
+}
+.choose-zone p label{
+    display: inline;
+    font-size: 13px !important;
+    color: #353535 !important;
+}
 /* end MODAL */
 
 .modal-registration #fos_user_registration_form div label.check-passwords {
@@ -314,7 +383,7 @@ div.boxChecked input, div.boxUnchecked input {
     width: 12px;
     height: 13px;
 }
-
+.open{*z-index:1000;}.open>.dropdown-menu{display:block;}
 /* User Profile */
 .sonata-user-show .user-profile-label {
     display: block;
@@ -395,7 +464,7 @@ div.boxChecked input, div.boxUnchecked input {
     height: 13px;
 }
 .sonata-user-edit-profile .user-edit-profile div input{
-    width: 381px;
+    width: 370px;
     height: 18px;
     padding-left: 10px;
     color: #353535;
@@ -426,6 +495,63 @@ div.boxChecked input, div.boxUnchecked input {
     top: 110px;
     right: 5px;
 }
+#tableOrderForm_tableNumber,
+#tableOrderForm_peopleCount{
+    width: 40px;
+    font-size: 14px;
+    color: #353535;
+    padding: 8px 0 7px 12px;
+    margin-bottom: 8px;
+    background: -moz-linear-gradient(top, #e2e0e0 0%, #f1f0f0 99%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e2e0e0), color-stop(99%,#f1f0f0));
+    background: -webkit-linear-gradient(top, #e2e0e0 0%,#f1f0f0 99%);
+    background: -o-linear-gradient(top, #e2e0e0 0%,#f1f0f0 99%);
+    background: -ms-linear-gradient(top, #e2e0e0 0%,#f1f0f0 99%);
+    background: linear-gradient(to bottom, #e2e0e0 0%,#f1f0f0 99%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e0e0', endColorstr='#f1f0f0',GradientType=0 );
+    border: 1px solid #cccdcf;
+    -moz-border-radius: 8px 8px 8px 8px;
+    -webkit-border-radius: 8px 8px 8px 8px;
+    -o-border-radius: 8px 8px 8px 8px;
+    border-radius: 8px 8px 8px 8px;
+    -moz-box-shadow: inset 1px 0px 3px rgba(238, 238, 238, 0.7), inset -2px 0px 3px rgba(238, 238, 238,0.7), inset 0px 2px 1px rgba(0, 0, 0, 0.7);
+    -webkit-box-shadow: inset 1px 0px 3px rgba(238, 238, 238, 0.7), inset -2px 0px 3px rgba(238, 238, 238,0.7), inset 0px 2px 1px rgba(0, 0, 0, 0.7);
+    box-shadow: inset 1px 0px 3px rgba(238, 238, 238, 0.7), inset -2px 0px 3px rgba(238, 238, 238,0.7), inset 0px 2px 1px rgba(0, 0, 0, 0.7);
+}
+input#tableOrderForm_tableNumber:focus, 
+input#tableOrderForm_peopleCount:focus{
+    border: 1px solid #fe8504;
+    outline: none;
+    box-shadow: none;
+}
+.floor-tabs{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.floor-tabs li{
+    float: left;
+    font-size: 18px;
+    margin-left: 22px;
+}
+.floor-tabs li:first-of-type{
+    margin-left: 0;
+}
+.floor-tabs li a{
+    color: #4a4a4c;
+    text-decoration: none;
+}
+.floor-tabs li a.active,
+.floor-tabs li a:hover{
+    color: #eb7200;
+}
+#register,
+#login{
+    margin-left: -172px !important;
+}
+.table-order-form select{
+    width: 180px;
+}
 /* end user profile  */
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) { /*ie10*/
    .modal-registration #fos_user_registration_form div input, .modal-login #fos-login-form div input{
@@ -435,3 +561,38 @@ div.boxChecked input, div.boxUnchecked input {
      color:#353535!important;
    }
 }
+
+
+
+#table-order-form .reserveDate .ui-widget-header .ui-datepicker-prev .ui-icon {
+    background-position: -91px -16px;
+    background-image: url(images/ui-icons_ef8c08_256x240.png);
+}
+#table-order-form .reserveDate .ui-widget-header .ui-datepicker-next .ui-icon {
+    background-position: -37px -16px;
+    background-image: url(images/ui-icons_ef8c08_256x240.png);
+}
+
+#table-order-form .reserveDate .ui-datepicker-prev-hover, #table-order-form .reserveDate .ui-datepicker-prev-hover span{
+    background: none; 
+    border: 0;
+    left:26.6%;
+    top:7.5px;
+}
+#table-order-form .reserveDate .ui-datepicker-next-hover, #table-order-form .reserveDate .ui-datepicker-next-hover span{
+    background: none; 
+    border: 0;
+    left:66.4%;
+    top:7.5px; 
+}
+.table-order-form{margin: 0;}
+.table-order-form .floor-tabs {margin-top: 25px;}
+#table-order-form-container  .table-order-form .label-font-size-modal label{font-size: 15px;}
+#table-order-form-container  .table-order-form .label-font-size_modal label{font-size: 16px;}
+#tableOrderForm_reserveTime{margin-top: -10px;}
+#table-order-form .cusel{top: 11px;}
+.cusel, .cuselFrameRight, .jScrollPaneDrag, .jScrollArrowUp, .jScrollArrowDown {
+background: url(images/selects-2.png) no-repeat;}
+.cusel:hover, .cusel:hover .cuselFrameRight, .cusel:focus, .cusel:focus .cuselFrameRight, .cuselFocus, .cuselFocus .cuselFrameRight {
+background-image: url(images/selects-2.png);}
+.table-order-form .floor-tabs li a {font-size: 18px;}

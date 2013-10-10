@@ -36,12 +36,13 @@
         "whiteoctober/breadcrumbs-bundle": "dev-master",
         "knplabs/knp-paginator-bundle": "2.3.*@dev",
         
-        "behat/symfony2-extension": "1.0.*@dev",
+        "behat/symfony2-extension": "1.1.*@dev",
         "behat/mink-extension": "1.2.*@dev",
         "behat/mink-browserkit-driver": "1.1.*@dev",
         "behat/mink-goutte-driver": "1.0.*@dev",
         "friendsofsymfony/rest-bundle": "0.13.*@dev",
-        "jms/serializer-bundle": "0.12.*@dev"
+        "jms/serializer-bundle": "0.12.*@dev",
+        "genemu/form-bundle": "2.2.*"
     },
     "scripts": {
         "post-install-cmd": [

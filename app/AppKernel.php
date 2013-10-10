@@ -39,6 +39,7 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new Table\ApiBundle\TableApiBundle(),
             new Table\CoreDomainBundle\TableCoreDomainBundle(),
+            new Genemu\Bundle\FormBundle\GenemuFormBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

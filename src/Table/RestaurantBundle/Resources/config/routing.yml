@@ -1,0 +1,5 @@
+table_order_reserve:
+    pattern:  /reserve/{id}
+    defaults: { _controller: TableRestaurantBundle:Default:reserve }
+    requirements:
+        id: \d+         

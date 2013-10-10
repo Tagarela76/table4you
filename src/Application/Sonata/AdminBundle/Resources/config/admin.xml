@@ -38,5 +38,18 @@
               <argument>ApplicationSonataAdminBundle</argument>
           </call>
       </service>
+      <service id="sonata.admin.tableOrder" class="Application\Sonata\AdminBundle\Controller\TableOrderAdmin">
+          <tag name="sonata.admin" manager_type="orm" group="Restaurant" label="restaurant.tableOrder.label"/>
+          <argument />
+          <argument>Table\RestaurantBundle\Entity\TableOrder</argument>
+          <argument>SonataAdminBundle:CRUD</argument>
+          <call method="setTranslationDomain">
+              <argument>ApplicationSonataAdminBundle</argument>
+          </call>
+          <call method="setTemplate">
+              <argument>list</argument>
+              <argument>ApplicationSonataAdminBundle:CRUD:list.html.twig</argument>
+          </call>
+      </service>
    </services>
 </container>

@@ -6,9 +6,18 @@ main:
     buttonLabel: Регистрация
     form:
       title: Регистрация
+    text: Зарегистрируйтесь   
   login: 
     buttonLabel: Войти
     form:
       title: Авторизация
   profile:
     buttonLabel: Мой профиль
+  order:
+      button: Reserve
+      form:
+        title: Заказ столика
+  auth:
+    text: Авторизируйтесь
+  please: пожалуйста
+  or: или   

@@ -145,6 +145,7 @@ sonata_admin:
     title_logo:  %base_url%bundles/sonataadmin/logo_title.png
     templates:
         # default global templates
+       # layout: ApplicationSonataAdminBundle::standard_layout.html.twig 
         layout:  SonataAdminBundle::standard_layout.html.twig
         ajax:    SonataAdminBundle::ajax_layout.html.twig
 
@@ -240,4 +241,7 @@ jms_serializer:
                 path: "@TableApiBundle/Resources/config/serializer/"
             RestaurantBundle:
                 namespace_prefix: "Table\\RestaurantBundle"
-                path: "@TableApiBundle/Resources/config/serializer/"    
+                path: "@TableApiBundle/Resources/config/serializer/"  
+                
+genemu_form:
+    date: ~                
