@@ -592,6 +592,7 @@ input#tableOrderForm_peopleCount:focus{
 #tableOrderForm_reserveTime{margin-top: -10px;}
 #table-order-form .cusel{top: 11px;}
 .cusel, .cuselFrameRight, .jScrollPaneDrag, .jScrollArrowUp, .jScrollArrowDown {
-background: url(images/selects-2.png) no-repeat;
+background: url(images/selects-2.png) no-repeat;}
 .cusel:hover, .cusel:hover .cuselFrameRight, .cusel:focus, .cusel:focus .cuselFrameRight, .cuselFocus, .cuselFocus .cuselFrameRight {
-background-image: url(images/selects-2.png);
+background-image: url(images/selects-2.png);}
+.table-order-form .floor-tabs li a {font-size: 18px;}
