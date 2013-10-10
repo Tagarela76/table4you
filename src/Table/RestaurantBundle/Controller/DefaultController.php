@@ -34,7 +34,12 @@ class DefaultController extends Controller
         $restaurant = $this->getRestaurantManager()->findOneById($id);
         // get Current user
         $user = $this->container->get('security.context')->getToken()->getUser();
-        
+        if (!is_object($user) || !$user instanceof UserInterface) {
+	    // redirect on homepage
+            return $this->redirect(
+                $this->generateUrl("table_main_homepage")
+            );
+        }
         // Generate public URL for restaurant map
         if (!is_null($restaurant->getMapPhoto())) {
             $provider = $this->getMediaService()
@@ -49,17 +54,15 @@ class DefaultController extends Controller
        
         if ($request->isMethod('POST')) {
             $form->bind($request);
-
             if ($form->isValid()) {
                 // add Order
-                $tableOrder = $form->getData();
+		$tableOrder = $form->getData();
+	    	// format reserve date
+            	$tableOrder->setReserveDate(new \DateTime($tableOrder->getReserveDate()));
                 // set User Data
                 $tableOrder->setUser($user);
                 // set Restaurant Data
                 $tableOrder->setRestaurant($restaurant);
-                
-                // format reserve date
-                $tableOrder->setReserveDate(new \DateTime($tableOrder->getReserveDate()));
                 // set status 0
                 if (is_null($tableOrder->getStatus())) {
                     $tableOrder->setStatus(0);
@@ -68,7 +71,7 @@ class DefaultController extends Controller
                 $em->persist($tableOrder);
                 $em->flush();
                 $request->getSession()->getFlashBag()->add('success', $this->get('translator')->trans('main.order.form.message.success'));
-            } 
+            }
         }
         return array(
             'form' => $form,

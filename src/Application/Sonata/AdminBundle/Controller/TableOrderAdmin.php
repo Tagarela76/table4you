@@ -41,7 +41,8 @@ class TableOrderAdmin extends Admin
                     'label' => 'restaurant.tableOrder.peopleCount'
                 ))
                 ->add('isSmokingZone', 'checkbox', array(
-                    'label'     => 'restaurant.tableOrder.isSmokingZone'
+                    'label'     => 'restaurant.tableOrder.isSmokingZone',
+                    'required' => false
                 ))
                 ->add('userPhone', 'genemu_plain', array(
                     'label' => 'restaurant.tableOrder.phone'
@@ -50,10 +51,12 @@ class TableOrderAdmin extends Admin
                     'label' => 'restaurant.tableOrder.email'
                 ))
                 ->add('isSms', 'checkbox', array(
-                    'label'     => 'restaurant.tableOrder.isSms'
+                    'label'     => 'restaurant.tableOrder.isSms',
+                    'required' => false
                 ))
                 ->add('isEmail', 'checkbox', array(
-                    'label'     => 'restaurant.tableOrder.isEmail'
+                    'label'     => 'restaurant.tableOrder.isEmail',
+                    'required' => false
                 ))
                 ->add('wish', 'genemu_plain', array(
                     'attr' => array(

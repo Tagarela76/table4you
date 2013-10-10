@@ -1,4 +1,10 @@
 Table\RestaurantBundle\Entity\TableOrder:
     properties:
-        floor:
+        peopleCount:
             - NotBlank: ~
+        tableNumber:
+            - NotBlank: ~
+        reserveDate:
+            - Date: ~
+        reserveTime:
+            - Time: ~
