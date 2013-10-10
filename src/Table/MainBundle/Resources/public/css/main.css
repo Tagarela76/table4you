@@ -60,7 +60,7 @@ body{font-family: Trebuchet MS, sans-serif;}
 /* MODAL WINDOW REGISTRATION */
 .modal{
     width: 816px;
-    position: absolute;
+    /*position: absolute;*/
 }
 
 .modal-registration, .modal-login{
