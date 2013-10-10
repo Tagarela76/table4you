@@ -128,7 +128,7 @@ body{font-family: Trebuchet MS, sans-serif;}
 .modal-registration #fos_user_registration_form div+div+div+div.password-registration+div, .modal-registration #fos_user_registration_form div.captcha-img{
     margin-top: 0px;
 }
-.modal-registration #fos_user_registration_form div ul li, .error-text-login, .sonata-user-edit-profile .user-edit-profile div ul li{
+.modal-registration #fos_user_registration_form div ul li, .error-text-login, .sonata-user-edit-profile .user-edit-profile div ul li, .table-order-form .container-fluid ul li{
     list-style: none;
     font-size: 11px;
     color: #ff0000;
@@ -183,6 +183,9 @@ body{font-family: Trebuchet MS, sans-serif;}
 }
 .modal-login #fos-login-form{
     margin:0px;
+}
+#table-order-form-container .container-fluid{
+    padding: 15px 20px 0 !important;
 }
 #table-order-form-container label{
     font-size: 18px;
@@ -300,7 +303,7 @@ body{font-family: Trebuchet MS, sans-serif;}
     width: 404px;
     height: 324px;
 }
-.modal-registration #fos_user_registration_form div input.error-form-registration, #fos-login-form div input.error-form-login, .sonata-user-edit-profile .user-edit-profile div input.error-form-profile{
+.modal-registration #fos_user_registration_form div input.error-form-registration, #fos-login-form div input.error-form-login, .sonata-user-edit-profile .user-edit-profile div input.error-form-profile, .table-order-form .captcha-img .error-form-reserve{
     border: 1px solid #ff0000;
     box-shadow: none;
 }
@@ -498,7 +501,7 @@ div.boxChecked input, div.boxUnchecked input {
     font-size: 14px;
     color: #353535;
     padding: 8px 0 7px 12px;
-    margin-bottom: 13px;
+    margin-bottom: 8px;
     background: -moz-linear-gradient(top, #e2e0e0 0%, #f1f0f0 99%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e2e0e0), color-stop(99%,#f1f0f0));
     background: -webkit-linear-gradient(top, #e2e0e0 0%,#f1f0f0 99%);
@@ -558,3 +561,38 @@ input#tableOrderForm_peopleCount:focus{
      color:#353535!important;
    }
 }
+
+
+
+#table-order-form .reserveDate .ui-widget-header .ui-datepicker-prev .ui-icon {
+    background-position: -91px -16px;
+    background-image: url(images/ui-icons_ef8c08_256x240.png);
+}
+#table-order-form .reserveDate .ui-widget-header .ui-datepicker-next .ui-icon {
+    background-position: -37px -16px;
+    background-image: url(images/ui-icons_ef8c08_256x240.png);
+}
+
+#table-order-form .reserveDate .ui-datepicker-prev-hover, #table-order-form .reserveDate .ui-datepicker-prev-hover span{
+    background: none; 
+    border: 0;
+    left:26.6%;
+    top:7.5px;
+}
+#table-order-form .reserveDate .ui-datepicker-next-hover, #table-order-form .reserveDate .ui-datepicker-next-hover span{
+    background: none; 
+    border: 0;
+    left:66.4%;
+    top:7.5px; 
+}
+.table-order-form{margin: 0;}
+.table-order-form .floor-tabs {margin-top: 25px;}
+#table-order-form-container  .table-order-form .label-font-size-modal label{font-size: 15px;}
+#table-order-form-container  .table-order-form .label-font-size_modal label{font-size: 16px;}
+#tableOrderForm_reserveTime{margin-top: -10px;}
+#table-order-form .cusel{top: 11px;}
+.cusel, .cuselFrameRight, .jScrollPaneDrag, .jScrollArrowUp, .jScrollArrowDown {
+background: url(images/selects-2.png) no-repeat;}
+.cusel:hover, .cusel:hover .cuselFrameRight, .cusel:focus, .cusel:focus .cuselFrameRight, .cuselFocus, .cuselFocus .cuselFrameRight {
+background-image: url(images/selects-2.png);}
+.table-order-form .floor-tabs li a {font-size: 18px;}

@@ -67,7 +67,6 @@ class DefaultController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($tableOrder);
                 $em->flush();
-         
                 $request->getSession()->getFlashBag()->add('success', $this->get('translator')->trans('main.order.form.message.success'));
             } 
         }
