@@ -77,12 +77,13 @@ class Restaurant
     private $kitchens;
 
     /**
-     * @var Table\RestaurantBundle\Entity\RestaurantCategory $category
-     * 
-     * @ORM\ManyToOne(targetEntity="RestaurantCategory", inversedBy="restaurants")
-     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
-     * */
-    private $category;
+     * @ORM\ManyToMany(targetEntity="Table\RestaurantBundle\Entity\RestaurantCategory")
+     * @ORM\JoinTable(name="restaurant2category",
+     *   joinColumns={@ORM\JoinColumn(name="restaurant_id", referencedColumnName="id")},
+     *   inverseJoinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id")}
+     * )
+     */
+    private $categories;
 
     /**
      * @var Application\Sonata\MediaBundle\Entity\Media $photo
@@ -142,6 +143,7 @@ class Restaurant
     {
         $this->additionalServices = new ArrayCollection();
         $this->kitchens = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
     /**
@@ -305,27 +307,49 @@ class Restaurant
         return $this->workHoursTo;
     }
 
+
     /**
-     * Set category
+     * Add categories
+     * 
+     * @param Table\RestaurantBundle\Entity\RestaurantCategory $categories
+     */
+    public function addCategories($categories)
+    {
+        $this->categories[] = $categories;
+    }
+
+
+    /**
+     * Remove categories
+     * 
+     * @param Table\RestaurantBundle\Entity\RestaurantCategory $categories
+     */
+    public function removecategories($categories)
+    {
+        $this->categories->removeElement($categories);
+    }
+    
+    /**
+     * Set categories
      *
-     * @param Table\RestaurantBundle\Entity\RestaurantCategory $category
+     * @param Table\RestaurantBundle\Entity\RestaurantCategory[] $categories
      * @return Restaurant
      */
-    public function setCategory($category)
+    public function setCategories($categories)
     {
-        $this->category = $category;
+        $this->categories = $categories;
 
         return $this;
     }
 
     /**
-     * Get category
+     * Get categories
      *
-     * @return Table\RestaurantBundle\Entity\RestaurantCategory
+     * @return Table\RestaurantBundle\Entity\RestaurantCategory[]
      */
-    public function getCategory()
+    public function getCategories()
     {
-        return $this->category;
+        return $this->categories;
     }
 
     /**

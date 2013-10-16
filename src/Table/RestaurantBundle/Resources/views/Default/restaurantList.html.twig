@@ -9,7 +9,7 @@
                     <a href="#" >{{ restaurant.name }}</a>
                 </p>
                 <p>
-                    {{ restaurant.category.name }}
+                    {{ restaurant.categories|join(',') }}
                 </p>
                 <p>
                     {% trans %}main.labels.kitchen{% endtrans %}

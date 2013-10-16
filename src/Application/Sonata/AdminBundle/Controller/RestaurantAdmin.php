@@ -36,7 +36,10 @@ class RestaurantAdmin extends Admin
                     'required' => false,
                     'label' => 'restaurant.kitchen.kitchen',
                 ))
-                ->add('category', 'sonata_type_model', array(
+                ->add('categories', 'sonata_type_model', array(
+                    'by_reference' => true,
+                    'multiple' => true,
+                    'expanded' => true,
                     'label' => 'restaurant.category.category',
                     'required' => true))
                 // html5 validation does not show error here
@@ -73,7 +76,7 @@ class RestaurantAdmin extends Admin
                 ->add('kitchens', null, array(
                     'label' => 'restaurant.kitchen.kitchen'
                 ))
-                ->add('category', null, array(
+                ->add('categories', null, array(
                     'label' => 'restaurant.category.category'
                 ))
         ;
@@ -96,7 +99,7 @@ class RestaurantAdmin extends Admin
                 ->add('kitchens', 'sonata_type_model', array(
                     'label' => 'restaurant.kitchen.kitchen'
                 ))
-                ->add('category', 'sonata_type_model', array(
+                ->add('categories', 'sonata_type_model', array(
                     'label' => 'restaurant.category.category'
                 ))
         ;

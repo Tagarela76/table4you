@@ -31,18 +31,6 @@ class RestaurantCategory
     private $name;
 
     /**
-     * @var Table\RestaurantBundle\Entity\Restaurant[] $restaurants
-     * 
-     * @ORM\OneToMany(targetEntity="Table\RestaurantBundle\Entity\Restaurant", mappedBy="restaurantCategory", cascade={"persist", "refresh"})
-     */
-    protected $restaurant;
-
-    public function __construct()
-    {
-        $this->restaurants = new ArrayCollection();
-    }
-
-    /**
      * Get id
      *
      * @return integer 
