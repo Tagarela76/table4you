@@ -2,6 +2,7 @@ main:
   labels:
     kitchen: 'Кухня:'
     address: 'Aдрес:'
+    scedule: 'График работы:'
   register:
     buttonLabel: Регистрация
     form:

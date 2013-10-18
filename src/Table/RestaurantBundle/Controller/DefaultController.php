@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use FOS\UserBundle\Model\UserInterface;
 
 use Table\RestaurantBundle\Entity\RatingStat;
+use Table\RestaurantBundle\Entity\RestaurantSchedule;
 
 class DefaultController extends Controller
 {
@@ -97,8 +98,10 @@ class DefaultController extends Controller
         } 
         return array(
             'restaurant' => $this->getRestaurantManager()->findOneById($id),
-            'anonim' => $anonim
+            'anonim' => $anonim,
+            'weekDays' => RestaurantSchedule::$WEEK_DAYS
         );
+        
     }
 
     /**

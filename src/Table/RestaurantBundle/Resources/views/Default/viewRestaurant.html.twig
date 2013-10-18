@@ -53,6 +53,14 @@
                 <p class="restaurant-content-font">
                     {{ restaurant.city }}, {{ restaurant.street }}, {{ restaurant.house }}
                 </p>
+                 <p>
+                     {% trans %}main.labels.scedule{% endtrans %}
+                </p>
+                <p class="restaurant-content-font">
+                    {% for schedule in restaurant.restaurantSchedule %}
+                        <p>{{schedule.dayFromStr}} - {{schedule.dayToStr}} {{schedule.timeFrom|date('H:i')}} - {{schedule.timeTo|date('H:i')}}</p>
+                    {% endfor %}
+                </p>
             </div>
             <div class="restaurant-content-reserve">
                 <input name="{{ restaurant.id }}" type="radio" class="rating required" value="1" {% if anonim %}disabled="disabled"{%endif%} {% if restaurant.rating == 1 %}checked="checked"{%endif%}/>

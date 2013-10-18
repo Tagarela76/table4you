@@ -48,6 +48,16 @@ class RestaurantSchedule
      * @ORM\Column(name="timeTo", type="time")
      */
     private $timeTo;
+    
+    /**
+     * @var string
+     */
+    private $dayFromStr;
+
+    /**
+     * @var string
+     */
+    private $dayToStr;
 
     /**
      * @ORM\ManyToOne(targetEntity="Restaurant", inversedBy="restaurantSchedule")
@@ -190,6 +200,44 @@ class RestaurantSchedule
         return $this->restaurant;
     }
     
+    public function getDayFromStr()
+    {
+        if (is_null($this->getDayFrom())) {
+            return false;
+        }
+        if (is_null($this->dayFromStr)) {
+            $dayFromStr = self::$WEEK_DAYS[$this->getDayFrom()];
+            $this->setDayFromStr($dayFromStr);
+            return $dayFromStr;
+        } else {
+            return $this->dayFromStr;
+        }
+    }
+
+    public function getDayToStr()
+    {
+        if (is_null($this->getDayTo())) {
+            return false;
+        }
+        if (is_null($this->dayToStr)) {
+            $dayToStr = self::$WEEK_DAYS[$this->getDayTo()];
+            $this->setDayToStr($dayToStr);
+            return $dayToStr;
+        } else {
+            return $this->dayToStr;
+        }
+    }
+
+    public function setDayFromStr($dayFromStr)
+    {
+        $this->dayFromStr = $dayFromStr;
+    }
+
+    public function setDayToStr($dayToStr)
+    {
+        $this->dayToStr = $dayToStr;
+    }
+   
     /**
      * @return string
      */

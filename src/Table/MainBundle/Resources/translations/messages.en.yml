@@ -2,6 +2,7 @@ main:
   labels:
     kitchen: 'Kitchen:'
     address: 'Address:'
+    scedule: 'Scedule:'
   register:
     buttonLabel: Registration
     form:
