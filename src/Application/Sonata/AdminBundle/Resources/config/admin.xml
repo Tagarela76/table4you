@@ -51,5 +51,14 @@
               <argument>ApplicationSonataAdminBundle:CRUD:list.html.twig</argument>
           </call>
       </service>
+      <service id="sonata.admin.restaurantSchedule" class="Application\Sonata\AdminBundle\Controller\RestaurantScheduleAdmin">
+          <tag name="sonata.admin" manager_type="orm" group="Restaurant" label="restaurant.schedule.schedule"/>
+          <argument />
+          <argument>Table\RestaurantBundle\Entity\RestaurantSchedule</argument>
+          <argument>SonataAdminBundle:CRUD</argument>
+          <call method="setTranslationDomain">
+              <argument>ApplicationSonataAdminBundle</argument>
+          </call>
+      </service>
    </services>
 </container>

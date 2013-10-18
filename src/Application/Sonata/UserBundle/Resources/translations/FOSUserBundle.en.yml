@@ -10,4 +10,7 @@ form:
 # Security
 "Bad credentials userName": Incorrect Login Name.
 "Bad credentials password": Incorrect Password.
-   
+  
+security:
+  login:
+    forgot_password: Forgot password

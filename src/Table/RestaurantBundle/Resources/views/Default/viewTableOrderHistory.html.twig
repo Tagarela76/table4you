@@ -1,0 +1,116 @@
+{% extends 'TableMainBundle::layout.html.twig' %}
+{% block javascripts %}
+    {{ parent() }}
+{# Rating #}
+<script>
+    // Rating
+    $(function(){ 
+        // get all table orders id
+        var tableOrdersId = $("[name='tableOrdersId']"); 
+        // init rating in cycle
+        for (var i=0; i < tableOrdersId.length; i++) {
+            $('.rating_'+tableOrdersId[i].value).rating({
+                callback: function(value, link){ 
+                    var restaurantId = $(this).attr('name');
+                    $.ajax({
+                        url: Routing.generate('table_update_restaurant_rating'),
+                        data: {restaurantId: restaurantId, value: value},
+                        type: "POST",
+                        dataType: "html"
+                    });
+                }
+            });
+        }  
+        
+        // Init calendar
+         $( "#datepickerCalendar" ).datepicker({
+            showOn: "button",
+            buttonImage: "{{ asset('bundles/tablemain/images/calendar.jpeg') }}",
+            buttonImageOnly: true
+         });
+    });
+        
+</script> 
+<script src="{{ asset('bundles/tablemain/rating/jquery.rating.js') }}"></script>
+<script src="{{ asset('bundles/tablemain/js/jquery-ui-1.10.3.custom.js') }}"></script>
+{# Rating #}
+{% endblock %}    
+{% block stylesheets %}
+    {{ parent() }}
+    {# Rating #}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/rating/jquery.rating.css') }}">
+    {# Rating #}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/jquery-ui-1.10.3.custom.css') }}">
+{% endblock %}    
+{% block content %}
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span2">
+                {% trans %}main.order.history.search{% endtrans %}
+            </div>
+            <div class="span6">
+                <input type="text" id="datepickerCalendar" />
+            </div>
+            <div class="span4">
+                <form class="form-search">
+                    <div class="input-append">
+                    <input type="text" class="search-query">
+                    <button type="submit" class="btn">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <table class="table">
+                <thead>
+                    <th>
+                        {% trans %}main.order.history.date{% endtrans %}
+                    </th>
+                    <th>
+                        {% trans %}main.order.history.time{% endtrans %}
+                    </th>
+                    <th>
+                        {% trans %}main.order.history.name{% endtrans %}
+                    </th>
+                    <th>
+                        {% trans %}main.order.history.rating{% endtrans %}
+                    </th>
+                </thead>
+                <tbody>
+                    {% for tableOrder in tableOrderHistory %}
+                        <tr>
+                            <td>
+                                {{tableOrder.reserveDate|date('d-m-Y')}}
+                            </td>
+                            <td>
+                                {{tableOrder.reserveTime|date('H:i:s')}}
+                            </td>
+                            <td>
+                                <p>{{tableOrder.restaurant.name}}</p>
+                                <p>{{ tableOrder.restaurant.categories|join(',') }}</p>
+                                <p>{{ tableOrder.restaurant.city }}, {{ tableOrder.restaurant.street }}, {{ tableOrder.restaurant.house }}</p>
+                            </td>
+                            <td>
+                                <input type="hidden" name="tableOrdersId" value="{{ tableOrder.id }}" />
+                                <input name="{{ tableOrder.restaurant.id }}" type="radio" class="rating_{{tableOrder.id}} required" value="1" {% if tableOrder.restaurant.rating == 1 %}checked="checked"{%endif%}/>
+                                <input name="{{ tableOrder.restaurant.id }}" type="radio" class="rating_{{tableOrder.id}}" value="2" {% if tableOrder.restaurant.rating == 2 %}checked="checked"{%endif%}/>
+                                <input name="{{ tableOrder.restaurant.id }}" type="radio" class="rating_{{tableOrder.id}}" value="3" {% if tableOrder.restaurant.rating == 3 %}checked="checked"{%endif%}/>
+                                <input name="{{ tableOrder.restaurant.id }}" type="radio" class="rating_{{tableOrder.id}}" value="4" {% if tableOrder.restaurant.rating == 4 %}checked="checked"{%endif%}/>
+                                <input name="{{ tableOrder.restaurant.id }}" type="radio" class="rating_{{tableOrder.id}}" value="5" {% if tableOrder.restaurant.rating == 5 %}checked="checked"{%endif%}/>
+                                <a class="btn btn-primary" data-toggle="modal" data-target="#reserve_{{ tableOrder.restaurant.id }}" href="{{ path('table_order_reserve', {'id': tableOrder.restaurant.id}) }}">
+                                    {% trans %}main.order.button{% endtrans %}
+                                </a>
+                            </td>
+                        </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+        <div class="row-fluid">
+            {# display navigation #}
+            <div class="navigation">
+                    {{ knp_pagination_render(tableOrderHistory) }}
+            </div>   
+        </div>
+    </div> 
+{% endblock %}    

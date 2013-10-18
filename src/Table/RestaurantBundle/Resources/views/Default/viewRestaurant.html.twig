@@ -1,16 +1,42 @@
-<div class="restaurantList-container">
-    {% for restaurant in restaurantsList %}
+{% extends 'TableMainBundle::layout.html.twig' %}
+{% block javascripts %}
+    {{ parent() }}
+{# Rating #}
+<script>
+    // Rating
+    $(function(){ 
+        $('.rating').rating({
+            callback: function(value, link){ 
+                var restaurantId = $(this).attr('name');
+                $.ajax({
+                    url: Routing.generate('table_update_restaurant_rating'),
+                    data: {restaurantId: restaurantId, value: value},
+                    type: "POST",
+                    dataType: "html"
+                });
+            }
+        });
+    });
+        
+</script> 
+<script src="{{ asset('bundles/tablemain/rating/jquery.rating.js') }}"></script>
+{# Rating #}
+{% endblock %}    
+{% block stylesheets %}
+    {{ parent() }}
+    {# Rating #}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/rating/jquery.rating.css') }}">
+    {# Rating #}
+{% endblock %}    
+{% block content %}
+    <div class="container-fluid">
         <div class="restaurant-container">
             <div class="restaurant-img-container">
-                <div class="restaurant-img">
-                    <a href="{{ path('table_view_restaurant', {'id': restaurant.id}) }}" >
-                        {% thumbnail restaurant.photo, 'reference' %}
-                    </a>    
-                </div>
+                <div class="restaurant-img">{% thumbnail restaurant.photo, 'reference' %}</div>
             </div>
             <div class="restaurant-content">
                 <p class="restaurant-content-name">
-                    <a href="{{ path('table_view_restaurant', {'id': restaurant.id}) }}" >{{ restaurant.name }}</a>
+                    <a href="#" >{{ restaurant.name }}</a>
                 </p>
                 <p>
                     {{ restaurant.categories|join(',') }}
@@ -43,7 +69,7 @@
                         {% trans %}main.order.button{% endtrans %}
                     </a>
                 {% endif %}
-                    
+
             </div>
         </div>
         {# ==Modal Window for reserve==#}
@@ -57,5 +83,5 @@
 
             </div>
         </div>
-    {% endfor %}
-</div>
+    </div>  
+{% endblock %}    

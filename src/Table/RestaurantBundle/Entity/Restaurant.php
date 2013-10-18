@@ -54,20 +54,6 @@ class Restaurant
     private $house;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="work_hours_from", type="time")
-     */
-    private $workHoursFrom;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="work_hours_to", type="time")
-     */
-    private $workHoursTo;
-
-    /**
      * @ORM\ManyToMany(targetEntity="Table\RestaurantBundle\Entity\RestaurantKitchen")
      * @ORM\JoinTable(name="restaurant2kitchen",
      *   joinColumns={@ORM\JoinColumn(name="restaurant_id", referencedColumnName="id")},
@@ -138,12 +124,39 @@ class Restaurant
      * @ORM\Column(name="floors", type="integer")
      */
     private $floors;
+    
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="rating", type="float", options={"default" = 0}, nullable=true)
+     */
+    private $rating;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", nullable=true)
+     */
+    private $email;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="phone", type="string", nullable=true)
+     */
+    private $phone;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="RestaurantSchedule", mappedBy="restaurant", orphanRemoval=true, cascade={"persist", "remove"})
+     */
+    protected $restaurantSchedule;
 
     public function __construct()
     {
         $this->additionalServices = new ArrayCollection();
         $this->kitchens = new ArrayCollection();
         $this->categories = new ArrayCollection();
+        $this->restaurantSchedule = new ArrayCollection();
     }
 
     /**
@@ -260,53 +273,6 @@ class Restaurant
     {
         return $this->house;
     }
-
-    /**
-     * Set workHoursFrom
-     *
-     * @param \DateTime $workHoursFrom
-     * @return Restaurant
-     */
-    public function setWorkHoursFrom($workHoursFrom)
-    {
-        $this->workHoursFrom = $workHoursFrom;
-
-        return $this;
-    }
-
-    /**
-     * Get workHoursFrom
-     *
-     * @return \DateTime 
-     */
-    public function getWorkHoursFrom()
-    {
-        return $this->workHoursFrom;
-    }
-
-    /**
-     * Set workHoursTo
-     *
-     * @param \DateTime $workHoursTo
-     * @return Restaurant
-     */
-    public function setWorkHoursTo($workHoursTo)
-    {
-        $this->workHoursTo = $workHoursTo;
-
-        return $this;
-    }
-
-    /**
-     * Get workHoursTo
-     *
-     * @return \DateTime 
-     */
-    public function getWorkHoursTo()
-    {
-        return $this->workHoursTo;
-    }
-
 
     /**
      * Add categories
@@ -598,6 +564,118 @@ class Restaurant
     {
         return $this->floors;
     }
+    
+    /**
+     * Set rating
+     *
+     * @param integer $rating
+     * @return Restaurant
+     */
+    public function setRating($rating)
+    {
+        $this->rating = $rating;
+    
+        return $this;
+    }
+
+    /**
+     * Get rating
+     *
+     * @return float 
+     */
+    public function getRating()
+    {
+        return $this->rating;
+    }
+    
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+    
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return Restaurant
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+    
+    /**
+     * Get phone
+     *
+     * @return string 
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+    
+    /**
+     * Set phone
+     *
+     * @param string $phone
+     * @return Restaurant
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+    
+    /**
+     * Get restaurantSchedule
+     *
+     * @return Re\PropertyBundle\Entity\RestaurantSchedule[] 
+     */
+    public function getRestaurantSchedule()
+    {
+        return $this->restaurantSchedule;
+    }
+
+    /**
+     * Set restaurantSchedule
+     *
+     * @param Re\PropertyBundle\Entity\RestaurantSchedule $restaurantSchedule
+     * @return Restaurant
+     */
+    public function setRestaurantSchedule($restaurantSchedule)
+    {
+        $this->restaurantSchedule = $restaurantSchedule;
+    }
+    
+
+    /**
+     * Add restaurantSchedule
+     * 
+     * @param Re\PropertyBundle\Entity\RestaurantSchedule $restaurantSchedule
+     */
+    public function addRestaurantSchedule($restaurantSchedule)
+    {
+        $this->restaurantSchedule[] = $restaurantSchedule;
+    }
+
+    /**
+     * Remove additionalIrestaurantSchedulemages
+     * 
+     * @param Re\PropertyBundle\Entity\RestaurantSchedule $restaurantSchedule
+     */
+    public function removeRestaurantSchedule($restaurantSchedule)
+    {
+        $this->restaurantSchedule->removeElement($restaurantSchedule);
+    }
+
     
     /**
      * @return string

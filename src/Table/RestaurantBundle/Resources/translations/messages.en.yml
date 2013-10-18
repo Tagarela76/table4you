@@ -16,3 +16,9 @@ main:
           wish: "Your wishes"
         message:
           success: Your request is processing. Thanks!
+      history:
+        search: "Search:"
+        date: "Date:"
+        time: "Time:"
+        name: "Name:"
+        rating: "Rating:"

@@ -3,3 +3,19 @@ table_order_reserve:
     defaults: { _controller: TableRestaurantBundle:Default:reserve }
     requirements:
         id: \d+         
+table_view_restaurant:
+    pattern:  /restaurant/{id}
+    defaults: { _controller: TableRestaurantBundle:Default:viewRestaurant }
+    requirements:
+        id: \d+    
+table_update_restaurant_rating:
+    pattern:  /updateRestaurantRating
+    defaults: { _controller: TableRestaurantBundle:Default:updateRestaurantRating }
+    options:
+       expose: true  
+table_order_history:
+    pattern:  /viewTableOrderHistory/{page}
+    defaults: { _controller: TableRestaurantBundle:Default:viewTableOrderHistory, page: 1 }
+    options:
+       expose: true               
+       

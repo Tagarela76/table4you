@@ -8,6 +8,11 @@ restaurant:
   category:
     category: Категория
     categories: Категории
+  schedule:
+    schedule: Расписание
+    day:
+      from: "Дни работы/От:"
+      to: "Дни работы/До:"
   tableOrder:
     label: Заказ столика 
     floor: Этаж
@@ -25,15 +30,16 @@ restaurant:
     isSms: Уведомление через sms
     isEmail: Уведомление через e-mail
   floors: Количество этажей  
+  workHours:
+      from: Часы работы(от)
+      to: Часы работы(до)
+  email: E-mail
+  phone: Телефон
 Name: Название
 address:
   city: Город
   street: Улица
   house: Номер дома  
-workHours:
-  from: Часы работы(от)
-  to: Часы работы(до)
-
 Category Id: Категория
 Photo: Фото * # HTML5 validation does not show error on this field. See #5512 in Redmine
 Additional Services: Дополнительные услуги
@@ -43,3 +49,4 @@ Restaurant Kitchen List: Список кухонь
 Restaurant Additional Service List: Список дополнительных услуг
 Map Photo:  Карта ресторана
 Table Order List: Заказ столиков
+Restaurant Schedule List: Список расписаний ресторана

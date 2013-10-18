@@ -63,4 +63,12 @@ class Controller extends BaseController
     {
         return $this->get('table_order_manager');
     }
+    
+    /**
+     * @return Table\RestaurantBundle\Model\RatingStatManager
+     */
+    public function getRatingStatManager()
+    {
+        return $this->get('rating_stat_manager');
+    }
 }

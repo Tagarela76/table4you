@@ -10,6 +10,19 @@ use Sonata\AdminBundle\Form\FormMapper;
 class RestaurantAdmin extends Admin
 {
 
+    /**
+     * @param \Table\RestaurantBundle\Entity\Restaurant $restaurant
+     *
+     * @return void
+     */
+    public function preUpdate($restaurant)
+    {
+        $object = $this->getRoot()->getSubject();
+        foreach ($object->getRestaurantSchedule() as $restaurantSchedule) {
+            $restaurantSchedule->setRestaurant($object);
+        }
+    }
+    
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
@@ -23,11 +36,13 @@ class RestaurantAdmin extends Admin
                 ->add('house', null, array(
                     'label' => 'address.house'
                 ))
-                ->add('workHoursFrom', 'time', array(
-                    'label' => 'workHours.from'
-                ))
-                ->add('workHoursTo', 'time', array(
-                    'label' => 'workHours.to'
+                ->add('restaurantSchedule', 'sonata_type_collection', array(
+                    'label' => 'restaurant.schedule.schedule',
+                    'required' => false,
+                        ), array(
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'allow_delete' => true
                 ))
                 ->add('kitchens', 'sonata_type_model', array(
                     'by_reference' => true,
@@ -56,6 +71,14 @@ class RestaurantAdmin extends Admin
                 ))
                 ->add('floors', 'text', array(
                     'label' => 'restaurant.floors'
+                ))
+                ->add('email', 'email', array(
+                    'label' => 'restaurant.email',
+                    'required' => false
+                ))
+                ->add('phone', null, array(
+                    'label' => 'restaurant.phone',
+                    'required' => false
                 ))
         ;
     }

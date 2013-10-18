@@ -4,9 +4,8 @@ namespace Table\RestaurantBundle\Model;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class TableOrderManager
+class RatingStatManager
 {
     /**
      * @var \Symfony\Component\DependencyInjection\ContainerInterface
@@ -29,9 +28,9 @@ class TableOrderManager
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getTableOrderRepo()
+    private function getRatingStatRepo()
     {
-        return $this->em->getRepository('TableRestaurantBundle:TableOrder');
+        return $this->em->getRepository('TableRestaurantBundle:RatingStat');
     }
     
     /**
@@ -49,52 +48,57 @@ class TableOrderManager
     /**
      * @param integer $id
      *
-     * @return Table\RestaurantBundle\Entity\TableOrder
+     * @return Table\RestaurantBundle\Entity\RatingStat
      */
     public function findOneById($id)
     {
-        return $this->getTableOrderRepo()->findOneById($id);
+        return $this->getRatingStatRepo()->findOneById($id);
     }
 
     /**
      * @param integer $id
      *
-     * @return Table\RestaurantBundle\Entity\TableOrder
+     * @return Table\RestaurantBundle\Entity\RatingStat
      */
     public function find($id)
     {
         if ($id) {
-            return $this->getTableOrderRepo()->find($id);
+            return $this->getRatingStatRepo()->find($id);
         } else {
-            return $this->getTableOrderRepo()->findAll();
+            return $this->getRatingStatRepo()->findAll();
         }
     }
 
     /**
-     * @return Table\RestaurantBundle\Entity\TableOrder[]
+     * @return Table\RestaurantBundle\Entity\RatingStat[]
      */
     public function findAll()
     {
-        return $this->getTableOrderRepo()->findAll();
-    }
-
-    /**
-     * @param integer $user
-     * 
-     * @return Table\RestaurantBundle\Entity\TableOrder[]
-     */
-    public function findByUser($user)
-    {
-        return $this->getTableOrderRepo()->findByUser($user);
+        return $this->getRatingStatRepo()->findAll();
     }
     
     /**
-     * @param integer $user
+     * @param integer $userId
      * 
-     * @return Table\RestaurantBundle\Entity\TableOrder[]
+     * @param integer $restaurantId
+     *
+     * @return Table\RestaurantBundle\Entity\RatingStat
      */
-    public function getOrderHistory($user)
+    public function getUser2RestaurantRating($userId, $restaurantId)
     {
-        return $this->getTableOrderRepo()->getOrderHistory($user);
+        return $this->getRatingStatRepo()->getUser2RestaurantRating($userId, $restaurantId);
     }
+    
+    /**
+     * @param integer $userId
+     * 
+     * @param string $datetime
+     *
+     * @return Table\RestaurantBundle\Entity\RatingStat
+     */
+    public function getUserRestaurantRating($userId, $datetime = null)
+    {
+        return $this->getRatingStatRepo()->getUserRestaurantRating($userId, $datetime);
+    }
+
 }

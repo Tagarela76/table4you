@@ -12,4 +12,18 @@ use Doctrine\ORM\EntityRepository;
  */
 class TableOrderRepository extends EntityRepository
 {
+    /**
+     * 
+     * Get Order History
+     * 
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function getOrderHistory($user) 
+    {
+        $query = $this->createQueryBuilder('tableOrder');
+        $query->where('tableOrder.user = :user')
+              ->setParameter('user', $user);
+ 
+        return $query;
+    }
 }

@@ -25,6 +25,7 @@
             <input type="checkbox" id="remember_me" name="_remember_me" value="on" class="boxCheckbox" onclick="doCheckbox(this);" />
             <label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
         </div>
+        <a href="{{ path('fos_user_resetting_check_email') }}" >{{ 'security.login.forgot_password'|trans({}, 'FOSUserBundle') }}</a>
         <div class="button-login">
         <input class="button-login" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
         <img id="loginPreloader" style="display: none;" src="{{ asset('bundles/tablemain/images/ajax-loader.gif') }}" />
