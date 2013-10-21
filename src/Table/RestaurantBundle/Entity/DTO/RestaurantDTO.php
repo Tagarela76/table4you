@@ -14,7 +14,7 @@ class RestaurantDTO
     private $id;
     private $name;
     private $photo;
-    private $category;
+    private $categories;
     private $kitchens;
     private $address;
     private $longitude;
@@ -42,8 +42,13 @@ class RestaurantDTO
         
         $this->photo = $photo;
         
-        $this->category = $restaurant->getCategory()->getId();
-        
+        // get categories id
+        $this->categories = array();
+        $categories = $restaurant->getCategories();
+        foreach ($categories as $category) {
+            $this->categories[] = $category->getId();
+        }
+
         $kitchens = array();
         foreach($restaurant->getKitchens() as $kitchen) {
             $kitchens[] = $kitchen->getId();
@@ -84,9 +89,9 @@ class RestaurantDTO
         return $this->photo;
     }
     
-    public function getCategory()
+    public function getCategories()
     {
-        return $this->category;
+        return $this->categories;
     }
 
     public function getKitchens()
