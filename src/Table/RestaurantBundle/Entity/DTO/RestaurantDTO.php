@@ -68,10 +68,18 @@ class RestaurantDTO
         }
         $this->additionalServices = $additionalServices;
         
-        $schedule = array();
-        $schedule['openTime'] = $restaurant->getWorkHoursFrom()->format('H:s');
-        $schedule['endTime'] = $restaurant->getWorkHoursTo()->format("H:s");
-        $this->schedule = $schedule;
+        // get Schedule
+        $scheduleList = array();
+        $restaurantSchedule = $restaurant->getRestaurantSchedule();
+        foreach ($restaurantSchedule as $scheduleObj) {
+            $schedule['dayFrom'] = $scheduleObj->getDayFromStr();
+            $schedule['dayTo'] = $scheduleObj->getDayToStr();
+            $schedule['timeFrom'] = $scheduleObj->getTimeFrom();
+            $schedule['timeTo'] = $scheduleObj->getTimeTo();
+            $scheduleList[] = $schedule;
+        }
+
+        $this->schedule = $scheduleList;
     }
     
     public function getId()
