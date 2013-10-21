@@ -74,8 +74,8 @@ class RestaurantDTO
         foreach ($restaurantSchedule as $scheduleObj) {
             $schedule['dayFrom'] = $scheduleObj->getDayFromStr();
             $schedule['dayTo'] = $scheduleObj->getDayToStr();
-            $schedule['timeFrom'] = $scheduleObj->getTimeFrom();
-            $schedule['timeTo'] = $scheduleObj->getTimeTo();
+            $schedule['timeFrom'] = $scheduleObj->getTimeFrom()->format('H:s');
+            $schedule['timeTo'] = $scheduleObj->getTimeTo()->format('H:s');
             $scheduleList[] = $schedule;
         }
 
