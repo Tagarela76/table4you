@@ -3,6 +3,7 @@ main:
     kitchen: 'Kitchen:'
     address: 'Address:'
     scedule: 'Scedule:'
+    additionalServices: 'Additional Services:'
   register:
     buttonLabel: Registration
     form:

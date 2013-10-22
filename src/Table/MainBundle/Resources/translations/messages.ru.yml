@@ -3,6 +3,7 @@ main:
     kitchen: 'Кухня:'
     address: 'Aдрес:'
     scedule: 'График работы:'
+    additionalServices: 'Дополнительные сервисы:'
   register:
     buttonLabel: Регистрация
     form:

@@ -22,3 +22,6 @@ main:
         time: "Time:"
         name: "Name:"
         rating: "Rating:"
+      notification:
+        dear: Dear
+        userCannotOrderTable: "our service allows to book no more than one table."

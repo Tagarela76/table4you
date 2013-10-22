@@ -31,11 +31,32 @@ class DefaultController extends Controller
         if (!is_object($user) || !$user instanceof UserInterface) {         
             $anonim = true;
         } 
+        // check if user can change rating
+        $isRatingDisabled = false;
+        if (!$anonim) {
+            $userRating = $this->getRatingStatManager()->getUserRestaurantRating($user->getId());
+            // only 3 state
+            if (count($userRating) > 2) {
+                $isRatingDisabled = true;
+            }
+            // Also we should get restaurants array , who has already have rating today
+            $restaurantsWhoHadHasAlreadyRating = array();
+            foreach ($userRating as $rating) {
+                $restaurantsWhoHadHasAlreadyRating[] = $rating->getRestaurant()->getId();
+            }
+            
+        }    
+        if ($anonim) {
+            $isRatingDisabled = true;
+        }
+        
         return array(
             'restaurantsList' => $this->getPaginator()->paginate(
                     $this->getRestaurantManager()->getRestaurants(), $page, Restaurant::PER_PAGE_COUNT
             ),
-            'anonim' => $anonim
+            'anonim' => $anonim,
+            'restaurantsWhoHadHasAlreadyRating' => $restaurantsWhoHadHasAlreadyRating,
+            'isRatingDisabled' => $isRatingDisabled
         );
     }
     

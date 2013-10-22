@@ -92,13 +92,12 @@ class RatingStatManager
     /**
      * @param integer $userId
      * 
-     * @param string $datetime
      *
      * @return Table\RestaurantBundle\Entity\RatingStat
      */
-    public function getUserRestaurantRating($userId, $datetime = null)
+    public function getUserRestaurantRating($userId)
     {
-        return $this->getRatingStatRepo()->getUserRestaurantRating($userId, $datetime);
+        return $this->getRatingStatRepo()->getUserRestaurantRating($userId);
     }
 
 }

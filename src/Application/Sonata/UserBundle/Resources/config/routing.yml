@@ -9,3 +9,7 @@ fos_user_security_check:
 fos_user_security_logout:
     pattern:  /logout
     defaults: { _controller: FOSUserBundle:Security:logout }  
+    
+fos_user_profile_show:
+    pattern:  /profile
+    defaults: { _controller: FOSUserBundle:Profile:show }  

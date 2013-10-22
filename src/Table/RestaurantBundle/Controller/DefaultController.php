@@ -39,6 +39,23 @@ class DefaultController extends Controller
                             $this->generateUrl("table_main_homepage")
             );
         }
+        // get User Order History
+        $orderHistory = $this->getTableOrdermanager()->getOrderHistory($user->getId());
+        // Check if user can do table order
+        $isUserHaveAnotherOrder = false;
+        foreach ($orderHistory->getQuery()->getResult() as $userTableOrder) {
+            if ($userTableOrder->getStatus() == 0 || is_null($userTableOrder->getStatus())) {
+                $isUserHaveAnotherOrder = true;
+            }
+        }
+        if ($isUserHaveAnotherOrder) {
+            // render Warning Notification, user cannot order other tables!!!
+            return $this->render('TableRestaurantBundle:Default:user.cannot.order.table.html.twig', array(
+                'user' => $user
+            ));
+            die();
+        }
+
         // Generate public URL for restaurant map
         if (!is_null($restaurant->getMapPhoto())) {
             $provider = $this->getMediaService()
@@ -96,10 +113,31 @@ class DefaultController extends Controller
         if (!is_object($user) || !$user instanceof UserInterface) {         
             $anonim = true;
         } 
+        // check if user can change rating
+        $isRatingDisabled = false;
+        if (!$anonim) {
+            $userRating = $this->getRatingStatManager()->getUserRestaurantRating($user->getId());
+            // only 3 state
+            if (count($userRating) > 2) {
+                $isRatingDisabled = true;
+            }
+            // Also we should get restaurants array , who has already have rating today
+            foreach ($userRating as $rating) {
+                if ($id == $rating->getRestaurant()->getId()) {
+                    $isRatingDisabled = true;
+                }
+            }
+            
+        }    
+        if ($anonim) {
+            $isRatingDisabled = true;
+        }
+        
         return array(
             'restaurant' => $this->getRestaurantManager()->findOneById($id),
             'anonim' => $anonim,
-            'weekDays' => RestaurantSchedule::$WEEK_DAYS
+            'weekDays' => RestaurantSchedule::$WEEK_DAYS,
+            'isRatingDisabled' => $isRatingDisabled
         );
         
     }

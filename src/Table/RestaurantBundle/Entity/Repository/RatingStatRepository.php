@@ -27,17 +27,19 @@ class RatingStatRepository extends EntityRepository
     }
     
     /**
-     *  Get User 2 Restaurant stat
+     *  Get User To Restaurant stat
      * 
      * @return Table\RestaurantBundle\Entity\Repository[]
      */
-    public function getUserRestaurantRating($userId, $dateTime)
+    public function getUserRestaurantRating($user)
     {
-        $query = $this->createQueryBuilder('restaurant')
-            ->select('DISTINCT(restaurant.city)') 
-            ->orderBy('restaurant.name', 'ASC')
-            ->getQuery();
-        
+        $query = $this->createQueryBuilder('rating')
+                ->where('rating.user = :user')
+                ->setParameter('user', $user)
+                ->andWhere('rating.lastUpdateTime >= :nowTime')
+                ->setParameter('nowTime', ' CURDATE( )')
+                ->getQuery();  
+
         return $query->getResult();
     }
 }

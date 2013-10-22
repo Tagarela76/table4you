@@ -48,6 +48,12 @@
                     {{ restaurant.kitchens|join(',') }}
                 </p>
                 <p>
+                    {% trans %}main.labels.additionalServices{% endtrans %}
+                </p>
+                <p class="restaurant-content-font">
+                    {{ restaurant.additionalServices|join(',') }}
+                </p>
+                <p>
                      {% trans %}main.labels.address{% endtrans %}
                 </p>
                 <p class="restaurant-content-font">
@@ -63,11 +69,11 @@
                 </p>
             </div>
             <div class="restaurant-content-reserve">
-                <input name="{{ restaurant.id }}" type="radio" class="rating required" value="1" {% if anonim %}disabled="disabled"{%endif%} {% if restaurant.rating == 1 %}checked="checked"{%endif%}/>
-                <input name="{{ restaurant.id }}" type="radio" class="rating" value="2" {% if anonim %}disabled="disabled"{%endif%}  {% if restaurant.rating == 2 %}checked="checked"{%endif%}/>
-                <input name="{{ restaurant.id }}" type="radio" class="rating" value="3" {% if anonim %}disabled="disabled"{%endif%}  {% if restaurant.rating == 3 %}checked="checked"{%endif%}/>
-                <input name="{{ restaurant.id }}" type="radio" class="rating" value="4" {% if anonim %}disabled="disabled"{%endif%}  {% if restaurant.rating == 4 %}checked="checked"{%endif%}/>
-                <input name="{{ restaurant.id }}" type="radio" class="rating" value="5" {% if anonim %}disabled="disabled"{%endif%}  {% if restaurant.rating == 5 %}checked="checked"{%endif%}/>
+                <input name="{{ restaurant.id }}" type="radio" class="rating required" value="1" {% if isRatingDisabled %}disabled="disabled"{%endif%} {% if restaurant.rating == 1 %}checked="checked"{%endif%}/>
+                <input name="{{ restaurant.id }}" type="radio" class="rating" value="2" {% if isRatingDisabled %}disabled="disabled"{%endif%}  {% if restaurant.rating == 2 %}checked="checked"{%endif%}/>
+                <input name="{{ restaurant.id }}" type="radio" class="rating" value="3" {% if isRatingDisabled %}disabled="disabled"{%endif%}  {% if restaurant.rating == 3 %}checked="checked"{%endif%}/>
+                <input name="{{ restaurant.id }}" type="radio" class="rating" value="4" {% if isRatingDisabled %}disabled="disabled"{%endif%}  {% if restaurant.rating == 4 %}checked="checked"{%endif%}/>
+                <input name="{{ restaurant.id }}" type="radio" class="rating" value="5" {% if isRatingDisabled %}disabled="disabled"{%endif%}  {% if restaurant.rating == 5 %}checked="checked"{%endif%}/>
                 {% if anonim %}
                     <a class="btn btn-primary"  href="{{ path('table_main_auth_page') }}">
                         {% trans %}main.order.button{% endtrans %}

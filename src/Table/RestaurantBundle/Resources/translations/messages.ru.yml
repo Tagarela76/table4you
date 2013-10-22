@@ -34,3 +34,6 @@ main:
         time: "Время:"
         name: "Название:"
         rating: "Рейтинг:"
+      notification:
+        dear: Уважаемый
+        userCannotOrderTable: "наш сервис позволяет забронировать не более одного столика."   

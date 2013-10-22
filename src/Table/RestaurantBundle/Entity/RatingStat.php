@@ -49,7 +49,7 @@ class RatingStat
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="lastUpdateTime", type="datetime")
+     * @ORM\Column(name="last_update_time", type="datetime")
      */
     private $lastUpdateTime;
 
