@@ -32,6 +32,7 @@ class DefaultController extends Controller
             $anonim = true;
         } 
         // check if user can change rating
+        $restaurantsWhoHadHasAlreadyRating = array();
         $isRatingDisabled = false;
         if (!$anonim) {
             $userRating = $this->getRatingStatManager()->getUserRestaurantRating($user->getId());
@@ -40,7 +41,6 @@ class DefaultController extends Controller
                 $isRatingDisabled = true;
             }
             // Also we should get restaurants array , who has already have rating today
-            $restaurantsWhoHadHasAlreadyRating = array();
             foreach ($userRating as $rating) {
                 $restaurantsWhoHadHasAlreadyRating[] = $rating->getRestaurant()->getId();
             }

@@ -20,9 +20,13 @@
                 var restaurantId = $(this).attr('name');
                 $.ajax({
                     url: Routing.generate('table_update_restaurant_rating'),
-                    data: {restaurantId: restaurantId, value: value},
+                    data: {restaurantId: restaurantId, value: value, objId: restaurantId},
                     type: "POST",
-                    dataType: "html"
+                    dataType: "html",
+                    success: function(responce) {
+                        location.reload();
+                        //$('.restaurant-rating-'+restaurantId).html(responce);
+                    }
                 });
             }
         });

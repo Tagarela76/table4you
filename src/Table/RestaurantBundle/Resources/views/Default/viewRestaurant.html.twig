@@ -1,6 +1,8 @@
 {% extends 'TableMainBundle::layout.html.twig' %}
 {% block javascripts %}
     {{ parent() }}
+<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 {# Rating #}
 <script>
     // Rating
@@ -10,9 +12,13 @@
                 var restaurantId = $(this).attr('name');
                 $.ajax({
                     url: Routing.generate('table_update_restaurant_rating'),
-                    data: {restaurantId: restaurantId, value: value},
+                    data: {restaurantId: restaurantId, value: value, objId: restaurantId},
                     type: "POST",
-                    dataType: "html"
+                    dataType: "html",
+                    success: function(responce) {
+                        location.reload();
+                        //$('.restaurant-rating-'+restaurantId).html(responce);
+                    }
                 });
             }
         });
@@ -68,12 +74,8 @@
                     {% endfor %}
                 </p>
             </div>
-            <div class="restaurant-content-reserve">
-                <input name="{{ restaurant.id }}" type="radio" class="rating required" value="1" {% if isRatingDisabled %}disabled="disabled"{%endif%} {% if restaurant.rating == 1 %}checked="checked"{%endif%}/>
-                <input name="{{ restaurant.id }}" type="radio" class="rating" value="2" {% if isRatingDisabled %}disabled="disabled"{%endif%}  {% if restaurant.rating == 2 %}checked="checked"{%endif%}/>
-                <input name="{{ restaurant.id }}" type="radio" class="rating" value="3" {% if isRatingDisabled %}disabled="disabled"{%endif%}  {% if restaurant.rating == 3 %}checked="checked"{%endif%}/>
-                <input name="{{ restaurant.id }}" type="radio" class="rating" value="4" {% if isRatingDisabled %}disabled="disabled"{%endif%}  {% if restaurant.rating == 4 %}checked="checked"{%endif%}/>
-                <input name="{{ restaurant.id }}" type="radio" class="rating" value="5" {% if isRatingDisabled %}disabled="disabled"{%endif%}  {% if restaurant.rating == 5 %}checked="checked"{%endif%}/>
+            <div class="restaurant-content-reserve restaurant-rating-{{ restaurant.id }}">
+                {% include 'TableRestaurantBundle:Default:rating.html.twig' with {'restaurant': restaurant, 'isRatingDisabled': isRatingDisabled, 'restaurantsWhoHadHasAlreadyRating': restaurantsWhoHadHasAlreadyRating, 'id': restaurant.id} %}
                 {% if anonim %}
                     <a class="btn btn-primary"  href="{{ path('table_main_auth_page') }}">
                         {% trans %}main.order.button{% endtrans %}

@@ -97,4 +97,14 @@ class TableOrderManager
     {
         return $this->getTableOrderRepo()->getOrderHistory($user);
     }
+    
+    /**
+     * @param Request $request
+     * 
+     * @return Table\RestaurantBundle\Entity\TableOrder[]
+     */
+    public function filterOrderHistory($request)
+    {
+        return $this->getTableOrderRepo()->filterOrderHistory($request);
+    }
 }

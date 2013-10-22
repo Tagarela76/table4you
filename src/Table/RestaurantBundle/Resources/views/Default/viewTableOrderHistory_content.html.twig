@@ -1,0 +1,33 @@
+{% for tableOrder in tableOrderHistory %}
+    <tr>
+        <td>
+            {{tableOrder.reserveDate|date('d-m-Y')}}
+        </td>
+        <td>
+            {{tableOrder.reserveTime|date('H:i:s')}}
+        </td>
+        <td>
+            <p>{{tableOrder.restaurant.name}}</p>
+            <p>{{ tableOrder.restaurant.categories|join(',') }}</p>
+            <p>{{ tableOrder.restaurant.city }}, {{ tableOrder.restaurant.street }}, {{ tableOrder.restaurant.house }}</p>
+        </td>
+        <td>
+            {% include 'TableRestaurantBundle:Default:rating.html.twig' with {'restaurant': tableOrder.restaurant, 'isRatingDisabled': isRatingDisabled, 'restaurantsWhoHadHasAlreadyRating': restaurantsWhoHadHasAlreadyRating, 'id': tableOrder.id} %}
+            <a class="btn btn-primary" data-toggle="modal" data-target="#reserve_{{ tableOrder.restaurant.id }}" href="{{ path('table_order_reserve', {'id': tableOrder.restaurant.id}) }}">
+                {% trans %}main.order.button{% endtrans %}
+            </a>
+        </td>
+    </tr>
+    {# ==Modal Window for reserve==#}
+    <div class="modal fade hide modal-reserve" data-backdrop="static" id="reserve_{{ tableOrder.restaurant.id }}">
+
+        <div class="modal-header modal-login-title">
+            <a class="close" data-dismiss="modal"></a>
+            <h3>{% trans %}main.order.form.title{% endtrans %} {{tableOrder.restaurant.name}}</h3>
+        </div>
+        <div class="modal-body" >
+
+        </div>
+    </div>
+{%endfor%}
+                

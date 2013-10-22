@@ -115,6 +115,7 @@ class DefaultController extends Controller
         } 
         // check if user can change rating
         $isRatingDisabled = false;
+        $restaurantsWhoHadHasAlreadyRating = array();
         if (!$anonim) {
             $userRating = $this->getRatingStatManager()->getUserRestaurantRating($user->getId());
             // only 3 state
@@ -122,7 +123,10 @@ class DefaultController extends Controller
                 $isRatingDisabled = true;
             }
             // Also we should get restaurants array , who has already have rating today
+            
             foreach ($userRating as $rating) {
+                // collect data
+                $restaurantsWhoHadHasAlreadyRating[] = $rating->getRestaurant()->getId();
                 if ($id == $rating->getRestaurant()->getId()) {
                     $isRatingDisabled = true;
                 }
@@ -137,7 +141,8 @@ class DefaultController extends Controller
             'restaurant' => $this->getRestaurantManager()->findOneById($id),
             'anonim' => $anonim,
             'weekDays' => RestaurantSchedule::$WEEK_DAYS,
-            'isRatingDisabled' => $isRatingDisabled
+            'isRatingDisabled' => $isRatingDisabled,
+            'restaurantsWhoHadHasAlreadyRating' => $restaurantsWhoHadHasAlreadyRating
         );
         
     }
@@ -153,7 +158,7 @@ class DefaultController extends Controller
         // Collect Data
         $restaurantId = $request->request->get('restaurantId');
         $rating = $request->request->get('value');
-        
+        $objId = $request->request->get('objId');
         // get Current user
         $user = $this->container->get('security.context')->getToken()->getUser();
         $restaurant = $this->getRestaurantManager()->findOneById($restaurantId);      
@@ -177,7 +182,25 @@ class DefaultController extends Controller
         $ratingStat->setRating($rating); 
         $em->persist($ratingStat);
         $em->flush();
-        return true;
+        // check if user can change rating
+        $isRatingDisabled = false;
+        $userRating = $this->getRatingStatManager()->getUserRestaurantRating($user->getId());
+        // only 3 state
+        if (count($userRating) > 2) {
+            $isRatingDisabled = true;
+        }
+        // Also we should get restaurants array , who has already have rating today
+        $restaurantsWhoHadHasAlreadyRating = array();
+        foreach ($userRating as $restRating) {
+            $restaurantsWhoHadHasAlreadyRating[] = $restRating->getRestaurant()->getId();
+        }
+        
+        return $this->render('TableRestaurantBundle:Default:rating.html.twig', array(
+            'restaurant' => $restaurant,
+            'isRatingDisabled' => $isRatingDisabled,
+            'restaurantsWhoHadHasAlreadyRating' => $restaurantsWhoHadHasAlreadyRating,
+            'id' => $objId
+        ));
     }
     
     /**
@@ -197,11 +220,27 @@ class DefaultController extends Controller
                 $this->generateUrl("table_main_homepage")
             );
         } 
+        
+        // check if user can change rating
+        $userRating = $this->getRatingStatManager()->getUserRestaurantRating($user->getId());
+        // only 3 state
+        if (count($userRating) > 2) {
+            $isRatingDisabled = true;
+        } else {
+            $isRatingDisabled = false;
+        }
+        // Also we should get restaurants array , who has already have rating today
+        $restaurantsWhoHadHasAlreadyRating = array();
+        foreach ($userRating as $rating) {
+            $restaurantsWhoHadHasAlreadyRating[] = $rating->getRestaurant()->getId();
+        }
 
         return array(
             'tableOrderHistory' => $this->getPaginator()->paginate(
                     $this->getTableOrderManager()->getOrderHistory($user->getId()), $page, TableOrder::PER_PAGE_COUNT
-            )
+            ),
+            'isRatingDisabled' => $isRatingDisabled,
+            'restaurantsWhoHadHasAlreadyRating' => $restaurantsWhoHadHasAlreadyRating
         );
     }
 }

@@ -26,4 +26,23 @@ class TableOrderRepository extends EntityRepository
  
         return $query;
     }
+    
+    /**
+     *  Filter Order History
+     * 
+     * @param Request $request
+     * 
+     * @return Table\RestaurantBundle\Entity\Repository[]
+     */
+    public function filterOrderHistory($request)
+    {
+        $query = $this->createQueryBuilder('rating')
+                ->where('rating.user = :user')
+                ->setParameter('user', $user)
+                ->andWhere('rating.lastUpdateTime >= :nowTime')
+                ->setParameter('nowTime', ' CURDATE( )')
+                ->getQuery();  
+
+        return $query->getResult();
+    }
 }

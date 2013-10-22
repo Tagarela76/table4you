@@ -30,11 +30,7 @@
             </div>
 
             <div class="restaurant-content-reserve">
-                <input name="{{ restaurant.id }}" type="radio" class="rating required" value="1" {% if isRatingDisabled or restaurant.id in restaurantsWhoHadHasAlreadyRating%}disabled="disabled"{%endif%} {% if restaurant.rating == 1 %}checked="checked"{%endif%}/>
-                <input name="{{ restaurant.id }}" type="radio" class="rating" value="2" {% if isRatingDisabled or restaurant.id in restaurantsWhoHadHasAlreadyRating %}disabled="disabled"{%endif%}  {% if restaurant.rating == 2 %}checked="checked"{%endif%}/>
-                <input name="{{ restaurant.id }}" type="radio" class="rating" value="3" {% if isRatingDisabled or restaurant.id in restaurantsWhoHadHasAlreadyRating %}disabled="disabled"{%endif%}  {% if restaurant.rating == 3 %}checked="checked"{%endif%}/>
-                <input name="{{ restaurant.id }}" type="radio" class="rating" value="4" {% if isRatingDisabled or restaurant.id in restaurantsWhoHadHasAlreadyRating %}disabled="disabled"{%endif%}  {% if restaurant.rating == 4 %}checked="checked"{%endif%}/>
-                <input name="{{ restaurant.id }}" type="radio" class="rating" value="5" {% if isRatingDisabled or restaurant.id in restaurantsWhoHadHasAlreadyRating %}disabled="disabled"{%endif%}  {% if restaurant.rating == 5 %}checked="checked"{%endif%}/>
+                {% include 'TableRestaurantBundle:Default:rating.html.twig' with {'restaurant': restaurant, 'isRatingDisabled': isRatingDisabled, 'restaurantsWhoHadHasAlreadyRating': restaurantsWhoHadHasAlreadyRating, 'id': restaurant.id} %}      
                 {% if anonim %}
                     <a class="btn btn-primary"  href="{{ path('table_main_auth_page') }}">
                         {% trans %}main.order.button{% endtrans %}

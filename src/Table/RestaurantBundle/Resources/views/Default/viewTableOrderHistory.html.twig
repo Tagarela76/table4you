@@ -1,26 +1,27 @@
 {% extends 'TableMainBundle::layout.html.twig' %}
 {% block javascripts %}
     {{ parent() }}
+<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 {# Rating #}
 <script>
     // Rating
     $(function(){ 
-        // get all table orders id
-        var tableOrdersId = $("[name='tableOrdersId']"); 
-        // init rating in cycle
-        for (var i=0; i < tableOrdersId.length; i++) {
-            $('.rating_'+tableOrdersId[i].value).rating({
+        $('.rating').rating({
                 callback: function(value, link){ 
-                    var restaurantId = $(this).attr('name');
+                    var restaurantId = $(this).attr('restaurantId');
                     $.ajax({
                         url: Routing.generate('table_update_restaurant_rating'),
-                        data: {restaurantId: restaurantId, value: value},
+                        data: {restaurantId: restaurantId, value: value, objId: restaurantId},
                         type: "POST",
-                        dataType: "html"
+                        dataType: "html",
+                        success: function(responce) {
+                            location.reload();
+                            //$('.restaurant-rating-'+restaurantId).html(responce);
+                        }
                     });
                 }
             });
-        }  
         
         // Init calendar
          $( "#datepickerCalendar" ).datepicker({
@@ -77,32 +78,7 @@
                     </th>
                 </thead>
                 <tbody>
-                    {% for tableOrder in tableOrderHistory %}
-                        <tr>
-                            <td>
-                                {{tableOrder.reserveDate|date('d-m-Y')}}
-                            </td>
-                            <td>
-                                {{tableOrder.reserveTime|date('H:i:s')}}
-                            </td>
-                            <td>
-                                <p>{{tableOrder.restaurant.name}}</p>
-                                <p>{{ tableOrder.restaurant.categories|join(',') }}</p>
-                                <p>{{ tableOrder.restaurant.city }}, {{ tableOrder.restaurant.street }}, {{ tableOrder.restaurant.house }}</p>
-                            </td>
-                            <td>
-                                <input type="hidden" name="tableOrdersId" value="{{ tableOrder.id }}" />
-                                <input name="{{ tableOrder.restaurant.id }}" type="radio" class="rating_{{tableOrder.id}} required" value="1" {% if tableOrder.restaurant.rating == 1 %}checked="checked"{%endif%}/>
-                                <input name="{{ tableOrder.restaurant.id }}" type="radio" class="rating_{{tableOrder.id}}" value="2" {% if tableOrder.restaurant.rating == 2 %}checked="checked"{%endif%}/>
-                                <input name="{{ tableOrder.restaurant.id }}" type="radio" class="rating_{{tableOrder.id}}" value="3" {% if tableOrder.restaurant.rating == 3 %}checked="checked"{%endif%}/>
-                                <input name="{{ tableOrder.restaurant.id }}" type="radio" class="rating_{{tableOrder.id}}" value="4" {% if tableOrder.restaurant.rating == 4 %}checked="checked"{%endif%}/>
-                                <input name="{{ tableOrder.restaurant.id }}" type="radio" class="rating_{{tableOrder.id}}" value="5" {% if tableOrder.restaurant.rating == 5 %}checked="checked"{%endif%}/>
-                                <a class="btn btn-primary" data-toggle="modal" data-target="#reserve_{{ tableOrder.restaurant.id }}" href="{{ path('table_order_reserve', {'id': tableOrder.restaurant.id}) }}">
-                                    {% trans %}main.order.button{% endtrans %}
-                                </a>
-                            </td>
-                        </tr>
-                    {%endfor%}
+                {% include "TableRestaurantBundle:Default:viewTableOrderHistory_content.html.twig" %}
                 </tbody>
             </table>
         </div>
@@ -112,5 +88,5 @@
                     {{ knp_pagination_render(tableOrderHistory) }}
             </div>   
         </div>
-    </div> 
+    </div>     
 {% endblock %}    
