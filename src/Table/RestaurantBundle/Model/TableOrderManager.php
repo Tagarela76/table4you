@@ -99,12 +99,15 @@ class TableOrderManager
     }
     
     /**
-     * @param Request $request
+     * 
+     * @param integer $user
+     * @param string $filterDate
+     * @param string $searchStr
      * 
      * @return Table\RestaurantBundle\Entity\TableOrder[]
      */
-    public function filterOrderHistory($request)
+    public function filterOrderHistory($user, $filterDate = null, $searchStr = null)
     {
-        return $this->getTableOrderRepo()->filterOrderHistory($request);
+        return $this->getTableOrderRepo()->filterOrderHistory($user, $filterDate, $searchStr);
     }
 }

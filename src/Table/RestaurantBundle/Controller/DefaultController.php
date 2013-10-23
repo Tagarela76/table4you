@@ -235,9 +235,18 @@ class DefaultController extends Controller
             $restaurantsWhoHadHasAlreadyRating[] = $rating->getRestaurant()->getId();
         }
 
+        $filterDate = $this->getRequest()->query->get('filterDate');
+        $searchStr = $this->getRequest()->query->get('searchStr');
+//var_dump($searchStr); die();
+        if(!is_null($filterDate) || !is_null($searchStr)) {
+            $orderHistory = $this->getTableOrderManager()->filterOrderHistory($user->getId(), $filterDate, $searchStr);
+        } else {
+            $orderHistory = $this->getTableOrderManager()->getOrderHistory($user->getId());
+        }
+        
         return array(
             'tableOrderHistory' => $this->getPaginator()->paginate(
-                    $this->getTableOrderManager()->getOrderHistory($user->getId()), $page, TableOrder::PER_PAGE_COUNT
+                    $orderHistory, $page, TableOrder::PER_PAGE_COUNT
             ),
             'isRatingDisabled' => $isRatingDisabled,
             'restaurantsWhoHadHasAlreadyRating' => $restaurantsWhoHadHasAlreadyRating

@@ -27,8 +27,15 @@
          $( "#datepickerCalendar" ).datepicker({
             showOn: "button",
             buttonImage: "{{ asset('bundles/tablemain/images/calendar.jpeg') }}",
-            buttonImageOnly: true
+            buttonImageOnly: true,
+            onSelect: function(filterDate) {
+                // get Search str
+                var searchStr = $("#searchStr").val();
+		// redirect on order history page
+		document.location.href = Routing.generate('table_order_history') + "?filterDate=" + filterDate + "&searchStr=" + searchStr;
+            }
          });
+	 $( "#datepickerCalendar" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
     });
         
 </script> 
@@ -55,7 +62,7 @@
             <div class="span4">
                 <form class="form-search">
                     <div class="input-append">
-                    <input type="text" class="search-query">
+                    <input id="searchStr" type="text" class="search-query">
                     <button type="submit" class="btn">Search</button>
                     </div>
                 </form>
@@ -77,7 +84,7 @@
                         {% trans %}main.order.history.rating{% endtrans %}
                     </th>
                 </thead>
-                <tbody>
+                <tbody id="orderHistoryContent">
                 {% include "TableRestaurantBundle:Default:viewTableOrderHistory_content.html.twig" %}
                 </tbody>
             </table>
