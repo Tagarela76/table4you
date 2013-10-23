@@ -19,7 +19,7 @@ body{font-family: Trebuchet MS, sans-serif;}
     border-radius: 3px;
 }
 .restaurantList-container .restaurant-container .restaurant-content{
-    width: 346px;
+    width: 318px;
     float: left;
     color:#454545;
 }
@@ -29,7 +29,7 @@ body{font-family: Trebuchet MS, sans-serif;}
     font-style: italic;
 }
 .restaurantList-container .restaurant-container .restaurant-content-reserve{
-    width: 120px;
+    width: 140px;
     height: 60px;
     float: right;
 }
@@ -302,6 +302,9 @@ body{font-family: Trebuchet MS, sans-serif;}
 .restaurant-photo-modal img{
     width: 404px;
     height: 324px;
+}
+.star-rating-readonly{
+    width: 85px;
 }
 .modal-registration #fos_user_registration_form div input.error-form-registration, #fos-login-form div input.error-form-login, .sonata-user-edit-profile .user-edit-profile div input.error-form-profile, .table-order-form .captcha-img .error-form-reserve{
     border: 1px solid #ff0000;
