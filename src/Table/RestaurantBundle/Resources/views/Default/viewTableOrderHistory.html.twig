@@ -35,12 +35,15 @@
 		document.location.href = Routing.generate('table_order_history') + "?filterDate=" + filterDate + "&searchStr=" + searchStr;
             }
          });
+	 var filterDate = $("#filterDate").val();
 	 $( "#datepickerCalendar" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+	 $( "#datepickerCalendar" ).datepicker("setDate", filterDate);
     });
         
 </script> 
 <script src="{{ asset('bundles/tablemain/rating/jquery.rating.js') }}"></script>
 <script src="{{ asset('bundles/tablemain/js/jquery-ui-1.10.3.custom.js') }}"></script>
+<script src="{{ asset('bundles/tablerestaurant/js/common.js') }}"></script>
 {# Rating #}
 {% endblock %}    
 {% block stylesheets %}
@@ -58,11 +61,12 @@
                     {% trans %}main.order.history.search{% endtrans %}
                 </div>
                 <div class="calendar-inp-field">
+		    <input type="hidden" id="filterDate" value="{{filterDate}}"/>
                     <input type="text" id="datepickerCalendar" placeholder="Выберите дату"/>
                 </div>
                 <form class="ord-form-search">
-                    <input type="text" id="searchStr" type="text" placeholder="Введите ключевое слово для поиска">
-                    <button type="submit" class="serach-glass"></button>
+                    <input id="searchStr" value="{{searchStr}}" type="text" placeholder="Введите ключевое слово для поиска">
+                    <button type="button" class="serach-glass" onclick="page.orderHistory.filterOrderHistory();"></button>
                 </form>
             </div>
         </div>
