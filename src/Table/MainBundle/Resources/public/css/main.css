@@ -167,7 +167,9 @@ body{font-family: Trebuchet MS, sans-serif;}
     margin: 0px;
     margin-bottom: 10px;
 }
-.modal-registration #fos_user_registration_form div input, .modal-login #fos-login-form div input{
+.modal-registration #fos_user_registration_form div input, .modal-login #fos-login-form div input,
+.calendar-inp-field input,
+.ord-form-search input{
     font-size: 14px;
     color: #353535;
     width: 292px;
@@ -582,22 +584,22 @@ input#tableOrderForm_peopleCount:focus{
 
 
 
-#table-order-form .reserveDate .ui-widget-header .ui-datepicker-prev .ui-icon {
+.reserveDate .ui-widget-header .ui-datepicker-prev .ui-icon {
     background-position: -91px -16px;
     background-image: url(images/ui-icons_ef8c08_256x240.png);
 }
-#table-order-form .reserveDate .ui-widget-header .ui-datepicker-next .ui-icon {
+.reserveDate .ui-widget-header .ui-datepicker-next .ui-icon {
     background-position: -37px -16px;
     background-image: url(images/ui-icons_ef8c08_256x240.png);
 }
 
-#table-order-form .reserveDate .ui-datepicker-prev-hover, #table-order-form .reserveDate .ui-datepicker-prev-hover span{
+.reserveDate .ui-datepicker-prev-hover, #table-order-form .reserveDate .ui-datepicker-prev-hover span{
     background: none; 
     border: 0;
     left:26.6%;
     top:7.5px;
 }
-#table-order-form .reserveDate .ui-datepicker-next-hover, #table-order-form .reserveDate .ui-datepicker-next-hover span{
+.reserveDate .ui-datepicker-next-hover, #table-order-form .reserveDate .ui-datepicker-next-hover span{
     background: none; 
     border: 0;
     left:66.4%;
@@ -614,3 +616,120 @@ background: url(images/selects-2.png) no-repeat;}
 .cusel:hover, .cusel:hover .cuselFrameRight, .cusel:focus, .cusel:focus .cuselFrameRight, .cuselFocus, .cuselFocus .cuselFrameRight {
 background-image: url(images/selects-2.png);}
 .table-order-form .floor-tabs li a {font-size: 18px;}
+.order-search{
+    margin-top: 15px;
+    border: 1px solid #c7c5c5;
+    border-radius: 6px;
+    padding: 0 4px;
+    background: rgb(244,245,245); /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(244,245,245,1) 0%, rgba(196,197,198,1) 97%, rgba(196,194,194,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(244,245,245,1)), color-stop(97%,rgba(196,197,198,1)), color-stop(100%,rgba(196,194,194,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(244,245,245,1) 0%,rgba(196,197,198,1) 97%,rgba(196,194,194,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(244,245,245,1) 0%,rgba(196,197,198,1) 97%,rgba(196,194,194,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(244,245,245,1) 0%,rgba(196,197,198,1) 97%,rgba(196,194,194,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(244,245,245,1) 0%,rgba(196,197,198,1) 97%,rgba(196,194,194,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4f5f5', endColorstr='#c4c2c2',GradientType=0 ); /* IE6-9 */
+    height: 33px;
+
+}
+.ord-search-text{
+    color: #757373;
+    padding: 0 9px 0 4px;
+    border-right: 1px solid #dad9da;
+    line-height: 32px;
+    height: 32px;
+    float: left;
+
+}
+.calendar-inp-field{
+    float: left;
+    border-left: 1px solid #c4c2c2;
+    position: relative;
+    width: 234px;
+}
+.calendar-inp-field input{
+    width: 210px !important;
+    margin: 3px 0 0 6px;
+    position: relative;
+    z-index: 10;
+}
+.calendar-inp-field img{
+    position: absolute;
+    right: 12px;
+    top: 9px;
+    z-index: 100;
+}    
+.ord-form-search{
+    margin-left: 5px;
+    height: 32px;
+    width: 336px;
+    float: left;
+    position: relative;
+
+}
+.ord-form-search input{
+    width: 296px !important;
+    margin: 3px 0 0 0;
+    position: relat;
+    z-index: 10;
+    padding-right: 25px;
+}
+.ord-form-search button{
+    border: 0;
+    outline: 0;
+    background: url(images/serach-glass.png) no-repeat;
+    z-index: 100;
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    right: 9px;
+    top: 10px;
+}
+.table-order-history{
+    border-radius: 6px;
+    border: 1px solid #d7d6d8;
+     margin-bottom: 20px;
+}
+.table-order-history table{
+    width: 100%;
+    font-size: 12px;
+    color: #454545;
+}
+.table-order-history table tr td:last-of-type,
+.table-order-history table tr th:last-of-type{
+    width: 270px; 
+}
+.table-order-history table tr td a.btn{
+    width: 50px !important; 
+    margin-left: 35px;
+}
+.table-order-history table tr td span div.star-rating{
+    margin-bottom: 0 !important;
+    margin-top: 7px !important;
+}
+.table-order-history table tr td,
+.table-order-history table th{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.table-order-history table tr td p{
+    margin: 0 0 3px;
+}
+.table-order-history table tr{
+    border-bottom: 1px solid #d7d6d8;
+}
+.table-order-history table tr:last-of-type{
+    border-bottom: none;
+}
+.rest-name-table,
+.table-order-history table th{
+    font-size: 13px;
+    font-weight: normal;
+}
+.table-order-history table th{
+    background-color: #e6e3e3;
+   
+}
+.table-order-history table th + th + th{
+    text-align: left;
+}

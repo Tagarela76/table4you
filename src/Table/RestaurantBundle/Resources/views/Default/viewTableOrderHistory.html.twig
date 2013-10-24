@@ -26,7 +26,7 @@
         // Init calendar
          $( "#datepickerCalendar" ).datepicker({
             showOn: "button",
-            buttonImage: "{{ asset('bundles/tablemain/images/calendar.jpeg') }}",
+            buttonImage: "{{ asset('bundles/tablemain/images/calendar.png') }}",
             buttonImageOnly: true,
             onSelect: function(filterDate) {
                 // get Search str
@@ -55,42 +55,41 @@
 {% block content %}
     <div class="container-fluid">
         <div class="row-fluid">
-            <div class="span2">
-                {% trans %}main.order.history.search{% endtrans %}
-            </div>
-            <div class="span6">
-                <input type="text" id="datepickerCalendar" />
-		<input type="hidden" id="filterDate" value="{{filterDate}}"/>
-            </div>
-            <div class="span4">
-                <form class="form-search">
-                    <div class="input-append">
-                    <input id="searchStr" value="{{searchStr}}" type="text" class="search-query">
-                    <button type="submit" class="btn">Search</button>
-                    </div>
+            <div class="order-search">
+                <div class="ord-search-text">
+                    {% trans %}main.order.history.search{% endtrans %}
+                </div>
+                <div class="calendar-inp-field">
+                    <input type="text" id="datepickerCalendar" placeholder="Выберите дату"/>
+                </div>
+                <form class="ord-form-search">
+                    <input id="searchStr" value="{{searchStr}}" type="text" placeholder="Введите ключевое слово для поиска">
+                    <button type="submit" class="serach-glass"></button>
                 </form>
             </div>
         </div>
         <div class="row-fluid">
-            <table class="table">
-                <thead>
-                    <th>
-                        {% trans %}main.order.history.date{% endtrans %}
-                    </th>
-                    <th>
-                        {% trans %}main.order.history.time{% endtrans %}
-                    </th>
-                    <th>
-                        {% trans %}main.order.history.name{% endtrans %}
-                    </th>
-                    <th>
-                        {% trans %}main.order.history.rating{% endtrans %}
-                    </th>
-                </thead>
-                <tbody id="orderHistoryContent">
-                {% include "TableRestaurantBundle:Default:viewTableOrderHistory_content.html.twig" %}
-                </tbody>
-            </table>
+            <div class="table-order-history">
+                <table>
+                    <thead>
+                        <th>
+                            {% trans %}main.order.history.date{% endtrans %}
+                        </th>
+                        <th>
+                            {% trans %}main.order.history.time{% endtrans %}
+                        </th>
+                        <th>
+                            {% trans %}main.order.history.name{% endtrans %}
+                        </th>
+                        <th>
+                            {% trans %}main.order.history.rating{% endtrans %}
+                        </th>
+                    </thead>
+                    <tbody>
+                    {% include "TableRestaurantBundle:Default:viewTableOrderHistory_content.html.twig" %}
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="row-fluid">
             {# display navigation #}
