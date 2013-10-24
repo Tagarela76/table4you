@@ -584,22 +584,22 @@ input#tableOrderForm_peopleCount:focus{
 
 
 
-#table-order-form .reserveDate .ui-widget-header .ui-datepicker-prev .ui-icon {
+.reserveDate .ui-widget-header .ui-datepicker-prev .ui-icon {
     background-position: -91px -16px;
     background-image: url(images/ui-icons_ef8c08_256x240.png);
 }
-#table-order-form .reserveDate .ui-widget-header .ui-datepicker-next .ui-icon {
+.reserveDate .ui-widget-header .ui-datepicker-next .ui-icon {
     background-position: -37px -16px;
     background-image: url(images/ui-icons_ef8c08_256x240.png);
 }
 
-#table-order-form .reserveDate .ui-datepicker-prev-hover, #table-order-form .reserveDate .ui-datepicker-prev-hover span{
+.reserveDate .ui-datepicker-prev-hover, #table-order-form .reserveDate .ui-datepicker-prev-hover span{
     background: none; 
     border: 0;
     left:26.6%;
     top:7.5px;
 }
-#table-order-form .reserveDate .ui-datepicker-next-hover, #table-order-form .reserveDate .ui-datepicker-next-hover span{
+.reserveDate .ui-datepicker-next-hover, #table-order-form .reserveDate .ui-datepicker-next-hover span{
     background: none; 
     border: 0;
     left:66.4%;
