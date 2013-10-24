@@ -201,6 +201,12 @@ body{font-family: Trebuchet MS, sans-serif;}
 .modal-login #fos-login-form{
     margin:0px;
 }
+#fos-login-form a{
+    display: inline-block;
+    margin: 0 0 15px 19px;
+    color: inherit;
+    text-decoration: underline;
+}
 #table-order-form-container .container-fluid{
     padding: 15px 20px 0 !important;
 }
@@ -732,4 +738,7 @@ background-image: url(images/selects-2.png);}
 }
 .table-order-history table th + th + th{
     text-align: left;
+}
+.error-li{
+    margin: 0 !important;
 }

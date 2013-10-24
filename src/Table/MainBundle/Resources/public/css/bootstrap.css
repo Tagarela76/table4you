@@ -3797,9 +3797,10 @@ input[type="submit"].btn.btn-mini {
           border-radius: 0 0 6px 6px;
 }
 
-.alert {
+.alert,
+.success{
+  margin: 10px 10px 20px;
   padding: 8px 35px 8px 14px;
-  margin-bottom: 20px;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
   background-color: #fcf8e3;
   border: 1px solid #fbeed5;
@@ -3824,13 +3825,15 @@ input[type="submit"].btn.btn-mini {
   line-height: 20px;
 }
 
-.alert-success {
+.alert-success,
+.success{
   color: #468847;
   background-color: #dff0d8;
   border-color: #d6e9c6;
 }
 
-.alert-success h4 {
+.alert-success h4,
+.success h4{
   color: #468847;
 }
 
