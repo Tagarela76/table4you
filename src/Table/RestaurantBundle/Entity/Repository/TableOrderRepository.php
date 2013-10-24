@@ -30,19 +30,29 @@ class TableOrderRepository extends EntityRepository
     /**
      *  Filter Order History
      * 
-     * @param Request $request
+     * @param integer $user
+     * @param string $filterDate
+     * @param string $searchStr
      * 
      * @return Table\RestaurantBundle\Entity\Repository[]
      */
-    public function filterOrderHistory($request)
+    public function filterOrderHistory($user, $filterDate = null, $searchStr = null)
     {
-        $query = $this->createQueryBuilder('rating')
-                ->where('rating.user = :user')
-                ->setParameter('user', $user)
-                ->andWhere('rating.lastUpdateTime >= :nowTime')
-                ->setParameter('nowTime', ' CURDATE( )')
-                ->getQuery();  
 
-        return $query->getResult();
+        $query = $this->createQueryBuilder('orderHistory')
+                ->where('orderHistory.user = :user')
+                ->setParameter('user', $user);
+	if (!is_null($filterDate) && $filterDate != "") {
+		$query->andWhere('orderHistory.reserveDate = :reserveDate')
+                      ->setParameter('reserveDate', $filterDate);
+	}
+	/*if (!is_null($searchStr) && $searchStr != "") {
+		$query->leftJoin('orderHistory.restaurant', 'r')
+		      ->andWhere("r.name like '%:searchStr%' ");
+                     // ->setParameter('searchStr', $searchStr);
+	}*/
+      //  $query->getQuery();  
+//var_dump($query->getQuery()->getResult()); die();
+        return $query->getQuery()->getResult();
     }
 }
