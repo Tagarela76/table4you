@@ -8,8 +8,18 @@ function TableOrder() {
     }
 }
 
+function OrderHistory() {
+    
+    this.filterOrderHistory = function() {
+	var filterDate = $("#filterDate").val();
+	var searchStr = $("#searchStr").val();
+        document.location.href = Routing.generate('table_order_history') + "?filterDate=" + filterDate + "&searchStr=" + searchStr;                            
+    }
+}
+
 function Page() {
     this.tableOrder = new TableOrder();
+    this.orderHistory = new OrderHistory();
 }
 
 //	global page object

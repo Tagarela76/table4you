@@ -43,6 +43,7 @@
 </script> 
 <script src="{{ asset('bundles/tablemain/rating/jquery.rating.js') }}"></script>
 <script src="{{ asset('bundles/tablemain/js/jquery-ui-1.10.3.custom.js') }}"></script>
+<script src="{{ asset('bundles/tablerestaurant/js/common.js') }}"></script>
 {# Rating #}
 {% endblock %}    
 {% block stylesheets %}
@@ -60,11 +61,12 @@
                     {% trans %}main.order.history.search{% endtrans %}
                 </div>
                 <div class="calendar-inp-field">
+		    <input type="hidden" id="filterDate" value="{{filterDate}}"/>
                     <input type="text" id="datepickerCalendar" placeholder="Выберите дату"/>
                 </div>
                 <form class="ord-form-search">
                     <input id="searchStr" value="{{searchStr}}" type="text" placeholder="Введите ключевое слово для поиска">
-                    <button type="submit" class="serach-glass"></button>
+                    <button type="button" class="serach-glass" onclick="page.orderHistory.filterOrderHistory();"></button>
                 </form>
             </div>
         </div>
