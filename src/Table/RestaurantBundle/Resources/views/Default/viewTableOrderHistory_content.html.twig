@@ -1,13 +1,13 @@
 {% for tableOrder in tableOrderHistory %}
     <tr>
-        <td>
+        <td style="text-align:center; width:100px;">
             {{tableOrder.reserveDate|date('d-m-Y')}}
         </td>
-        <td>
+        <td style="text-align:center; width:100px;">
             {{tableOrder.reserveTime|date('H:i:s')}}
         </td>
         <td>
-            <p>{{tableOrder.restaurant.name}}</p>
+            <p class="rest-name-table">{{tableOrder.restaurant.name}}</p>
             <p>{{ tableOrder.restaurant.categories|join(',') }}</p>
             <p>{{ tableOrder.restaurant.city }}, {{ tableOrder.restaurant.street }}, {{ tableOrder.restaurant.house }}</p>
         </td>
