@@ -26,11 +26,7 @@
         // Init calendar
          $( "#datepickerCalendar" ).datepicker({
             showOn: "button",
-<<<<<<< HEAD
             buttonImage: "{{ asset('bundles/tablemain/images/calendar.png') }}",
-            buttonImageOnly: true
-=======
-            buttonImage: "{{ asset('bundles/tablemain/images/calendar.jpeg') }}",
             buttonImageOnly: true,
             onSelect: function(filterDate) {
                 // get Search str
@@ -38,7 +34,6 @@
 		// redirect on order history page
 		document.location.href = Routing.generate('table_order_history') + "?filterDate=" + filterDate + "&searchStr=" + searchStr;
             }
->>>>>>> 5f3c82e6e13d56218664ee7a365092e12c8f2f2f
          });
 	 $( "#datepickerCalendar" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
     });
@@ -66,7 +61,7 @@
                     <input type="text" id="datepickerCalendar" placeholder="Выберите дату"/>
                 </div>
                 <form class="ord-form-search">
-                    <input type="text" placeholder="Введите ключевое слово для поиска">
+                    <input type="text" id="searchStr" type="text" placeholder="Введите ключевое слово для поиска">
                     <button type="submit" class="serach-glass"></button>
                 </form>
             </div>
