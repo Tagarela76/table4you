@@ -249,7 +249,9 @@ class DefaultController extends Controller
                     $orderHistory, $page, TableOrder::PER_PAGE_COUNT
             ),
             'isRatingDisabled' => $isRatingDisabled,
-            'restaurantsWhoHadHasAlreadyRating' => $restaurantsWhoHadHasAlreadyRating
+            'restaurantsWhoHadHasAlreadyRating' => $restaurantsWhoHadHasAlreadyRating,
+	    'filterDate' => $filterDate,
+	    'searchStr' => $searchStr
         );
     }
 }
