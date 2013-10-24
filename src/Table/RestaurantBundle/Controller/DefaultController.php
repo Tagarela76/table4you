@@ -83,6 +83,9 @@ class DefaultController extends Controller
                 if (is_null($tableOrder->getStatus())) {
                     $tableOrder->setStatus(0);
                 }
+		if (is_null($tableOrder->getFloor())) {
+                    $tableOrder->setFloor(1);
+                }
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($tableOrder);
                 $em->flush();
