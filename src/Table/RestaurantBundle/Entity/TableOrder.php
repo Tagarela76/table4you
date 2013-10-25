@@ -150,9 +150,9 @@ class TableOrder
     protected $userEmail;
 
     public static $STATUS_LIST = array(
-        "0" => "Не обработано",
-        "1" => "Не выполнено",
-        "2" => "Выполнено"
+        self::ORDER_NOTHING_DID_STATUS_CODE => "Не обработано",
+        self::ORDER_REJECT_STATUS_CODE => "Не выполнено",
+        self::ORDER_ACCEPT_STATUS_CODE => "Выполнено"
     );
     
     public static $STATUS_COLOR_LIST = array(
@@ -162,6 +162,10 @@ class TableOrder
     );
     
     const PER_PAGE_COUNT = 10;
+
+    const ORDER_ACCEPT_STATUS_CODE = 2;
+    const ORDER_REJECT_STATUS_CODE = 1;
+    const ORDER_NOTHING_DID_STATUS_CODE = 0;
 
     /**
      * Get id

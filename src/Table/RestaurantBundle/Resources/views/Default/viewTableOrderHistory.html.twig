@@ -64,8 +64,8 @@
 		    <input type="hidden" id="filterDate" value="{{filterDate}}"/>
                     <input type="text" id="datepickerCalendar" placeholder="Выберите дату"/>
                 </div>
-                <form class="ord-form-search">
-                    <input id="searchStr" value="{{searchStr}}" type="text" placeholder="Введите ключевое слово для поиска">
+                <form class="ord-form-search" onsubmit="page.orderHistory.filterOrderHistory();return false;">
+                    <input id="searchStr" value="{{searchStr}}" onKeyPress="page.orderHistory.filterOrderHistory();" type="text" placeholder="Введите ключевое слово для поиска">
                     <button type="button" class="serach-glass" onclick="page.orderHistory.filterOrderHistory();"></button>
                 </form>
             </div>
