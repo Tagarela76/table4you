@@ -19,4 +19,7 @@ services:
         arguments: [@doctrine.orm.entity_manager, @service_container]   
   rating_stat_manager:
         class: Table\RestaurantBundle\Model\RatingStatManager
-        arguments: [@doctrine.orm.entity_manager, @service_container]       
+        arguments: [@doctrine.orm.entity_manager, @service_container]    
+  common_manager:
+        class: Table\MainBundle\Model\CommonManager
+        arguments: [@doctrine.orm.entity_manager, @service_container]            

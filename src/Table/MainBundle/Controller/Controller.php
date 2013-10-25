@@ -71,4 +71,9 @@ class Controller extends BaseController
     {
         return $this->get('rating_stat_manager');
     }
+    
+    public function getCommonManager()
+    {
+        return $this->get('common_manager');
+    }
 }
