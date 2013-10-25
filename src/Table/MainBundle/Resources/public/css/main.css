@@ -199,13 +199,14 @@ body{font-family: Trebuchet MS, sans-serif;}
     border-radius: 50%;
 }
 .modal-login #fos-login-form{
-    margin:0px;
+    margin: 15px 0 0;
 }
 #fos-login-form a{
-    display: inline-block;
+    display: block;
     margin: 0 0 15px 19px;
     color: inherit;
     text-decoration: underline;
+    clear: both;
 }
 #table-order-form-container .container-fluid{
     padding: 15px 20px 0 !important;
@@ -698,7 +699,7 @@ background-image: url(images/selects-2.png);}
 }
 .table-order-history table{
     width: 100%;
-    font-size: 12px;
+    font-size: 14px;
     color: #454545;
 }
 .table-order-history table tr td:last-of-type,
@@ -720,6 +721,7 @@ background-image: url(images/selects-2.png);}
 }
 .table-order-history table tr td p{
     margin: 0 0 3px;
+    padding-right: 15px;
 }
 .table-order-history table tr{
     border-bottom: 1px solid #d7d6d8;
@@ -729,7 +731,7 @@ background-image: url(images/selects-2.png);}
 }
 .rest-name-table,
 .table-order-history table th{
-    font-size: 13px;
+    font-size: 16px;
     font-weight: normal;
 }
 .table-order-history table th{
