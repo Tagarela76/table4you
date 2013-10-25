@@ -6,111 +6,203 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-
 use Table\RestaurantBundle\Entity\TableOrder;
-
 use Sonata\AdminBundle\Route\RouteCollection;
 
 class TableOrderAdmin extends Admin
 {
 
-    public function sendAcceptTableOrderEmailNotification4customer($tableOrder)
+    /**
+     * Send accept order  notifiction to customer
+     * 
+     * @param Table\RestaurantBundle\Entity\TableOrder $tableOrder
+     */
+    public function sendAcceptTableOrderNotification4customer($tableOrder)
     {
-	// get User Mail
-	$userName = $tableOrder->getUser()->getEmail();
-	// get subject
-	$container = $this->getConfigurationPool()->getContainer();
-	$trans = $container->get('translator');
-	$subject = $trans->trans('main.mail.tableOrder.notification.accept.subject');
+        // get User Mail
+        $userName = $tableOrder->getUser()->getEmail();
+        // get subject
+        $container = $this->getConfigurationPool()->getContainer();
+        $trans = $container->get('translator');
+        $subject = $trans->trans('main.mail.tableOrder.notification.accept.subject');
 
-	$message = \Swift_Message::newInstance()
+        // send email notification
+        if ($tableOrder->getIsEmail()) {
+            $message = \Swift_Message::newInstance()
                     ->setSubject($subject)
                     ->setFrom("noreply@table4you.com")
-		    ->setSender("noreply@table4you.com")
-                    ->setReturnPath("noreply@table4you.com")
                     ->setTo($userName)
                     ->setBody(
                     $container->get('templating')->render(
                             'TableMainBundle:Mail:acceptTableOrderNotification4customer.html.twig', array(
-                                'tableOrder' => $tableOrder
+                        'tableOrder' => $tableOrder
                             )
                     ), 'text/html', 'utf-8'
-        );
-    }
-
-    public function sendAcceptTableOrderEmailNotification4admin($tableOrder)
-    {
-	// get receiver Mail
-	$receiverName = $tableOrder->getRestaurant()->getEmail();
-	// get subject
-	$container = $this->getConfigurationPool()->getContainer();
-	$trans = $container->get('translator');
-	$subject = $trans->trans('main.mail.tableOrder.notification.accept.subject');
-
-	$message = \Swift_Message::newInstance()
+            );
+            $container->get('mailer')->send($message);
+        }
+        
+        // format target email (sent sms) 
+        $targetEmail = "masha.an@kttsoft.com";
+        if ($tableOrder->getIsSms()) {
+            $message = \Swift_Message::newInstance()
                     ->setSubject($subject)
                     ->setFrom("noreply@table4you.com")
-		    ->setSender("noreply@table4you.com")
-                    ->setReturnPath("noreply@table4you.com")
-                    ->setTo($receiverName)
+                    ->setTo($targetEmail)
                     ->setBody(
                     $container->get('templating')->render(
-                            'TableMainBundle:Mail:acceptTableOrderNotification4admin.html.twig', array(
-                                'tableOrder' => $tableOrder
+                            'TableMainBundle:Mail:acceptTableOrderNotification4customer.html.twig', array(
+                        'tableOrder' => $tableOrder
                             )
                     ), 'text/html', 'utf-8'
-        );
+            );
+            $container->get('mailer')->send($message);
+        }
+            
     }
 
-    public function sendRejectTableOrderEmailNotification4customer($tableOrder)
+    /**
+     * Send accept order notifiction to admin
+     * 
+     * @param Table\RestaurantBundle\Entity\TableOrder $tableOrder
+     */
+    public function sendAcceptTableOrderNotification4admin($tableOrder)
     {
-	// get User Mail
-	$userName = $tableOrder->getUser()->getEmail();
-	// get subject
-	$container = $this->getConfigurationPool()->getContainer();
-	$trans = $container->get('translator');
-	$subject = $trans->trans('main.mail.tableOrder.notification.reject.subject');
+        // get receiver Mail
+        $receiverName = $tableOrder->getRestaurant()->getEmail();
+        // get subject
+        $container = $this->getConfigurationPool()->getContainer();
+        $trans = $container->get('translator');
+        $subject = $trans->trans('main.mail.tableOrder.notification.accept.subject');
 
-	$message = \Swift_Message::newInstance()
+        // send email notification
+        $message = \Swift_Message::newInstance()
+                ->setSubject($subject)
+                ->setFrom("noreply@table4you.com")
+                ->setTo($receiverName)
+                ->setBody(
+                $container->get('templating')->render(
+                        'TableMainBundle:Mail:acceptTableOrderNotification4admin.html.twig', array(
+                    'tableOrder' => $tableOrder
+                        )
+                ), 'text/html', 'utf-8'
+        );
+        $container->get('mailer')->send($message);
+        
+        // format target email and send sms
+        $targetEmail = "masha.an@kttsoft.com";
+        // send email notification
+        $message = \Swift_Message::newInstance()
+                ->setSubject($subject)
+                ->setFrom("noreply@table4you.com")
+                ->setTo($targetEmail)
+                ->setBody(
+                $container->get('templating')->render(
+                        'TableMainBundle:Mail:acceptTableOrderNotification4admin.html.twig', array(
+                    'tableOrder' => $tableOrder
+                        )
+                ), 'text/html', 'utf-8'
+        );
+        $container->get('mailer')->send($message);
+    }
+
+    /**
+     * Send accept order notifiction to customer
+     * 
+     * @param Table\RestaurantBundle\Entity\TableOrder $tableOrder
+     */
+    public function sendRejectTableOrderNotification4customer($tableOrder)
+    {
+        // get User Mail
+        $userEmail = $tableOrder->getUser()->getEmail();
+        // get subject
+        $container = $this->getConfigurationPool()->getContainer();
+        $trans = $container->get('translator');
+        $subject = $trans->trans('main.mail.tableOrder.notification.reject.subject');
+
+        // sent email if needed
+        if ($tableOrder->getIsEmail()) {
+            $message = \Swift_Message::newInstance()
                     ->setSubject($subject)
                     ->setFrom("noreply@table4you.com")
-		    ->setSender("noreply@table4you.com")
-                    ->setReturnPath("noreply@table4you.com")
-                    ->setTo($userName)
+                    ->setTo($userEmail)
                     ->setBody(
                     $container->get('templating')->render(
                             'TableMainBundle:Mail:rejectTableOrderNotification4admin.html.twig', array(
-                                'tableOrder' => $tableOrder
+                        'tableOrder' => $tableOrder
                             )
                     ), 'text/html', 'utf-8'
-        );
-    }
-
-    public function sendRejectTableOrderEmailNotification4admin($tableOrder)
-    {
-	// get User Mail
-	// get subject
-	$container = $this->getConfigurationPool()->getContainer();
-	$trans = $container->get('translator');
-	$subject = $trans->trans('main.mail.tableOrder.notification.reject.subject');
-	$receiverName = $tableOrder->getRestaurant()->getEmail();
-
-	$message = \Swift_Message::newInstance()
+            );
+            $container->get('mailer')->send($message);
+        } 
+        
+        // sent sms if needed
+        $targetEmail = "masha.an@kttsoft.com"; // get email regarding phone number
+        if ($tableOrder->getIsSms()) {
+            $message = \Swift_Message::newInstance()
                     ->setSubject($subject)
                     ->setFrom("noreply@table4you.com")
-		    ->setSender("noreply@table4you.com")
-                    ->setReturnPath("noreply@table4you.com")
-                    ->setTo($receiverName)
+                    ->setTo($targetEmail)
                     ->setBody(
-		    $container->get('templating')->render(
+                    $container->get('templating')->render(
                             'TableMainBundle:Mail:rejectTableOrderNotification4admin.html.twig', array(
-                                'tableOrder' => $tableOrder
+                        'tableOrder' => $tableOrder
                             )
                     ), 'text/html', 'utf-8'
-        );
+            );
+            $container->get('mailer')->send($message);
+        }
+            
     }
 
-    /** 
+    /**
+     * Send accept order notifiction to admin
+     * 
+     * @param Table\RestaurantBundle\Entity\TableOrder $tableOrder
+     */
+    public function sendRejectTableOrderNotification4admin($tableOrder)
+    {
+        // get User Mail
+        // get subject
+        $container = $this->getConfigurationPool()->getContainer();
+        $trans = $container->get('translator');
+        $subject = $trans->trans('main.mail.tableOrder.notification.reject.subject');
+        
+        // get admin email
+        $receiverEmail = $tableOrder->getRestaurant()->getEmail();
+
+        // sent email
+        $message = \Swift_Message::newInstance()
+                ->setSubject($subject)
+                ->setFrom("noreply@table4you.com")
+                ->setTo($receiverEmail)
+                ->setBody(
+                $container->get('templating')->render(
+                        'TableMainBundle:Mail:rejectTableOrderNotification4admin.html.twig', array(
+                    'tableOrder' => $tableOrder
+                        )
+                ), 'text/html', 'utf-8'
+        );
+        $container->get('mailer')->send($message);
+        
+        // sent sms
+        // get target email regarding phone number
+        $targetEmail = "masha.an@kttsoft.com";
+        $message = \Swift_Message::newInstance()
+                ->setSubject($subject)
+                ->setFrom("noreply@table4you.com")
+                ->setTo($targetEmail)
+                ->setBody(
+                $container->get('templating')->render(
+                        'TableMainBundle:Mail:rejectTableOrderNotification4admin.html.twig', array(
+                    'tableOrder' => $tableOrder
+                        )
+                ), 'text/html', 'utf-8'
+        );
+        $container->get('mailer')->send($message);
+    }
+
+    /**
      * @param \Table\RestaurantBundle\Entity\TableOrder $tableOrder
      *
      * @return void
@@ -119,32 +211,28 @@ class TableOrderAdmin extends Admin
     {
         $object = $this->getRoot()->getSubject();
         // we should know if changed smt
-	if (/*$object->getStatus() != $tableOrder->getStatus()*/true) {
-	    // sent notification
-	    switch ($object->getStatus()) {
-		// reject
-		case TableOrder::ORDER_REJECT_STATUS_CODE :
-		    // sent email notification to admin
-		    $this->sendRejectTableOrderEmailNotification4admin($object);
+        if (/* $object->getStatus() != $tableOrder->getStatus() */true) {
+            // sent notification
+            switch ($object->getStatus()) {
+                // reject
+                case TableOrder::ORDER_REJECT_STATUS_CODE :
+                    // sent notification to admin
+                    $this->sendRejectTableOrderNotification4admin($object);
 
-		    // sent email notification to custorem if needed
-		    if ($object->getIsEmail()) {
-			$this->sendRejectTableOrderEmailNotification4customer($object);
-		    }
-		    break;
-		// accept
-		case TableOrder::ORDER_ACCEPT_STATUS_CODE :
-		    // sent email notification to admin
-		    $this->sendAcceptTableOrderEmailNotification4admin($object);
+                    // sent notification to custorem 
+                    $this->sendRejectTableOrderNotification4customer($object);
 
-		    // sent email notification to custorem if needed
-		    if ($object->getIsEmail()) {
-			$this->sendAcceptTableOrderEmailNotification4customer($object);
-		    }
-		    break;
-	    }
-	}
-		
+                    break;
+                // accept
+                case TableOrder::ORDER_ACCEPT_STATUS_CODE :
+                    // sent notification to admin
+                    $this->sendAcceptTableOrderNotification4admin($object);
+                    
+                    // sent  notification to custorem if needed
+                    $this->sendAcceptTableOrderNotification4customer($object);
+                    break;
+            }
+        }
     }
 
     protected function configureFormFields(FormMapper $formMapper)
@@ -174,7 +262,7 @@ class TableOrderAdmin extends Admin
                     'label' => 'restaurant.tableOrder.peopleCount'
                 ))
                 ->add('isSmokingZone', 'checkbox', array(
-                    'label'     => 'restaurant.tableOrder.isSmokingZone',
+                    'label' => 'restaurant.tableOrder.isSmokingZone',
                     'required' => false
                 ))
                 ->add('userPhone', 'genemu_plain', array(
@@ -184,22 +272,22 @@ class TableOrderAdmin extends Admin
                     'label' => 'restaurant.tableOrder.email'
                 ))
                 ->add('isSms', 'checkbox', array(
-                    'label'     => 'restaurant.tableOrder.isSms',
+                    'label' => 'restaurant.tableOrder.isSms',
                     'required' => false
                 ))
                 ->add('isEmail', 'checkbox', array(
-                    'label'     => 'restaurant.tableOrder.isEmail',
+                    'label' => 'restaurant.tableOrder.isEmail',
                     'required' => false
                 ))
                 ->add('wish', 'genemu_plain', array(
                     'attr' => array(
                         'cols' => '5', 'rows' => '5'
-                     ),
+                    ),
                     'label' => 'restaurant.tableOrder.wish'
                 ))
                 ->add('status', 'choice', array(
-                    'choices'   => TableOrder::$STATUS_LIST,
-                    'label'     => 'restaurant.tableOrder.status'
+                    'choices' => TableOrder::$STATUS_LIST,
+                    'label' => 'restaurant.tableOrder.status'
                 ))
         ;
     }
@@ -226,7 +314,7 @@ class TableOrderAdmin extends Admin
                     'label' => 'restaurant.tableOrder.peopleCount'
                 ))
                 ->add('status', null, array(
-                    'label'     => 'restaurant.tableOrder.status'
+                    'label' => 'restaurant.tableOrder.status'
                 ))
         ;
     }
@@ -254,7 +342,7 @@ class TableOrderAdmin extends Admin
                     'label' => 'restaurant.tableOrder.email'
                 ))
                 ->add('statusName', null, array(
-                    'label'     => 'restaurant.tableOrder.status'
+                    'label' => 'restaurant.tableOrder.status'
                 ))
                 ->add('userName', null, array(
                     'label' => 'restaurant.tableOrder.userName'
@@ -264,10 +352,10 @@ class TableOrderAdmin extends Admin
                 ))
         ;
     }
-    
+
     protected function configureRoutes(RouteCollection $collection)
     {
-         $collection->remove('create');
+        $collection->remove('create');
     }
 
 }
