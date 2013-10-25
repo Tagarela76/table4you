@@ -1,0 +1,8 @@
+{% trans %}main.mail.tableOrder.notification.greeting{% endtrans %}, {{tableOrder.user.username}},
+ {% trans %}main.mail.tableOrder.notification.tableOrder{% endtrans %} №{{tableOrder.tableNumber}} {% trans %}main.mail.tableOrder.notification.for{% endtrans %} {{tableOrder.peopleCount}} {% trans %}main.mail.tableOrder.notification.guest{% endtrans %}, {% if not tableOrder.isSmokingZone %} {% trans %}main.mail.tableOrder.notification.notSmoke{% endtrans %},{% endif %} {% trans %}main.mail.tableOrder.notification.restaurant{% endtrans %} {{tableOrder.restaurant.name}}, {{tableOrder.reserveDate}}, {{tableOrder.reserveTime}}!
+{% trans %}main.mail.tableOrder.notification.wishes{% endtrans %}
+
+{% trans %}main.mail.tableOrder.notification.endText{% endtrans %}
+{% trans %}main.mail.tableOrder.notification.thankYouText{% endtrans %}
+
+{% trans %}main.mail.tableOrder.notification.signature{% endtrans %}

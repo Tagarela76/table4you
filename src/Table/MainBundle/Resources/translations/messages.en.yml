@@ -24,3 +24,35 @@ main:
     text: Register
   please: please
   or: or
+  mail:
+    tableOrder:
+      notification:
+        greeting: "Hello"
+        tableOrder: "You have successfully reserved table"
+        guest: "guest"
+        for: "for"
+        notSmoke: "Not smoke hall"
+        restaurant: "Restaurant"
+        wishes: "wishes"
+        endText: "This notification was formated automatically and no need to reply it."
+        thankYouText: "Thank you for reserve"
+        signature: "Sincerely, tema Table4U"
+        youWant: "you want reserve table"
+        rejectMsg: "Sorry, but you cannot reserve this table"
+        rejectSms: "Sorry, but you cannot reserve this table"
+        suggestionSms: "Please choice another table"
+        table: "table"
+        reserve: "reserve"
+        reserveConfirm: "Please confirm reserve"
+        reserveWarning: "Warning"
+        autoMsg4admin: "This notification was formated automatically and no need to reply it."
+        wantReserve: "want resevre"
+        guestInYourRestaurant: "Guest in your restaurant"
+        successfullyReserve: "reserve successfully"
+        guestReject: "guest reject"
+        thankYou4understanding: "Thank you for understanding"
+        pleaseAcceptOrder: "Please accept/reject order"
+        reserveRequest: "Reserve Request"
+        reserveReject: "Reject reserve"
+        rejectSubject: "reject reserve"
+        acceptSubject: "accept reserve"
