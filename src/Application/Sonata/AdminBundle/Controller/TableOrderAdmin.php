@@ -41,7 +41,7 @@ class TableOrderAdmin extends Admin
                             )
                     ), 'text/html', 'utf-8'
             );
-            $this->get('mailer')->send($message);
+            $container->get('mailer')->send($message);
         }
         
         // format target email (sent sms) 
@@ -60,7 +60,7 @@ class TableOrderAdmin extends Admin
                             )
                     ), 'text/html', 'utf-8'
             );
-            $this->get('mailer')->send($message);
+            $container->get('mailer')->send($message);
         }
             
     }
@@ -93,7 +93,7 @@ class TableOrderAdmin extends Admin
                         )
                 ), 'text/html', 'utf-8'
         );
-        $this->get('mailer')->send($message);
+        $container->get('mailer')->send($message);
         
         // format target email and send sms
         $targetEmail = "";
@@ -111,7 +111,7 @@ class TableOrderAdmin extends Admin
                         )
                 ), 'text/html', 'utf-8'
         );
-        $this->get('mailer')->send($message);
+        $container->get('mailer')->send($message);
     }
 
     /**
@@ -143,7 +143,7 @@ class TableOrderAdmin extends Admin
                             )
                     ), 'text/html', 'utf-8'
             );
-            $this->get('mailer')->send($message);
+            $container->get('mailer')->send($message);
         } 
         
         // sent sms if needed
@@ -162,7 +162,7 @@ class TableOrderAdmin extends Admin
                             )
                     ), 'text/html', 'utf-8'
             );
-            $this->get('mailer')->send($message);
+            $container->get('mailer')->send($message);
         }
             
     }
@@ -197,7 +197,7 @@ class TableOrderAdmin extends Admin
                         )
                 ), 'text/html', 'utf-8'
         );
-        $this->get('mailer')->send($message);
+        $container->get('mailer')->send($message);
         
         // sent sms
         // get target email regarding phone number
@@ -215,7 +215,7 @@ class TableOrderAdmin extends Admin
                         )
                 ), 'text/html', 'utf-8'
         );
-        $this->get('mailer')->send($message);
+        $container->get('mailer')->send($message);
     }
 
     /**
