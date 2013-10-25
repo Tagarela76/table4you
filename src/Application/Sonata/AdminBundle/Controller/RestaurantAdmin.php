@@ -74,11 +74,11 @@ class RestaurantAdmin extends Admin
                 ))
                 ->add('email', 'email', array(
                     'label' => 'restaurant.email',
-                    'required' => false
+                    'required' => true
                 ))
                 ->add('phone', null, array(
                     'label' => 'restaurant.phone',
-                    'required' => false
+                    'required' => true
                 ))
         ;
     }
