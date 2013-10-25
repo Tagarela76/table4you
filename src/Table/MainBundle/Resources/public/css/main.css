@@ -742,3 +742,15 @@ background-image: url(images/selects-2.png);}
 .error-li{
     margin: 0 !important;
 }
+@media (max-width: 860px){
+    .restaurantList-container .modal {
+        width: 100%;
+        max-width: 816px;
+        margin-left: -50%;
+    }
+    .restaurantList-container .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 350px;
+    }
+}
