@@ -31,8 +31,6 @@ class TableOrderAdmin extends Admin
             $message = \Swift_Message::newInstance()
                     ->setSubject($subject)
                     ->setFrom("noreply@table4you.com")
-                    ->setSender("noreply@table4you.com")
-                    ->setReturnPath("noreply@table4you.com")
                     ->setTo($userName)
                     ->setBody(
                     $container->get('templating')->render(
@@ -45,13 +43,11 @@ class TableOrderAdmin extends Admin
         }
         
         // format target email (sent sms) 
-        $targetEmail = "";
+        $targetEmail = "masha.an@kttsoft.com";
         if ($tableOrder->getIsSms()) {
             $message = \Swift_Message::newInstance()
                     ->setSubject($subject)
                     ->setFrom("noreply@table4you.com")
-                    ->setSender("noreply@table4you.com")
-                    ->setReturnPath("noreply@table4you.com")
                     ->setTo($targetEmail)
                     ->setBody(
                     $container->get('templating')->render(
@@ -83,8 +79,6 @@ class TableOrderAdmin extends Admin
         $message = \Swift_Message::newInstance()
                 ->setSubject($subject)
                 ->setFrom("noreply@table4you.com")
-                ->setSender("noreply@table4you.com")
-                ->setReturnPath("noreply@table4you.com")
                 ->setTo($receiverName)
                 ->setBody(
                 $container->get('templating')->render(
@@ -96,13 +90,11 @@ class TableOrderAdmin extends Admin
         $container->get('mailer')->send($message);
         
         // format target email and send sms
-        $targetEmail = "";
+        $targetEmail = "masha.an@kttsoft.com";
         // send email notification
         $message = \Swift_Message::newInstance()
                 ->setSubject($subject)
                 ->setFrom("noreply@table4you.com")
-                ->setSender("noreply@table4you.com")
-                ->setReturnPath("noreply@table4you.com")
                 ->setTo($targetEmail)
                 ->setBody(
                 $container->get('templating')->render(
@@ -133,8 +125,6 @@ class TableOrderAdmin extends Admin
             $message = \Swift_Message::newInstance()
                     ->setSubject($subject)
                     ->setFrom("noreply@table4you.com")
-                    ->setSender("noreply@table4you.com")
-                    ->setReturnPath("noreply@table4you.com")
                     ->setTo($userEmail)
                     ->setBody(
                     $container->get('templating')->render(
@@ -147,13 +137,11 @@ class TableOrderAdmin extends Admin
         } 
         
         // sent sms if needed
-        $targetEmail = ""; // get email regarding phone number
+        $targetEmail = "masha.an@kttsoft.com"; // get email regarding phone number
         if ($tableOrder->getIsSms()) {
             $message = \Swift_Message::newInstance()
                     ->setSubject($subject)
                     ->setFrom("noreply@table4you.com")
-                    ->setSender("noreply@table4you.com")
-                    ->setReturnPath("noreply@table4you.com")
                     ->setTo($targetEmail)
                     ->setBody(
                     $container->get('templating')->render(
@@ -187,8 +175,6 @@ class TableOrderAdmin extends Admin
         $message = \Swift_Message::newInstance()
                 ->setSubject($subject)
                 ->setFrom("noreply@table4you.com")
-                ->setSender("noreply@table4you.com")
-                ->setReturnPath("noreply@table4you.com")
                 ->setTo($receiverEmail)
                 ->setBody(
                 $container->get('templating')->render(
@@ -201,12 +187,10 @@ class TableOrderAdmin extends Admin
         
         // sent sms
         // get target email regarding phone number
-        $targetEmail = "";
+        $targetEmail = "masha.an@kttsoft.com";
         $message = \Swift_Message::newInstance()
                 ->setSubject($subject)
                 ->setFrom("noreply@table4you.com")
-                ->setSender("noreply@table4you.com")
-                ->setReturnPath("noreply@table4you.com")
                 ->setTo($targetEmail)
                 ->setBody(
                 $container->get('templating')->render(
