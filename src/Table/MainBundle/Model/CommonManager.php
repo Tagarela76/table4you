@@ -51,11 +51,16 @@ class CommonManager
 
         $clearPhone = "";
         $k = 0; // counter
-        for ($i = strlen($phone) - 1; $k < 10; $i --) {
-            $clearPhone .= $phone[$i];
-            $k ++;
+        if (strlen($phone) > 10) {
+            for ($i = strlen($phone) - 1; $k < 10; $i --) {
+                $clearPhone .= $phone[$i];
+                $k ++;
+            }
+            $clearPhone = strrev($clearPhone); 
+        } else {
+            $clearPhone = $phone;
         }
-        $clearPhone = strrev($clearPhone); 
+            
         // first we need to get code
         $phoneCode = "";
         for ($i = 0; $i < 3; $i ++) {
