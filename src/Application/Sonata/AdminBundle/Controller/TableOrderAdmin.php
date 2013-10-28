@@ -21,15 +21,6 @@ class TableOrderAdmin extends Admin
      */
     public function sendAcceptTableOrderNotification4customer($tableOrder)
     {
-        $container = $this->getConfigurationPool()->getContainer();
-        $message2 = \Swift_Message::newInstance()
-                ->setSubject("test")
-                ->setFrom("amn-15@mail.ru")
-                ->setTo("masha.an@kttsoft.com")
-                ->setBody("test");
-
-        $container->get('mailer')->send($message2);
-
         // get User Mail
         $userEmail = $tableOrder->getUser()->getEmail();
         // get subject
