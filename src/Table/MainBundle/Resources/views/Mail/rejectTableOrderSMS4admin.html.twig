@@ -1,1 +1,8 @@
-{% trans %}main.mail.tableOrder.notification.reserveReject{% endtrans %}: {% trans %}main.mail.tableOrder.notification.table{% endtrans %} №{{tableOrder.tableNumber}} {% trans %}main.mail.tableOrder.notification.for{% endtrans %} {{tableOrder.peopleCount}} {% trans %}main.mail.tableOrder.notification.guest{% endtrans %}, {% if not tableOrder.isSmokingZone %} {% trans %}main.mail.tableOrder.notification.notSmoke{% endtrans %}, {{tableOrder.reserveDate|date('d-m-Y')}}, {{tableOrder.reserveTime|date('H:s')}}. {% trans %}main.mail.tableOrder.notification.signature{% endtrans %}.
+{% trans %}main.mail.tableOrder.notification.reserveReject{% endtrans %}: 
+{% trans %}main.mail.tableOrder.notification.table{% endtrans %} 
+№{{tableOrder.tableNumber}} {% trans %}main.mail.tableOrder.notification.for{% endtrans %} 
+{{tableOrder.peopleCount}} {% trans %}main.mail.tableOrder.notification.guest{% endtrans %}, 
+{% if not tableOrder.isSmokingZone %} {% trans %}main.mail.tableOrder.notification.notSmoke{% endtrans %}, {%endif%}
+{{tableOrder.reserveDate|date('d-m-Y')}}, 
+{{tableOrder.reserveTime|date('H:s')}}.
+ {% trans %}main.mail.tableOrder.notification.signature{% endtrans %}.
