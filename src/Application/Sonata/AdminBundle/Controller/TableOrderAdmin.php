@@ -26,7 +26,7 @@ class TableOrderAdmin extends Admin
         // get subject
         $container = $this->getConfigurationPool()->getContainer();
         $trans = $container->get('translator');
-        $subject = $trans->trans('main.mail.tableOrder.notification.accept.subject');
+        $subject = $trans->trans('main.mail.tableOrder.notification.accept.subject', array(), 'ApplicationSonataAdminBundle');
 
         // send email notification
         if ($tableOrder->getIsEmail()) {
@@ -95,7 +95,7 @@ class TableOrderAdmin extends Admin
         // get subject
         $container = $this->getConfigurationPool()->getContainer();
         $trans = $container->get('translator');
-        $subject = $trans->trans('main.mail.tableOrder.notification.accept.subject');
+        $subject = $trans->trans('main.mail.tableOrder.notification.accept.subject', array(), 'ApplicationSonataAdminBundle');
 
         // send email notification
        /* $message = \Swift_Message::newInstance()
@@ -164,7 +164,7 @@ class TableOrderAdmin extends Admin
         // get subject
         $container = $this->getConfigurationPool()->getContainer();
         $trans = $container->get('translator');
-        $subject = $trans->trans('main.mail.tableOrder.notification.reject.subject');
+        $subject = $trans->trans('main.mail.tableOrder.notification.reject.subject', array(), 'ApplicationSonataAdminBundle');
 
         // sent email if needed
         if ($tableOrder->getIsEmail()) {
@@ -232,7 +232,7 @@ class TableOrderAdmin extends Admin
         // get subject
         $container = $this->getConfigurationPool()->getContainer();
         $trans = $container->get('translator');
-        $subject = $trans->trans('main.mail.tableOrder.notification.reject.subject');
+        $subject = $trans->trans('main.mail.tableOrder.notification.reject.subject', array(), 'ApplicationSonataAdminBundle');
 
         // get admin email
         $adminEmail = $tableOrder->getRestaurant()->getEmail();
