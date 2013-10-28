@@ -45,6 +45,9 @@
                     <a href="#" >{{ restaurant.name }}</a>
                 </p>
                 <p>
+                    {% trans %}main.labels.category{% endtrans %}
+                </p>
+                <p class="restaurant-content-font">
                     {{ restaurant.categories|join(',') }}
                 </p>
                 <p>

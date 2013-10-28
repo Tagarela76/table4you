@@ -4,6 +4,7 @@ main:
     address: 'Address:'
     scedule: 'Scedule:'
     additionalServices: 'Additional Services:'
+    category: 'Тип заведения:'
   register:
     buttonLabel: Registration
     form:
