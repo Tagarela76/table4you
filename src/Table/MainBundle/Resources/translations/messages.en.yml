@@ -54,5 +54,3 @@ main:
         pleaseAcceptOrder: "Please accept/reject order"
         reserveRequest: "Reserve Request"
         reserveReject: "Reject reserve"
-        rejectSubject: "reject reserve"
-        acceptSubject: "accept reserve"

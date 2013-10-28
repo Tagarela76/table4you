@@ -20,39 +20,43 @@ class TableOrderAdmin extends Admin
     public function sendAcceptTableOrderNotification4customer($tableOrder)
     {
         // get User Mail
-        $userName = $tableOrder->getUser()->getEmail();
+        $userEmail = $tableOrder->getUser()->getEmail();
         // get subject
         $container = $this->getConfigurationPool()->getContainer();
         $trans = $container->get('translator');
         $subject = $trans->trans('main.mail.tableOrder.notification.accept.subject');
-
+	
         // send email notification
         if ($tableOrder->getIsEmail()) {
             $message = \Swift_Message::newInstance()
                     ->setSubject($subject)
                     ->setFrom("noreply@table4you.com")
-                    ->setTo($userName)
-                    ->setBody(
+                    ->setTo($userEmail);
+	    // add logo
+	    $logo = $message->embed(\Swift_Image::fromPath('web/uploads/t4ylogo.png'));
+	    $message->setBody(
                     $container->get('templating')->render(
                             'TableMainBundle:Mail:acceptTableOrderNotification4customer.html.twig', array(
-                        'tableOrder' => $tableOrder
+                        'tableOrder' => $tableOrder,
+			'logo' => $logo
                             )
                     ), 'text/html', 'utf-8'
             );
+
             $container->get('mailer')->send($message);
         }
         
         // format target email (sent sms) 
         if (!is_null($phone = $tableOrder->getUser()->getPhone())) {
             $targetEmail = $container->get('common_manager')->getTargetEmailByPhone($phone);
-            if ($tableOrder->getIsSms()) {
+            if ($tableOrder->getIsSms() && !is_null($targetEmail)) {
                 $message = \Swift_Message::newInstance()
                         ->setSubject($subject)
                         ->setFrom("noreply@table4you.com")
                         ->setTo($targetEmail)
                         ->setBody(
                         $container->get('templating')->render(
-                                'TableMainBundle:Mail:acceptTableOrderNotification4customer.html.twig', array(
+                                'TableMainBundle:Mail:acceptTableOrderSMS4customer.html.twig', array(
                             'tableOrder' => $tableOrder
                                 )
                         ), 'text/html', 'utf-8'
@@ -72,7 +76,7 @@ class TableOrderAdmin extends Admin
     public function sendAcceptTableOrderNotification4admin($tableOrder)
     { 
         // get receiver Mail
-        $receiverName = $tableOrder->getRestaurant()->getEmail();
+        $adminEmail = $tableOrder->getRestaurant()->getEmail();
         // get subject
         $container = $this->getConfigurationPool()->getContainer();
         $trans = $container->get('translator');
@@ -82,11 +86,14 @@ class TableOrderAdmin extends Admin
         $message = \Swift_Message::newInstance()
                 ->setSubject($subject)
                 ->setFrom("noreply@table4you.com")
-                ->setTo($receiverName)
-                ->setBody(
+                ->setTo($adminEmail);
+	// add logo
+	$logo = $message->embed(\Swift_Image::fromPath('web/uploads/t4ylogo.png'));
+        $message->setBody(
                 $container->get('templating')->render(
                         'TableMainBundle:Mail:acceptTableOrderNotification4admin.html.twig', array(
-                    'tableOrder' => $tableOrder
+                    'tableOrder' => $tableOrder,
+		    'logo' => $logo
                         )
                 ), 'text/html', 'utf-8'
         );
@@ -95,19 +102,21 @@ class TableOrderAdmin extends Admin
        if (!is_null($phone = $tableOrder->getRestaurant()->getPhone())) { 
             // get email regarding phone number
             $targetEmail = $container->get('common_manager')->getTargetEmailByPhone($phone);
-            // send email notification
-            $message = \Swift_Message::newInstance()
-                    ->setSubject($subject)
-                    ->setFrom("noreply@table4you.com")
-                    ->setTo($targetEmail)
-                    ->setBody(
-                    $container->get('templating')->render(
-                            'TableMainBundle:Mail:acceptTableOrderNotification4admin.html.twig', array(
-                        'tableOrder' => $tableOrder
-                            )
-                    ), 'text/html', 'utf-8'
-            );
-            $container->get('mailer')->send($message);
+	    if (!is_null($targetEmail)) {
+		    // send email notification
+		    $message = \Swift_Message::newInstance()
+		            ->setSubject($subject)
+		            ->setFrom("noreply@table4you.com")
+		            ->setTo($targetEmail)
+		            ->setBody(
+		            $container->get('templating')->render(
+		                    'TableMainBundle:Mail:acceptTableOrderSMS4admin.html.twig', array(
+		                'tableOrder' => $tableOrder
+		                    )
+		            ), 'text/html', 'utf-8'
+		    );
+		    $container->get('mailer')->send($message);
+	    }
        }
     }
 
@@ -130,10 +139,12 @@ class TableOrderAdmin extends Admin
             $message = \Swift_Message::newInstance()
                     ->setSubject($subject)
                     ->setFrom("noreply@table4you.com")
-                    ->setTo($userEmail)
-                    ->setBody(
+                    ->setTo($userEmail);
+	    // add logo
+	    $logo = $message->embed(\Swift_Image::fromPath('web/uploads/t4ylogo.png'));
+            $message->setBody(
                     $container->get('templating')->render(
-                            'TableMainBundle:Mail:rejectTableOrderNotification4admin.html.twig', array(
+                            'TableMainBundle:Mail:rejectTableOrderNotification4customer.html.twig', array(
                         'tableOrder' => $tableOrder
                             )
                     ), 'text/html', 'utf-8'
@@ -145,14 +156,14 @@ class TableOrderAdmin extends Admin
         if (!is_null($phone = $tableOrder->getUser()->getPhone())) {
             // get email regarding phone number
             $targetEmail = $container->get('common_manager')->getTargetEmailByPhone($phone);
-            if ($tableOrder->getIsSms()) {
+            if ($tableOrder->getIsSms() && !is_null($targetEmail)) {
                 $message = \Swift_Message::newInstance()
                         ->setSubject($subject)
                         ->setFrom("noreply@table4you.com")
                         ->setTo($targetEmail)
                         ->setBody(
                         $container->get('templating')->render(
-                                'TableMainBundle:Mail:rejectTableOrderNotification4admin.html.twig', array(
+                                'TableMainBundle:Mail:rejectTableOrderSMS4customer.html.twig', array(
                             'tableOrder' => $tableOrder
                                 )
                         ), 'text/html', 'utf-8'
@@ -177,14 +188,16 @@ class TableOrderAdmin extends Admin
         $subject = $trans->trans('main.mail.tableOrder.notification.reject.subject');
         
         // get admin email
-        $receiverEmail = $tableOrder->getRestaurant()->getEmail();
+        $adminEmail = $tableOrder->getRestaurant()->getEmail();
 
         // sent email
         $message = \Swift_Message::newInstance()
                 ->setSubject($subject)
                 ->setFrom("noreply@table4you.com")
-                ->setTo($receiverEmail)
-                ->setBody(
+                ->setTo($adminEmail);
+	// add logo
+	$logo = $message->embed(\Swift_Image::fromPath('web/uploads/t4ylogo.png'));
+        $message->setBody(
                 $container->get('templating')->render(
                         'TableMainBundle:Mail:rejectTableOrderNotification4admin.html.twig', array(
                     'tableOrder' => $tableOrder
@@ -197,18 +210,20 @@ class TableOrderAdmin extends Admin
         // get target email regarding phone number
         if (!is_null($phone = $tableOrder->getRestaurant()->getPhone())) {
             $targetEmail = $container->get('common_manager')->getTargetEmailByPhone($phone);
-            $message = \Swift_Message::newInstance()
-                    ->setSubject($subject)
-                    ->setFrom("noreply@table4you.com")
-                    ->setTo($targetEmail)
-                    ->setBody(
-                    $container->get('templating')->render(
-                            'TableMainBundle:Mail:rejectTableOrderNotification4admin.html.twig', array(
-                        'tableOrder' => $tableOrder
-                            )
-                    ), 'text/html', 'utf-8'
-            );
-            $container->get('mailer')->send($message);
+	    if (!is_null($targetEmail)) {
+		    $message = \Swift_Message::newInstance()
+		            ->setSubject($subject)
+		            ->setFrom("noreply@table4you.com")
+		            ->setTo($targetEmail)
+		            ->setBody(
+		            $container->get('templating')->render(
+		                    'TableMainBundle:Mail:rejectTableOrderSMS4admin.html.twig', array(
+		                'tableOrder' => $tableOrder
+		                    )
+		            ), 'text/html', 'utf-8'
+		    );
+		    $container->get('mailer')->send($message);
+	    }
         }
        
     }

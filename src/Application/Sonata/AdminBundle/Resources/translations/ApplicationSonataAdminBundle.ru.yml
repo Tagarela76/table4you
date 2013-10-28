@@ -50,3 +50,11 @@ Restaurant Additional Service List: Список дополнительных у
 Map Photo:  Карта ресторана
 Table Order List: Заказ столиков
 Restaurant Schedule List: Список расписаний ресторана
+main:
+  mail:
+    tableOrder:
+      notification:
+        reject:
+          subject: "отказ бронирования"
+        accept:
+          subject: "подтверждение бронирования"
