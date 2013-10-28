@@ -145,7 +145,8 @@ class TableOrderAdmin extends Admin
             $message->setBody(
                     $container->get('templating')->render(
                             'TableMainBundle:Mail:rejectTableOrderNotification4customer.html.twig', array(
-                        'tableOrder' => $tableOrder
+                        'tableOrder' => $tableOrder,
+			'logo' => $logo
                             )
                     ), 'text/html', 'utf-8'
             );
@@ -200,7 +201,8 @@ class TableOrderAdmin extends Admin
         $message->setBody(
                 $container->get('templating')->render(
                         'TableMainBundle:Mail:rejectTableOrderNotification4admin.html.twig', array(
-                    'tableOrder' => $tableOrder
+                    'tableOrder' => $tableOrder,
+		    'logo' => $logo
                         )
                 ), 'text/html', 'utf-8'
         );
