@@ -30,7 +30,7 @@ class TableOrderAdmin extends Admin
 
         // send email notification
         if ($tableOrder->getIsEmail()) {
-            $message = \Swift_Message::newInstance()
+      /*      $message = \Swift_Message::newInstance()
                     ->setSubject($subject)
                     ->setFrom("noreply@table4you.com")
                     ->setTo($userEmail);
@@ -45,6 +45,21 @@ class TableOrderAdmin extends Admin
                     ), 'text/html', 'utf-8'
             );
 
+            $container->get('mailer')->send($message);*/
+            // add logo
+            $logo = 'uploads/t4ylogo.png';
+            $message = \Swift_Message::newInstance()
+                    ->setSubject($subject)
+                    ->setFrom("noreply@table4you.com")
+                    ->setTo($userEmail)
+                    ->setBody(
+                    $container->get('templating')->render(
+                            'TableMainBundle:Mail:acceptTableOrderNotification4customer.html.twig', array(
+                        'tableOrder' => $tableOrder,
+                        'logo' => $logo
+                            )
+                    ), 'text/html', 'utf-8'
+            );
             $container->get('mailer')->send($message);
         }
 
@@ -83,13 +98,30 @@ class TableOrderAdmin extends Admin
         $subject = $trans->trans('main.mail.tableOrder.notification.accept.subject');
 
         // send email notification
-        $message = \Swift_Message::newInstance()
+       /* $message = \Swift_Message::newInstance()
                 ->setSubject($subject)
                 ->setFrom("noreply@table4you.com")
                 ->setTo($adminEmail);
         // add logo
         $logo = $message->embed(\Swift_Image::fromPath('uploads/t4ylogo.png'));
         $message->setBody(
+                $container->get('templating')->render(
+                        'TableMainBundle:Mail:acceptTableOrderNotification4admin.html.twig', array(
+                    'tableOrder' => $tableOrder,
+                    'logo' => $logo
+                        )
+                ), 'text/html', 'utf-8'
+        );
+        $container->get('mailer')->send($message);*.
+        * 
+        */
+        // add logo
+        $logo = 'uploads/t4ylogo.png';
+        $message = \Swift_Message::newInstance()
+                ->setSubject($subject)
+                ->setFrom("noreply@table4you.com")
+                ->setTo($adminEmail)
+                ->setBody(
                 $container->get('templating')->render(
                         'TableMainBundle:Mail:acceptTableOrderNotification4admin.html.twig', array(
                     'tableOrder' => $tableOrder,
@@ -136,13 +168,28 @@ class TableOrderAdmin extends Admin
 
         // sent email if needed
         if ($tableOrder->getIsEmail()) {
-            $message = \Swift_Message::newInstance()
+           /* $message = \Swift_Message::newInstance()
                     ->setSubject($subject)
                     ->setFrom("noreply@table4you.com")
                     ->setTo($userEmail);
             // add logo
             $logo = $message->embed(\Swift_Image::fromPath('uploads/t4ylogo.png'));
             $message->setBody(
+                    $container->get('templating')->render(
+                            'TableMainBundle:Mail:rejectTableOrderNotification4customer.html.twig', array(
+                        'tableOrder' => $tableOrder,
+                        'logo' => $logo
+                            )
+                    ), 'text/html', 'utf-8'
+            );
+            $container->get('mailer')->send($message);*/
+            // add logo
+            $logo = 'uploads/t4ylogo.png';
+            $message = \Swift_Message::newInstance()
+                    ->setSubject($subject)
+                    ->setFrom("noreply@table4you.com")
+                    ->setTo($userEmail)
+                    ->setBody(
                     $container->get('templating')->render(
                             'TableMainBundle:Mail:rejectTableOrderNotification4customer.html.twig', array(
                         'tableOrder' => $tableOrder,
@@ -191,13 +238,28 @@ class TableOrderAdmin extends Admin
         $adminEmail = $tableOrder->getRestaurant()->getEmail();
 
         // sent email
-        $message = \Swift_Message::newInstance()
+      /*  $message = \Swift_Message::newInstance()
                 ->setSubject($subject)
                 ->setFrom("noreply@table4you.com")
                 ->setTo($adminEmail);
         // add logo
         $logo = $message->embed(\Swift_Image::fromPath('uploads/t4ylogo.png'));
         $message->setBody(
+                $container->get('templating')->render(
+                        'TableMainBundle:Mail:rejectTableOrderNotification4admin.html.twig', array(
+                    'tableOrder' => $tableOrder,
+                    'logo' => $logo
+                        )
+                ), 'text/html', 'utf-8'
+        );
+        $container->get('mailer')->send($message);*/
+        // add logo
+        $logo = 'uploads/t4ylogo.png';
+        $message = \Swift_Message::newInstance()
+                ->setSubject($subject)
+                ->setFrom("noreply@table4you.com")
+                ->setTo($adminEmail)
+                ->setBody(
                 $container->get('templating')->render(
                         'TableMainBundle:Mail:rejectTableOrderNotification4admin.html.twig', array(
                     'tableOrder' => $tableOrder,
