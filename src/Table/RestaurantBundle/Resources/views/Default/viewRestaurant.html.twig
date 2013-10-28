@@ -70,7 +70,7 @@
                 </p>
                 <p class="restaurant-content-font">
                     {% for schedule in restaurant.restaurantSchedule %}
-                        <p>{{schedule.dayFromStr}} - {{schedule.dayToStr}} {{schedule.timeFrom|date('H:i')}} - {{schedule.timeTo|date('H:i')}}</p>
+                     {{schedule.dayFromStr}} - {{schedule.dayToStr}} {{schedule.timeFrom|date('H:i')}} - {{schedule.timeTo|date('H:i')}}
                     {% endfor %}
                 </p>
             </div>
