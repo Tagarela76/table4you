@@ -33,7 +33,7 @@ class TableOrderAdmin extends Admin
                     ->setFrom("noreply@table4you.com")
                     ->setTo($userEmail);
 	    // add logo
-	    $logo = $message->embed(\Swift_Image::fromPath('web/uploads/t4ylogo.png'));
+	    $logo = $message->embed(\Swift_Image::fromPath('uploads/t4ylogo.png'));
 	    $message->setBody(
                     $container->get('templating')->render(
                             'TableMainBundle:Mail:acceptTableOrderNotification4customer.html.twig', array(
@@ -88,7 +88,7 @@ class TableOrderAdmin extends Admin
                 ->setFrom("noreply@table4you.com")
                 ->setTo($adminEmail);
 	// add logo
-	$logo = $message->embed(\Swift_Image::fromPath('web/uploads/t4ylogo.png'));
+	$logo = $message->embed(\Swift_Image::fromPath('uploads/t4ylogo.png'));
         $message->setBody(
                 $container->get('templating')->render(
                         'TableMainBundle:Mail:acceptTableOrderNotification4admin.html.twig', array(
@@ -141,7 +141,7 @@ class TableOrderAdmin extends Admin
                     ->setFrom("noreply@table4you.com")
                     ->setTo($userEmail);
 	    // add logo
-	    $logo = $message->embed(\Swift_Image::fromPath('web/uploads/t4ylogo.png'));
+	    $logo = $message->embed(\Swift_Image::fromPath('uploads/t4ylogo.png'));
             $message->setBody(
                     $container->get('templating')->render(
                             'TableMainBundle:Mail:rejectTableOrderNotification4customer.html.twig', array(
@@ -196,7 +196,7 @@ class TableOrderAdmin extends Admin
                 ->setFrom("noreply@table4you.com")
                 ->setTo($adminEmail);
 	// add logo
-	$logo = $message->embed(\Swift_Image::fromPath('web/uploads/t4ylogo.png'));
+	$logo = $message->embed(\Swift_Image::fromPath('uploads/t4ylogo.png'));
         $message->setBody(
                 $container->get('templating')->render(
                         'TableMainBundle:Mail:rejectTableOrderNotification4admin.html.twig', array(
