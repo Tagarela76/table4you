@@ -9,6 +9,9 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Table\RestaurantBundle\Entity\TableOrder;
 use Sonata\AdminBundle\Route\RouteCollection;
 
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+
 class TableOrderAdmin extends Admin
 {
 
@@ -47,7 +50,7 @@ class TableOrderAdmin extends Admin
         }
         
         // format target email (sent sms) 
-        if (!is_null($phone = $tableOrder->getUser()->getPhone())) {
+    /*    if (!is_null($phone = $tableOrder->getUser()->getPhone())) {
             $targetEmail = $container->get('common_manager')->getTargetEmailByPhone($phone);
             if ($tableOrder->getIsSms() && !is_null($targetEmail)) {
                 $message = \Swift_Message::newInstance()
@@ -63,7 +66,7 @@ class TableOrderAdmin extends Admin
                 );
                 $container->get('mailer')->send($message);
             }
-        }
+        }*/
        
             
     }
@@ -99,7 +102,7 @@ class TableOrderAdmin extends Admin
         );
         $container->get('mailer')->send($message);
         
-       if (!is_null($phone = $tableOrder->getRestaurant()->getPhone())) { 
+   /*    if (!is_null($phone = $tableOrder->getRestaurant()->getPhone())) { 
             // get email regarding phone number
             $targetEmail = $container->get('common_manager')->getTargetEmailByPhone($phone);
 	    if (!is_null($targetEmail)) {
@@ -117,7 +120,7 @@ class TableOrderAdmin extends Admin
 		    );
 		    $container->get('mailer')->send($message);
 	    }
-       }
+       }*/
     }
 
     /**
@@ -154,7 +157,7 @@ class TableOrderAdmin extends Admin
         } 
         
         // sent sms if needed
-        if (!is_null($phone = $tableOrder->getUser()->getPhone())) {
+    /*    if (!is_null($phone = $tableOrder->getUser()->getPhone())) {
             // get email regarding phone number
             $targetEmail = $container->get('common_manager')->getTargetEmailByPhone($phone);
             if ($tableOrder->getIsSms() && !is_null($targetEmail)) {
@@ -171,7 +174,7 @@ class TableOrderAdmin extends Admin
                 );
                 $container->get('mailer')->send($message);
             }
-        }  
+        }  */
             
     }
 
@@ -210,7 +213,7 @@ class TableOrderAdmin extends Admin
         
         // sent sms
         // get target email regarding phone number
-        if (!is_null($phone = $tableOrder->getRestaurant()->getPhone())) {
+     /*   if (!is_null($phone = $tableOrder->getRestaurant()->getPhone())) {
             $targetEmail = $container->get('common_manager')->getTargetEmailByPhone($phone);
 	    if (!is_null($targetEmail)) {
 		    $message = \Swift_Message::newInstance()
@@ -226,7 +229,7 @@ class TableOrderAdmin extends Admin
 		    );
 		    $container->get('mailer')->send($message);
 	    }
-        }
+        }*/
        
     }
 
