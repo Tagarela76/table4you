@@ -756,3 +756,16 @@ background-image: url(images/selects-2.png);}
         max-height: 350px;
     }
 }
+@media (max-width: 1024px){
+    .restaurantList-container .modal.fade.in {
+        top: 5%;
+    }
+}
+@media (max-height: 690px){
+    .restaurantList-container .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 350px;
+  overflow-y: overlay;
+    }
+}
