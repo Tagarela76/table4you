@@ -58,7 +58,7 @@ class ProfileFormHandler extends BaseProfileFormHandler
      */
     public function process(UserInterface $user)
     {
-        $this->form->setData($user);
+        $this->form->setData($user); 
 
         if ('POST' == $this->request->getMethod()) {
             $this->form->bind($this->request);
@@ -85,8 +85,8 @@ class ProfileFormHandler extends BaseProfileFormHandler
     {
         if ($this->getNewPassword() != "") {
             $user->setPlainPassword($this->getNewPassword());
-            $this->userManager->updateUser($user); 
         }
+        $this->userManager->updateUser($user); 
             
     }
 }
