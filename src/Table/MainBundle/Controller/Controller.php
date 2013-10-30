@@ -76,4 +76,9 @@ class Controller extends BaseController
     {
         return $this->get('common_manager');
     }
+    
+    public function getCityManager()
+    {
+        return $this->get('city_manager');
+    }
 }

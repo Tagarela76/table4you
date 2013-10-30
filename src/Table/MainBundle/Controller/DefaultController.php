@@ -50,13 +50,28 @@ class DefaultController extends Controller
             $isRatingDisabled = true;
         }
         
+	/* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN HEADER */
+	// get city list
+	$cityList = $this->getCityManager()->findAll();
+	/// get all category list
+	$categoryList = $this->getRestaurantCategoryManager()->findAll();
+	// get all kitchen list
+	$kitchenList = $this->getRestaurantKitchenManager()->findAll();
+	
+	// get current city
+	$searchCity = $this->getRequest()->query->get('city');
+
         return array(
             'restaurantsList' => $this->getPaginator()->paginate(
                     $this->getRestaurantManager()->getRestaurants(), $page, Restaurant::PER_PAGE_COUNT
             ),
             'anonim' => $anonim,
             'restaurantsWhoHadHasAlreadyRating' => $restaurantsWhoHadHasAlreadyRating,
-            'isRatingDisabled' => $isRatingDisabled
+            'isRatingDisabled' => $isRatingDisabled,
+	    'cityList' => $cityList,
+	    'categoryList' => $categoryList,
+	    'kitchenList' => $kitchenList,
+	    'searchCity'  => $searchCity
         );
     }
     
@@ -71,6 +86,24 @@ class DefaultController extends Controller
     {
         return array(
 
+        );
+    }
+
+    /**
+     * 
+     * Refresh restaurant list
+     * @Template()
+     * 
+     * @return array[]
+     */
+    public function refreshRestaurantListAction()
+    {
+	// get restaurant list
+	$restaurantList = $this->getRestaurantManager()->searchRestaurants($this->getRequest());
+        return array(
+            'restaurantsList' => $this->getPaginator()->paginate(
+                    $this->getRestaurantManager()->getRestaurants(), $page, Restaurant::PER_PAGE_COUNT
+            )
         );
     }
 

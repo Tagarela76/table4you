@@ -3,6 +3,13 @@ table_main_homepage:
     defaults: { _controller: TableMainBundle:Default:index, page: 1 }
     requirements:
         page: \d+         
+
 table_main_auth_page:
     pattern:  /viewAuthPage
     defaults: { _controller: TableMainBundle:Default:viewAuthPage }
+
+table_main_refresh_restaurant_list:
+    pattern:  /refreshRestaurantList
+    defaults: { _controller: TableMainBundle:Default:refreshRestaurantList }
+    options:
+       expose: true 

@@ -50,19 +50,36 @@ class RestaurantRepository extends EntityRepository
     public function searchRestaurants($request) 
     { 
         // collect parametres
-        $requestParametres = $request->request->all();  
         $query = $this->createQueryBuilder('restaurant');
-        $searchStr = $requestParametres['searchStr'];
-        $categoriesList = $requestParametres['categoriesList'];
-        $kitchensList = $requestParametres['kitchensList'];
-        if (!is_null($searchStr)) {
-            $query->where('restaurant.name like "%:operation%"')
-            ->setParameter('operation', $propertyOperation);
-        }
-        
-        
-        $query->orderBy('restaurant.name', 'ASC');
+        $searchStr = $request->request->get('restaurantSearchStr');
+        $categoriesList = $request->request->get('restaurantCategoryList');
+        $kitchensList = $request->request->get('restaurantKitchenList');
+	$searchCity = $request->request->get('searchCity');
+      
+	if (!is_null($searchCity) && $searchCity != "") {
+	    $query->andWhere("restaurant.city = :searchCity")
+	          ->setParameter('searchCity', $searchCity);
+	}
 
+        if (!is_null($searchStr) && $searchStr != "") {
+            $query->leftJoin('restaurant.city', 'city')        
+                  ->andWhere("restaurant.name like '%$searchStr%' or city.name like '%$searchStr%' or restaurant.street like '%$searchStr%'");
+
+        }
+   	    
+	if (!is_null($categoriesList) && !empty($categoriesList)) {
+            $query->andWhere("restaurant.categories IN(:categoriesList)")
+		  ->setParameter('categoriesList', implode(",", $categoriesList));
+
+        }
+	if (!is_null($kitchensList) && !empty($kitchensList)) {
+            $query->andWhere("restaurant.kitchens IN(:kitchensList)")
+		  ->setParameter('kitchensList', implode(",", $kitchensList));
+
+        }
+
+        $query->orderBy('restaurant.name', 'ASC');
+//var_dump($query->getQuery()->getResult());
         return $query;
     }
 }

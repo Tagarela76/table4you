@@ -5,6 +5,9 @@ main:
     scedule: 'Scedule:'
     additionalServices: 'Additional Services:'
     category: 'Тип заведения:'
+    search:
+      kitchen: 'Kitchen'
+      category: 'Category'
   register:
     buttonLabel: Registration
     form:

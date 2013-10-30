@@ -16,6 +16,7 @@
             <!--[if lt IE 9]>
                 <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/ie-css.css') }}">
             <![endif]-->
+	    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/bootstrap-multiselect.css') }}">
         {% endblock %}
 
         {% block javascripts %}
@@ -24,6 +25,29 @@
             <script src="{{ asset('bundles/tablemain/js/bootstrap-dropdown.js') }}"></script>
             <script src="{{ asset('bundles/tablemain/js/respond.min.js') }}"></script>
             <script src="{{ asset('bundles/tablemain/js/placeholder-ie-support.js') }}"></script>
+	    <script src="{{ asset('bundles/tablemain/js/bootstrap-multiselect.js') }}"></script>
+	    <script src="{{ asset('bundles/tablemain/js/restaurant-filter.js') }}"></script>
+	    <!-- Initialize the multiselect plugin: -->
+	    <script type="text/javascript">
+	    $(document).ready(function() {
+	        $('.restaurantCategoryList_main').multiselect({
+			buttonText: function(options, select) {
+				return "{% trans %}main.labels.search.category{% endtrans %}";
+			},
+			onChange: function(element, checked) {
+				restaurantFilter.refreshRestaurantList();
+			}
+		});
+		$('.restaurantKitchenList_main').multiselect({
+			buttonText: function(options, select) {
+				return "{% trans %}main.labels.search.kitchen{% endtrans %}";
+			},
+			onChange: function(element, checked) {
+				restaurantFilter.refreshRestaurantList();
+			}
+		});
+	    });
+	    </script>
         {% endblock %}
 
     </head>
@@ -31,7 +55,16 @@
         <div class="container">
             <div class="row">
                 <div class="span12">
-
+		    {% block header %}
+			{% include 'TableMainBundle:Component:header.html.twig' %}
+		    {% endblock %}
+                </div>
+            </div>
+	    <div class="row">
+                <div class="span12">
+		    {% block searchContainer %}
+			{% include 'TableMainBundle:Component:searchContainer.html.twig' %}
+		    {% endblock %}
                 </div>
             </div>
             <div class="row">

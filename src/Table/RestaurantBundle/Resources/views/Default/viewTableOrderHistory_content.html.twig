@@ -9,7 +9,7 @@
         <td>
             <p class="rest-name-table">{{tableOrder.restaurant.name}}</p>
             <p>{{ tableOrder.restaurant.categories|join(',') }}</p>
-            <p>{{ tableOrder.restaurant.city }}, {{ tableOrder.restaurant.street }}, {{ tableOrder.restaurant.house }}</p>
+            <p>{{ tableOrder.restaurant.city.name }}, {{ tableOrder.restaurant.street }}, {{ tableOrder.restaurant.house }}</p>
         </td>
         <td>
             {% include 'TableRestaurantBundle:Default:rating.html.twig' with {'restaurant': tableOrder.restaurant, 'isRatingDisabled': isRatingDisabled, 'restaurantsWhoHadHasAlreadyRating': restaurantsWhoHadHasAlreadyRating, 'id': tableOrder.id} %}

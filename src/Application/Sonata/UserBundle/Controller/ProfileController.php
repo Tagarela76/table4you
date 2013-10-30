@@ -61,7 +61,7 @@ class ProfileController extends BaseSecurityController
 
         $process = $formHandler->process($user);
         if ($process) {
-            $this->setFlash('fos_user_success', 'profile.flash.updated');
+           // $this->setFlash('fos_user_success', 'profile.flash.updated');
 
             return new RedirectResponse($this->generateUrl('sonata_user_profile_show'));
         } 

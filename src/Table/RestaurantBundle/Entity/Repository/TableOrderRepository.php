@@ -47,13 +47,14 @@ class TableOrderRepository extends EntityRepository
                       ->setParameter('reserveDate', $filterDate);
 	}
 	if (!is_null($searchStr) && $searchStr != "") {
-		$query->leftJoin('orderHistory.restaurant', 'r')
-		      ->andWhere("r.name like '%$searchStr%' or r.city like '%$searchStr%' or r.street like '%$searchStr%'");
+		$query->leftJoin('orderHistory.restaurant', 'restaurant')
+              ->leftJoin('restaurant.city', 'city')        
+		      ->andWhere("restaurant.name like '%$searchStr%' or city.name like '%$searchStr%' or restaurant.street like '%$searchStr%'");
 		//$query->leftJoin('orderHistory.restaurant.categories', 'c');
 		
 	}
       //  $query->getQuery();  
-//var_dump($query->getQuery()); die();
+//var_dump($query->getQuery()->getResult()); die();
         return $query->getQuery()->getResult();
     }
 }

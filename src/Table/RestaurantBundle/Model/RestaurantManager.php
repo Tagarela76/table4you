@@ -127,6 +127,6 @@ class RestaurantManager
      */
     public function searchRestaurants($request)
     {
-        return $this->getRestaurantRepo()->searchProperty($request);
+        return $this->getRestaurantRepo()->searchRestaurants($request);
     }
 }

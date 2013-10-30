@@ -60,5 +60,14 @@
               <argument>ApplicationSonataAdminBundle</argument>
           </call>
       </service>
+      <service id="sonata.admin.city" class="Application\Sonata\AdminBundle\Controller\CityAdmin">
+          <tag name="sonata.admin" manager_type="orm" group="Restaurant" label="restaurant.city.city"/>
+          <argument />
+          <argument>Table\RestaurantBundle\Entity\City</argument>
+          <argument>SonataAdminBundle:CRUD</argument>
+          <call method="setTranslationDomain">
+              <argument>ApplicationSonataAdminBundle</argument>
+          </call>
+      </service>
    </services>
 </container>
