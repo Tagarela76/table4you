@@ -4,7 +4,7 @@
     </div>
     <div class="span5">
 	{% for city in cityList %}
-		<a href="?city={{city.id}}"> {{city.name}} </a>
+		<a href="#" onclick="restaurantFilter.selectCity4Search({{city.id}});restaurantFilter.refreshRestaurantList();"> {{city.name}} </a>
 	{% endfor %}
     </div>
     <div class="span3">

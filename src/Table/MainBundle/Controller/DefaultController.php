@@ -59,20 +59,51 @@ class DefaultController extends Controller
 	$kitchenList = $this->getRestaurantKitchenManager()->findAll();
 	
 	// get current city
-	$searchCity = $this->getRequest()->query->get('city');
+	$searchCity = $this->getRequest()->query->get('searchCity');
+	// if null set default -> krasnodar
+	if (is_null($searchCity)) {
+	    $searchCity = 1;
+	}
 
-        return array(
-            'restaurantsList' => $this->getPaginator()->paginate(
-                    $this->getRestaurantManager()->getRestaurants(), $page, Restaurant::PER_PAGE_COUNT
-            ),
-            'anonim' => $anonim,
-            'restaurantsWhoHadHasAlreadyRating' => $restaurantsWhoHadHasAlreadyRating,
-            'isRatingDisabled' => $isRatingDisabled,
-	    'cityList' => $cityList,
-	    'categoryList' => $categoryList,
-	    'kitchenList' => $kitchenList,
-	    'searchCity'  => $searchCity
-        );
+	// get restaurant list
+	$filter = $this->getRequest()->request->get('filter');  // fir restaurant filter
+	if ($filter) { 
+	    $restaurantList = $this->getRestaurantManager()->searchRestaurants($this->getRequest());
+	} else {
+	    $restaurantList = $this->getRestaurantManager()->getRestaurants();
+	}
+
+	// if filter render only restaurant list
+	if ($filter) {
+	    return $this->render(
+                'TableRestaurantBundle:Default:restaurantList.html.twig', array(
+                    'restaurantsList' => $this->getPaginator()->paginate(
+                        $restaurantList, $page, Restaurant::PER_PAGE_COUNT
+                    ),
+                    'anonim' => $anonim,
+                    'restaurantsWhoHadHasAlreadyRating' => $restaurantsWhoHadHasAlreadyRating,
+                    'isRatingDisabled' => $isRatingDisabled,
+	            'cityList' => $cityList,
+	            'categoryList' => $categoryList,
+	            'kitchenList' => $kitchenList,
+	            'searchCity'  => $searchCity
+                 )
+            ); 
+	} else {
+	
+            return array(
+                'restaurantsList' => $this->getPaginator()->paginate(
+                    $restaurantList, $page, Restaurant::PER_PAGE_COUNT
+                ),
+                'anonim' => $anonim,
+                'restaurantsWhoHadHasAlreadyRating' => $restaurantsWhoHadHasAlreadyRating,
+                'isRatingDisabled' => $isRatingDisabled,
+	        'cityList' => $cityList,
+	        'categoryList' => $categoryList,
+	        'kitchenList' => $kitchenList,
+	        'searchCity'  => $searchCity
+            );
+	}
     }
     
     /**
@@ -86,24 +117,6 @@ class DefaultController extends Controller
     {
         return array(
 
-        );
-    }
-
-    /**
-     * 
-     * Refresh restaurant list
-     * @Template()
-     * 
-     * @return array[]
-     */
-    public function refreshRestaurantListAction()
-    {
-	// get restaurant list
-	$restaurantList = $this->getRestaurantManager()->searchRestaurants($this->getRequest());
-        return array(
-            'restaurantsList' => $this->getPaginator()->paginate(
-                    $this->getRestaurantManager()->getRestaurants(), $page, Restaurant::PER_PAGE_COUNT
-            )
         );
     }
 

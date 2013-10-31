@@ -2,14 +2,10 @@ table_main_homepage:
     pattern:  /{page}
     defaults: { _controller: TableMainBundle:Default:index, page: 1 }
     requirements:
-        page: \d+         
+        page: \d+   
+    options:
+       expose: true       
 
 table_main_auth_page:
     pattern:  /viewAuthPage
     defaults: { _controller: TableMainBundle:Default:viewAuthPage }
-
-table_main_refresh_restaurant_list:
-    pattern:  /refreshRestaurantList
-    defaults: { _controller: TableMainBundle:Default:refreshRestaurantList }
-    options:
-       expose: true 
