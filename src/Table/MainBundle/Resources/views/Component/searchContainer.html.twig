@@ -1,29 +1,29 @@
-<div class="row">
-    <div class="span1">
-	LOGO
+<div class="row wrap_search_categories">
+    <div class="span1 logo-mini">
+	<a href="" class="logo-mini-img"></a>
     </div>
-    <div class="span2">
+    <div class="span2 btn-categories">
 	<select class ="restaurantCategoryList_main" id='restaurantCategory_main' name='restaurantCategory_main' multiple="multiple">
 		{% for category in categoryList %}
 		    <option value='{{ category.id }}'>{{ category.name }}</option>    
 		{% endfor %}
 	</select> 
     </div>
-    <div class="span2">
+    <div class="span2 btn-kitchen">
 	<select class="restaurantKitchenList_main" id='restaurantKitchen_main' name='restaurantKitchen_main' multiple="multiple">
 		{% for kitchen in kitchenList %}
 		    <option value='{{ kitchen.id }}'>{{ kitchen.name }}</option>    
 		{% endfor %}
 	</select> 
     </div>
-    <div class="span5">
+    <div class="span5 serch-text">
 	<input type="text" name="searchRestaurantsStr_main" id="searchRestaurantsStr_main" value="" />
 	<input type="hidden" name="searchRestaurantsCity_main" id="searchRestaurantsCity_main" value="{{searchCity}}" />
     </div>
-    <div class="span1">
-	<input type="button" onclick="restaurantFilter.refreshRestaurantList();" value="SEARCH" />
+    <div class="span1 serch-btn">
+	<input type="button" onclick="restaurantFilter.refreshRestaurantList();" value="" />
     </div>
-    <div class="span1">
-	<input type="button" onclick="" value="SEARCH_MAP" />
+    <div class="span1 serch-map">
+	<input type="button" onclick="" value="" />
     </div>
 </div>
