@@ -9,12 +9,12 @@
 		<a class="btn" href="#" onclick="restaurantFilter.selectCity4Search({{city.id}});restaurantFilter.refreshRestaurantList();"> {{city.name}} </a>
 	{% endfor %}
     </div>
-    <div class="span2">
+    <div class="span2 log-in-top">
+        <a data-toggle="modal" data-target="#login" href="{{ path('fos_user_security_login') }}">
+            {% trans %}main.login.buttonLabel{% endtrans %}
+        </a>
 	<a data-toggle="modal" data-target="#register" href="{{ path('fos_user_registration_register') }}">
             {% trans %}main.register.buttonLabel{% endtrans %}
-        </a>
-	<a data-toggle="modal" data-target="#login" href="{{ path('fos_user_security_login') }}">
-            {% trans %}main.login.buttonLabel{% endtrans %}
         </a>
     </div>
 </div>
