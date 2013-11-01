@@ -55,31 +55,35 @@ class RestaurantRepository extends EntityRepository
         $categoriesList = $request->request->get('restaurantCategoryList');
         $kitchensList = $request->request->get('restaurantKitchenList');
 	$searchCity = $request->request->get('searchCity');
-      
+  
+	// set dependency with category and kitchen entitues
+	$query->leftJoin('restaurant.categories', 'category', 'ON restaurant.id = category.id')
+	      ->leftJoin('restaurant.kitchens', 'kitchen', 'ON restaurant.id = kitchen.id');
+
 	if (!is_null($searchCity) && $searchCity != "") {
 	    $query->andWhere("restaurant.city = :searchCity")
 	          ->setParameter('searchCity', $searchCity);
 	}
 
         if (!is_null($searchStr) && $searchStr != "") {
-            $query->leftJoin('restaurant.city', 'city')        
-                  ->andWhere("restaurant.name like '%$searchStr%' or city.name like '%$searchStr%' or restaurant.street like '%$searchStr%'");
+            $query->leftJoin('restaurant.city', 'city')   
+		  ->andWhere("restaurant.name like '%$searchStr%' or city.name like '%$searchStr%' or restaurant.street like '%$searchStr%' or category.name like '%$searchStr%' or kitchen.name like '%$searchStr%'");
 
         }
    	    
 	if (!is_null($categoriesList) && !empty($categoriesList)) {
-            $query->andWhere("restaurant.categories IN(:categoriesList)")
+	    $query->andWhere("category.id IN(:categoriesList)")
 		  ->setParameter('categoriesList', implode(",", $categoriesList));
 
         }
 	if (!is_null($kitchensList) && !empty($kitchensList)) {
-            $query->andWhere("restaurant.kitchens IN(:kitchensList)")
+	    $query->andWhere("kitchen.id IN(:kitchensList)")
 		  ->setParameter('kitchensList', implode(",", $kitchensList));
 
         }
 
         $query->orderBy('restaurant.name', 'ASC');
-//var_dump($query->getQuery()->getResult());
+//var_dump($query->getQuery());
         return $query;
     }
 }

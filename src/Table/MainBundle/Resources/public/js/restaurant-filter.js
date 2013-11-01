@@ -1,5 +1,8 @@
 function RestaurantFilter() {
  
+    this.selectCity4Search = function(city) {
+	$("#searchRestaurantsCity_main").val(city);
+    }
     this.refreshRestaurantList = function() {
         // get search string
 	var restaurantSearchStr = $("#searchRestaurantsStr_main").val();
@@ -18,10 +21,10 @@ function RestaurantFilter() {
 
 	// get city
 	var searchCity = $("#searchRestaurantsCity_main").val();
-
+	
 	$.ajax({
-		url: Routing.generate('table_main_refresh_restaurant_list'),
-		data: {restaurantCategoryList: restaurantCategoryList, restaurantKitchenList: restaurantKitchenList, restaurantSearchStr: restaurantSearchStr, searchCity:searchCity},
+		url: Routing.generate('table_main_homepage'),
+		data: {restaurantCategoryList: restaurantCategoryList, restaurantKitchenList: restaurantKitchenList, restaurantSearchStr: restaurantSearchStr, searchCity:searchCity, filter: 1},
 		type: "POST",
 		dataType: "html",
 		success: function(responce) {

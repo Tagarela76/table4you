@@ -6,7 +6,7 @@
     </div>
     <div class="span6 list-city">
 	{% for city in cityList %}
-		<a class="btn" href="?city={{city.id}}"> {{city.name}} </a>
+		<a class="btn" href="#" onclick="restaurantFilter.selectCity4Search({{city.id}});restaurantFilter.refreshRestaurantList();"> {{city.name}} </a>
 	{% endfor %}
     </div>
     <div class="span3">
