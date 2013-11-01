@@ -75,8 +75,12 @@
                 </div>
                 <div class="span3"></div>
             </div>
-            <div class="row">
-                <div class="span12"></div>
+            <div class="row footer">
+                <div class="span12">
+                    {% block footer %}
+			{% include 'TableMainBundle:Component:footer.html.twig' %}
+		    {% endblock %}
+                </div>
             </div>
         </div>
     </body>
