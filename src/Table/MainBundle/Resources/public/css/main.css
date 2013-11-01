@@ -6,7 +6,12 @@ input:focus{outline: 0 none}
     padding-top: 7px;
 }
 .list-city .btn{
-    padding: 3px 13px;
+    padding: 3px 16px;
+    font-size: 12px;
+    color: #4a4949;
+    -webkit-box-shadow: 0px -1px 1px rgba(50, 50, 50, 0.3);
+    -moz-box-shadow: 0px -1px 1px rgba(50, 50, 50, 0.3);
+    box-shadow: 0px -1px 1px rgba(50, 50, 50, 0.3);
     background: #ffffff;
     background: -moz-linear-gradient(top,  #ffffff 0%, #bbbcbd 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#bbbcbd));
@@ -911,9 +916,9 @@ background-image: url(images/selects-2.png);}
     top: 3px;
     width: 15px;
     height: 17px;
-    background: url(../images/checkbox-sprite.png) no-repeat;
+    background: url(../images/checkbox-sprite.png) no-repeat 0px -24px;
     cursor: pointer;
    }
 .wrap_search_categories .multiselect-container .checkbox  input[type="checkbox"]:checked + span {
-    background-position: 0 -24px; 
+    background-position: 0px 0px; 
    }

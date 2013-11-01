@@ -4,12 +4,12 @@
             <img src="{{ asset('bundles/tablemain/images/logotip.png') }}" alt="logotip"/>
         </a>
     </div>
-    <div class="span6 list-city">
+    <div class="span7 list-city">
 	{% for city in cityList %}
 		<a class="btn" href="#" onclick="restaurantFilter.selectCity4Search({{city.id}});restaurantFilter.refreshRestaurantList();"> {{city.name}} </a>
 	{% endfor %}
     </div>
-    <div class="span3">
+    <div class="span2">
 	<a data-toggle="modal" data-target="#register" href="{{ path('fos_user_registration_register') }}">
             {% trans %}main.register.buttonLabel{% endtrans %}
         </a>
