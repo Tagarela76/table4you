@@ -64,6 +64,7 @@ class DefaultController extends Controller
 	if (is_null($searchCity)) {
 	    $searchCity = 1;
 	}
+	/* *** */
 
 	// get restaurant list
 	$filter = $this->getRequest()->request->get('filter');  // fir restaurant filter
@@ -115,8 +116,26 @@ class DefaultController extends Controller
      */
     public function viewAuthPageAction()
     {
+	/* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN HEADER */
+	// get city list
+	$cityList = $this->getCityManager()->findAll();
+	/// get all category list
+	$categoryList = $this->getRestaurantCategoryManager()->findAll();
+	// get all kitchen list
+	$kitchenList = $this->getRestaurantKitchenManager()->findAll();
+	
+	// get current city
+	$searchCity = $this->getRequest()->query->get('searchCity');
+	// if null set default -> krasnodar
+	if (is_null($searchCity)) {
+	    $searchCity = 1;
+	}
+	/* *** */
         return array(
-
+	    'cityList' => $cityList,
+	    'categoryList' => $categoryList,
+	    'kitchenList' => $kitchenList,
+	    'searchCity' => $searchCity
         );
     }
 
