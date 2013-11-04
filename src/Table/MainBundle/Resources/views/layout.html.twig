@@ -67,13 +67,9 @@
 		    {% endblock %}
                 </div>
             </div>
-            <div class="row">
-                <div class="span12">
-                    {{ wo_render_breadcrumbs() }}
-                </div>
-            </div>
             <div class="row content">
                 <div class="span9">
+                    <div class="wrap_breadcrumb">{{ wo_render_breadcrumbs() }}</div>
                     {% block content %}
 
                     {% endblock %}
