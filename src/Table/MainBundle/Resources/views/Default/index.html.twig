@@ -48,9 +48,6 @@
     {# Rating #}
 {% endblock %}    
 {% block content %}  
-    <a class="btn btn-primary" href="{{ path('sonata_user_profile_show') }}">
-        {% trans %}main.profile.buttonLabel{% endtrans %}
-    </a>
     <div class="container-fluid" id="restaurantList_main">
         {% include 'TableRestaurantBundle:Default:restaurantList.html.twig' %}
     </div>

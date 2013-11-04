@@ -16,13 +16,22 @@ class TableOrderRepository extends EntityRepository
      * 
      * Get Order History
      * 
+     * @param integer $user
+     * 
+     * @param integer $orderStatus
+     * 
      * @return \Doctrine\ORM\QueryBuilder
      */
-    public function getOrderHistory($user) 
+    public function getOrderHistory($user, $orderStatus = null) 
     {
         $query = $this->createQueryBuilder('tableOrder');
         $query->where('tableOrder.user = :user')
               ->setParameter('user', $user);
+        if (!is_null($orderStatus)) {
+          $query->andWhere('tableOrder.status = :orderStatus')
+                ->setParameter('orderStatus', $orderStatus);
+        }
+          
  
         return $query;
     }
@@ -31,17 +40,26 @@ class TableOrderRepository extends EntityRepository
      *  Filter Order History
      * 
      * @param integer $user
-     * @param string $filterDate
-     * @param string $searchStr
+     * 
+     * @param Request $request
+     * 
+     * @param integer $orderStatus
      * 
      * @return Table\RestaurantBundle\Entity\Repository[]
      */
-    public function filterOrderHistory($user, $filterDate = null, $searchStr = null)
+    public function filterOrderHistory($user, $request, $orderStatus = null)
     {
+        $filterDate = $request->query->get('filterDate');
+        $searchStr = $request->query->get('searchStr');
 
         $query = $this->createQueryBuilder('orderHistory')
                 ->where('orderHistory.user = :user')
                 ->setParameter('user', $user);
+        if (!is_null($orderStatus)) {
+            $query->andWhere('orderHistory.status = :orderStatus')
+                  ->setParameter('orderStatus', $orderStatus);
+        }
+            
 	if (!is_null($filterDate) && $filterDate != "") {
 		$query->andWhere('orderHistory.reserveDate = :reserveDate')
                       ->setParameter('reserveDate', $filterDate);
@@ -49,11 +67,8 @@ class TableOrderRepository extends EntityRepository
 	if (!is_null($searchStr) && $searchStr != "") {
 		$query->leftJoin('orderHistory.restaurant', 'restaurant')
               ->leftJoin('restaurant.city', 'city')        
-		      ->andWhere("restaurant.name like '%$searchStr%' or city.name like '%$searchStr%' or restaurant.street like '%$searchStr%'");
-		//$query->leftJoin('orderHistory.restaurant.categories', 'c');
-		
-	}
-      //  $query->getQuery();  
+		      ->andWhere("restaurant.name like '%$searchStr%' or city.name like '%$searchStr%' or restaurant.street like '%$searchStr%'");	
+	}  
 //var_dump($query->getQuery()->getResult()); die();
         return $query->getQuery()->getResult();
     }

@@ -71,7 +71,7 @@ class DefaultController extends Controller
 	if ($filter) { 
 	    $restaurantList = $this->getRestaurantManager()->searchRestaurants($this->getRequest());
 	} else {
-	    $restaurantList = $this->getRestaurantManager()->getRestaurants();
+	    $restaurantList = $this->getRestaurantManager()->findByCity($searchCity);
 	}
 
 	// if filter render only restaurant list

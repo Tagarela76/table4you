@@ -1,15 +1,6 @@
-{#
-
-This file is part of the Sonata package.
-
-(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
-
-For the full copyright and license information, please view the LICENSE
-file that was distributed with this source code.
-
-#}
 {% extends "TableMainBundle::layout.html.twig" %}
 {% block content %}
+    {% include "TableMainBundle:Component:profilePageTabs.html.twig" %}
     <div class="sonata-user-show">
         <p>
             <span class="user-profile-label">{{ 'profile.show.username.label'|trans({}, 'SonataUserBundle') }}</span>

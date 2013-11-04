@@ -1,7 +1,11 @@
 function RestaurantFilter() {
  
-    this.selectCity4Search = function(city) {
-	$("#searchRestaurantsCity_main").val(city);
+    this.selectCity4Search = function(obj) {
+	$("#searchRestaurantsCity_main").val($(obj).attr("city") );
+	// remove active class from all
+        $(".cityList").removeClass('active'); 
+	// add class active for current obj
+        $(obj).addClass('active');   
     }
     this.refreshRestaurantList = function() {
         // get search string

@@ -5,6 +5,7 @@ namespace Table\RestaurantBundle\Model;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Table\RestaurantBundle\Entity\TableOrder;
 
 class TableOrderManager
 {
@@ -91,23 +92,27 @@ class TableOrderManager
     /**
      * @param integer $user
      * 
+     * @param integer $orderStatus
+     * 
      * @return Table\RestaurantBundle\Entity\TableOrder[]
      */
-    public function getOrderHistory($user)
+    public function getOrderHistory($user, $orderStatus = null )
     {
-        return $this->getTableOrderRepo()->getOrderHistory($user);
+        return $this->getTableOrderRepo()->getOrderHistory($user, $orderStatus);
     }
     
     /**
      * 
      * @param integer $user
-     * @param string $filterDate
-     * @param string $searchStr
+     * 
+     * @param Request $request
+     * 
+     * @param integer $orderStatus
      * 
      * @return Table\RestaurantBundle\Entity\TableOrder[]
      */
-    public function filterOrderHistory($user, $filterDate = null, $searchStr = null)
+    public function filterOrderHistory($user, $request, $orderStatus = null)
     {
-        return $this->getTableOrderRepo()->filterOrderHistory($user, $filterDate, $searchStr);
+        return $this->getTableOrderRepo()->filterOrderHistory($user, $request, $orderStatus);
     }
 }
