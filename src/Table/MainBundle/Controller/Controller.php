@@ -81,4 +81,9 @@ class Controller extends BaseController
     {
         return $this->get('city_manager');
     }
+    
+    public function getBreadCrumbsManager()
+    {
+        return $this->get('white_october_breadcrumbs');
+    }
 }

@@ -67,7 +67,7 @@ class DefaultController extends Controller
             $publicMapURL = false;
         }
 
-
+        $successReserve = false; // we should know if table reserve was successfull
         if ($request->isMethod('POST')) {
             $form->bind($request);
             if ($form->isValid()) {
@@ -89,13 +89,14 @@ class DefaultController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($tableOrder);
                 $em->flush();
-                $request->getSession()->getFlashBag()->add('success', $this->get('translator')->trans('main.order.form.message.success'));
+                $successReserve = true;
             }
         }
         return array(
             'form' => $form,
             'restaurant' => $restaurant,
-            'publicMapURL' => $publicMapURL
+            'publicMapURL' => $publicMapURL,
+            'successReserve' => $successReserve
         );
     }
 
@@ -156,6 +157,17 @@ class DefaultController extends Controller
 	}
 	/* *** */
 
+        // BreadCrumbs
+        $breadcrumbs = $this->getBreadCrumbsManager();
+        $breadcrumbs->addItem(
+                $this->get('translator')->trans('main.breadcrumbs.label.home'), 
+                $this->get("router")->generate("table_main_homepage")
+        );
+        // current
+        $breadcrumbs->addItem(
+                $this->get('translator')->trans('main.breadcrumbs.label.restaurant')
+        );
+
         return array(
             'restaurant' => $this->getRestaurantManager()->findOneById($id),
             'anonim' => $anonim,
@@ -165,7 +177,8 @@ class DefaultController extends Controller
 	    'cityList' => $cityList,
 	    'categoryList' => $categoryList,
 	    'kitchenList' => $kitchenList,
-	    'searchCity' => $searchCity
+	    'searchCity' => $searchCity,
+            'breadcrumbs' => $breadcrumbs
         );
         
     }
@@ -282,9 +295,9 @@ class DefaultController extends Controller
         $searchStr = $this->getRequest()->query->get('searchStr');
 
         if(!is_null($filterDate) || !is_null($searchStr)) {
-            $orderHistory = $this->getTableOrderManager()->filterOrderHistory($user->getId(), $filterDate, $searchStr);
+            $orderHistory = $this->getTableOrderManager()->filterOrderHistory($user->getId(), $this->getRequest(), TableOrder::ORDER_ACCEPT_STATUS_CODE);
         } else {
-            $orderHistory = $this->getTableOrderManager()->getOrderHistory($user->getId());
+            $orderHistory = $this->getTableOrderManager()->getOrderHistory($user->getId(), TableOrder::ORDER_ACCEPT_STATUS_CODE);
         }
         
 	/* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN HEADER */
@@ -302,6 +315,18 @@ class DefaultController extends Controller
 	    $searchCity = 1;
 	}
 	/* *** */
+        
+        // BreadCrumbs
+        $breadcrumbs = $this->getBreadCrumbsManager();
+        $breadcrumbs->addItem(
+                $this->get('translator')->trans('main.breadcrumbs.label.home'), 
+                $this->get("router")->generate("table_main_homepage")
+        );
+        // current
+        $breadcrumbs->addItem(
+                $this->get('translator')->trans('main.breadcrumbs.label.profile')
+        );
+        
         return array(
             'tableOrderHistory' => $this->getPaginator()->paginate(
                     $orderHistory, $page, TableOrder::PER_PAGE_COUNT
@@ -314,7 +339,8 @@ class DefaultController extends Controller
 	    'cityList' => $cityList,
 	    'categoryList' => $categoryList,
 	    'kitchenList' => $kitchenList,
-	    'searchCity' => $searchCity
+	    'searchCity' => $searchCity,
+            'breadcrumbs' =>$breadcrumbs
         );
     }
 }
