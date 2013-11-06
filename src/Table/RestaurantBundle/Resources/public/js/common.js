@@ -44,15 +44,17 @@ function InfiniteLoad() {
         
         var loader = "{{ asset('bundles/tablemain/infinite-ajax-scroll/images/loader.gif') }}"; 
         
-        jQuery.ias({
+         ({
             container : '.restaurantList-container',
             item: '.restaurant-container',
             pagination: '.navigation',
             next: '.next a',
-            loader: '<img src=' + loader + '/>'
+            loader: '<img src=' + loader + '/>',
+            onRenderComplete: function(items) {
+                // init rating
+                page.rating.initRating();
+            }
         }); 
-        // init rating
-        setTimeout(page.rating.initRating, 1000)
     }
 }
 
