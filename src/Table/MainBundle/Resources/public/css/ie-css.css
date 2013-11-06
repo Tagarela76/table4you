@@ -161,3 +161,15 @@
 	line-height: 24px !important;
 	border-left: 1px solid #3d8ddb !important;
 }
+
+.multiselect-container label.checkbox {width: auto; height: auto; }
+span.switch { display: none !important; }
+.wrap_search_categories .multiselect-container .checkbox input {
+    display: block;
+    margin: 0;
+}
+.serch-text input{
+    margin: 10px 0px 10px 5px;
+    height: 17px;
+    width: 263px;
+}

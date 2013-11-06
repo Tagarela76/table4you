@@ -44,31 +44,31 @@
                 <p class="restaurant-content-name">
                     <a href="#" >{{ restaurant.name }}</a>
                 </p>
-                <p>
+                <p class="restaurant-content-font-category">
                     {% trans %}main.labels.category{% endtrans %}
                 </p>
                 <p class="restaurant-content-font">
                     {{ restaurant.categories|join(',') }}
                 </p>
-                <p>
+                <p class="restaurant-content-font-category">
                     {% trans %}main.labels.kitchen{% endtrans %}
                 </p>
                 <p class="restaurant-content-font">
                     {{ restaurant.kitchens|join(',') }}
                 </p>
-                <p>
+                <p class="restaurant-content-font-category">
                     {% trans %}main.labels.additionalServices{% endtrans %}
                 </p>
                 <p class="restaurant-content-font">
                     {{ restaurant.additionalServices|join(',') }}
                 </p>
-                <p>
+                <p class="restaurant-content-font-category">
                      {% trans %}main.labels.address{% endtrans %}
                 </p>
                 <p class="restaurant-content-font">
                     {{ restaurant.city.name }}, {{ restaurant.street }}, {{ restaurant.house }}
                 </p>
-                 <p>
+                 <p class="restaurant-content-font-category">
                      {% trans %}main.labels.scedule{% endtrans %}
                 </p>
                 <p class="restaurant-content-font">

@@ -328,7 +328,7 @@
 
             var $li = $(this.templates.li);
             $('label', $li).addClass(inputType);
-            $('label', $li).append('<input type="' + inputType + '" /><span></span>');
+            $('label', $li).append('<input type="' + inputType + '" /><span class="switch"></span>');
 
             var selected = $(element).prop('selected') || false;
             var $checkbox = $('input', $li);
