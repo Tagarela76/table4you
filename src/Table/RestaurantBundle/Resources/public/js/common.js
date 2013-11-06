@@ -44,7 +44,7 @@ function InfiniteLoad() {
         
         var loader = "{{ asset('bundles/tablemain/infinite-ajax-scroll/images/loader.gif') }}"; 
         
-         ({
+        jQuery.ias({
             container : '.restaurantList-container',
             item: '.restaurant-container',
             pagination: '.navigation',
