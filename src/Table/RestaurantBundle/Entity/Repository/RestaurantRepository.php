@@ -21,7 +21,7 @@ class RestaurantRepository extends EntityRepository
     public function getRestaurants() 
     {
         $query = $this->createQueryBuilder('restaurant');
-        $query->orderBy('restaurant.name', 'ASC');
+        $query->orderBy('restaurant.rating', 'DESC');
  
         return $query;
     }
@@ -82,7 +82,7 @@ class RestaurantRepository extends EntityRepository
 
         }
 
-        $query->orderBy('restaurant.name', 'ASC');
+        $query->orderBy('restaurant.rating', 'DESC');
 //var_dump($query->getQuery());
         return $query;
     }
