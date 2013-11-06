@@ -17,6 +17,9 @@
                 <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/ie-css.css') }}">
             <![endif]-->
 	    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/bootstrap-multiselect.css') }}">
+            {# Rating #}
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/rating/jquery.rating.css') }}">
+            {# Rating #}
         {% endblock %}
 
         {% block javascripts %}
@@ -27,6 +30,11 @@
             <script src="{{ asset('bundles/tablemain/js/placeholder-ie-support.js') }}"></script>
 	    <script src="{{ asset('bundles/tablemain/js/bootstrap-multiselect.js') }}"></script>
 	    <script src="{{ asset('bundles/tablerestaurant/js/common.js') }}"></script>
+            <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+            <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+            {# Rating #}
+            <script src="{{ asset('bundles/tablemain/rating/jquery.rating.js') }}"></script>
+            {# Rating #}
 	    <!-- Initialize the multiselect plugin: -->
 	    <script type="text/javascript">
 	    $(document).ready(function() {
