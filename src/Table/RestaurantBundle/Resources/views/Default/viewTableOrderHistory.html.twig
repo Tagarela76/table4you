@@ -1,8 +1,6 @@
 {% extends 'TableMainBundle::layout.html.twig' %}
 {% block javascripts %}
     {{ parent() }}
-<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 {# Rating #}
 <script>
     // Rating
@@ -15,9 +13,8 @@
                         data: {restaurantId: restaurantId, value: value, objId: restaurantId},
                         type: "POST",
                         dataType: "html",
-                        success: function(responce) {
+                        success: function() {
                             location.reload();
-                            //$('.restaurant-rating-'+restaurantId).html(responce);
                         }
                     });
                 }
@@ -41,7 +38,6 @@
     });
         
 </script> 
-<script src="{{ asset('bundles/tablemain/rating/jquery.rating.js') }}"></script>
 <script src="{{ asset('bundles/tablemain/js/jquery-ui-1.10.3.custom.js') }}"></script>
 {# Rating #}
 {% endblock %}    
@@ -53,7 +49,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/jquery-ui-1.10.3.custom.css') }}">
 {% endblock %}    
 {% block content %}
-    <div class="container-fluid">
+    <div class="container-fluid" id="restaurantList_main">
         <div class="row-fluid">
             <div class="span6 tabs-history-page">
                 {% include "TableMainBundle:Component:profilePageTabs.html.twig" %}

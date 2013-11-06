@@ -16,26 +16,15 @@
         
 </script>    
 {# infinitive scrolling #}
-{# Rating #}
-<script src="{{ asset('bundles/tablemain/rating/jquery.rating.js') }}"></script>
-{# Rating #}
 {% endblock %}    
 {% block stylesheets %}
     {{ parent() }}
     {# infinitive scrolling #}
     <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/infinite-ajax-scroll/css/jquery.ias.css') }}">
     {# infinitive scrolling #}
-    {# Rating #}
-    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/rating/jquery.rating.css') }}">
-    {# Rating #}
 {% endblock %}    
 {% block content %}  
     <div class="container-fluid" id="restaurantList_main">
         {% include 'TableRestaurantBundle:Default:restaurantList.html.twig' %}
-    </div>
-
-        {# display navigation #}
-    <div class="navigation">
-            {{ knp_pagination_render(restaurantsList) }}
-    </div>    
+    </div>  
 {% endblock %}    
