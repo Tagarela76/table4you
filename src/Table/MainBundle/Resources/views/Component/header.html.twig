@@ -6,8 +6,9 @@
     </div>
     <div class="span7 list-city">
 	{% for city in cityList %}
-        <a class="btn cityList {% if searchCity == city.id %} active {%endif%}" city="{{city.id}}" href="#" onclick="restaurantFilter.selectCity4Search(this);
-                        restaurantFilter.refreshRestaurantList();"> {{city.name}} </a>
+        <a class="btn cityList {% if searchCity == city.id %} active {%endif%}" city="{{city.id}}" href="#" onclick="page.restaurantFilter.selectCity4Search(this); page.restaurantFilter.refreshRestaurantList();"> 
+            {{city.name}} 
+        </a>
 	{% endfor %}
     </div>
     <div class="span2 log-in-top">
