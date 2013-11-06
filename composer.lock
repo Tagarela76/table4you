@@ -873,7 +873,7 @@
                 {
                     "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -1977,7 +1977,7 @@
                 {
                     "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -3658,7 +3658,7 @@
         },
         {
             "name": "symfony/icu",
-            "version": "v1.2.0",
+            "version": "v1.1.0",
             "target-dir": "Symfony/Component/Icu",
             "source": {
                 "type": "git",
@@ -3672,7 +3672,7 @@
                 "shasum": ""
             },
             "require": {
-                "lib-icu": ">=4.4",
+                "lib-icu": ">=3.8",
                 "php": ">=5.3.3",
                 "symfony/intl": "~2.3"
             },
@@ -3702,7 +3702,7 @@
                 "icu",
                 "intl"
             ],
-            "time": "2013-06-03 18:32:58"
+            "time": "2013-06-03 18:32:40"
         },
         {
             "name": "symfony/monolog-bundle",
