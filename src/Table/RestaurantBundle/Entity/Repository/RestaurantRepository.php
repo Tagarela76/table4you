@@ -22,7 +22,6 @@ class RestaurantRepository extends EntityRepository
     {
         $query = $this->createQueryBuilder('restaurant');
         $query->orderBy('restaurant.rating', 'DESC');
- 
         return $query;
     }
     
@@ -83,7 +82,24 @@ class RestaurantRepository extends EntityRepository
         }
 
         $query->orderBy('restaurant.rating', 'DESC');
-//var_dump($query->getQuery());
+
+        return $query;
+    }
+    
+    /**
+     * 
+     * Get Restaurants by city
+     * 
+     * @param integer $city
+     * 
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function findByCity($city) 
+    {
+        $query = $this->createQueryBuilder('restaurant')
+                ->andWhere("restaurant.city = :city")
+	        ->setParameter('city', $city)
+                ->orderBy('restaurant.rating', 'DESC');
         return $query;
     }
 }
