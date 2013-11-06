@@ -23,6 +23,7 @@ main:
       button: Reserve
       form:
         title: Заказ столика
+      buttonLabel: История заказов  
   auth:
     text: Авторизируйтесь
   please: пожалуйста
@@ -57,3 +58,9 @@ main:
         pleaseAcceptOrder: "Подтвердите или предложите альтернативу"
         reserveRequest: "Запрос бронирования"
         reserveReject: "Отказ от бронирования"
+  breadcrumbs:
+      label:
+          home: Главная
+          restaurant: Заведение
+          profile: Мой профиль
+          editProfile: Редактировать профиль

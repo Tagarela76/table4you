@@ -53,12 +53,25 @@ class ProfileController extends BaseSecurityController
 	    $searchCity = 1;
 	}
 	/* *** */
+        
+        // BreadCrumbs
+        $breadcrumbs = $this->get('white_october_breadcrumbs');
+        $breadcrumbs->addItem(
+                $this->get('translator')->trans('main.breadcrumbs.label.home'), 
+                $this->get("router")->generate("table_main_homepage")
+        );
+        // current
+        $breadcrumbs->addItem(
+                $this->get('translator')->trans('main.breadcrumbs.label.profile')
+        );
+        
         return $this->render('ApplicationSonataUserBundle:Profile:show.html.twig', array(
             'user' => $user,
 	    'cityList' => $cityList,
 	    'categoryList' => $categoryList,
 	    'kitchenList' => $kitchenList,
-	    'searchCity' => $searchCity
+	    'searchCity' => $searchCity,
+            'breadcrumbs' => $breadcrumbs
         ));
     }
 
@@ -104,12 +117,31 @@ class ProfileController extends BaseSecurityController
 	    $searchCity = 1;
 	}
 	/* *** */
+        
+        // BreadCrumbs
+        $breadcrumbs = $this->get('white_october_breadcrumbs');
+        $breadcrumbs->addItem(
+                $this->get('translator')->trans('main.breadcrumbs.label.home'), 
+                $this->get("router")->generate("table_main_homepage")
+        );
+
+        $breadcrumbs->addItem(
+                $this->get('translator')->trans('main.breadcrumbs.label.profile'),
+                $this->get("router")->generate("fos_user_profile_show")
+        );
+        
+        // current
+        $breadcrumbs->addItem(
+                $this->get('translator')->trans('main.breadcrumbs.label.editProfile')
+        );
+        
         return $this->render('ApplicationSonataUserBundle:Profile:edit_profile.html.twig', array(
             'form' => $form->createView(),
 	    'cityList' => $cityList,
 	    'categoryList' => $categoryList,
 	    'kitchenList' => $kitchenList,
-	    'searchCity' => $searchCity
+	    'searchCity' => $searchCity,
+            'breadcrumbs' => $breadcrumbs
         ));
     }
 }

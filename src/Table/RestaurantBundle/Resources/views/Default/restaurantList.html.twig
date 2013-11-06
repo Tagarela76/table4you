@@ -2,7 +2,12 @@
     <table class="title-top_restoraunt">    
         <tr>
             <td><span></span></td>
-            <td><span><span>Топ заведений</span></span></td>
+            <td><span>
+                    <span>
+                        {% trans %}main.restaurant.label.top{% endtrans %}
+                    </span>
+                </span>
+            </td>
             <td><span></span></td>
         </tr>
     </table>
@@ -19,16 +24,16 @@
                 <p class="restaurant-content-name">
                     <a href="{{ path('table_view_restaurant', {'id': restaurant.id}) }}" >{{ restaurant.name }}</a>
                 </p>
-                <p>
+                <p class="tets">
                     {{ restaurant.categories|join(',') }}
                 </p>
-                <p>
+                <p class="restaurant-content-font-category">
                     {% trans %}main.labels.kitchen{% endtrans %}
                 </p>
                 <p class="restaurant-content-font">
                     {{ restaurant.kitchens|join(',') }}
                 </p>
-                <p>
+                <p  class="restaurant-content-font-category">
                      {% trans %}main.labels.address{% endtrans %}
                 </p>
                 <p class="restaurant-content-font">

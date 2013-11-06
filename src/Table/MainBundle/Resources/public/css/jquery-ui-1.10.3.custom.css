@@ -883,6 +883,7 @@ body .ui-tooltip {
 	border: 1px solid #fed09f;
 	background: #fed09f;
 	color: #363636;
+        border-radius: 6px;
 }
 .ui-state-highlight a,
 .ui-widget-content .ui-state-highlight a,

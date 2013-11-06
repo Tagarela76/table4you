@@ -25,3 +25,6 @@ main:
       notification:
         dear: Dear
         userCannotOrderTable: "our service allows to book no more than one table."
+  restaurant:
+      label:
+          top: TOP       

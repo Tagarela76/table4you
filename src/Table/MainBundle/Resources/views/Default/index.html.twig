@@ -6,30 +6,12 @@
 {# infinitive scrolling #}
 <script src="{{ asset('bundles/tablemain/infinite-ajax-scroll/js/jquery-ias.min.js') }}"></script>
 <script>
-    jQuery.ias({
-        container : '.restaurantList-container',
-        item: '.restaurant-container',
-        pagination: '.navigation',
-        next: '.next a',
-        loader: '<img src="{{ asset('bundles/tablemain/infinite-ajax-scroll/images/loader.gif') }}"/>'
-    });
-    // Rating
     $(function(){ 
-        $('.rating').rating({
-            callback: function(value, link){ 
-                var restaurantId = $(this).attr('name');
-                $.ajax({
-                    url: Routing.generate('table_update_restaurant_rating'),
-                    data: {restaurantId: restaurantId, value: value, objId: restaurantId},
-                    type: "POST",
-                    dataType: "html",
-                    success: function(responce) {
-                        location.reload();
-                        //$('.restaurant-rating-'+restaurantId).html(responce);
-                    }
-                });
-            }
-        });
+        // Rating
+        page.rating.initRating();
+        
+        // Infinite  ajax loading
+        page.infiniteLoad.initLoading();
     });
         
 </script>    
@@ -48,9 +30,6 @@
     {# Rating #}
 {% endblock %}    
 {% block content %}  
-    <a class="btn btn-primary" href="{{ path('sonata_user_profile_show') }}">
-        {% trans %}main.profile.buttonLabel{% endtrans %}
-    </a>
     <div class="container-fluid" id="restaurantList_main">
         {% include 'TableRestaurantBundle:Default:restaurantList.html.twig' %}
     </div>
