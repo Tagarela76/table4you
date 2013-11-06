@@ -54,17 +54,17 @@
                 {% endif %}
                     
             </div>
-        </div>
-        {# ==Modal Window for reserve==#}
-        <div class="modal fade hide modal-reserve" data-backdrop="static" id="reserve_{{ restaurant.id }}">
+            {# ==Modal Window for reserve==#}
+            <div class="modal fade hide modal-reserve" data-backdrop="static" id="reserve_{{ restaurant.id }}">
 
-            <div class="modal-header modal-login-title">
-                <a class="close" data-dismiss="modal"></a>
-                <h3>{% trans %}main.order.form.title{% endtrans %} {{restaurant.name}}</h3>
-            </div>
-            <div class="modal-body" >
+                <div class="modal-header modal-login-title">
+                    <a class="close" data-dismiss="modal"></a>
+                    <h3>{% trans %}main.order.form.title{% endtrans %} {{restaurant.name}}</h3>
+                </div>
+                <div class="modal-body" >
 
+                </div>
             </div>
-        </div>
+        </div> 
     {% endfor %}
 </div>
