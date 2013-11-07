@@ -5,6 +5,9 @@ main:
     scedule: 'Scedule:'
     additionalServices: 'Additional Services:'
     category: 'Тип заведения:'
+    search:
+      kitchen: 'Kitchen'
+      category: 'Category'
   register:
     buttonLabel: Registration
     form:
@@ -19,6 +22,7 @@ main:
       button: Reserve
       form:
         title: Table Reserve
+      buttonLabel: Order history  
   auth:
     text: Auth
   register:
@@ -55,3 +59,9 @@ main:
         pleaseAcceptOrder: "Please accept/reject order"
         reserveRequest: "Reserve Request"
         reserveReject: "Reject reserve"
+  breadcrumbs:
+      label:
+          home: Home
+          restaurant: Restaurant
+          profile: Profile
+          editProfile: Edit profile

@@ -36,4 +36,8 @@ main:
         rating: "Рейтинг:"
       notification:
         dear: Уважаемый
-        userCannotOrderTable: "наш сервис позволяет забронировать не более одного столика."   
+        userCannotOrderTable: "наш сервис позволяет забронировать не более одного столика."     
+  restaurant:
+      label:
+          top: Топ заведений
+          

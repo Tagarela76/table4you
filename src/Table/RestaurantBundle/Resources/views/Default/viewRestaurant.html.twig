@@ -1,41 +1,22 @@
 {% extends 'TableMainBundle::layout.html.twig' %}
 {% block javascripts %}
     {{ parent() }}
-<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 {# Rating #}
 <script>
     // Rating
     $(function(){ 
-        $('.rating').rating({
-            callback: function(value, link){ 
-                var restaurantId = $(this).attr('name');
-                $.ajax({
-                    url: Routing.generate('table_update_restaurant_rating'),
-                    data: {restaurantId: restaurantId, value: value, objId: restaurantId},
-                    type: "POST",
-                    dataType: "html",
-                    success: function(responce) {
-                        location.reload();
-                        //$('.restaurant-rating-'+restaurantId).html(responce);
-                    }
-                });
-            }
-        });
+        // Rating
+        page.rating.initRating();
     });
         
 </script> 
-<script src="{{ asset('bundles/tablemain/rating/jquery.rating.js') }}"></script>
 {# Rating #}
 {% endblock %}    
 {% block stylesheets %}
     {{ parent() }}
-    {# Rating #}
-    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/rating/jquery.rating.css') }}">
-    {# Rating #}
 {% endblock %}    
 {% block content %}
-    <div class="container-fluid">
+    <div class="container-fluid" id="restaurantList_main">
         <div class="restaurant-container">
             <div class="restaurant-img-container">
                 <div class="restaurant-img">{% thumbnail restaurant.photo, 'reference' %}</div>
@@ -44,31 +25,31 @@
                 <p class="restaurant-content-name">
                     <a href="#" >{{ restaurant.name }}</a>
                 </p>
-                <p>
+                <p class="restaurant-content-font-category">
                     {% trans %}main.labels.category{% endtrans %}
                 </p>
                 <p class="restaurant-content-font">
                     {{ restaurant.categories|join(',') }}
                 </p>
-                <p>
+                <p class="restaurant-content-font-category">
                     {% trans %}main.labels.kitchen{% endtrans %}
                 </p>
                 <p class="restaurant-content-font">
                     {{ restaurant.kitchens|join(',') }}
                 </p>
-                <p>
+                <p class="restaurant-content-font-category">
                     {% trans %}main.labels.additionalServices{% endtrans %}
                 </p>
                 <p class="restaurant-content-font">
                     {{ restaurant.additionalServices|join(',') }}
                 </p>
-                <p>
+                <p class="restaurant-content-font-category">
                      {% trans %}main.labels.address{% endtrans %}
                 </p>
                 <p class="restaurant-content-font">
-                    {{ restaurant.city }}, {{ restaurant.street }}, {{ restaurant.house }}
+                    {{ restaurant.city.name }}, {{ restaurant.street }}, {{ restaurant.house }}
                 </p>
-                 <p>
+                 <p class="restaurant-content-font-category">
                      {% trans %}main.labels.scedule{% endtrans %}
                 </p>
                 <p class="restaurant-content-font">

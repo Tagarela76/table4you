@@ -1,4 +1,16 @@
 <div class="restaurantList-container">
+    <table class="title-top_restoraunt">    
+        <tr>
+            <td><span></span></td>
+            <td><span>
+                    <span>
+                        {% trans %}main.restaurant.label.top{% endtrans %}
+                    </span>
+                </span>
+            </td>
+            <td><span></span></td>
+        </tr>
+    </table>
     {% for restaurant in restaurantsList %}
         <div class="restaurant-container">
             <div class="restaurant-img-container">
@@ -12,20 +24,20 @@
                 <p class="restaurant-content-name">
                     <a href="{{ path('table_view_restaurant', {'id': restaurant.id}) }}" >{{ restaurant.name }}</a>
                 </p>
-                <p>
+                <p class="tets">
                     {{ restaurant.categories|join(',') }}
                 </p>
-                <p>
+                <p class="restaurant-content-font-category">
                     {% trans %}main.labels.kitchen{% endtrans %}
                 </p>
                 <p class="restaurant-content-font">
                     {{ restaurant.kitchens|join(',') }}
                 </p>
-                <p>
+                <p  class="restaurant-content-font-category">
                      {% trans %}main.labels.address{% endtrans %}
                 </p>
                 <p class="restaurant-content-font">
-                    {{ restaurant.city }}, {{ restaurant.street }}, {{ restaurant.house }}
+                    {{ restaurant.city.name }}, {{ restaurant.street }}, {{ restaurant.house }}
                 </p>
             </div>
 
@@ -42,17 +54,21 @@
                 {% endif %}
                     
             </div>
-        </div>
-        {# ==Modal Window for reserve==#}
-        <div class="modal fade hide modal-reserve" data-backdrop="static" id="reserve_{{ restaurant.id }}">
+            {# ==Modal Window for reserve==#}
+            <div class="modal fade hide modal-reserve" data-backdrop="static" id="reserve_{{ restaurant.id }}">
 
-            <div class="modal-header modal-login-title">
-                <a class="close" data-dismiss="modal"></a>
-                <h3>{% trans %}main.order.form.title{% endtrans %} {{restaurant.name}}</h3>
-            </div>
-            <div class="modal-body" >
+                <div class="modal-header modal-login-title">
+                    <a class="close" data-dismiss="modal"></a>
+                    <h3>{% trans %}main.order.form.title{% endtrans %} {{restaurant.name}}</h3>
+                </div>
+                <div class="modal-body" >
 
+                </div>
             </div>
-        </div>
+        </div> 
     {% endfor %}
 </div>
+{# display navigation #}
+<div class="navigation">
+        {{ knp_pagination_render(restaurantsList) }}
+</div>  

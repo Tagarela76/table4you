@@ -67,7 +67,7 @@ class DefaultController extends Controller
             $publicMapURL = false;
         }
 
-
+        $successReserve = false; // we should know if table reserve was successfull
         if ($request->isMethod('POST')) {
             $form->bind($request);
             if ($form->isValid()) {
@@ -89,13 +89,14 @@ class DefaultController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($tableOrder);
                 $em->flush();
-                $request->getSession()->getFlashBag()->add('success', $this->get('translator')->trans('main.order.form.message.success'));
+                $successReserve = true;
             }
         }
         return array(
             'form' => $form,
             'restaurant' => $restaurant,
-            'publicMapURL' => $publicMapURL
+            'publicMapURL' => $publicMapURL,
+            'successReserve' => $successReserve
         );
     }
 
@@ -140,12 +141,44 @@ class DefaultController extends Controller
             $isRatingDisabled = true;
         }
         
+	/* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN HEADER */
+	// get city list
+	$cityList = $this->getCityManager()->findAll();
+	/// get all category list
+	$categoryList = $this->getRestaurantCategoryManager()->findAll();
+	// get all kitchen list
+	$kitchenList = $this->getRestaurantKitchenManager()->findAll();
+	
+	// get current city
+	$searchCity = $this->getRequest()->query->get('searchCity');
+	// if null set default -> krasnodar
+	if (is_null($searchCity)) {
+	    $searchCity = 1;
+	}
+	/* *** */
+
+        // BreadCrumbs
+        $breadcrumbs = $this->getBreadCrumbsManager();
+        $breadcrumbs->addItem(
+                $this->get('translator')->trans('main.breadcrumbs.label.home'), 
+                $this->get("router")->generate("table_main_homepage")
+        );
+        // current
+        $breadcrumbs->addItem(
+                $this->get('translator')->trans('main.breadcrumbs.label.restaurant')
+        );
+
         return array(
             'restaurant' => $this->getRestaurantManager()->findOneById($id),
             'anonim' => $anonim,
             'weekDays' => RestaurantSchedule::$WEEK_DAYS,
             'isRatingDisabled' => $isRatingDisabled,
-            'restaurantsWhoHadHasAlreadyRating' => $restaurantsWhoHadHasAlreadyRating
+            'restaurantsWhoHadHasAlreadyRating' => $restaurantsWhoHadHasAlreadyRating,
+	    'cityList' => $cityList,
+	    'categoryList' => $categoryList,
+	    'kitchenList' => $kitchenList,
+	    'searchCity' => $searchCity,
+            'breadcrumbs' => $breadcrumbs
         );
         
     }
@@ -198,11 +231,31 @@ class DefaultController extends Controller
             $restaurantsWhoHadHasAlreadyRating[] = $restRating->getRestaurant()->getId();
         }
         
+	/* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN HEADER */
+	// get city list
+	$cityList = $this->getCityManager()->findAll();
+	/// get all category list
+	$categoryList = $this->getRestaurantCategoryManager()->findAll();
+	// get all kitchen list
+	$kitchenList = $this->getRestaurantKitchenManager()->findAll();
+	
+	// get current city
+	$searchCity = $this->getRequest()->query->get('searchCity');
+	// if null set default -> krasnodar
+	if (is_null($searchCity)) {
+	    $searchCity = 1;
+	}
+	/* *** */
+
         return $this->render('TableRestaurantBundle:Default:rating.html.twig', array(
             'restaurant' => $restaurant,
             'isRatingDisabled' => $isRatingDisabled,
             'restaurantsWhoHadHasAlreadyRating' => $restaurantsWhoHadHasAlreadyRating,
-            'id' => $objId
+            'id' => $objId,
+	    'cityList' => $cityList,
+	    'categoryList' => $categoryList,
+	    'kitchenList' => $kitchenList,
+	    'searchCity' => $searchCity
         ));
     }
     
@@ -240,12 +293,39 @@ class DefaultController extends Controller
 
         $filterDate = $this->getRequest()->query->get('filterDate');
         $searchStr = $this->getRequest()->query->get('searchStr');
-//var_dump($searchStr); die();
+
         if(!is_null($filterDate) || !is_null($searchStr)) {
-            $orderHistory = $this->getTableOrderManager()->filterOrderHistory($user->getId(), $filterDate, $searchStr);
+            $orderHistory = $this->getTableOrderManager()->filterOrderHistory($user->getId(), $this->getRequest(), TableOrder::ORDER_ACCEPT_STATUS_CODE);
         } else {
-            $orderHistory = $this->getTableOrderManager()->getOrderHistory($user->getId());
+            $orderHistory = $this->getTableOrderManager()->getOrderHistory($user->getId(), TableOrder::ORDER_ACCEPT_STATUS_CODE);
         }
+        
+	/* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN HEADER */
+	// get city list
+	$cityList = $this->getCityManager()->findAll();
+	/// get all category list
+	$categoryList = $this->getRestaurantCategoryManager()->findAll();
+	// get all kitchen list
+	$kitchenList = $this->getRestaurantKitchenManager()->findAll();
+	
+	// get current city
+	$searchCity = $this->getRequest()->query->get('searchCity');
+	// if null set default -> krasnodar
+	if (is_null($searchCity)) {
+	    $searchCity = 1;
+	}
+	/* *** */
+        
+        // BreadCrumbs
+        $breadcrumbs = $this->getBreadCrumbsManager();
+        $breadcrumbs->addItem(
+                $this->get('translator')->trans('main.breadcrumbs.label.home'), 
+                $this->get("router")->generate("table_main_homepage")
+        );
+        // current
+        $breadcrumbs->addItem(
+                $this->get('translator')->trans('main.breadcrumbs.label.profile')
+        );
         
         return array(
             'tableOrderHistory' => $this->getPaginator()->paginate(
@@ -254,7 +334,13 @@ class DefaultController extends Controller
             'isRatingDisabled' => $isRatingDisabled,
             'restaurantsWhoHadHasAlreadyRating' => $restaurantsWhoHadHasAlreadyRating,
 	    'filterDate' => $filterDate,
-	    'searchStr' => $searchStr
+	    'searchStr' => $searchStr,
+
+	    'cityList' => $cityList,
+	    'categoryList' => $categoryList,
+	    'kitchenList' => $kitchenList,
+	    'searchCity' => $searchCity,
+            'breadcrumbs' =>$breadcrumbs
         );
     }
 }

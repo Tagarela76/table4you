@@ -21,8 +21,7 @@ class RestaurantRepository extends EntityRepository
     public function getRestaurants() 
     {
         $query = $this->createQueryBuilder('restaurant');
-        $query->orderBy('restaurant.name', 'ASC');
- 
+        $query->orderBy('restaurant.rating', 'DESC');
         return $query;
     }
     
@@ -50,19 +49,55 @@ class RestaurantRepository extends EntityRepository
     public function searchRestaurants($request) 
     { 
         // collect parametres
-        $requestParametres = $request->request->all();  
         $query = $this->createQueryBuilder('restaurant');
-        $searchStr = $requestParametres['searchStr'];
-        $categoriesList = $requestParametres['categoriesList'];
-        $kitchensList = $requestParametres['kitchensList'];
-        if (!is_null($searchStr)) {
-            $query->where('restaurant.name like "%:operation%"')
-            ->setParameter('operation', $propertyOperation);
-        }
-        
-        
-        $query->orderBy('restaurant.name', 'ASC');
+        $searchStr = $request->request->get('restaurantSearchStr');
+        $categoriesList = $request->request->get('restaurantCategoryList');
+        $kitchensList = $request->request->get('restaurantKitchenList');
+	$searchCity = $request->request->get('searchCity');
+  
+	// set dependency with category and kitchen entitues
+	$query->leftJoin('restaurant.categories', 'category', 'ON restaurant.id = category.id')
+	      ->leftJoin('restaurant.kitchens', 'kitchen', 'ON restaurant.id = kitchen.id');
 
+	if (!is_null($searchCity) && $searchCity != "") {
+	    $query->andWhere("restaurant.city = :searchCity")
+	          ->setParameter('searchCity', $searchCity);
+	}
+
+        if (!is_null($searchStr) && $searchStr != "") {
+            $query->leftJoin('restaurant.city', 'city')   
+		  ->andWhere("restaurant.name like '%$searchStr%' or city.name like '%$searchStr%' or restaurant.street like '%$searchStr%' or category.name like '%$searchStr%' or kitchen.name like '%$searchStr%'");
+
+        }
+   	    
+	if (!is_null($categoriesList) && !empty($categoriesList)) {
+	    $query->andWhere($query->expr()->in('category.id',$categoriesList));
+
+        }
+	if (!is_null($kitchensList) && !empty($kitchensList)) {
+            $query->andWhere($query->expr()->in('kitchen.id',$kitchensList));
+
+        }
+
+        $query->orderBy('restaurant.rating', 'DESC');
+//var_dump($query->getQuery()->getResult()); die();
+        return $query;
+    }
+    
+    /**
+     * 
+     * Get Restaurants by city
+     * 
+     * @param integer $city
+     * 
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function findByCity($city) 
+    {
+        $query = $this->createQueryBuilder('restaurant')
+                ->andWhere("restaurant.city = :city")
+	        ->setParameter('city', $city)
+                ->orderBy('restaurant.rating', 'DESC');
         return $query;
     }
 }

@@ -17,9 +17,99 @@ function OrderHistory() {
     }
 }
 
+function Rating() {
+    
+    this.initRating = function() { 
+	$('.rating').rating({
+            callback: function(value, link){ 
+                var restaurantId = $(this).attr('name');
+                $.ajax({
+                    url: Routing.generate('table_update_restaurant_rating'),
+                    data: {restaurantId: restaurantId, value: value, objId: restaurantId},
+                    type: "POST",
+                    dataType: "html",
+                    success: function(responce) {
+                        location.reload();
+                        //$('.restaurant-rating-'+restaurantId).html(responce);
+                    }
+                });
+            }
+        });                           
+    }
+}
+
+function InfiniteLoad() {
+    
+    this.initLoading = function() {
+        
+        var loader = "{{ asset('bundles/tablemain/infinite-ajax-scroll/images/loader.gif') }}"; 
+        
+        jQuery.ias({
+            container : '.restaurantList-container',
+            item: '.restaurant-container',
+            pagination: '.navigation',
+            next: '.next a',
+            loader: '<img src=' + loader + '/>',
+            onRenderComplete: function(items) {
+                // init rating
+                page.rating.initRating();
+            }
+        }); 
+    }
+}
+
+function RestaurantFilter() {
+ 
+    this.selectCity4Search = function(obj) {
+	$("#searchRestaurantsCity_main").val($(obj).attr("city") );
+	// remove active class from all
+        $(".cityList").removeClass('active'); 
+	// add class active for current obj
+        $(obj).addClass('active');   
+    }
+    this.refreshRestaurantList = function() {
+        // get search string
+	var restaurantSearchStr = $("#searchRestaurantsStr_main").val();
+
+	// get category list
+	var restaurantCategoryList = new Array();
+	$('.restaurantCategoryList_main :selected').each(function(i, selected){ 
+		restaurantCategoryList[i] = $(selected).val(); 
+	});
+
+	// get kitchen list
+	var restaurantKitchenList = new Array();
+	$('.restaurantKitchenList_main :selected').each(function(i, selected){ 
+		restaurantKitchenList[i] = $(selected).val(); 
+	});
+
+	// get city
+	var searchCity = $("#searchRestaurantsCity_main").val();
+	
+	$.ajax({
+		url: Routing.generate('table_main_homepage'),
+		data: {restaurantCategoryList: restaurantCategoryList, restaurantKitchenList: restaurantKitchenList, restaurantSearchStr: restaurantSearchStr, searchCity:searchCity, filter: 1},
+		type: "POST",
+		dataType: "html",
+		success: function(responce) {
+			//location.reload();
+		        $('#restaurantList_main').html(responce);
+                        // init rating
+                        page.rating.initRating();
+                        // init infinite ajax
+                     //   page.infiniteLoad.initLoading();
+		}  
+	});      
+        
+    }
+}
+
 function Page() {
     this.tableOrder = new TableOrder();
     this.orderHistory = new OrderHistory();
+    this.rating = new Rating();
+    this.infiniteLoad = new InfiniteLoad();
+    this.restaurantFilter = new RestaurantFilter();
 }
 
 //	global page object

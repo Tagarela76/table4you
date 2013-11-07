@@ -14,7 +14,7 @@ file that was distributed with this source code.
     <script src="{{ asset('bundles/applicationsonatauser/js/profile-password-validation.js') }}"></script>
 {% endblock %}
 {% block content %}
-    <div class="sonata-user-edit-profile">
+    <div class="sonata-user-edit-profile"  id="restaurantList_main">
         <form novalidate action="{{ path('sonata_user_profile_edit') }}" method="POST" class="form-horizontal">
             <div class="user-edit-profile">
             {{ form_start(form) }}

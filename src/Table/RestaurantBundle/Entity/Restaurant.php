@@ -33,10 +33,12 @@ class Restaurant
     private $name;
 
     /**
-     * @var string
+     * @var Table\RestaurantBundle\Entity\City $city
+     * 
+     * @ORM\ManyToOne(targetEntity="Table\RestaurantBundle\Entity\City")
+     * @ORM\JoinColumn(name="city", referencedColumnName="id")
      *
-     * @ORM\Column(name="city", type="string", length=150)
-     */
+     * */
     private $city;
 
     /**
@@ -208,7 +210,7 @@ class Restaurant
     /**
      * Set city
      *
-     * @param string $city
+     * @param Table\RestaurantBundle\Entity\City $city
      * @return Restaurant
      */
     public function setCity($city)
@@ -219,9 +221,9 @@ class Restaurant
     }
 
     /**
-     * Get city
+     * Get City
      *
-     * @return string 
+     * @return Table\RestaurantBundle\Entity\City
      */
     public function getCity()
     {
@@ -430,7 +432,7 @@ class Restaurant
     {
         if (is_null($this->address)) {
             $address = $this->getHouse() . " " . $this->getStreet() . " " .
-                    $this->getCity(); 
+                    $this->getCity()->getName(); 
             $address = str_replace(' ', '+', $address);
             $this->setAddress($address);
             return $address;

@@ -133,34 +133,24 @@ class RestaurantController extends Controller
      */
     public function searchAction()
     {
-        $request = $this->getRequest();
-        $restaurants = $restaurant = $this->get('restaurant_repository')->findAll();
-        $response = array();
-        $newObj = array();
-        foreach ($restaurants as $restaurant) {
-            $newObj['id'] = $restaurant->getId();
-            $newObj['name'] = $restaurant->getName();
-            $newObj['photo'] = $restaurant->getPhoto();
-            $newObj['category'] = $restaurant->getCategory();
-            $newObj['kitchens'] = $restaurant->getKitchens();
-            $newObj['address'] = $restaurant->getAddress();
-            $newObj['longitude'] = $restaurant->getLongitude();
-            $newObj['latitude'] = $restaurant->getLatitude();
-            $newObj['additional_services'] = $restaurant->getAdditionalServices();
-            $scedule['openTime'] = $restaurant->getWorkHoursFrom();
-            $scedule['endTime'] = $restaurant->getWorkHoursTo();
-            $newObj['scedule'] = $scedule;
-        }
+	$restaurantsQuery = $this->getRestaurantManager()->searchRestaurants($this->getRequest());
+	$restaurants = $restaurantsQuery->getQuery()->getResult();
         if (!$restaurants) {
             return array(
                 "success" => false,
                 "errorStr" => $this->get('translator')->trans('validation.errors.restaurant.Unable to find restaurants')
             );
         }
-
+        
+        $response = array();
+        foreach ($restaurants as $restaurant) {
+            $dtoRestaurant = new RestaurantDTO($restaurant, $this->container);
+            $response[] = $dtoRestaurant;
+        }
+   
         return array(
             "success" => true,
-            "response" => $newObj
+            "response" => $response
         );
     }
     

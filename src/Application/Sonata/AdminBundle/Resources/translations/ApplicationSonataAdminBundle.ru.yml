@@ -13,6 +13,8 @@ restaurant:
     day:
       from: "Дни работы/От:"
       to: "Дни работы/До:"
+  city:
+    city: Города
   tableOrder:
     label: Заказ столика 
     floor: Этаж
@@ -50,6 +52,7 @@ Restaurant Additional Service List: Список дополнительных у
 Map Photo:  Карта ресторана
 Table Order List: Заказ столиков
 Restaurant Schedule List: Список расписаний ресторана
+City List: Список городов
 main:
   mail:
     tableOrder:

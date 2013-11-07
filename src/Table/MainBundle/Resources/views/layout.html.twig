@@ -16,6 +16,10 @@
             <!--[if lt IE 9]>
                 <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/ie-css.css') }}">
             <![endif]-->
+	    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/bootstrap-multiselect.css') }}">
+            {# Rating #}
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/rating/jquery.rating.css') }}">
+            {# Rating #}
         {% endblock %}
 
         {% block javascripts %}
@@ -24,26 +28,68 @@
             <script src="{{ asset('bundles/tablemain/js/bootstrap-dropdown.js') }}"></script>
             <script src="{{ asset('bundles/tablemain/js/respond.min.js') }}"></script>
             <script src="{{ asset('bundles/tablemain/js/placeholder-ie-support.js') }}"></script>
+	    <script src="{{ asset('bundles/tablemain/js/bootstrap-multiselect.js') }}"></script>
+	    <script src="{{ asset('bundles/tablerestaurant/js/common.js') }}"></script>
+            <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+            <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+            {# Rating #}
+            <script src="{{ asset('bundles/tablemain/rating/jquery.rating.js') }}"></script>
+            {# Rating #}
+	    <!-- Initialize the multiselect plugin: -->
+	    <script type="text/javascript">
+	    $(document).ready(function() {
+	        $('.restaurantCategoryList_main').multiselect({
+			buttonText: function(options, select) {
+				return "{% trans %}main.labels.search.category{% endtrans %}";
+			},
+			onChange: function(element, checked) {
+				page.restaurantFilter.refreshRestaurantList();
+			}
+		});
+		$('.restaurantKitchenList_main').multiselect({
+			buttonText: function(options, select) {
+				return "{% trans %}main.labels.search.kitchen{% endtrans %}";
+			},
+			onChange: function(element, checked) {
+				page.restaurantFilter.refreshRestaurantList();
+			}
+		});
+	    });
+	    </script>
         {% endblock %}
 
     </head>
     <body>
         <div class="container">
-            <div class="row">
+            <div class="row header">
                 <div class="span12">
-
+		    {% block header %}
+			{% include 'TableMainBundle:Component:header.html.twig' %}
+		    {% endblock %}
                 </div>
             </div>
-            <div class="row">
+	    <div class="row">
+                <div class="span12">
+		    {% block searchContainer %}
+			{% include 'TableMainBundle:Component:searchContainer.html.twig' %}
+		    {% endblock %}
+                </div>
+            </div>
+            <div class="row content">
                 <div class="span9">
+                    <div class="wrap_breadcrumb">{{ wo_render_breadcrumbs() }}</div>
                     {% block content %}
 
                     {% endblock %}
                 </div>
                 <div class="span3"></div>
             </div>
-            <div class="row">
-                <div class="span12"></div>
+            <div class="row footer">
+                <div class="span12">
+                    {% block footer %}
+			{% include 'TableMainBundle:Component:footer.html.twig' %}
+		    {% endblock %}
+                </div>
             </div>
         </div>
     </body>

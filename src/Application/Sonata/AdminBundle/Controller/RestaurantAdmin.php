@@ -27,7 +27,7 @@ class RestaurantAdmin extends Admin
     {
         $formMapper
                 ->add('name')
-                ->add('city', null, array(
+                ->add('city', 'sonata_type_model', array(
                     'label' => 'address.city'
                 ))
                 ->add('street', null, array(

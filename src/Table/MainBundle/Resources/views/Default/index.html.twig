@@ -6,92 +6,25 @@
 {# infinitive scrolling #}
 <script src="{{ asset('bundles/tablemain/infinite-ajax-scroll/js/jquery-ias.min.js') }}"></script>
 <script>
-    jQuery.ias({
-        container : '.restaurantList-container',
-        item: '.restaurant-container',
-        pagination: '.navigation',
-        next: '.next a',
-        loader: '<img src="{{ asset('bundles/tablemain/infinite-ajax-scroll/images/loader.gif') }}"/>'
-    });
-    // Rating
     $(function(){ 
-        $('.rating').rating({
-            callback: function(value, link){ 
-                var restaurantId = $(this).attr('name');
-                $.ajax({
-                    url: Routing.generate('table_update_restaurant_rating'),
-                    data: {restaurantId: restaurantId, value: value, objId: restaurantId},
-                    type: "POST",
-                    dataType: "html",
-                    success: function(responce) {
-                        location.reload();
-                        //$('.restaurant-rating-'+restaurantId).html(responce);
-                    }
-                });
-            }
-        });
+        // Rating
+        page.rating.initRating();
+        
+        // Infinite  ajax loading
+        page.infiniteLoad.initLoading();
     });
         
 </script>    
 {# infinitive scrolling #}
-{# Rating #}
-<script src="{{ asset('bundles/tablemain/rating/jquery.rating.js') }}"></script>
-{# Rating #}
 {% endblock %}    
 {% block stylesheets %}
     {{ parent() }}
     {# infinitive scrolling #}
     <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/infinite-ajax-scroll/css/jquery.ias.css') }}">
     {# infinitive scrolling #}
-    {# Rating #}
-    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/rating/jquery.rating.css') }}">
-    {# Rating #}
 {% endblock %}    
-{% block content %}
-    <a class="btn btn-primary" data-toggle="modal" data-target="#register" href="{{ path('fos_user_registration_register') }}">
-        {% trans %}main.register.buttonLabel{% endtrans %}
-    </a>
-    <a class="btn btn-primary" data-toggle="modal" data-target="#login" href="{{ path('fos_user_security_login') }}">
-        {% trans %}main.login.buttonLabel{% endtrans %}
-    </a>
-    <a class="btn btn-primary" href="{{ path('sonata_user_profile_show') }}">
-        {% trans %}main.profile.buttonLabel{% endtrans %}
-    </a>
-    
-    {# ==Modal Window for registration==#}
-    <div class="modal hide modal-registration" data-backdrop="static" id="register">
-        <div class="modal-header modal-registration-title">
-            <a class="close" data-dismiss="modal"></a>
-            <img id="registrationPreloader" style="display: none;" src="{{ asset('bundles/tablemain/images/ajax-loader.gif') }}" />
-            <h3>{% trans %}main.register.form.title{% endtrans %}</h3>
-        </div>
-        <div class="modal-body" >
-            
-        </div>    
-
-    </div>
-    {# ==Modal Window for registration==#}
-    
-    {# ==Modal Window for login==#}
-    <div class="modal fade hide modal-login" data-backdrop="static" id="login">
-
-        <div class="modal-header modal-login-title">
-            <a class="close" data-dismiss="modal"></a>
-            <img id="loginPreloader" style="display: none;" src="{{ asset('bundles/tablemain/images/ajax-loader.gif') }}" />
-            <h3>{% trans %}main.login.form.title{% endtrans %}</h3>
-        </div>
-        <div class="modal-body" >
-
-        </div>
-    </div>
-    {# ==Modal Window for login==#}
-
-    <div class="container-fluid">
+{% block content %}  
+    <div class="container-fluid" id="restaurantList_main">
         {% include 'TableRestaurantBundle:Default:restaurantList.html.twig' %}
-    </div>
-
-        {# display navigation #}
-    <div class="navigation">
-            {{ knp_pagination_render(restaurantsList) }}
-    </div>    
+    </div>  
 {% endblock %}    
