@@ -96,6 +96,8 @@ function RestaurantFilter() {
 		        $('#restaurantList_main').html(responce);
                         // init rating
                         page.rating.initRating();
+                        // init infinite ajax
+                     //   page.infiniteLoad.initLoading();
 		}  
 	});      
         

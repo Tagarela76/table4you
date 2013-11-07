@@ -71,18 +71,16 @@ class RestaurantRepository extends EntityRepository
         }
    	    
 	if (!is_null($categoriesList) && !empty($categoriesList)) {
-	    $query->andWhere("category.id IN(:categoriesList)")
-		  ->setParameter('categoriesList', implode(",", $categoriesList));
+	    $query->andWhere($query->expr()->in('category.id',$categoriesList));
 
         }
 	if (!is_null($kitchensList) && !empty($kitchensList)) {
-	    $query->andWhere("kitchen.id IN(:kitchensList)")
-		  ->setParameter('kitchensList', implode(",", $kitchensList));
+            $query->andWhere($query->expr()->in('kitchen.id',$kitchensList));
 
         }
 
         $query->orderBy('restaurant.rating', 'DESC');
-
+//var_dump($query->getQuery()->getResult()); die();
         return $query;
     }
     
