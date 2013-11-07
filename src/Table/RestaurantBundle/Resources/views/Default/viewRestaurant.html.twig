@@ -102,21 +102,38 @@
                 <ul class="bx-restaurantAdditionalPhotos">
                     {% for additionalPhoto in additionalPhotos %}
                         <li>
-                            <img src="{{ additionalPhoto }}" />
+                            <img src="{{ additionalPhoto }}" width="150" height="150"/>
                         </li>
                     {% endfor %}
                 </ul>
 
                 <div id="bx-restaurantAdditionalPhotos-pager">
                     {% for additionalPhoto in additionalPhotos %}
-                        <a data-slide-index="{{ loop.index }}" href="">
-                            <img src="{{ additionalPhoto }}" />
+                        <a data-slide-index="{{ loop.index - 1 }}" href="">
+                            <img src="{{ additionalPhoto }}" width="150" height="150"/>
                         </a>
                     {% endfor %}
                </div>
             </div>
             <div id="menus" class="tab-pane">
-                Menus
+                <div style="clear:both;"></div>
+                {# menu #}
+                <ul class="bx-restaurantMenuPhotos">
+                    {% for menuPhoto in menuPhotos %}
+                        <li>
+                            <img src="{{ menuPhoto }}" width="150" height="150"/>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                <div id="bx-restaurantMenuPhotos-pager">
+                    {% for menuPhoto in menuPhotos %}
+                        <a data-slide-index="{{ loop.index - 1 }}" href="">
+                            <img src="{{ menuPhoto }}" width="150" height="150"/>
+                        </a>
+                    {% endfor %}
+                </div>
+                {# menu #}
             </div>
             <div id="description" class="tab-pane">
                 {{ restaurant.description }}
