@@ -152,13 +152,32 @@ class Restaurant
      * @ORM\OneToMany(targetEntity="RestaurantSchedule", mappedBy="restaurant", orphanRemoval=true, cascade={"persist", "remove"})
      */
     protected $restaurantSchedule;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", nullable=true, length=8000 )
+     */
+    private $description;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="RestaurantAdditionalPhoto", mappedBy="restaurant", orphanRemoval=true, cascade={"persist", "remove"})
+     */
+    protected $additionalPhotos;
 
+    /**
+     * @ORM\OneToMany(targetEntity="RestaurantMenuPhoto", mappedBy="restaurant", orphanRemoval=true, cascade={"persist", "remove"})
+     */
+    protected $additionalMenuPhotos;
+    
     public function __construct()
     {
         $this->additionalServices = new ArrayCollection();
         $this->kitchens = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->restaurantSchedule = new ArrayCollection();
+        $this->additionalPhotos = new ArrayCollection();
+        $this->additionalMenuPhotos = new ArrayCollection();
     }
 
     /**
@@ -639,7 +658,7 @@ class Restaurant
     /**
      * Get restaurantSchedule
      *
-     * @return Re\PropertyBundle\Entity\RestaurantSchedule[] 
+     * @return Table\RestaurantBundle\Entity\RestaurantSchedule[] 
      */
     public function getRestaurantSchedule()
     {
@@ -649,7 +668,7 @@ class Restaurant
     /**
      * Set restaurantSchedule
      *
-     * @param Re\PropertyBundle\Entity\RestaurantSchedule $restaurantSchedule
+     * @param Table\RestaurantBundle\Entity\RestaurantSchedule $restaurantSchedule
      * @return Restaurant
      */
     public function setRestaurantSchedule($restaurantSchedule)
@@ -661,7 +680,7 @@ class Restaurant
     /**
      * Add restaurantSchedule
      * 
-     * @param Re\PropertyBundle\Entity\RestaurantSchedule $restaurantSchedule
+     * @param Table\RestaurantBundle\Entity\RestaurantSchedule $restaurantSchedule
      */
     public function addRestaurantSchedule($restaurantSchedule)
     {
@@ -671,13 +690,119 @@ class Restaurant
     /**
      * Remove additionalIrestaurantSchedulemages
      * 
-     * @param Re\PropertyBundle\Entity\RestaurantSchedule $restaurantSchedule
+     * @param Table\RestaurantBundle\Entity\RestaurantSchedule $restaurantSchedule
      */
     public function removeRestaurantSchedule($restaurantSchedule)
     {
         $this->restaurantSchedule->removeElement($restaurantSchedule);
     }
 
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+    
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Restaurant
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+    
+    /**
+     * Get additionalPhotos
+     *
+     * @return Table\RestaurantBundle\Entity\RestaurantAdditionalPhoto[] 
+     */
+    public function getAdditionalPhotos()
+    {
+        return $this->additionalPhotos;
+    }
+
+    /**
+     * Set additionalPhotos
+     *
+     * @param Table\RestaurantBundle\Entity\RestaurantAdditionalPhoto $additionalPhotos
+     * @return Restaurant
+     */
+    public function setAdditionalPhotos($additionalPhotos)
+    {
+        $this->additionalPhotos = $additionalPhotos;
+    }
+    
+
+    /**
+     * Add additionalPhotos
+     * 
+     * @param Table\RestaurantBundle\Entity\RestaurantAdditionalPhoto $additionalPhotos
+     */
+    public function addAdditionalPhotos($additionalPhotos)
+    {
+        $this->additionalPhotos[] = $additionalPhotos;
+    }
+
+    /**
+     * Remove additionalPhotos
+     * 
+     * @param Table\RestaurantBundle\Entity\RestaurantAdditionalPhoto $additionalPhotos
+     */
+    public function removeAdditionalPhotos($additionalPhotos)
+    {
+        $this->additionalPhotos->removeElement($additionalPhotos);
+    }
+    
+    /**
+     * Get additionalMenuPhotos
+     *
+     * @return Table\RestaurantBundle\Entity\RestaurantMenuPhoto[] 
+     */
+    public function getAdditionalMenuPhotos()
+    {
+        return $this->additionalMenuPhotos;
+    }
+
+    /**
+     * Set additionalMenuPhotos
+     *
+     * @param Table\RestaurantBundle\Entity\RestaurantMenuPhoto $additionalMenuPhotos
+     * @return Restaurant
+     */
+    public function setAdditionalMenuPhotos($additionalMenuPhotos)
+    {
+        $this->additionalMenuPhotos = $additionalMenuPhotos;
+    }
+    
+
+    /**
+     * Add additionalMenuPhotos
+     * 
+     * @param Table\RestaurantBundle\Entity\RestaurantMenuPhoto $additionalMenuPhotos
+     */
+    public function addAdditionalMenuPhotos($additionalMenuPhotos)
+    {
+        $this->additionalMenuPhotos[] = $additionalMenuPhotos;
+    }
+
+    /**
+     * Remove additionalMenuPhotos
+     * 
+     * @param Table\RestaurantBundle\Entity\RestaurantMenuPhoto $additionalMenuPhotos
+     */
+    public function removeAdditionalMenuPhotos($additionalMenuPhotos)
+    {
+        $this->additionalMenuPhotos->removeElement($additionalMenuPhotos);
+    }
     
     /**
      * @return string

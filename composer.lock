@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "2a4bdee2032e147e07d60052988260ae",
+    "hash": "d84f2ab0b771755a16ee109b3eb36573",
     "packages": [
         {
             "name": "behat/behat",
@@ -873,7 +873,7 @@
                 {
                     "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -1840,16 +1840,16 @@
         },
         {
             "name": "jms/metadata",
-            "version": "1.4.2",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/metadata.git",
-                "reference": "246d7096801ce29b5aea30a1abf0277ccfb9f055"
+                "reference": "88ffa28bc987e4c26229fc84a2e541b6ed4e1459"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/metadata/zipball/246d7096801ce29b5aea30a1abf0277ccfb9f055",
-                "reference": "246d7096801ce29b5aea30a1abf0277ccfb9f055",
+                "url": "https://api.github.com/repos/schmittjoh/metadata/zipball/88ffa28bc987e4c26229fc84a2e541b6ed4e1459",
+                "reference": "88ffa28bc987e4c26229fc84a2e541b6ed4e1459",
                 "shasum": ""
             },
             "require": {
@@ -1861,7 +1861,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.4.x-dev"
+                    "dev-master": "1.5.x-dev"
                 }
             },
             "autoload": {
@@ -1888,7 +1888,7 @@
                 "xml",
                 "yaml"
             ],
-            "time": "2013-09-13 09:05:44"
+            "time": "2013-11-05 23:02:36"
         },
         {
             "name": "jms/parser-lib",
@@ -1977,7 +1977,7 @@
                 {
                     "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -2064,7 +2064,7 @@
         },
         {
             "name": "knplabs/gaufrette",
-            "version": "v0.1.6",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/Gaufrette.git",
@@ -2203,6 +2203,66 @@
                 "paginator"
             ],
             "time": "2013-03-14 07:31:46"
+        },
+        {
+            "name": "knplabs/knp-gaufrette-bundle",
+            "version": "dev-master",
+            "target-dir": "Knp/Bundle/GaufretteBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/KnpLabs/KnpGaufretteBundle.git",
+                "reference": "9e70925730eb06eff9ebf24bf2062613b45a6dcb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/KnpLabs/KnpGaufretteBundle/zipball/9e70925730eb06eff9ebf24bf2062613b45a6dcb",
+                "reference": "9e70925730eb06eff9ebf24bf2062613b45a6dcb",
+                "shasum": ""
+            },
+            "require": {
+                "knplabs/gaufrette": "0.2.*@dev",
+                "symfony/framework-bundle": "2.*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*",
+                "symfony/console": "2.*",
+                "symfony/yaml": "2.*"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Knp\\Bundle\\GaufretteBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Antoine Hérault",
+                    "email": "antoine.herault@gmail.com",
+                    "homepage": "https://github.com/Herzult"
+                },
+                {
+                    "name": "The contributors",
+                    "homepage": "https://github.com/knplabs/KnpGaufretteBundle/contributors"
+                }
+            ],
+            "description": "Allows to easily use the Gaufrette library in a Symfony project",
+            "homepage": "http://knplabs.com",
+            "keywords": [
+                "abstraction",
+                "file",
+                "filesystem",
+                "media"
+            ],
+            "time": "2013-11-04 08:31:06"
         },
         {
             "name": "knplabs/knp-menu",
@@ -2892,12 +2952,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "b794b728ae7ac50ec7b923e2ff273b2597affa2e"
+                "reference": "afb14fad049c6e68d84ddc1cc4234f4772f0daf9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/b794b728ae7ac50ec7b923e2ff273b2597affa2e",
-                "reference": "b794b728ae7ac50ec7b923e2ff273b2597affa2e",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/afb14fad049c6e68d84ddc1cc4234f4772f0daf9",
+                "reference": "afb14fad049c6e68d84ddc1cc4234f4772f0daf9",
                 "shasum": ""
             },
             "require": {
@@ -2962,7 +3022,7 @@
                 "bootstrap",
                 "sonata"
             ],
-            "time": "2013-11-01 17:10:12"
+            "time": "2013-11-06 09:53:39"
         },
         {
             "name": "sonata-project/block-bundle",
@@ -3414,23 +3474,23 @@
         },
         {
             "name": "sonata-project/notification-bundle",
-            "version": "2.2.3",
+            "version": "2.2.4",
             "target-dir": "Sonata/NotificationBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataNotificationBundle.git",
-                "reference": "25e3477f506c8171e25e55249a7fdf0ebcebc8f2"
+                "reference": "a1cf1578185b56e4151888ba8d3465fed0b7a59c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataNotificationBundle/zipball/25e3477f506c8171e25e55249a7fdf0ebcebc8f2",
-                "reference": "25e3477f506c8171e25e55249a7fdf0ebcebc8f2",
+                "url": "https://api.github.com/repos/sonata-project/SonataNotificationBundle/zipball/a1cf1578185b56e4151888ba8d3465fed0b7a59c",
+                "reference": "a1cf1578185b56e4151888ba8d3465fed0b7a59c",
                 "shasum": ""
             },
             "require": {
                 "sonata-project/doctrine-extensions": "1.*",
                 "sonata-project/easy-extends-bundle": "2.1.*",
-                "symfony/symfony": ">=2.1,<2.4-dev"
+                "symfony/symfony": "~2.1"
             },
             "require-dev": {
                 "guzzle/guzzle": "3.*",
@@ -3478,7 +3538,7 @@
                 "page",
                 "sonata"
             ],
-            "time": "2013-10-21 16:24:44"
+            "time": "2013-11-07 08:26:16"
         },
         {
             "name": "sonata-project/user-bundle",
@@ -3487,12 +3547,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataUserBundle.git",
-                "reference": "9070416b87c54fecf1375e2630820b4c9c7a54e3"
+                "reference": "ac314f2c5e1319d7daefbfcc127c0b25adf658b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/9070416b87c54fecf1375e2630820b4c9c7a54e3",
-                "reference": "9070416b87c54fecf1375e2630820b4c9c7a54e3",
+                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/ac314f2c5e1319d7daefbfcc127c0b25adf658b9",
+                "reference": "ac314f2c5e1319d7daefbfcc127c0b25adf658b9",
                 "shasum": ""
             },
             "require": {
@@ -3542,7 +3602,7 @@
                 "sonata",
                 "user"
             ],
-            "time": "2013-10-24 15:30:07"
+            "time": "2013-11-06 17:34:26"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3658,7 +3718,7 @@
         },
         {
             "name": "symfony/icu",
-            "version": "v1.1.0",
+            "version": "v1.2.0",
             "target-dir": "Symfony/Component/Icu",
             "source": {
                 "type": "git",
@@ -3672,7 +3732,7 @@
                 "shasum": ""
             },
             "require": {
-                "lib-icu": ">=3.8",
+                "lib-icu": ">=4.4",
                 "php": ">=5.3.3",
                 "symfony/intl": "~2.3"
             },
@@ -3702,7 +3762,7 @@
                 "icu",
                 "intl"
             ],
-            "time": "2013-06-03 18:32:40"
+            "time": "2013-06-03 18:32:58"
         },
         {
             "name": "symfony/monolog-bundle",
@@ -4022,6 +4082,64 @@
             "time": "2013-10-30 08:20:53"
         },
         {
+            "name": "vich/uploader-bundle",
+            "version": "dev-master",
+            "target-dir": "Vich/UploaderBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dustin10/VichUploaderBundle.git",
+                "reference": "d348d7d76f35774eec17582a07f99d9ca5f4ae2e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dustin10/VichUploaderBundle/zipball/d348d7d76f35774eec17582a07f99d9ca5f4ae2e",
+                "reference": "d348d7d76f35774eec17582a07f99d9ca5f4ae2e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/framework-bundle": "~2.0"
+            },
+            "require-dev": {
+                "doctrine/common": "@stable",
+                "doctrine/dbal": "@stable",
+                "doctrine/mongodb-odm": "dev-master",
+                "doctrine/orm": "@stable",
+                "knplabs/knp-gaufrette-bundle": "0.2.*",
+                "twig/twig": "@stable"
+            },
+            "suggest": {
+                "doctrine/doctrine-bundle": "*",
+                "doctrine/mongodb-odm-bundle": "*",
+                "knplabs/knp-gaufrette-bundle": "*",
+                "phpunit/phpunit": "~3.7@stable"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Vich\\UploaderBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dustin Dobervich",
+                    "email": "ddobervich@gmail.com",
+                    "homepage": "http://www.dobervich.com"
+                }
+            ],
+            "description": "Ease file uploads attached to entities",
+            "homepage": "https://github.com/dustin10/VichUploaderBundle",
+            "keywords": [
+                "file uploads",
+                "upload"
+            ],
+            "time": "2013-10-04 17:29:38"
+        },
+        {
             "name": "whiteoctober/breadcrumbs-bundle",
             "version": "dev-master",
             "target-dir": "WhiteOctober/BreadcrumbsBundle",
@@ -4183,7 +4301,10 @@
         "behat/mink-browserkit-driver": 20,
         "behat/mink-goutte-driver": 20,
         "friendsofsymfony/rest-bundle": 20,
-        "jms/serializer-bundle": 20
+        "jms/serializer-bundle": 20,
+        "vich/uploader-bundle": 20,
+        "knplabs/gaufrette": 20,
+        "knplabs/knp-gaufrette-bundle": 20
     },
     "platform": {
         "php": ">=5.3.3"

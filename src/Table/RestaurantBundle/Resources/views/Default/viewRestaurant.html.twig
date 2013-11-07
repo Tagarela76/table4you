@@ -1,87 +1,139 @@
 {% extends 'TableMainBundle::layout.html.twig' %}
 {% block javascripts %}
     {{ parent() }}
+<script src="{{ asset('bundles/tablemain/bxslider/jquery.bxslider.js') }}"></script>
 {# Rating #}
 <script>
     // Rating
-    $(function(){ 
+    $(function() {
         // Rating
         page.rating.initRating();
+
+        // additional photos slideshow
+        $('.bx-restaurantAdditionalPhotos').bxSlider({
+            pagerCustom: '#bx-restaurantAdditionalPhotos-pager'
+        });
+
+        // menu photos slideshow
+        $('.bx-restaurantMenuPhotos').bxSlider({
+            pagerCustom: '#bx-restaurantMenuPhotos-pager'
+        });
     });
-        
+
 </script> 
 {# Rating #}
 {% endblock %}    
 {% block stylesheets %}
     {{ parent() }}
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/bxslider/jquery.bxslider.css') }}">    
 {% endblock %}    
 {% block content %}
-    <div class="container-fluid" id="restaurantList_main">
-        <div class="restaurant-container">
-            <div class="restaurant-img-container">
-                <div class="restaurant-img">{% thumbnail restaurant.photo, 'reference' %}</div>
-            </div>
-            <div class="restaurant-content restaurant-card">
-                <p class="restaurant-content-name">
-                    <a href="#" >{{ restaurant.name }}</a>
-                </p>
-                <p class="restaurant-content-font-category">
+<div class="container-fluid" id="restaurantList_main">
+    <div class="restaurant-container">
+        <div class="restaurant-img-container">
+            <div class="restaurant-img">{% thumbnail restaurant.photo, 'reference' %}</div>
+        </div>
+        <div class="restaurant-content restaurant-card">
+            <p class="restaurant-content-name">
+                <a href="#" >{{ restaurant.name }}</a>
+            </p>
+            <p class="restaurant-content-font-category">
                     {% trans %}main.labels.category{% endtrans %}
-                </p>
-                <p class="restaurant-content-font">
+            </p>
+            <p class="restaurant-content-font">
                     {{ restaurant.categories|join(',') }}
-                </p>
-                <p class="restaurant-content-font-category">
+            </p>
+            <p class="restaurant-content-font-category">
                     {% trans %}main.labels.kitchen{% endtrans %}
-                </p>
-                <p class="restaurant-content-font">
+            </p>
+            <p class="restaurant-content-font">
                     {{ restaurant.kitchens|join(',') }}
-                </p>
-                <p class="restaurant-content-font-category">
+            </p>
+            <p class="restaurant-content-font-category">
                     {% trans %}main.labels.additionalServices{% endtrans %}
-                </p>
-                <p class="restaurant-content-font">
+            </p>
+            <p class="restaurant-content-font">
                     {{ restaurant.additionalServices|join(',') }}
-                </p>
-                <p class="restaurant-content-font-category">
+            </p>
+            <p class="restaurant-content-font-category">
                      {% trans %}main.labels.address{% endtrans %}
-                </p>
-                <p class="restaurant-content-font">
+            </p>
+            <p class="restaurant-content-font">
                     {{ restaurant.city.name }}, {{ restaurant.street }}, {{ restaurant.house }}
-                </p>
-                 <p class="restaurant-content-font-category">
+            </p>
+            <p class="restaurant-content-font-category">
                      {% trans %}main.labels.scedule{% endtrans %}
-                </p>
-                <p class="restaurant-content-font">
+            </p>
+            <p class="restaurant-content-font">
                     {% for schedule in restaurant.restaurantSchedule %}
                      {{schedule.dayFromStr}} - {{schedule.dayToStr}} {{schedule.timeFrom|date('H:i')}} - {{schedule.timeTo|date('H:i')}}
                     {% endfor %}
-                </p>
-            </div>
-            <div class="restaurant-content-reserve restaurant-rating-{{ restaurant.id }}">
+            </p>
+        </div>
+        <div class="restaurant-content-reserve restaurant-rating-{{ restaurant.id }}">
                 {% include 'TableRestaurantBundle:Default:rating.html.twig' with {'restaurant': restaurant, 'isRatingDisabled': isRatingDisabled, 'restaurantsWhoHadHasAlreadyRating': restaurantsWhoHadHasAlreadyRating, 'id': restaurant.id} %}
                 {% if anonim %}
-                    <a class="btn btn-primary"  href="{{ path('table_main_auth_page') }}">
+            <a class="btn btn-primary"  href="{{ path('table_main_auth_page') }}">
                         {% trans %}main.order.button{% endtrans %}
-                    </a>
+            </a>
                 {% else %}
-                    <a class="btn btn-primary" data-toggle="modal" data-target="#reserve_{{ restaurant.id }}" href="{{ path('table_order_reserve', {'id': restaurant.id}) }}">
+            <a class="btn btn-primary" data-toggle="modal" data-target="#reserve_{{ restaurant.id }}" href="{{ path('table_order_reserve', {'id': restaurant.id}) }}">
                         {% trans %}main.order.button{% endtrans %}
-                    </a>
+            </a>
                 {% endif %}
 
+        </div>
+    </div>
+        {# TABS #}
+    <div class="tabbable">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#photos" data-toggle="tab">{% trans %}main.labels.photos.additional{% endtrans %}</a>
+            </li>
+            <li>
+                <a href="#menus" data-toggle="tab">{% trans %}main.labels.photos.menu{% endtrans %}</a>
+            </li>
+            <li>
+                <a href="#description" data-toggle="tab">{% trans %}main.labels.description{% endtrans %}</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div id="photos" class="tab-pane active">
+                <ul class="bx-restaurantAdditionalPhotos">
+                    {% for additionalPhoto in additionalPhotos %}
+                    <li>
+                        <img src="{{ additionalPhoto }}" />
+                    </li>
+                    {% endfor %}
+                </ul>
+
+                <div id="bx-restaurantAdditionalPhotos-pager">
+                    {% for additionalPhoto in additionalPhotos %}
+                    <a data-slide-index="{{ loop.index }}" href="">
+                        <img src="{{ additionalPhoto }}" />
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div id="menus" class="tab-pane">
+                Menus
+            </div>
+            <div id="description" class="tab-pane">
+                {{ restaurant.description }}
             </div>
         </div>
+    </div>
+        {# TABS #}
         {# ==Modal Window for reserve==#}
-        <div class="modal fade hide modal-reserve" data-backdrop="static" id="reserve_{{ restaurant.id }}">
+    <div class="modal fade hide modal-reserve" data-backdrop="static" id="reserve_{{ restaurant.id }}">
 
-            <div class="modal-header modal-login-title">
-                <a class="close" data-dismiss="modal"></a>
-                <h3>{% trans %}main.order.form.title{% endtrans %} {{restaurant.name}}</h3>
-            </div>
-            <div class="modal-body" >
-
-            </div>
+        <div class="modal-header modal-login-title">
+            <a class="close" data-dismiss="modal"></a>
+            <h3>{% trans %}main.order.form.title{% endtrans %} {{restaurant.name}}</h3>
         </div>
-    </div>  
+        <div class="modal-body" >
+
+        </div>
+    </div>
+</div>  
 {% endblock %}    

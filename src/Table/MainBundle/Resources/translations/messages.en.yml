@@ -8,6 +8,10 @@ main:
     search:
       kitchen: 'Kitchen'
       category: 'Category'
+    photos: 
+        additional: Photo Gallery
+        menu: Menu photos
+    description: Description    
   register:
     buttonLabel: Registration
     form:
