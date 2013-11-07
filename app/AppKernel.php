@@ -40,6 +40,8 @@ class AppKernel extends Kernel
             new Table\ApiBundle\TableApiBundle(),
             new Table\CoreDomainBundle\TableCoreDomainBundle(),
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
+            new Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
+            new Vich\UploaderBundle\VichUploaderBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

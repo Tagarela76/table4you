@@ -8,6 +8,10 @@ main:
     search:
       kitchen: 'Кухня'
       category: 'Категория'
+    photos: 
+        additional: Фото заведения
+        menu: Меню
+    description: О заведении    
   register:
     buttonLabel: Регистрация
     form:

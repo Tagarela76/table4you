@@ -167,9 +167,30 @@ class DefaultController extends Controller
         $breadcrumbs->addItem(
                 $this->get('translator')->trans('main.breadcrumbs.label.restaurant')
         );
+        
+         // get additional photo
+        $additionalPhotos = array();
+        $menuPhotos = array();
+        $restaurant = $this->getRestaurantManager()->findOneById($id);
+
+	if (is_null($restaurant)) {
+            throw $this->createNotFoundException('The page does not exist');
+        }
+        $helper = $this->container->get('vich_uploader.templating.helper.uploader_helper');
+        foreach ($restaurant->getAdditionalPhotos() as $additionalPhoto) {
+            if (!is_null($additionalPhoto->getFileName())) {
+                $additionalPhotos[] = $helper->asset($additionalPhoto, 'file'); 
+            }
+        }
+        
+        foreach ($restaurant->getAdditionalMenuPhotos() as $menuPhoto) {
+            if (!is_null($menuPhoto->getFileName())) {
+                $menuPhotos[] = $helper->asset($menuPhoto, 'file'); 
+            }
+        }
 
         return array(
-            'restaurant' => $this->getRestaurantManager()->findOneById($id),
+            'restaurant' => $restaurant,
             'anonim' => $anonim,
             'weekDays' => RestaurantSchedule::$WEEK_DAYS,
             'isRatingDisabled' => $isRatingDisabled,
@@ -178,7 +199,9 @@ class DefaultController extends Controller
 	    'categoryList' => $categoryList,
 	    'kitchenList' => $kitchenList,
 	    'searchCity' => $searchCity,
-            'breadcrumbs' => $breadcrumbs
+            'breadcrumbs' => $breadcrumbs,
+            'additionalPhotos' => $additionalPhotos,
+            'menuPhotos' => $menuPhotos
         );
         
     }

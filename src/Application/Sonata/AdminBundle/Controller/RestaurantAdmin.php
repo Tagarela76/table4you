@@ -21,6 +21,37 @@ class RestaurantAdmin extends Admin
         foreach ($object->getRestaurantSchedule() as $restaurantSchedule) {
             $restaurantSchedule->setRestaurant($object);
         }
+        
+        // set for photos restaurant
+        foreach ($object->getAdditionalPhotos() as $additionalPhoto) {
+            $additionalPhoto->setRestaurant($object);
+        }
+        // set for photos restaurant
+        foreach ($object->getAdditionalMenuPhotos() as $menuPhoto) {
+            $menuPhoto->setRestaurant($object);
+        }
+    }
+    
+     /**
+     * @param \Table\RestaurantBundle\Entity\Restaurant $restaurant
+     *
+     * @return void
+     */
+    public function prePersist($restaurant)
+    {
+        $object = $this->getRoot()->getSubject();
+        foreach ($object->getRestaurantSchedule() as $restaurantSchedule) {
+            $restaurantSchedule->setRestaurant($object);
+        }
+        
+        // set for photos restaurant
+        foreach ($object->getAdditionalPhotos() as $additionalPhoto) {
+            $additionalPhoto->setRestaurant($object);
+        }
+        // set for photos restaurant
+        foreach ($object->getAdditionalMenuPhotos() as $menuPhoto) {
+            $menuPhoto->setRestaurant($object);
+        }
     }
     
     protected function configureFormFields(FormMapper $formMapper)
@@ -79,6 +110,26 @@ class RestaurantAdmin extends Admin
                 ->add('phone', null, array(
                     'label' => 'restaurant.phone',
                     'required' => true
+                ))
+                ->add('description','textarea', array(
+                    'label' => 'restaurant.description',
+                    'required' => false
+                ))
+                ->add('additionalPhotos', 'sonata_type_collection', array(
+                    'label' => 'restaurant.photo.additional',
+                    'required' => false,
+                        ), array(
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'allow_delete' => true
+                ))
+                ->add('additionalMenuPhotos', 'sonata_type_collection', array(
+                    'label' => 'restaurant.photo.menu',
+                    'required' => false,
+                        ), array(
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'allow_delete' => true
                 ))
         ;
     }

@@ -15,6 +15,11 @@ restaurant:
       to: "Дни работы/До:"
   city:
     city: Города
+  photo:
+      additional: Фото заведения
+      menu: Фото меню
+      file: Файл
+      fileName: Имя
   tableOrder:
     label: Заказ столика 
     floor: Этаж
@@ -37,6 +42,7 @@ restaurant:
       to: Часы работы(до)
   email: E-mail
   phone: Телефон
+  description: Описание
 Name: Название
 address:
   city: Город
@@ -53,6 +59,8 @@ Map Photo:  Карта ресторана
 Table Order List: Заказ столиков
 Restaurant Schedule List: Список расписаний ресторана
 City List: Список городов
+Restaurant Additional Photo List: Список фото заведения
+Restaurant Menu Photo List: Список фото меню заведения
 main:
   mail:
     tableOrder:

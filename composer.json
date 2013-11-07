@@ -42,7 +42,10 @@
         "behat/mink-goutte-driver": "1.0.*@dev",
         "friendsofsymfony/rest-bundle": "0.13.*@dev",
         "jms/serializer-bundle": "0.12.*@dev",
-        "genemu/form-bundle": "2.2.*"
+        "genemu/form-bundle": "2.2.*",
+        "vich/uploader-bundle": "dev-master",
+        "knplabs/gaufrette": "0.2.*@dev",
+        "knplabs/knp-gaufrette-bundle" : "dev-master"
     },
     "scripts": {
         "post-install-cmd": [
