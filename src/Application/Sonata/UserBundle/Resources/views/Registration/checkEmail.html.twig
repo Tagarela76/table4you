@@ -1,5 +1,5 @@
-{% extends "TableMainBundle::layout.html.twig" %}
+{% extends "TableMainBundle::layout4modal.html.twig" %}
 
 {% block content %}
-    <p>{{ 'registration.check_email'|trans({'%email%': user.email}, 'FOSUserBundle') }}</p>
+    <div class="alert">{{ 'registration.check_email'|trans({'%email%': user.email}, 'FOSUserBundle') }}</div>
 {% endblock content %}
