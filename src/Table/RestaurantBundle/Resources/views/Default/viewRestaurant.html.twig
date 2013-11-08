@@ -3,6 +3,13 @@
     {{ parent() }}
 <script src="{{ asset('bundles/tablemain/bxslider/jquery.bxslider.js') }}"></script>
 {# Rating #}
+{# FANCYBOX #}
+<script src="{{ asset('bundles/tablemain/fancy-box/jquery.fancybox.pack.js') }}"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<script src="{{ asset('bundles/tablemain/fancy-box/helpers/jquery.fancybox-buttons.js') }}"></script>
+<script src="{{ asset('bundles/tablemain/fancy-box/helpers/jquery.fancybox-media.js') }}"></script>
+<script src="{{ asset('bundles/tablemain/fancy-box/helpers/jquery.fancybox-thumbs.js') }}"></script>
+{# FANCYBOX #}
 <script>
     // Rating
     $(function() {
@@ -11,13 +18,46 @@
 
         // additional photos slideshow
         $('.bx-restaurantAdditionalPhotos').bxSlider({
-            pagerCustom: '#bx-restaurantAdditionalPhotos-pager'
+            pagerCustom: '#bx-restaurantAdditionalPhotos-pager',
+            nextSelector: '#restaurantAdditionalPhotos-next',
+            prevSelector: '#restaurantAdditionalPhotos-prev'
         });
 
         // menu photos slideshow
         $('.bx-restaurantMenuPhotos').bxSlider({
-            pagerCustom: '#bx-restaurantMenuPhotos-pager'
+            pagerCustom: '#bx-restaurantMenuPhotos-pager',
+            nextSelector: '#restaurantMenuPhotos-next',
+            prevSelector: '#restaurantMenuPhotos-prev'
         });
+        
+        // fancyBOX
+        $("a.restaurantAdditionalPhotos").fancybox({
+		prevEffect	: 'none',
+		nextEffect	: 'none',
+		helpers	: {
+			title	: {
+				type: 'outside'
+			},
+			thumbs	: {
+				width	: 50,
+				height	: 50
+			}
+		}
+	});
+        
+        $("a.restaurantMenuPhotos").fancybox({
+		prevEffect	: 'none',
+		nextEffect	: 'none',
+		helpers	: {
+			title	: {
+				type: 'outside'
+			},
+			thumbs	: {
+				width	: 50,
+				height	: 50
+			}
+		}
+	});
     });
 
 </script> 
@@ -25,7 +65,13 @@
 {% endblock %}    
 {% block stylesheets %}
     {{ parent() }}
-<link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/bxslider/jquery.bxslider.css') }}">    
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/bxslider/jquery.bxslider.css') }}"> 
+{# FANCYBOX #}
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/fancy-box/jquery.fancybox.css') }}">
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/fancy-box/helpers/jquery.fancybox-buttons.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/fancy-box/helpers/jquery.fancybox-thumbs.css') }}">
+{# FANCYBOX #}
 {% endblock %}    
 {% block content %}
 <div class="container-fluid" id="restaurantList_main">
@@ -99,40 +145,51 @@
         </ul>
         <div class="tab-content">
             <div id="photos" class="tab-pane active">
-                <ul class="bx-restaurantAdditionalPhotos">
-                    {% for additionalPhoto in additionalPhotos %}
-                    <li>
-                        <img src="{{ additionalPhoto }}" width="150" height="150"/>
-                    </li>
-                    {% endfor %}
-                </ul>
+                {% if additionalPhotos %}
+                    <ul class="bx-restaurantAdditionalPhotos">
+                        {% for additionalPhoto in additionalPhotos %}
+                        <li>
+                            <a class="restaurantAdditionalPhotos" rel="restaurantAdditionalPhotos" href="{{ additionalPhoto }}">
+                                <img src="{{ additionalPhoto }}" width="150" height="150"/>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
 
-                <div id="bx-restaurantAdditionalPhotos-pager">
-                    {% for additionalPhoto in additionalPhotos %}
-                    <a data-slide-index="{{ loop.index - 1 }}" href="">
-                        <img src="{{ additionalPhoto }}" width="150" height="150"/>
-                    </a>
-                    {% endfor %}
-                </div>
+                    <div id="bx-restaurantAdditionalPhotos-pager">
+                        <span id="restaurantAdditionalPhotos-prev"></span>
+                        {% for additionalPhoto in additionalPhotos %}
+                        <a data-slide-index="{{ loop.index - 1 }}" href="">
+                            <img src="{{ additionalPhoto }}" width="150" height="150"/>
+                        </a>
+                        {% endfor %}
+                        <span id="restaurantAdditionalPhotos-next"></span>
+                    </div>
+                {% endif %}
             </div>
             <div id="menus" class="tab-pane">
-                <div style="clear:both;"></div>
                 {# menu #}
-                <ul class="bx-restaurantMenuPhotos">
-                    {% for menuPhoto in menuPhotos %}
-                    <li>
-                        <img src="{{ menuPhoto }}" width="150" height="150"/>
-                    </li>
-                    {% endfor %}
-                </ul>
+                {% if menuPhotos %}
+                    <ul class="bx-restaurantMenuPhotos">
+                        {% for menuPhoto in menuPhotos %}
+                        <li>
+                            <a class="restaurantMenuPhotos" rel="restaurantMenuPhotos" href="{{ menuPhoto }}">
+                                <img src="{{ menuPhoto }}" width="150" height="150"/>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
 
-                <div id="bx-restaurantMenuPhotos-pager">
-                    {% for menuPhoto in menuPhotos %}
-                    <a data-slide-index="{{ loop.index - 1 }}" href="">
-                        <img src="{{ menuPhoto }}" width="150" height="150"/>
-                    </a>
-                    {% endfor %}
-                </div>
+                    <div id="bx-restaurantMenuPhotos-pager">
+                        <span id="restaurantMenuPhotos-prev"></span>
+                        {% for menuPhoto in menuPhotos %}
+                        <a data-slide-index="{{ loop.index - 1 }}" href="">
+                            <img src="{{ menuPhoto }}" width="150" height="150"/>
+                        </a>
+                        {% endfor %}
+                        <span id="restaurantMenuPhotos-next"></span>
+                    </div>
+                {% endif %}
                 {# menu #}
             </div>
             <div id="description" class="tab-pane">
