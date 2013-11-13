@@ -97,10 +97,17 @@ function RestaurantFilter() {
                         // init rating
                         page.rating.initRating();
                         // init infinite ajax
-                     //   page.infiniteLoad.initLoading();
+                        page.infiniteLoad.initLoading();
 		}  
 	});      
         
+    }
+}
+
+function Common() {
+ 
+    this.closeModalWindow = function(element) {
+        $('.modal-backdrop fade in').remove();
     }
 }
 
@@ -110,6 +117,7 @@ function Page() {
     this.rating = new Rating();
     this.infiniteLoad = new InfiniteLoad();
     this.restaurantFilter = new RestaurantFilter();
+    this.common = new Common();
 }
 
 //	global page object
