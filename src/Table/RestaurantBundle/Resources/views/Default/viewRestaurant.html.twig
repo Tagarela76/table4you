@@ -1,8 +1,12 @@
 {% extends 'TableMainBundle::layout.html.twig' %}
 {% block javascripts %}
     {{ parent() }}
-<script src="{{ asset('bundles/tablemain/bxslider/jquery.bxslider.js') }}"></script>
-{# Rating #}
+{# SLIDER #}
+<script src="{{ asset('bundles/tablemain/lofslidernews/js/jquery.easing.js') }}"></script>
+<script src="{{ asset('bundles/tablemain/lofslidernews/js/jquery.touchSwipe.min.js') }}"></script>
+<script src="{{ asset('bundles/tablemain/lofslidernews/js/lofslidernews-script.js') }}"></script>
+{# SLIDER #}
+
 {# FANCYBOX #}
 <script src="{{ asset('bundles/tablemain/fancy-box/jquery.fancybox.pack.js') }}"></script>
 <!-- Optionally add helpers - button, thumbnail and/or media -->
@@ -13,22 +17,47 @@
 <script>
     // Rating
     $(function() {
+        // Slider init
+        // buttons for next and previous item						 
+	var additionalPhotosButtons = {
+            previous:$('#additionalPhotosSlider .button-previous') ,
+            next:$('#additionalPhotosSlider .button-next') 
+        };	
+        var menuPhotosButtons = {
+            previous:$('#menuPhotosSlider .button-previous') ,
+            next:$('#menuPhotosSlider .button-next') 
+        };
+        $('#additionalPhotosSlider').lofJSidernews( {
+            interval : 4000,
+            direction : 'opacitys',	
+            easing : 'easeInOutExpo',
+            duration : 1200,
+            auto : true,
+            maxItemDisplay  : 4,
+            mobile : true,
+            navPosition : 'horizontal', // horizontal
+            navigatorHeight : 32,
+            navigatorWidth  : 80,
+            mainWidth		: 980,
+            buttons : additionalPhotosButtons 
+        } );
+        $('#menuPhotosSlider').lofJSidernews( {
+            interval : 4000,
+            direction : 'opacitys',	
+            easing : 'easeInOutExpo',
+            duration : 1200,
+            auto : true,
+            maxItemDisplay  : 4,
+            mobile : true,
+            navPosition : 'horizontal', // horizontal
+            navigatorHeight : 32,
+            navigatorWidth  : 80,
+            mainWidth		: 980,
+            buttons : menuPhotosButtons 
+        } );
+        
         // Rating
         page.rating.initRating();
-
-        // additional photos slideshow
-        $('.bx-restaurantAdditionalPhotos').bxSlider({
-            pagerCustom: '#bx-restaurantAdditionalPhotos-pager',
-            nextSelector: '#restaurantAdditionalPhotos-next',
-            prevSelector: '#restaurantAdditionalPhotos-prev'
-        });
-
-        // menu photos slideshow
-        $('.bx-restaurantMenuPhotos').bxSlider({
-            pagerCustom: '#bx-restaurantMenuPhotos-pager',
-            nextSelector: '#restaurantMenuPhotos-next',
-            prevSelector: '#restaurantMenuPhotos-prev'
-        });
         
         // fancyBOX
         $("a.restaurantAdditionalPhotos").fancybox({
@@ -65,7 +94,10 @@
 {% endblock %}    
 {% block stylesheets %}
     {{ parent() }}
-<link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/bxslider/jquery.bxslider.css') }}"> 
+{# SLIDER #}
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/lofslidernews/css/lofslidernews.css') }}">
+{# SLIDER #}
+
 {# FANCYBOX #}
 <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/fancy-box/jquery.fancybox.css') }}">
 <!-- Optionally add helpers - button, thumbnail and/or media -->
@@ -146,48 +178,78 @@
         <div class="tab-content">
             <div id="photos" class="tab-pane active">
                 {% if additionalPhotos %}
-                    <ul class="bx-restaurantAdditionalPhotos">
-                        {% for additionalPhoto in additionalPhotos %}
-                        <li>
-                            <a class="restaurantAdditionalPhotos" rel="restaurantAdditionalPhotos" href="{{ additionalPhoto }}">
-                                <img src="{{ additionalPhoto }}" width="150" height="150"/>
-                            </a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-
-                    <div id="bx-restaurantAdditionalPhotos-pager">
-                        <span id="restaurantAdditionalPhotos-prev"></span>
-                        {% for additionalPhoto in additionalPhotos %}
-                        <a data-slide-index="{{ loop.index - 1 }}" href="">
-                            <img src="{{ additionalPhoto }}" width="150" height="150"/>
-                        </a>
-                        {% endfor %}
-                        <span id="restaurantAdditionalPhotos-next"></span>
-                    </div>
+                    <div id="additionalPhotosSlider" class="lof-slidecontent" style="width:980px; height:340px;">
+                        <div class="preload"><div></div></div>
+                        <!-- MAIN CONTENT --> 
+                        <div class="main-slider-content" style="width:980px; height:340px;">
+                            <ul class="sliders-wrap-inner">
+                                {% for additionalPhoto in additionalPhotos %}
+                                <li>
+                                    <a class="restaurantAdditionalPhotos" rel="restaurantAdditionalPhotos" href="{{ additionalPhoto }}">
+                                        <img src="{{ additionalPhoto }}" width="150" height="150"/>
+                                    </a>        
+                                </li> 
+                                {% endfor %}
+                            </ul>  	
+                        </div>
+                        <!-- END MAIN CONTENT --> 
+                        <!-- NAVIGATOR -->
+                        <div class="navigator-content">
+                            <div class="button-next">Next</div>
+                            <div class="navigator-wrapper">
+                                <ul class="navigator-wrap-inner">
+                                    {% for additionalPhoto in additionalPhotos %}
+                                        <li>
+                                            <img src="{{ additionalPhoto }}" />
+                                        </li> 
+                                    {% endfor %}    
+                                </ul>
+                            </div>
+                            <div  class="button-previous">Previous</div>
+                       </div> 
+                        <!----------------- END OF NAVIGATOR --------------------->
+                        <!-- BUTTON PLAY-STOP -->
+                        <div class="button-control"><span></span></div>
+                         <!-- END OF BUTTON PLAY-STOP -->
+                    </div> 
                 {% endif %}
             </div>
             <div id="menus" class="tab-pane">
                 {# menu #}
                 {% if menuPhotos %}
-                    <ul class="bx-restaurantMenuPhotos">
-                        {% for menuPhoto in menuPhotos %}
-                        <li>
-                            <a class="restaurantMenuPhotos" rel="restaurantMenuPhotos" href="{{ menuPhoto }}">
-                                <img src="{{ menuPhoto }}" width="150" height="150"/>
-                            </a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-
-                    <div id="bx-restaurantMenuPhotos-pager">
-                        <span id="restaurantMenuPhotos-prev"></span>
-                        {% for menuPhoto in menuPhotos %}
-                        <a data-slide-index="{{ loop.index - 1 }}" href="">
-                            <img src="{{ menuPhoto }}" width="150" height="150"/>
-                        </a>
-                        {% endfor %}
-                        <span id="restaurantMenuPhotos-next"></span>
+                    <div id="menuPhotosSlider" class="lof-slidecontent" style="width:980px; height:340px;">
+                        <div class="preload"><div></div></div>
+                        <!-- MAIN CONTENT --> 
+                        <div class="main-slider-content" style="width:980px; height:340px;">
+                            <ul class="sliders-wrap-inner">
+                                {% for menuPhoto in menuPhotos %}
+                                <li>
+                                    <a class="restaurantMenuPhotos" rel="restaurantMenuPhotos" href="{{ menuPhoto }}">
+                                        <img src="{{ menuPhoto }}" width="150" height="150"/>
+                                    </a>
+                                </li> 
+                                {% endfor %}
+                            </ul>  	
+                        </div>
+                        <!-- END MAIN CONTENT --> 
+                        <!-- NAVIGATOR -->
+                        <div class="navigator-content">
+                            <div class="button-next">Next</div>
+                            <div class="navigator-wrapper">
+                                <ul class="navigator-wrap-inner">
+                                    {% for menuPhoto in menuPhotos %}
+                                        <li>
+                                            <img src="{{ menuPhoto }}" />
+                                        </li> 
+                                    {% endfor %}    
+                                </ul>
+                            </div>
+                            <div  class="button-previous">Previous</div>
+                       </div> 
+                        <!----------------- END OF NAVIGATOR --------------------->
+                        <!-- BUTTON PLAY-STOP -->
+                        <div class="button-control"><span></span></div>
+                         <!-- END OF BUTTON PLAY-STOP -->
                     </div>
                 {% endif %}
                 {# menu #}
