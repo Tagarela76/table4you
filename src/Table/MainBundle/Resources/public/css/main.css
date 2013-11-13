@@ -129,7 +129,6 @@ input:focus{outline: 0 none}
     width: 148px;
     height: 148px;
     border-radius: 3px;
-    border: 2px solid #6d6868;
 }
 .restaurant-container .restaurant-content{
     width: 318px;
@@ -1105,3 +1104,137 @@ background-image: url(images/selects-2.png);}
     color: #d3441b;
     text-decoration: none;
 }
+
+/* restoraunt page(tabs) */
+.container-fluid .tabbable .nav-tabs{
+    margin: 0;
+    border: none;
+}
+.container-fluid .tabbable .nav-tabs > li > a {
+    color: #454545;
+    cursor: default;
+    background: none;
+    border: none;
+    font-size: 13px;
+    padding: 12px 42px 13px 0px;
+}
+.container-fluid .tabbable .nav-tabs > .active > a, .container-fluid .tabbable  .nav-tabs > .active > a:hover, .container-fluid .tabbable .nav-tabs > li > a:hover{
+    color: #e66103;
+    background: none;
+    cursor: pointer;
+}
+
+
+.tab-pane .lof-slidecontent{
+    border: none;
+    border-bottom: 1px solid #8c8888;
+    width: 100%!important;
+}
+
+.tab-pane .lof-slidecontent .navigator-content {
+    background: none;
+    position: absolute;
+    bottom: 15px;
+    left: 0px;
+    padding: 0px;
+    margin-top: 15px;
+}
+.tab-pane ul.sliders-wrap-inner li img {
+    padding: 0px;
+    width: 646px;
+    height: 320px;
+    border: none;
+}
+.tab-pane .lof-slidecontent ul.navigator-wrap-inner li {
+    height: 110px!important;
+    width: 205px!important;
+    margin-right: 16px;
+}
+.tab-pane .lof-slidecontent .navigator-wrapper, .tab-pane .lof-slidecontent ul.navigator-wrap-inner {
+    width: 20000px!important;
+    height: 110px!important;
+}
+
+.tab-pane .lof-slidecontent ul.navigator-wrap-inner li img {
+    border: none;
+    height: 100%;
+}
+.tab-pane .lof-slidecontent ul.navigator-wrap-inner li.active img, .lof-slidecontent ul.navigator-wrap-inner li:hover img, .tab-pane .lof-slidecontent ul.navigator-wrap-inner li.active img, .lof-slidecontent ul.navigator-wrap-inner li:hover img, .lof-slidecontent ul.navigator-wrap-inner li.active img, .lof-slidecontent ul.navigator-wrap-inner li:hover img{
+    border:none!important;
+}
+.tab-pane .lof-slidecontent .navigator-content .button-next, .tab-pane .lof-slidecontent .navigator-content .button-previous {
+    display: block;
+    width: 32px;
+    height: 110px;
+    color: #FFF;
+    cursor: pointer;
+    position: absolute;
+    z-index: 999;
+    opacity: 0.9;
+}
+.tab-pane .lof-slidecontent .navigator-content .button-next {
+    float: none;
+    margin-right: 0px;
+    background: #b2acac;
+}
+.tab-pane .lof-slidecontent .navigator-content .button-previous {
+    float: none;
+    margin-left: 0px;
+    background: #b2acac;
+    right: -10px;
+}
+.tab-pane .lof-slidecontent .navigator-content .button-next:after{
+    right: 35%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+.tab-pane .lof-slidecontent .navigator-content .button-next:after{
+    border-color: rgba(255, 255, 255, 0);
+    border-right-color: #fff;
+    border-width: 11px;
+    top: 50%;
+    margin-top: -11px;
+}
+.tab-pane .lof-slidecontent .navigator-content .button-previous:after{
+    left: 32%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+.tab-pane .lof-slidecontent .navigator-content .button-previous:after{
+    border-color: rgba(255, 255, 255, 0);
+    border-left-color: #fff;
+    border-width: 11px;
+    top: 50%;
+    margin-top: -11px;
+}
+.tab-pane .lof-slidecontent .button-control {display: none;}
+
+
+#description hr{
+    margin:0px 0px 14px 0px;
+    background: #dbdada;
+    height: 1px;
+    border-top: 1px solid #bdbdbd;
+}
+#description p{
+    color: #454545;
+}
+#description p+p{
+    font-size: 12px;
+    font-style: italic;
+}
+
+.fancybox-overlay .fancybox-skin {
+    background: #d8d5d5;
+    border-radius: 0;
+    padding: 10% 2%!important;
+}
+*/

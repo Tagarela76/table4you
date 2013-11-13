@@ -178,10 +178,10 @@
         <div class="tab-content">
             <div id="photos" class="tab-pane active">
                 {% if additionalPhotos %}
-                    <div id="additionalPhotosSlider" class="lof-slidecontent" style="width:980px; height:340px;">
+                    <div id="additionalPhotosSlider" class="lof-slidecontent" style="width:980px; height:462px;">
                         <div class="preload"><div></div></div>
                         <!-- MAIN CONTENT --> 
-                        <div class="main-slider-content" style="width:980px; height:340px;">
+                        <div class="main-slider-content" style="width:980px; height:320px;">
                             <ul class="sliders-wrap-inner">
                                 {% for additionalPhoto in additionalPhotos %}
                                 <li>
@@ -217,15 +217,15 @@
             <div id="menus" class="tab-pane">
                 {# menu #}
                 {% if menuPhotos %}
-                    <div id="menuPhotosSlider" class="lof-slidecontent" style="width:980px; height:340px;">
+                    <div id="menuPhotosSlider" class="lof-slidecontent" style="width:980px; height:462px;">
                         <div class="preload"><div></div></div>
                         <!-- MAIN CONTENT --> 
-                        <div class="main-slider-content" style="width:980px; height:340px;">
+                        <div class="main-slider-content" style="width:980px; height:320px;">
                             <ul class="sliders-wrap-inner">
                                 {% for menuPhoto in menuPhotos %}
                                 <li>
                                     <a class="restaurantMenuPhotos" rel="restaurantMenuPhotos" href="{{ menuPhoto }}">
-                                        <img src="{{ menuPhoto }}" width="150" height="150"/>
+                                        <img src="{{ menuPhoto }}"/>
                                     </a>
                                 </li> 
                                 {% endfor %}
@@ -255,7 +255,9 @@
                 {# menu #}
             </div>
             <div id="description" class="tab-pane">
-                {{ restaurant.description }}
+                <hr>
+                <p>О заведении</p>
+                <p>{{ restaurant.description }}</p>
             </div>
         </div>
     </div>
