@@ -160,7 +160,7 @@ class RestaurantAdmin extends Admin
     {
         $listMapper
                 ->addIdentifier('id')
-                ->add('name')
+                ->addIdentifier('name')
                 ->add('city', null, array(
                     'label' => 'address.city'
                 ))

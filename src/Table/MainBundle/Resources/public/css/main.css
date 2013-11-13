@@ -1105,3 +1105,17 @@ background-image: url(images/selects-2.png);}
     color: #d3441b;
     text-decoration: none;
 }
+
+.restaurantSchedule {
+    width:318px;
+    overflow:hidden;
+    margin-left: 0;
+}
+
+.restaurantSchedule li {
+  float:left;
+  display:inline;
+  width:50%;
+  font-size: 11.9px;
+  margin-bottom: 4px;
+}

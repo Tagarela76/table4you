@@ -25,13 +25,13 @@
                     <a href="{{ path('table_view_restaurant', {'id': restaurant.id}) }}" >{{ restaurant.name }}</a>
                 </p>
                 <p class="tets">
-                    {{ restaurant.categories|join(',') }}
+                    {{ restaurant.categories|join(', ') }}
                 </p>
                 <p class="restaurant-content-font-category">
                     {% trans %}main.labels.kitchen{% endtrans %}
                 </p>
                 <p class="restaurant-content-font">
-                    {{ restaurant.kitchens|join(',') }}
+                    {{ restaurant.kitchens|join(', ') }}
                 </p>
                 <p  class="restaurant-content-font-category">
                      {% trans %}main.labels.address{% endtrans %}
