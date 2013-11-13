@@ -1105,6 +1105,7 @@ background-image: url(images/selects-2.png);}
     text-decoration: none;
 }
 
+
 /* restoraunt page(tabs) */
 .container-fluid .tabbable .nav-tabs{
     margin: 0;
@@ -1237,4 +1238,18 @@ background-image: url(images/selects-2.png);}
     border-radius: 0;
     padding: 10% 2%!important;
 }
-*/
+
+.restaurantSchedule {
+    width:318px;
+    overflow:hidden;
+    margin-left: 0;
+}
+
+.restaurantSchedule li {
+  float:left;
+  display:inline;
+  width:50%;
+  font-size: 11.9px;
+  margin-bottom: 4px;
+}
+
