@@ -2,9 +2,17 @@
 {% block javascripts %}
     {{ parent() }}
 {# SLIDER #}
-<script src="{{ asset('bundles/tablemain/lofslidernews/js/jquery.easing.js') }}"></script>
-<script src="{{ asset('bundles/tablemain/lofslidernews/js/jquery.touchSwipe.min.js') }}"></script>
-<script src="{{ asset('bundles/tablemain/lofslidernews/js/lofslidernews-script.js') }}"></script>
+<script src="{{ asset('bundles/tablemain/flexSlider/js/modernizr.js') }}"></script>
+<script src="{{ asset('bundles/tablemain/flexSlider/js/jquery.flexslider.js') }}"></script>
+<!-- Syntax Highlighter -->
+<script src="{{ asset('bundles/tablemain/flexSlider/js/shCore.js') }}"></script>
+<script src="{{ asset('bundles/tablemain/flexSlider/js/shBrushXml.js') }}"></script>
+<script src="{{ asset('bundles/tablemain/flexSlider/js/shBrushJScript.js') }}"></script>
+
+<!-- Optional FlexSlider Additions -->
+<script src="{{ asset('bundles/tablemain/flexSlider/js/jquery.easing.js') }}"></script>
+<script src="{{ asset('bundles/tablemain/flexSlider/js/jquery.mousewheel.js') }}"></script>
+<script src="{{ asset('bundles/tablemain/flexSlider/js/demo.js') }}"></script>
 {# SLIDER #}
 
 {# FANCYBOX #}
@@ -15,47 +23,56 @@
 <script src="{{ asset('bundles/tablemain/fancy-box/helpers/jquery.fancybox-thumbs.js') }}"></script>
 {# FANCYBOX #}
 <script>
-    // Rating
-    $(function() {
-        // Slider init
-        // buttons for next and previous item						 
-	var additionalPhotosButtons = {
-            previous:$('#additionalPhotosSlider .button-previous') ,
-            next:$('#additionalPhotosSlider .button-next') 
-        };	
-        var menuPhotosButtons = {
-            previous:$('#menuPhotosSlider .button-previous') ,
-            next:$('#menuPhotosSlider .button-next') 
-        };
-        $('#additionalPhotosSlider').lofJSidernews( {
-            interval : 4000,
-            direction : 'opacitys',	
-            easing : 'easeInOutExpo',
-            duration : 1200,
-            auto : true,
-            maxItemDisplay  : 4,
-            mobile : true,
-            navPosition : 'horizontal', // horizontal
-            navigatorHeight : 32,
-            navigatorWidth  : 80,
-            mainWidth		: 980,
-            buttons : additionalPhotosButtons 
-        } );
-        $('#menuPhotosSlider').lofJSidernews( {
-            interval : 4000,
-            direction : 'opacitys',	
-            easing : 'easeInOutExpo',
-            duration : 1200,
-            auto : true,
-            maxItemDisplay  : 4,
-            mobile : true,
-            navPosition : 'horizontal', // horizontal
-            navigatorHeight : 32,
-            navigatorWidth  : 80,
-            mainWidth		: 980,
-            buttons : menuPhotosButtons 
-        } );
-        
+    // Slider
+    $(function(){
+      SyntaxHighlighter.all();
+    });
+    $(window).load(function(){
+      $('#additionalPhotos-carousel').flexslider({
+        animation: "slide",
+        controlNav: false,
+        animationLoop: false,
+        slideshow: false,
+        itemWidth: 210,
+        itemMargin: 5,
+        asNavFor: '#additionalPhotos-slider'
+      });
+
+      $('#additionalPhotos-slider').flexslider({
+        animation: "slide",
+        controlNav: false,
+        animationLoop: false,
+        slideshow: false,
+        sync: "#additionalPhotos-carousel",
+        start: function(slider){
+          $('body').removeClass('loading');
+        }
+      });
+      
+      $('#menuPhotos-carousel').flexslider({
+        animation: "slide",
+        controlNav: false,
+        animationLoop: false,
+        slideshow: false,
+        itemWidth: 210,
+        itemMargin: 5,
+        asNavFor: '#menuPhotos-slider'
+      });
+
+      $('#menuPhotos-slider').flexslider({
+        animation: "slide",
+        controlNav: false,
+        animationLoop: false,
+        slideshow: false,
+        sync: "#menuPhotos-carousel",
+        start: function(slider){
+          $('body').removeClass('loading');
+        }
+      });
+    });
+
+
+    $(function() {       
         // Rating
         page.rating.initRating();
         
@@ -95,7 +112,7 @@
 {% block stylesheets %}
     {{ parent() }}
 {# SLIDER #}
-<link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/lofslidernews/css/lofslidernews.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/flexSlider/css/flexslider.css') }}">
 {# SLIDER #}
 
 {# FANCYBOX #}
@@ -185,78 +202,50 @@
         <div class="tab-content">
             <div id="photos" class="tab-pane active">
                 {% if additionalPhotos %}
-                    <div id="additionalPhotosSlider" class="lof-slidecontent" style="width:980px; height:462px;">
-                        <div class="preload"><div></div></div>
-                        <!-- MAIN CONTENT --> 
-                        <div class="main-slider-content" style="width:980px; height:320px;">
-                            <ul class="sliders-wrap-inner">
-                                {% for additionalPhoto in additionalPhotos %}
+                    <div id="additionalPhotos-slider" class="flexslider">
+                        <ul class="slides">
+                            {% for additionalPhoto in additionalPhotos %}
                                 <li>
                                     <a class="restaurantAdditionalPhotos" rel="restaurantAdditionalPhotos" href="{{ additionalPhoto }}">
                                         <img src="{{ additionalPhoto }}" width="150" height="150"/>
                                     </a>        
-                                </li> 
-                                {% endfor %}
-                            </ul>  	
-                        </div>
-                        <!-- END MAIN CONTENT --> 
-                        <!-- NAVIGATOR -->
-                        <div class="navigator-content">
-                            <div class="button-next">Next</div>
-                            <div class="navigator-wrapper">
-                                <ul class="navigator-wrap-inner">
-                                    {% for additionalPhoto in additionalPhotos %}
-                                        <li>
-                                            <img src="{{ additionalPhoto }}" />
-                                        </li> 
-                                    {% endfor %}    
-                                </ul>
-                            </div>
-                            <div  class="button-previous">Previous</div>
-                       </div> 
-                        <!----------------- END OF NAVIGATOR --------------------->
-                        <!-- BUTTON PLAY-STOP -->
-                        <div class="button-control"><span></span></div>
-                         <!-- END OF BUTTON PLAY-STOP -->
-                    </div> 
+                                </li>
+                            {% endfor %}   
+                        </ul>
+                    </div>
+                    <div id="additionalPhotos-carousel" class="flexslider">
+                        <ul class="slides">
+                            {% for additionalPhoto in additionalPhotos %}
+                                <li>
+                                    <img src="{{additionalPhoto}}" />
+                                </li>
+                            {% endfor %}  
+                        </ul>
+                    </div>
                 {% endif %}
             </div>
             <div id="menus" class="tab-pane">
                 {# menu #}
                 {% if menuPhotos %}
-                    <div id="menuPhotosSlider" class="lof-slidecontent" style="width:980px; height:462px;">
-                        <div class="preload"><div></div></div>
-                        <!-- MAIN CONTENT --> 
-                        <div class="main-slider-content" style="width:980px; height:320px;">
-                            <ul class="sliders-wrap-inner">
-                                {% for menuPhoto in menuPhotos %}
+                    <div id="menuPhotos-slider" class="flexslider">
+                        <ul class="slides">
+                            {% for menuPhoto in menuPhotos %}
                                 <li>
                                     <a class="restaurantMenuPhotos" rel="restaurantMenuPhotos" href="{{ menuPhoto }}">
                                         <img src="{{ menuPhoto }}"/>
                                     </a>
-                                </li> 
-                                {% endfor %}
-                            </ul>  	
-                        </div>
-                        <!-- END MAIN CONTENT --> 
-                        <!-- NAVIGATOR -->
-                        <div class="navigator-content">
-                            <div class="button-next">Next</div>
-                            <div class="navigator-wrapper">
-                                <ul class="navigator-wrap-inner">
-                                    {% for menuPhoto in menuPhotos %}
-                                        <li>
-                                            <img src="{{ menuPhoto }}" />
-                                        </li> 
-                                    {% endfor %}    
-                                </ul>
-                            </div>
-                            <div  class="button-previous">Previous</div>
-                       </div> 
-                        <!----------------- END OF NAVIGATOR --------------------->
-                        <!-- BUTTON PLAY-STOP -->
-                        <div class="button-control"><span></span></div>
-                         <!-- END OF BUTTON PLAY-STOP -->
+                                </li>
+                            {% endfor %}   
+                        </ul>
+                    </div>
+                    <div id="menuPhotos-carousel" class="flexslider">
+                        <ul class="slides">
+                            {% for menuPhoto in menuPhotos %}
+                                <li>
+                                    <img src="{{menuPhoto}}" />
+                                </li>
+                            {% endfor %}  
+                        </ul>
                     </div>
                 {% endif %}
                 {# menu #}
