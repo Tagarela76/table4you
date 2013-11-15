@@ -953,8 +953,96 @@ background-image: url(images/selects-2.png);}
     .restaurantList-container .modal-body {
         height: 100%;
         overflow: auto;
+        max-height: 560px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 670px){
+    .restaurantList-container .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 545px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 650px){
+    .restaurantList-container .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 530px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 630px){
+    .restaurantList-container .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 510px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 610px){
+    .restaurantList-container .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 490px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 590px){
+    .restaurantList-container .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 470px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 570px){
+    .restaurantList-container .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 450px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 550px){
+    .restaurantList-container .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 430px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 530px){
+    .restaurantList-container .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 410px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 510px){
+    .restaurantList-container .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 390px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 490px){
+    .restaurantList-container .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 370px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 470px){
+    .restaurantList-container .modal-body {
+        height: 100%;
+        overflow: auto;
         max-height: 350px;
-  overflow-y: overlay;
+        overflow-y: overlay;
     }
 }
 
