@@ -261,8 +261,8 @@ vich_uploader:
             namer: vich_uploader.namer_origname     
            
         restaurant_menu_photo:
-            uri_prefix: /uploads/media/menuPhotos #/table4you/web/uploads/media/menuPhotos 
-            upload_destination:  %kernel.root_dir%/../web/uploads/media/menuPhotos#/table4you/web/uploads/media/menuPhotos 
+            uri_prefix: /uploads/media/menuPhotos 
+            upload_destination:  %kernel.root_dir%/../web/uploads/media/menuPhotos
             delete_on_remove: true
             delete_on_update: true
             inject_on_load: true 

@@ -189,6 +189,8 @@ class DefaultController extends Controller
             }
         }
 
+        // assign base_url
+        $baseUrl = $this->container->getParameter('base_url');
         return array(
             'restaurant' => $restaurant,
             'anonim' => $anonim,
@@ -201,7 +203,8 @@ class DefaultController extends Controller
 	    'searchCity' => $searchCity,
             'breadcrumbs' => $breadcrumbs,
             'additionalPhotos' => $additionalPhotos,
-            'menuPhotos' => $menuPhotos
+            'menuPhotos' => $menuPhotos,
+            'baseUrl' => $baseUrl
         );
         
     }

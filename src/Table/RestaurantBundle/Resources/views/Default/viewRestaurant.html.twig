@@ -206,8 +206,8 @@
                         <ul class="slides">
                             {% for additionalPhoto in additionalPhotos %}
                                 <li>
-                                    <a class="restaurantAdditionalPhotos" rel="restaurantAdditionalPhotos" href="{{ additionalPhoto }}">
-                                        <img src="{{ additionalPhoto }}" width="150" height="150"/>
+                                    <a class="restaurantAdditionalPhotos" rel="restaurantAdditionalPhotos" href="{{baseUrl}}{{ additionalPhoto }}">
+                                        <img src="{{baseUrl}}{{ additionalPhoto }}" width="150" height="150"/>
                                     </a>        
                                 </li>
                             {% endfor %}   
@@ -217,7 +217,7 @@
                         <ul class="slides">
                             {% for additionalPhoto in additionalPhotos %}
                                 <li>
-                                    <img src="{{additionalPhoto}}" />
+                                    <img src="{{baseUrl}}{{additionalPhoto}}" />
                                 </li>
                             {% endfor %}  
                         </ul>
@@ -231,8 +231,8 @@
                         <ul class="slides">
                             {% for menuPhoto in menuPhotos %}
                                 <li>
-                                    <a class="restaurantMenuPhotos" rel="restaurantMenuPhotos" href="{{ menuPhoto }}">
-                                        <img src="{{ menuPhoto }}"/>
+                                    <a class="restaurantMenuPhotos" rel="restaurantMenuPhotos" href="{{baseUrl}}{{ menuPhoto }}">
+                                        <img src="{{baseUrl}}{{ menuPhoto }}"/>
                                     </a>
                                 </li>
                             {% endfor %}   
@@ -242,7 +242,7 @@
                         <ul class="slides">
                             {% for menuPhoto in menuPhotos %}
                                 <li>
-                                    <img src="{{menuPhoto}}" />
+                                    <img src="{{baseUrl}}{{menuPhoto}}" />
                                 </li>
                             {% endfor %}  
                         </ul>
