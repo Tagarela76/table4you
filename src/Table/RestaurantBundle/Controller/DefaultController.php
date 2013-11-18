@@ -41,10 +41,27 @@ class DefaultController extends Controller
         }
         // get User Order History
         $orderHistory = $this->getTableOrdermanager()->getOrderHistory($user->getId());
+        
         // Check if user can do table order
         $isUserHaveAnotherOrder = false;
         foreach ($orderHistory->getQuery()->getResult() as $userTableOrder) {
-            if ($userTableOrder->getStatus() == 0 || is_null($userTableOrder->getStatus())) {
+            // devide reserve time on parts
+            $reserveHour = $userTableOrder->getReserveTime()->format('h');
+            $reserveMin = $userTableOrder->getReserveTime()->format('s');
+            // get reserve date and time
+            $reserveDateTime = $userTableOrder->getReserveDate();
+            $reserveDateTime->setTime($reserveHour, $reserveMin);
+            
+            // get current date time
+            $currentDateTime = new \DateTime();
+            
+            // get diff
+            $interval = $reserveDateTime->diff($currentDateTime, true);
+            
+            if ($userTableOrder->getStatus() == 0 ||
+                    is_null($userTableOrder->getStatus()) || 
+                    ($interval->days == 0 && $interval->h == 1 && $interval->i < 31) ||
+                    ($interval->days == 0 && $interval->h == 0 ) ) {
                 $isUserHaveAnotherOrder = true;
             }
         }
@@ -53,7 +70,6 @@ class DefaultController extends Controller
             return $this->render('TableRestaurantBundle:Default:user.cannot.order.table.html.twig', array(
                 'user' => $user
             ));
-            die();
         }
 
         // Generate public URL for restaurant map
