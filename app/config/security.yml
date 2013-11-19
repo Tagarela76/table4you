@@ -12,6 +12,24 @@ security:
             id: fos_user.user_provider.username_email
 
     firewalls:
+        secured_area:
+            pattern:    ^/
+            form_login:
+                provider: fos_userbundle
+                login_path: /connect/
+                check_path: /login/login_check
+            anonymous:    true
+            oauth:
+                resource_owners:
+                    facebook:           "/login/check-facebook"
+                    vkontakte: "/login/check-vkontakte"
+                login_path:        /connect
+                failure_path:      /connect
+
+                # FOSUB integration
+                oauth_user_provider:
+                    service: hwi_oauth.user.provider.fosub_bridge
+                    
         wsse_secured:
           pattern:   ^/api/rest/wsse/.*
           stateless:    true

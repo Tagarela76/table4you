@@ -266,4 +266,48 @@ vich_uploader:
             delete_on_remove: true
             delete_on_update: true
             inject_on_load: true 
-            namer: vich_uploader.namer_origname      
+            namer: vich_uploader.namer_origname     
+            
+hwi_oauth:
+    # configuration of oauth resource owners to use
+    resource_owners:
+        facebook:
+            type:                facebook
+            client_id:           <client_id>
+            client_secret:       <client_secret>
+            scope:    
+                
+        vkontakte:
+            type:                vkontakte
+            client_id:           <client_id>
+            client_secret:       <client_secret>
+
+    # name of the firewall the oauth bundle is active in
+    firewall_name: secured_area
+
+    # optional FOSUserBundle integration
+    fosub:
+        # try 30 times to check if a username is available (foo, foo1, foo2 etc)
+        username_iterations: 30
+
+        # mapping between resource owners (see below) and properties
+        properties:
+            facebook: facebookId
+            vkontakte: vkontakteId
+
+    # if you want to use 'connect' and do not use the FOSUB integration, configure these separately
+    connect: ~
+#        confirmation: true # should show confirmation page or not
+#        registration_form_handler: my_registration_form_handler
+#        registration_form: my_registration_form
+#        account_connector: my_link_provider # can be the same as your user provider
+
+    # optional HTTP Client configuration
+    http_client:
+        timeout:       5
+        verify_peer:   true
+        ignore_errors: true
+        max_redirects: 5
+
+    # allows to switch templating engine for bundle views
+    #templating_engine: "php"      
