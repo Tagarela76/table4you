@@ -68,3 +68,7 @@ main:
           restaurant: Заведение
           profile: Мой профиль
           editProfile: Редактировать профиль
+          news: Открытая акция
+  helper:
+      from: с
+      to: по

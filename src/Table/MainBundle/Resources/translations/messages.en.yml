@@ -69,3 +69,7 @@ main:
           restaurant: Restaurant
           profile: Profile
           editProfile: Edit profile
+          news: Open News
+  helper:
+      from: from
+      to: to        
