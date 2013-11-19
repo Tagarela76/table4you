@@ -40,13 +40,13 @@ function Rating() {
 
 function InfiniteLoad() {
     
-    this.initLoading = function() {
+    this.initLoading = function(entity) {
         
         var loader = "{{ asset('bundles/tablemain/infinite-ajax-scroll/images/loader.gif') }}"; 
         
         jQuery.ias({
-            container : '.restaurantList-container',
-            item: '.restaurant-container',
+            container : '.'+entity+'List-container',
+            item: '.'+entity+'-container',
             pagination: '.navigation',
             next: '.next a',
             loader: '<img src=' + loader + '/>',

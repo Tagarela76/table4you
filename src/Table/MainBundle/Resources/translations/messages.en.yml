@@ -12,6 +12,7 @@ main:
         additional: Photo Gallery
         menu: Menu photos
     description: Description    
+    news: News
   register:
     buttonLabel: Registration
     form:

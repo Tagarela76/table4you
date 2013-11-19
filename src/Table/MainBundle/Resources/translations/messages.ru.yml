@@ -11,7 +11,8 @@ main:
     photos: 
         additional: Фото заведения
         menu: Меню
-    description: О заведении    
+    description: О заведении 
+    news: Акции/новости
   register:
     buttonLabel: Регистрация
     form:
