@@ -65,7 +65,10 @@ class DefaultController extends Controller
 	    $searchCity = 1;
 	}
 	/* *** */
-
+        
+        /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN RIGHT SIDEBAR */
+        $newsList = $this->getNewsManager()->getNews();
+        
 	// get restaurant list
 	$filter = $this->getRequest()->request->get('filter');  // fir restaurant filter
 	if ($filter) { 
@@ -102,7 +105,10 @@ class DefaultController extends Controller
 	        'cityList' => $cityList,
 	        'categoryList' => $categoryList,
 	        'kitchenList' => $kitchenList,
-	        'searchCity'  => $searchCity
+	        'searchCity'  => $searchCity,
+                'newsList' => $this->getPaginator()->paginate(
+                    $newsList, $page, Restaurant::PER_PAGE_COUNT
+                )
             );
 	}
     }

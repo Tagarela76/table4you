@@ -33,10 +33,8 @@ class NewsAdmin extends Admin
      */
     public function prePersist($news)
     {
-        // I should get original data
-        $original = (object) $this->getModelManager()->getEntityManager($this->getClass())->getUnitOfWork()->getOriginalEntityData($news);
 
-        if ($news->getPublished() && !$original->published) {
+        if ($news->getPublished()) {
             // set published Date if published
             $news->setPublishedDate(new \DateTime);
         }  

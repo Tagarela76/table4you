@@ -83,7 +83,11 @@
 
                     {% endblock %}
                 </div>
-                <div class="span3"></div>
+                <div class="span2">
+                    {% block rightSidebar %}
+                        {% include 'TableMainBundle:Component:rightSidebar.html.twig' %}
+                    {% endblock %}
+                </div>
             </div>
             <div class="row footer">
                 <div class="span12">

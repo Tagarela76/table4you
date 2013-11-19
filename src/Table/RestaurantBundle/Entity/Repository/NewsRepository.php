@@ -21,7 +21,8 @@ class NewsRepository extends EntityRepository
     public function getNews() 
     {
         $query = $this->createQueryBuilder('news');
-        $query->andWhere("news.published = 1");
+        $query->andWhere("news.published = :published")
+	      ->setParameter('published', 1);
         $query->orderBy('news.publishedDate', 'DESC');
         return $query;
     }

@@ -456,7 +456,7 @@ class DefaultController extends Controller
         
         // get News
         $news = $this->getNewsManager()->findOneById($id);
-        if (is_null($news)) {
+        if (is_null($news) || !$news->getPublished()) {
             throw $this->createNotFoundException('The page does not exist');
         }
         
