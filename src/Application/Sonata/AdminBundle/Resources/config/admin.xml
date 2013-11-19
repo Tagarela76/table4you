@@ -87,5 +87,14 @@
               <argument>ApplicationSonataAdminBundle</argument>
           </call>
       </service>
+      <service id="sonata.admin.news" class="Application\Sonata\AdminBundle\Controller\NewsAdmin">
+          <tag name="sonata.admin" manager_type="orm" group="Restaurant" label="restaurant.news.news"/>
+          <argument />
+          <argument>Table\RestaurantBundle\Entity\News</argument>
+          <argument>SonataAdminBundle:CRUD</argument>
+          <call method="setTranslationDomain">
+              <argument>ApplicationSonataAdminBundle</argument>
+          </call>
+      </service>
    </services>
 </container>

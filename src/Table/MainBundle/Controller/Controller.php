@@ -91,4 +91,9 @@ class Controller extends BaseController
     {
         return $this->get('sms_manager');
     }
+    
+    public function getNewsManager()
+    {
+        return $this->get('news_manager');
+    }
 }

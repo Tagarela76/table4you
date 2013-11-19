@@ -170,6 +170,11 @@ class Restaurant
      */
     protected $additionalMenuPhotos;
     
+    /**
+     * @ORM\OneToMany(targetEntity="News", mappedBy="restaurant", orphanRemoval=true, cascade={"persist", "remove"})
+     */
+    protected $news;
+    
     public function __construct()
     {
         $this->additionalServices = new ArrayCollection();
@@ -178,6 +183,7 @@ class Restaurant
         $this->restaurantSchedule = new ArrayCollection();
         $this->additionalPhotos = new ArrayCollection();
         $this->additionalMenuPhotos = new ArrayCollection();
+        $this->news = new ArrayCollection();
     }
 
     /**
@@ -802,6 +808,27 @@ class Restaurant
     public function removeAdditionalMenuPhotos($additionalMenuPhotos)
     {
         $this->additionalMenuPhotos->removeElement($additionalMenuPhotos);
+    }
+    
+    /**
+     * Get news
+     *
+     * @return Table\RestaurantBundle\Entity\News[] 
+     */
+    public function getNews()
+    {
+        return $this->news;
+    }
+
+    /**
+     * Set news
+     *
+     * @param Table\RestaurantBundle\Entity\News $news
+     * @return Restaurant
+     */
+    public function setNews($news)
+    {
+        $this->news = $news;
     }
     
     /**

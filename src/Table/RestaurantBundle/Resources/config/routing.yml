@@ -17,5 +17,10 @@ table_order_history:
     pattern:  /viewTableOrderHistory/{page}
     defaults: { _controller: TableRestaurantBundle:Default:viewTableOrderHistory, page: 1 }
     options:
-       expose: true               
+       expose: true   
+table_view_news:
+    pattern:  /news/{id}
+    defaults: { _controller: TableRestaurantBundle:Default:viewNews }
+    requirements:
+        id: \d+          
        

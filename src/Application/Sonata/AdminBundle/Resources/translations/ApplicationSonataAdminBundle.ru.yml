@@ -15,6 +15,17 @@ restaurant:
       to: "Дни работы/До:"
   city:
     city: Города
+  news:
+    news: Новости/Акции
+    title: Заголовок
+    content: Содержимое
+    restaurant: Ресторан
+    date:
+        start: Дата начала действия
+        end: Дата окончания действия
+    published: Публиковать
+    photo: Фото
+    
   photo:
       additional: Фото заведения
       menu: Фото меню
@@ -61,6 +72,7 @@ Restaurant Schedule List: Список расписаний ресторана
 City List: Список городов
 Restaurant Additional Photo List: Список фото заведения
 Restaurant Menu Photo List: Список фото меню заведения
+News List: Новости/Акции
 main:
   mail:
     tableOrder:
