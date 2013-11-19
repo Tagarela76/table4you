@@ -45,7 +45,8 @@
         "genemu/form-bundle": "2.2.*",
         "vich/uploader-bundle": "dev-master",
         "knplabs/gaufrette": "0.2.*@dev",
-        "knplabs/knp-gaufrette-bundle" : "dev-master"
+        "knplabs/knp-gaufrette-bundle" : "dev-master",
+        "hwi/oauth-bundle": "0.3.*@dev"
     },
     "scripts": {
         "post-install-cmd": [

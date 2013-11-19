@@ -1,4 +1,23 @@
 
+hwi_oauth_security:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix: /login
+
+hwi_oauth_connect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+    prefix: /connect
+
+
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /connect
+
+facebook_login:
+    pattern: /login/check-facebook
+
+vkontakte_login:
+    pattern: /login/check-vkontakte
+    
 table_api:
     resource: "@TableApiBundle/Resources/config/routing.yml"
     prefix:   /
