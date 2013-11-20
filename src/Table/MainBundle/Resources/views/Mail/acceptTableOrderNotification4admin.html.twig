@@ -2,7 +2,7 @@
 
 <br>
 
-{% trans %}main.mail.tableOrder.notification.guestInYourRestaurant{% endtrans %} {{tableOrder.user.username}} {% trans %}main.mail.tableOrder.notification.wantReserve{% endtrans %} {% trans %}main.mail.tableOrder.notification.table{% endtrans %} №{{tableOrder.tableNumber}} {% trans %}main.mail.tableOrder.notification.for{% endtrans %} {{tableOrder.peopleCount}} {% trans %}main.mail.tableOrder.notification.guest{% endtrans %}, {% if not tableOrder.isSmokingZone %} {% trans %}main.mail.tableOrder.notification.notSmoke{% endtrans %},{% endif %} {% trans %}main.mail.tableOrder.notification.restaurant{% endtrans %} {{tableOrder.restaurant.name}}, {{tableOrder.reserveDate|date('d-m-Y')}}, {{tableOrder.reserveTime|date('H:s')}}! {% trans %}main.mail.tableOrder.notification.reserveConfirm{% endtrans %}
+{% trans %}main.mail.tableOrder.notification.guestInYourRestaurant{% endtrans %} {{tableOrder.user.username}} {% trans %}main.mail.tableOrder.notification.wantReserve{% endtrans %} {% trans %}main.mail.tableOrder.notification.table{% endtrans %} №{{tableOrder.tableNumber}} {% trans %}main.mail.tableOrder.notification.for{% endtrans %} {{tableOrder.peopleCount}} {% trans %}main.mail.tableOrder.notification.guest{% endtrans %}, {% if not tableOrder.isSmokingZone %} {% trans %}main.mail.tableOrder.notification.notSmoke{% endtrans %},{% endif %} {% trans %}main.mail.tableOrder.notification.restaurant{% endtrans %} {{tableOrder.restaurant.name}}, {{tableOrder.reserveDate|date('d-m-Y')}}, {{tableOrder.reserveTime|date('H:i')}}! {% trans %}main.mail.tableOrder.notification.reserveConfirm{% endtrans %}
 
 <br>
 
