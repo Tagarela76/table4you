@@ -23,6 +23,7 @@ class NewsRepository extends EntityRepository
         $query = $this->createQueryBuilder('news');
         $query->andWhere("news.published = :published")
 	      ->setParameter('published', 1);
+      //  $query->andWhere('news.endDate > CURDATE() or news.endDate is NULL');             
         $query->orderBy('news.publishedDate', 'DESC');
         return $query;
     }

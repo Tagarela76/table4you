@@ -13,6 +13,8 @@ use FOS\UserBundle\Model\UserInterface;
 
 use Table\RestaurantBundle\Entity\RatingStat;
 use Table\RestaurantBundle\Entity\RestaurantSchedule;
+use Table\RestaurantBundle\Entity\Restaurant;
+use Table\RestaurantBundle\Entity\News;
 
 class DefaultController extends Controller
 {
@@ -121,9 +123,11 @@ class DefaultController extends Controller
      * 
      * @param int $id
      * 
+     * @param type $page
+     * 
      * @Template()
      */
-    public function viewRestaurantAction($id)
+    public function viewRestaurantAction($id, $page)
     {
         // get Current user
         $user = $this->container->get('security.context')->getToken()->getUser();
@@ -173,6 +177,9 @@ class DefaultController extends Controller
 	}
 	/* *** */
 
+        /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN RIGHT SIDEBAR */
+        $newsList = $this->getNewsManager()->getNews();
+        
         // BreadCrumbs
         $breadcrumbs = $this->getBreadCrumbsManager();
         $breadcrumbs->addItem(
@@ -220,7 +227,10 @@ class DefaultController extends Controller
             'breadcrumbs' => $breadcrumbs,
             'additionalPhotos' => $additionalPhotos,
             'menuPhotos' => $menuPhotos,
-            'baseUrl' => $baseUrl
+            'baseUrl' => $baseUrl,
+            'newsList' => $this->getPaginator()->paginate(
+                $newsList, $page, News::PER_PAGE_COUNT
+            )
         );
         
     }
@@ -358,6 +368,9 @@ class DefaultController extends Controller
 	}
 	/* *** */
         
+        /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN RIGHT SIDEBAR */
+        $newsList = $this->getNewsManager()->getNews();
+        
         // BreadCrumbs
         $breadcrumbs = $this->getBreadCrumbsManager();
         $breadcrumbs->addItem(
@@ -368,11 +381,9 @@ class DefaultController extends Controller
         $breadcrumbs->addItem(
                 $this->get('translator')->trans('main.breadcrumbs.label.profile')
         );
-        
+
         return array(
-            'tableOrderHistory' => $this->getPaginator()->paginate(
-                    $orderHistory, $page, TableOrder::PER_PAGE_COUNT
-            ),
+            'tableOrderHistory' => $orderHistory->getQuery()->getResult(),
             'isRatingDisabled' => $isRatingDisabled,
             'restaurantsWhoHadHasAlreadyRating' => $restaurantsWhoHadHasAlreadyRating,
 	    'filterDate' => $filterDate,
@@ -382,7 +393,10 @@ class DefaultController extends Controller
 	    'categoryList' => $categoryList,
 	    'kitchenList' => $kitchenList,
 	    'searchCity' => $searchCity,
-            'breadcrumbs' =>$breadcrumbs
+            'breadcrumbs' =>$breadcrumbs,
+            'newsList' => $this->getPaginator()->paginate(
+                $newsList, $page, News::PER_PAGE_COUNT
+            )
         );
     }
     
@@ -391,9 +405,11 @@ class DefaultController extends Controller
      * 
      * @param int $id
      * 
+     * @param type $page
+     * 
      * @Template()
      */
-    public function viewNewsAction($id)
+    public function viewNewsAction($id, $page)
     {
         // get Current user
         $user = $this->container->get('security.context')->getToken()->getUser();
@@ -443,6 +459,9 @@ class DefaultController extends Controller
 	}
 	/* *** */
 
+        /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN RIGHT SIDEBAR */
+        $newsList = $this->getNewsManager()->getNews();
+        
         // BreadCrumbs
         $breadcrumbs = $this->getBreadCrumbsManager();
         $breadcrumbs->addItem(
@@ -462,7 +481,7 @@ class DefaultController extends Controller
         
          // get restaurant for this news
         $restaurant = $news->getRestaurant();
-//var_dump($news->getContent()); die();
+
         return array(
             'news' => $news,
             'restaurant' => $restaurant,
@@ -474,7 +493,10 @@ class DefaultController extends Controller
 	    'categoryList' => $categoryList,
 	    'kitchenList' => $kitchenList,
 	    'searchCity' => $searchCity,
-            'breadcrumbs' => $breadcrumbs
+            'breadcrumbs' => $breadcrumbs,
+            'newsList' => $this->getPaginator()->paginate(
+                $newsList, $page, News::PER_PAGE_COUNT
+            )
         );
         
     }
