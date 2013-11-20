@@ -777,18 +777,23 @@ input#tableOrderForm_peopleCount:focus{
    }
 }
 
+.reserveDate .ui-widget-header .ui-datepicker-prev, .reserveDate .ui-widget-header .ui-datepicker-next{
+    background: none;
+    border: 0;
+    border-radius: 0;
+    cursor: pointer;
+}
 
-
-.reserveDate .ui-widget-header .ui-datepicker-prev .ui-icon {
+.container .reserveDate .ui-widget-header .ui-datepicker-prev .ui-icon {
     background-position: -91px -16px;
     background-image: url(images/ui-icons_ef8c08_256x240.png);
 }
-.reserveDate .ui-widget-header .ui-datepicker-next .ui-icon {
+.container .reserveDate .ui-widget-header .ui-datepicker-next .ui-icon {
     background-position: -37px -16px;
     background-image: url(images/ui-icons_ef8c08_256x240.png);
 }
 
-.reserveDate .ui-datepicker-prev-hover, #table-order-form .reserveDate .ui-datepicker-prev-hover span{
+/*.reserveDate .ui-datepicker-prev-hover, #table-order-form .reserveDate .ui-datepicker-prev-hover span{
     background: none; 
     border: 0;
     left:26.6%;
@@ -799,7 +804,7 @@ input#tableOrderForm_peopleCount:focus{
     border: 0;
     left:66.4%;
     top:7.5px; 
-}
+}*/
 .table-order-form{margin: 0;}
 .table-order-form .floor-tabs {margin-top: 25px;}
 #table-order-form-container  .table-order-form .label-font-size-modal label{font-size: 15px;}
@@ -902,11 +907,11 @@ background-image: url(images/selects-2.png);}
     margin-bottom: 0 !important;
     margin-top: 7px !important;
 }
-.table-order-history table tr td,
+/*.table-order-history table tr td,
 .table-order-history table th{
     padding-top: 15px;
     padding-bottom: 15px;
-}
+}*/
 .table-order-history table tr td p{
     margin: 0 0 3px;
     padding-right: 15px;
@@ -933,24 +938,112 @@ background-image: url(images/selects-2.png);}
     margin: 0 !important;
 }
 @media (max-width: 860px){
-    .restaurantList-container .modal {
+    .modal-reserve {
         width: 100%;
         max-width: 816px;
         margin-left: -50%;
     }
-    .restaurantList-container .modal-body {
+    .modal-reserve .modal-body {
         height: 100%;
         overflow: auto;
         max-height: 350px;
     }
 }
 @media (max-width: 1024px){
-    .restaurantList-container .modal.fade.in {
+    .modal-reserve .modal.fade.in {
         top: 5%;
     }
 }
 @media (max-height: 690px){
-    .restaurantList-container .modal-body {
+    .modal-reserve .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 560px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 670px){
+    .modal-reserve .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 545px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 650px){
+    .modal-reserve .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 530px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 630px){
+    .modal-reserve .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 510px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 610px){
+    .modal-reserve .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 490px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 590px){
+    .modal-reserve .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 470px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 570px){
+    .modal-reserve .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 450px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 550px){
+    .modal-reserve .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 430px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 530px){
+    .modal-reserve .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 410px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 510px){
+    .modal-reserve .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 390px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 490px){
+    .modal-reserve .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 370px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 470px){
+    .modal-reserve .modal-body {
         height: 100%;
         overflow: auto;
         max-height: 560px;
@@ -1225,7 +1318,7 @@ background-image: url(images/selects-2.png);}
 }
 
 .tab-content #additionalPhotos-carousel, .tab-content #menuPhotos-carousel{
-    height: 125px;
+    height: 153px;
     overflow: hidden;
     border: 0;
     margin-bottom: 15px;
@@ -1326,30 +1419,8 @@ background-image: url(images/selects-2.png);}
 .fancybox-overlay .fancybox-nav-false {
     position: absolute;
     top: 0;
-    width: 10%;
+    width: 50%;
     height: 100%;
-    cursor: pointer;
-    text-decoration: none;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-    z-index: 8040;
-    background: #BBAEAE;
-    opacity: 0.8;
-}
-.fancybox-overlay .fancybox-prev-false:after {
-    right: 43%;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-}
-.fancybox-overlay .fancybox-prev-false:after {
-    border-color: rgba(255, 255, 255, 0);
-    border-right-color: #fff;
-    border-width: 10px;
-    top: 50%;
-    margin-top: -10px;
 }
 .fancybox-overlay .fancybox-nav:hover span {
     display: none;
@@ -1357,35 +1428,20 @@ background-image: url(images/selects-2.png);}
 .fancybox-overlay .fancybox-next-false {
     right: -2px;
 }
-.fancybox-overlay .fancybox-next-false:after {
-    left: 43%;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-}
-.fancybox-overlay .fancybox-next-false:after {
-    border-color: rgba(255, 255, 255, 0);
-    border-left-color: #fff;
-    border-width: 10px;
-    top: 50%;
-    margin-top: -10px;
-}
+
 .fancybox-overlay .fancybox-close{
-    background: none;
     color: #898787;
     font-size: 36px;
     font-weight: 100!important;
     font-family: Helvetic;
-    top: 2px;
-    right: -15px;
+    top: 8px;
+    right: 12px;
+    background: url(../images/close-modal.png) no-repeat;
+    opacity: 0.4;
+    width: 14px;
+    height: 14px;
 }
 .fancybox-overlay .fancybox-close:hover{text-decoration: none;}
-.fancybox-overlay .fancybox-close:before {
-    content: "×";
-}
 
 .restaurantSchedule {
     width:318px;
@@ -1396,7 +1452,7 @@ background-image: url(images/selects-2.png);}
 .restaurantSchedule li {
   float:left;
   display:inline;
-  width:50%;
+  margin-right: 5px;
   font-size: 11.9px;
   margin-bottom: 4px;
 }
