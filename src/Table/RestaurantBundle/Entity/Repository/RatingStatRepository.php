@@ -37,7 +37,7 @@ class RatingStatRepository extends EntityRepository
                 ->where('rating.user = :user')
                 ->setParameter('user', $user)
                 ->andWhere('rating.lastUpdateTime >= :nowTime')
-                ->setParameter('nowTime', ' CURDATE( )')
+                ->setParameter('nowTime', new \DateTime())
                 ->getQuery();  
 
         return $query->getResult();

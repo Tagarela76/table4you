@@ -69,7 +69,7 @@ class DefaultController extends Controller
         
         /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN RIGHT SIDEBAR */
         $newsList = $this->getNewsManager()->getNews();
-        
+   //var_dump($newsList->getQuery()); die();     
 	// get restaurant list
 	$filter = $this->getRequest()->request->get('filter');  // fir restaurant filter
 	if ($filter) { 
