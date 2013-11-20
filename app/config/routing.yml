@@ -1,4 +1,4 @@
-
+   
 table_api:
     resource: "@TableApiBundle/Resources/config/routing.yml"
     prefix:   /

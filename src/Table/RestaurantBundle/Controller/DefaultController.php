@@ -13,6 +13,8 @@ use FOS\UserBundle\Model\UserInterface;
 
 use Table\RestaurantBundle\Entity\RatingStat;
 use Table\RestaurantBundle\Entity\RestaurantSchedule;
+use Table\RestaurantBundle\Entity\Restaurant;
+use Table\RestaurantBundle\Entity\News;
 
 class DefaultController extends Controller
 {
@@ -41,10 +43,27 @@ class DefaultController extends Controller
         }
         // get User Order History
         $orderHistory = $this->getTableOrdermanager()->getOrderHistory($user->getId());
+        
         // Check if user can do table order
         $isUserHaveAnotherOrder = false;
         foreach ($orderHistory->getQuery()->getResult() as $userTableOrder) {
-            if ($userTableOrder->getStatus() == 0 || is_null($userTableOrder->getStatus())) {
+            // devide reserve time on parts
+            $reserveHour = $userTableOrder->getReserveTime()->format('h');
+            $reserveMin = $userTableOrder->getReserveTime()->format('s');
+            // get reserve date and time
+            $reserveDateTime = $userTableOrder->getReserveDate();
+            $reserveDateTime->setTime($reserveHour, $reserveMin);
+            
+            // get current date time
+            $currentDateTime = new \DateTime();
+            
+            // get diff
+            $interval = $reserveDateTime->diff($currentDateTime, true);
+            
+            if ($userTableOrder->getStatus() == 0 ||
+                    is_null($userTableOrder->getStatus()) || 
+                    ($interval->days == 0 && $interval->h == 1 && $interval->i < 31) ||
+                    ($interval->days == 0 && $interval->h == 0 ) ) {
                 $isUserHaveAnotherOrder = true;
             }
         }
@@ -53,7 +72,6 @@ class DefaultController extends Controller
             return $this->render('TableRestaurantBundle:Default:user.cannot.order.table.html.twig', array(
                 'user' => $user
             ));
-            die();
         }
 
         // Generate public URL for restaurant map
@@ -105,9 +123,11 @@ class DefaultController extends Controller
      * 
      * @param int $id
      * 
+     * @param type $page
+     * 
      * @Template()
      */
-    public function viewRestaurantAction($id)
+    public function viewRestaurantAction($id, $page)
     {
         // get Current user
         $user = $this->container->get('security.context')->getToken()->getUser();
@@ -157,6 +177,9 @@ class DefaultController extends Controller
 	}
 	/* *** */
 
+        /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN RIGHT SIDEBAR */
+        $newsList = $this->getNewsManager()->getNews();
+        
         // BreadCrumbs
         $breadcrumbs = $this->getBreadCrumbsManager();
         $breadcrumbs->addItem(
@@ -167,9 +190,32 @@ class DefaultController extends Controller
         $breadcrumbs->addItem(
                 $this->get('translator')->trans('main.breadcrumbs.label.restaurant')
         );
+        
+         // get additional photo
+        $additionalPhotos = array();
+        $menuPhotos = array();
+        $restaurant = $this->getRestaurantManager()->findOneById($id);
 
+	if (is_null($restaurant)) {
+            throw $this->createNotFoundException('The page does not exist');
+        }
+        $helper = $this->container->get('vich_uploader.templating.helper.uploader_helper');
+        foreach ($restaurant->getAdditionalPhotos() as $additionalPhoto) {
+            if (!is_null($additionalPhoto->getFileName())) {
+                $additionalPhotos[] = $helper->asset($additionalPhoto, 'file'); 
+            }
+        }
+        
+        foreach ($restaurant->getAdditionalMenuPhotos() as $menuPhoto) {
+            if (!is_null($menuPhoto->getFileName())) {
+                $menuPhotos[] = $helper->asset($menuPhoto, 'file'); 
+            }
+        }
+
+        // assign base_url
+        $baseUrl = $this->container->getParameter('base_url');
         return array(
-            'restaurant' => $this->getRestaurantManager()->findOneById($id),
+            'restaurant' => $restaurant,
             'anonim' => $anonim,
             'weekDays' => RestaurantSchedule::$WEEK_DAYS,
             'isRatingDisabled' => $isRatingDisabled,
@@ -178,7 +224,13 @@ class DefaultController extends Controller
 	    'categoryList' => $categoryList,
 	    'kitchenList' => $kitchenList,
 	    'searchCity' => $searchCity,
-            'breadcrumbs' => $breadcrumbs
+            'breadcrumbs' => $breadcrumbs,
+            'additionalPhotos' => $additionalPhotos,
+            'menuPhotos' => $menuPhotos,
+            'baseUrl' => $baseUrl,
+            'newsList' => $this->getPaginator()->paginate(
+                $newsList, $page, News::PER_PAGE_COUNT
+            )
         );
         
     }
@@ -316,6 +368,9 @@ class DefaultController extends Controller
 	}
 	/* *** */
         
+        /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN RIGHT SIDEBAR */
+        $newsList = $this->getNewsManager()->getNews();
+        
         // BreadCrumbs
         $breadcrumbs = $this->getBreadCrumbsManager();
         $breadcrumbs->addItem(
@@ -326,11 +381,9 @@ class DefaultController extends Controller
         $breadcrumbs->addItem(
                 $this->get('translator')->trans('main.breadcrumbs.label.profile')
         );
-        
+
         return array(
-            'tableOrderHistory' => $this->getPaginator()->paginate(
-                    $orderHistory, $page, TableOrder::PER_PAGE_COUNT
-            ),
+            'tableOrderHistory' => $orderHistory->getQuery()->getResult(),
             'isRatingDisabled' => $isRatingDisabled,
             'restaurantsWhoHadHasAlreadyRating' => $restaurantsWhoHadHasAlreadyRating,
 	    'filterDate' => $filterDate,
@@ -340,7 +393,111 @@ class DefaultController extends Controller
 	    'categoryList' => $categoryList,
 	    'kitchenList' => $kitchenList,
 	    'searchCity' => $searchCity,
-            'breadcrumbs' =>$breadcrumbs
+            'breadcrumbs' =>$breadcrumbs,
+            'newsList' => $this->getPaginator()->paginate(
+                $newsList, $page, News::PER_PAGE_COUNT
+            )
         );
+    }
+    
+    /**
+     * View News
+     * 
+     * @param int $id
+     * 
+     * @param type $page
+     * 
+     * @Template()
+     */
+    public function viewNewsAction($id, $page)
+    {
+        // get Current user
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        
+        // Check if user auth in app
+        $anonim = false;
+        if (!is_object($user) || !$user instanceof UserInterface) {         
+            $anonim = true;
+        } 
+        // check if user can change rating
+        $isRatingDisabled = false;
+        $restaurantsWhoHadHasAlreadyRating = array();
+        if (!$anonim) {
+            $userRating = $this->getRatingStatManager()->getUserRestaurantRating($user->getId());
+            // only 3 state
+            if (count($userRating) > 2) {
+                $isRatingDisabled = true;
+            }
+            // Also we should get restaurants array , who has already have rating today
+            
+            foreach ($userRating as $rating) {
+                // collect data
+                $restaurantsWhoHadHasAlreadyRating[] = $rating->getRestaurant()->getId();
+                if ($id == $rating->getRestaurant()->getId()) {
+                    $isRatingDisabled = true;
+                }
+            }
+            
+        }    
+        if ($anonim) {
+            $isRatingDisabled = true;
+        }
+        
+	/* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN HEADER */
+	// get city list
+	$cityList = $this->getCityManager()->findAll();
+	/// get all category list
+	$categoryList = $this->getRestaurantCategoryManager()->findAll();
+	// get all kitchen list
+	$kitchenList = $this->getRestaurantKitchenManager()->findAll();
+	
+	// get current city
+	$searchCity = $this->getRequest()->query->get('searchCity');
+	// if null set default -> krasnodar
+	if (is_null($searchCity)) {
+	    $searchCity = 1;
+	}
+	/* *** */
+
+        /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN RIGHT SIDEBAR */
+        $newsList = $this->getNewsManager()->getNews();
+        
+        // BreadCrumbs
+        $breadcrumbs = $this->getBreadCrumbsManager();
+        $breadcrumbs->addItem(
+                $this->get('translator')->trans('main.breadcrumbs.label.home'), 
+                $this->get("router")->generate("table_main_homepage")
+        );
+        // current
+        $breadcrumbs->addItem(
+                $this->get('translator')->trans('main.breadcrumbs.label.news')
+        );
+        
+        // get News
+        $news = $this->getNewsManager()->findOneById($id);
+        if (is_null($news) || !$news->getPublished()) {
+            throw $this->createNotFoundException('The page does not exist');
+        }
+        
+         // get restaurant for this news
+        $restaurant = $news->getRestaurant();
+
+        return array(
+            'news' => $news,
+            'restaurant' => $restaurant,
+            'anonim' => $anonim,
+            'weekDays' => RestaurantSchedule::$WEEK_DAYS,
+            'isRatingDisabled' => $isRatingDisabled,
+            'restaurantsWhoHadHasAlreadyRating' => $restaurantsWhoHadHasAlreadyRating,
+	    'cityList' => $cityList,
+	    'categoryList' => $categoryList,
+	    'kitchenList' => $kitchenList,
+	    'searchCity' => $searchCity,
+            'breadcrumbs' => $breadcrumbs,
+            'newsList' => $this->getPaginator()->paginate(
+                $newsList, $page, News::PER_PAGE_COUNT
+            )
+        );
+        
     }
 }

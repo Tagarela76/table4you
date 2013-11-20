@@ -7,5 +7,5 @@ table_main_homepage:
        expose: true       
 
 table_main_auth_page:
-    pattern:  /viewAuthPage
-    defaults: { _controller: TableMainBundle:Default:viewAuthPage }
+    pattern:  /viewAuthPage/{page}
+    defaults: { _controller: TableMainBundle:Default:viewAuthPage, page: 1 }

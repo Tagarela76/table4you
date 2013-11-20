@@ -8,6 +8,11 @@ main:
     search:
       kitchen: 'Кухня'
       category: 'Категория'
+    photos: 
+        additional: Фото заведения
+        menu: Меню
+    description: О заведении 
+    news: Акции/новости
   register:
     buttonLabel: Регистрация
     form:
@@ -64,3 +69,7 @@ main:
           restaurant: Заведение
           profile: Мой профиль
           editProfile: Редактировать профиль
+          news: Открытая акция
+  helper:
+      from: с
+      to: по

@@ -40,13 +40,13 @@ function Rating() {
 
 function InfiniteLoad() {
     
-    this.initLoading = function() {
+    this.initLoading = function(entity) {
         
         var loader = "{{ asset('bundles/tablemain/infinite-ajax-scroll/images/loader.gif') }}"; 
         
         jQuery.ias({
-            container : '.restaurantList-container',
-            item: '.restaurant-container',
+            container : '.'+entity+'List-container',
+            item: '.'+entity+'-container',
             pagination: '.navigation',
             next: '.next a',
             loader: '<img src=' + loader + '/>',
@@ -97,10 +97,17 @@ function RestaurantFilter() {
                         // init rating
                         page.rating.initRating();
                         // init infinite ajax
-                     //   page.infiniteLoad.initLoading();
+                        page.infiniteLoad.initLoading();
 		}  
 	});      
         
+    }
+}
+
+function Common() {
+ 
+    this.closeModalWindow = function(element) {
+        $('.modal-backdrop fade in').remove();
     }
 }
 
@@ -110,6 +117,7 @@ function Page() {
     this.rating = new Rating();
     this.infiniteLoad = new InfiniteLoad();
     this.restaurantFilter = new RestaurantFilter();
+    this.common = new Common();
 }
 
 //	global page object

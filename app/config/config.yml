@@ -244,4 +244,26 @@ jms_serializer:
                 path: "@TableApiBundle/Resources/config/serializer/"  
                 
 genemu_form:
-    date: ~                
+    date: ~            
+    
+vich_uploader:
+    db_driver: orm 
+    twig: true
+    gaufrette: false # set to true to enable gaufrette support
+    storage: vich_uploader.storage.file_system
+    mappings:
+        restaurant_additional_photo:
+            uri_prefix: /uploads/media/additionalPhotos
+            upload_destination:  %kernel.root_dir%/../web/uploads/media/additionalPhotos
+            delete_on_remove: true
+            delete_on_update: true
+            inject_on_load: true 
+            namer: vich_uploader.namer_origname     
+           
+        restaurant_menu_photo:
+            uri_prefix: /uploads/media/menuPhotos 
+            upload_destination:  %kernel.root_dir%/../web/uploads/media/menuPhotos
+            delete_on_remove: true
+            delete_on_update: true
+            inject_on_load: true 
+            namer: vich_uploader.namer_origname     

@@ -86,4 +86,14 @@ class Controller extends BaseController
     {
         return $this->get('white_october_breadcrumbs');
     }
+    
+    public function getSMSManager()
+    {
+        return $this->get('sms_manager');
+    }
+    
+    public function getNewsManager()
+    {
+        return $this->get('news_manager');
+    }
 }

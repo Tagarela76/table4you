@@ -129,7 +129,6 @@ input:focus{outline: 0 none}
     width: 148px;
     height: 148px;
     border-radius: 3px;
-    border: 2px solid #6d6868;
 }
 .restaurant-container .restaurant-content{
     width: 318px;
@@ -778,18 +777,23 @@ input#tableOrderForm_peopleCount:focus{
    }
 }
 
+.reserveDate .ui-widget-header .ui-datepicker-prev, .reserveDate .ui-widget-header .ui-datepicker-next{
+    background: none;
+    border: 0;
+    border-radius: 0;
+    cursor: pointer;
+}
 
-
-.reserveDate .ui-widget-header .ui-datepicker-prev .ui-icon {
+.container .reserveDate .ui-widget-header .ui-datepicker-prev .ui-icon {
     background-position: -91px -16px;
     background-image: url(images/ui-icons_ef8c08_256x240.png);
 }
-.reserveDate .ui-widget-header .ui-datepicker-next .ui-icon {
+.container .reserveDate .ui-widget-header .ui-datepicker-next .ui-icon {
     background-position: -37px -16px;
     background-image: url(images/ui-icons_ef8c08_256x240.png);
 }
 
-.reserveDate .ui-datepicker-prev-hover, #table-order-form .reserveDate .ui-datepicker-prev-hover span{
+/*.reserveDate .ui-datepicker-prev-hover, #table-order-form .reserveDate .ui-datepicker-prev-hover span{
     background: none; 
     border: 0;
     left:26.6%;
@@ -800,7 +804,7 @@ input#tableOrderForm_peopleCount:focus{
     border: 0;
     left:66.4%;
     top:7.5px; 
-}
+}*/
 .table-order-form{margin: 0;}
 .table-order-form .floor-tabs {margin-top: 25px;}
 #table-order-form-container  .table-order-form .label-font-size-modal label{font-size: 15px;}
@@ -903,11 +907,11 @@ background-image: url(images/selects-2.png);}
     margin-bottom: 0 !important;
     margin-top: 7px !important;
 }
-.table-order-history table tr td,
+/*.table-order-history table tr td,
 .table-order-history table th{
     padding-top: 15px;
     padding-bottom: 15px;
-}
+}*/
 .table-order-history table tr td p{
     margin: 0 0 3px;
     padding-right: 15px;
@@ -934,28 +938,204 @@ background-image: url(images/selects-2.png);}
     margin: 0 !important;
 }
 @media (max-width: 860px){
-    .restaurantList-container .modal {
+    .modal-reserve {
         width: 100%;
         max-width: 816px;
         margin-left: -50%;
     }
-    .restaurantList-container .modal-body {
+    .modal-reserve .modal-body {
         height: 100%;
         overflow: auto;
         max-height: 350px;
     }
 }
 @media (max-width: 1024px){
-    .restaurantList-container .modal.fade.in {
+    .modal-reserve .modal.fade.in {
         top: 5%;
     }
 }
 @media (max-height: 690px){
+    .modal-reserve .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 560px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 670px){
+    .modal-reserve .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 545px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 650px){
+    .modal-reserve .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 530px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 630px){
+    .modal-reserve .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 510px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 610px){
+    .modal-reserve .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 490px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 590px){
+    .modal-reserve .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 470px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 570px){
+    .modal-reserve .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 450px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 550px){
+    .modal-reserve .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 430px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 530px){
+    .modal-reserve .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 410px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 510px){
+    .modal-reserve .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 390px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 490px){
+    .modal-reserve .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 370px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 470px){
+    .modal-reserve .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 560px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 670px){
+    .restaurantList-container .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 545px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 650px){
+    .restaurantList-container .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 530px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 630px){
+    .restaurantList-container .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 510px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 610px){
+    .restaurantList-container .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 490px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 590px){
+    .restaurantList-container .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 470px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 570px){
+    .restaurantList-container .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 450px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 550px){
+    .restaurantList-container .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 430px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 530px){
+    .restaurantList-container .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 410px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 510px){
+    .restaurantList-container .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 390px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 490px){
+    .restaurantList-container .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 370px;
+        overflow-y: overlay;
+    }
+}
+@media (max-height: 470px){
     .restaurantList-container .modal-body {
         height: 100%;
         overflow: auto;
         max-height: 350px;
-  overflow-y: overlay;
+        overflow-y: overlay;
     }
 }
 
@@ -1105,3 +1285,175 @@ background-image: url(images/selects-2.png);}
     color: #d3441b;
     text-decoration: none;
 }
+
+
+/* restoraunt page(tabs) */
+.container-fluid .tabbable .nav-tabs{
+    margin: 0;
+    border: none;
+}
+.container-fluid .tabbable .nav-tabs > li > a {
+    color: #454545;
+    cursor: default;
+    background: none;
+    border: none;
+    font-size: 13px;
+    padding: 12px 42px 13px 0px;
+}
+.container-fluid .tabbable .nav-tabs > .active > a, .container-fluid .tabbable  .nav-tabs > .active > a:hover, .container-fluid .tabbable .nav-tabs > li > a:hover{
+    color: #e66103;
+    background: none;
+    cursor: pointer;
+}
+
+/* restoraunt page(slider) */
+.tab-content #additionalPhotos-slider, .tab-content  #menuPhotos-slider {
+    height: 341px;
+    width: 646px;
+    box-shadow: none;
+    border: 0;
+    border-radius: 0;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+.tab-content #additionalPhotos-carousel, .tab-content #menuPhotos-carousel{
+    height: 153px;
+    overflow: hidden;
+    border: 0;
+    margin-bottom: 15px;
+    box-shadow: none;
+    border-bottom: 1px solid #8c8888;
+    border-radius: 0;
+}
+.tab-content #additionalPhotos-carousel .slides > li, .tab-content #menuPhotos-carousel .slides > li{
+    margin-right: 16px;
+    cursor: pointer;
+}
+.tab-content #additionalPhotos-carousel .flex-direction-nav a, .tab-content #menuPhotos-carousel .flex-direction-nav a{
+    display: block;
+    width: 32px;
+    height: 138px;
+    margin: 0;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 10;
+    overflow: visible;
+    opacity: 100;
+    cursor: pointer;
+    text-indent: -9999px!important;
+    text-align: center;
+    background: #BBAEAE;
+    opacity: 0.8;
+    transition: none;
+}
+.tab-content #additionalPhotos-carousel .flexslider:hover .flex-next, .tab-content #menuPhotos-carousel .flexslider:hover .flex-next{
+    right: 0;
+}
+.tab-content #additionalPhotos-carousel .flex-direction-nav .flex-next:after, .tab-content #menuPhotos-carousel .flex-direction-nav .flex-next:after{
+    left: 32%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+.tab-content #additionalPhotos-carousel .flex-direction-nav .flex-next:after, .tab-content #menuPhotos-carousel .flex-direction-nav .flex-next:after{
+    border-color: rgba(255, 255, 255, 0);
+    border-left-color: #fff;
+    border-width: 11px;
+    top: 50%;
+    margin-top: -11px;
+}
+.tab-content #additionalPhotos-carousel .flex-direction-nav .flex-prev, .tab-content #menuPhotos-carousel .flex-direction-nav .flex-prev{
+    left: 0px;
+}
+.tab-content #additionalPhotos-carousel .flex-direction-nav .flex-prev:after, .tab-content #menuPhotos-carousel .flex-direction-nav .flex-prev:after{
+    right: 35%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+.tab-content #additionalPhotos-carousel .flex-direction-nav .flex-prev:after, .tab-content #menuPhotos-carousel .flex-direction-nav .flex-prev:after {
+    border-color: rgba(255, 255, 255, 0);
+    border-right-color: #fff;
+    border-width: 11px;
+    top: 50%;
+    margin-top: -11px;
+}
+
+#description hr{
+    margin:0px 0px 14px 0px;
+    background: #dbdada;
+    height: 1px;
+    border-top: 1px solid #bdbdbd;
+}
+#description p{
+    color: #454545;
+}
+#description p+p{
+    font-size: 12px;
+    font-style: italic;
+}
+
+.fancybox-outer, .fancybox-outer .fancybox-inner {
+    margin: 0 auto;
+}
+.fancybox-overlay .fancybox-skin {
+    background: #d8d5d5;
+    border-radius: 0;
+    padding: 10% 2%!important;
+}
+.fancybox-overlay+#fancybox-thumbs{
+    display: none;
+}
+.fancybox-overlay .fancybox-nav, .fancybox-overlay .fancybox-prev{
+    background: none;
+    width: 10%;
+}
+.fancybox-overlay .fancybox-nav-false {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+}
+.fancybox-overlay .fancybox-nav:hover span {
+    display: none;
+}
+.fancybox-overlay .fancybox-next-false {
+    right: -2px;
+}
+
+.fancybox-overlay .fancybox-close{
+    color: #898787;
+    font-size: 36px;
+    font-weight: 100!important;
+    font-family: Helvetic;
+    top: 8px;
+    right: 12px;
+    background: url(../images/close-modal.png) no-repeat;
+    opacity: 0.4;
+    width: 14px;
+    height: 14px;
+}
+.fancybox-overlay .fancybox-close:hover{text-decoration: none;}
+
+.restaurantSchedule {
+    width:318px;
+    overflow:hidden;
+    margin-left: 0;
+}
+
+.restaurantSchedule li {
+  float:left;
+  display:inline;
+  margin-right: 5px;
+  font-size: 11.9px;
+  margin-bottom: 4px;
+}
+
