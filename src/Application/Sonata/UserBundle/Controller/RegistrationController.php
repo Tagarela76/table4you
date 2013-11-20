@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Form\FormError;
 
+use Table\RestaurantBundle\Entity\News;
+
 class RegistrationController extends BaseController
 {
     public function registerAction()
@@ -30,6 +32,11 @@ class RegistrationController extends BaseController
 	}
 	/* *** */
         
+         /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN RIGHT SIDEBAR */
+        $newsList = $this->container->get('news_manager')->getNews();
+        
+        $page = 1;
+        
         $form = $this->container->get('fos_user.registration.form');
         $formHandler = $this->container->get('fos_user.registration.form.handler');
         $confirmationEnabled = $this->container->getParameter('fos_user.registration.confirmation.enabled');
@@ -48,7 +55,10 @@ class RegistrationController extends BaseController
                     'cityList' => $cityList,
                     'categoryList' => $categoryList,
                     'kitchenList' => $kitchenList,
-                    'searchCity' => $searchCity
+                    'searchCity' => $searchCity,
+                    'newsList' => $this->container->get('knp_paginator')->paginate(
+                        $newsList, $page, News::PER_PAGE_COUNT
+                    )
                 ));
 
             } else {
@@ -62,7 +72,10 @@ class RegistrationController extends BaseController
                     'cityList' => $cityList,
                     'categoryList' => $categoryList,
                     'kitchenList' => $kitchenList,
-                    'searchCity' => $searchCity
+                    'searchCity' => $searchCity,
+                    'newsList' => $this->get('knp_paginator')->paginate(
+                        $newsList, $page, News::PER_PAGE_COUNT
+                    )
                 ));
             }
 

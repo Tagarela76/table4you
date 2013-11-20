@@ -7,6 +7,7 @@ use Table\RestaurantBundle\Entity\Restaurant;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
+use Table\RestaurantBundle\Entity\News;
 
 use FOS\UserBundle\Model\UserInterface;
 
@@ -107,7 +108,7 @@ class DefaultController extends Controller
 	        'kitchenList' => $kitchenList,
 	        'searchCity'  => $searchCity,
                 'newsList' => $this->getPaginator()->paginate(
-                    $newsList, $page, Restaurant::PER_PAGE_COUNT
+                    $newsList, $page, News::PER_PAGE_COUNT
                 )
             );
 	}
@@ -116,11 +117,14 @@ class DefaultController extends Controller
     /**
      * 
      * Render auth page
+     * 
+     * @param type $page
+     * 
      * @Template()
      * 
      * @return array[]
      */
-    public function viewAuthPageAction()
+    public function viewAuthPageAction($page)
     {
 	/* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN HEADER */
 	// get city list
@@ -137,11 +141,17 @@ class DefaultController extends Controller
 	    $searchCity = 1;
 	}
 	/* *** */
+        /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN RIGHT SIDEBAR */
+        $newsList = $this->getNewsManager()->getNews();
+        
         return array(
 	    'cityList' => $cityList,
 	    'categoryList' => $categoryList,
 	    'kitchenList' => $kitchenList,
-	    'searchCity' => $searchCity
+	    'searchCity' => $searchCity,
+            'newsList' => $this->getPaginator()->paginate(
+                $newsList, $page, News::PER_PAGE_COUNT
+            )
         );
     }
 

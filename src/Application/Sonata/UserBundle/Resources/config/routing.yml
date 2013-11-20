@@ -13,3 +13,7 @@ fos_user_security_logout:
 fos_user_profile_show:
     pattern:  /profile
     defaults: { _controller: FOSUserBundle:Profile:show }  
+
+sonata_user_profile_show:
+    pattern:  /profile/{page}
+    defaults: { _controller: ApplicationSonataUserBundle:Profile:showProfile, page: 1 }           

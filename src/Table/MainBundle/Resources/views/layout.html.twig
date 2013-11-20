@@ -20,6 +20,9 @@
             {# Rating #}
             <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/rating/jquery.rating.css') }}">
             {# Rating #}
+            {# infinitive scrolling #}
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/infinite-ajax-scroll/css/jquery.ias.css') }}">
+            {# infinitive scrolling #}
         {% endblock %}
 
         {% block javascripts %}
@@ -36,6 +39,10 @@
             {# Rating #}
             <script src="{{ asset('bundles/tablemain/rating/jquery.rating.js') }}"></script>
             {# Rating #}
+            {# infinitive scrolling #}
+            <script src="{{ asset('bundles/tablemain/infinite-ajax-scroll/js/jquery-ias.min.js') }}"></script>
+            {# infinitive scrolling #}
+            
 	    <!-- Initialize the multiselect plugin: -->
 	    <script type="text/javascript">
 	    $(document).ready(function() {
@@ -55,6 +62,8 @@
 				page.restaurantFilter.refreshRestaurantList();
 			}
 		});
+                // infinitive ajax loading
+                page.infiniteLoad.initLoading('news');
 	    });
 	    </script>
         {% endblock %}

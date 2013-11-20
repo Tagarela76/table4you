@@ -90,8 +90,9 @@ class News
      * @Assert\NotBlank
      * */
     private $photo;
-    
 
+    const PER_PAGE_COUNT = 10;
+    
     /**
      * Get id
      *

@@ -12,6 +12,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FOS\UserBundle\FOSUserEvents;
 use Symfony\Component\Form\FormError;
 use Sonata\UserBundle\Controller\ProfileController as BaseSecurityController;
+
+use Table\RestaurantBundle\Entity\News;
 /**
  * This class is inspired from the FOS Profile Controller, except :
  *   - only twig is supported
@@ -22,6 +24,8 @@ class ProfileController extends BaseSecurityController
 {
 
     /**
+     * View Profile
+     * 
      * @return Response
      *
      * @throws AccessDeniedException
@@ -54,6 +58,9 @@ class ProfileController extends BaseSecurityController
 	}
 	/* *** */
         
+        /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN RIGHT SIDEBAR */
+        $newsList = $this->get('news_manager')->getNews();
+        
         // BreadCrumbs
         $breadcrumbs = $this->get('white_october_breadcrumbs');
         $breadcrumbs->addItem(
@@ -65,13 +72,18 @@ class ProfileController extends BaseSecurityController
                 $this->get('translator')->trans('main.breadcrumbs.label.profile')
         );
         
+        // i should get page parameter.
+        $page = 1;
         return $this->render('ApplicationSonataUserBundle:Profile:show.html.twig', array(
             'user' => $user,
 	    'cityList' => $cityList,
 	    'categoryList' => $categoryList,
 	    'kitchenList' => $kitchenList,
 	    'searchCity' => $searchCity,
-            'breadcrumbs' => $breadcrumbs
+            'breadcrumbs' => $breadcrumbs,
+            'newsList' => $this->get('knp_paginator')->paginate(
+                $newsList, $page, News::PER_PAGE_COUNT
+            )
         ));
     }
 
@@ -118,6 +130,9 @@ class ProfileController extends BaseSecurityController
 	}
 	/* *** */
         
+        /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN RIGHT SIDEBAR */
+        $newsList = $this->get('news_manager')->getNews();
+        
         // BreadCrumbs
         $breadcrumbs = $this->get('white_october_breadcrumbs');
         $breadcrumbs->addItem(
@@ -135,13 +150,18 @@ class ProfileController extends BaseSecurityController
                 $this->get('translator')->trans('main.breadcrumbs.label.editProfile')
         );
         
+        $page = 1;
+        
         return $this->render('ApplicationSonataUserBundle:Profile:edit_profile.html.twig', array(
             'form' => $form->createView(),
 	    'cityList' => $cityList,
 	    'categoryList' => $categoryList,
 	    'kitchenList' => $kitchenList,
 	    'searchCity' => $searchCity,
-            'breadcrumbs' => $breadcrumbs
+            'breadcrumbs' => $breadcrumbs,
+            'newsList' => $this->get('knp_paginator')->paginate(
+                $newsList, $page, News::PER_PAGE_COUNT
+            )
         ));
     }
 }

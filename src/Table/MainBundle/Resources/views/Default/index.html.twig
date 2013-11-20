@@ -3,8 +3,7 @@
     {{ parent() }}
 <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
 <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-{# infinitive scrolling #}
-<script src="{{ asset('bundles/tablemain/infinite-ajax-scroll/js/jquery-ias.min.js') }}"></script>
+
 <script>
     $(function(){ 
         // Rating
@@ -12,7 +11,6 @@
         
         // Infinite  ajax loading
         page.infiniteLoad.initLoading('restaurant');
-        page.infiniteLoad.initLoading('news');
     });
         
 </script>    
@@ -20,9 +18,7 @@
 {% endblock %}    
 {% block stylesheets %}
     {{ parent() }}
-    {# infinitive scrolling #}
-    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/infinite-ajax-scroll/css/jquery.ias.css') }}">
-    {# infinitive scrolling #}
+    
 {% endblock %}    
 {% block content %}  
     <div class="container-fluid" id="restaurantList_main">
