@@ -41,39 +41,7 @@ class DefaultController extends Controller
                             $this->generateUrl("table_main_homepage")
             );
         }
-        // get User Order History
-        $orderHistory = $this->getTableOrdermanager()->getOrderHistory($user->getId());
         
-        // Check if user can do table order
-        $isUserHaveAnotherOrder = false;
-        foreach ($orderHistory->getQuery()->getResult() as $userTableOrder) {
-            // devide reserve time on parts
-            $reserveHour = $userTableOrder->getReserveTime()->format('h');
-            $reserveMin = $userTableOrder->getReserveTime()->format('s');
-            // get reserve date and time
-            $reserveDateTime = $userTableOrder->getReserveDate();
-            $reserveDateTime->setTime($reserveHour, $reserveMin);
-            
-            // get current date time
-            $currentDateTime = new \DateTime();
-            
-            // get diff
-            $interval = $reserveDateTime->diff($currentDateTime, true);
-            
-            if ($userTableOrder->getStatus() == 0 ||
-                    is_null($userTableOrder->getStatus()) || 
-                    ($interval->days == 0 && $interval->h == 1 && $interval->i < 31) ||
-                    ($interval->days == 0 && $interval->h == 0 ) ) {
-                $isUserHaveAnotherOrder = true;
-            }
-        }
-        if ($isUserHaveAnotherOrder) {
-            // render Warning Notification, user cannot order other tables!!!
-            return $this->render('TableRestaurantBundle:Default:user.cannot.order.table.html.twig', array(
-                'user' => $user
-            ));
-        }
-
         // Generate public URL for restaurant map
         if (!is_null($restaurant->getMapPhoto())) {
             $provider = $this->getMediaService()
@@ -88,9 +56,27 @@ class DefaultController extends Controller
         $successReserve = false; // we should know if table reserve was successfull
         if ($request->isMethod('POST')) {
             $form->bind($request);
+
+            // get table order date
+            $tableOrder = $form->getData();
+            
+            // Check if user can do table order
+            // devide reserve time on parts
+            $reserveHour = $tableOrder->getReserveTime()->format('h');
+            $reserveMin = $tableOrder->getReserveTime()->format('i');
+            // get reserve date and time
+            $reserveDateTime = new \DateTime($tableOrder->getReserveDate());
+            $reserveDateTime->setTime($reserveHour, $reserveMin);
+
+            if (!$this->getTableOrderManager()->isUserCanReserveTable($user, $reserveDateTime)) {
+                // render Warning Notification, user cannot order other tables!!!
+                return $this->render('TableRestaurantBundle:Default:user.cannot.order.table.html.twig', array(
+                    'user' => $user
+                ));
+            }
+
             if ($form->isValid()) {
                 // add Order
-                $tableOrder = $form->getData();
                 // format reserve date
                 $tableOrder->setReserveDate(new \DateTime($tableOrder->getReserveDate()));
                 // set User Data
