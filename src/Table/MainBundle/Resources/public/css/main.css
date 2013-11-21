@@ -112,9 +112,10 @@ input:focus{outline: 0 none}
     
 .container-fluid{padding:0px;}
 .restaurant-container{
-    padding: 20px 0;
+    padding: 25px 0 0px;
     border-bottom: 1px solid #aeacac;
     overflow: hidden;
+    height: 194px;
 }
 .restaurantList-container{
     margin-top: 24px;
@@ -1487,15 +1488,17 @@ background-image: url(images/selects-2.png);}
 .stock-block .news-container{
     border-bottom: 1px solid #ccc;
     padding: 9px 16px 3px;
-    margin-bottom: 23px;
+    /*margin-bottom: 23px;*/
+    min-height: 206px;
 }
 .stock-block .news-img-container{
     text-align: center;
     margin-bottom: 7px;
+    padding-top: 16px;
 }
 .stock-block .news-img-container img{
-    width: 156px;
-    border: 2px solid #645e5e;
+    width: 160px;
+    height: 125px;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
@@ -1506,6 +1509,7 @@ background-image: url(images/selects-2.png);}
 }
 .stock-block .news-content-title{
     margin: 0 0 5px;
+    min-height: 33px;
 }
 .stock-block .news-content-title+.news-content-font{
     margin: 0;
@@ -1526,9 +1530,8 @@ background-image: url(images/selects-2.png);}
     text-align: center;
 }
 .news-stock-page .news-img-container img{
-    width: 128px;
-    height: 128px;
-    border: 2px solid #525050;
+    width: 130px;
+    height: 130px;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
@@ -1554,3 +1557,6 @@ background-image: url(images/selects-2.png);}
     font-style: italic;
     font-size: 12px;
 }
+
+
+.modal-backdrop+.modal-backdrop{width: 0px; height:0px;}
