@@ -69,7 +69,50 @@ class TableOrderRepository extends EntityRepository
               ->leftJoin('restaurant.city', 'city')        
 		      ->andWhere("restaurant.name like '%$searchStr%' or city.name like '%$searchStr%' or restaurant.street like '%$searchStr%'");	
 	}  
-//var_dump($query->getQuery()->getResult()); die();
+
         return $query->getQuery()->getResult();
+    }
+    
+    /**
+     *  Check if user can order table
+     * 
+     * @param integer $user
+     * 
+     * @param \DateTime $reserveDateTime
+     * 
+     * @return Table\RestaurantBundle\Entity\Repository[]
+     */
+    public function isUserCanReserveTable($user, $reserveDateTime)
+    {
+        $query = $this->createQueryBuilder('orderHistory')
+                // for define user
+                ->where('orderHistory.user = :user')
+                ->setParameter('user', $user);
+        
+        // Check only for complete and not processed order
+        $query->andWhere('orderHistory.status = 0 or orderHistory.status=2');
+  
+        // check date. Search for the same date and time[+-1.5 h]
+        $query->andWhere('orderHistory.reserveDate = :reserveDate')
+              ->setParameter('reserveDate', $reserveDateTime->format('Y-m-d'));
+        
+        // get start time
+        $startTime = clone $reserveDateTime; // first init
+        $startTime->modify ("-90 minutes");
+        // get end time
+        $endTime = clone $reserveDateTime; // first init
+        $endTime->modify ("+90 minutes");
+        
+        $query->andWhere('orderHistory.reserveTime BETWEEN :startTime AND :endTime')
+              ->setParameter('startTime', $startTime->format('H:i:s'))
+              ->setParameter('endTime', $endTime->format('H:i:s'));
+
+        $result = $query->getQuery()->getResult();
+
+        if (count($result) == 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

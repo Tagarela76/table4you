@@ -284,8 +284,8 @@ class TableOrderAdmin extends Admin
         // we should know if changed smt
         // I should get original data
         $original = (object) $this->getModelManager()->getEntityManager($this->getClass())->getUnitOfWork()->getOriginalEntityData($tableOrder);
-        
-        if ( $object->getStatus() != $original->getStatus() ) {
+     
+        if ( $object->getStatus() != $original->status ) {
             // sent notification
             switch ($object->getStatus()) {
                 // reject
