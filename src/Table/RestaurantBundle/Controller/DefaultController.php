@@ -62,7 +62,7 @@ class DefaultController extends Controller
             
             // Check if user can do table order
             // devide reserve time on parts
-            $reserveHour = $tableOrder->getReserveTime()->format('h');
+            $reserveHour = $tableOrder->getReserveTime()->format('H');
             $reserveMin = $tableOrder->getReserveTime()->format('i');
             // get reserve date and time
             $reserveDateTime = new \DateTime($tableOrder->getReserveDate());
