@@ -26,21 +26,6 @@ class RestaurantRepository extends EntityRepository
     }
     
     /**
-     *  Get regions
-     * 
-     * @return Table\RestaurantBundle\Entity\Repository[]
-     */
-    public function getCitiesList()
-    {
-        $query = $this->createQueryBuilder('restaurant')
-            ->select('DISTINCT(restaurant.city)') 
-            ->orderBy('restaurant.name', 'ASC')
-            ->getQuery();
-        
-        return $query->getResult();
-    }
-    
-    /**
      * 
      * Search Restaurants
      * 
