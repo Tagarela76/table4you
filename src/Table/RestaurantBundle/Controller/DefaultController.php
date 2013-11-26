@@ -164,7 +164,7 @@ class DefaultController extends Controller
 	/* *** */
 
         /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN RIGHT SIDEBAR */
-        $newsList = $this->getNewsManager()->getNews();
+        $newsList = $this->getNewsManager()->findByCity($searchCity);
         
         // BreadCrumbs
         $breadcrumbs = $this->getBreadCrumbsManager();
@@ -355,7 +355,7 @@ class DefaultController extends Controller
 	/* *** */
         
         /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN RIGHT SIDEBAR */
-        $newsList = $this->getNewsManager()->getNews();
+        $newsList = $this->getNewsManager()->findByCity($searchCity);
         
         // BreadCrumbs
         $breadcrumbs = $this->getBreadCrumbsManager();
@@ -446,7 +446,7 @@ class DefaultController extends Controller
 	/* *** */
 
         /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN RIGHT SIDEBAR */
-        $newsList = $this->getNewsManager()->getNews();
+        $newsList = $this->getNewsManager()->findByCity($searchCity);
         
         // BreadCrumbs
         $breadcrumbs = $this->getBreadCrumbsManager();
@@ -480,6 +480,25 @@ class DefaultController extends Controller
 	    'kitchenList' => $kitchenList,
 	    'searchCity' => $searchCity,
             'breadcrumbs' => $breadcrumbs,
+            'newsList' => $this->getPaginator()->paginate(
+                $newsList, $page, News::PER_PAGE_COUNT
+            )
+        );
+        
+    }
+    
+    /**
+     * Get News List
+     * 
+     * @param int $city
+     * 
+     * @Template()
+     */
+    public function newsListAction($city)
+    {
+        $newsList = $this->getNewsManager()->findByCity($city);
+        $page = 1;
+        return array(
             'newsList' => $this->getPaginator()->paginate(
                 $newsList, $page, News::PER_PAGE_COUNT
             )

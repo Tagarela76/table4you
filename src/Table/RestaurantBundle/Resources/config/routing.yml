@@ -22,5 +22,10 @@ table_view_news:
     pattern:  /news/{id}/{page}
     defaults: { _controller: TableRestaurantBundle:Default:viewNews, page: 1 }
     requirements:
-        id: \d+         
+        id: \d+     
+table_all_news:
+    pattern:  /newsList/{city}
+    defaults: { _controller: TableRestaurantBundle:Default:newsList, city: 1 } 
+    options:
+       expose: true 
        

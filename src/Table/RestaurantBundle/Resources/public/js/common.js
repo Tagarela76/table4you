@@ -97,7 +97,28 @@ function RestaurantFilter() {
                         // init rating
                         page.rating.initRating();
                         // init infinite ajax
-                        page.infiniteLoad.initLoading();
+                        page.infiniteLoad.initLoading('restaurant');
+		}  
+	});      
+        
+    }
+}
+
+function NewsFilter() {
+ 
+    this.refreshNewsList = function() {
+	// get city
+	var searchCity = $("#searchRestaurantsCity_main").val();
+	
+	$.ajax({
+		url: Routing.generate('table_all_news')+"/"+searchCity,
+		type: "POST",
+		dataType: "html",
+		success: function(responce) {
+			//location.reload();
+		        $('#newsList_main').html(responce);
+                        // init infinite ajax
+                        page.infiniteLoad.initLoading('news');
 		}  
 	});      
         
@@ -118,6 +139,7 @@ function Page() {
     this.infiniteLoad = new InfiniteLoad();
     this.restaurantFilter = new RestaurantFilter();
     this.common = new Common();
+    this.newsFilter = new NewsFilter();
 }
 
 //	global page object
