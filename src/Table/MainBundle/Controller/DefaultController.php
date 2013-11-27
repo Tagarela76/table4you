@@ -60,7 +60,7 @@ class DefaultController extends Controller
 	$kitchenList = $this->getRestaurantKitchenManager()->findAll();
 	
 	// get current city
-	$searchCity = $this->getRequest()->query->get('searchCity');
+	$searchCity = $this->getRequest()->query->get('searchCity');      
 	// if null set default -> krasnodar
 	if (is_null($searchCity)) {
 	    $searchCity = 1;

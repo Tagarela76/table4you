@@ -52,6 +52,7 @@ function InfiniteLoad() {
             next: '.next a',
             loader: '<img src="bundles/tablemain/infinite-ajax-scroll/images/loader.gif" />',
             history: false,
+         //   triggerPageThreshold: 2,
             onRenderComplete: function(items) {
                 // init rating
                 page.rating.initRating();    
