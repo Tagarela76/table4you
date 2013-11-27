@@ -49,12 +49,10 @@ class RestaurantDTO
             $this->categories[] = $category->getId();
         }
 
-        $kitchens = array();
+        $this->kitchens = array();
         foreach($restaurant->getKitchens() as $kitchen) {
-            $kitchens[] = $kitchen->getId();
+            $this->kitchens[] = $kitchen->getId();
         }
-        
-        $this->kitchens = $kitchens;
         
         $this->address = $restaurant->getCity() . ", " . 
                 $restaurant->getStreet() . ", " . $restaurant->getHouse();
@@ -62,11 +60,10 @@ class RestaurantDTO
         $this->latitude = $restaurant->getLatitude();
         $this->longitude = $restaurant->getLongitude();
         
-        $additionalServices = array();
+        $this->additionalServices = array();
         foreach($restaurant->getAdditionalServices() as $additionalService) {
-            $additionalServices[] = $additionalService->getId();
+            $this->additionalServices[] = $additionalService->getId();
         }
-        $this->additionalServices = $additionalServices;
         
         // get Schedule
         $scheduleList = array();

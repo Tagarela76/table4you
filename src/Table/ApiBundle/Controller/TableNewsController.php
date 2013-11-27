@@ -3,9 +3,10 @@
 namespace Table\ApiBundle\Controller;
 
 use FOS\RestBundle\Controller\Annotations as Rest;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Table\MainBundle\Controller\Controller;
 
-use Table\CoreDomain\TableOrder\TableNews;
+use Table\RestaurantBundle\Entity\DTO\NewsDTO;
+use Table\RestaurantBundle\Entity\News;
 
 class TableNewsController extends Controller
 {
@@ -17,27 +18,24 @@ class TableNewsController extends Controller
     public function getNewsListAction($city)
     {
         if (!is_null($city)) {
-            $newsList = $this->get('table_news_repository')->findByCity($city);
+            $newsList = $this->getNewsManager()->findByCity($city)->getQuery()->getResult();
         } else {
-            $newsList = $this->get('table_news_repository')->findAll();
+            $newsList = $this->getNewsManager()->findAll();
         }
 
+        if (!$newsList) {
+            return array(
+                "success" => false,
+                "errorStr" => $this->get('translator')->trans('validation.errors.restaurant.news.Unable to find news')
+            );
+        }
+        
         $response = array();
-        $newObj = array();
-        foreach($newsList as $news) {
-            $newObj['id'] = $news->getId();
-            $startDateTime = new \DateTime($news->getStartDateTime());
-            $newObj['startDate'] = $startDateTime->format('Y/m/d');
-            $newObj['startTime'] = $startDateTime->format('H:i:s'); 
-
-            $endDateTime = new \DateTime($news->getEndDateTime()); 
-            $newObj['endDate'] = $endDateTime->format('Y/m/d');
-            $newObj['endTime'] = $endDateTime->format('H:i:s');
-            
-            $newObj['title'] = $news->getTitle();
-            $newObj['content'] = $news->getContent();
-            $response[] = $newObj;
+        foreach ($newsList as $news) {
+            $dtoNews = new NewsDTO($news, $this->container);
+            $response[] = $dtoNews;
         }
+   
         return array(
             "success" => true,
             "response" => $response
@@ -51,25 +49,18 @@ class TableNewsController extends Controller
      */
     public function getNewsByIdAction($id)
     {
-        $news = $this->get('table_news_repository')->findOneById($id);
-        
-        $newObj = array();
- 
-        $newObj['id'] = $news->getId(); ;
-        $startDateTime = new \DateTime($news->getStartDateTime());
-        $newObj['startDate'] = $startDateTime->format('Y/m/d');
-        $newObj['startTime'] = $startDateTime->format('H:i:s');
-
-        $endDateTime = new \DateTime($news->getEndDateTime());
-        $newObj['endDate'] = $endDateTime->format('Y/m/d');
-        $newObj['endTime'] = $endDateTime->format('H:i:s');
-
-        $newObj['title'] = $news->getTitle();
-        $newObj['content'] = $news->getContent();
+        $news = $this->getNewsManager()->findOneById($id);      
+        if (!$news instanceof News) {
+            return array(
+                "success" => false,
+                "errorStr" => $this->get('translator')->trans('validation.errors.restaurant.news.News not found')
+            );
+        }
+        $dtoNews = new NewsDTO($news, $this->container);
 
         return array(
             "success" => true,
-            "response" => $newObj
+            "response" => $dtoNews
         );
     }
 }

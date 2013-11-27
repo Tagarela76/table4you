@@ -28,4 +28,23 @@ class NewsRepository extends EntityRepository
         $query->orderBy('news.publishedDate', 'DESC');
         return $query;
     }
+    
+    /**
+     * 
+     * Get News by city
+     * 
+     * @param int $city
+     * 
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function findByCity($city) 
+    {
+        $query = $this->createQueryBuilder('news');
+        $query->leftJoin('news.restaurant', 'restaurant')
+              ->andWhere('restaurant.city = :city')
+              ->setParameter('city', $city);
+        $query->orderBy('news.publishedDate', 'DESC');
+        return $query;
+    }
+   
 }

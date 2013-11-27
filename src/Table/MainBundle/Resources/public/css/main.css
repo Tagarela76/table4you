@@ -111,11 +111,16 @@ input:focus{outline: 0 none}
 }
     
 .container-fluid{padding:0px;}
-.restaurant-container{
+.restaurantList-container .restaurant-container{
     padding: 25px 0 0px;
     border-bottom: 1px solid #aeacac;
     overflow: hidden;
     height: 194px;
+}
+.restaurant-container{
+    padding: 25px 0 0px;
+    border-bottom: 1px solid #aeacac;
+    overflow: hidden;
 }
 .restaurantList-container{
     margin-top: 24px;
@@ -1340,6 +1345,12 @@ background-image: url(images/selects-2.png);}
     margin-bottom: 15px;
     overflow: hidden;
 }
+.tab-content #additionalPhotos-slider .slides li, .tab-content #menuPhotos-slider .slides li{
+    height: 340px;
+}
+.tab-content #additionalPhotos-slider .slides img{
+    height: 100%;
+}
 .tab-content #additionalPhotos-carousel, .tab-content #menuPhotos-carousel{
     height: 153px;
     overflow: hidden;
@@ -1352,6 +1363,37 @@ background-image: url(images/selects-2.png);}
 .tab-content #additionalPhotos-carousel .slides > li, .tab-content #menuPhotos-carousel .slides > li{
     margin-right: 16px;
     cursor: pointer;
+    height: 138px;
+    overflow: hidden;
+}
+.tab-content #additionalPhotos-carousel .slides > li img {
+    max-width: 200%;
+    width: 200%;
+    position: relative;
+    left: -50%;
+    height: 100%;
+}
+.tab-content #menuPhotos-carousel .slides > li img{
+    max-width: 100%;
+    width: 100%;
+    position: relative;
+    left: 0%;
+    top: -25%;
+    height: 150%;
+}
+.tab-content #menuPhotos-slider .slides li a{
+    display: block;
+    height: 100%;
+    width: 50%;
+    margin: 0 auto;
+}
+.tab-content #menuPhotos-slider .slides li a img{
+    max-width: 100%;
+    width: 100%;
+    position: relative;
+    left: 0%;
+    top: -25%;
+    height: 150%;
 }
 .tab-content #additionalPhotos-carousel .flex-direction-nav a, .tab-content #menuPhotos-carousel .flex-direction-nav a{
     display: block;
@@ -1424,32 +1466,83 @@ background-image: url(images/selects-2.png);}
     font-style: italic;
 }
 
+.fancybox-overlay .fancybox-wrap {
+    margin-top: -13px;
+}
 .fancybox-outer, .fancybox-outer .fancybox-inner {
     margin: 0 auto;
 }
 .fancybox-overlay .fancybox-skin {
-    background: #d8d5d5;
     border-radius: 0;
-    padding: 10% 2%!important;
 }
 .fancybox-overlay+#fancybox-thumbs{
     display: none;
 }
+.fancybox-outer .fancybox-inner img{
+    border-bottom-width: 45px;
+    border-top-width: 45px;
+    border-left-width: 20px;
+    border-right-width: 20px;
+    border-color: #d8d5d5;
+    border-style: solid;
+}
 .fancybox-overlay .fancybox-nav, .fancybox-overlay .fancybox-prev{
-    background: none;
     width: 10%;
+    top: 45px;
+    background: rgba(187, 174, 174, 0.4);
+}
+.fancybox-outer .fancybox-next {
+    right: -20px;
+}
+.fancybox-outer .fancybox-next:after{
+    left: 44%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+.fancybox-outer .fancybox-next:after{
+    border-color: rgba(255, 255, 255, 0);
+    border-left-color: #fff;
+    border-width: 11px;
+    top: 50%;
+    margin-top: -11px;
+}
+.fancybox-outer .fancybox-prev {
+    left: 20px;
+}
+.fancybox-outer .fancybox-prev:after {
+    right: 44%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+.fancybox-outer .fancybox-prev:after {
+    border-color: rgba(255, 255, 255, 0);
+    border-right-color: #fff;
+    border-width: 11px;
+    top: 50%;
+    margin-top: -11px;
 }
 .fancybox-overlay .fancybox-nav-false {
     position: absolute;
-    top: 0;
-    width: 50%;
+    top: 45px;
+    width: 10%;
     height: 100%;
 }
 .fancybox-overlay .fancybox-nav:hover span {
     display: none;
 }
 .fancybox-overlay .fancybox-next-false {
-    right: -2px;
+    right: -20px;
+}
+.fancybox-overlay .fancybox-prev-false{
+    left: 20px;
 }
 
 .fancybox-overlay .fancybox-close{
@@ -1458,7 +1551,7 @@ background-image: url(images/selects-2.png);}
     font-weight: 100!important;
     font-family: Helvetic;
     top: 8px;
-    right: 12px;
+    right: -32px;
     background: url(../images/close-modal.png) no-repeat;
     opacity: 0.4;
     width: 14px;

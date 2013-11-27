@@ -9,12 +9,6 @@
 <script src="{{ asset('bundles/tablemain/flexSlider/js/shBrushXml.js') }}"></script>
 <script src="{{ asset('bundles/tablemain/flexSlider/js/shBrushJScript.js') }}"></script>
 
-<!-- Optional FlexSlider Additions -->
-<script src="{{ asset('bundles/tablemain/flexSlider/js/jquery.easing.js') }}"></script>
-<script src="{{ asset('bundles/tablemain/flexSlider/js/jquery.mousewheel.js') }}"></script>
-<script src="{{ asset('bundles/tablemain/flexSlider/js/demo.js') }}"></script>
-{# SLIDER #}
-
 {# FANCYBOX #}
 <script src="{{ asset('bundles/tablemain/fancy-box/jquery.fancybox.pack.js') }}"></script>
 <!-- Optionally add helpers - button, thumbnail and/or media -->
@@ -34,7 +28,7 @@
         animationLoop: false,
         slideshow: false,
         move: 1,
-        itemWidth: 205,
+        itemWidth: 138,
         itemMargin: 16,
         asNavFor: '#additionalPhotos-slider'
       });
@@ -56,7 +50,7 @@
         animationLoop: false,
         slideshow: false,
         move: 1,
-        itemWidth: 205,
+        itemWidth: 138,
         itemMargin: 16,
         asNavFor: '#menuPhotos-slider'
       });
@@ -82,6 +76,7 @@
         $("a.restaurantAdditionalPhotos").fancybox({
 		prevEffect	: 'none',
 		nextEffect	: 'none',
+                padding: 0,
 		helpers	: {
 			title	: {
 				type: 'outside'
@@ -96,6 +91,7 @@
         $("a.restaurantMenuPhotos").fancybox({
 		prevEffect	: 'none',
 		nextEffect	: 'none',
+                padding: 0,
 		helpers	: {
 			title	: {
 				type: 'outside'
