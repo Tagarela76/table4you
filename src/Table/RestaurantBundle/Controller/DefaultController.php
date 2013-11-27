@@ -109,11 +109,9 @@ class DefaultController extends Controller
      * 
      * @param int $id
      * 
-     * @param type $page
-     * 
      * @Template()
      */
-    public function viewRestaurantAction($id, $page)
+    public function viewRestaurantAction($id)
     {
         // get Current user
         $user = $this->container->get('security.context')->getToken()->getUser();
@@ -214,9 +212,7 @@ class DefaultController extends Controller
             'additionalPhotos' => $additionalPhotos,
             'menuPhotos' => $menuPhotos,
             'baseUrl' => $baseUrl,
-            'newsList' => $this->getPaginator()->paginate(
-                $newsList, $page, News::PER_PAGE_COUNT
-            )
+            'newsList' => $newsList->getQuery()->getResult()
         );
         
     }
@@ -300,11 +296,9 @@ class DefaultController extends Controller
     /**
      * View Table Order History
      * 
-     * @param type $page
-     * 
      * @Template()
      */
-    public function viewTableOrderHistoryAction($page) 
+    public function viewTableOrderHistoryAction() 
     {
         // get Current user
         $user = $this->container->get('security.context')->getToken()->getUser();
@@ -380,9 +374,7 @@ class DefaultController extends Controller
 	    'kitchenList' => $kitchenList,
 	    'searchCity' => $searchCity,
             'breadcrumbs' =>$breadcrumbs,
-            'newsList' => $this->getPaginator()->paginate(
-                $newsList, $page, News::PER_PAGE_COUNT
-            )
+            'newsList' => $newsList->getQuery()->getResult()
         );
     }
     
@@ -391,11 +383,9 @@ class DefaultController extends Controller
      * 
      * @param int $id
      * 
-     * @param type $page
-     * 
      * @Template()
      */
-    public function viewNewsAction($id, $page)
+    public function viewNewsAction($id)
     {
         // get Current user
         $user = $this->container->get('security.context')->getToken()->getUser();
@@ -480,9 +470,7 @@ class DefaultController extends Controller
 	    'kitchenList' => $kitchenList,
 	    'searchCity' => $searchCity,
             'breadcrumbs' => $breadcrumbs,
-            'newsList' => $this->getPaginator()->paginate(
-                $newsList, $page, News::PER_PAGE_COUNT
-            )
+            'newsList' => $newsList->getQuery()->getResult()
         );
         
     }
@@ -497,11 +485,8 @@ class DefaultController extends Controller
     public function newsListAction($city)
     {
         $newsList = $this->getNewsManager()->findByCity($city);
-        $page = 1;
         return array(
-            'newsList' => $this->getPaginator()->paginate(
-                $newsList, $page, News::PER_PAGE_COUNT
-            )
+            'newsList' => $newsList->getQuery()->getResult()
         );
         
     }

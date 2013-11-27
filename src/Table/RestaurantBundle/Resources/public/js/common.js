@@ -34,7 +34,8 @@ function Rating() {
                     }
                 });
             }
-        });                           
+        });
+        $(".rating").removeClass('rating'); 
     }
 }
 
@@ -42,17 +43,18 @@ function InfiniteLoad() {
     
     this.initLoading = function(entity) {
         
-        var loader = "{{ asset('bundles/tablemain/infinite-ajax-scroll/images/loader.gif') }}"; 
+      //  var loader = "{{ asset('bundles/tablemain/infinite-ajax-scroll/images/loader.gif') }}"; 
         
         jQuery.ias({
             container : '.'+entity+'List-container',
             item: '.'+entity+'-container',
             pagination: '.navigation',
             next: '.next a',
-            loader: '<img src=' + loader + '/>',
+            loader: '<img src="bundles/tablemain/infinite-ajax-scroll/images/loader.gif" />',
+            history: false,
             onRenderComplete: function(items) {
                 // init rating
-                page.rating.initRating();
+                page.rating.initRating();    
             }
         }); 
     }
@@ -115,10 +117,7 @@ function NewsFilter() {
 		type: "POST",
 		dataType: "html",
 		success: function(responce) {
-			//location.reload();
 		        $('#newsList_main').html(responce);
-                        // init infinite ajax
-                        page.infiniteLoad.initLoading('news');
 		}  
 	});      
         

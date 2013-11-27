@@ -107,9 +107,7 @@ class DefaultController extends Controller
 	        'categoryList' => $categoryList,
 	        'kitchenList' => $kitchenList,
 	        'searchCity'  => $searchCity,
-                'newsList' => $this->getPaginator()->paginate(
-                    $newsList, $page, News::PER_PAGE_COUNT
-                )
+                'newsList' => $newsList->getQuery()->getResult()
             );
 	}
     }
@@ -118,13 +116,11 @@ class DefaultController extends Controller
      * 
      * Render auth page
      * 
-     * @param type $page
-     * 
      * @Template()
      * 
      * @return array[]
      */
-    public function viewAuthPageAction($page)
+    public function viewAuthPageAction()
     {
 	/* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN HEADER */
 	// get city list
@@ -149,9 +145,7 @@ class DefaultController extends Controller
 	    'categoryList' => $categoryList,
 	    'kitchenList' => $kitchenList,
 	    'searchCity' => $searchCity,
-            'newsList' => $this->getPaginator()->paginate(
-                $newsList, $page, News::PER_PAGE_COUNT
-            )
+            'newsList' => $newsList->getQuery()->getResult()
         );
     }
 
