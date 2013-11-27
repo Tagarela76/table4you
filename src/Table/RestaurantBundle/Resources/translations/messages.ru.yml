@@ -10,6 +10,14 @@ validation:
       Restaurant not found: Ресторан не найден
       kitchen:
         Unable to find restaurant kitchens: Нет результата
+      news:
+        Unable to find news: Нет результата  
+        News not found: Новость не найдена
+      tableOrder:
+        Unable to find order: Нет результата  
+        Cannor reserve: наш сервис позволяет забронировать не более одного столика.
+    city:
+        Unable to find cities: Нет результата
 main:
   order:
       form:

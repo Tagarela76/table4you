@@ -72,8 +72,6 @@ class ProfileController extends BaseSecurityController
                 $this->get('translator')->trans('main.breadcrumbs.label.profile')
         );
         
-        // i should get page parameter.
-        $page = 1;
         return $this->render('ApplicationSonataUserBundle:Profile:show.html.twig', array(
             'user' => $user,
 	    'cityList' => $cityList,
@@ -81,9 +79,7 @@ class ProfileController extends BaseSecurityController
 	    'kitchenList' => $kitchenList,
 	    'searchCity' => $searchCity,
             'breadcrumbs' => $breadcrumbs,
-            'newsList' => $this->get('knp_paginator')->paginate(
-                $newsList, $page, News::PER_PAGE_COUNT
-            )
+            'newsList' => $newsList->getQuery()->getResult()
         ));
     }
 
@@ -149,9 +145,7 @@ class ProfileController extends BaseSecurityController
         $breadcrumbs->addItem(
                 $this->get('translator')->trans('main.breadcrumbs.label.editProfile')
         );
-        
-        $page = 1;
-        
+
         return $this->render('ApplicationSonataUserBundle:Profile:edit_profile.html.twig', array(
             'form' => $form->createView(),
 	    'cityList' => $cityList,
@@ -159,9 +153,7 @@ class ProfileController extends BaseSecurityController
 	    'kitchenList' => $kitchenList,
 	    'searchCity' => $searchCity,
             'breadcrumbs' => $breadcrumbs,
-            'newsList' => $this->get('knp_paginator')->paginate(
-                $newsList, $page, News::PER_PAGE_COUNT
-            )
+            'newsList' => $newsList->getQuery()->getResult()
         ));
     }
 }

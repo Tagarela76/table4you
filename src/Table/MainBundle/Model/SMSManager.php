@@ -53,6 +53,8 @@ class SMSManager
      */
     private function _getXmlRequest($phone, $message) 
     {
+        // generate sms id
+        $smsId = rand(5, 15);
         $response = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>   
                     <SMS>
                     <operations> 
@@ -67,7 +69,7 @@ class SMSManager
                     <text>".$message."</text>  
                     </message>   
                     <numbers>
-                    <number messageID=\"msg11\">{$phone}</number>
+                    <number messageID=\"".$smsId."\">{$phone}</number>
                     </numbers>   
                     </SMS>"; 
             

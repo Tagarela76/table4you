@@ -60,7 +60,7 @@ class DefaultController extends Controller
 	$kitchenList = $this->getRestaurantKitchenManager()->findAll();
 	
 	// get current city
-	$searchCity = $this->getRequest()->query->get('searchCity');
+	$searchCity = $this->getRequest()->query->get('searchCity');      
 	// if null set default -> krasnodar
 	if (is_null($searchCity)) {
 	    $searchCity = 1;
@@ -68,7 +68,7 @@ class DefaultController extends Controller
 	/* *** */
         
         /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN RIGHT SIDEBAR */
-        $newsList = $this->getNewsManager()->getNews();
+        $newsList = $this->getNewsManager()->findByCity($searchCity);
    //var_dump($newsList->getQuery()); die();     
 	// get restaurant list
 	$filter = $this->getRequest()->request->get('filter');  // fir restaurant filter
@@ -107,9 +107,7 @@ class DefaultController extends Controller
 	        'categoryList' => $categoryList,
 	        'kitchenList' => $kitchenList,
 	        'searchCity'  => $searchCity,
-                'newsList' => $this->getPaginator()->paginate(
-                    $newsList, $page, News::PER_PAGE_COUNT
-                )
+                'newsList' => $newsList->getQuery()->getResult()
             );
 	}
     }
@@ -118,13 +116,11 @@ class DefaultController extends Controller
      * 
      * Render auth page
      * 
-     * @param type $page
-     * 
      * @Template()
      * 
      * @return array[]
      */
-    public function viewAuthPageAction($page)
+    public function viewAuthPageAction()
     {
 	/* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN HEADER */
 	// get city list
@@ -142,16 +138,14 @@ class DefaultController extends Controller
 	}
 	/* *** */
         /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN RIGHT SIDEBAR */
-        $newsList = $this->getNewsManager()->getNews();
+        $newsList = $this->getNewsManager()->findByCity($searchCity);
         
         return array(
 	    'cityList' => $cityList,
 	    'categoryList' => $categoryList,
 	    'kitchenList' => $kitchenList,
 	    'searchCity' => $searchCity,
-            'newsList' => $this->getPaginator()->paginate(
-                $newsList, $page, News::PER_PAGE_COUNT
-            )
+            'newsList' => $newsList->getQuery()->getResult()
         );
     }
 

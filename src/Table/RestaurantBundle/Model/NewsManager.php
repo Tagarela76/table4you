@@ -88,4 +88,17 @@ class NewsManager
     {
         return $this->getNewsRepo()->getNews();
     }
+    
+    /**
+     * 
+     * Get news by city. 
+     * 
+     * @param int $city
+     * 
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function findByCity($city)
+    {
+        return $this->getNewsRepo()->findByCity($city);
+    }
 }

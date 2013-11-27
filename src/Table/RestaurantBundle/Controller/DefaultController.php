@@ -109,11 +109,9 @@ class DefaultController extends Controller
      * 
      * @param int $id
      * 
-     * @param type $page
-     * 
      * @Template()
      */
-    public function viewRestaurantAction($id, $page)
+    public function viewRestaurantAction($id)
     {
         // get Current user
         $user = $this->container->get('security.context')->getToken()->getUser();
@@ -164,7 +162,7 @@ class DefaultController extends Controller
 	/* *** */
 
         /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN RIGHT SIDEBAR */
-        $newsList = $this->getNewsManager()->getNews();
+        $newsList = $this->getNewsManager()->findByCity($searchCity);
         
         // BreadCrumbs
         $breadcrumbs = $this->getBreadCrumbsManager();
@@ -214,9 +212,7 @@ class DefaultController extends Controller
             'additionalPhotos' => $additionalPhotos,
             'menuPhotos' => $menuPhotos,
             'baseUrl' => $baseUrl,
-            'newsList' => $this->getPaginator()->paginate(
-                $newsList, $page, News::PER_PAGE_COUNT
-            )
+            'newsList' => $newsList->getQuery()->getResult()
         );
         
     }
@@ -300,11 +296,9 @@ class DefaultController extends Controller
     /**
      * View Table Order History
      * 
-     * @param type $page
-     * 
      * @Template()
      */
-    public function viewTableOrderHistoryAction($page) 
+    public function viewTableOrderHistoryAction() 
     {
         // get Current user
         $user = $this->container->get('security.context')->getToken()->getUser();
@@ -355,7 +349,7 @@ class DefaultController extends Controller
 	/* *** */
         
         /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN RIGHT SIDEBAR */
-        $newsList = $this->getNewsManager()->getNews();
+        $newsList = $this->getNewsManager()->findByCity($searchCity);
         
         // BreadCrumbs
         $breadcrumbs = $this->getBreadCrumbsManager();
@@ -380,9 +374,7 @@ class DefaultController extends Controller
 	    'kitchenList' => $kitchenList,
 	    'searchCity' => $searchCity,
             'breadcrumbs' =>$breadcrumbs,
-            'newsList' => $this->getPaginator()->paginate(
-                $newsList, $page, News::PER_PAGE_COUNT
-            )
+            'newsList' => $newsList->getQuery()->getResult()
         );
     }
     
@@ -391,11 +383,9 @@ class DefaultController extends Controller
      * 
      * @param int $id
      * 
-     * @param type $page
-     * 
      * @Template()
      */
-    public function viewNewsAction($id, $page)
+    public function viewNewsAction($id)
     {
         // get Current user
         $user = $this->container->get('security.context')->getToken()->getUser();
@@ -446,7 +436,7 @@ class DefaultController extends Controller
 	/* *** */
 
         /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN RIGHT SIDEBAR */
-        $newsList = $this->getNewsManager()->getNews();
+        $newsList = $this->getNewsManager()->findByCity($searchCity);
         
         // BreadCrumbs
         $breadcrumbs = $this->getBreadCrumbsManager();
@@ -480,9 +470,23 @@ class DefaultController extends Controller
 	    'kitchenList' => $kitchenList,
 	    'searchCity' => $searchCity,
             'breadcrumbs' => $breadcrumbs,
-            'newsList' => $this->getPaginator()->paginate(
-                $newsList, $page, News::PER_PAGE_COUNT
-            )
+            'newsList' => $newsList->getQuery()->getResult()
+        );
+        
+    }
+    
+    /**
+     * Get News List
+     * 
+     * @param int $city
+     * 
+     * @Template()
+     */
+    public function newsListAction($city)
+    {
+        $newsList = $this->getNewsManager()->findByCity($city);
+        return array(
+            'newsList' => $newsList->getQuery()->getResult()
         );
         
     }

@@ -4,8 +4,8 @@ table_order_reserve:
     requirements:
         id: \d+         
 table_view_restaurant:
-    pattern:  /restaurant/{id}/{page}
-    defaults: { _controller: TableRestaurantBundle:Default:viewRestaurant, page: 1 }
+    pattern:  /restaurant/{id}
+    defaults: { _controller: TableRestaurantBundle:Default:viewRestaurant }
     requirements:
         id: \d+    
 table_update_restaurant_rating:
@@ -14,13 +14,18 @@ table_update_restaurant_rating:
     options:
        expose: true  
 table_order_history:
-    pattern:  /viewTableOrderHistory/{page}
-    defaults: { _controller: TableRestaurantBundle:Default:viewTableOrderHistory, page: 1 }
+    pattern:  /viewTableOrderHistory
+    defaults: { _controller: TableRestaurantBundle:Default:viewTableOrderHistory }
     options:
        expose: true   
 table_view_news:
-    pattern:  /news/{id}/{page}
-    defaults: { _controller: TableRestaurantBundle:Default:viewNews, page: 1 }
+    pattern:  /news/{id}
+    defaults: { _controller: TableRestaurantBundle:Default:viewNews }
     requirements:
-        id: \d+         
+        id: \d+     
+table_all_news:
+    pattern:  /newsList/{city}
+    defaults: { _controller: TableRestaurantBundle:Default:newsList } 
+    options:
+       expose: true 
        
