@@ -28,4 +28,12 @@ table_all_news:
     defaults: { _controller: TableRestaurantBundle:Default:newsList } 
     options:
        expose: true 
-       
+table_map:
+    pattern:  /map
+    defaults: { _controller: TableRestaurantBundle:Default:viewMap }
+    
+table_restaurant_map:
+    pattern:  /viewRestaurantMap/{id}
+    defaults: { _controller: TableRestaurantBundle:Default:viewRestaurantMap }
+    requirements:
+        id: \d+          

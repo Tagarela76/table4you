@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+        <title>{% block title %}{% endblock %}</title>
+
+        <meta name="keywords" content="{% block keywords %}{% endblock %}">
+        <meta name="description" content="{% block description %}{% endblock %}">
+
+        {% block stylesheets %}
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/bootstrap.css') }}">
+            
+            {# include leaflet map#}
+            <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
+            <!--[if lte IE 8]>
+                <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
+            <![endif]-->
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablerestaurant/css/map.css') }}">
+        {% endblock %}
+
+        {% block javascripts %}
+            <script src="{{ asset('bundles/tablemain/js/jquery.min.js') }}"></script>
+            <script src="{{ asset('bundles/tablemain/js/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('bundles/tablemain/js/bootstrap-dropdown.js') }}"></script>
+            <script src="{{ asset('bundles/tablemain/js/respond.min.js') }}"></script>
+            <script src="{{ asset('bundles/tablemain/js/placeholder-ie-support.js') }}"></script>
+            
+            {# include leaflet map#}
+            <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
+        {% endblock %}
+
+    </head>
+    <body>
+            <div class="container">
+                <div class="row">
+                    <div class="span13">
+                        {% block content %}
+
+                        {% endblock %}
+                    </div>
+                    <div class="span3"></div>
+                </div>
+        </div>
+    </body>
+</html>

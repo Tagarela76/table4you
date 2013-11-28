@@ -25,10 +25,13 @@ main:
   profile:
     buttonLabel: Мой профиль
   order:
-      button: Reserve
-      form:
-        title: Заказ столика
-      buttonLabel: История заказов  
+    button: Reserve
+    form:
+      title: Заказ столика
+    buttonLabel: История заказов  
+  map:
+    form:
+      title: Заведение на карте
   auth:
     text: Авторизируйтесь
   please: пожалуйста
@@ -70,6 +73,7 @@ main:
           profile: Мой профиль
           editProfile: Редактировать профиль
           news: Открытая акция
+          map: Карта
   helper:
       from: с
       to: по
