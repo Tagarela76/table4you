@@ -1489,7 +1489,6 @@ background-image: url(images/selects-2.png);}
 .fancybox-overlay .fancybox-nav, .fancybox-overlay .fancybox-prev{
     width: 10%;
     top: 45px;
-    background: rgba(187, 174, 174, 0.4);
 }
 .fancybox-outer .fancybox-next {
     right: -20px;
