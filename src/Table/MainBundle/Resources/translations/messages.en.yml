@@ -24,10 +24,13 @@ main:
   profile:
     buttonLabel: Profile
   order:
-      button: Reserve
-      form:
-        title: Table Reserve
-      buttonLabel: Order history  
+    button: Reserve
+    form:
+      title: Table Reserve
+    buttonLabel: Order history  
+  map:
+    form:
+      title: Заведение на карте    
   auth:
     text: Auth
   register:
@@ -71,6 +74,7 @@ main:
           profile: Profile
           editProfile: Edit profile
           news: Open News
+          map: Map
   helper:
       from: from
       to: to        
