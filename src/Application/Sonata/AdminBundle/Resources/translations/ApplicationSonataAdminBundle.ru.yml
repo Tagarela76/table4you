@@ -57,7 +57,9 @@ restaurant:
 Name: Название
 address:
   city: Город
-  street: Улица
+  street: 
+    label: Улица
+    help: "Указывайте только название улицы без слов 'улица', 'ул.' и подобное"    
   house: Номер дома  
 Category Id: Категория
 Photo: Фото * # HTML5 validation does not show error on this field. See #5512 in Redmine
