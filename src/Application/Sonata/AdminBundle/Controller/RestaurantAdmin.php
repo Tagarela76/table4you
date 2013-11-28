@@ -62,7 +62,8 @@ class RestaurantAdmin extends Admin
                     'label' => 'address.city'
                 ))
                 ->add('street', null, array(
-                    'label' => 'address.street'
+                    'label' => 'address.street.label',
+                    'help' => 'address.street.help'
                 ))
                 ->add('house', null, array(
                     'label' => 'address.house'
