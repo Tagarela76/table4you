@@ -22,10 +22,10 @@ class RestaurantController extends Controller
     public function getRestaurantsAction($city = null)
     {
         if (!is_null($city)) {
-            $restaurants = $this->getRestaurantManager()->findByCity($city);
+            $restaurants = $this->getRestaurantManager()->findByCity($city)->getQuery()->getResult();
         } else {
             $restaurants = $this->getRestaurantManager()->findAll();
-        }
+        } 
         if (!$restaurants) {
             return array(
                 "success" => false,
@@ -79,7 +79,7 @@ class RestaurantController extends Controller
     public function geoSearchAction($city = null)
     {
         if (!is_null($city)) {
-            $restaurants = $this->getRestaurantManager()->findByCity($city);
+            $restaurants = $this->getRestaurantManager()->findByCity($city)->getQuery()->getResult();
         } else {
             $restaurants = $this->getRestaurantManager()->findAll();
         }
@@ -95,30 +95,6 @@ class RestaurantController extends Controller
             $response[] = $dtoGeoSearch;
         }
         
-        return array(
-            "success" => true,
-            "response" => $response
-        );
-    }
-    
-    /**
-     * Get city list. It will be array of strings
-     * 
-     * @Rest\View
-     */
-    public function getCitiesListAction()
-    {
-        $citiesList = $this->getRestaurantManager()->getCitiesList();
-        if (!$citiesList) {
-            return array(
-                "success" => false,
-                "errorStr" => $this->get('translator')->trans('validation.errors.restaurant.Unable to find cities')
-            );
-        }
-        $response = array();
-        foreach($citiesList as $city) { 
-            $response[] = $city['city'];
-        }
         return array(
             "success" => true,
             "response" => $response
@@ -155,36 +131,69 @@ class RestaurantController extends Controller
     }
     
     /**
-     * Get menu photos. Every photo obj should consist big and small
+     * Get menu photos. 
      * 
-     * @param integer $restaurantId
+     * @param integer $id
      * 
      * @Rest\View
      */
-    public function getMenuPhotosAction($restaurantId)
+    
+    public function getMenuPhotosAction($id)
     {
-        $restaurant = $this->get('restaurant_repository')->findOneById($restaurantId);
+        $restaurant = $this->getRestaurantManager()->find($id);
+        if (!$restaurant instanceof Restaurant) {
+            return array(
+                "success" => false,
+                "errorStr" => $this->get('translator')->trans('validation.errors.restaurant.Restaurant not found')
+            );
+        }
+        $helper = $this->container->get('vich_uploader.templating.helper.uploader_helper');
+        
+        $menuPhotos = array();
+        foreach ($restaurant->getAdditionalMenuPhotos() as $menuPhoto) {
+            if (!is_null($menuPhoto->getFileName())) {
+                $menuPhotos[] = $this->container->getParameter('site_host') . 
+                                $this->container->getParameter('base_url') . 
+                                $helper->asset($menuPhoto, 'file'); 
+            }
+        }
 
         return array(
             "success" => true,
-            "response" => $restaurant->getMenusPhotos()
+            "response" => $menuPhotos
         );
     }
     
     /**
-     * Get additional photos. Every photo obj should consist big and small
+     * Get additional photos. 
      * 
-     * @param integer $restaurantId
+     * @param integer $id
      * 
      * @Rest\View
      */
-    public function getAdditionalPhotosAction($restaurantId)
+    public function getAdditionalPhotosAction($id)
     {
-        $restaurant = $this->get('restaurant_repository')->findOneById($restaurantId);
+        $restaurant = $this->getRestaurantManager()->find($id);
+        if (!$restaurant instanceof Restaurant) {
+            return array(
+                "success" => false,
+                "errorStr" => $this->get('translator')->trans('validation.errors.restaurant.Restaurant not found')
+            );
+        }
+        $helper = $this->container->get('vich_uploader.templating.helper.uploader_helper');
+        
+        $additionalPhotos = array();
+        foreach ($restaurant->getAdditionalPhotos() as $additionalPhoto) {
+            if (!is_null($additionalPhoto->getFileName())) {
+                $additionalPhotos[] = $this->container->getParameter('site_host') . 
+                                $this->container->getParameter('base_url') . 
+                                $helper->asset($additionalPhoto, 'file'); 
+            }
+        }
 
         return array(
             "success" => true,
-            "response" => $restaurant->getAdditionalPhotos()
+            "response" => $additionalPhotos
         );
     }
 }

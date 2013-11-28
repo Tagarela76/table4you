@@ -1,87 +1,200 @@
 {% extends 'TableMainBundle::layout.html.twig' %}
 {% block javascripts %}
     {{ parent() }}
-{# Rating #}
+{# SLIDER #}
+<script src="{{ asset('bundles/tablemain/flexSlider/js/modernizr.js') }}"></script>
+<script src="{{ asset('bundles/tablemain/flexSlider/js/jquery.flexslider.js') }}"></script>
+<!-- Syntax Highlighter -->
+<script src="{{ asset('bundles/tablemain/flexSlider/js/shCore.js') }}"></script>
+<script src="{{ asset('bundles/tablemain/flexSlider/js/shBrushXml.js') }}"></script>
+<script src="{{ asset('bundles/tablemain/flexSlider/js/shBrushJScript.js') }}"></script>
+
+{# FANCYBOX #}
+<script src="{{ asset('bundles/tablemain/fancy-box/jquery.fancybox.pack.js') }}"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<script src="{{ asset('bundles/tablemain/fancy-box/helpers/jquery.fancybox-buttons.js') }}"></script>
+<script src="{{ asset('bundles/tablemain/fancy-box/helpers/jquery.fancybox-media.js') }}"></script>
+<script src="{{ asset('bundles/tablemain/fancy-box/helpers/jquery.fancybox-thumbs.js') }}"></script>
+{# FANCYBOX #}
 <script>
-    // Rating
-    $(function(){ 
+    // Slider
+    $(function(){
+      SyntaxHighlighter.all();
+    });
+    $(window).load(function(){
+      $('#additionalPhotos-carousel').flexslider({
+        animation: "slide",
+        controlNav: false,
+        animationLoop: false,
+        slideshow: false,
+        move: 1,
+        itemWidth: 138,
+        itemMargin: 16,
+        asNavFor: '#additionalPhotos-slider'
+      });
+
+      $('#additionalPhotos-slider').flexslider({
+        animation: "slide",
+        controlNav: false,
+        animationLoop: false,
+        slideshow: false,
+        sync: "#additionalPhotos-carousel",
+        start: function(slider){
+          $('body').removeClass('loading');
+        }
+      });
+      
+      $('#menuPhotos-carousel').flexslider({
+        animation: "slide",
+        controlNav: false,
+        animationLoop: false,
+        slideshow: false,
+        move: 1,
+        itemWidth: 138,
+        itemMargin: 16,
+        asNavFor: '#menuPhotos-slider'
+      });
+
+      $('#menuPhotos-slider').flexslider({
+        animation: "slide",
+        controlNav: false,
+        animationLoop: false,
+        slideshow: false,
+        sync: "#menuPhotos-carousel",
+        start: function(slider){
+          $('body').removeClass('loading');
+        }
+      });
+    });
+
+
+    $(function() {       
         // Rating
         page.rating.initRating();
-    });
         
+        // fancyBOX
+        $("a.restaurantAdditionalPhotos").fancybox({
+		prevEffect	: 'none',
+		nextEffect	: 'none',
+                padding: 0,
+		helpers	: {
+			title	: {
+				type: 'outside'
+			},
+			thumbs	: {
+				width	: 50,
+				height	: 50
+			}
+		}
+	});
+        
+        $("a.restaurantMenuPhotos").fancybox({
+		prevEffect	: 'none',
+		nextEffect	: 'none',
+                padding: 0,
+		helpers	: {
+			title	: {
+				type: 'outside'
+			},
+			thumbs	: {
+				width	: 50,
+				height	: 50
+			}
+		}
+	});
+    });
+
 </script> 
 {# Rating #}
 {% endblock %}    
 {% block stylesheets %}
     {{ parent() }}
+{# SLIDER #}
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/flexSlider/css/flexslider.css') }}">
+{# SLIDER #}
+
+{# FANCYBOX #}
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/fancy-box/jquery.fancybox.css') }}">
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/fancy-box/helpers/jquery.fancybox-buttons.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/fancy-box/helpers/jquery.fancybox-thumbs.css') }}">
+{# FANCYBOX #}
 {% endblock %}    
 {% block content %}
-    <div class="container-fluid" id="restaurantList_main">
-        <div class="restaurant-container">
-            <div class="restaurant-img-container">
-                <div class="restaurant-img">{% thumbnail restaurant.photo, 'reference' %}</div>
-            </div>
-            <div class="restaurant-content restaurant-card">
-                <p class="restaurant-content-name">
-                    <a href="#" >{{ restaurant.name }}</a>
-                </p>
-                <p class="restaurant-content-font-category">
-                    {% trans %}main.labels.category{% endtrans %}
-                </p>
-                <p class="restaurant-content-font">
-                    {{ restaurant.categories|join(',') }}
-                </p>
-                <p class="restaurant-content-font-category">
-                    {% trans %}main.labels.kitchen{% endtrans %}
-                </p>
-                <p class="restaurant-content-font">
-                    {{ restaurant.kitchens|join(',') }}
-                </p>
-                <p class="restaurant-content-font-category">
-                    {% trans %}main.labels.additionalServices{% endtrans %}
-                </p>
-                <p class="restaurant-content-font">
-                    {{ restaurant.additionalServices|join(',') }}
-                </p>
-                <p class="restaurant-content-font-category">
-                     {% trans %}main.labels.address{% endtrans %}
-                </p>
-                <p class="restaurant-content-font">
-                    {{ restaurant.city.name }}, {{ restaurant.street }}, {{ restaurant.house }}
-                </p>
-                 <p class="restaurant-content-font-category">
-                     {% trans %}main.labels.scedule{% endtrans %}
-                </p>
-                <p class="restaurant-content-font">
-                    {% for schedule in restaurant.restaurantSchedule %}
-                     {{schedule.dayFromStr}} - {{schedule.dayToStr}} {{schedule.timeFrom|date('H:i')}} - {{schedule.timeTo|date('H:i')}}
-                    {% endfor %}
-                </p>
-            </div>
-            <div class="restaurant-content-reserve restaurant-rating-{{ restaurant.id }}">
-                {% include 'TableRestaurantBundle:Default:rating.html.twig' with {'restaurant': restaurant, 'isRatingDisabled': isRatingDisabled, 'restaurantsWhoHadHasAlreadyRating': restaurantsWhoHadHasAlreadyRating, 'id': restaurant.id} %}
-                {% if anonim %}
-                    <a class="btn btn-primary"  href="{{ path('table_main_auth_page') }}">
-                        {% trans %}main.order.button{% endtrans %}
-                    </a>
-                {% else %}
-                    <a class="btn btn-primary" data-toggle="modal" data-target="#reserve_{{ restaurant.id }}" href="{{ path('table_order_reserve', {'id': restaurant.id}) }}">
-                        {% trans %}main.order.button{% endtrans %}
-                    </a>
+<div class="container-fluid" id="restaurantList_main">
+    {#restaurant profile #}
+    {% include 'TableRestaurantBundle:Default:restaurant.html.twig' %}  
+        {# TABS #}
+    <div class="tabbable">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#photos" data-toggle="tab">{% trans %}main.labels.photos.additional{% endtrans %}</a>
+            </li>
+            <li>
+                <a href="#menus" data-toggle="tab">{% trans %}main.labels.photos.menu{% endtrans %}</a>
+            </li>
+            <li>
+                <a href="#description" data-toggle="tab">{% trans %}main.labels.description{% endtrans %}</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div id="photos" class="tab-pane active">
+                {% if additionalPhotos %}
+                    <div id="additionalPhotos-slider" class="flexslider">
+                        <ul class="slides">
+                            {% for additionalPhoto in additionalPhotos %}
+                                <li>
+                                    <a class="restaurantAdditionalPhotos" rel="restaurantAdditionalPhotos" href="{{baseUrl}}{{ additionalPhoto }}">
+                                        <img src="{{baseUrl}}{{ additionalPhoto }}" width="150" height="150"/>
+                                    </a>        
+                                </li>
+                            {% endfor %}   
+                        </ul>
+                    </div>
+                    <div id="additionalPhotos-carousel" class="flexslider">
+                        <ul class="slides">
+                            {% for additionalPhoto in additionalPhotos %}
+                                <li>
+                                    <img src="{{baseUrl}}{{additionalPhoto}}" />
+                                </li>
+                            {% endfor %}  
+                        </ul>
+                    </div>
                 {% endif %}
-
+            </div>
+            <div id="menus" class="tab-pane">
+                {# menu #}
+                {% if menuPhotos %}
+                    <div id="menuPhotos-slider" class="flexslider">
+                        <ul class="slides">
+                            {% for menuPhoto in menuPhotos %}
+                                <li>
+                                    <a class="restaurantMenuPhotos" rel="restaurantMenuPhotos" href="{{baseUrl}}{{ menuPhoto }}">
+                                        <img src="{{baseUrl}}{{ menuPhoto }}"/>
+                                    </a>
+                                </li>
+                            {% endfor %}   
+                        </ul>
+                    </div>
+                    <div id="menuPhotos-carousel" class="flexslider">
+                        <ul class="slides">
+                            {% for menuPhoto in menuPhotos %}
+                                <li>
+                                    <img src="{{baseUrl}}{{menuPhoto}}" />
+                                </li>
+                            {% endfor %}  
+                        </ul>
+                    </div>
+                {% endif %}
+                {# menu #}
+            </div>
+            <div id="description" class="tab-pane">
+                <hr>
+                <p>{% trans %}main.labels.description{% endtrans %}</p>
+                <p>{{ restaurant.description }}</p>
             </div>
         </div>
-        {# ==Modal Window for reserve==#}
-        <div class="modal fade hide modal-reserve" data-backdrop="static" id="reserve_{{ restaurant.id }}">
-
-            <div class="modal-header modal-login-title">
-                <a class="close" data-dismiss="modal"></a>
-                <h3>{% trans %}main.order.form.title{% endtrans %} {{restaurant.name}}</h3>
-            </div>
-            <div class="modal-body" >
-
-            </div>
-        </div>
-    </div>  
+    </div>
+    {# TABS #}
+</div>  
 {% endblock %}    

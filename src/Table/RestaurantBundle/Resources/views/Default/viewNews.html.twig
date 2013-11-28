@@ -1,0 +1,44 @@
+{% extends 'TableMainBundle::layout.html.twig' %}
+{% block javascripts %}
+    {{ parent() }}
+
+<script>
+    
+    $(function() {       
+        // Rating
+        page.rating.initRating();  
+    });
+
+</script> 
+{# Rating #}
+{% endblock %}    
+{% block stylesheets %}
+    {{ parent() }}
+
+{% endblock %}    
+{% block content %}
+<div class="container-fluid" id="restaurantList_main">
+    {#restaurant profile #}
+    {% include 'TableRestaurantBundle:Default:restaurant.html.twig' %}  
+    <div class="news-container news-stock-page">
+        <div class="news-img-container">
+            <div class="news-img">{% thumbnail news.photo, 'reference' %}</div>
+        </div>
+        <div class="news-content">
+            <p class="news-content-title">
+                <a href="#" >{{ news.title }}</a>
+            </p>
+            <p class="news-content-publishedDate">
+                {{news.publishedDate|date('d.m.Y')}}
+            </p>
+            <p class="news-content-content">
+                {{ news.content | replace({"\n":"<br>"}) |raw}}
+            </p>
+            <p class="news-content-date">
+                {% trans %}main.helper.from{% endtrans %} {{news.startDate|date('d.m.Y')}} 
+                {% trans %}main.helper.to{% endtrans %} {{news.endDate|date('d.m.Y')}}
+            </p>
+        </div>
+</div>
+</div>  
+{% endblock %}    

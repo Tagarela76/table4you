@@ -26,3 +26,9 @@ services:
   city_manager:
         class: Table\RestaurantBundle\Model\CityManager
         arguments: [@doctrine.orm.entity_manager, @service_container]      
+  sms_manager:
+        class: Table\MainBundle\Model\SMSManager
+        arguments: [@doctrine.orm.entity_manager, @service_container]    
+  news_manager:
+        class: Table\RestaurantBundle\Model\NewsManager
+        arguments: [@doctrine.orm.entity_manager, @service_container]       

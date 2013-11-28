@@ -109,13 +109,13 @@ class UserController extends Controller
         if (!$user instanceof User) {
             return array(
                 'success' => false,
-                'errorStr' => $this->get('translator')->trans('validation.errors.user.User not found')
+                'errorStr' => $this->get('translator')->trans('validation.errors.user.User not found', array(), 'FOSUserBundle')
             );
         }
         if (!$this->checkUserPassword($user, $password)) {
             return array(
                 'success' => false,
-                'errorStr' => $this->get('translator')->trans("validation.errors.user.Wrong password")
+                'errorStr' => $this->get('translator')->trans("validation.errors.user.Wrong password", array(), 'FOSUserBundle')
             );
         }
         $this->loginUser($user);
@@ -152,14 +152,14 @@ class UserController extends Controller
         if ($user == "anon.") {
             return array(
                 'success' => false,
-                'errorStr' => $this->get('translator')->trans("validation.errors.user.You should auth at first")
+                'errorStr' => $this->get('translator')->trans("validation.errors.user.You should auth at first", array(), 'FOSUserBundle')
             );
         }
 
         if (!is_object($user) || !$user instanceof User) {
             return array(
                 'success' => false,
-                'errorStr' => $this->get('translator')->trans("validation.errors.user.This user does not have access to this section")
+                'errorStr' => $this->get('translator')->trans("validation.errors.user.This user does not have access to this section", array(), 'FOSUserBundle')
             );
         } else {
             return array(
@@ -184,14 +184,14 @@ class UserController extends Controller
         if (null === $user) {
             return array(
                 'success' => false,
-                'errorStr' => $this->get('translator')->trans("validation.errors.user.User not found")
+                'errorStr' => $this->get('translator')->trans("validation.errors.user.User not found", array(), 'FOSUserBundle')
             );
         }
 
         if ($user->isPasswordRequestNonExpired($this->container->getParameter('fos_user.resetting.token_ttl'))) {
             return array(
                 'success' => false,
-                'errorStr' => $this->get('translator')->trans("validation.errors.user.Password already requested")
+                'errorStr' => $this->get('translator')->trans("validation.errors.user.Password already requested", array(), 'FOSUserBundle')
             );
         }
 

@@ -12,6 +12,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FOS\UserBundle\FOSUserEvents;
 use Symfony\Component\Form\FormError;
 use Sonata\UserBundle\Controller\ProfileController as BaseSecurityController;
+
+use Table\RestaurantBundle\Entity\News;
 /**
  * This class is inspired from the FOS Profile Controller, except :
  *   - only twig is supported
@@ -22,6 +24,8 @@ class ProfileController extends BaseSecurityController
 {
 
     /**
+     * View Profile
+     * 
      * @return Response
      *
      * @throws AccessDeniedException
@@ -54,6 +58,9 @@ class ProfileController extends BaseSecurityController
 	}
 	/* *** */
         
+        /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN RIGHT SIDEBAR */
+        $newsList = $this->get('news_manager')->getNews();
+        
         // BreadCrumbs
         $breadcrumbs = $this->get('white_october_breadcrumbs');
         $breadcrumbs->addItem(
@@ -71,7 +78,8 @@ class ProfileController extends BaseSecurityController
 	    'categoryList' => $categoryList,
 	    'kitchenList' => $kitchenList,
 	    'searchCity' => $searchCity,
-            'breadcrumbs' => $breadcrumbs
+            'breadcrumbs' => $breadcrumbs,
+            'newsList' => $newsList->getQuery()->getResult()
         ));
     }
 
@@ -118,6 +126,9 @@ class ProfileController extends BaseSecurityController
 	}
 	/* *** */
         
+        /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN RIGHT SIDEBAR */
+        $newsList = $this->get('news_manager')->getNews();
+        
         // BreadCrumbs
         $breadcrumbs = $this->get('white_october_breadcrumbs');
         $breadcrumbs->addItem(
@@ -134,14 +145,15 @@ class ProfileController extends BaseSecurityController
         $breadcrumbs->addItem(
                 $this->get('translator')->trans('main.breadcrumbs.label.editProfile')
         );
-        
+
         return $this->render('ApplicationSonataUserBundle:Profile:edit_profile.html.twig', array(
             'form' => $form->createView(),
 	    'cityList' => $cityList,
 	    'categoryList' => $categoryList,
 	    'kitchenList' => $kitchenList,
 	    'searchCity' => $searchCity,
-            'breadcrumbs' => $breadcrumbs
+            'breadcrumbs' => $breadcrumbs,
+            'newsList' => $newsList->getQuery()->getResult()
         ));
     }
 }

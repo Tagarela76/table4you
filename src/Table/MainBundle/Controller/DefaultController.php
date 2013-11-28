@@ -7,6 +7,7 @@ use Table\RestaurantBundle\Entity\Restaurant;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
+use Table\RestaurantBundle\Entity\News;
 
 use FOS\UserBundle\Model\UserInterface;
 
@@ -59,13 +60,16 @@ class DefaultController extends Controller
 	$kitchenList = $this->getRestaurantKitchenManager()->findAll();
 	
 	// get current city
-	$searchCity = $this->getRequest()->query->get('searchCity');
+	$searchCity = $this->getRequest()->query->get('searchCity');      
 	// if null set default -> krasnodar
 	if (is_null($searchCity)) {
 	    $searchCity = 1;
 	}
 	/* *** */
-
+        
+        /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN RIGHT SIDEBAR */
+        $newsList = $this->getNewsManager()->findByCity($searchCity);
+   //var_dump($newsList->getQuery()); die();     
 	// get restaurant list
 	$filter = $this->getRequest()->request->get('filter');  // fir restaurant filter
 	if ($filter) { 
@@ -102,7 +106,8 @@ class DefaultController extends Controller
 	        'cityList' => $cityList,
 	        'categoryList' => $categoryList,
 	        'kitchenList' => $kitchenList,
-	        'searchCity'  => $searchCity
+	        'searchCity'  => $searchCity,
+                'newsList' => $newsList->getQuery()->getResult()
             );
 	}
     }
@@ -110,6 +115,7 @@ class DefaultController extends Controller
     /**
      * 
      * Render auth page
+     * 
      * @Template()
      * 
      * @return array[]
@@ -131,11 +137,15 @@ class DefaultController extends Controller
 	    $searchCity = 1;
 	}
 	/* *** */
+        /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN RIGHT SIDEBAR */
+        $newsList = $this->getNewsManager()->findByCity($searchCity);
+        
         return array(
 	    'cityList' => $cityList,
 	    'categoryList' => $categoryList,
 	    'kitchenList' => $kitchenList,
-	    'searchCity' => $searchCity
+	    'searchCity' => $searchCity,
+            'newsList' => $newsList->getQuery()->getResult()
         );
     }
 

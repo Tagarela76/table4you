@@ -26,21 +26,6 @@ class RestaurantRepository extends EntityRepository
     }
     
     /**
-     *  Get regions
-     * 
-     * @return Table\RestaurantBundle\Entity\Repository[]
-     */
-    public function getCitiesList()
-    {
-        $query = $this->createQueryBuilder('restaurant')
-            ->select('DISTINCT(restaurant.city)') 
-            ->orderBy('restaurant.name', 'ASC')
-            ->getQuery();
-        
-        return $query->getResult();
-    }
-    
-    /**
      * 
      * Search Restaurants
      * 
@@ -56,8 +41,10 @@ class RestaurantRepository extends EntityRepository
 	$searchCity = $request->request->get('searchCity');
   
 	// set dependency with category and kitchen entitues
-	$query->leftJoin('restaurant.categories', 'category', 'ON restaurant.id = category.id')
-	      ->leftJoin('restaurant.kitchens', 'kitchen', 'ON restaurant.id = kitchen.id');
+        if (!is_null($categoriesList) || !is_null($kitchensList) || $searchStr != "") {
+            $query->leftJoin('restaurant.categories', 'category', 'ON restaurant.id = category.id')
+                  ->leftJoin('restaurant.kitchens', 'kitchen', 'ON restaurant.id = kitchen.id');
+        }  
 
 	if (!is_null($searchCity) && $searchCity != "") {
 	    $query->andWhere("restaurant.city = :searchCity")
@@ -80,7 +67,7 @@ class RestaurantRepository extends EntityRepository
         }
 
         $query->orderBy('restaurant.rating', 'DESC');
-//var_dump($query->getQuery()->getResult()); die();
+
         return $query;
     }
     

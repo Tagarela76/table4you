@@ -12,4 +12,4 @@ fos_user_security_logout:
     
 fos_user_profile_show:
     pattern:  /profile
-    defaults: { _controller: FOSUserBundle:Profile:show }  
+    defaults: { _controller: FOSUserBundle:Profile:show }     

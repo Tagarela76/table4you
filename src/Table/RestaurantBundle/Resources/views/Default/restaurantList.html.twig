@@ -25,13 +25,13 @@
                     <a href="{{ path('table_view_restaurant', {'id': restaurant.id}) }}" >{{ restaurant.name }}</a>
                 </p>
                 <p class="tets">
-                    {{ restaurant.categories|join(',') }}
+                    {{ restaurant.categories|join(', ') }}
                 </p>
                 <p class="restaurant-content-font-category">
                     {% trans %}main.labels.kitchen{% endtrans %}
                 </p>
                 <p class="restaurant-content-font">
-                    {{ restaurant.kitchens|join(',') }}
+                    {{ restaurant.kitchens|join(', ') }}
                 </p>
                 <p  class="restaurant-content-font-category">
                      {% trans %}main.labels.address{% endtrans %}
@@ -58,7 +58,7 @@
             <div class="modal fade hide modal-reserve" data-backdrop="static" id="reserve_{{ restaurant.id }}">
 
                 <div class="modal-header modal-login-title">
-                    <a class="close" data-dismiss="modal"></a>
+                    <a class="close" data-dismiss="modal" onclick="page.common.closeModalWindow();"></a>
                     <h3>{% trans %}main.order.form.title{% endtrans %} {{restaurant.name}}</h3>
                 </div>
                 <div class="modal-body" >
@@ -67,8 +67,9 @@
             </div>
         </div> 
     {% endfor %}
+    {# display navigation #}
+    <div class="navigation">
+            {{ knp_pagination_render(restaurantsList) }}
+    </div>  
 </div>
-{# display navigation #}
-<div class="navigation">
-        {{ knp_pagination_render(restaurantsList) }}
-</div>  
+    

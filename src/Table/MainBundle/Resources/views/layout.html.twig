@@ -20,6 +20,9 @@
             {# Rating #}
             <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/rating/jquery.rating.css') }}">
             {# Rating #}
+            {# infinitive scrolling #}
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/infinite-ajax-scroll/css/jquery.ias.css') }}">
+            {# infinitive scrolling #}
         {% endblock %}
 
         {% block javascripts %}
@@ -29,12 +32,17 @@
             <script src="{{ asset('bundles/tablemain/js/respond.min.js') }}"></script>
             <script src="{{ asset('bundles/tablemain/js/placeholder-ie-support.js') }}"></script>
 	    <script src="{{ asset('bundles/tablemain/js/bootstrap-multiselect.js') }}"></script>
+           {# <script src="{{ asset('bundles/tablemain/js/bootstrap-modal.js') }}"></script> #}
 	    <script src="{{ asset('bundles/tablerestaurant/js/common.js') }}"></script>
             <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
             <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
             {# Rating #}
             <script src="{{ asset('bundles/tablemain/rating/jquery.rating.js') }}"></script>
             {# Rating #}
+            {# infinitive scrolling #}
+            <script src="{{ asset('bundles/tablemain/infinite-ajax-scroll/js/jquery-ias.min.js') }}"></script>
+            {# infinitive scrolling #}
+            
 	    <!-- Initialize the multiselect plugin: -->
 	    <script type="text/javascript">
 	    $(document).ready(function() {
@@ -82,7 +90,11 @@
 
                     {% endblock %}
                 </div>
-                <div class="span3"></div>
+                <div class="span3 stock-block">
+                    {% block rightSidebar %}
+                        {% include 'TableMainBundle:Component:rightSidebar.html.twig' %}
+                    {% endblock %}
+                </div>
             </div>
             <div class="row footer">
                 <div class="span12">
