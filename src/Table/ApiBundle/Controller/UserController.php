@@ -290,9 +290,25 @@ class UserController extends Controller
             $response = array();
             $response['success'] = true;
             return $response;
+        } else {
+            $errors = array();
+            foreach ($form->createView()->children as $key => $childrenErrors) {
+                if (!empty($childrenErrors->vars['errors'])) {
+                   $errors[] = $childrenErrors->vars['errors'][0];
+                } elseif($key == "plainPassword" &&
+                       !empty($childrenErrors->children['first']->vars['errors']) ) {
+                    $errors[] = $childrenErrors->children['first']->vars['errors'][0];
+                }
+            }
+
+            return array(
+                'success' => false,
+                'errorStr' => $errors
+            );
         }
 
-        return \FOS\RestBundle\View\View::create($form, \FOS\Rest\Util\Codes::HTTP_BAD_REQUEST);
+     //   return \FOS\RestBundle\View\View::create($form, \FOS\Rest\Util\Codes::HTTP_BAD_REQUEST);
     }
-
+    
+    
 }

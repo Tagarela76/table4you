@@ -7,6 +7,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Knp\Menu\MenuFactory;
 
+use Symfony\Component\HttpFoundation\Request;
+
 class RestaurantManager
 {
     /**
@@ -117,7 +119,7 @@ class RestaurantManager
      * 
      * @return \Doctrine\ORM\QueryBuilder
      */
-    public function searchRestaurants($request)
+    public function searchRestaurants(Request $request)
     {
         return $this->getRestaurantRepo()->searchRestaurants($request);
     }
