@@ -4,5 +4,5 @@
 {{tableOrder.peopleCount}} {% trans %}main.mail.tableOrder.notification.guest{% endtrans %}, 
 {% if not tableOrder.isSmokingZone %} {% trans %}main.mail.tableOrder.notification.notSmoke{% endtrans %}, {%endif%}
 {{tableOrder.reserveDate|date('d-m-Y')}}, 
-{{tableOrder.reserveTime|date('H:s')}}.
+{{tableOrder.reserveTime|date('H:i')}}.
  {% trans %}main.mail.tableOrder.notification.signature{% endtrans %}.

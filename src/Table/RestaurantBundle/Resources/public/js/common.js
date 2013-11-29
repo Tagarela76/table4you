@@ -34,25 +34,28 @@ function Rating() {
                     }
                 });
             }
-        });                           
+        });
+        $(".rating").removeClass('rating'); 
     }
 }
 
 function InfiniteLoad() {
     
-    this.initLoading = function() {
+    this.initLoading = function(entity) {
         
-        var loader = "{{ asset('bundles/tablemain/infinite-ajax-scroll/images/loader.gif') }}"; 
+      //  var loader = "{{ asset('bundles/tablemain/infinite-ajax-scroll/images/loader.gif') }}"; 
         
         jQuery.ias({
-            container : '.restaurantList-container',
-            item: '.restaurant-container',
+            container : '.'+entity+'List-container',
+            item: '.'+entity+'-container',
             pagination: '.navigation',
             next: '.next a',
-            loader: '<img src=' + loader + '/>',
+            loader: '<img src="bundles/tablemain/infinite-ajax-scroll/images/loader.gif" />',
+            history: false,
+         //   triggerPageThreshold: 2,
             onRenderComplete: function(items) {
                 // init rating
-                page.rating.initRating();
+                page.rating.initRating();    
             }
         }); 
     }
@@ -97,10 +100,35 @@ function RestaurantFilter() {
                         // init rating
                         page.rating.initRating();
                         // init infinite ajax
-                     //   page.infiniteLoad.initLoading();
+                        page.infiniteLoad.initLoading('restaurant');
 		}  
 	});      
         
+    }
+}
+
+function NewsFilter() {
+ 
+    this.refreshNewsList = function() {
+	// get city
+	var searchCity = $("#searchRestaurantsCity_main").val();
+	
+	$.ajax({
+		url: Routing.generate('table_all_news')+"/"+searchCity,
+		type: "POST",
+		dataType: "html",
+		success: function(responce) {
+		        $('#newsList_main').html(responce);
+		}  
+	});      
+        
+    }
+}
+
+function Common() {
+ 
+    this.closeModalWindow = function(element) {
+        $('.modal-backdrop fade in').remove();
     }
 }
 
@@ -110,6 +138,8 @@ function Page() {
     this.rating = new Rating();
     this.infiniteLoad = new InfiniteLoad();
     this.restaurantFilter = new RestaurantFilter();
+    this.common = new Common();
+    this.newsFilter = new NewsFilter();
 }
 
 //	global page object

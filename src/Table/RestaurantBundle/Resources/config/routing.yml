@@ -14,8 +14,18 @@ table_update_restaurant_rating:
     options:
        expose: true  
 table_order_history:
-    pattern:  /viewTableOrderHistory/{page}
-    defaults: { _controller: TableRestaurantBundle:Default:viewTableOrderHistory, page: 1 }
+    pattern:  /viewTableOrderHistory
+    defaults: { _controller: TableRestaurantBundle:Default:viewTableOrderHistory }
     options:
-       expose: true               
+       expose: true   
+table_view_news:
+    pattern:  /news/{id}
+    defaults: { _controller: TableRestaurantBundle:Default:viewNews }
+    requirements:
+        id: \d+     
+table_all_news:
+    pattern:  /newsList/{city}
+    defaults: { _controller: TableRestaurantBundle:Default:newsList } 
+    options:
+       expose: true 
        

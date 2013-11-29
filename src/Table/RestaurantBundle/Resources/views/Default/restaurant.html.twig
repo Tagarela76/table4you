@@ -1,0 +1,74 @@
+<div class="restaurant-container">
+    <div class="restaurant-img-container">
+        <div class="restaurant-img">{% thumbnail restaurant.photo, 'reference' %}</div>
+    </div>
+    <div class="restaurant-content restaurant-card">
+        <p class="restaurant-content-name">
+            <a href="#" >{{ restaurant.name }}</a>
+        </p>
+        <p class="restaurant-content-font-category">
+                {% trans %}main.labels.category{% endtrans %}
+        </p>
+        <p class="restaurant-content-font">
+                {{ restaurant.categories|join(', ') }}
+        </p>
+        <p class="restaurant-content-font-category">
+                {% trans %}main.labels.kitchen{% endtrans %}
+        </p>
+        <p class="restaurant-content-font">
+                {{ restaurant.kitchens|join(', ') }}
+        </p>
+        <p class="restaurant-content-font-category">
+                {% trans %}main.labels.additionalServices{% endtrans %}
+        </p>
+        <p class="restaurant-content-font">
+                {{ restaurant.additionalServices|join(', ') }}
+        </p>
+        <p class="restaurant-content-font-category">
+                 {% trans %}main.labels.address{% endtrans %}
+        </p>
+        <p class="restaurant-content-font">
+                {{ restaurant.city.name }}, {{ restaurant.street }}, {{ restaurant.house }}
+        </p>
+        <p class="restaurant-content-font-category">
+                 {% trans %}main.labels.scedule{% endtrans %}
+        </p>
+        <p class="restaurant-content-font">
+            <ul class="restaurantSchedule">
+                {% for schedule in restaurant.restaurantSchedule %}
+                    <li>
+                        {{schedule.dayFromStr}} - {{schedule.dayToStr}} {{schedule.timeFrom|date('H:i')}} - {{schedule.timeTo|date('H:i')}}
+                        {% if loop.index < restaurant.restaurantSchedule|length %}
+                            ,
+                        {% endif %}
+                    </li>    
+                {% endfor %}
+            </ul>     
+        </p>
+    </div>
+    <div class="restaurant-content-reserve restaurant-rating-{{ restaurant.id }}">
+            {% include 'TableRestaurantBundle:Default:rating.html.twig' with {'restaurant': restaurant, 'isRatingDisabled': isRatingDisabled, 'restaurantsWhoHadHasAlreadyRating': restaurantsWhoHadHasAlreadyRating, 'id': restaurant.id} %}
+            {% if anonim %}
+        <a class="btn btn-primary"  href="{{ path('table_main_auth_page') }}">
+                    {% trans %}main.order.button{% endtrans %}
+        </a>
+            {% else %}
+        <a class="btn btn-primary" data-toggle="modal" data-target="#reserve_{{ restaurant.id }}" href="{{ path('table_order_reserve', {'id': restaurant.id}) }}">
+                    {% trans %}main.order.button{% endtrans %}
+        </a>
+            {% endif %}
+
+    </div>
+</div>
+{# ==Modal Window for reserve==#}
+    <div class="modal fade hide modal-reserve" data-backdrop="static" id="reserve_{{ restaurant.id }}">
+
+        <div class="modal-header modal-login-title">
+            <a class="close" data-dismiss="modal"></a>
+            <h3>{% trans %}main.order.form.title{% endtrans %} {{restaurant.name}}</h3>
+        </div>
+        <div class="modal-body" >
+
+        </div>
+    </div>
+{# ==Modal Window for reserve==#}

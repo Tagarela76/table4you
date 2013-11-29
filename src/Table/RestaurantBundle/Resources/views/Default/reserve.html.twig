@@ -9,13 +9,16 @@
 <script src="{{ asset('bundles/tablemain/js/cusel-min-2.5.js') }}"></script>
 <script src="{{ asset('bundles/tablerestaurant/js/common.js') }}"></script>
 <script>
-    $(function() {
-        var params = {
+    jQuery(document).ready(function(){
+         var params = {
             changedEl: ".table-order-form select",
             visRows: 8,
             scrollArrows: true
         }
         cuSel(params);
+    });
+    $(function() {
+        
         $("a#restaurantMap").fancybox({
         });
         $('.reserveDate').datepicker({

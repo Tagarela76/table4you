@@ -11,7 +11,7 @@ security:
         fos_userbundle:
             id: fos_user.user_provider.username_email
 
-    firewalls:
+    firewalls:                         
         wsse_secured:
           pattern:   ^/api/rest/wsse/.*
           stateless:    true
@@ -43,7 +43,7 @@ security:
                 check_path:     /login_check
                 failure_path:   null
             logout:             true
-            anonymous:          true 
+            anonymous:          true    
 
     access_control:
         - { path: ^/_wdt, role: IS_AUTHENTICATED_ANONYMOUSLY }

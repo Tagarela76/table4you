@@ -49,7 +49,7 @@ class TableOrderAdmin extends Admin
 
         // format target email (sent sms) 
         if (!is_null($phone = $tableOrder->getUser()->getPhone())) {
-            $targetEmail = $container->get('common_manager')->getTargetEmailByPhone($phone);
+           /* $targetEmail = $container->get('common_manager')->getTargetEmailByPhone($phone);
             if ($tableOrder->getIsSms() && !is_null($targetEmail)) {
                 $message = \Swift_Message::newInstance()
                         ->setSubject($subject)
@@ -63,6 +63,16 @@ class TableOrderAdmin extends Admin
                         ), 'text/html', 'utf-8'
                 );
                 $container->get('mailer')->send($message);
+            }*/
+            if ($tableOrder->getIsSms()) {
+                // get sms text 
+                $text = $container->get('templating')->render(
+                            'TableMainBundle:Mail:acceptTableOrderSMS4customer.html.twig', array(
+                                'tableOrder' => $tableOrder
+                            )
+                );
+                // send sms
+                $response = $container->get('sms_manager')->sendMessage($phone, $text);
             }
         }
     }
@@ -99,6 +109,7 @@ class TableOrderAdmin extends Admin
         $container->get('mailer')->send($message);
 
         if (!is_null($phone = $tableOrder->getRestaurant()->getPhone())) {
+            /*
             // get email regarding phone number
             $targetEmail = $container->get('common_manager')->getTargetEmailByPhone($phone);
             if (!is_null($targetEmail)) {
@@ -115,7 +126,16 @@ class TableOrderAdmin extends Admin
                         ), 'text/html', 'utf-8'
                 );
                 $container->get('mailer')->send($message);
-            }
+            }*/
+            
+            // get sms text 
+            $text = $container->get('templating')->render(
+                        'TableMainBundle:Mail:acceptTableOrderSMS4admin.html.twig', array(
+                            'tableOrder' => $tableOrder
+                        )
+            );
+            // send sms
+            $response = $container->get('sms_manager')->sendMessage($phone, $text);
         }
     }
 
@@ -154,6 +174,7 @@ class TableOrderAdmin extends Admin
 
         // sent sms if needed
         if (!is_null($phone = $tableOrder->getUser()->getPhone())) {
+            /*
             // get email regarding phone number
             $targetEmail = $container->get('common_manager')->getTargetEmailByPhone($phone);
             if ($tableOrder->getIsSms() && !is_null($targetEmail)) {
@@ -169,6 +190,18 @@ class TableOrderAdmin extends Admin
                         ), 'text/html', 'utf-8'
                 );
                 $container->get('mailer')->send($message);
+            }
+             * 
+             */
+            if ($tableOrder->getIsSms()) {
+                // get sms text 
+                $text = $container->get('templating')->render(
+                            'TableMainBundle:Mail:rejectTableOrderSMS4customer.html.twig', array(
+                                'tableOrder' => $tableOrder
+                            )
+                );
+                // send sms
+                $response = $container->get('sms_manager')->sendMessage($phone, $text);
             }
         }
     }
@@ -209,6 +242,7 @@ class TableOrderAdmin extends Admin
         // sent sms
         // get target email regarding phone number
         if (!is_null($phone = $tableOrder->getRestaurant()->getPhone())) {
+            /*
             $targetEmail = $container->get('common_manager')->getTargetEmailByPhone($phone);
             if (!is_null($targetEmail)) {
                 $message = \Swift_Message::newInstance()
@@ -224,6 +258,18 @@ class TableOrderAdmin extends Admin
                 );
                 $container->get('mailer')->send($message);
             }
+             * 
+             */
+
+            // get sms text 
+            $text = $container->get('templating')->render(
+                        'TableMainBundle:Mail:rejectTableOrderSMS4admin.html.twig', array(
+                            'tableOrder' => $tableOrder
+                        )
+            );
+            // send sms
+            $response = $container->get('sms_manager')->sendMessage($phone, $text);
+
         }
     }
 
@@ -236,7 +282,10 @@ class TableOrderAdmin extends Admin
     {
         $object = $this->getRoot()->getSubject();
         // we should know if changed smt
-        if (/* $object->getStatus() != $tableOrder->getStatus() */true) {
+        // I should get original data
+        $original = (object) $this->getModelManager()->getEntityManager($this->getClass())->getUnitOfWork()->getOriginalEntityData($tableOrder);
+     
+        if ( $object->getStatus() != $original->status ) {
             // sent notification
             switch ($object->getStatus()) {
                 // reject

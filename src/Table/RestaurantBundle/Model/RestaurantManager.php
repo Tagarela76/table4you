@@ -111,14 +111,6 @@ class RestaurantManager
     }
     
     /**
-     * @return string[]
-     */
-    public function getCitiesList()
-    {
-        return $this->getRestaurantRepo()->getCitiesList();
-    }
-    
-    /**
      * Search Restaurants
      * 
      * @param Request $request

@@ -1,0 +1,34 @@
+<div class="newsList-container">
+    <table class="title-news">    
+        <tr>
+            <td><span></span></td>
+            <td><span>
+                    <span>
+                        {% trans %}main.labels.news{% endtrans %}
+                    </span>
+                </span>
+            </td>
+            <td><span></span></td>
+        </tr>
+    </table>
+    {% for news in newsList %}
+        <div class="news-container">
+            <div class="news-img-container">
+                <div class="news-img">
+                    <a href="{{ path('table_view_news', {'id': news.id}) }}" >
+                        {% thumbnail news.photo, 'reference' %}
+                    </a>    
+                </div>
+            </div>
+            <div class="news-content">
+                <p class="news-content-title">
+                    <a href="{{ path('table_view_news', {'id': news.id}) }}" >{{ news.title }}</a>
+                </p>
+                
+                <p class="news-content-font">
+                    {{news.publishedDate|date('d.m.Y')}}
+                </p>
+            </div>
+        </div> 
+    {% endfor %}
+</div>
