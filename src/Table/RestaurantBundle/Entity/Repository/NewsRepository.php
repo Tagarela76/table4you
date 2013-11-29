@@ -42,7 +42,9 @@ class NewsRepository extends EntityRepository
         $query = $this->createQueryBuilder('news');
         $query->leftJoin('news.restaurant', 'restaurant')
               ->andWhere('restaurant.city = :city')
-              ->setParameter('city', $city);
+              ->setParameter('city', $city)
+              ->andWhere("news.published = :published")  
+              ->setParameter('published', 1);
         $query->orderBy('news.publishedDate', 'DESC');
         return $query;
     }

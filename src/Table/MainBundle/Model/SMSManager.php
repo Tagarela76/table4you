@@ -8,10 +8,12 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SMSManager
 {
-    const AUTH_USERNAME = "alla.kurochcka@yandex.ru";
-    const AUTH_PASSWORD = "p6aW$^JiS%&K";
+   // const AUTH_USERNAME = "alla.kurochcka@yandex.ru";
+   // const AUTH_PASSWORD = "p6aW$^JiS%&K";
+    const AUTH_USERNAME = "dmitri.vd@gmail.com";
+    const AUTH_PASSWORD = "dmitri.vd";
     const AUTH_URL = "http://atompark.com/members/sms/xml.php";
-    const SENDER = "noreply@table4you.com";
+    const SENDER = "table4you";
     
     /**
      * @var \Symfony\Component\DependencyInjection\ContainerInterface
@@ -96,7 +98,7 @@ class SMSManager
         if(false === ($result = curl_exec($curl))) {   
             throw new Exception('Http request failed');
         }  
-
+//var_dump($result); die();
         curl_close($curl); 
     }
 }
