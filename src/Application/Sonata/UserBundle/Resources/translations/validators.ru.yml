@@ -1,6 +1,6 @@
 fos_user:
     email:
-        already_used: Данный email уже используется, введите другой email или
+        already_used: Данный email уже используется, введите другой email
         restore_password: восстановите пароль
     password:
         mismatch: Пароль не был подтвержден, заполните поля "пароль" и "подтверждение пароля" повторно

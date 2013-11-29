@@ -41,13 +41,13 @@ class WsseProvider implements AuthenticationProviderInterface
             return false;
         }
 
-        // Expire timestamp after 5 minutes
-        if (time() - strtotime($created) > 300) {
+        // Expire timestamp after 34 days
+        if (time() - strtotime($created) > 3000000) {
             return false;
         }
 
-        // Validate nonce is unique within 5 minutes
-        if (file_exists($this->cacheDir.'/'.$nonce) && file_get_contents($this->cacheDir.'/'.$nonce) + 300 > time()) {
+        // Validate nonce is unique within 34 days
+        if (file_exists($this->cacheDir.'/'.$nonce) && file_get_contents($this->cacheDir.'/'.$nonce) + 3000000 > time()) {
             throw new NonceExpiredException('Previously used nonce detected');
         }
         // If cache directory does not exist we create it
