@@ -1,4 +1,4 @@
-{% extends "TableMainBundle::layout4map.html.twig" %}
+{% extends "TableMainBundle::layout4modal.html.twig" %}
 {% block javascripts %}
     {{ parent() }}
 <script>
@@ -12,10 +12,15 @@
             shadowAnchor: [4, 62],  // the same for the shadow
             popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
         });
-
-        var restaurantContent = "";
         
-        var map = L.map('restaurant-map').setView([51.505, -0.09], 13);
+        var latitude = $("#latitude").val();
+        var longitude = $("#longitude").val();
+        var restaurantName = $("#restaurantName").val();
+        var reserveButton = $("#reserveButton").val();
+        
+        var restaurantContent = "<div><b>" + restaurantName + "</b></div>" + reserveButton;
+        
+        var map = L.map('restaurant-map').setView([latitude, longitude], 13);
         L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
             key: 'BC9A493B41014CAABB98F0471D759707',
             styleId: 997,
@@ -23,8 +28,8 @@
             maxZoom: 18
         }).addTo(map);
 
-        var marker = L.marker([51.5, -0.09], {icon: restaurantIcon}).addTo(map);
-        marker.bindPopup("<b><a>I am a circle.</a></b>");
+        var marker = L.marker([latitude, longitude], {icon: restaurantIcon}).addTo(map);
+        marker.bindPopup(restaurantContent);
         
     });
 </script>
@@ -35,5 +40,23 @@
 
 {% block content %}
     <div id="restaurant-map"></div>
+
+    {# hidden inforamation#}
+    <input type="hidden" id="reserveButton" value="{{reserveButton}}" />
+    <input type="hidden" id="restaurantName" value="{{restaurant.name}}" />
+    <input type="hidden" id="latitude" value="{{restaurant.latitude}}" />
+    <input type="hidden" id="longitude" value="{{restaurant.longitude}}" />
+    {# ==Modal Window for reserve==#}
+    <div class="modal fade hide modal-reserve" data-backdrop="static" id="reserve_{{ restaurant.id }}">
+
+        <div class="modal-header modal-login-title">
+            <a class="close" data-dismiss="modal"></a>
+            <h3>{% trans %}main.order.form.title{% endtrans %} {{restaurant.name}}</h3>
+        </div>
+        <div class="modal-body" >
+
+        </div>
+    </div>
+    {# ==Modal Window for reserve==#}
 {% endblock content %}
 

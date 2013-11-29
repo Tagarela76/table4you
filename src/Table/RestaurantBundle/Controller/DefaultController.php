@@ -565,8 +565,24 @@ class DefaultController extends Controller
         if (!is_object($user) || !$user instanceof UserInterface) {
             $anonim = true;
         }
+        // format reserve button
+        $reserveLabel = $this->get('translator')->trans('main.order.button', array(), 'messages');
+        if ($anonim) {
+            $homeUrl = $this->generateUrl("table_main_auth_page");
+            $reserveButton = "<a class=\"btn btn-primary\" href=\"{$homeUrl}\">{$reserveLabel}</a>";
+        } else {
+            $reserveUrl = $this->generateUrl(
+                'table_order_reserve',
+                array('id' => $restaurant->getId())
+            ); 
+            $reserveButton = "<a class=\"btn btn-primary\" data-toggle=\"modal\" " .
+                             "data-target=\"#reserve_{$restaurant->getId()}\" " .
+                             "href=\"$reserveUrl\">{$reserveLabel}</a>";
+        }
+
         return array(
             'restaurant' => $restaurant,
+            'reserveButton' => $reserveButton
         );
     }
 }
