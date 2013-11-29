@@ -35,8 +35,12 @@
                 {{ news.content | replace({"\n":"<br>"}) |raw}}
             </p>
             <p class="news-content-date">
-                {% trans %}main.helper.from{% endtrans %} {{news.startDate|date('d.m.Y')}} 
-                {% trans %}main.helper.to{% endtrans %} {{news.endDate|date('d.m.Y')}}
+                {% if news.startDate %}
+                    {% trans %}main.helper.from{% endtrans %} {{news.startDate|date('d.m.Y')}} 
+                {% endif %}   
+                {% if news.endDate %}    
+                    {% trans %}main.helper.to{% endtrans %} {{news.endDate|date('d.m.Y')}}
+                {% endif %}       
             </p>
         </div>
 </div>
