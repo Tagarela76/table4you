@@ -13,7 +13,7 @@ class SMSManager
     const AUTH_USERNAME = "dmitri.vd@gmail.com";
     const AUTH_PASSWORD = "dmitri.vd";
     const AUTH_URL = "http://atompark.com/members/sms/xml.php";
-    const SENDER = "noreply@table4you.com";
+    const SENDER = "table4you";
     
     /**
      * @var \Symfony\Component\DependencyInjection\ContainerInterface
