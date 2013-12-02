@@ -42,21 +42,11 @@
     <div id="restaurant-map"></div>
 
     {# hidden inforamation#}
+    <input type="hidden" id="reserveTitle" value="{% trans %}main.order.form.title{% endtrans %}" />
+    <input type="hidden" id="restaurantId" value="{{restaurant.id}}" />
     <input type="hidden" id="reserveButton" value="{{reserveButton}}" />
     <input type="hidden" id="restaurantName" value="{{restaurant.name}}" />
     <input type="hidden" id="latitude" value="{{restaurant.latitude}}" />
     <input type="hidden" id="longitude" value="{{restaurant.longitude}}" />
-    {# ==Modal Window for reserve==#}
-    <div class="modal fade hide modal-reserve" data-backdrop="static" id="reserve_{{ restaurant.id }}">
-
-        <div class="modal-header modal-login-title">
-            <a class="close" data-dismiss="modal"></a>
-            <h3>{% trans %}main.order.form.title{% endtrans %} {{restaurant.name}}</h3>
-        </div>
-        <div class="modal-body" >
-
-        </div>
-    </div>
-    {# ==Modal Window for reserve==#}
 {% endblock content %}
 
