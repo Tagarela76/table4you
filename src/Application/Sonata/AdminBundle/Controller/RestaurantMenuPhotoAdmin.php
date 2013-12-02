@@ -12,18 +12,14 @@ class RestaurantMenuPhotoAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-         /*   ->add('file', 'file', array(
+            ->add('file', 'file', array(
                 'required' => true,
                 'label' => 'restaurant.photo.file'
-             ))  */       
+             ))         
             ->add('fileName', null, array(
                 'required' => false,
                 'label' => 'restaurant.photo.fileName'
-            ))   
-            ->add('file', 'sonata_media_type', array(
-                'provider' => 'sonata.media.provider.file',
-                'context'  => 'default'
-           ))    
+            ))     
         ;
     }
 
@@ -34,6 +30,5 @@ class RestaurantMenuPhotoAdmin extends Admin
             ->add('fileName')   
         ;
     }
-    
    
 }
