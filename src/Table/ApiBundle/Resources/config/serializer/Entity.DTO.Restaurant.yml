@@ -28,3 +28,12 @@ Table\RestaurantBundle\Entity\DTO\Restaurant:
         additionalServices:
             expose: true
             serialized_name: additionalServices    
+        description:     
+            expose: true
+            serialized_name: description   
+        rating:     
+            expose: true
+            serialized_name: rating    
+        schedule:
+            expose: true
+            serialized_name: schedule        

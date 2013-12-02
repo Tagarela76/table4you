@@ -21,11 +21,15 @@ class RestaurantDTO
     private $latitude;
     private $additionalServices;
     private $schedule;
+    private $rating;
+    private $description;
 
     public function __construct(Restaurant $restaurant, $container)
     {
         $this->id = $restaurant->getId();
         $this->name = $restaurant->getName();
+        $this->rating = $restaurant->getRating();
+        $this->description = $restaurant->getDescription();
         // get big and small
         $provider = $container->get('sonata.media.pool')
                        ->getProvider($restaurant->getPhoto()->getProviderName());
@@ -134,7 +138,16 @@ class RestaurantDTO
         $this->schedule = $schedule;
     }
 
+    public function getRating()
+    {
+        return $this->rating;
+    }
 
+    public function getDescription()
+    {
+        return $this->description;
+    }
+    
 }
 
 ?>
