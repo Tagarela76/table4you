@@ -319,40 +319,49 @@ class UserController extends Controller
     public function editProfileAction()
     {
         $user = $this->get('security.context')->getToken()->getUser();
-
+        
         if (null === $user) {
             return array(
                 'success' => false,
                 'errorStr' => $this->get('translator')->trans("validation.errors.user.User not found", array(), 'FOSUserBundle')
             );
         }
+        
         $form = $this->createForm(new RestProfileFormType(), $user);
 
         // check if user want to change something
-        $newUserData = array();
+        $userData = array();
         $username = $this->getRequest()->request->get('username');
         if(!is_null($username)) {
-            $newUserData['username'] = $username;
+            $userData['username'] = $username;
+        } else {
+            $userData['username'] = $this->getUser()->getUserName();
         }
         $lastname = $this->getRequest()->request->get('lastname');
         if(!is_null($lastname)) {
-            $newUserData['lastname'] = $lastname;
+            $userData['lastname'] = $lastname;
+        } else {
+            $userData['lastname'] = $this->getUser()->getLastName();
         }
         $email = $this->getRequest()->request->get('email');
         if(!is_null($email)) {
-            $newUserData['email'] = $email;
+            $userData['email'] = $email;
+        } else {
+            $userData['email'] = $this->getUser()->getEmail();
         }
         $firstPassword = $this->getRequest()->request->get('firstPassword');
         if(!is_null($firstPassword)) {
             $secondPassword = $this->getRequest()->request->get('secondPassword');
-            $newUserData['newPassword']['first'] = $firstPassword;
-            $newUserData['newPassword']['second'] = $secondPassword;
+            $userData['newPassword']['first'] = $firstPassword;
+            $userData['newPassword']['second'] = $secondPassword;
         }
         $phone = $this->getRequest()->request->get('phone');
         if(!is_null($phone)) {
-            $newUserData['phone'] = $phone;
+            $userData['phone'] = $phone;
+        } else {
+            $userData['phone'] = $this->getUser()->getPhone();
         }
-        $form->bind($newUserData);
+        $form->bind($userData);
 
         if ($form->isValid()) {
             // update user
@@ -360,11 +369,8 @@ class UserController extends Controller
             if ($newUser->newPassword != "") {
                 $user->setPlainPassword($newUser->newPassword);
             }
-
-            // add user
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
+            $userManager = $this->container->get('fos_user.user_manager');
+            $userManager->updateUser($user);
             $response = array();
             $response['success'] = true;
             return $response;
