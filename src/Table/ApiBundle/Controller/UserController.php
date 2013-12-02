@@ -12,6 +12,7 @@ use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Application\Sonata\UserBundle\Form\Type\RestRegistrationFormType;
+use Application\Sonata\UserBundle\Form\Type\RestProfileFormType;
 use Application\Sonata\UserBundle\Entity\User as BaseUser;
 
 class UserController extends Controller
@@ -310,5 +311,85 @@ class UserController extends Controller
      //   return \FOS\RestBundle\View\View::create($form, \FOS\Rest\Util\Codes::HTTP_BAD_REQUEST);
     }
     
-    
+    /**
+     * User edit Profile
+     * 
+     * @Rest\View
+     */
+    public function editProfileAction()
+    {
+        $user = $this->get('security.context')->getToken()->getUser();
+        
+        if (null === $user) {
+            return array(
+                'success' => false,
+                'errorStr' => $this->get('translator')->trans("validation.errors.user.User not found", array(), 'FOSUserBundle')
+            );
+        }
+        
+        $form = $this->createForm(new RestProfileFormType(), $user);
+
+        // check if user want to change something
+        $userData = array();
+        $username = $this->getRequest()->request->get('username');
+        if(!is_null($username)) {
+            $userData['username'] = $username;
+        } else {
+            $userData['username'] = $this->getUser()->getUserName();
+        }
+        $lastname = $this->getRequest()->request->get('lastname');
+        if(!is_null($lastname)) {
+            $userData['lastname'] = $lastname;
+        } else {
+            $userData['lastname'] = $this->getUser()->getLastName();
+        }
+        $email = $this->getRequest()->request->get('email');
+        if(!is_null($email)) {
+            $userData['email'] = $email;
+        } else {
+            $userData['email'] = $this->getUser()->getEmail();
+        }
+        $firstPassword = $this->getRequest()->request->get('firstPassword');
+        if(!is_null($firstPassword)) {
+            $secondPassword = $this->getRequest()->request->get('secondPassword');
+            $userData['newPassword']['first'] = $firstPassword;
+            $userData['newPassword']['second'] = $secondPassword;
+        }
+        $phone = $this->getRequest()->request->get('phone');
+        if(!is_null($phone)) {
+            $userData['phone'] = $phone;
+        } else {
+            $userData['phone'] = $this->getUser()->getPhone();
+        }
+        $form->bind($userData);
+
+        if ($form->isValid()) {
+            // update user
+            $newUser = $form->getData();
+            if ($newUser->newPassword != "") {
+                $user->setPlainPassword($newUser->newPassword);
+            }
+            $userManager = $this->container->get('fos_user.user_manager');
+            $userManager->updateUser($user);
+            $response = array();
+            $response['success'] = true;
+            return $response;
+        } else {
+            $errors = array();
+            foreach ($form->createView()->children as $key => $childrenErrors) {
+                if (!empty($childrenErrors->vars['errors'])) {
+                   $errors[] = $childrenErrors->vars['errors'][0];
+                } elseif($key == "newPassword" &&
+                       !empty($childrenErrors->children['first']->vars['errors']) ) {
+                    $errors[] = $childrenErrors->children['first']->vars['errors'][0];
+                }
+            }
+
+            return array(
+                'success' => false,
+                'errorStr' => $errors
+            );
+        }
+    }
+
 }

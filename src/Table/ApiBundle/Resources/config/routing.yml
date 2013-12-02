@@ -27,7 +27,13 @@ table_api_register:
     pattern:  /api/rest/register
     defaults: { _controller: TableApiBundle:User:register, _format: json }
     requirements:
-        _method: POST   
+        _method: POST  
+        
+table_api.edit_profile:
+    pattern:  /api/rest/wsse/editProfile
+    defaults: { _controller: TableApiBundle:User:editProfile, _format: json }
+    requirements:
+        _method: POST          
         
 table_api.restaurant_all:
     pattern:  /api/rest/getRestaurants/{city}
