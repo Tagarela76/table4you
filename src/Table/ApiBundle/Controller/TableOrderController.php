@@ -8,6 +8,8 @@ use Table\MainBundle\Controller\Controller;
 use Table\RestaurantBundle\Entity\DTO\TableOrderDTO;
 use Table\RestaurantBundle\Entity\TableOrder;
 use Table\RestaurantBundle\Form\Type\RestTableOrderFormType;
+use Table\RestaurantBundle\Entity\RatingStat;
+use Table\RestaurantBundle\Entity\Restaurant;
 
 class TableOrderController extends Controller
 {   
@@ -121,5 +123,89 @@ class TableOrderController extends Controller
         }
 
         return \FOS\RestBundle\View\View::create($form, \FOS\Rest\Util\Codes::HTTP_BAD_REQUEST);
+    }
+    
+    /**
+     * Update Rating
+     * 
+     * @Rest\View
+     */
+    public function updateRatingAction()
+    {
+        // update rating can only auth user
+        $user = $this->get('security.context')->getToken()->getUser(); 
+        // user can be anon.
+        if ($user == "anon.") {
+            return array(
+                'success' => false, 
+                'errorStr' => $this->get('translator')->trans("validation.errors.user.You should auth at first")
+            );
+        }
+        
+        // Collect Data
+        $restaurantId = $this->getRequest()->get('restaurantId');
+       
+        $rating = $this->getRequest()->get('rating');
+        
+        $restaurant = $this->getRestaurantManager()->findOneById($restaurantId);      
+        if (!$restaurant instanceof Restaurant) {
+            return array(
+                "success" => false,
+                "errorStr" => $this->get('translator')->trans('validation.errors.restaurant.Restaurant not found')
+            );
+        }
+
+        if (is_null($rating)) {
+            return array(
+                "success" => false,
+                "errorStr" => $this->get('translator')->trans('validation.errors.restaurant.tableOrder.Rating not found')
+            );
+        }
+ 
+        // check if user can change rating
+        $userRating = $this->getRatingStatManager()->getUserRestaurantRating($user->getId());
+        
+        // Also this restaurant shouldn't have rating today
+        foreach ($userRating as $userRate) {
+            if ($restaurantId == $userRate->getRestaurant()->getId()) {
+                return array(
+                'success' => false, 
+                'errorStr' => $this->get('translator')->trans("validation.errors.restaurant.tableOrder.Rating is has already set")
+            );
+            }
+        }
+        // only 3 rates
+        if (count($userRating) > 2) {
+            return array(
+                'success' => false, 
+                'errorStr' => $this->get('translator')->trans("validation.errors.restaurant.tableOrder.Rating is disabled")
+            );
+        } 
+        
+        // Update Restaurant Rating
+        $em = $this->getDoctrine()->getManager();
+        $newRating = round(($restaurant->getRating() + $rating) / 2);
+
+        $restaurant->setRating($newRating);
+        $em->persist($restaurant);
+        $em->flush();
+
+        // Update Rating Stat
+        $ratingStat = $this->getRatingStatManager()->getUser2RestaurantRating($user->getId(), $restaurant->getId());
+        if (empty($ratingStat)) {
+            $ratingStat = new RatingStat();
+            $ratingStat->setUser($user);
+            $ratingStat->setRestaurant($restaurant);
+        } 
+        $ratingStat->setLastUpdateTime(new \DateTime);
+        $ratingStat->setRating($rating); 
+        $em->persist($ratingStat);
+        $em->flush();
+
+        return array(
+            'success' => true,
+            'rating' => $newRating
+        );
+            
     }
 }
