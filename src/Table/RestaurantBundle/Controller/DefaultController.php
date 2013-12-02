@@ -54,7 +54,7 @@ class DefaultController extends Controller
         }
 
         $successReserve = false; // we should know if table reserve was successfull
-        if ($request->isMethod('POST')) {
+        if ($request->isMethod('POST') && !$this->getRequest()->request->get('fromMap')) {
             $form->bind($request);
 
             // get table order date
@@ -571,13 +571,7 @@ class DefaultController extends Controller
             $homeUrl = $this->generateUrl("table_main_auth_page");
             $reserveButton = "<a class=\"btn btn-primary\" href=\"{$homeUrl}\">{$reserveLabel}</a>";
         } else {
-            $reserveUrl = $this->generateUrl(
-                'table_order_reserve',
-                array('id' => $restaurant->getId())
-            ); 
-            $reserveButton = "<a class=\"btn btn-primary\" data-toggle=\"modal\" " .
-                             "data-target=\"#reserve_{$restaurant->getId()}\" " .
-                             "href=\"$reserveUrl\">{$reserveLabel}</a>";
+            $reserveButton = "<a class=\"btn btn-primary\" onclick=\"page.tableOrder.view();\">{$reserveLabel}</a>";
         }
 
         return array(
