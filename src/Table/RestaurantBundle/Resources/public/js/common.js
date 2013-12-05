@@ -7,8 +7,7 @@ function TableOrder() {
         $(obj).addClass('active');                            
     }
     
-    this.view = function() {
-        var restaurantId = $("#restaurantId").val();
+    this.view = function(restaurantId) {
         var reserveTitle = $("#reserveTitle").val();
         $.ajax({
             url: Routing.generate('table_order_reserve') + "/" + restaurantId,
