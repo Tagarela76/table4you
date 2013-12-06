@@ -170,7 +170,14 @@ input:focus{outline: 0 none}
     font-size: 11.9px;
     margin-bottom: 4px;
 }
-.restaurant-container .restaurant-content-reserve{
+.restaurant-container .restaurant-content .restaurant-content-font a{
+    margin-left: 5px;
+}
+
+.restaurant-content-reserve a {
+    width: 85px;
+}
+.restaurant-container .restaurant-content-reserve {
     width: 140px;
     height: 60px;
     float: right;
@@ -316,7 +323,7 @@ input:focus{outline: 0 none}
     -o-border-radius: 5px 5px 5px 5px;
     border-radius: 5px 5px 5px 5px;
 }
-.modal-registration-title, .modal-login-title{
+.modal-registration-title, .modal-login-title, .modal-header{
     background: #e4e3e2;
     border: 0px;
     padding-left: 14px;
@@ -334,14 +341,14 @@ input:focus{outline: 0 none}
     position: absolute;
     right: 40px;
 }
-.modal-registration-title .close, .modal-login-title .close{
+.modal-registration-title .close, .modal-login-title .close, .modal-header .close{
     background: url(../images/close-modal.png) no-repeat;
     display: block;
     width: 14px;
     height: 14px;
     margin-top: 6px;
 }
-.modal-registration-title h3, .modal-login-title  h3{
+.modal-registration-title h3, .modal-login-title  h3, .modal-header h3{
     font-size: 15.31px;
     color: #353535;
     margin: 0px;
@@ -1344,6 +1351,7 @@ background-image: url(images/selects-2.png);}
     border-radius: 0;
     margin-bottom: 15px;
     overflow: hidden;
+    background: none;
 }
 .tab-content #additionalPhotos-slider .slides li, .tab-content #menuPhotos-slider .slides li{
     height: 340px;

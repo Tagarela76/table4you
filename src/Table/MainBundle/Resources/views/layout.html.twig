@@ -23,6 +23,13 @@
             {# infinitive scrolling #}
             <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/infinite-ajax-scroll/css/jquery.ias.css') }}">
             {# infinitive scrolling #}
+            
+            {# include leaflet map#}
+            <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css" />
+            <!--[if lte IE 8]>
+                <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.ie.css" />
+            <![endif]-->
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablerestaurant/css/map.css') }}">
         {% endblock %}
 
         {% block javascripts %}
@@ -64,6 +71,9 @@
 		});
 	    });
 	    </script>
+            
+            {# include leaflet map#}
+            <script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
         {% endblock %}
 
     </head>

@@ -6,6 +6,30 @@ function TableOrder() {
         $('#tableOrderForm_floor').val(floor);
         $(obj).addClass('active');                            
     }
+    
+    this.view = function(restaurantId) {
+        var reserveTitle = $("#reserveTitle").val();
+        $.ajax({
+            url: Routing.generate('table_order_reserve') + "/" + restaurantId,
+            data: {fromMap: 1},
+            type: "POST",
+            dataType: "html",
+            success: function(responce) {
+                $('.modal-header h3').html(reserveTitle);
+                $('#restaurant-map').html(responce);
+            }  
+	});  
+    }
+    
+    this.initFancySelectBox = function() {
+
+        var timeParams = {
+            changedEl: ".table-order-form select",
+            visRows: 8,
+            scrollArrows: true
+        }
+        cuSel(timeParams);
+    }
 }
 
 function OrderHistory() {

@@ -1,0 +1,51 @@
+{% extends "TableMainBundle::layout4modal.html.twig" %}
+{% block javascripts %}
+    {{ parent() }}
+<script>
+    $(function() {
+
+        var restaurantIcon = L.icon({
+            iconUrl: "{{ asset('bundles/tablerestaurant/images/label_on_the_map.png') }}",
+
+            iconSize:     [40, 56], // size of the icon
+            iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+            shadowAnchor: [4, 62],  // the same for the shadow
+            popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
+        
+        var latitude = $("#latitude").val();
+        var longitude = $("#longitude").val();
+        var restaurantName = $("#restaurantName").val();
+        var reserveButton = $("#reserveButton").val();
+        
+        var restaurantContent = "<div><b>" + restaurantName + "</b></div>" + reserveButton;
+        
+        var map = L.map('restaurant-map').setView([latitude, longitude], 13);
+        L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
+            key: 'BC9A493B41014CAABB98F0471D759707',
+            styleId: 997,
+            attribution: '',
+            maxZoom: 18
+        }).addTo(map);
+
+        var marker = L.marker([latitude, longitude], {icon: restaurantIcon}).addTo(map);
+        marker.bindPopup(restaurantContent);
+        
+    });
+</script>
+{% endblock %}      
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <div id="restaurant-map"></div>
+
+    {# hidden inforamation#}
+    <input type="hidden" id="reserveTitle" value="{% trans %}main.order.form.title{% endtrans %}" />
+    <input type="hidden" id="reserveButton" value="{{reserveButton}}" />
+    <input type="hidden" id="restaurantName" value="{{restaurant.name}}" />
+    <input type="hidden" id="latitude" value="{{restaurant.latitude}}" />
+    <input type="hidden" id="longitude" value="{{restaurant.longitude}}" />
+{% endblock content %}
+

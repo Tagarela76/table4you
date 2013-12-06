@@ -30,6 +30,13 @@ class RestaurantAdmin extends Admin
         foreach ($object->getAdditionalMenuPhotos() as $menuPhoto) {
             $menuPhoto->setRestaurant($object);
         }
+        
+        // update latitude/longitude
+        $latitude = $restaurant->calculateLatitude();
+        $object->setLatitude($latitude);
+        
+        $longitude = $restaurant->calculateLongitude();
+        $object->setLongitude($longitude);
     }
     
      /**
@@ -52,6 +59,13 @@ class RestaurantAdmin extends Admin
         foreach ($object->getAdditionalMenuPhotos() as $menuPhoto) {
             $menuPhoto->setRestaurant($object);
         }
+        
+        // update latitude/longitude
+        $latitude = $restaurant->calculateLatitude();
+        $object->setLatitude($latitude);
+        
+        $longitude = $restaurant->calculateLongitude();
+        $object->setLongitude($longitude);
     }
     
     protected function configureFormFields(FormMapper $formMapper)

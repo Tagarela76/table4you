@@ -54,7 +54,7 @@ class DefaultController extends Controller
         }
 
         $successReserve = false; // we should know if table reserve was successfull
-        if ($request->isMethod('POST')) {
+        if ($request->isMethod('POST') && !$this->getRequest()->request->get('fromMap')) {
             $form->bind($request);
 
             // get table order date
@@ -490,4 +490,137 @@ class DefaultController extends Controller
         );
         
     }
+
+    /**
+     * View Map
+     * 
+     * 
+     * @Template()
+     */
+    public function viewMapAction()
+    {
+        // get Current user
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        
+        // Check if user auth in app
+        $anonim = false;
+        if (!is_object($user) || !$user instanceof UserInterface) {         
+            $anonim = true;
+        } 
+        
+	/* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN HEADER */
+	// get city list
+	$cityList = $this->getCityManager()->findAll();
+	/// get all category list
+	$categoryList = $this->getRestaurantCategoryManager()->findAll();
+	// get all kitchen list
+	$kitchenList = $this->getRestaurantKitchenManager()->findAll();
+	
+	// get current city
+	$searchCity = $this->getRequest()->query->get('searchCity');
+	// if null set default -> krasnodar
+	if (is_null($searchCity)) {
+	    $searchCity = 1;
+	}
+	/* *** */
+
+        /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN RIGHT SIDEBAR */
+        $newsList = $this->getNewsManager()->findByCity($searchCity);
+        
+        // BreadCrumbs
+        $breadcrumbs = $this->getBreadCrumbsManager();
+        $breadcrumbs->addItem(
+                $this->get('translator')->trans('main.breadcrumbs.label.home'), 
+                $this->get("router")->generate("table_main_homepage")
+        );
+        // current
+        $breadcrumbs->addItem(
+                $this->get('translator')->trans('main.breadcrumbs.label.map')
+        );
+
+        $restaurantsList = $this->getRestaurantManager()->findAll();
+
+        return array(
+	    'cityList' => $cityList,
+	    'categoryList' => $categoryList,
+	    'kitchenList' => $kitchenList,
+	    'searchCity' => $searchCity,
+            'breadcrumbs' => $breadcrumbs,
+            'newsList' => $newsList->getQuery()->getResult(),
+            'restaurantsList' => $restaurantsList
+        );
+        
+    }
+    
+    /**
+     * Vie restaurant on Map
+     * 
+     * @param int $id
+     * 
+     * @Template()
+     */
+    public function viewRestaurantMapAction($id)
+    {
+        $restaurant = $this->getRestaurantManager()->findOneById($id);
+        // get Current user
+        $anonim = false;
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            $anonim = true;
+        }
+        // format reserve button
+        $reserveLabel = $this->get('translator')->trans('main.order.button', array(), 'messages');
+        if ($anonim) {
+            $homeUrl = $this->generateUrl("table_main_auth_page");
+            $reserveButton = "<a class=\"btn btn-primary\" href=\"{$homeUrl}\">{$reserveLabel}</a>";
+        } else {
+            $reserveButton = "<a class=\"btn btn-primary\" onclick=\"page.tableOrder.view({$restaurant->getId()});\">{$reserveLabel}</a>";
+        }
+
+        return array(
+            'restaurant' => $restaurant,
+            'reserveButton' => $reserveButton
+        );
+    }
+    
+    /**
+     * Get restaurants in jsone format
+     * 
+     */
+    public function getGeoRestaurantsAction()
+    {
+        // get Current user
+        $anonim = false;
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            $anonim = true;
+        }
+
+        $reserveLabel = $this->get('translator')->trans('main.order.button', array(), 'messages');
+
+        $restaurants = $this->getRestaurantManager()->findAll();
+        // create new object
+        $geoRestaurants = array();
+        $geoRestaurant = array();
+        foreach ($restaurants as $restaurant) {
+            if ($anonim) {
+                $homeUrl = $this->generateUrl("table_main_auth_page");
+                $reserveButton = "<a class='btn btn-primary' href='{$homeUrl}'>{$reserveLabel}</a>";
+            } else {
+                $reserveUrl = $this->generateUrl("table_order_reserve", array(
+                    "id" => $restaurant->getId()
+                ));
+                $reserveButton = "<a class='btn btn-primary' data-toggle='modal' " .
+                                 "data-target='#reserve_{$restaurant->getId()}' href='{$reserveUrl}'>{$reserveLabel}</a>";
+            }
+            $geoRestaurant['content'] = "<div><b>" . $restaurant->getName() . "</b></div>" . $reserveButton;
+            $geoRestaurant['latitude'] = $restaurant->getLatitude();
+            $geoRestaurant['longitude'] = $restaurant->getLongitude();
+
+            $geoRestaurants[] = $geoRestaurant;
+        }
+        return $geoRestaurants;
+        
+    }
+
 }
