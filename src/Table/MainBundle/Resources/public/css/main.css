@@ -1359,6 +1359,9 @@ background-image: url(images/selects-2.png);}
 .tab-content #additionalPhotos-slider .slides li, .tab-content #menuPhotos-slider .slides li{
     height: 340px;
 }
+.tab-content #menuPhotos-slider .slides li{
+    width: 608px!important;
+}
 .tab-content #additionalPhotos-slider .slides img{
     height: 100%;
 }
@@ -1376,6 +1379,9 @@ background-image: url(images/selects-2.png);}
     cursor: pointer;
     height: 138px;
     overflow: hidden;
+}
+.tab-content #menuPhotos-carousel .slides > li{
+    width: 138px!important;
 }
 .tab-content #additionalPhotos-carousel .slides > li img {
     max-width: 200%;
