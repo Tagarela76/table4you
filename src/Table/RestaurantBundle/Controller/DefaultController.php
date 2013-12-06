@@ -490,7 +490,7 @@ class DefaultController extends Controller
         );
         
     }
-    
+
     /**
      * View Map
      * 
@@ -537,9 +537,9 @@ class DefaultController extends Controller
         $breadcrumbs->addItem(
                 $this->get('translator')->trans('main.breadcrumbs.label.map')
         );
-        
+
         $restaurantsList = $this->getRestaurantManager()->findAll();
-        
+
         return array(
 	    'cityList' => $cityList,
 	    'categoryList' => $categoryList,
@@ -622,4 +622,5 @@ class DefaultController extends Controller
         return $geoRestaurants;
         
     }
+
 }
