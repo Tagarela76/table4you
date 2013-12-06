@@ -170,9 +170,12 @@ input:focus{outline: 0 none}
     font-size: 11.9px;
     margin-bottom: 4px;
 }
-.restaurant-container .restaurant-content-reserve{
+.restaurant-content-reserve a {
+    width: 85px;
+}
+.restaurant-container .restaurant-content-reserve {
     width: 140px;
-    height: 60px;
+  //  height: 60px;
     float: right;
 }
 .restaurant-container .restaurant-content-reserve input{

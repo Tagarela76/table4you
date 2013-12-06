@@ -20,6 +20,16 @@ function TableOrder() {
             }  
 	});  
     }
+    
+    this.initFancySelectBox = function() {
+
+        var timeParams = {
+            changedEl: ".table-order-form select",
+            visRows: 8,
+            scrollArrows: true
+        }
+        cuSel(timeParams);
+    }
 }
 
 function OrderHistory() {
