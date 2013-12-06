@@ -1351,6 +1351,9 @@ background-image: url(images/selects-2.png);}
     border-radius: 0;
     margin-bottom: 15px;
     overflow: hidden;
+    
+}
+.tab-content .flexslider{
     background: none;
 }
 .tab-content #additionalPhotos-slider .slides li, .tab-content #menuPhotos-slider .slides li{
