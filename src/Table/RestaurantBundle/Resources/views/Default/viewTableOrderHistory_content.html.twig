@@ -11,7 +11,7 @@
             <p>{{ tableOrder.restaurant.categories|join(',') }}</p>
             <p>{{ tableOrder.restaurant.city.name }}, {{ tableOrder.restaurant.street }}, {{ tableOrder.restaurant.house }}</p>
             <a data-toggle="modal" data-target="#restaurantMap_{{ tableOrder.restaurant.id }}" href="{{ path('table_restaurant_map', {'id': tableOrder.restaurant.id}) }}">
-                <img src="{{ asset('bundles/tablerestaurant/images/map-button.jpg') }}" />
+                <img src="{{ asset('bundles/tablerestaurant/images/label_card.png') }}" />
             </a>
         </td>
         <td>
