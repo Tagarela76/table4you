@@ -173,7 +173,11 @@ input:focus{outline: 0 none}
 .restaurant-container .restaurant-content .restaurant-content-font a{
     margin-left: 5px;
 }
-.restaurant-container .restaurant-content-reserve{
+
+.restaurant-content-reserve a {
+    width: 85px;
+}
+.restaurant-container .restaurant-content-reserve {
     width: 140px;
     height: 60px;
     float: right;
@@ -1347,6 +1351,7 @@ background-image: url(images/selects-2.png);}
     border-radius: 0;
     margin-bottom: 15px;
     overflow: hidden;
+    background: none;
 }
 .tab-content #additionalPhotos-slider .slides li, .tab-content #menuPhotos-slider .slides li{
     height: 340px;

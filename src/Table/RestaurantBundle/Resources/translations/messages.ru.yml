@@ -16,6 +16,9 @@ validation:
       tableOrder:
         Unable to find order: Нет результата  
         Cannor reserve: наш сервис позволяет забронировать не более одного столика.
+        Rating is disabled: Вы уже выставляли рейтинг более чем двум заведениям сегодня
+        Rating not found: Укажите рейтинг
+        Rating is has already set: Для этого заведения уже был выставлен рейтинг сегодня
     city:
         Unable to find cities: Нет результата
 main:

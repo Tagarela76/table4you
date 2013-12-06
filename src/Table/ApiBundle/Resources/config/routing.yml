@@ -34,7 +34,8 @@ table_api.edit_profile:
     defaults: { _controller: TableApiBundle:User:editProfile, _format: json }
     requirements:
         _method: POST          
-        
+
+# API for restaurants
 table_api.restaurant_all:
     pattern:  /api/rest/getRestaurants/{city}
     defaults: { _controller: TableApiBundle:Restaurant:getRestaurants, city: null, _format: json }
@@ -72,7 +73,7 @@ table_api.restaurant_get_additional_photos:
     defaults: { _controller: TableApiBundle:Restaurant:getAdditionalPhotos, _format: json }
     requirements:
         _method: GET   
-        id: "\d+"         
+        id: "\d+"             
         
 # Api for Restaurant category
 table_api.restaurant_categories_all:
@@ -113,6 +114,12 @@ table_api.orders_all:
 table_api.reserve:
     pattern:  /api/rest/wsse/reserve
     defaults: { _controller: TableApiBundle:TableOrder:reserve, _format: json }
+    requirements:
+        _method: POST      
+
+table_api.update_rating:
+    pattern:  /api/rest/wsse/updateRating
+    defaults: { _controller: TableApiBundle:TableOrder:updateRating, _format: json }
     requirements:
         _method: POST        
         

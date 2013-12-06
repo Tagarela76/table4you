@@ -7,8 +7,7 @@ function TableOrder() {
         $(obj).addClass('active');                            
     }
     
-    this.view = function() {
-        var restaurantId = $("#restaurantId").val();
+    this.view = function(restaurantId) {
         var reserveTitle = $("#reserveTitle").val();
         $.ajax({
             url: Routing.generate('table_order_reserve') + "/" + restaurantId,
@@ -20,6 +19,16 @@ function TableOrder() {
                 $('#restaurant-map').html(responce);
             }  
 	});  
+    }
+    
+    this.initFancySelectBox = function() {
+
+        var timeParams = {
+            changedEl: ".table-order-form select",
+            visRows: 8,
+            scrollArrows: true
+        }
+        cuSel(timeParams);
     }
 }
 

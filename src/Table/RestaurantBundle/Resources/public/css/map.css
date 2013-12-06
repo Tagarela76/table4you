@@ -22,3 +22,6 @@
 .modal .leaflet-popup-content-wrapper .btn-primary{
     color: #fff;
 }
+#full-restaurant-map { 
+    height: 400px; 
+}
