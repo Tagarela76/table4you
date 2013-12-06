@@ -49,12 +49,10 @@
                         var marker = L.marker(new L.LatLng(restaurantsPoints.latitude, restaurantsPoints.longitude), {icon: restaurantIcon});
                         marker.bindPopup(restaurantsPoints.content);
                         markers.addLayer(marker);
-                        map.addLayer(markers);
-                        //marker.addTo(map);
                     }
                 }
                 
-                
+                map.addLayer(markers);
             }  
 	}); 
     });
