@@ -879,7 +879,7 @@ background-image: url(images/selects-2.png);}
     float: left;
     border-left: 1px solid #c4c2c2;
     position: relative;
-    width: 234px;
+    width: 230px;
 }
 .calendar-inp-field input{
     width: 210px !important;
