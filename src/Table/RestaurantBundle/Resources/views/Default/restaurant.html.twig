@@ -1,10 +1,14 @@
 <div class="restaurant-container">
     <div class="restaurant-img-container">
-        <div class="restaurant-img">{% thumbnail restaurant.photo, 'reference' %}</div>
+        <div class="restaurant-img">
+            <a href="{{ path('table_view_restaurant', {'id': restaurant.id}) }}" >
+                {% thumbnail restaurant.photo, 'reference' %}
+            </a> 
+        </div>
     </div>
     <div class="restaurant-content restaurant-card">
         <p class="restaurant-content-name">
-            <a href="#" >{{ restaurant.name }}</a>
+            <a href="{{ path('table_view_restaurant', {'id': restaurant.id}) }}" >{{ restaurant.name }}</a>
         </p>
         <p class="restaurant-content-font-category">
                 {% trans %}main.labels.category{% endtrans %}
