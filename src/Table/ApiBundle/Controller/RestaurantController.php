@@ -150,11 +150,17 @@ class RestaurantController extends Controller
         $helper = $this->container->get('vich_uploader.templating.helper.uploader_helper');
         
         $menuPhotos = array();
+        $addMenuPhoto = array();
         foreach ($restaurant->getAdditionalMenuPhotos() as $menuPhoto) {
             if (!is_null($menuPhoto->getFileName())) {
-                $menuPhotos[] = $this->container->getParameter('site_host') . 
+                $imagePath = $this->container->getParameter('site_host') . 
                                 $this->container->getParameter('base_url') . 
-                                $helper->asset($menuPhoto, 'file'); 
+                                $helper->asset($menuPhoto, 'file');
+                $thumbImage = $menuPhoto->getThumbFileName();
+                $thumbPath = str_replace($menuPhoto->getFileName(), $thumbImage, $imagePath);
+                $addMenuPhoto['big'] = $imagePath;
+                $addMenuPhoto['small'] = $thumbPath;
+                $menuPhotos[] = $addMenuPhoto;
             }
         }
 
@@ -183,11 +189,17 @@ class RestaurantController extends Controller
         $helper = $this->container->get('vich_uploader.templating.helper.uploader_helper');
         
         $additionalPhotos = array();
+        $addPhoto = array();
         foreach ($restaurant->getAdditionalPhotos() as $additionalPhoto) {
             if (!is_null($additionalPhoto->getFileName())) {
-                $additionalPhotos[] = $this->container->getParameter('site_host') . 
+                $imagePath = $this->container->getParameter('site_host') . 
                                 $this->container->getParameter('base_url') . 
-                                $helper->asset($additionalPhoto, 'file'); 
+                                $helper->asset($additionalPhoto, 'file');
+                $thumbImage = $additionalPhoto->getThumbFileName();
+                $thumbPath = str_replace($additionalPhoto->getFileName(), $thumbImage, $imagePath);
+                $addPhoto['big'] = $imagePath;
+                $addPhoto['small'] = $thumbPath;
+                $additionalPhotos[] = $addPhoto;
             }
         }
 
