@@ -879,7 +879,7 @@ background-image: url(images/selects-2.png);}
     float: left;
     border-left: 1px solid #c4c2c2;
     position: relative;
-    width: 234px;
+    width: 230px;
 }
 .calendar-inp-field input{
     width: 210px !important;
@@ -1351,10 +1351,16 @@ background-image: url(images/selects-2.png);}
     border-radius: 0;
     margin-bottom: 15px;
     overflow: hidden;
+    
+}
+.tab-content .flexslider{
     background: none;
 }
 .tab-content #additionalPhotos-slider .slides li, .tab-content #menuPhotos-slider .slides li{
     height: 340px;
+}
+.tab-content #menuPhotos-slider .slides li{
+    width: 608px!important;
 }
 .tab-content #additionalPhotos-slider .slides img{
     height: 100%;
@@ -1373,6 +1379,9 @@ background-image: url(images/selects-2.png);}
     cursor: pointer;
     height: 138px;
     overflow: hidden;
+}
+.tab-content #menuPhotos-carousel .slides > li{
+    width: 138px!important;
 }
 .tab-content #additionalPhotos-carousel .slides > li img {
     max-width: 200%;
