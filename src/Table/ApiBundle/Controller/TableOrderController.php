@@ -10,6 +10,7 @@ use Table\RestaurantBundle\Entity\TableOrder;
 use Table\RestaurantBundle\Form\Type\RestTableOrderFormType;
 use Table\RestaurantBundle\Entity\RatingStat;
 use Table\RestaurantBundle\Entity\Restaurant;
+use Table\RestaurantBundle\Entity\DTO\ReserveInfoDTO;
 
 class TableOrderController extends Controller
 {   
@@ -207,5 +208,30 @@ class TableOrderController extends Controller
             'rating' => $newRating
         );
             
+    }
+
+    /**
+     *
+     * View Reserve Information
+     *
+     * @param int $id
+     *
+     * @Rest\View
+     */
+    public function viewReserveInfo($id)
+    {
+        $restaurant = $this->getRestaurantManager()->find($id);
+        if (!$restaurant instanceof Restaurant) {
+            return array(
+                "success" => false,
+                "errorStr" => $this->get('translator')->trans('validation.errors.restaurant.Restaurant not found')
+            );
+        }
+        $dtoReserveInfo = new ReserveInfoDTO($restaurant);
+
+        return array(
+            "success" => true,
+            "response" => $dtoReserveInfo
+        );
     }
 }
