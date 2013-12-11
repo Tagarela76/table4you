@@ -14,10 +14,24 @@ class ReserveInfoDTO
     private $floors;
     private $mapPhoto;
     
-    public function __construct(Restaurant $restaurant)
+    public function __construct(Restaurant $restaurant, $container)
     {
         $this->floors = $restaurant->getFloors(); 
-        $this->mapPhoto = $restaurant->getMapPhoto();
+        // get big and small
+        $provider = $container->get('sonata.media.pool')
+                       ->getProvider($restaurant->getMapPhoto()->getProviderName());
+
+        $formatSmall = $provider->getFormatName($restaurant->getMapPhoto(), "small");
+        $formatBig = $provider->getFormatName($restaurant->getMapPhoto(), "big");
+        $smallImageURL = $container->getParameter('site_host') . $provider->generatePublicUrl($restaurant->getMapPhoto(), $formatSmall);
+        $bigImageURL = $container->getParameter('site_host') . $provider->generatePublicUrl($restaurant->getMapPhoto(), $formatBig);
+        
+        $photo = array(
+            "small" => $smallImageURL,
+            "big" => $bigImageURL
+        );
+        
+        $this->mapPhoto = $photo;
     }
     
     public function getFloors()

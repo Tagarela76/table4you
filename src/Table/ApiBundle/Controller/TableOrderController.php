@@ -218,8 +218,17 @@ class TableOrderController extends Controller
      *
      * @Rest\View
      */
-    public function viewReserveInfo($id)
+    public function viewReserveInfoAction($id)
     {
+        $user = $this->get('security.context')->getToken()->getUser();
+        // user can be anon.
+        if ($user == "anon.") {
+            return array(
+                'success' => false, 
+                'errorStr' => $this->get('translator')->trans("validation.errors.user.You should auth at first")
+            );
+        }
+
         $restaurant = $this->getRestaurantManager()->find($id);
         if (!$restaurant instanceof Restaurant) {
             return array(
@@ -227,7 +236,7 @@ class TableOrderController extends Controller
                 "errorStr" => $this->get('translator')->trans('validation.errors.restaurant.Restaurant not found')
             );
         }
-        $dtoReserveInfo = new ReserveInfoDTO($restaurant);
+        $dtoReserveInfo = new ReserveInfoDTO($restaurant, $this->container);
 
         return array(
             "success" => true,
