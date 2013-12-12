@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: @ApplicationSonataAdminBundle/Resources/config/admin.xml }
+    - { resource: sonata_core.yml }
 
 framework:
     #esi:             ~
