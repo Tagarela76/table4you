@@ -115,8 +115,13 @@ class RestaurantMenuPhoto
                 }
             }
             $thumbImage = $imageName . "_thumb." . $imageExt;
-            $this->setThumbFileName($thumbImage);
-            return $thumbImage;
+            if (file_exists($thumbImage)) {
+                $this->setThumbFileName($thumbImage);
+                return $thumbImage;
+            } else {
+                return null;
+            }
+                
         } else {
             return $this->thumbFileName;
         }
