@@ -115,7 +115,14 @@ table_api.reserve:
     pattern:  /api/rest/wsse/reserve
     defaults: { _controller: TableApiBundle:TableOrder:reserve, _format: json }
     requirements:
-        _method: POST      
+        _method: POST   
+
+table_api.view_reserve_info:
+    pattern:  /api/rest/wsse/viewReserveInfo/{id}
+    defaults: { _controller: TableApiBundle:TableOrder:viewReserveInfo, _format: json }
+    requirements:
+        _method: GET   
+        id: "\d+" 
 
 table_api.update_rating:
     pattern:  /api/rest/wsse/updateRating
