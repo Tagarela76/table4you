@@ -3,7 +3,6 @@ Table\RestaurantBundle\Entity\DTO\GeoSearch:
     properties:
         id:
             expose: true
-            inline: true
             serialized_name: id
         name:
             expose: true
