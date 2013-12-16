@@ -16,7 +16,9 @@
         });
         
         // init Map
-        var map = L.map('full-restaurant-map');        
+        var map = L.map('full-restaurant-map', {
+            zoom: 18
+        });
         // Set Map Layer
         L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
             key: 'BC9A493B41014CAABB98F0471D759707',
@@ -25,10 +27,14 @@
         }).addTo(map);
 
         // My Location
-        map.locate({setView: true});
+        map.locate({
+            setView: true
+        });
+       
         
         map.on('locationfound', onLocationFound);
-        function onLocationFound(e) {
+        function onLocationFound(e) { 
+            map.setZoom(12);
             L.marker(e.latlng).addTo(map);
         }
         // get Restaurants
@@ -46,7 +52,7 @@
                 for (var i = 0; i < response.length; i++) {
                     var restaurantsPoints = response[i];
                     if (restaurantsPoints.longitude && restaurantsPoints.latitude) {
-                        var marker = L.marker(new L.LatLng(restaurantsPoints.latitude, restaurantsPoints.longitude), {icon: restaurantIcon});
+                        var marker = L.marker(new L.LatLng(restaurantsPoints.latitude, restaurantsPoints.longitude), {icon: restaurantIcon, zoom: 18});
                         marker.bindPopup(restaurantsPoints.content);
                         markers.addLayer(marker);
                     }

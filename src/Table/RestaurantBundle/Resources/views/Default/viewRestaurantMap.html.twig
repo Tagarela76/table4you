@@ -20,7 +20,10 @@
         
         var restaurantContent = "<div><b>" + restaurantName + "</b></div>" + reserveButton;
         
-        var map = L.map('restaurant-map').setView([latitude, longitude], 13);
+        var map = L.map('restaurant-map', {
+            center: new L.LatLng(latitude, longitude), 
+            zoom: 17
+        });
         L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
             key: 'BC9A493B41014CAABB98F0471D759707',
             styleId: 997,
