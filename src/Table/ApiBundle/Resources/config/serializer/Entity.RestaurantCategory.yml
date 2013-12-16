@@ -4,6 +4,7 @@ Table\RestaurantBundle\Entity\RestaurantCategory:
         id:
             expose: true
             inline: true
+            serialized_name: id
         name:
             expose: true
             serialized_name: name
