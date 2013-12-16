@@ -3,7 +3,7 @@ Table\CoreDomain\TableOrder\TableOrder:
     properties:
         id:
             expose: true
-            inline: true
+            serialized_name: id
         restaurantMap:
             expose: true
             serialized_name: restaurantMap
