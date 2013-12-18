@@ -52,7 +52,13 @@ class FOSUBUserProvider extends BaseClass
             $user->setUsername($accessToken);
             $user->setFirstname($realName);
             $user->setLastname($realLastName);
-            $user->setEmail($email);
+            //email can be null
+            if (!is_null($email)) {
+                $user->setEmail($email);
+            } else {
+                $user->setEmail($accessToken);
+            }
+            
             $user->setPassword($userTokenId);
             $user->setEnabled(true);
             
