@@ -74,6 +74,9 @@ doctrine:
                 auto_mapping: true
                 mappings:
                     ApplicationSonataMediaBundle: ~
+                    FOSUserBundle: ~
+                    ApplicationSonataUserBundle: ~
+                    SonataUserBundle: ~
 
 sonata_media:
     # if you don't use default namespace configuration
@@ -268,3 +271,44 @@ vich_uploader:
             delete_on_update: true
             inject_on_load: true 
             namer: vich_uploader.namer_origname     
+            
+hwi_oauth:
+    #this is my custom user provider, created from FOSUBUserProvider - will manage the 
+    #automatic user registration on your site, with data from the provider (facebook. twitter, vkintakte, etc.)
+    #and also, the connecting part (get the token and the user_id)
+    connect:
+        account_connector: my_user_provider
+        confirmation: true
+        #account_connector: hwi_oauth.user.provider.fosub_bridge
+    # name of the firewall in which this bundle is active, this setting MUST be set
+    firewall_name: main
+    fosub:
+        #username_iterations: 30
+        properties:
+            # these properties will be used/redefined later in the custom FOSUBUserProvider service.
+            facebook: facebook_id
+            twitter: twitter_id
+            vkontakte: vkontakte_id
+    resource_owners:
+        facebook:
+            type:                facebook
+            client_id:           "%facebook_app_id%"
+            client_secret:       "%facebook_app_secret%"
+            scope:         "email"
+            infos_url:     "https://graph.facebook.com/me?fields=username,name,email,picture.type(square)"
+            
+        twitter:
+            type:                twitter
+            client_id:           "%twitter_app_id%"
+            client_secret:       "%twitter_app_secret%"
+            scope:               "email"
+            paths:
+                email: email
+            
+        vkontakte:
+            type:                vkontakte
+            client_id:           "%vkontakte_app_id%"
+            client_secret:       "%vkontakte_app_secret%"
+            scope:               email, wall, offline
+            paths:
+                email: email

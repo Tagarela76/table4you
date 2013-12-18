@@ -42,8 +42,26 @@ security:
                 use_forward:    false
                 check_path:     /login_check
                 failure_path:   null
+            oauth:
+                resource_owners:
+                    facebook:           "/login/check-facebook"
+                    twitter:            "/login/check-twitter"
+                    vkontakte:          "/login/check-vkontakte"
+                login_path:        /login
+                failure_path:      /login
+                default_target_path: /profile/ 
+                
+                provider: fos_userbundle
+                
+                oauth_user_provider:
+                    service: my_user_provider
+                    #service: hwi_oauth.user.provider.fosub_bridge
+                    
             logout:             true
-            anonymous:          true    
+            anonymous:          true   
+        login:
+            pattern:  ^/login$
+            security: false
 
     access_control:
         - { path: ^/_wdt, role: IS_AUTHENTICATED_ANONYMOUSLY }

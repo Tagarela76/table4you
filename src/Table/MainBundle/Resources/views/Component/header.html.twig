@@ -21,6 +21,15 @@
             <a data-toggle="modal" data-target="#login" href="{{ path('fos_user_security_login') }}">
                 {% trans %}main.login.buttonLabel{% endtrans %}
             </a>
+            <a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}">
+                <img src="{{ asset('bundles/tablemain/images/social-media/facebook.png') }}" />
+            </a>
+            <a href="{{ path('hwi_oauth_service_redirect', {'service': 'twitter' }) }}">
+                <img src="{{ asset('bundles/tablemain/images/social-media/twitter.png') }}" />
+            </a>
+            <a href="{{ path('hwi_oauth_service_redirect', {'service': 'vkontakte' }) }}">
+                <img src="{{ asset('bundles/tablemain/images/social-media/vkontakte.png') }}" />
+            </a>
         {% endif %}
 
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
