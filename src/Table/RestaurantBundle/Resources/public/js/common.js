@@ -87,12 +87,9 @@ function InfiniteLoad() {
 
 function RestaurantFilter() {
 
-    this.selectCity4Search = function(obj) {
-        $("#searchRestaurantsCity_main").val($(obj).attr("city"));
-        // remove active class from all
-        $(".cityList").removeClass('active');
-        // add class active for current obj
-        $(obj).addClass('active');
+    this.selectCity4Search = function() { 
+        var city = $("#select-city option:selected").val();
+        $("#searchRestaurantsCity_main").val(city); 
     }
     this.refreshRestaurantList = function() {
         // get search string
