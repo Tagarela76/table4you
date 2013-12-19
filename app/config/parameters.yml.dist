@@ -19,3 +19,10 @@ parameters:
     site_host: http://5.9.156.3
     site_url: 5.9.156.3/~tabledev/
 
+    # for auth through social
+    facebook_app_id: 1428243604059910
+    facebook_app_secret: 87c911338c242b36a71ee6784044b28e
+    twitter_app_id: A4HsHa672ABoj1Ny37CRaQ
+    twitter_app_secret: oEU1shYYdpTeT9tRG63hDcq77Ep0oD19GWVQTn0qV8
+    vkontakte_app_id: 4063902
+    vkontakte_app_secret: 6cpu26SLqCpGdckkGJo5
