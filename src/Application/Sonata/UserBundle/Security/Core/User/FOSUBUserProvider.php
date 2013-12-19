@@ -36,10 +36,23 @@ class FOSUBUserProvider extends BaseClass
         $email = $response->getEmail();
         $userNameLastName = $response->getRealName(); // name + lastname
         $userNameLastName = explode(" ", $userNameLastName);
-        $realName = $userNameLastName[0];
-        $realLastName = $userNameLastName[1];
-  //  var_dump($response); die();    
+        
         $service = $response->getResourceOwner()->getName();
+        switch($service) {
+            case "facebook" :
+                $realName = $userNameLastName[0];
+                $realLastName = $userNameLastName[1];
+                break;
+            case "vkontakte" :
+                $realName = $userNameLastName[1];
+                $realLastName = $userNameLastName[0];
+                break;
+            default :
+                $realName = $userNameLastName[0];
+                $realLastName = $userNameLastName[1];
+                break;
+        }
+            
         // Lets create toke service _ id (for example facebook_213123424)
         $accessToken = $userTokenId . "_" . $service;
         
