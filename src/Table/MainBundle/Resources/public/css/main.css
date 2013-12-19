@@ -70,8 +70,8 @@ input:focus{outline: 0 none}
 }
 .list-city .social{
     float: right;
-    margin-right: 124px;
-    width: 150px;
+    margin-right: 131px;
+    width: 95px;
 }
 .list-city .social a{
     background: url(./images/sprite-social.png) no-repeat -60px 0px;
