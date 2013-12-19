@@ -11,7 +11,8 @@ class RegistrationFormType extends BaseType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-                ->add('username', null, array('label' => 'form.username', 'translation_domain' => 'FOSUserBundle'))
+                ->add('username','hidden')
+                ->add('firstname', null, array('label' => 'form.username', 'translation_domain' => 'FOSUserBundle'))
                 ->add('lastname', null, array('label' => 'form.lastname', 'translation_domain' => 'FOSUserBundle'))
                 ->add('email', 'email', array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle'))
                 ->add('plainPassword', 'repeated', array(

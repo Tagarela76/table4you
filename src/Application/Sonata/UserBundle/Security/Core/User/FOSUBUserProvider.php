@@ -6,6 +6,8 @@ use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider as BaseClass;
 use Symfony\Component\Security\Core\User\UserInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
 
+use Symfony\Component\Finder\Exception\AccessDeniedException;
+
 class FOSUBUserProvider extends BaseClass
 {
     protected $container;
@@ -45,34 +47,40 @@ class FOSUBUserProvider extends BaseClass
         $user = $this->userManager->findUserBy(array("username" => $accessToken));
         
         //when the user is registrating
-        if (null === $user) {       
-            // create new user here
-            $user = $this->userManager->createUser();
-            
-            $user->setUsername($accessToken);
-            $user->setFirstname($realName);
-            $user->setLastname($realLastName);
-            //email can be null
-            if (!is_null($email)) {
-                $user->setEmail($email);
-            } else {
-                $user->setEmail($accessToken);
+        if (null === $user) {  
+            try {
+                // create new user here
+                $user = $this->userManager->createUser();
+
+                $user->setUsername($accessToken);
+                $user->setFirstname($realName);
+                $user->setLastname($realLastName);
+                //email can be null
+                if (!is_null($email)) {
+                    $user->setEmail($email);
+                } else {
+                    $user->setEmail($accessToken . "@gmail.com");
+                }
+
+                $user->setPassword($userTokenId);
+                $user->setEnabled(true);
+
+                if (null === $user->getConfirmationToken()) {
+                    /** @var $tokenGenerator \FOS\UserBundle\Util\TokenGeneratorInterface */
+                    $tokenGenerator = $this->container->get('fos_user.util.token_generator');
+                    $user->setConfirmationToken($tokenGenerator->generateToken());
+                }
+                $this->userManager->updateUser($user);
+
+                // We should send confirmation email
+            //    $mailer = $this->container->get('fos_user.mailer');
+            //    $mailer->sendConfirmationEmailMessage($user);
+                return $user;
+            } catch (Exception $ex) {
+                throw new AccessDeniedException();
             }
             
-            $user->setPassword($userTokenId);
-            $user->setEnabled(true);
-            
-            if (null === $user->getConfirmationToken()) {
-                /** @var $tokenGenerator \FOS\UserBundle\Util\TokenGeneratorInterface */
-                $tokenGenerator = $this->container->get('fos_user.util.token_generator');
-                $user->setConfirmationToken($tokenGenerator->generateToken());
-            }
-            $this->userManager->updateUser($user);
-            
-            // We should send confirmation email
-            $mailer = $this->container->get('fos_user.mailer');
-            $mailer->sendConfirmationEmailMessage($user);
-            return $user;
+                
         }
  
         //if user exists - go with the HWIOAuth way

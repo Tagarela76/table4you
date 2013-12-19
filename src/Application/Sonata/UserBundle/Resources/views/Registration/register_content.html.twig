@@ -11,12 +11,16 @@
         {{ form_errors(form) }}
 
         <div>
-            {{ form_label(form.username) }}
-            {{ form_errors(form.username) }}
-            {% if form.username.vars.errors|length %}
-                {{ form_widget(form.username, {'attr':{'class':'error-form-registration'} }) }}
+            {{ form_widget(form.username) }}
+        </div>
+        
+        <div>
+            {{ form_label(form.firstname) }}
+            {{ form_errors(form.firstname) }}
+            {% if form.firstname.vars.errors|length %}
+                {{ form_widget(form.firstname, {'attr':{'class':'error-form-registration'} }) }}
             {%  else %}
-                {{ form_widget(form.username) }}
+                {{ form_widget(form.firstname) }}
             {% endif %}
         </div>
 

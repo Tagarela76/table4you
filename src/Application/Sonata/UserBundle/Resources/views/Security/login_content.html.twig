@@ -14,7 +14,7 @@
         <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
         <div>
-        <label for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+        <label for="username">{{ 'security.login.email'|trans({}, 'FOSUserBundle') }}</label>
         <input {% if error == "Bad credentials userName" %} class="error-form-login"{% endif %} type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
         </div>
         <div>

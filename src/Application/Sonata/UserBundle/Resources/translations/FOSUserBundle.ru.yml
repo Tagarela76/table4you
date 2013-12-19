@@ -41,3 +41,4 @@ validation:
 security:
   login:
     forgot_password: "Забыли пароль?"   
+    email: "E-mail:"
