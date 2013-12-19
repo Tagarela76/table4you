@@ -14,9 +14,11 @@
 
         </select>
         <div class="social">
-            <a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}"></a>
-            <a href="{{ path('hwi_oauth_service_redirect', {'service': 'twitter' }) }}"></a>
-            <a href="{{ path('hwi_oauth_service_redirect', {'service': 'vkontakte' }) }}"></a>
+            {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                <a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}"></a>
+                <a href="{{ path('hwi_oauth_service_redirect', {'service': 'twitter' }) }}"></a>
+                <a href="{{ path('hwi_oauth_service_redirect', {'service': 'vkontakte' }) }}"></a>
+            {% endif %}
         </div>
     </div>
     <div class="span2 log-in-top">
