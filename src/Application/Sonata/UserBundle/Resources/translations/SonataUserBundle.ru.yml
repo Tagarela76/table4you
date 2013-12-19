@@ -17,6 +17,7 @@ profile:
       label: 'Фамилия:'
     email:
       label: 'E-mail:'
+      error: 'Пожалуйста, укажите реальный e-mail'
     phone:
       label: 'Телефон:'
     currentPassword:

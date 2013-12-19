@@ -71,6 +71,9 @@
 		});
                 $('#select-city').multiselect();
                 $('.list-city .btn-group .btn').removeAttr('title');
+                
+                // validate User email
+                page.userProfile.validateUserEmail("{{app.request.attributes.get('_route')}}");
 	    });
 	    </script>
             

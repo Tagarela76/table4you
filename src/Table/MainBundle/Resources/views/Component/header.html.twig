@@ -34,7 +34,11 @@
 
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
             <a href="{{ path('table_order_history') }}">
-                {{app.user.username}}
+                {% if app.user.firstname %}
+                    {{app.user.firstname}}
+                {% else %}
+                    {{app.user.username}}
+                {% endif %}
             </a>
         {% else %}
             <a data-toggle="modal" data-target="#register" href="{{ path('fos_user_registration_register') }}">

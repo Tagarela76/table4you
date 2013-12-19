@@ -17,6 +17,7 @@ profile:
       label: 'Lastname:'  
     email:
       label: 'E-mail:'   
+      error: 'Please, change email'
     phone:
       label: 'Phone:' 
     currentPassword:
