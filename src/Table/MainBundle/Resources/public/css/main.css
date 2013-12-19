@@ -30,24 +30,14 @@ input:focus{outline: 0 none}
     padding-top: 10px;
     margin-left: 8px;
 }
-.list-city .btn{
+.list-city .btn-group{
+    float: left;
+}
+.list-city .btn, .list-city .btn-group.open .dropdown-toggle{
     padding: 3px 16px;
     margin-right: 10px;
+    border: none;
     font-size: 12px;
-    color: #4a4949;
-    -webkit-box-shadow: 0px -1px 1px rgba(50, 50, 50, 0.3);
-    -moz-box-shadow: 0px -1px 1px rgba(50, 50, 50, 0.3);
-    box-shadow: 0px -1px 1px rgba(50, 50, 50, 0.3);
-    background: #ffffff;
-    background: -moz-linear-gradient(top,  #ffffff 0%, #bbbcbd 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#bbbcbd));
-    background: -webkit-linear-gradient(top,  #ffffff 0%,#bbbcbd 100%);
-    background: -o-linear-gradient(top,  #ffffff 0%,#bbbcbd 100%);
-    background: -ms-linear-gradient(top,  #ffffff 0%,#bbbcbd 100%);
-    background: linear-gradient(to bottom,  #ffffff 0%,#bbbcbd 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#bbbcbd',GradientType=0 );
-}
-.list-city .active{
     color: #fcfcfc;
     -webkit-box-shadow: 0px -1px 1px rgba(255, 143, 0, 0.5);
     -moz-box-shadow: 0px -1px 1px rgba(255, 143, 0, 0.5);
@@ -61,7 +51,41 @@ input:focus{outline: 0 none}
     background: linear-gradient(to bottom, #feb200 0%,#e04c00 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feb200', endColorstr='#e04c00',GradientType=0 );
 }
-.log-in-top{
+.list-city .btn .caret{
+    border-top: 4px solid #fff;
+    margin-left: 5px;
+}
+.list-city .btn-group .multiselect-container>li>a>label>input{display: none;}
+.list-city .dropdown-menu {
+    min-width: 109px;
+    width: 93%;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.36);
+    border: 0;
+    background: #c5c6c7;
+    padding-bottom: 5px;
+}
+.list-city .multiselect-container>li{
+    margin: 0px 10px;
+    border-bottom: 1px solid #a8a7a7;
+}
+.list-city .social{
+    float: right;
+    margin-right: 124px;
+    width: 150px;
+}
+.list-city .social a{
+    background: url(./images/sprite-social.png) no-repeat -60px 0px;
+    width: 30px;
+    height: 30px;
+    display: block;
+    float: left;
+}
+.list-city .social a:hover{background-position: -60px -28px;}
+.list-city .social a+a{background-position: -30px 0px;}
+.list-city .social a+a:hover{background-position: -30px -28px;}
+.list-city .social a+a+a{background-position: 0px 0px;}
+.list-city .social a+a+a:hover{background-position: 0px -28px;}
+.list-city .log-in-top{
     width: 90px;
     margin: 0px;
     position: relative;

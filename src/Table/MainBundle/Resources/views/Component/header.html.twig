@@ -5,12 +5,21 @@
         </a>
     </div>
     <div class="span7 list-city">
-	{% for city in cityList %}
-        <a class="btn cityList {% if searchCity == city.id %} active {%endif%}" city="{{city.id}}" href="#"
-           onclick="page.restaurantFilter.selectCity4Search(this); page.restaurantFilter.refreshRestaurantList(); page.newsFilter.refreshNewsList();"> 
-            {{city.name}} 
-        </a>
-	{% endfor %}
+        <select id="select-city">
+            {% for city in cityList %}
+            <option>
+                <a class="btn cityList {% if searchCity == city.id %} active {%endif%}" city="{{city.id}}" href="#"
+                   onclick="page.restaurantFilter.selectCity4Search(this); page.restaurantFilter.refreshRestaurantList(); page.newsFilter.refreshNewsList();"> 
+                    {{city.name}} 
+                </a>
+            </option>
+            {% endfor %}
+        </select>
+        <div class="social">
+            <a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}"></a>
+            <a href="{{ path('hwi_oauth_service_redirect', {'service': 'twitter' }) }}"></a>
+            <a href="{{ path('hwi_oauth_service_redirect', {'service': 'vkontakte' }) }}"></a>
+        </div>
     </div>
     <div class="span2 log-in-top">
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
@@ -20,15 +29,6 @@
         {% else %}
             <a data-toggle="modal" data-target="#login" href="{{ path('fos_user_security_login') }}">
                 {% trans %}main.login.buttonLabel{% endtrans %}
-            </a>
-            <a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}">
-                <img src="{{ asset('bundles/tablemain/images/social-media/facebook.png') }}" />
-            </a>
-            <a href="{{ path('hwi_oauth_service_redirect', {'service': 'twitter' }) }}">
-                <img src="{{ asset('bundles/tablemain/images/social-media/twitter.png') }}" />
-            </a>
-            <a href="{{ path('hwi_oauth_service_redirect', {'service': 'vkontakte' }) }}">
-                <img src="{{ asset('bundles/tablemain/images/social-media/vkontakte.png') }}" />
             </a>
         {% endif %}
 
