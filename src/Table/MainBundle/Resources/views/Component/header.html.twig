@@ -5,20 +5,20 @@
         </a>
     </div>
     <div class="span7 list-city">
-        <select id="select-city">
+        <select id="select-city" onchange="page.restaurantFilter.selectCity4Search();
+                    page.restaurantFilter.refreshRestaurantList();
+                    page.newsFilter.refreshNewsList();" >
             {% for city in cityList %}
-            <option>
-                <a class="btn cityList {% if searchCity == city.id %} active {%endif%}" city="{{city.id}}" href="#"
-                   onclick="page.restaurantFilter.selectCity4Search(this); page.restaurantFilter.refreshRestaurantList(); page.newsFilter.refreshNewsList();"> 
-                    {{city.name}} 
-                </a>
-            </option>
+            <option value="{{city.id}}" {% if searchCity == city.id %} selected {% endif %}>{{city.name}} </option>
             {% endfor %}
+
         </select>
         <div class="social">
-            <a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}"></a>
-            <a href="{{ path('hwi_oauth_service_redirect', {'service': 'twitter' }) }}"></a>
-            <a href="{{ path('hwi_oauth_service_redirect', {'service': 'vkontakte' }) }}"></a>
+            {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                <a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}"></a>
+                <a href="{{ path('hwi_oauth_service_redirect', {'service': 'twitter' }) }}"></a>
+                <a href="{{ path('hwi_oauth_service_redirect', {'service': 'vkontakte' }) }}"></a>
+            {% endif %}
         </div>
     </div>
     <div class="span2 log-in-top">
