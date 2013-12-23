@@ -48,7 +48,7 @@ security:
                     twitter:            "/login/check-twitter"
                     vkontakte:          "/login/check-vkontakte"
                 login_path:        /login
-                failure_path:      /login
+                failure_path:      /
                 default_target_path: /profile/ 
                 
                 provider: fos_userbundle
