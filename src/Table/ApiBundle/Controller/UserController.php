@@ -261,16 +261,7 @@ class UserController extends Controller
             ),
             "phone" => $this->getRequest()->request->get('phone')
         ));
-        /*   $form->bind(array(
-          "username" => "test4restApi14",
-          "lastname" => "By By",
-          "email" => "test4restApi14@mail.ru",
-          "plainPassword" => array(
-          "first" => "12345",
-          "second" => "12345"
-          ),
-          "phone" => "321"
-          )); */
+
         if ($form->isValid()) {
 
             $user = $form->getData();
@@ -337,33 +328,39 @@ class UserController extends Controller
         } else {
             $userData['username'] = $this->getUser()->getUserName();
         }
+        
         $lastname = $this->getRequest()->request->get('lastname');
         if(!is_null($lastname)) {
             $userData['lastname'] = $lastname;
         } else {
             $userData['lastname'] = $this->getUser()->getLastName();
         }
+        
         $email = $this->getRequest()->request->get('email');
         if(!is_null($email)) {
             $userData['email'] = $email;
         } else {
             $userData['email'] = $this->getUser()->getEmail();
         }
+        
         $firstPassword = $this->getRequest()->request->get('firstPassword');
         if(!is_null($firstPassword)) {
             $secondPassword = $this->getRequest()->request->get('secondPassword');
             $userData['newPassword']['first'] = $firstPassword;
             $userData['newPassword']['second'] = $secondPassword;
         }
+        
         $phone = $this->getRequest()->request->get('phone');
         if(!is_null($phone)) {
             $userData['phone'] = $phone;
         } else {
             $userData['phone'] = $this->getUser()->getPhone();
         }
+        
         $form->bind($userData);
 
         if ($form->isValid()) {
+            
             // update user
             $newUser = $form->getData();
             if ($newUser->newPassword != "") {
@@ -371,9 +368,18 @@ class UserController extends Controller
             }
             $userManager = $this->container->get('fos_user.user_manager');
             $userManager->updateUser($user);
+            
+            // set response
             $response = array();
             $response['success'] = true;
+            if (!is_null($firstPassword)) {
+                // get wsse token
+                $token = $this->createBaseWsse($user, $firstPassword);
+                $response['token'] = $token;
+            }
+                     
             return $response;
+            
         } else {
             $errors = array();
             foreach ($form->createView()->children as $key => $childrenErrors) {
