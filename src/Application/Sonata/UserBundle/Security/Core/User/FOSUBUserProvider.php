@@ -79,7 +79,7 @@ class FOSUBUserProvider extends BaseClass
 
                 $user->setUsername($accessToken);
                 $user->setFirstname($realName);
-                if (!is_null($realLastName) && $realLastName != "") {
+                if (!is_null($realLastName)) {
                     $user->setLastname($realLastName);
                 } 
                 //email can be null
