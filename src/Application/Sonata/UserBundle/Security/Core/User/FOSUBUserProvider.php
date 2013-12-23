@@ -45,6 +45,7 @@ class FOSUBUserProvider extends BaseClass
                     $realLastName = $userNameLastName[1];
                 } else {
                     $realName = $userNameLastName[0];
+                    $realLastName = null;
                 }   
                 break;
             case "vkontakte" :
@@ -53,6 +54,7 @@ class FOSUBUserProvider extends BaseClass
                     $realLastName = $userNameLastName[0];
                 } else {
                     $realName = $userNameLastName[0];
+                    $realLastName = null;
                 } 
                 break;
             default :
@@ -61,6 +63,7 @@ class FOSUBUserProvider extends BaseClass
                     $realLastName = $userNameLastName[1];
                 } else {
                     $realName = $userNameLastName[0];
+                    $realLastName = null;
                 }
                 break;
         }
