@@ -40,16 +40,28 @@ class FOSUBUserProvider extends BaseClass
         $service = $response->getResourceOwner()->getName();
         switch($service) {
             case "facebook" :
-                $realName = $userNameLastName[0];
-                $realLastName = $userNameLastName[1];
+                if (count($userNameLastName) > 1) {
+                    $realName = $userNameLastName[0];
+                    $realLastName = $userNameLastName[1];
+                } else {
+                    $realName = $userNameLastName[0];
+                }   
                 break;
             case "vkontakte" :
-                $realName = $userNameLastName[1];
-                $realLastName = $userNameLastName[0];
+                if (count($userNameLastName) > 1) {
+                    $realName = $userNameLastName[1];
+                    $realLastName = $userNameLastName[0];
+                } else {
+                    $realName = $userNameLastName[0];
+                } 
                 break;
             default :
-                $realName = $userNameLastName[0];
-                $realLastName = $userNameLastName[1];
+                if (count($userNameLastName) > 1) {
+                    $realName = $userNameLastName[0];
+                    $realLastName = $userNameLastName[1];
+                } else {
+                    $realName = $userNameLastName[0];
+                }
                 break;
         }
             
@@ -67,7 +79,9 @@ class FOSUBUserProvider extends BaseClass
 
                 $user->setUsername($accessToken);
                 $user->setFirstname($realName);
-                $user->setLastname($realLastName);
+                if (!is_null($realLastName) && $realLastName != "") {
+                    $user->setLastname($realLastName);
+                } 
                 //email can be null
                 // Lets use default email
                 $user->setEmail($accessToken . "@gmail.com");
