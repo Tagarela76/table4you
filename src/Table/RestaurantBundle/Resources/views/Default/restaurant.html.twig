@@ -13,45 +13,47 @@
         <p class="restaurant-content-font-category">
                 {% trans %}main.labels.category{% endtrans %}
         </p>
-        <p class="restaurant-content-font">
+        <p class="restaurant-categories">
                 {{ restaurant.categories|join(', ') }}
         </p>
         <p class="restaurant-content-font-category">
                 {% trans %}main.labels.kitchen{% endtrans %}
         </p>
-        <p class="restaurant-content-font">
+        <p class="restaurant-categories">
                 {{ restaurant.kitchens|join(', ') }}
         </p>
         <p class="restaurant-content-font-category">
                 {% trans %}main.labels.additionalServices{% endtrans %}
         </p>
-        <p class="restaurant-content-font">
+        <p class="restaurant-categories">
                 {{ restaurant.additionalServices|join(', ') }}
         </p>
         <p class="restaurant-content-font-category">
                  {% trans %}main.labels.address{% endtrans %}
         </p>
-        <p class="restaurant-content-font">
+        <p class="restaurant-categories">
                 {{ restaurant.city.name }}, {{ restaurant.street }}, {{ restaurant.house }}
                 <a data-toggle="modal" data-target="#restaurantMap_{{ restaurant.id }}" href="{{ path('table_restaurant_map', {'id': restaurant.id}) }}">
                     <img src="{{ asset('bundles/tablerestaurant/images/label_card.png') }}" />
                 </a>
         </p>
-        <p class="restaurant-content-font-category">
-                 {% trans %}main.labels.scedule{% endtrans %}
-        </p>
-        <p class="restaurant-content-font">
-            <ul class="restaurantSchedule">
-                {% for schedule in restaurant.restaurantSchedule %}
-                    <li>
-                        {{schedule.dayFromStr}} - {{schedule.dayToStr}} {{schedule.timeFrom|date('H:i')}} - {{schedule.timeTo|date('H:i')}}
-                        {% if loop.index < restaurant.restaurantSchedule|length %}
-                            ,
-                        {% endif %}
-                    </li>    
-                {% endfor %}
-            </ul>     
-        </p>
+        {% if restaurant.restaurantSchedule is not empty %}
+            <p class="restaurant-content-font-category">
+                     {% trans %}main.labels.scedule{% endtrans %}
+            </p>
+            <p class="restaurant-categories">
+                <ul class="restaurantSchedule">
+                    {% for schedule in restaurant.restaurantSchedule %}
+                        <li>
+                            {{schedule.dayFromStr}} - {{schedule.dayToStr}} {{schedule.timeFrom|date('H:i')}} - {{schedule.timeTo|date('H:i')}}
+                            {% if loop.index < restaurant.restaurantSchedule|length %}
+                                ,
+                            {% endif %}
+                        </li>    
+                    {% endfor %}
+                </ul>     
+            </p>
+        {% endif %}    
     </div>
     <div class="restaurant-rating-{{ restaurant.id }}">
             {% include 'TableRestaurantBundle:Default:rating.html.twig' with {'restaurant': restaurant, 'isRatingDisabled': isRatingDisabled, 'restaurantsWhoHadHasAlreadyRating': restaurantsWhoHadHasAlreadyRating, 'id': restaurant.id} %}

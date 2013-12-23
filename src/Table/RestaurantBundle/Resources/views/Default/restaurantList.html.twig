@@ -33,13 +33,13 @@
                 <p class="restaurant-content-font-category">
                     {% trans %}main.labels.kitchen{% endtrans %}
                 </p>
-                <p class="restaurant-content-font">
+                <p class="restaurant-categories">
                     {{ restaurant.kitchens|join(', ') }}
                 </p>
                 <p  class="restaurant-content-font-category">
                      {% trans %}main.labels.address{% endtrans %}
                 </p>
-                <p class="restaurant-content-font">
+                <p class="restaurant-categories">
                     {{ restaurant.city.name }}, {{ restaurant.street }}, {{ restaurant.house }}
                     <a data-toggle="modal" data-target="#restaurantMap_{{ restaurant.id }}" href="{{ path('table_restaurant_map', {'id': restaurant.id}) }}">
                         <img src="{{ asset('bundles/tablerestaurant/images/label_card.png') }}" />
