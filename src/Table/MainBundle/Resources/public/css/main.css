@@ -379,7 +379,7 @@ input:focus{outline: 0 none}
     position: absolute;
     right: 40px;
 }
-.modal-registration-title .close, .modal-login-title .close, .modal-header .close{
+.modal-registration-title .close, .modal-login-title .close, .container .modal-header .close{
     background: url(../images/close-modal.png) no-repeat;
     display: block;
     width: 14px;
