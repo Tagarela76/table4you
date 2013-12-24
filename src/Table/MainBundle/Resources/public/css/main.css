@@ -1707,3 +1707,8 @@ background-image: url(images/selects-2.png);}
 
 
 .modal-backdrop+.modal-backdrop{width: 0px; height:0px;}
+
+.modal-registration .alert{
+    width: 275px;
+    text-align: center;
+}
