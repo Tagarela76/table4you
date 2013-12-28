@@ -252,9 +252,10 @@ class UserController extends Controller
         $form = $this->createForm(new RestRegistrationFormType(), $user);
 
         $form->bind(array(
-            "username" => $this->getRequest()->request->get('username'),
+            "firstname" => $this->getRequest()->request->get('username'), // It is firstname in server
             "lastname" => $this->getRequest()->request->get('lastname'),
             "email" => $this->getRequest()->request->get('email'),
+            "username" => $this->getRequest()->request->get('email'), // the same as email
             "plainPassword" => array(
                 "first" => $this->getRequest()->request->get('firstPassword'),
                 "second" => $this->getRequest()->request->get('secondPassword')
@@ -285,11 +286,14 @@ class UserController extends Controller
         } else {
             $errors = array();
             foreach ($form->createView()->children as $key => $childrenErrors) {
-                if (!empty($childrenErrors->vars['errors'])) {
-                   $errors[] = $childrenErrors->vars['errors'][0];
-                } elseif($key == "plainPassword" &&
-                       !empty($childrenErrors->children['first']->vars['errors']) ) {
-                    $errors[] = $childrenErrors->children['first']->vars['errors'][0];
+                // skip username validation
+                if ($key != "username") {
+                    if (!empty($childrenErrors->vars['errors'])) {
+                       $errors[] = $childrenErrors->vars['errors'][0];
+                    } elseif($key == "plainPassword" &&
+                           !empty($childrenErrors->children['first']->vars['errors']) ) {
+                        $errors[] = $childrenErrors->children['first']->vars['errors'][0];
+                    }
                 }
             }
 
@@ -322,11 +326,11 @@ class UserController extends Controller
 
         // check if user want to change something
         $userData = array();
-        $username = $this->getRequest()->request->get('username');
-        if(!is_null($username)) {
-            $userData['username'] = $username;
+        $firstname = $this->getRequest()->request->get('username'); // firstname
+        if(!is_null($firstname)) {
+            $userData['firstname'] = $firstname;
         } else {
-            $userData['username'] = $this->getUser()->getUserName();
+            $userData['firstname'] = $this->getUser()->getFirstName();
         }
         
         $lastname = $this->getRequest()->request->get('lastname');
@@ -342,6 +346,8 @@ class UserController extends Controller
         } else {
             $userData['email'] = $this->getUser()->getEmail();
         }
+        // username get old
+        $userData['username'] = $this->getUser()->getUserName();
         
         $firstPassword = $this->getRequest()->request->get('firstPassword');
         if(!is_null($firstPassword)) {
