@@ -51,7 +51,7 @@
             </div>
             <div class="restaurant-content-reserve">    
                 {% if anonim %}
-                    <a class="btn btn-primary"  href="{{ path('table_main_auth_page') }}">
+                    <a class="btn btn-primary" data-toggle="modal" data-target="#login" href="{{ path('fos_user_security_login') }}">
                         {% trans %}main.order.button{% endtrans %}
                     </a>
                 {% else %}
