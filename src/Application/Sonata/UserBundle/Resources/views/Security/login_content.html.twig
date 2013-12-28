@@ -1,50 +1,62 @@
 {% for type, messages in app.session.flashBag.all %}
     {% for message in messages %}
-<div class="{{ type }}">
+        <div class="{{ type }}">
             {{ message|trans({}, 'FOSUserBundle') }}
-    </div>
+        </div>
     {% endfor %}
 {% endfor %}
 
 {% if error %}
-<div class="error-text-login">{{ error|trans({}, 'FOSUserBundle') }}</div>
+    <div class="error-text-login">{{ error|trans({}, 'FOSUserBundle') }}</div>
 {% endif %}
 
-    <form novalidate id="fos-login-form" action="{{ path("fos_user_security_check") }}" method="post">
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+<form novalidate id="fos-login-form" action="{{ path("fos_user_security_check") }}" method="post">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
-        <div>
+    <div>
         <label for="username">{{ 'security.login.email'|trans({}, 'FOSUserBundle') }}</label>
         <input {% if error == "Bad credentials userName" %} class="error-form-login"{% endif %} type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
-        </div>
-        <div>
+    </div>
+    <div>
         <label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
         <input {% if error == "Bad credentials password" %} class="error-form-login"{% endif %} type="password" id="password" name="_password" required="required" />
+    </div>
+    <div class="boxChecked">
+        <input type="checkbox" id="remember_me" name="_remember_me" value="on" class="boxCheckbox" onclick="doCheckbox(this);" />
+        <label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
+    </div>
+    <div class="row">
+        <div class="span6">
+            <a href="{{ path('fos_user_resetting_check_email') }}" >{{ 'security.login.forgot_password'|trans({}, 'FOSUserBundle') }}</a> 
+        </div>   
+        <div class="span6">
+            <a onclick="page.helper.openRegisterWindow();" href="#">
+                {% trans %}main.register.buttonLabel{% endtrans %}
+            </a> 
+            <input type="hidden" id="registerTitle" value="{% trans %}main.register.form.title{% endtrans %}" />
         </div>
-        <div class="boxChecked">
-            <input type="checkbox" id="remember_me" name="_remember_me" value="on" class="boxCheckbox" onclick="doCheckbox(this);" />
-            <label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
-        </div>
-        <a href="{{ path('fos_user_resetting_check_email') }}" >{{ 'security.login.forgot_password'|trans({}, 'FOSUserBundle') }}</a>
-        <div class="button-login">
+    </div>    
+    
+            
+    <div class="button-login">
         <input class="button-login" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
         <img id="loginPreloader" style="display: none;" src="{{ asset('bundles/tablemain/images/ajax-loader.gif') }}" />
-        </div>
-    </form>
+    </div>
+</form>
 
 <script type="text/javascript">
 <!--
-function doCheckbox(elem) {
-  if (elem.className=='boxCheckbox' && elem.parentNode.tagName.toLowerCase()=='div') {
-    elem.parentNode.className='box'+(elem.checked?'Checked':'Unchecked');
-  }
-}
-var css=document.styleSheets[0];
-try {
-  css.addRule('.boxCheckbox', 'filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);');
-}
-catch(e) {
-  css.insertRule('.boxCheckbox { -moz-opacity: 0; -khtml-opacity: 0; }', css.cssRules.length);
-}
+    function doCheckbox(elem) {
+        if (elem.className == 'boxCheckbox' && elem.parentNode.tagName.toLowerCase() == 'div') {
+            elem.parentNode.className = 'box' + (elem.checked ? 'Checked' : 'Unchecked');
+        }
+    }
+    var css = document.styleSheets[0];
+    try {
+        css.addRule('.boxCheckbox', 'filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);');
+    }
+    catch (e) {
+        css.insertRule('.boxCheckbox { -moz-opacity: 0; -khtml-opacity: 0; }', css.cssRules.length);
+    }
 //-->
 </script>

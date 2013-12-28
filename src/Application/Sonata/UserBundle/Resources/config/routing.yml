@@ -18,4 +18,10 @@ fos_user_profile_edit:
     pattern:  /edit-profile
     defaults: { _controller: SonataUserBundle:Profile:editProfile }     
     options:
-       expose: true        
+       expose: true      
+ 
+fos_user_registration_register_custom:       
+    pattern:  /register
+    defaults: { _controller: SonataUserBundle:Registration:register }     
+    options:
+       expose: true
