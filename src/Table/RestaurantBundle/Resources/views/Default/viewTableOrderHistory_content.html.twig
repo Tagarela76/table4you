@@ -10,6 +10,9 @@
             <p class="rest-name-table">{{tableOrder.restaurant.name}}</p>
             <p>{{ tableOrder.restaurant.categories|join(',') }}</p>
             <p>{{ tableOrder.restaurant.city.name }}, {{ tableOrder.restaurant.street }}, {{ tableOrder.restaurant.house }}</p>
+            <a data-toggle="modal" data-target="#restaurantMap_{{ tableOrder.restaurant.id }}" href="{{ path('table_restaurant_map', {'id': tableOrder.restaurant.id}) }}">
+                <img src="{{ asset('bundles/tablerestaurant/images/label_card.png') }}" />
+            </a>
         </td>
         <td>
             {% include 'TableRestaurantBundle:Default:rating.html.twig' with {'restaurant': tableOrder.restaurant, 'isRatingDisabled': isRatingDisabled, 'restaurantsWhoHadHasAlreadyRating': restaurantsWhoHadHasAlreadyRating, 'id': tableOrder.id} %}
@@ -29,5 +32,17 @@
 
         </div>
     </div>
+    {# ==Modal Window for map==#}
+    <div class="modal fade hide" data-backdrop="static" id="restaurantMap_{{ tableOrder.restaurant.id }}">
+
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal" onclick="page.common.closeModalWindow();"></a>
+            <h3>{% trans %}main.map.form.title{% endtrans %}</h3>
+        </div>
+        <div class="modal-body" >
+
+        </div>
+    </div>
+    {# ==Modal Window for map==#}
 {%endfor%}
                 

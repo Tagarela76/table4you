@@ -3,7 +3,7 @@ Table\RestaurantBundle\Entity\City:
     properties:
         id:
             expose: true
-            inline: true
+            serialized_name: id
         name:
             expose: true
             serialized_name: name

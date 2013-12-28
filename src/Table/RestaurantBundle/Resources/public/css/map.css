@@ -1,0 +1,27 @@
+#restaurant-map { 
+    min-height: 565px; 
+}
+.modal .leaflet-popup-content-wrapper, .leaflet-container .leaflet-popup-content-wrapper {
+    background: rgba(228,227,226,0.85);;
+}
+.modal .leaflet-popup-content-wrapper .leaflet-popup-content, .leaflet-container .leaflet-popup-content-wrapper .leaflet-popup-content{
+    min-width: 120px;
+    text-align: center;
+}
+.modal .leaflet-popup-content-wrapper .leaflet-popup-content div, .leaflet-container .leaflet-popup-content-wrapper .leaflet-popup-content div{
+    text-align: center;
+}
+.modal .leaflet-popup-content-wrapper .leaflet-popup-content div b, .leaflet-container .leaflet-popup-content-wrapper .leaflet-popup-content div b{
+    font-size: 24px;
+    color: #454545;
+    font-weight: 400;
+    font-family: 'Trebuchet MS';
+    padding: 0px 0px 15px;
+    display: block;
+}
+.modal .leaflet-popup-content-wrapper .btn-primary, .leaflet-container .leaflet-popup-content-wrapper .btn-primary{
+    color: #fff;
+}
+#full-restaurant-map { 
+    height: 400px; 
+}

@@ -36,7 +36,7 @@ class ProfileType extends BaseProfileType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', null, array(
+            ->add('firstname', null, array(
                 'label' => 'profile.edit.username.label',
                 'translation_domain' => 'SonataUserBundle'
             ))

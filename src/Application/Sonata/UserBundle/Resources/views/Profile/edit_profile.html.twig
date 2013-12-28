@@ -19,12 +19,12 @@ file that was distributed with this source code.
             <div class="user-edit-profile">
             {{ form_start(form) }}
                 <div>
-                    {{ form_label(form.username) }}
-                    {{ form_errors(form.username) }}
-                    {% if form.username.vars.errors|length %}
-                        {{ form_widget(form.username, {'attr':{'class':'error-form-profile'} }) }}
+                    {{ form_label(form.firstname) }}
+                    {{ form_errors(form.firstname) }}
+                    {% if form.firstname.vars.errors|length %}
+                        {{ form_widget(form.firstname, {'attr':{'class':'error-form-profile'} }) }}
                     {%  else %}
-                        {{ form_widget(form.username) }}
+                        {{ form_widget(form.firstname) }}
                     {% endif %}
                 </div>
 
@@ -41,7 +41,10 @@ file that was distributed with this source code.
                 <div>
                     {{ form_label(form.email) }}
                     {{ form_errors(form.email) }}
-                    {% if form.email.vars.errors|length %}
+                    {% if isInvalidEmail %}
+                        {{ 'profile.edit.email.error'|trans({}, 'SonataUserBundle') }}
+                    {% endif %}
+                    {% if form.email.vars.errors|length or isInvalidEmail %}
                         {{ form_widget(form.email, {'attr':{'class':'error-form-profile'} }) }}
                     {%  else %}
                         {{ form_widget(form.email) }}

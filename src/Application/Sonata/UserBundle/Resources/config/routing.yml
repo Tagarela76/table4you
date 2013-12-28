@@ -13,3 +13,9 @@ fos_user_security_logout:
 fos_user_profile_show:
     pattern:  /profile
     defaults: { _controller: FOSUserBundle:Profile:show }     
+       
+fos_user_profile_edit:
+    pattern:  /edit-profile
+    defaults: { _controller: SonataUserBundle:Profile:editProfile }     
+    options:
+       expose: true        

@@ -1,0 +1,100 @@
+{% extends 'TableMainBundle::layout.html.twig' %}
+{% block javascripts %}
+    {{ parent() }}
+{# include leaflet map#}
+<script src="{{ asset('bundles/tablerestaurant/leaflet/js/leaflet.markercluster-src.js') }}"></script>
+<script>
+    $(function() {
+
+        var restaurantIcon = L.icon({
+            iconUrl: "{{ asset('bundles/tablerestaurant/images/label_on_the_map.png') }}",
+
+            iconSize:     [39, 41], // size of the icon
+            iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+            shadowAnchor: [4, 62],  // the same for the shadow
+            popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
+        
+        // init Map
+        var map = L.map('full-restaurant-map', {
+            zoom: 18
+        });
+        // Set Map Layer
+        L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
+            key: 'BC9A493B41014CAABB98F0471D759707',
+            styleId: 997,
+            attribution: ''
+        }).addTo(map);
+
+        // My Location
+        map.locate({
+            setView: true
+        });
+       
+        
+        map.on('locationfound', onLocationFound);
+        function onLocationFound(e) { 
+            map.setZoom(14);
+            L.marker(e.latlng).addTo(map);
+        }
+        // get Restaurants
+        $.ajax({
+            url: Routing.generate('table_getGeoRestaurants'),
+            type: "GET",
+            dataType: "json",
+            success: function(response) { 
+                // add all Restaurants
+                var markers = L.markerClusterGroup({
+                   // maxClusterRadius: 50,
+                    removeOutsideVisibleBounds: false
+                });
+                
+                for (var i = 0; i < response.length; i++) {
+                    var restaurantsPoints = response[i];
+                    if (restaurantsPoints.longitude && restaurantsPoints.latitude) {
+                        var marker = L.marker(new L.LatLng(restaurantsPoints.latitude, restaurantsPoints.longitude), {icon: restaurantIcon, zoom: 18});
+                        marker.bindPopup(restaurantsPoints.content);
+                        markers.addLayer(marker);
+                    }
+                }
+                
+                map.addLayer(markers);
+            }  
+	}); 
+    });
+</script>
+{% endblock %}      
+{% block stylesheets %}
+    {{ parent() }}
+{# include leaflet map#}
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablerestaurant/leaflet/css/MarkerCluster.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablerestaurant/leaflet/css/MarkerCluster.Default.css') }}">
+<!--[if lte IE 8]>
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablerestaurant/leaflet/css/MarkerCluster.Default.ie.css') }}">
+<![endif]-->
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid" id="restaurantList_main">
+    
+    <div id="full-restaurant-map"></div>
+
+    {# hidden inforamation#}
+    <input type="hidden" id="reserveTitle" value="{% trans %}main.order.form.title{% endtrans %}" />
+    {% for restaurant in restaurantsList %}
+        {# ==Modal Window for reserve==#}
+        <div class="modal fade hide modal-reserve" data-backdrop="static" id="reserve_{{ restaurant.id }}">
+
+            <div class="modal-header modal-login-title">
+                <a class="close" data-dismiss="modal" onclick="page.common.closeModalWindow();"></a>
+                <h3>{% trans %}main.order.form.title{% endtrans %} {{restaurant.name}}</h3>
+            </div>
+            <div class="modal-body" >
+
+            </div>
+        </div>
+        {# ==Modal Window for reserve==#}
+    {% endfor %}
+</div>  
+{% endblock %}   
+

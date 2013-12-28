@@ -24,25 +24,32 @@
                 <p class="restaurant-content-name">
                     <a href="{{ path('table_view_restaurant', {'id': restaurant.id}) }}" >{{ restaurant.name }}</a>
                 </p>
-                <p class="tets">
+                <p class="restaurant-content-font-category">
+                    {% trans %}main.labels.category{% endtrans %}
+                </p>
+                <p class="restaurant-categories">
                     {{ restaurant.categories|join(', ') }}
                 </p>
                 <p class="restaurant-content-font-category">
                     {% trans %}main.labels.kitchen{% endtrans %}
                 </p>
-                <p class="restaurant-content-font">
+                <p class="restaurant-categories">
                     {{ restaurant.kitchens|join(', ') }}
                 </p>
-                <p  class="restaurant-content-font-category">
+                <p  class="restaurant-content-font-category restaurant-adress">
                      {% trans %}main.labels.address{% endtrans %}
                 </p>
-                <p class="restaurant-content-font">
+                <p class="restaurant-categories">
                     {{ restaurant.city.name }}, {{ restaurant.street }}, {{ restaurant.house }}
+                    <a data-toggle="modal" data-target="#restaurantMap_{{ restaurant.id }}" href="{{ path('table_restaurant_map', {'id': restaurant.id}) }}">
+                        <img src="{{ asset('bundles/tablerestaurant/images/label_card.png') }}" />
+                    </a>
                 </p>
             </div>
-
-            <div class="restaurant-content-reserve">
-                {% include 'TableRestaurantBundle:Default:rating.html.twig' with {'restaurant': restaurant, 'isRatingDisabled': isRatingDisabled, 'restaurantsWhoHadHasAlreadyRating': restaurantsWhoHadHasAlreadyRating, 'id': restaurant.id} %}      
+            <div>
+                {% include 'TableRestaurantBundle:Default:rating.html.twig' with {'restaurant': restaurant, 'isRatingDisabled': isRatingDisabled, 'restaurantsWhoHadHasAlreadyRating': restaurantsWhoHadHasAlreadyRating, 'id': restaurant.id} %} 
+            </div>
+            <div class="restaurant-content-reserve">    
                 {% if anonim %}
                     <a class="btn btn-primary"  href="{{ path('table_main_auth_page') }}">
                         {% trans %}main.order.button{% endtrans %}
@@ -65,6 +72,21 @@
 
                 </div>
             </div>
+            {# ==Modal Window for reserve==#}
+            
+            {# ==Modal Window for map==#}
+            <div class="modal fade hide" data-backdrop="static" id="restaurantMap_{{ restaurant.id }}">
+
+                <div class="modal-header">
+                    <a class="close" data-dismiss="modal" onclick="page.common.closeModalWindow();"></a>
+                    <h3>{% trans %}main.map.form.title{% endtrans %}</h3>
+                </div>
+                <div class="modal-body" >
+
+                </div>
+            </div>
+            {# ==Modal Window for map==#}
+            
         </div> 
     {% endfor %}
     {# display navigation #}

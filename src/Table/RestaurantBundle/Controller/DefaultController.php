@@ -10,7 +10,6 @@ use Table\RestaurantBundle\Form\Type\TableOrderFormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\UserBundle\Model\UserInterface;
-
 use Table\RestaurantBundle\Entity\RatingStat;
 use Table\RestaurantBundle\Entity\RestaurantSchedule;
 use Table\RestaurantBundle\Entity\Restaurant;
@@ -41,7 +40,7 @@ class DefaultController extends Controller
                             $this->generateUrl("table_main_homepage")
             );
         }
-        
+
         // Generate public URL for restaurant map
         if (!is_null($restaurant->getMapPhoto())) {
             $provider = $this->getMediaService()
@@ -54,12 +53,12 @@ class DefaultController extends Controller
         }
 
         $successReserve = false; // we should know if table reserve was successfull
-        if ($request->isMethod('POST')) {
+        if ($request->isMethod('POST') && !$this->getRequest()->request->get('fromMap')) {
             $form->bind($request);
 
             // get table order date
             $tableOrder = $form->getData();
-            
+
             // Check if user can do table order
             // devide reserve time on parts
             $reserveHour = $tableOrder->getReserveTime()->format('H');
@@ -71,7 +70,7 @@ class DefaultController extends Controller
             if (!$this->getTableOrderManager()->isUserCanReserveTable($user, $reserveDateTime)) {
                 // render Warning Notification, user cannot order other tables!!!
                 return $this->render('TableRestaurantBundle:Default:user.cannot.order.table.html.twig', array(
-                    'user' => $user
+                            'user' => $user
                 ));
             }
 
@@ -87,7 +86,7 @@ class DefaultController extends Controller
                 if (is_null($tableOrder->getStatus())) {
                     $tableOrder->setStatus(0);
                 }
-		if (is_null($tableOrder->getFloor())) {
+                if (is_null($tableOrder->getFloor())) {
                     $tableOrder->setFloor(1);
                 }
                 $em = $this->getDoctrine()->getManager();
@@ -115,12 +114,12 @@ class DefaultController extends Controller
     {
         // get Current user
         $user = $this->container->get('security.context')->getToken()->getUser();
-        
+
         // Check if user auth in app
         $anonim = false;
-        if (!is_object($user) || !$user instanceof UserInterface) {         
+        if (!is_object($user) || !$user instanceof UserInterface) {
             $anonim = true;
-        } 
+        }
         // check if user can change rating
         $isRatingDisabled = false;
         $restaurantsWhoHadHasAlreadyRating = array();
@@ -131,7 +130,7 @@ class DefaultController extends Controller
                 $isRatingDisabled = true;
             }
             // Also we should get restaurants array , who has already have rating today
-            
+
             foreach ($userRating as $rating) {
                 // collect data
                 $restaurantsWhoHadHasAlreadyRating[] = $rating->getRestaurant()->getId();
@@ -139,60 +138,58 @@ class DefaultController extends Controller
                     $isRatingDisabled = true;
                 }
             }
-            
-        }    
+        }
         if ($anonim) {
             $isRatingDisabled = true;
         }
-        
-	/* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN HEADER */
-	// get city list
-	$cityList = $this->getCityManager()->findAll();
-	/// get all category list
-	$categoryList = $this->getRestaurantCategoryManager()->findAll();
-	// get all kitchen list
-	$kitchenList = $this->getRestaurantKitchenManager()->findAll();
-	
-	// get current city
-	$searchCity = $this->getRequest()->query->get('searchCity');
-	// if null set default -> krasnodar
-	if (is_null($searchCity)) {
-	    $searchCity = 1;
-	}
-	/* *** */
+
+        /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN HEADER */
+        // get city list
+        $cityList = $this->getCityManager()->findAll();
+        /// get all category list
+        $categoryList = $this->getRestaurantCategoryManager()->findAll();
+        // get all kitchen list
+        $kitchenList = $this->getRestaurantKitchenManager()->findAll();
+
+        // get current city
+        $searchCity = $this->getRequest()->query->get('searchCity');
+        // if null set default -> krasnodar
+        if (is_null($searchCity)) {
+            $searchCity = 1;
+        }
+        /*         * ** */
 
         /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN RIGHT SIDEBAR */
         $newsList = $this->getNewsManager()->findByCity($searchCity);
-        
+
         // BreadCrumbs
         $breadcrumbs = $this->getBreadCrumbsManager();
         $breadcrumbs->addItem(
-                $this->get('translator')->trans('main.breadcrumbs.label.home'), 
-                $this->get("router")->generate("table_main_homepage")
+                $this->get('translator')->trans('main.breadcrumbs.label.home'), $this->get("router")->generate("table_main_homepage")
         );
         // current
         $breadcrumbs->addItem(
                 $this->get('translator')->trans('main.breadcrumbs.label.restaurant')
         );
-        
-         // get additional photo
+
+        // get additional photo
         $additionalPhotos = array();
         $menuPhotos = array();
         $restaurant = $this->getRestaurantManager()->findOneById($id);
 
-	if (is_null($restaurant)) {
+        if (is_null($restaurant)) {
             throw $this->createNotFoundException('The page does not exist');
         }
         $helper = $this->container->get('vich_uploader.templating.helper.uploader_helper');
         foreach ($restaurant->getAdditionalPhotos() as $additionalPhoto) {
             if (!is_null($additionalPhoto->getFileName())) {
-                $additionalPhotos[] = $helper->asset($additionalPhoto, 'file'); 
+                $additionalPhotos[] = $helper->asset($additionalPhoto, 'file');
             }
         }
-        
+
         foreach ($restaurant->getAdditionalMenuPhotos() as $menuPhoto) {
             if (!is_null($menuPhoto->getFileName())) {
-                $menuPhotos[] = $helper->asset($menuPhoto, 'file'); 
+                $menuPhotos[] = $helper->asset($menuPhoto, 'file');
             }
         }
 
@@ -204,17 +201,16 @@ class DefaultController extends Controller
             'weekDays' => RestaurantSchedule::$WEEK_DAYS,
             'isRatingDisabled' => $isRatingDisabled,
             'restaurantsWhoHadHasAlreadyRating' => $restaurantsWhoHadHasAlreadyRating,
-	    'cityList' => $cityList,
-	    'categoryList' => $categoryList,
-	    'kitchenList' => $kitchenList,
-	    'searchCity' => $searchCity,
+            'cityList' => $cityList,
+            'categoryList' => $categoryList,
+            'kitchenList' => $kitchenList,
+            'searchCity' => $searchCity,
             'breadcrumbs' => $breadcrumbs,
             'additionalPhotos' => $additionalPhotos,
             'menuPhotos' => $menuPhotos,
             'baseUrl' => $baseUrl,
             'newsList' => $newsList->getQuery()->getResult()
         );
-        
     }
 
     /**
@@ -223,7 +219,7 @@ class DefaultController extends Controller
      * @param Request $request
      * 
      */
-    public function updateRestaurantRatingAction(Request $request) 
+    public function updateRestaurantRatingAction(Request $request)
     {
         // Collect Data
         $restaurantId = $request->request->get('restaurantId');
@@ -231,8 +227,8 @@ class DefaultController extends Controller
         $objId = $request->request->get('objId');
         // get Current user
         $user = $this->container->get('security.context')->getToken()->getUser();
-        $restaurant = $this->getRestaurantManager()->findOneById($restaurantId);      
-        
+        $restaurant = $this->getRestaurantManager()->findOneById($restaurantId);
+
         // Update Restaurant Rating
         $em = $this->getDoctrine()->getManager();
         $newRating = round(($restaurant->getRating() + $rating) / 2);
@@ -240,16 +236,16 @@ class DefaultController extends Controller
         $restaurant->setRating($newRating);
         $em->persist($restaurant);
         $em->flush();
-        
+
         // Update Rating Stat
         $ratingStat = $this->getRatingStatManager()->getUser2RestaurantRating($user->getId(), $restaurant->getId());
         if (empty($ratingStat)) {
             $ratingStat = new RatingStat();
             $ratingStat->setUser($user);
             $ratingStat->setRestaurant($restaurant);
-        } 
+        }
         $ratingStat->setLastUpdateTime(new \DateTime);
-        $ratingStat->setRating($rating); 
+        $ratingStat->setRating($rating);
         $em->persist($ratingStat);
         $em->flush();
         // check if user can change rating
@@ -264,51 +260,51 @@ class DefaultController extends Controller
         foreach ($userRating as $restRating) {
             $restaurantsWhoHadHasAlreadyRating[] = $restRating->getRestaurant()->getId();
         }
-        
-	/* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN HEADER */
-	// get city list
-	$cityList = $this->getCityManager()->findAll();
-	/// get all category list
-	$categoryList = $this->getRestaurantCategoryManager()->findAll();
-	// get all kitchen list
-	$kitchenList = $this->getRestaurantKitchenManager()->findAll();
-	
-	// get current city
-	$searchCity = $this->getRequest()->query->get('searchCity');
-	// if null set default -> krasnodar
-	if (is_null($searchCity)) {
-	    $searchCity = 1;
-	}
-	/* *** */
+
+        /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN HEADER */
+        // get city list
+        $cityList = $this->getCityManager()->findAll();
+        /// get all category list
+        $categoryList = $this->getRestaurantCategoryManager()->findAll();
+        // get all kitchen list
+        $kitchenList = $this->getRestaurantKitchenManager()->findAll();
+
+        // get current city
+        $searchCity = $this->getRequest()->query->get('searchCity');
+        // if null set default -> krasnodar
+        if (is_null($searchCity)) {
+            $searchCity = 1;
+        }
+        /*         * ** */
 
         return $this->render('TableRestaurantBundle:Default:rating.html.twig', array(
-            'restaurant' => $restaurant,
-            'isRatingDisabled' => $isRatingDisabled,
-            'restaurantsWhoHadHasAlreadyRating' => $restaurantsWhoHadHasAlreadyRating,
-            'id' => $objId,
-	    'cityList' => $cityList,
-	    'categoryList' => $categoryList,
-	    'kitchenList' => $kitchenList,
-	    'searchCity' => $searchCity
+                    'restaurant' => $restaurant,
+                    'isRatingDisabled' => $isRatingDisabled,
+                    'restaurantsWhoHadHasAlreadyRating' => $restaurantsWhoHadHasAlreadyRating,
+                    'id' => $objId,
+                    'cityList' => $cityList,
+                    'categoryList' => $categoryList,
+                    'kitchenList' => $kitchenList,
+                    'searchCity' => $searchCity
         ));
     }
-    
+
     /**
      * View Table Order History
      * 
      * @Template()
      */
-    public function viewTableOrderHistoryAction() 
+    public function viewTableOrderHistoryAction()
     {
         // get Current user
         $user = $this->container->get('security.context')->getToken()->getUser();
-        if (!is_object($user) || !$user instanceof UserInterface) {         
+        if (!is_object($user) || !$user instanceof UserInterface) {
             // redirect on homepage
             return $this->redirect(
-                $this->generateUrl("table_main_homepage")
+                            $this->generateUrl("table_main_homepage")
             );
-        } 
-        
+        }
+
         // check if user can change rating
         $userRating = $this->getRatingStatManager()->getUserRestaurantRating($user->getId());
         // only 3 state
@@ -326,36 +322,35 @@ class DefaultController extends Controller
         $filterDate = $this->getRequest()->query->get('filterDate');
         $searchStr = $this->getRequest()->query->get('searchStr');
 
-        if(!is_null($filterDate) || !is_null($searchStr)) {
+        if (!is_null($filterDate) || !is_null($searchStr)) {
             $orderHistory = $this->getTableOrderManager()->filterOrderHistory($user->getId(), $this->getRequest(), TableOrder::ORDER_ACCEPT_STATUS_CODE);
         } else {
             $orderHistory = $this->getTableOrderManager()->getOrderHistory($user->getId(), TableOrder::ORDER_ACCEPT_STATUS_CODE);
         }
-        
-	/* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN HEADER */
-	// get city list
-	$cityList = $this->getCityManager()->findAll();
-	/// get all category list
-	$categoryList = $this->getRestaurantCategoryManager()->findAll();
-	// get all kitchen list
-	$kitchenList = $this->getRestaurantKitchenManager()->findAll();
-	
-	// get current city
-	$searchCity = $this->getRequest()->query->get('searchCity');
-	// if null set default -> krasnodar
-	if (is_null($searchCity)) {
-	    $searchCity = 1;
-	}
-	/* *** */
-        
+
+        /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN HEADER */
+        // get city list
+        $cityList = $this->getCityManager()->findAll();
+        /// get all category list
+        $categoryList = $this->getRestaurantCategoryManager()->findAll();
+        // get all kitchen list
+        $kitchenList = $this->getRestaurantKitchenManager()->findAll();
+
+        // get current city
+        $searchCity = $this->getRequest()->query->get('searchCity');
+        // if null set default -> krasnodar
+        if (is_null($searchCity)) {
+            $searchCity = 1;
+        }
+        /*         * ** */
+
         /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN RIGHT SIDEBAR */
         $newsList = $this->getNewsManager()->findByCity($searchCity);
-        
+
         // BreadCrumbs
         $breadcrumbs = $this->getBreadCrumbsManager();
         $breadcrumbs->addItem(
-                $this->get('translator')->trans('main.breadcrumbs.label.home'), 
-                $this->get("router")->generate("table_main_homepage")
+                $this->get('translator')->trans('main.breadcrumbs.label.home'), $this->get("router")->generate("table_main_homepage")
         );
         // current
         $breadcrumbs->addItem(
@@ -366,18 +361,17 @@ class DefaultController extends Controller
             'tableOrderHistory' => $orderHistory->getQuery()->getResult(),
             'isRatingDisabled' => $isRatingDisabled,
             'restaurantsWhoHadHasAlreadyRating' => $restaurantsWhoHadHasAlreadyRating,
-	    'filterDate' => $filterDate,
-	    'searchStr' => $searchStr,
-
-	    'cityList' => $cityList,
-	    'categoryList' => $categoryList,
-	    'kitchenList' => $kitchenList,
-	    'searchCity' => $searchCity,
-            'breadcrumbs' =>$breadcrumbs,
+            'filterDate' => $filterDate,
+            'searchStr' => $searchStr,
+            'cityList' => $cityList,
+            'categoryList' => $categoryList,
+            'kitchenList' => $kitchenList,
+            'searchCity' => $searchCity,
+            'breadcrumbs' => $breadcrumbs,
             'newsList' => $newsList->getQuery()->getResult()
         );
     }
-    
+
     /**
      * View News
      * 
@@ -389,12 +383,12 @@ class DefaultController extends Controller
     {
         // get Current user
         $user = $this->container->get('security.context')->getToken()->getUser();
-        
+
         // Check if user auth in app
         $anonim = false;
-        if (!is_object($user) || !$user instanceof UserInterface) {         
+        if (!is_object($user) || !$user instanceof UserInterface) {
             $anonim = true;
-        } 
+        }
         // check if user can change rating
         $isRatingDisabled = false;
         $restaurantsWhoHadHasAlreadyRating = array();
@@ -405,7 +399,7 @@ class DefaultController extends Controller
                 $isRatingDisabled = true;
             }
             // Also we should get restaurants array , who has already have rating today
-            
+
             foreach ($userRating as $rating) {
                 // collect data
                 $restaurantsWhoHadHasAlreadyRating[] = $rating->getRestaurant()->getId();
@@ -413,49 +407,47 @@ class DefaultController extends Controller
                     $isRatingDisabled = true;
                 }
             }
-            
-        }    
+        }
         if ($anonim) {
             $isRatingDisabled = true;
         }
-        
-	/* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN HEADER */
-	// get city list
-	$cityList = $this->getCityManager()->findAll();
-	/// get all category list
-	$categoryList = $this->getRestaurantCategoryManager()->findAll();
-	// get all kitchen list
-	$kitchenList = $this->getRestaurantKitchenManager()->findAll();
-	
-	// get current city
-	$searchCity = $this->getRequest()->query->get('searchCity');
-	// if null set default -> krasnodar
-	if (is_null($searchCity)) {
-	    $searchCity = 1;
-	}
-	/* *** */
+
+        /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN HEADER */
+        // get city list
+        $cityList = $this->getCityManager()->findAll();
+        /// get all category list
+        $categoryList = $this->getRestaurantCategoryManager()->findAll();
+        // get all kitchen list
+        $kitchenList = $this->getRestaurantKitchenManager()->findAll();
+
+        // get current city
+        $searchCity = $this->getRequest()->query->get('searchCity');
+        // if null set default -> krasnodar
+        if (is_null($searchCity)) {
+            $searchCity = 1;
+        }
+        /*         * ** */
 
         /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN RIGHT SIDEBAR */
         $newsList = $this->getNewsManager()->findByCity($searchCity);
-        
+
         // BreadCrumbs
         $breadcrumbs = $this->getBreadCrumbsManager();
         $breadcrumbs->addItem(
-                $this->get('translator')->trans('main.breadcrumbs.label.home'), 
-                $this->get("router")->generate("table_main_homepage")
+                $this->get('translator')->trans('main.breadcrumbs.label.home'), $this->get("router")->generate("table_main_homepage")
         );
         // current
         $breadcrumbs->addItem(
                 $this->get('translator')->trans('main.breadcrumbs.label.news')
         );
-        
+
         // get News
         $news = $this->getNewsManager()->findOneById($id);
         if (is_null($news) || !$news->getPublished()) {
             throw $this->createNotFoundException('The page does not exist');
         }
-        
-         // get restaurant for this news
+
+        // get restaurant for this news
         $restaurant = $news->getRestaurant();
 
         return array(
@@ -465,16 +457,15 @@ class DefaultController extends Controller
             'weekDays' => RestaurantSchedule::$WEEK_DAYS,
             'isRatingDisabled' => $isRatingDisabled,
             'restaurantsWhoHadHasAlreadyRating' => $restaurantsWhoHadHasAlreadyRating,
-	    'cityList' => $cityList,
-	    'categoryList' => $categoryList,
-	    'kitchenList' => $kitchenList,
-	    'searchCity' => $searchCity,
+            'cityList' => $cityList,
+            'categoryList' => $categoryList,
+            'kitchenList' => $kitchenList,
+            'searchCity' => $searchCity,
             'breadcrumbs' => $breadcrumbs,
             'newsList' => $newsList->getQuery()->getResult()
         );
-        
     }
-    
+
     /**
      * Get News List
      * 
@@ -488,6 +479,135 @@ class DefaultController extends Controller
         return array(
             'newsList' => $newsList->getQuery()->getResult()
         );
-        
     }
+
+    /**
+     * View Map
+     * 
+     * 
+     * @Template()
+     */
+    public function viewMapAction()
+    {
+        // get Current user
+        $user = $this->container->get('security.context')->getToken()->getUser();
+
+        // Check if user auth in app
+        $anonim = false;
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            $anonim = true;
+        }
+
+        /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN HEADER */
+        // get city list
+        $cityList = $this->getCityManager()->findAll();
+        /// get all category list
+        $categoryList = $this->getRestaurantCategoryManager()->findAll();
+        // get all kitchen list
+        $kitchenList = $this->getRestaurantKitchenManager()->findAll();
+
+        // get current city
+        $searchCity = $this->getRequest()->query->get('searchCity');
+        // if null set default -> krasnodar
+        if (is_null($searchCity)) {
+            $searchCity = 1;
+        }
+        /*         * ** */
+
+        /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN RIGHT SIDEBAR */
+        $newsList = $this->getNewsManager()->findByCity($searchCity);
+
+        // BreadCrumbs
+        $breadcrumbs = $this->getBreadCrumbsManager();
+        $breadcrumbs->addItem(
+                $this->get('translator')->trans('main.breadcrumbs.label.home'), $this->get("router")->generate("table_main_homepage")
+        );
+        // current
+        $breadcrumbs->addItem(
+                $this->get('translator')->trans('main.breadcrumbs.label.map')
+        );
+
+        $restaurantsList = $this->getRestaurantManager()->findAll();
+
+        return array(
+            'cityList' => $cityList,
+            'categoryList' => $categoryList,
+            'kitchenList' => $kitchenList,
+            'searchCity' => $searchCity,
+            'breadcrumbs' => $breadcrumbs,
+            'newsList' => $newsList->getQuery()->getResult(),
+            'restaurantsList' => $restaurantsList
+        );
+    }
+
+    /**
+     * Vie restaurant on Map
+     * 
+     * @param int $id
+     * 
+     * @Template()
+     */
+    public function viewRestaurantMapAction($id)
+    {
+        $restaurant = $this->getRestaurantManager()->findOneById($id);
+        // get Current user
+        $anonim = false;
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            $anonim = true;
+        }
+        // format reserve button
+        $reserveLabel = $this->get('translator')->trans('main.order.button', array(), 'messages');
+        if ($anonim) {
+            $homeUrl = $this->generateUrl("table_main_auth_page");
+            $reserveButton = "<a class=\"btn btn-primary\" href=\"{$homeUrl}\">{$reserveLabel}</a>";
+        } else {
+            $reserveButton = "<a class=\"btn btn-primary\" onclick=\"page.tableOrder.view({$restaurant->getId()});\">{$reserveLabel}</a>";
+        }
+
+        return array(
+            'restaurant' => $restaurant,
+            'reserveButton' => $reserveButton
+        );
+    }
+
+    /**
+     * Get restaurants in jsone format
+     * 
+     */
+    public function getGeoRestaurantsAction()
+    {
+        // get Current user
+        $anonim = false;
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            $anonim = true;
+        }
+
+        $reserveLabel = $this->get('translator')->trans('main.order.button', array(), 'messages');
+
+        $restaurants = $this->getRestaurantManager()->findAll();
+        // create new object
+        $geoRestaurants = array();
+        $geoRestaurant = array();
+        foreach ($restaurants as $restaurant) {
+            if ($anonim) {
+                $homeUrl = $this->generateUrl("table_main_auth_page");
+                $reserveButton = "<a class='btn btn-primary' href='{$homeUrl}'>{$reserveLabel}</a>";
+            } else {
+                $reserveUrl = $this->generateUrl("table_order_reserve", array(
+                    "id" => $restaurant->getId()
+                ));
+                $reserveButton = "<a class='btn btn-primary' data-toggle='modal' " .
+                        "data-target='#reserve_{$restaurant->getId()}' href='{$reserveUrl}'>{$reserveLabel}</a>";
+            }
+            $geoRestaurant['content'] = "<div><b>" . $restaurant->getName() . "</b></div>" . $reserveButton;
+            $geoRestaurant['latitude'] = $restaurant->getLatitude();
+            $geoRestaurant['longitude'] = $restaurant->getLongitude();
+
+            $geoRestaurants[] = $geoRestaurant;
+        }
+        return $geoRestaurants;
+    }
+
 }

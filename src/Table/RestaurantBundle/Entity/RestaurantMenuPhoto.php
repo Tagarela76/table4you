@@ -18,6 +18,9 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class RestaurantMenuPhoto
 {
+    const THUMB_HEIGHT = 400;
+    const THUMB_WIDTH = 400;
+    
     /**
      * @var integer
      *
@@ -46,6 +49,14 @@ class RestaurantMenuPhoto
      * @ORM\JoinColumn(name="restaurant_id", referencedColumnName="id")
      */
     protected $restaurant;
+    
+    /**
+     *
+     * Thumb file name
+     * 
+     * @var string
+     */
+    protected $thumbFileName;
     
     public function getId()
     {
@@ -85,6 +96,40 @@ class RestaurantMenuPhoto
     public function setRestaurant($restaurant)
     {
         $this->restaurant = $restaurant;
+    }
+    
+    public function getThumbFileName()
+    {
+        if (is_null($this->getFileName())) {
+            return null;
+        }
+        if (is_null($this->thumbFileName)) {
+            $imageArray = explode(".", $this->getFileName());
+            //1 Get extension
+            $imageExt = end($imageArray);
+            //2. Init thumb name
+            $imageName = "";
+            foreach ($imageArray as $imagePart) {
+                if ($imagePart !=  $imageExt) {
+                    $imageName .= $imagePart;
+                }
+            }
+            $thumbImage = $imageName . "_thumb." . $imageExt;
+            if (file_exists($thumbImage)) {
+                $this->setThumbFileName($thumbImage);
+                return $thumbImage;
+            } else {
+                return null;
+            }
+                
+        } else {
+            return $this->thumbFileName;
+        }
+    }
+
+    public function setThumbFileName($thumbFileName)
+    {
+        $this->thumbFileName = $thumbFileName;
     }
     
     /**

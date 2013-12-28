@@ -1,9 +1,15 @@
 $(function() {
+    // password validation
     $("#fos_user_registration_form_plainPassword_first").keyup(function() {
         checkPasswordFit();
     });
+    
     $("#fos_user_registration_form_plainPassword_second").keyup(function() {
-        checkPasswordFit();
+        checkPasswordFit();    
+    });
+    // sync username with email(on change event)
+    $("#fos_user_registration_form_email").keyup(function(){
+        $("#fos_user_registration_form_username").val($("#fos_user_registration_form_email").val());
     });
 });
 

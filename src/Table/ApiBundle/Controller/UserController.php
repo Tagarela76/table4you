@@ -12,6 +12,7 @@ use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Application\Sonata\UserBundle\Form\Type\RestRegistrationFormType;
+use Application\Sonata\UserBundle\Form\Type\RestProfileFormType;
 use Application\Sonata\UserBundle\Entity\User as BaseUser;
 
 class UserController extends Controller
@@ -251,25 +252,17 @@ class UserController extends Controller
         $form = $this->createForm(new RestRegistrationFormType(), $user);
 
         $form->bind(array(
-            "username" => $this->getRequest()->request->get('username'),
+            "firstname" => $this->getRequest()->request->get('username'), // It is firstname in server
             "lastname" => $this->getRequest()->request->get('lastname'),
             "email" => $this->getRequest()->request->get('email'),
+            "username" => $this->getRequest()->request->get('email'), // the same as email
             "plainPassword" => array(
                 "first" => $this->getRequest()->request->get('firstPassword'),
                 "second" => $this->getRequest()->request->get('secondPassword')
             ),
             "phone" => $this->getRequest()->request->get('phone')
         ));
-        /*   $form->bind(array(
-          "username" => "test4restApi14",
-          "lastname" => "By By",
-          "email" => "test4restApi14@mail.ru",
-          "plainPassword" => array(
-          "first" => "12345",
-          "second" => "12345"
-          ),
-          "phone" => "321"
-          )); */
+
         if ($form->isValid()) {
 
             $user = $form->getData();
@@ -290,9 +283,125 @@ class UserController extends Controller
             $response = array();
             $response['success'] = true;
             return $response;
+        } else {
+            $errors = array();
+            foreach ($form->createView()->children as $key => $childrenErrors) {
+                // skip username validation
+                if ($key != "username") {
+                    if (!empty($childrenErrors->vars['errors'])) {
+                       $errors[] = $childrenErrors->vars['errors'][0];
+                    } elseif($key == "plainPassword" &&
+                           !empty($childrenErrors->children['first']->vars['errors']) ) {
+                        $errors[] = $childrenErrors->children['first']->vars['errors'][0];
+                    }
+                }
+            }
+
+            return array(
+                'success' => false,
+                'errorStr' => $errors
+            );
         }
 
-        return \FOS\RestBundle\View\View::create($form, \FOS\Rest\Util\Codes::HTTP_BAD_REQUEST);
+     //   return \FOS\RestBundle\View\View::create($form, \FOS\Rest\Util\Codes::HTTP_BAD_REQUEST);
+    }
+    
+    /**
+     * User edit Profile
+     * 
+     * @Rest\View
+     */
+    public function editProfileAction()
+    {
+        $user = $this->get('security.context')->getToken()->getUser();
+        
+        if (null === $user) {
+            return array(
+                'success' => false,
+                'errorStr' => $this->get('translator')->trans("validation.errors.user.User not found", array(), 'FOSUserBundle')
+            );
+        }
+        
+        $form = $this->createForm(new RestProfileFormType(), $user);
+
+        // check if user want to change something
+        $userData = array();
+        $firstname = $this->getRequest()->request->get('username'); // firstname
+        if(!is_null($firstname)) {
+            $userData['firstname'] = $firstname;
+        } else {
+            $userData['firstname'] = $this->getUser()->getFirstName();
+        }
+        
+        $lastname = $this->getRequest()->request->get('lastname');
+        if(!is_null($lastname)) {
+            $userData['lastname'] = $lastname;
+        } else {
+            $userData['lastname'] = $this->getUser()->getLastName();
+        }
+        
+        $email = $this->getRequest()->request->get('email');
+        if(!is_null($email)) {
+            $userData['email'] = $email;
+        } else {
+            $userData['email'] = $this->getUser()->getEmail();
+        }
+        // username get old
+        $userData['username'] = $this->getUser()->getUserName();
+        
+        $firstPassword = $this->getRequest()->request->get('firstPassword');
+        if(!is_null($firstPassword)) {
+            $secondPassword = $this->getRequest()->request->get('secondPassword');
+            $userData['newPassword']['first'] = $firstPassword;
+            $userData['newPassword']['second'] = $secondPassword;
+        }
+        
+        $phone = $this->getRequest()->request->get('phone');
+        if(!is_null($phone)) {
+            $userData['phone'] = $phone;
+        } else {
+            $userData['phone'] = $this->getUser()->getPhone();
+        }
+        
+        $form->bind($userData);
+
+        if ($form->isValid()) {
+            
+            // update user
+            $newUser = $form->getData();
+            if ($newUser->newPassword != "") {
+                $user->setPlainPassword($newUser->newPassword);
+            }
+            $userManager = $this->container->get('fos_user.user_manager');
+            $userManager->updateUser($user);
+            
+            // set response
+            $response = array();
+            $response['success'] = true;
+            if (!is_null($firstPassword)) {
+                // get wsse token
+                $token = $this->createBaseWsse($user, $firstPassword);
+                $response['token'] = $token;
+            }
+                     
+            return $response;
+            
+        } else {
+            $errors = array();
+            foreach ($form->createView()->children as $key => $childrenErrors) {
+                if (!empty($childrenErrors->vars['errors'])) {
+                   $errors[] = $childrenErrors->vars['errors'][0];
+                } elseif($key == "newPassword" &&
+                       !empty($childrenErrors->children['first']->vars['errors']) ) {
+                    $errors[] = $childrenErrors->children['first']->vars['errors'][0];
+                }
+            }
+
+            return array(
+                'success' => false,
+                'errorStr' => $errors
+            );
+        }
     }
 
 }
