@@ -468,6 +468,11 @@ input:focus{outline: 0 none}
     text-decoration: underline;
     clear: both;
 }
+#fos-login-form .register-frogot_pass .span6{
+    float: left;
+    width: 140px;
+    margin: 0;
+}
 #table-order-form-container .container-fluid{
     padding: 15px 20px 0 !important;
 }

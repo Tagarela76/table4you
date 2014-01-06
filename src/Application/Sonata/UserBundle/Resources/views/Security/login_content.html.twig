@@ -25,7 +25,7 @@
         <input type="checkbox" id="remember_me" name="_remember_me" value="on" class="boxCheckbox" onclick="doCheckbox(this);" />
         <label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
     </div>
-    <div class="row">
+    <div class="row register-frogot_pass">
         <div class="span6">
             <a href="{{ path('fos_user_resetting_check_email') }}" >{{ 'security.login.forgot_password'|trans({}, 'FOSUserBundle') }}</a> 
         </div>   
