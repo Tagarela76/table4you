@@ -12,4 +12,16 @@ use Doctrine\ORM\EntityRepository;
  */
 class RestaurantKitchenRepository extends EntityRepository
 {
+    /**
+     * 
+     * Get Kitchens
+     * 
+     * @return Table\RestaurantBundle\Entity\RestaurantKitchen[]
+     */
+    public function getKitchens()
+    {
+        $query = $this->createQueryBuilder('restaurantKitchen');
+        $query->orderBy('restaurantKitchen.name');
+        return $query->getQuery()->getResult();
+    }
 }

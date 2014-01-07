@@ -12,7 +12,7 @@ class RestaurantCategoryController extends Controller
      */
     public function getCategoriesListAction()
     {
-        $restaurantCategories = $this->getRestaurantCategoryManager()->findAll();
+        $restaurantCategories = $this->getRestaurantCategoryManager()->getCategories();
         if (!$restaurantCategories) {
             return array(
                 "success" => false,
