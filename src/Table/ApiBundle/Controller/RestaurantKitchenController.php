@@ -12,7 +12,7 @@ class RestaurantKitchenController extends Controller
      */
     public function getKitchensListAction()
     {
-        $restaurantKitchens = $this->getRestaurantKitchenManager()->findAll();
+        $restaurantKitchens = $this->getRestaurantKitchenManager()->getKitchens();
         if (!$restaurantKitchens) {
             return array(
                 "success" => false,

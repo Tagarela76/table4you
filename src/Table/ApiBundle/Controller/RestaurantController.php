@@ -153,13 +153,20 @@ class RestaurantController extends Controller
         $addMenuPhoto = array();
         foreach ($restaurant->getAdditionalMenuPhotos() as $menuPhoto) {
             if (!is_null($menuPhoto->getFileName())) {
-                $imagePath = $this->container->getParameter('site_host') . 
-                                $this->container->getParameter('base_url') . 
+                $imageURL = $this->container->getParameter('site_host') . 
+                                $this->container->getParameter('base_folder_url') . 
                                 $helper->asset($menuPhoto, 'file');
                 $thumbImage = $menuPhoto->getThumbFileName();
-                $thumbPath = str_replace($menuPhoto->getFileName(), $thumbImage, $imagePath);
-                $addMenuPhoto['big'] = $imagePath;
-                $addMenuPhoto['small'] = $thumbPath;
+                $thumbURL = str_replace($menuPhoto->getFileName(), $thumbImage, $imageURL);
+                $thumbPath = str_replace($menuPhoto->getFileName(), $thumbImage, getcwd() . $helper->asset($menuPhoto, 'file'));
+                $addMenuPhoto['big'] = $imageURL;
+                // check if file exist
+                if (file_exists($thumbPath)) {
+                    $addMenuPhoto['small'] = $thumbURL;
+                } else {
+                    // set origin image
+                    $addMenuPhoto['small'] = $imageURL;
+                }
                 $menuPhotos[] = $addMenuPhoto;
             }
         }
@@ -192,13 +199,23 @@ class RestaurantController extends Controller
         $addPhoto = array();
         foreach ($restaurant->getAdditionalPhotos() as $additionalPhoto) {
             if (!is_null($additionalPhoto->getFileName())) {
-                $imagePath = $this->container->getParameter('site_host') . 
-                                $this->container->getParameter('base_url') . 
+                $imageURL = $this->container->getParameter('site_host') . 
+                                $this->container->getParameter('base_folder_url') . 
                                 $helper->asset($additionalPhoto, 'file');
+                
                 $thumbImage = $additionalPhoto->getThumbFileName();
-                $thumbPath = str_replace($additionalPhoto->getFileName(), $thumbImage, $imagePath);
-                $addPhoto['big'] = $imagePath;
-                $addPhoto['small'] = $thumbPath;
+                $thumbURL = str_replace($additionalPhoto->getFileName(), $thumbImage, $imageURL);
+                $thumbPath = str_replace($additionalPhoto->getFileName(), $thumbImage, getcwd() . $helper->asset($additionalPhoto, 'file'));
+                $addPhoto['big'] = $imageURL;
+
+                // check if file exist
+                if (file_exists($thumbPath)) {
+                    $addPhoto['small'] = $thumbURL;
+                } else {
+                    // set origin image
+                    $addPhoto['small'] = $imageURL;
+                }
+                    
                 $additionalPhotos[] = $addPhoto;
             }
         }

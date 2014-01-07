@@ -79,4 +79,11 @@ class RestaurantCategoryManager
         return $this->getRestaurantCategoryRepo()->findAll();
     }
 
+    /**
+     * @return Table\RestaurantBundle\Entity\RestaurantCategory[]
+     */
+    public function getCategories()
+    {
+        return $this->getRestaurantCategoryRepo()->getCategories();
+    }
 }

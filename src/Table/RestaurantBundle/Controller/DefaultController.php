@@ -147,9 +147,9 @@ class DefaultController extends Controller
         // get city list
         $cityList = $this->getCityManager()->findAll();
         /// get all category list
-        $categoryList = $this->getRestaurantCategoryManager()->findAll();
+        $categoryList = $this->getRestaurantCategoryManager()->getCategories();
         // get all kitchen list
-        $kitchenList = $this->getRestaurantKitchenManager()->findAll();
+        $kitchenList = $this->getRestaurantKitchenManager()->getKitchens();
 
         // get current city
         $searchCity = $this->getRequest()->query->get('searchCity');
@@ -194,7 +194,7 @@ class DefaultController extends Controller
         }
 
         // assign base_url
-        $baseUrl = $this->container->getParameter('base_url');
+        $baseUrl = $this->container->getParameter('base_folder_url');
         return array(
             'restaurant' => $restaurant,
             'anonim' => $anonim,
@@ -265,9 +265,9 @@ class DefaultController extends Controller
         // get city list
         $cityList = $this->getCityManager()->findAll();
         /// get all category list
-        $categoryList = $this->getRestaurantCategoryManager()->findAll();
+        $categoryList = $this->getRestaurantCategoryManager()->getCategories();
         // get all kitchen list
-        $kitchenList = $this->getRestaurantKitchenManager()->findAll();
+        $kitchenList = $this->getRestaurantKitchenManager()->getKitchens();
 
         // get current city
         $searchCity = $this->getRequest()->query->get('searchCity');
@@ -332,9 +332,9 @@ class DefaultController extends Controller
         // get city list
         $cityList = $this->getCityManager()->findAll();
         /// get all category list
-        $categoryList = $this->getRestaurantCategoryManager()->findAll();
+        $categoryList = $this->getRestaurantCategoryManager()->getCategories();
         // get all kitchen list
-        $kitchenList = $this->getRestaurantKitchenManager()->findAll();
+        $kitchenList = $this->getRestaurantKitchenManager()->getKitchens();
 
         // get current city
         $searchCity = $this->getRequest()->query->get('searchCity');
@@ -416,9 +416,9 @@ class DefaultController extends Controller
         // get city list
         $cityList = $this->getCityManager()->findAll();
         /// get all category list
-        $categoryList = $this->getRestaurantCategoryManager()->findAll();
+        $categoryList = $this->getRestaurantCategoryManager()->getCategories();
         // get all kitchen list
-        $kitchenList = $this->getRestaurantKitchenManager()->findAll();
+        $kitchenList = $this->getRestaurantKitchenManager()->getKitchens();
 
         // get current city
         $searchCity = $this->getRequest()->query->get('searchCity');
@@ -502,9 +502,9 @@ class DefaultController extends Controller
         // get city list
         $cityList = $this->getCityManager()->findAll();
         /// get all category list
-        $categoryList = $this->getRestaurantCategoryManager()->findAll();
+        $categoryList = $this->getRestaurantCategoryManager()->getCategories();
         // get all kitchen list
-        $kitchenList = $this->getRestaurantKitchenManager()->findAll();
+        $kitchenList = $this->getRestaurantKitchenManager()->getKitchens();
 
         // get current city
         $searchCity = $this->getRequest()->query->get('searchCity');
