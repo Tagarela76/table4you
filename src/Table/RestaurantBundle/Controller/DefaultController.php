@@ -194,7 +194,7 @@ class DefaultController extends Controller
         }
 
         // assign base_url
-        $baseUrl = $this->container->getParameter('base_url');
+        $baseUrl = $this->container->getParameter('base_folder_url');
         return array(
             'restaurant' => $restaurant,
             'anonim' => $anonim,
