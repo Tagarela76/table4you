@@ -115,13 +115,9 @@ class RestaurantAdditionalPhoto
                     $imageName .= $imagePart;
                 }
             }
-            $thumbImage = $imageName . "_thumb." . $imageExt;
-            if (file_exists($thumbImage)) {
-                $this->setThumbFileName($thumbImage);
-                return $thumbImage;
-            } else {
-                return null;
-            }
+            $thumbImage = $imageName . "_thumb." . $imageExt;           
+            $this->setThumbFileName($thumbImage);
+            return $thumbImage;
         } else {
             return $this->thumbFileName;
         }
