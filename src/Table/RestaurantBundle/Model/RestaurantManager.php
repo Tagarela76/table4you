@@ -121,6 +121,6 @@ class RestaurantManager
      */
     public function searchRestaurants(Request $request)
     {
-        return $this->getRestaurantRepo()->searchRestaurants($request);
+        return $this->getRestaurantRepo()->searchRestaurants($request, $this->container);
     }
 }
