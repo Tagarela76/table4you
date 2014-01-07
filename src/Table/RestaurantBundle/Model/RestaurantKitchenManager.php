@@ -78,5 +78,13 @@ class RestaurantKitchenManager
     {
         return $this->getRestaurantKitchenRepo()->findAll();
     }
+    
+    /**
+     * @return Table\RestaurantBundle\Entity\RestaurantKitchen[]
+     */
+    public function getKitchens()
+    {
+        return $this->getRestaurantKitchenRepo()->getKitchens();
+    }
 
 }
