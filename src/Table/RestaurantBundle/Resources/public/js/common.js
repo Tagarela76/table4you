@@ -68,7 +68,7 @@ function InfiniteLoad() {
     this.initLoading = function(entity) {
 
         //  var loader = "{{ asset('bundles/tablemain/infinite-ajax-scroll/images/loader.gif') }}"; 
-
+        $(window).unbind();
         jQuery.ias({
             container: '.' + entity + 'List-container',
             item: '.' + entity + '-container',
