@@ -114,5 +114,18 @@ class TableOrderManager
         return $this->getTableOrderRepo()->isUserCanReserveTable($user, $reserveDateTime);
     }
     
-    
+    /**
+     * 
+     * @param integer $user
+     * 
+     * @param Request $request
+     * 
+     * @param integer $orderStatus
+     * 
+     * @return Table\RestaurantBundle\Entity\TableOrder[]
+     */
+    public function filterOrderHistory($user, $request, $orderStatus = null)
+    {
+        return $this->getTableOrderRepo()->filterOrderHistory($user, $request, $orderStatus);
+    }
 }
