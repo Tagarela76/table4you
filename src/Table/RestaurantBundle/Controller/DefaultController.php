@@ -541,37 +541,6 @@ class DefaultController extends Controller
     }
 
     /**
-     * Vie restaurant on Map
-     * 
-     * @param int $id
-     * 
-     * @Template()
-     */
-    public function viewRestaurantMapAction($id)
-    {
-        $restaurant = $this->getRestaurantManager()->findOneById($id);
-        // get Current user
-        $anonim = false;
-        $user = $this->container->get('security.context')->getToken()->getUser();
-        if (!is_object($user) || !$user instanceof UserInterface) {
-            $anonim = true;
-        }
-        // format reserve button
-        $reserveLabel = $this->get('translator')->trans('main.order.button', array(), 'messages');
-        if ($anonim) {
-            $homeUrl = $this->generateUrl("table_main_auth_page");
-            $reserveButton = "<a class=\"btn btn-primary\" href=\"{$homeUrl}\">{$reserveLabel}</a>";
-        } else {
-            $reserveButton = "<a class=\"btn btn-primary\" onclick=\"page.tableOrder.view({$restaurant->getId()});\">{$reserveLabel}</a>";
-        }
-
-        return array(
-            'restaurant' => $restaurant,
-            'reserveButton' => $reserveButton
-        );
-    }
-
-    /**
      * Get restaurants in jsone format
      * 
      */
