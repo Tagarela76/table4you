@@ -70,7 +70,7 @@ class TableOrderRepository extends EntityRepository
 		      ->andWhere("restaurant.name like '%$searchStr%' or city.name like '%$searchStr%' or restaurant.street like '%$searchStr%'");	
 	}  
 
-        return $query->getQuery()->getResult();
+        return $query;
     }
     
     /**
