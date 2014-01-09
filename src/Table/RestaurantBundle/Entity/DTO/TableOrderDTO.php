@@ -21,10 +21,16 @@ class TableOrderDTO
     public function __construct(TableOrder $tableOrder)
     {
         $this->id = $tableOrder->getId();
-        $this->date = $tableOrder->getReserveDate();
-        $this->time = $tableOrder->getReserveTime();
+        if (!is_null($tableOrder->getReserveDate())) {
+            $this->date = $tableOrder->getReserveDate()->format('Y/m/d');
+        } 
+        if (!is_null($tableOrder->getReserveTime())) {
+            $this->time = $tableOrder->getReserveTime()->format('H:i:s'); 
+        } 
         $this->name = $tableOrder->getRestaurant()->getName();
-        $this->address = $tableOrder->getRestaurant()->getAddress();
+        $this->address = $tableOrder->getRestaurant()->getCity() . ", " . 
+                $tableOrder->getRestaurant()->getStreet() . ", " . 
+                $tableOrder->getRestaurant()->getHouse();
     }
 }
 
