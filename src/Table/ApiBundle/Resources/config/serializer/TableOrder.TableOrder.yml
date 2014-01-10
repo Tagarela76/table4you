@@ -16,3 +16,6 @@ Table\CoreDomain\TableOrder\TableOrder:
         address:
             expose: true
             serialized_name: address    
+        rating:     
+            expose: true
+            serialized_name: rating        
