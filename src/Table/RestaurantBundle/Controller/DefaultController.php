@@ -305,6 +305,14 @@ class DefaultController extends Controller
             );
         }
 
+        $user = $this->container->get('security.context')->getToken()->getUser();
+
+        // Check if user auth in app
+        $anonim = false;
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            $anonim = true;
+        }
+
         // check if user can change rating
         $userRating = $this->getRatingStatManager()->getUserRestaurantRating($user->getId());
         // only 3 state
@@ -368,7 +376,8 @@ class DefaultController extends Controller
             'kitchenList' => $kitchenList,
             'searchCity' => $searchCity,
             'breadcrumbs' => $breadcrumbs,
-            'newsList' => $newsList->getQuery()->getResult()
+            'newsList' => $newsList->getQuery()->getResult(),
+            'anonim' => $anonim
         );
     }
 
