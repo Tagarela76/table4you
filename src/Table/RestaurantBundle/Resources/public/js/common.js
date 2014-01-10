@@ -1,8 +1,9 @@
 function RestaurantMap() {
 
     this.onenMap = function(restaurantId) {
+        var mapIcon = $("#map-icon").val();
         var restaurantIcon = L.icon({
-            iconUrl: "bundles/tablerestaurant/images/label_on_the_map.png",
+            iconUrl: mapIcon,
             iconSize: [39, 41], // size of the icon
             iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
             shadowAnchor: [4, 62], // the same for the shadow
