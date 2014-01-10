@@ -1,3 +1,44 @@
+function RestaurantMap() {
+
+    this.onenMap = function(restaurantId) {
+        var restaurantIcon = L.icon({
+            iconUrl: "bundles/tablerestaurant/images/label_on_the_map.png",
+            iconSize: [39, 41], // size of the icon
+            iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+            shadowAnchor: [4, 62], // the same for the shadow
+            popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
+
+        var latitude = $("#latitude_" + restaurantId).val();
+        var longitude = $("#longitude_" + restaurantId).val();
+        var restaurantName = $("#restaurantName_" + restaurantId).val();
+        var reserveButton = $("#reserveButton_" + restaurantId).val();
+
+        var restaurantContent = "<div><b>" + restaurantName + "</b></div>" + reserveButton;
+
+        var map = L.map('restaurant-map_' + restaurantId, {
+            center: new L.LatLng(latitude, longitude),
+            zoom: 17
+        });
+        L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
+            key: 'BC9A493B41014CAABB98F0471D759707',
+            styleId: 997,
+            attribution: '',
+            maxZoom: 18
+        }).addTo(map);
+
+        var marker = L.marker([latitude, longitude], {icon: restaurantIcon}).addTo(map);
+        marker.bindPopup(restaurantContent);
+
+        // Load full map (fix bug with leaflet map size)
+        $("#restaurantMap_" + restaurantId).on('show.bs.modal', function() {
+            setTimeout(function() {
+                map.invalidateSize();
+            }, 10);
+        });
+    }
+}
+
 function TableOrder() {
 
     this.selectRestaurantFloor = function(obj, floor) {
@@ -170,6 +211,7 @@ function UserProfile() {
 }
 
 function Page() {
+    this.restaurantMap = new RestaurantMap();
     this.tableOrder = new TableOrder();
     this.orderHistory = new OrderHistory();
     this.rating = new Rating();
