@@ -12,86 +12,78 @@
         </tr>
     </table>
     {% for restaurant in restaurantsList %}
-        <div class="restaurant-container">
-            <div class="restaurant-img-container">
-                <div class="restaurant-img">
-                    <a href="{{ path('table_view_restaurant', {'id': restaurant.id}) }}" >
+    <div class="restaurant-container">
+        <div class="restaurant-img-container">
+            <div class="restaurant-img">
+                <a href="{{ path('table_view_restaurant', {'id': restaurant.id}) }}" >
                         {% thumbnail restaurant.photo, 'reference' %}
-                    </a>    
-                </div>
+                </a>    
             </div>
-            <div class="restaurant-content">
-                <p class="restaurant-content-name">
-                    <a href="{{ path('table_view_restaurant', {'id': restaurant.id}) }}" >{{ restaurant.name }}</a>
-                </p>
-                <p class="restaurant-content-font-category">
+        </div>
+        <div class="restaurant-content">
+            <p class="restaurant-content-name">
+                <a href="{{ path('table_view_restaurant', {'id': restaurant.id}) }}" >{{ restaurant.name }}</a>
+            </p>
+            <p class="restaurant-content-font-category">
                     {% trans %}main.labels.category{% endtrans %}
-                </p>
-                <p class="restaurant-categories">
+            </p>
+            <p class="restaurant-categories">
                     {{ restaurant.categories|join(', ') }}
-                </p>
-                <p class="restaurant-content-font-category">
+            </p>
+            <p class="restaurant-content-font-category">
                     {% trans %}main.labels.kitchen{% endtrans %}
-                </p>
-                <p class="restaurant-categories">
+            </p>
+            <p class="restaurant-categories">
                     {{ restaurant.kitchens|join(', ') }}
-                </p>
-                <p  class="restaurant-content-font-category restaurant-adress">
+            </p>
+            <p  class="restaurant-content-font-category restaurant-adress">
                      {% trans %}main.labels.address{% endtrans %}
-                </p>
-                <p class="restaurant-categories">
+            </p>
+            <p class="restaurant-categories">
                     {{ restaurant.city.name }}, {{ restaurant.street }}, {{ restaurant.house }}
-                    <a data-toggle="modal" data-target="#restaurantMap_{{ restaurant.id }}" href="{{ path('table_restaurant_map', {'id': restaurant.id}) }}">
-                        <img src="{{ asset('bundles/tablerestaurant/images/label_card.png') }}" />
-                    </a>
-                </p>
-            </div>
-            <div>
+                <a onclick="page.restaurantMap.onenMap({{restaurant.id}});" data-toggle="modal" href="#restaurantMap_{{restaurant.id}}">
+                    <img src="{{ asset('bundles/tablerestaurant/images/label_card.png') }}" />
+                </a>   
+            </p>
+        </div>
+        <div>
                 {% include 'TableRestaurantBundle:Default:rating.html.twig' with {'restaurant': restaurant, 'isRatingDisabled': isRatingDisabled, 'restaurantsWhoHadHasAlreadyRating': restaurantsWhoHadHasAlreadyRating, 'id': restaurant.id} %} 
-            </div>
-            <div class="restaurant-content-reserve">    
+        </div>
+        <div class="restaurant-content-reserve">    
                 {% if anonim %}
-                    <a class="btn btn-primary" data-toggle="modal" data-target="#login" href="{{ path('fos_user_security_login') }}">
+            <a class="btn btn-primary" data-toggle="modal" data-target="#login" href="{{ path('fos_user_security_login') }}">
                         {% trans %}main.order.button{% endtrans %}
-                    </a>
+            </a>
                 {% else %}
-                    <a class="btn btn-primary" data-toggle="modal" data-target="#reserve_{{ restaurant.id }}" href="{{ path('table_order_reserve', {'id': restaurant.id}) }}">
+            <a class="btn btn-primary" data-toggle="modal" data-target="#reserve_{{ restaurant.id }}" href="{{ path('table_order_reserve', {'id': restaurant.id}) }}">
                         {% trans %}main.order.button{% endtrans %}
-                    </a>
+            </a>
                 {% endif %}
-                    
-            </div>
+
+        </div>
             {# ==Modal Window for reserve==#}
-            <div class="modal fade hide modal-reserve" data-backdrop="static" id="reserve_{{ restaurant.id }}">
+        <div class="modal fade hide modal-reserve" data-backdrop="static" id="reserve_{{ restaurant.id }}">
 
-                <div class="modal-header modal-login-title">
-                    <a class="close" data-dismiss="modal" onclick="page.common.closeModalWindow();"></a>
-                    <h3>{% trans %}main.order.form.title{% endtrans %} {{restaurant.name}}</h3>
-                </div>
-                <div class="modal-body" >
-
-                </div>
+            <div class="modal-header modal-login-title">
+                <a class="close" data-dismiss="modal" onclick="page.common.closeModalWindow();"></a>
+                <h3>{% trans %}main.order.form.title{% endtrans %} {{restaurant.name}}</h3>
             </div>
+            <div class="modal-body" >
+
+            </div>
+        </div>
             {# ==Modal Window for reserve==#}
-            
-            {# ==Modal Window for map==#}
-            <div class="modal modal-map fade hide" data-backdrop="true" id="restaurantMap_{{ restaurant.id }}">
 
-                <div class="modal-header">
-                    <a class="close" data-dismiss="modal" onclick="page.common.closeModalWindow();"></a>
-                    <h3>{% trans %}main.map.form.title{% endtrans %}</h3>
-                </div>
-                <div class="modal-body" >
-
-                </div>
-            </div>
             {# ==Modal Window for map==#}
-            
-        </div> 
+
+                {% include 'TableRestaurantBundle:Default:restaurantMap.html.twig' %} 
+            {# ==Modal Window for map==#}
+
+    </div> 
     {% endfor %}
+    <input type="hidden" id="map-icon" value="{{ asset('bundles/tablerestaurant/images/label_on_the_map.png') }}" />
     {# display navigation #}
     <div class="navigation">
             {{ knp_pagination_render(restaurantsList) }}
     </div>  
 </div>
-    

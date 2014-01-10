@@ -1,5 +1,9 @@
 #restaurant-map { 
     min-height: 565px; 
+    min-width: 600px;
+}
+.restaurant-map { 
+    min-height: 565px; 
 }
 .modal .leaflet-popup-content-wrapper, .leaflet-container .leaflet-popup-content-wrapper {
     background: rgba(228,227,226,0.85);;

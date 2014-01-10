@@ -33,26 +33,26 @@
         </p>
         <p class="restaurant-categories restaurant-adress">
                 {{ restaurant.city.name }}, {{ restaurant.street }}, {{ restaurant.house }}
-                <a data-toggle="modal" data-target="#restaurantMap_{{ restaurant.id }}" href="{{ path('table_restaurant_map', {'id': restaurant.id}) }}">
-                    <img src="{{ asset('bundles/tablerestaurant/images/label_card.png') }}" />
-                </a>
+            <a onclick="page.restaurantMap.onenMap({{restaurant.id}});" data-toggle="modal" href="#restaurantMap_{{restaurant.id}}">
+                <img src="{{ asset('bundles/tablerestaurant/images/label_card.png') }}" />
+            </a>  
         </p>
         {% if restaurant.restaurantSchedule is not empty %}
-            <p class="restaurant-content-font-category">
+        <p class="restaurant-content-font-category">
                      {% trans %}main.labels.scedule{% endtrans %}
-            </p>
-            <p class="restaurant-categories">
-                <ul class="restaurantSchedule">
+        </p>
+        <p class="restaurant-categories">
+        <ul class="restaurantSchedule">
                     {% for schedule in restaurant.restaurantSchedule %}
-                        <li>
+            <li>
                             {{schedule.dayFromStr}} - {{schedule.dayToStr}} {{schedule.timeFrom|date('H:i')}} - {{schedule.timeTo|date('H:i')}}
                             {% if loop.index < restaurant.restaurantSchedule|length %}
-                                ,
+                ,
                             {% endif %}
-                        </li>    
+            </li>    
                     {% endfor %}
-                </ul>     
-            </p>
+        </ul>     
+        </p>
         {% endif %}    
     </div>
     <div class="restaurant-rating-{{ restaurant.id }}">
@@ -60,37 +60,30 @@
     </div>
     <div class="restaurant-content-reserve">
         {% if anonim %}
-            <a class="btn btn-primary" data-toggle="modal" data-target="#login" href="{{ path('fos_user_security_login') }}">
+        <a class="btn btn-primary" data-toggle="modal" data-target="#login" href="{{ path('fos_user_security_login') }}">
                 {% trans %}main.order.button{% endtrans %}
-            </a>
+        </a>
         {% else %}
-            <a class="btn btn-primary" data-toggle="modal" data-target="#reserve_{{ restaurant.id }}" href="{{ path('table_order_reserve', {'id': restaurant.id}) }}">
+        <a class="btn btn-primary" data-toggle="modal" data-target="#reserve_{{ restaurant.id }}" href="{{ path('table_order_reserve', {'id': restaurant.id}) }}">
                         {% trans %}main.order.button{% endtrans %}
-            </a>
+        </a>
         {% endif %}
     </div>    
 </div>
 {# ==Modal Window for reserve==#}
-    <div class="modal fade hide modal-reserve" data-backdrop="static" id="reserve_{{ restaurant.id }}">
+<div class="modal fade hide modal-reserve" data-backdrop="static" id="reserve_{{ restaurant.id }}">
 
-        <div class="modal-header modal-login-title">
-            <a class="close" data-dismiss="modal"></a>
-            <h3>{% trans %}main.order.form.title{% endtrans %} {{restaurant.name}}</h3>
-        </div>
-        <div class="modal-body" >
-
-        </div>
-    </div>
-{# ==Modal Window for reserve==#}
-{# ==Modal Window for map==#}
-<div class="modal modal-map fade hide" data-backdrop="true" id="restaurantMap_{{ restaurant.id }}">
-
-    <div class="modal-header">
-        <a class="close" data-dismiss="modal" onclick="page.common.closeModalWindow();"></a>
-        <h3>{% trans %}main.map.form.title{% endtrans %}</h3>
+    <div class="modal-header modal-login-title">
+        <a class="close" data-dismiss="modal"></a>
+        <h3>{% trans %}main.order.form.title{% endtrans %} {{restaurant.name}}</h3>
     </div>
     <div class="modal-body" >
 
     </div>
 </div>
+{# ==Modal Window for reserve==#}
+
+{# ==Modal Window for map==#}
+    {% include 'TableRestaurantBundle:Default:restaurantMap.html.twig' %} 
+    <input type="hidden" id="map-icon" value="{{ asset('bundles/tablerestaurant/images/label_on_the_map.png') }}" />
 {# ==Modal Window for map==#}
