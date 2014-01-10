@@ -31,13 +31,6 @@ class TableOrderController extends Controller
         }
         $orderHistory = $this->getTableOrderManager()->getOrderHistory($user)->getQuery()->getResult();
         
-        if (!$orderHistory) {
-            return array(
-                "success" => false,
-                "errorStr" => $this->get('translator')->trans('validation.errors.restaurant.tableOrder.Unable to find order')
-            );
-        }
-        
         $response = array();
         foreach ($orderHistory as $order) {
             $dtoOrder = new TableOrderDTO($order);

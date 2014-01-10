@@ -386,6 +386,11 @@ input:focus{outline: 0 none}
     width: 14px;
     height: 14px;
     margin-top: 6px;
+    opacity: 0.9;
+}
+.modal-registration-title .close:hover, .modal-login-title .close:hover, .container .modal-header .close:hover{
+    opacity: 0.4;
+    filter: alpha(opacity=40);
 }
 .modal-registration-title h3, .modal-login-title  h3, .modal-header h3{
     font-size: 15.31px;
@@ -464,7 +469,7 @@ input:focus{outline: 0 none}
 }
 #fos-login-form a{
     display: block;
-    margin: 0 0 15px 19px;
+    margin: 0 0 15px 2px;
     color: inherit;
     text-decoration: underline;
     clear: both;

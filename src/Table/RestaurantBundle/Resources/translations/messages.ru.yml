@@ -32,8 +32,8 @@ main:
           peopleCount: "Количество человек:"
           isSmokingZone: "Зал для курящих"
           floor: Этаж
-          isSms: Уведомления sms
-          isEmail: Уведомления e-mail
+          isSms: напомнить по sms
+          isEmail: напомнить по e-mail
           submit: Reserve
         placeholder:
           wish: "Ваши пожелания"

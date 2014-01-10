@@ -16,7 +16,7 @@ class TableOrderDTO
     private $time;
     private $name;
     private $address;
-
+    private $rating;
 
     public function __construct(TableOrder $tableOrder)
     {
@@ -31,6 +31,7 @@ class TableOrderDTO
         $this->address = $tableOrder->getRestaurant()->getCity() . ", " . 
                 $tableOrder->getRestaurant()->getStreet() . ", " . 
                 $tableOrder->getRestaurant()->getHouse();
+        $this->rating = $tableOrder->getRestaurant()->getRating();
     }
 }
 
