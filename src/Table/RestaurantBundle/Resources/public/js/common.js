@@ -58,7 +58,7 @@ function TableOrder() {
             dataType: "html",
             success: function(responce) {
                 $('.modal-header h3').html(reserveTitle);
-                $('#restaurant-map').html(responce);
+                $('.restaurant-map-body').html(responce);
             }
         });
     }
@@ -192,6 +192,21 @@ function Common() {
 
     this.closeModalWindow = function(element) {
         $('.modal-backdrop fade in').remove();
+    }
+    
+    this.viewAuthPage = function(restaurantId) {      
+        var reserveTitle = $("#reserveTitle_" + restaurantId).val();
+        $.ajax({
+            url: Routing.generate('fos_user_security_login'),
+            type: "POST",
+            dataType: "html",
+            success: function(responce) {
+                $('.modal-header h3').html(reserveTitle);
+                $('.modal').css("margin-left", "-188px");
+                $('#restaurantMap_' + restaurantId).css("width", "345px");
+                $('.restaurant-map-body').html(responce);
+            }
+        });
     }
 }
 

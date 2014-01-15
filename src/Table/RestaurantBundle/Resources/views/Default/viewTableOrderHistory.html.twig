@@ -21,6 +21,7 @@
             });
         
         // Init calendar
+        $.datepicker.setDefaults($.datepicker.regional['ru']);
          $( "#datepickerCalendar" ).datepicker({
             showOn: "button",
             buttonImage: "{{ asset('bundles/tablemain/images/calendar.png') }}",
