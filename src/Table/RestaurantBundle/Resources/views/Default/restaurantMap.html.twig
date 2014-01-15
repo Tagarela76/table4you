@@ -3,20 +3,24 @@
         <a class="close" data-dismiss="modal"></a>
         <h3>{% trans %}main.map.form.title{% endtrans %}</h3>
     </div>
-    <div class="modal-body" >
+    <div class="modal-body restaurant-map-body">
         <div class="restaurant-map"  id="restaurant-map_{{restaurant.id}}"></div>
     </div>
 </div> 
 {# hidden inforamation#}
 <input type="hidden" name="restaurantId"  value="{{restaurant.id}}" />
+{%if anonim %}
+    <input type="hidden" id="reserveTitle_{{restaurant.id}}" value="{% trans %}main.login.form.title{% endtrans %}" />
+{% else %}
+    <input type="hidden" id="reserveTitle_{{restaurant.id}}" value="{% trans %}main.order.form.title{% endtrans %}" />
+{% endif %}
 
-<input type="hidden" id="reserveTitle_{{restaurant.id}}" value="{% trans %}main.order.form.title{% endtrans %}" />
 <input type="hidden" id="restaurantName_{{restaurant.id}}" value="{{restaurant.name}}" />
 <input type="hidden" id="latitude_{{restaurant.id}}" value="{{restaurant.latitude}}" />
 <input type="hidden" id="longitude_{{restaurant.id}}" value="{{restaurant.longitude}}" />
 {%if anonim %}
     <input type="hidden" id="reserveButton_{{restaurant.id}}" 
-       value="<a class='btn btn-primary' href='{{ path('table_main_auth_page') }}'>{% trans %}main.order.button{% endtrans %}</a>" />
+       value="<a class='btn btn-primary' onclick='page.common.viewAuthPage({{restaurant.id}});'>{% trans %}main.order.button{% endtrans %}</a>" />
 {% else %}
     <input type="hidden" id="reserveButton_{{restaurant.id}}" 
        value="<a class='btn btn-primary' onclick='page.tableOrder.view({{restaurant.id}});'>{% trans %}main.order.button{% endtrans %}</a>" />
