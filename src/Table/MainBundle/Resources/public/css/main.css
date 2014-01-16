@@ -985,8 +985,14 @@ background-image: url(images/selects-2.png);}
     width: 270px; 
 }
 .table-order-history table.table-order-history-th tr td a.btn{
-    width: 50px !important; 
-    margin-left: 35px;
+    width: 50px !important;
+    margin:4px 13px 4px 0px;
+    float: right;
+}
+.table-order-history table.table-order-history-th tr td .star-rating-control{
+    padding-top: 2px;
+    display: block;
+    float: left;
 }
 .table-order-history table.table-order-history-th tr td span div.star-rating{
     margin-bottom: 0 !important;
@@ -998,8 +1004,15 @@ background-image: url(images/selects-2.png);}
     padding-bottom: 15px;
 }*/
 .table-order-history table.table-order-history-th tr td p{
-    margin: 0 0 3px;
-    padding-right: 15px;
+    margin: 0px;
+    float: left;
+    margin-right: 5px;
+    margin-top: 2px;
+}
+.table-order-history table.table-order-history-th tr td p a{
+    position: relative;
+    top: -4px;
+    margin-left: 2px;
 }
 .table-order-history table.table-order-history-th tr{
     border-bottom: 1px solid #d7d6d8;
@@ -1019,6 +1032,7 @@ background-image: url(images/selects-2.png);}
 .table-order-history table.table-order-history-th th + th + th{
     text-align: left;
 }
+
 .error-li{
     margin: 0 !important;
 }
