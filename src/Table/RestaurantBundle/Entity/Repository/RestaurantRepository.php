@@ -59,26 +59,42 @@ class RestaurantRepository extends EntityRepository
             
             $searchStrEn = $container->get('common_manager')->translit($searchStr);
             $searchStrRu = $container->get('common_manager')->reverseTranslit($searchStr);
+            // using it only in restaurant name
+            $searchStrAlternative = $container->get('common_manager')->translateUsingAlternativeAlphabet($searchStr); 
            
-            $query->leftJoin('restaurant.city', 'city')
-                    ->andWhere("restaurant.name like :searchStr or " .
-                            "restaurant.name like :searchStrRu or " .
-                            "restaurant.name like :searchStrEn or " .
-                            "city.name like :searchStr or " .
-                            "city.name like :searchStrRu or " .
-                            "city.name like :searchStrEn or " .
-                            "restaurant.street like :searchStr or " .
-                            "restaurant.street like :searchStrRu or " .
-                            "restaurant.street like :searchStrEn or " .
-                            "category.name like :searchStr or " .
-                            "category.name like :searchStrRu or " .
-                            "category.name like :searchStrEn or " .
-                            "kitchen.name like :searchStr or " .
-                            "kitchen.name like :searchStrRu or " .
-                            "kitchen.name like :searchStrEn")
-                    ->setParameter('searchStr', "%$searchStr%")
-                    ->setParameter('searchStrRu', "%$searchStrRu%")
-                    ->setParameter('searchStrEn', "%$searchStrEn%");
+            $query->leftJoin('restaurant.city', 'city');
+            
+            // format query
+            $queryString = "restaurant.name like :searchStr or " .
+                    "city.name like :searchStr or " .
+                    "restaurant.street like :searchStr or " .
+                    "category.name like :searchStr or " .
+                    "kitchen.name like :searchStr or ";
+            if ($searchStrRu != $searchStr) {
+                $queryString .= "restaurant.name like :searchStrRu or " .
+                        "city.name like :searchStrRu or " .
+                        "restaurant.street like :searchStrRu or " .
+                        "category.name like :searchStrRu or " .
+                        "kitchen.name like :searchStrRu or ";
+            }
+            if ($searchStrEn != $searchStr) {
+                $queryString .= "restaurant.name like :searchStrEn or " .
+                        "city.name like :searchStrEn or " .
+                        "restaurant.street like :searchStrEn or " .
+                        "category.name like :searchStrEn or " .
+                        "kitchen.name like :searchStrEn or ";
+            }
+            $queryString .= "restaurant.name like :searchStrAlternative";
+            
+            $query->andWhere($queryString)
+                    ->setParameter('searchStr', "%$searchStr%");
+            if ($searchStrRu != $searchStr) {
+                $query->setParameter('searchStrRu', "%$searchStrRu%");
+            }
+            if ($searchStrEn != $searchStr) {
+                $query->setParameter('searchStrEn', "%$searchStrEn%");
+            }
+            $query->setParameter('searchStrAlternative', "%$searchStrAlternative%");
         }
 
         if (!is_null($categoriesList) && !empty($categoriesList)) {
