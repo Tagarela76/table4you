@@ -131,7 +131,7 @@
                     <ul class="floor-tabs">
                             {% for i in 1..restaurant.floors %}
                         <li>
-                            <a class="floors" href="#" onclick="page.tableOrder.selectRestaurantFloor(this, {{i}});
+                            <a class="floors {% if i==1%}active{%endif%}" href="#" onclick="page.tableOrder.selectRestaurantFloor(this, {{i}});
                                         return false;">
                                 {{ i }} {% trans %}main.order.form.label.floor{% endtrans %}
                             </a>

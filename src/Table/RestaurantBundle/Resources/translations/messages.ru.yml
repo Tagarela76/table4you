@@ -29,7 +29,7 @@ main:
           reserveDate: "Дата:"
           reserveTime: "Время:"
           tableNumber: "Номер столика:"
-          peopleCount: "Количество человек:"
+          peopleCount: "Количество гостей:"
           isSmokingZone: "Зал для курящих"
           floor: Этаж
           isSms: напомнить по sms
