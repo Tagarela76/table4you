@@ -7,12 +7,12 @@
             {{tableOrder.reserveTime|date('H:i:s')}}
         </td>
         <td>
-            <p class="rest-name-table">{{tableOrder.restaurant.name}}</p>
-            <p>{{ tableOrder.restaurant.categories|join(',') }}</p>
-            <p>{{ tableOrder.restaurant.city.name }}, {{ tableOrder.restaurant.street }}, {{ tableOrder.restaurant.house }}</p>
-            <a onclick="page.restaurantMap.onenMap({{tableOrder.restaurant.id}});" data-toggle="modal" href="#restaurantMap_{{tableOrder.restaurant.id}}">
-                <img src="{{ asset('bundles/tablerestaurant/images/label_card.png') }}" />
-            </a>  
+            <p class="rest-name-table">
+                {{tableOrder.restaurant.name}}
+                <a onclick="page.restaurantMap.onenMap({{tableOrder.restaurant.id}});" data-toggle="modal" href="#restaurantMap_{{tableOrder.restaurant.id}}">
+                    <img src="{{ asset('bundles/tablerestaurant/images/label_card.png') }}" />
+                </a>  
+            </p>    
         </td>
         <td>
             {% include 'TableRestaurantBundle:Default:rating.html.twig' with {'restaurant': tableOrder.restaurant, 'isRatingDisabled': isRatingDisabled, 'restaurantsWhoHadHasAlreadyRating': restaurantsWhoHadHasAlreadyRating, 'id': tableOrder.id} %}
