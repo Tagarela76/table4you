@@ -41,7 +41,7 @@ restaurant:
     date: Дата бронирования
     time: Время бронирования
     tableNumber: Номер столика
-    peopleCount: Кол-во человек
+    peopleCount: Кол-во гостей
     isSmokingZone: Курящая зона
     wish: Пожелания  
     status: Статус заказа 
