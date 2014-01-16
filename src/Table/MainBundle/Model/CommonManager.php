@@ -193,6 +193,19 @@ class CommonManager
             "ee" => "и", "EE" => "И", "ph" => "ф", "PH" => "Ф"
         );
     }
+    
+    /**
+     * 
+     * Get alternative alphabet (for external situations)
+     * 
+     * @return array 
+     */
+    private function _getAlternativeAlphabet()
+    {
+        return array(
+            "Зо" => "Zо", "Ли" => "Lи", "Брэд Пит" => "Bread&Питъ"
+        );
+    }
 
     /**
      * 
@@ -222,4 +235,17 @@ class CommonManager
         return strtr($str, $enAlphabet);
     }
 
+    /**
+     * 
+     *  Translate using alterantive alphabet
+     * 
+     * @param string $str
+     * 
+     * @return string
+     */
+    public function translateUsingAlternativeAlphabet($str)
+    {
+        $alternativeAlphabet = $this->_getAlternativeAlphabet(); 
+        return strtr($str, $alternativeAlphabet);
+    }
 }
