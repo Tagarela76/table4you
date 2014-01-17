@@ -203,7 +203,8 @@ class CommonManager
     private function _getAlternativeAlphabet()
     {
         return array(
-            "Зо" => "Zо", "Ли" => "Lи", "Брэд Пит" => "Bread & Питъ"
+            "Зо" => "Zо", "Ли" => "Lи", "Брэд Пит" => "Bread & Питъ",
+            "зо" => "Zо", "ли" => "Lи"
         );
     }
 
