@@ -33,7 +33,7 @@
         </p>
         <p class="restaurant-categories restaurant-adress">
                 {{ restaurant.city.name }}, {{ restaurant.street }}, {{ restaurant.house }}
-            <a onclick="page.restaurantMap.openMap({{restaurant.id}});" data-toggle="modal" href="#restaurantMap_{{restaurant.id}}">
+            <a onclick="restaurantPage.restaurantMap.openMap({{restaurant.id}});" data-toggle="modal" href="#restaurantMap_{{restaurant.id}}">
                 <img src="{{ asset('bundles/tablerestaurant/images/label_card.png') }}" />
             </a>  
         </p>
@@ -85,5 +85,6 @@
 
 {# ==Modal Window for map==#}
     {% include 'TableRestaurantBundle:Default:restaurantMap.html.twig' %} 
-<input type="hidden" id="map-icon" value="{{ asset('bundles/tablerestaurant/images/label_on_the_map.png') }}" />
+    <input type="hidden" id="map-icon" value="{{ asset('bundles/tablerestaurant/images/label_on_the_map.png') }}" />
+    <input type="hidden" id="map-title" value="{% trans %}main.map.form.title{% endtrans %}" />
 {# ==Modal Window for map==#}

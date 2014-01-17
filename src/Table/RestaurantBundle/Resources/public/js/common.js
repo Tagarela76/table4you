@@ -1,6 +1,14 @@
 function RestaurantMap() {
 
     this.openMap = function(restaurantId) {
+        
+        // change modal window width and left margin
+       // $("#restaurantMap_" + restaurantId).css("width", "816px");
+        
+        // rebuilt map
+        $("#restaurant-map-body_" + restaurantId).html("<div class=\"restaurant-map\"  id=\"restaurant-map_"+restaurantId+"\"></div>");
+        var mapTitle = $("#map-title").val();
+        $('.modal-header h3').html(mapTitle);
         var mapIcon = $("#map-icon").val();
         var restaurantIcon = L.icon({
             iconUrl: mapIcon,
@@ -238,10 +246,12 @@ function Page() {
     this.userProfile = new UserProfile();
 }
 
-//	global page object
+//global page object
 var page;
-
+//for restaurant page
+var restaurantPage;
 $(function() {
     //	ini global object
     page = new Page();
+    restaurantPage = new Page();
 });
