@@ -1,15 +1,15 @@
 {% for tableOrder in tableOrderHistory %}
     <tr>
-        <td style="text-align:center; width:100px;">
+        <td width="90" style="text-align: left;padding-left: 15px;">
             {{tableOrder.reserveDate|date('d-m-Y')}}
         </td>
-        <td style="text-align:center; width:100px;">
+        <td width="62" style="padding-left: 8px;">
             {{tableOrder.reserveTime|date('H:i')}}
         </td>
-        <td>
+        <td width="240">
             <p class="rest-name-table">
                 {{tableOrder.restaurant.name}}
-                <a onclick="page.restaurantMap.onenMap({{tableOrder.restaurant.id}});" data-toggle="modal" href="#restaurantMap_{{tableOrder.restaurant.id}}">
+                <a onclick="page.restaurantMap.openMap({{tableOrder.restaurant.id}});" data-toggle="modal" href="#restaurantMap_{{tableOrder.restaurant.id}}">
                     <img src="{{ asset('bundles/tablerestaurant/images/label_card.png') }}" />
                 </a>  
             </p>    
@@ -19,22 +19,22 @@
             <a class="btn btn-primary" data-toggle="modal" data-target="#reserve_{{ tableOrder.restaurant.id }}" href="{{ path('table_order_reserve', {'id': tableOrder.restaurant.id}) }}">
                 {% trans %}main.order.button{% endtrans %}
             </a>
+            {# ==Modal Window for reserve==#}
+            <div class="modal fade hide modal-reserve" data-backdrop="static" id="reserve_{{ tableOrder.restaurant.id }}">
+
+                <div class="modal-header modal-login-title">
+                    <a class="close" data-dismiss="modal"></a>
+                    <h3>{% trans %}main.order.form.title{% endtrans %} {{tableOrder.restaurant.name}}</h3>
+                </div>
+                <div class="modal-body" >
+
+                </div>
+            </div>
+            {# ==Modal Window for map==#}
+                {% include 'TableRestaurantBundle:Default:restaurantMap.html.twig' with {'restaurant': tableOrder.restaurant} %} 
+            {# ==Modal Window for map==#}
         </td>
-    </tr>
-    {# ==Modal Window for reserve==#}
-    <div class="modal fade hide modal-reserve" data-backdrop="static" id="reserve_{{ tableOrder.restaurant.id }}">
-
-        <div class="modal-header modal-login-title">
-            <a class="close" data-dismiss="modal"></a>
-            <h3>{% trans %}main.order.form.title{% endtrans %} {{tableOrder.restaurant.name}}</h3>
-        </div>
-        <div class="modal-body" >
-
-        </div>
-    </div>
-    {# ==Modal Window for map==#}
-        {% include 'TableRestaurantBundle:Default:restaurantMap.html.twig' with {'restaurant': tableOrder.restaurant} %} 
-    {# ==Modal Window for map==#}
+    </tr>   
 {%endfor%}
 <input type="hidden" id="map-icon" value="{{ asset('bundles/tablerestaurant/images/label_on_the_map.png') }}" />    
                 

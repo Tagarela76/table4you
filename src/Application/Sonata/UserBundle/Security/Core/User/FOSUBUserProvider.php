@@ -33,7 +33,7 @@ class FOSUBUserProvider extends BaseClass
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
         $userTokenId = $response->getUsername();// it is user id in social network
-        $email = $response->getEmail();
+       // $email = $response->getEmail();
         $userNameLastName = $response->getRealName(); // name + lastname
         $userNameLastName = explode(" ", $userNameLastName);
         
@@ -68,7 +68,7 @@ class FOSUBUserProvider extends BaseClass
                 break;
         }
             
-        // Lets create toke service _ id (for example facebook_213123424)
+        // Lets create toke service _ id (for example 213123424_facebook)
         $accessToken = $userTokenId . "_" . $service;
         
         // find by name
@@ -87,9 +87,14 @@ class FOSUBUserProvider extends BaseClass
                 } 
                 //email can be null
                 // Lets use default email
-                $user->setEmail($accessToken . "@gmail.com");
+                $user->setEmail($accessToken . "@table4you.com");
 
-                $user->setPassword($userTokenId);
+                // encode password
+                $factory = $this->get('security.encoder_factory');
+                $encoder = $factory->getEncoder($user);
+                $password = $encoder->encodePassword($userTokenId, $user->getSalt());
+
+                $user->setPassword($password);
                 $user->setEnabled(true);
 
                 if (null === $user->getConfirmationToken()) {

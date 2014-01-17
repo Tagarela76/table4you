@@ -143,3 +143,22 @@ table_api.news_one:
     requirements:
         _method: GET   
         id: "\d+"        
+
+# Api for auth through social networks         
+table_api.auth_through_facebook:
+    pattern:  /api/rest/loginThroughtFacebook
+    defaults: { _controller: TableApiBundle:User:loginThroughtFacebook, _format: json }
+    requirements:
+        _method: POST  
+        
+table_api.auth_through_twitter:
+    pattern:  /api/rest/loginThroughtTwitter
+    defaults: { _controller: TableApiBundle:User:loginThroughtTwitter, _format: json }
+    requirements:
+        _method: POST         
+        
+table_api.auth_through_vkontakte:
+    pattern:  /api/rest/loginThroughtVkontakte
+    defaults: { _controller: TableApiBundle:User:loginThroughtVkontakte, _format: json }
+    requirements:
+        _method: POST          

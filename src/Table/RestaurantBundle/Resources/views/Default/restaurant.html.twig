@@ -33,7 +33,7 @@
         </p>
         <p class="restaurant-categories restaurant-adress">
                 {{ restaurant.city.name }}, {{ restaurant.street }}, {{ restaurant.house }}
-            <a onclick="page.restaurantMap.onenMap({{restaurant.id}});" data-toggle="modal" href="#restaurantMap_{{restaurant.id}}">
+            <a onclick="page.restaurantMap.openMap({{restaurant.id}});" data-toggle="modal" href="#restaurantMap_{{restaurant.id}}">
                 <img src="{{ asset('bundles/tablerestaurant/images/label_card.png') }}" />
             </a>  
         </p>
