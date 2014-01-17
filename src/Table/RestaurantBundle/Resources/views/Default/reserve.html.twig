@@ -143,7 +143,7 @@
             <div class="row-fluid">
                 <div class="span5">
                     <div class="choose-zone">
-                        <label>Напомнить по:</label>
+                        <label>{% trans %}main.order.form.label.notice{% endtrans %}</label>
                         <p>
                                     {% if form.isSms.vars.errors|length %}
                                         {{ form_widget(form.isSms, {'attr':{'class':'error-form-reserve'} }) }}

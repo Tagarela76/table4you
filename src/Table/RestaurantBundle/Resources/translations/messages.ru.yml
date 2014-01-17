@@ -34,6 +34,7 @@ main:
           floor: Этаж
           isSms: sms
           isEmail: e-mail
+          notice: "Напомнить по:"
           submit: Reserve
         placeholder:
           wish: "Ваши пожелания"

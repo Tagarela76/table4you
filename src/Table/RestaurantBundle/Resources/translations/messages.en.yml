@@ -9,8 +9,9 @@ main:
           peopleCount: "People count:"
           isSmokingZone: "Smoking zone"
           floor: Floor
-          isSms: Get notifications through sms
-          isEmail: Get notifications through e-mail
+          isSms: sms
+          isEmail: e-mail
+          notice: "Notice used:"
           submit: Reserve
         placeholder:
           wish: "Your wishes"
