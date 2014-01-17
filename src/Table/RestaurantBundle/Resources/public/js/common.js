@@ -1,6 +1,6 @@
 function RestaurantMap() {
 
-    this.onenMap = function(restaurantId) {
+    this.openMap = function(restaurantId) {
         var mapIcon = $("#map-icon").val();
         var restaurantIcon = L.icon({
             iconUrl: mapIcon,
