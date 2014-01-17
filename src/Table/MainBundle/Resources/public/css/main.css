@@ -1,6 +1,6 @@
 /* Reset */
-input:focus, a:focus{outline: 0 none;}
-a, a:visited {outline:none;}
+input:focus, a:focus, .btn:focus{outline: 0 none;}
+a, a:visited, .btn:focus {outline:none;}
 
 html, body{height: 100%;}
 body{font-family: Helvetica, sans-serif; background-color: #f2f2f2;}
@@ -892,7 +892,8 @@ input#tableOrderForm_peopleCount:focus{
 .table-order-form{margin: 0;}
 .table-order-form .floor-tabs {margin-top: 25px;}
 #table-order-form-container  .table-order-form .label-font-size-modal label{font-size: 15px;}
-#table-order-form-container  .table-order-form .label-font-size_modal label{font-size: 16px;}
+#table-order-form-container  .table-order-form .label-font-size_modal label,
+#table-order-form-container  .table-order-form .choose-zone label{font-size: 16px;}
 #tableOrderForm_reserveTime{margin-top: -10px;}
 #table-order-form .cusel{top: 11px;}
 .cusel, .cuselFrameRight, .jScrollPaneDrag, .jScrollArrowUp, .jScrollArrowDown {
