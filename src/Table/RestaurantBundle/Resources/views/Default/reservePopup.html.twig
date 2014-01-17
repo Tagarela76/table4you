@@ -1,0 +1,9 @@
+<div id="reserve_{{ restaurant.id }}" class="modal modal-reserve hide" data-backdrop="static">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal"></a>
+        <h3>{% trans %}main.order.form.title{% endtrans %} {{restaurant.name}}</h3>
+    </div>
+    <div class="modal-body" >
+        <div id="restaurant-reserve-container_{{restaurant.id}}"></div>
+    </div>
+</div>

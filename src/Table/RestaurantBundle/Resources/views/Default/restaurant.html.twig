@@ -43,14 +43,14 @@
         </p>
         <p class="restaurant-categories">
         <ul class="restaurantSchedule">
-                    {% for schedule in restaurant.restaurantSchedule %}
-            <li>
-                            {{schedule.dayFromStr}} - {{schedule.dayToStr}} {{schedule.timeFrom|date('H:i')}} - {{schedule.timeTo|date('H:i')}}
-                            {% if loop.index < restaurant.restaurantSchedule|length %}
-                ,
-                            {% endif %}
-            </li>    
-                    {% endfor %}
+            {% for schedule in restaurant.restaurantSchedule %}
+                <li>
+                    {{schedule.dayFromStr}} - {{schedule.dayToStr}} {{schedule.timeFrom|date('H:i')}} - {{schedule.timeTo|date('H:i')}}
+                    {% if loop.index < restaurant.restaurantSchedule|length %}
+                        ,
+                    {% endif %}
+                </li>    
+            {% endfor %}
         </ul>     
         </p>
         {% endif %}    
@@ -85,5 +85,5 @@
 
 {# ==Modal Window for map==#}
     {% include 'TableRestaurantBundle:Default:restaurantMap.html.twig' %} 
-    <input type="hidden" id="map-icon" value="{{ asset('bundles/tablerestaurant/images/label_on_the_map.png') }}" />
+<input type="hidden" id="map-icon" value="{{ asset('bundles/tablerestaurant/images/label_on_the_map.png') }}" />
 {# ==Modal Window for map==#}
