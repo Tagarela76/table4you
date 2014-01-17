@@ -145,7 +145,8 @@ class ProfileController extends BaseSecurityController
 
         // Check if user should fill email
         $isInvalidEmail = false;
-        if ($user->getEmail() == $user->getUsername() . "@gmail.com") {
+        if ($user->getEmail() == $user->getUsername() . "@gmail.com" || 
+                $user->getEmail() == $user->getUsername() . "@table4you.com") {
             $isInvalidEmail = true;
         }
         return $this->render('ApplicationSonataUserBundle:Profile:edit_profile.html.twig', array(
