@@ -165,7 +165,8 @@ class DefaultController extends Controller
         $user = $this->container->get('security.context')->getToken()->getUser();
         // only for auth users
         if (is_object($user) && $user instanceof UserInterface) {
-            if ($user->getEmail() == $user->getUsername() . "@gmail.com") {
+            if ($user->getEmail() == $user->getUsername() . "@gmail.com" || 
+                $user->getEmail() == $user->getUsername() . "@table4you.com") {
                 return new Response('false');
             }
         }

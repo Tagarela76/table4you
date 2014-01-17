@@ -163,10 +163,17 @@ class UserController extends Controller
                 'errorStr' => $this->get('translator')->trans("validation.errors.user.This user does not have access to this section", array(), 'FOSUserBundle')
             );
         } else {
+            // check if user change email after auth through social networks
+            if ($user->getEmail() == $user->getUsername() . "@table4you.com") {
+                $emailStatus = 0;
+            } else {
+                $emailStatus = 1;
+            }
             return array(
                 'success' => true,
-                'user' => $user
-            );
+                'user' => $user,
+                'emailStatus' => $emailStatus
+            ); 
         }
     }
 
@@ -218,7 +225,7 @@ class UserController extends Controller
      * 
      * @return string
      */
-    public function createBaseWsse(User $user, $palinPassword)
+    public function createBaseWsse(User $user, $palinPassword, $truePassword = true)
     {
         $username = $user->getUsername();
         $password = $palinPassword;
@@ -229,7 +236,11 @@ class UserController extends Controller
 
         $factory = $this->get('security.encoder_factory');
         $encoder = $factory->getEncoder($user);
-        $password = $encoder->encodePassword($password, $user->getSalt());
+        if ($truePassword) {
+            // encode password
+            $password = $encoder->encodePassword($password, $user->getSalt());
+        }
+        
         $passwordDigest = base64_encode(sha1($nonce . $created . $password, true));
 
         $token = "UsernameToken Username=\"{$username}\", " .
@@ -403,5 +414,118 @@ class UserController extends Controller
             );
         }
     }
+    
+    /**
+     * 
+     * Common method for auth through social networks
+     * 
+     * @param string $service
+     * 
+     * @return array
+     */
+    private function _loginThroughtSocialNetwork($service)
+    {
+        // collect data
+        $userTokenId = $this->container->get('request')->request->get('userTokenId');// require
+        if (is_null($userTokenId) || $userTokenId == "") {
+            return array(
+                'success' => false,
+                'errorStr' => $this->get('translator')->trans("validation.errors.user.Bad token id", array(), 'FOSUserBundle')
+            );
+        }
+        $realName = $this->container->get('request')->request->get('realName'); // require
+        if (is_null($realName) || $realName == "") {
+            return array(
+                'success' => false,
+                'errorStr' => $this->get('translator')->trans("validation.errors.user.Name is blank", array(), 'FOSUserBundle')
+            );
+        }
+        $realLastName = $this->container->get('request')->request->get('realLastName');
 
+        // Lets create toke service _ id (for example 213123424_facebook)
+        $accessToken = $userTokenId . "_" . $service;
+        
+        // find by name
+        $userManager = $this->container->get('fos_user.user_manager');
+        $user = $userManager->findUserBy(array("username" => $accessToken));
+        
+        //when the user is registrating
+        if (null === $user) {  
+            // create new user here
+            $user = $userManager->createUser();
+
+            $user->setUsername($accessToken);
+            $user->setFirstname($realName);
+            if (!is_null($realLastName)) {
+                $user->setLastname($realLastName);
+            } 
+            //email can be null
+            // Lets use default email
+            $user->setEmail($accessToken . "@table4you.com");
+
+            // encode password
+            $factory = $this->get('security.encoder_factory');
+            $encoder = $factory->getEncoder($user);
+            $password = $encoder->encodePassword($userTokenId, $user->getSalt());
+            
+            $user->setPassword($password);
+            $user->setEnabled(true);
+
+            if (null === $user->getConfirmationToken()) {
+                /** @var $tokenGenerator \FOS\UserBundle\Util\TokenGeneratorInterface */
+                $tokenGenerator = $this->container->get('fos_user.util.token_generator');
+                $user->setConfirmationToken($tokenGenerator->generateToken());
+            }
+            $userManager->updateUser($user); 
+        }
+ 
+        // get wsse token
+        $token = $this->createBaseWsse($user, $user->getPassword(), false); // used already encoded password
+         
+        // check if user change email after auth through social networks
+        if ($user->getEmail() == $user->getUsername() . "@table4you.com") {
+            $emailStatus = 0;
+        } else {
+            $emailStatus = 1;
+        }
+        return array(
+            'success' => true,
+            'user' => $user,
+            'token' => $token,
+            'emailStatus' => $emailStatus
+        ); 
+    }
+    
+    /**
+     * 
+     * Login through facebook
+     * 
+     * @Rest\View
+     */
+    public function loginThroughtFacebookAction()
+    {
+        return $this->_loginThroughtSocialNetwork("facebook");
+    }
+
+    /**
+     * 
+     * Login through twitter
+     * 
+     * @Rest\View
+     */
+    public function loginThroughtTwitterAction()
+    {
+        return $this->_loginThroughtSocialNetwork("twitter");
+    }
+    
+    /**
+     * 
+     * Login through vkontakte
+     * 
+     * @Rest\View
+     */
+    public function loginThroughtVkontakteAction()
+    {
+        return $this->_loginThroughtSocialNetwork("vkontakte");
+    }
 }
