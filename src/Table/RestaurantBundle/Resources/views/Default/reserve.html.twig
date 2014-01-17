@@ -143,6 +143,7 @@
             <div class="row-fluid">
                 <div class="span5">
                     <div class="choose-zone">
+                        <label>{% trans %}main.order.form.label.notice{% endtrans %}</label>
                         <p>
                                     {% if form.isSms.vars.errors|length %}
                                         {{ form_widget(form.isSms, {'attr':{'class':'error-form-reserve'} }) }}
@@ -152,6 +153,15 @@
                                     {{ form_label(form.isSms) }}
                                     {{ form_errors(form.isSms) }}
                         </p>
+                        <p>
+                            {{ form_label(form.isSmokingZone) }}
+                            {{ form_errors(form.isSmokingZone) }}
+                            {% if form.isSmokingZone.vars.errors|length %}
+                                {{ form_widget(form.isSmokingZone, {'attr':{'class':'error-form-reserve'} }) }}
+                            {%  else %}
+                                {{ form_widget(form.isSmokingZone) }}
+                            {% endif %}
+                        </p>
                         <p>    
                                     {% if form.isEmail.vars.errors|length %}
                                         {{ form_widget(form.isEmail, {'attr':{'class':'error-form-reserve'} }) }}
@@ -160,15 +170,6 @@
                                     {% endif %}
                                     {{ form_label(form.isEmail) }}
                                     {{ form_errors(form.isEmail) }}
-                        </p>
-                        <p>
-                                    {{ form_label(form.isSmokingZone) }}
-                                    {{ form_errors(form.isSmokingZone) }}
-                                    {% if form.isSmokingZone.vars.errors|length %}
-                                     {{ form_widget(form.isSmokingZone, {'attr':{'class':'error-form-reserve'} }) }}
-                                    {%  else %}
-                                            {{ form_widget(form.isSmokingZone) }}
-                                     {% endif %}
                         </p>
                     </div>       
                 </div>
