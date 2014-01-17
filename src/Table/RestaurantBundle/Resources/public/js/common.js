@@ -62,7 +62,7 @@ function TableOrder() {
             }
         });
     }
-
+    
     this.initFancySelectBox = function() {
 
         var timeParams = {

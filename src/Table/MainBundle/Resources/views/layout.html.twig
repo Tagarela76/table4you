@@ -10,7 +10,6 @@
 
         {% block stylesheets %}
             <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/bootstrap.css') }}">
-            <!--<link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/bootstrap-responsive.css') }}">-->
             <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/jquery-ui.css') }}">
             <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/main.css') }}">
             <!--[if lt IE 9]>
@@ -30,6 +29,12 @@
                 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.ie.css" />
             <![endif]-->
             <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablerestaurant/css/map.css') }}">
+            {# FANCYBOX #}
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/fancy-box/jquery.fancybox.css') }}">
+            <!-- Optionally add helpers - button, thumbnail and/or media -->
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/fancy-box/helpers/jquery.fancybox-buttons.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/fancy-box/helpers/jquery.fancybox-thumbs.css') }}">
+            {# FANCYBOX #}
         {% endblock %}
 
         {% block javascripts %}
@@ -79,6 +84,13 @@
             
             {# include leaflet map#}
             <script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
+            {# FANCYBOX #}
+            <script src="{{ asset('bundles/tablemain/fancy-box/jquery.fancybox.pack.js') }}"></script>
+            <!-- Optionally add helpers - button, thumbnail and/or media -->
+            <script src="{{ asset('bundles/tablemain/fancy-box/helpers/jquery.fancybox-buttons.js') }}"></script>
+            <script src="{{ asset('bundles/tablemain/fancy-box/helpers/jquery.fancybox-media.js') }}"></script>
+            <script src="{{ asset('bundles/tablemain/fancy-box/helpers/jquery.fancybox-thumbs.js') }}"></script>
+            {# FANCYBOX #}
         {% endblock %}
 
     </head>
