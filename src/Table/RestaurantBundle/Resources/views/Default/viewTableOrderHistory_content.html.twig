@@ -8,10 +8,10 @@
         </td>
         <td width="240">
             <p class="rest-name-table">
-                {{tableOrder.restaurant.name}}
                 <a onclick="page.restaurantMap.openMap({{tableOrder.restaurant.id}});" data-toggle="modal" href="#restaurantMap_{{tableOrder.restaurant.id}}">
                     <img src="{{ asset('bundles/tablerestaurant/images/label_card.png') }}" />
-                </a>  
+                </a> 
+                {{ tableOrder.restaurant.name|wordwrap(20, "<a>...</a>") | raw }}            
             </p>    
         </td>
         <td>
