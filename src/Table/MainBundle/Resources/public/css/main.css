@@ -666,7 +666,7 @@ div.boxChecked input, div.boxUnchecked input {
 }
 .choose-zone p{
     display: block;
-    width: 50%;
+    width: 48%;
     float: left;
 }
 .choose-zone p input[type="checkbox"]{
