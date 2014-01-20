@@ -1016,6 +1016,9 @@ background-image: url(images/selects-2.png);}*/
 .table-order-history table.table-order-history-th tr th:last-of-type{
     width: 270px; 
 }
+.table-order-history table.table-order-history-th .ui-datepicker-calendar tr th:last-of-type{
+    width: 45px;
+}
 .table-order-history table.table-order-history-th tr td a.btn{
     width: 50px !important;
     margin:4px 13px 4px 0px;
@@ -1049,6 +1052,9 @@ background-image: url(images/selects-2.png);}*/
 .table-order-history table.table-order-history-th tr{
     border-bottom: 1px solid #d7d6d8;
 }
+.table-order-history table.table-order-history-th .ui-datepicker-calendar tr{
+    border-bottom: 0;
+}
 .table-order-history table.table-order-history-th tr:last-of-type{
     border-bottom: none;
 }
@@ -1059,10 +1065,15 @@ background-image: url(images/selects-2.png);}*/
 }
 .table-order-history table.table-order-history-th th{
     background-color: #e6e3e3;
-
+}
+.table-order-history table.table-order-history-th .ui-datepicker-calendar th{
+    background: none;
 }
 .table-order-history table.table-order-history-th th + th + th{
     text-align: left;
+}
+.table-order-history table.table-order-history-th .ui-datepicker-calendar th + th + th{
+    text-align: center;
 }
 
 .error-li{
