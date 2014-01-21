@@ -7,11 +7,11 @@
             {{tableOrder.reserveTime|date('H:i')}}
         </td>
         <td width="240">
-            <p class="rest-name-table">
+            <p class="rest-name-table hide-symbols-up">
                 <a onclick="page.restaurantMap.openMap({{tableOrder.restaurant.id}});" data-toggle="modal" href="#restaurantMap_{{tableOrder.restaurant.id}}">
                     <img src="{{ asset('bundles/tablerestaurant/images/label_card.png') }}" />
                 </a> 
-                {{ tableOrder.restaurant.name|wordwrap(20, "<a>...</a>") | raw }}            
+                {{ tableOrder.restaurant.name|wordwrap(20, "<a class=hide-symbols>...</a>") | raw }}
             </p>    
         </td>
         <td>
@@ -36,5 +36,10 @@
         </td>
     </tr>   
 {%endfor%}
-<input type="hidden" id="map-icon" value="{{ asset('bundles/tablerestaurant/images/label_on_the_map.png') }}" />    
+<input type="hidden" id="map-icon" value="{{ asset('bundles/tablerestaurant/images/label_on_the_map.png') }}" />
+<script>
+        $(".hide-symbols").click(function(){
+            $(".hide-symbols-up").toggleClass("hide-symbols-down");
+        });
+</script>
                 
