@@ -1044,9 +1044,13 @@ background-image: url(images/selects-2.png);}*/
     margin-right: 5px;
     margin-top: 2px;
 }
+.table-order-history table.table-order-history-th tr td .hide-symbols{cursor: pointer;color: #E2601B;}
+.table-order-history table.table-order-history-th tr td .hide-symbols+.hide-symbols{display: none;}
+.table-order-history table.table-order-history-th tr td p.hide-symbols-up{height: 28px; overflow: hidden;}
+.table-order-history table.table-order-history-th tr td p.hide-symbols-down{overflow: visible; height: 100%;margin: 5px 0px;}
 .table-order-history table.table-order-history-th tr td p a{
     position: relative;
-    top: -4px;
+    top: 0px;
     margin-left: 2px;
 }
 .table-order-history table.table-order-history-th tr{
