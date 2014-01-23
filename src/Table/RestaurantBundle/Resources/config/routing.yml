@@ -41,4 +41,8 @@ table_getGeoRestaurants:
     requirements:
         _method: GET  
     options:
-       expose: true     
+       expose: true  
+       
+table_editor_dashboard:
+    pattern:  /table_editor
+    defaults: { _controller: TableRestaurantBundle:Default:viewEditorDashboard }      

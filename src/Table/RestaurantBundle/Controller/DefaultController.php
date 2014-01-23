@@ -587,5 +587,114 @@ class DefaultController extends Controller
         }
         return $geoRestaurants;
     }
+    
+    /**
+     * View Restaurant
+     * 
+     * 
+     * @Template()
+     */
+    public function viewEditorDashboardAction()
+    {$id = 3;
+        // get Current user
+        $user = $this->container->get('security.context')->getToken()->getUser();
+
+        // Check if user auth in app
+        $anonim = false;
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            $anonim = true;
+        }
+        // check if user can change rating
+        $isRatingDisabled = false;
+        $restaurantsWhoHadHasAlreadyRating = array();
+        if (!$anonim) {
+            $userRating = $this->getRatingStatManager()->getUserRestaurantRating($user->getId());
+            // only 3 state
+            if (count($userRating) > 2) {
+                $isRatingDisabled = true;
+            }
+            // Also we should get restaurants array , who has already have rating today
+
+            foreach ($userRating as $rating) {
+                // collect data
+                $restaurantsWhoHadHasAlreadyRating[] = $rating->getRestaurant()->getId();
+                if ($id == $rating->getRestaurant()->getId()) {
+                    $isRatingDisabled = true;
+                }
+            }
+        }
+        if ($anonim) {
+            $isRatingDisabled = true;
+        }
+
+        /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN HEADER */
+        // get city list
+        $cityList = $this->getCityManager()->findAll();
+        /// get all category list
+        $categoryList = $this->getRestaurantCategoryManager()->getCategories();
+        // get all kitchen list
+        $kitchenList = $this->getRestaurantKitchenManager()->getKitchens();
+
+        // get current city
+        $searchCity = $this->getRequest()->query->get('searchCity');
+        // if null set default -> krasnodar
+        if (is_null($searchCity)) {
+            $searchCity = 1;
+        }
+        /*         * ** */
+
+        /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN RIGHT SIDEBAR */
+        $newsList = $this->getNewsManager()->findByCity($searchCity);
+
+        // BreadCrumbs
+        $breadcrumbs = $this->getBreadCrumbsManager();
+        $breadcrumbs->addItem(
+                $this->get('translator')->trans('main.breadcrumbs.label.home'), $this->get("router")->generate("table_main_homepage")
+        );
+        // current
+        $breadcrumbs->addItem(
+                $this->get('translator')->trans('main.breadcrumbs.label.restaurant')
+        );
+
+        // get additional photo
+        $additionalPhotos = array();
+        $menuPhotos = array();
+        $restaurant = $this->getRestaurantManager()->findOneById($id);
+
+        if (is_null($restaurant)) {
+            throw $this->createNotFoundException('The page does not exist');
+        }
+        $helper = $this->container->get('vich_uploader.templating.helper.uploader_helper');
+        foreach ($restaurant->getAdditionalPhotos() as $additionalPhoto) {
+            if (!is_null($additionalPhoto->getFileName())) {
+                $additionalPhotos[] = $helper->asset($additionalPhoto, 'file');
+            }
+        }
+
+        foreach ($restaurant->getAdditionalMenuPhotos() as $menuPhoto) {
+            if (!is_null($menuPhoto->getFileName())) {
+                $menuPhotos[] = $helper->asset($menuPhoto, 'file');
+            }
+        }
+
+        // assign base_url
+        $baseUrl = $this->container->getParameter('base_folder_url');
+        return array(
+            'restaurant' => $restaurant,
+            'anonim' => $anonim,
+            'weekDays' => RestaurantSchedule::$WEEK_DAYS,
+            'isRatingDisabled' => $isRatingDisabled,
+            'restaurantsWhoHadHasAlreadyRating' => $restaurantsWhoHadHasAlreadyRating,
+            'cityList' => $cityList,
+            'categoryList' => $categoryList,
+            'kitchenList' => $kitchenList,
+            'searchCity' => $searchCity,
+            'breadcrumbs' => $breadcrumbs,
+            'additionalPhotos' => $additionalPhotos,
+            'menuPhotos' => $menuPhotos,
+            'baseUrl' => $baseUrl,
+            'newsList' => $newsList->getQuery()->getResult()
+        );
+    }
 
 }

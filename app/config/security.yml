@@ -33,6 +33,10 @@ security:
             logout:
                 path:           /table_admin/logout
             anonymous:          true
+        editor:
+            pattern:            /table_editor(.*)
+            context:            user
+            anonymous:          true    
         main:
             pattern:             .*
             context:             user
@@ -71,6 +75,8 @@ security:
         - { path: ^/table_admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/table_admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/table_admin/login-check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        - { path: ^/table_editor, role: [ROLE_ADMIN] }
 
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }

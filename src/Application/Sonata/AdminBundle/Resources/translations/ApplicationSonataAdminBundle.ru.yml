@@ -2,6 +2,7 @@ restaurant:
   restaurant: Ресторан
   restaurants: Рестораны
   additionalServices: Дополнительные услуги
+  editor: Админ ресторана
   kitchen:
     kitchen: Кухня
     kitchens: Кухни

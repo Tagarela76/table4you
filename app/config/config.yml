@@ -109,10 +109,16 @@ sonata_media:
         map_photo:
             providers:
                 - sonata.media.provider.image
-
             formats:
                 small: { width: 150 , quality: 95}
-                big:   { width: 500 , quality: 90}         
+                big:   { width: 500 , quality: 90}  
+                
+        table_type_photo:
+            providers:
+                - sonata.media.provider.image
+            formats:
+                small: { width: 150 , quality: 95}
+                big:   { width: 500 , quality: 90}            
 
     cdn:
         server:
