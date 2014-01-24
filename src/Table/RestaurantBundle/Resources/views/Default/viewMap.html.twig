@@ -45,8 +45,14 @@
             success: function(response) { 
                 // add all Restaurants
                 var markers = L.markerClusterGroup({
-                   // maxClusterRadius: 50,
-                    removeOutsideVisibleBounds: false
+                    removeOutsideVisibleBounds: false,
+                    iconCreateFunction: function(cluster) {
+                        return new L.divIcon({ 
+                            className: 'map-count-icon',
+                            iconSize: new L.Point(30, 40),
+                            html: '<b>' + cluster.getChildCount() + '</b>'
+                        });
+                    }
                 });
                 
                 for (var i = 0; i < response.length; i++) {

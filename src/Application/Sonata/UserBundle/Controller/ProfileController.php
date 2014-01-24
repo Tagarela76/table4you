@@ -11,7 +11,7 @@ use FOS\UserBundle\Event\FilterUserResponseEvent;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FOS\UserBundle\FOSUserEvents;
 use Symfony\Component\Form\FormError;
-use Sonata\UserBundle\Controller\ProfileController as BaseSecurityController;
+use FOS\UserBundle\Controller\ProfileController as BaseSecurityController;
 use Table\RestaurantBundle\Entity\News;
 
 /**
@@ -44,14 +44,14 @@ class ProfileController extends BaseSecurityController
 
         /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN HEADER */
         // get city list
-        $cityList = $this->get('city_manager')->findAll();
+        $cityList = $this->container->get('city_manager')->findAll();
         /// get all category list
-        $categoryList = $this->get('restaurant_category_manager')->findAll();
+        $categoryList = $this->container->get('restaurant_category_manager')->findAll();
         // get all kitchen list
-        $kitchenList = $this->get('restaurant_kitchen_manager')->findAll();
+        $kitchenList = $this->container->get('restaurant_kitchen_manager')->findAll();
 
         // get current city
-        $searchCity = $this->getRequest()->query->get('searchCity');
+        $searchCity = $this->container->get('request')->query->get('searchCity');
         // if null set default -> krasnodar
         if (is_null($searchCity)) {
             $searchCity = 1;
@@ -59,19 +59,20 @@ class ProfileController extends BaseSecurityController
         /*         * ** */
 
         /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN RIGHT SIDEBAR */
-        $newsList = $this->get('news_manager')->getNews();
+        $newsList = $this->container->get('news_manager')->getNews();
 
         // BreadCrumbs
-        $breadcrumbs = $this->get('white_october_breadcrumbs');
+        $breadcrumbs = $this->container->get('white_october_breadcrumbs');
         $breadcrumbs->addItem(
-                $this->get('translator')->trans('main.breadcrumbs.label.home'), $this->get("router")->generate("table_main_homepage")
+                $this->container->get('translator')->trans('main.breadcrumbs.label.home'), $this->container->get("router")->generate("table_main_homepage")
         );
         // current
         $breadcrumbs->addItem(
-                $this->get('translator')->trans('main.breadcrumbs.label.profile')
+                $this->container->get('translator')->trans('main.breadcrumbs.label.profile')
         );
 
-        return $this->render('ApplicationSonataUserBundle:Profile:show.html.twig', array(
+        return $this->container->get('templating')->renderResponse(
+                'ApplicationSonataUserBundle:Profile:show.html.twig', array(
                     'user' => $user,
                     'cityList' => $cityList,
                     'categoryList' => $categoryList,
@@ -102,7 +103,7 @@ class ProfileController extends BaseSecurityController
         if ($process) {
             // $this->setFlash('fos_user_success', 'profile.flash.updated');
 
-            return new RedirectResponse($this->generateUrl('sonata_user_profile_show'));
+            return new RedirectResponse($this->container->get('router')->generate('fos_user_profile_show'));
         }
         foreach ($form->getErrors() as $formError) {
             if ($formError->getMessageTemplate() == "fos_user.password.password_not_fit_format") {
@@ -112,13 +113,13 @@ class ProfileController extends BaseSecurityController
 
         /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN HEADER */
         // get city list
-        $cityList = $this->get('city_manager')->findAll();
+        $cityList = $this->container->get('city_manager')->findAll();
         /// get all category list
-        $categoryList = $this->get('restaurant_category_manager')->findAll();
+        $categoryList = $this->container->get('restaurant_category_manager')->findAll();
         // get all kitchen list
-        $kitchenList = $this->get('restaurant_kitchen_manager')->findAll();
+        $kitchenList = $this->container->get('restaurant_kitchen_manager')->findAll();
         // get current city
-        $searchCity = $this->getRequest()->query->get('searchCity');
+        $searchCity = $this->container->get('request')->query->get('searchCity');
         // if null set default -> krasnodar
         if (is_null($searchCity)) {
             $searchCity = 1;
@@ -126,21 +127,21 @@ class ProfileController extends BaseSecurityController
         /*         * ** */
 
         /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN RIGHT SIDEBAR */
-        $newsList = $this->get('news_manager')->getNews();
+        $newsList = $this->container->get('news_manager')->getNews();
 
         // BreadCrumbs
-        $breadcrumbs = $this->get('white_october_breadcrumbs');
+        $breadcrumbs = $this->container->get('white_october_breadcrumbs');
         $breadcrumbs->addItem(
-                $this->get('translator')->trans('main.breadcrumbs.label.home'), $this->get("router")->generate("table_main_homepage")
+                $this->container->get('translator')->trans('main.breadcrumbs.label.home'), $this->container->get("router")->generate("table_main_homepage")
         );
 
         $breadcrumbs->addItem(
-                $this->get('translator')->trans('main.breadcrumbs.label.profile'), $this->get("router")->generate("fos_user_profile_show")
+                $this->container->get('translator')->trans('main.breadcrumbs.label.profile'), $this->container->get("router")->generate("fos_user_profile_show")
         );
 
         // current
         $breadcrumbs->addItem(
-                $this->get('translator')->trans('main.breadcrumbs.label.editProfile')
+                $this->container->get('translator')->trans('main.breadcrumbs.label.editProfile')
         );
 
         // Check if user should fill email
@@ -149,7 +150,8 @@ class ProfileController extends BaseSecurityController
                 $user->getEmail() == $user->getUsername() . "@table4you.com") {
             $isInvalidEmail = true;
         }
-        return $this->render('ApplicationSonataUserBundle:Profile:edit_profile.html.twig', array(
+        return $this->container->get('templating')->renderResponse(
+                'ApplicationSonataUserBundle:Profile:edit_profile.html.twig', array(
             'form' => $form->createView(),
             'cityList' => $cityList,
             'categoryList' => $categoryList,
