@@ -1,3 +1,64 @@
+function TableType() {
+    
+    this.validateEditForm = function(el) {
+        //reset errors
+        $(".validationError").css("display", "none");
+        // Get parent form
+        var form = $(el).closest('form');
+        //check if people count field empty
+        if (form.find($('input[name="peopleCount"]')).val() == "") {
+            //display error
+            $(".validationError").css("display", "block");
+        } else {
+            // submit form
+            form.submit(); 
+        }
+        
+    }
+    
+    this.validateAddForm = function() {
+        //reset errors
+        $(".validationError").css("display", "none");
+        
+        //check if people count field empty
+        var peopleCountEmptyError = false;
+        $(":input[name='peopleCount[]']").each(function(i){
+            if($(this).val() == "") {
+                peopleCountEmptyError = true;
+            }
+        });
+        //check if file field empty
+        var fileEmptyError = false;
+        $(":input[name='file[]']").each(function(i){
+            if($(this).val() == "") {
+                fileEmptyError = true;
+            }
+        });
+
+        //validate
+        if (peopleCountEmptyError || fileEmptyError) {
+            //display error
+           $(".validationError").css("display", "block");
+        } else {
+            // submit form
+            $("#table-type-form").submit(); 
+        }
+        
+    }
+    
+    this.deleteTableType = function(tableTypeId) {
+        $.ajax({
+            url: Routing.generate('table_deleteTableType'),
+            data: {tableTypeId: tableTypeId},
+            type: "POST",
+            dataType: "html",
+            success: function(responce) {
+                $('#tableTypeContainer').html(responce);
+            }
+        });
+    }
+}
+
 function RestaurantMap() {
 
     this.openMap = function(restaurantId) {
@@ -216,6 +277,30 @@ function Common() {
             }
         });
     }
+    
+    this.addNewFileField = function() {
+        //should be no more than 10
+        var fileContaunerCount = $(":input[name='peopleCount[]']").length; 
+        if (fileContaunerCount != 10) {
+            var peopleCountLabel = $("#peopleCountLabel").val();
+            var deleteFileIcon = $("#deleteFileIcon").val();
+            var fileContainer = "<div class='row-fluid'>" +
+                    "<span class='span5'>" + peopleCountLabel +
+                    "<input type='text' name='peopleCount[]' size='2'>" +
+                    "</span>" +
+                    "<span class='span5'>" +
+                    "<input type='file' name='file[]' size='30' >" +
+                    "<a href='#' onclick='page.common.removeFileField(this); return false;'> " +
+                    "<img alt='Delete' src='" + deleteFileIcon + "'>" +
+                    "</a></span></div>";
+
+            $('#fileFieldsContainer').append(fileContainer);
+        }
+    }
+
+    this.removeFileField = function(element) {
+        $(element).closest("div").remove();
+    }
 }
 
 function UserProfile() {
@@ -244,6 +329,7 @@ function Page() {
     this.common = new Common();
     this.newsFilter = new NewsFilter();
     this.userProfile = new UserProfile();
+    this.tableType = new TableType();
 }
 
 //global page object

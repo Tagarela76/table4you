@@ -52,4 +52,21 @@ main:
   restaurant:
       label:
           top: Топ заведений
+  tableMap:
+      tableList:
+        header: Список столов 
+        add: Добавить столик
+        tableOn: Столик на
+        form:
+            label:
+                tableOn: Столик на
+                addMore: Добавить еще
+                load: Загрузить
+            error:
+                peopleCount: Заполните поле
+            errors: Ошибки при заполении формы    
+      createMap:
+        header: Создать карту
+      orders:
+        header: Заказы
           

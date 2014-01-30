@@ -277,6 +277,14 @@ vich_uploader:
             delete_on_update: true
             inject_on_load: true 
             namer: vich_uploader.namer_origname     
+       
+        table_type:
+            uri_prefix: /uploads/media/tableType
+            upload_destination:  %kernel.root_dir%/../web/uploads/media/tableType
+            delete_on_remove: true
+            delete_on_update: true
+            inject_on_load: true 
+            namer: vich_uploader.namer_origname        
             
 hwi_oauth:
     #this is my custom user provider, created from FOSUBUserProvider - will manage the 

@@ -3,7 +3,10 @@
 namespace Table\RestaurantBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -11,6 +14,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  *
  * @ORM\Table(name="table_type")
  * @ORM\Entity(repositoryClass="Table\RestaurantBundle\Entity\Repository\TableTypeRepository")
+ * @Vich\Uploadable
  */
 class TableType
 {
@@ -31,14 +35,18 @@ class TableType
     private $peopleCount;
 
     /**
-     * @var Application\Sonata\MediaBundle\Entity\Media $image
-     * 
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
-     * @ORM\JoinColumn(name="photo", referencedColumnName="id")
-     *
-     * @Assert\NotBlank
-     * */
-    private $image;
+     * @Assert\File(
+     *     maxSize="20M",
+     *     mimeTypes={"image/png", "image/jpeg", "image/pjpeg"}
+     * )
+     * @Vich\UploadableField(mapping="table_type", fileNameProperty="fileName")
+     */
+    protected $file;
+
+    /**
+     * @ORM\Column(name="file_name", type="string", nullable=true)
+     */
+    protected $fileName;
     
     /**
      * @ORM\OneToMany(targetEntity="ActiveTable", mappedBy="tableType", orphanRemoval=true, cascade={"persist", "remove"})
@@ -83,26 +91,44 @@ class TableType
     {
         return $this->peopleCount;
     }
-
     
-    /**
-     * Get image
-     *
-     * @return Application\Sonata\MediaBundle\Entity\Media 
-     */
-    public function getImage()
+    public function getFile()
     {
-        return $this->image;
+        return $this->file;
     }
 
     /**
-     * Set image
-     *
-     * @param Application\Sonata\MediaBundle\Entity\Media $image
-     * @return Restaurant
+     * 
+     * @return string
      */
-    public function setImage($image)
+    public function getFileName()
     {
-        $this->image = $image;
+        return $this->fileName;
+    }
+
+    
+    public function setFile($file)
+    {
+        $this->file = $file;
+    }
+
+    /**
+     * 
+     * @param string $fileName
+     * 
+     * @return TableType
+     */
+    public function setFileName($fileName)
+    {
+        $this->fileName = $fileName;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return strval($this->getFileName());
     }
 }
