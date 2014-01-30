@@ -21,14 +21,14 @@ function TableType() {
         $(".validationError").css("display", "none");
         
         //check if people count field empty
-        var peopleCountEmptyError = false;
+        var isPeopleCountEmptyError = false;
         $(":input[name='peopleCount[]']").each(function(i){
             if($(this).val() == "") {
                 peopleCountEmptyError = true;
             }
         });
         //check if file field empty
-        var fileEmptyError = false;
+        var isFileEmptyError = false;
         $(":input[name='file[]']").each(function(i){
             if($(this).val() == "") {
                 fileEmptyError = true;
@@ -36,7 +36,7 @@ function TableType() {
         });
 
         //validate
-        if (peopleCountEmptyError || fileEmptyError) {
+        if (isPeopleCountEmptyError || isFileEmptyError) {
             //display error
            $(".validationError").css("display", "block");
         } else {

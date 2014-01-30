@@ -10,9 +10,8 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class TableDashboardController extends Controller
 {
-
-        /**
-     * View Restaurant
+    /**
+     * View Editor Dashboard
      * 
      * @Template()
      */
