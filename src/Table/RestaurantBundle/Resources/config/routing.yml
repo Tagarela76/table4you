@@ -41,4 +41,33 @@ table_getGeoRestaurants:
     requirements:
         _method: GET  
     options:
+       expose: true  
+
+# Interactive table map
+table_editor_dashboard:
+    pattern:  /table_editor
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:viewEditorDashboard }      
+    
+table_updateTableTypeList:
+    pattern:  /updateTableTypeList
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:updateTableTypeList, _format: json }
+    requirements:
+        _method: POST  
+    options:
        expose: true     
+       
+table_editTableType:
+    pattern:  /editTableType
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:editTableType, _format: json }
+    requirements:
+        _method: POST  
+    options:
+       expose: true     
+  
+table_deleteTableType:
+    pattern:  /deleteTableType
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:deleteTableType, _format: json }
+    requirements:
+        _method: POST  
+    options:
+       expose: true         

@@ -177,6 +177,19 @@ class Restaurant
      */
     protected $news;
     
+    /**
+     * @ORM\OneToMany(targetEntity="ActiveTable", mappedBy="restaurant", orphanRemoval=true, cascade={"persist", "remove"})
+     */
+    protected $activeTables;
+    
+    /**
+     * @var Application\Sonata\UserBundle\Entity\User $editor
+     * 
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\UserBundle\Entity\User", inversedBy="restaurants")
+     * @ORM\JoinColumn(name="editor_id", referencedColumnName="id", onDelete="CASCADE")
+     * */
+    private $editor;
+    
     public function __construct()
     {
         $this->additionalServices = new ArrayCollection();
@@ -186,6 +199,7 @@ class Restaurant
         $this->additionalPhotos = new ArrayCollection();
         $this->additionalMenuPhotos = new ArrayCollection();
         $this->news = new ArrayCollection();
+        $this->activeTables = new ArrayCollection();
     }
 
     /**
@@ -857,6 +871,50 @@ class Restaurant
     public function setNews($news)
     {
         $this->news = $news;
+    }
+    
+    /**
+     * Get activeTables
+     *
+     * @return Table\RestaurantBundle\Entity\ActiveTable[] 
+     */
+    public function getActiveTables()
+    {
+        return $this->activeTables;
+    }
+
+    /**
+     * Set activeTables
+     *
+     * @param Table\RestaurantBundle\Entity\ActiveTable[] $activeTables
+     * @return Restaurant
+     */
+    public function setActiveTables($activeTables)
+    {
+        $this->activeTables = $activeTables;
+    }
+    
+    /**
+     * Set editor
+     *
+     * @param Application\Sonata\UserBundle\Entity\User
+     * @return Restaurant
+     */
+    public function setEditor($editor)
+    {
+        $this->editor = $editor;
+
+        return $this;
+    }
+
+    /**
+     * Get editor
+     *
+     * @return Application\Sonata\UserBundle\Entity\User
+     */
+    public function getEditor()
+    {
+        return $this->editor;
     }
     
     /**

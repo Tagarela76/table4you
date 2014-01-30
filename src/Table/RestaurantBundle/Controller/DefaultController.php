@@ -13,7 +13,7 @@ use FOS\UserBundle\Model\UserInterface;
 use Table\RestaurantBundle\Entity\RatingStat;
 use Table\RestaurantBundle\Entity\RestaurantSchedule;
 use Table\RestaurantBundle\Entity\Restaurant;
-use Table\RestaurantBundle\Entity\News;
+use Table\RestaurantBundle\Entity\TableType;
 
 class DefaultController extends Controller
 {
@@ -587,5 +587,5 @@ class DefaultController extends Controller
         }
         return $geoRestaurants;
     }
-
+   
 }

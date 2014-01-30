@@ -219,6 +219,9 @@ class RestaurantAdmin extends Admin
                     'inline' => 'table',
                     'allow_delete' => true
                 ))
+                ->add('editor', null, array(
+                    'label' => 'restaurant.editor'
+                ))
         ;
     }
 
@@ -263,6 +266,9 @@ class RestaurantAdmin extends Admin
                 ))
                 ->add('categories', 'sonata_type_model', array(
                     'label' => 'restaurant.category.category'
+                ))
+                ->add('editor', null, array(
+                    'label' => 'restaurant.editor'
                 ))
         ;
     }

@@ -109,10 +109,16 @@ sonata_media:
         map_photo:
             providers:
                 - sonata.media.provider.image
-
             formats:
                 small: { width: 150 , quality: 95}
-                big:   { width: 500 , quality: 90}         
+                big:   { width: 500 , quality: 90}  
+                
+        table_type_photo:
+            providers:
+                - sonata.media.provider.image
+            formats:
+                small: { width: 150 , quality: 95}
+                big:   { width: 500 , quality: 90}            
 
     cdn:
         server:
@@ -271,6 +277,14 @@ vich_uploader:
             delete_on_update: true
             inject_on_load: true 
             namer: vich_uploader.namer_origname     
+       
+        table_type:
+            uri_prefix: /uploads/media/tableType
+            upload_destination:  %kernel.root_dir%/../web/uploads/media/tableType
+            delete_on_remove: true
+            delete_on_update: true
+            inject_on_load: true 
+            namer: vich_uploader.namer_origname        
             
 hwi_oauth:
     #this is my custom user provider, created from FOSUBUserProvider - will manage the 
