@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use FOS\UserBundle\Model\UserInterface;
 use Table\RestaurantBundle\Entity\TableType;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Application\Sonata\UserBundle\Entity\User;
 
 class TableDashboardController extends Controller
 {
@@ -28,12 +29,23 @@ class TableDashboardController extends Controller
             );
         }
         $tableTypeList = $this->getTableTypeManager()->findAll();
+        
         // assign base_url
         $baseUrl = $this->container->getParameter('base_folder_url');
         
+        
+        // we should now if user is super admin
+        $isUserIsSuperAdmin = false;
+        if (in_array(User::ROLE_SUPER_ADMIN, $user->getRoles())) {
+            $isUserIsSuperAdmin = true;
+        }
+        // get restaurant list
+        $restaurantList = $this->getRestaurantManager()->getEditorRestaurants($user->getId(), $isUserIsSuperAdmin);
+       
         return array(
             'tableTypeList' => $tableTypeList,
-            'baseUrl' => $baseUrl
+            'baseUrl' => $baseUrl,
+            'restaurantList' => $restaurantList
         );
     }
     

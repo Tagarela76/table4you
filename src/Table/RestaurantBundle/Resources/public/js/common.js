@@ -9,6 +9,7 @@ function TableType() {
         if (form.find($('input[name="peopleCount"]')).val() == "") {
             //display error
             $(".validationError").css("display", "block");
+            form.find($('input[name="peopleCount"]')).addClass("error-form");
         } else {
             // submit form
             form.submit(); 
@@ -24,14 +25,16 @@ function TableType() {
         var isPeopleCountEmptyError = false;
         $(":input[name='peopleCount[]']").each(function(i){
             if($(this).val() == "") {
-                peopleCountEmptyError = true;
+                isPeopleCountEmptyError = true;
+                $(this).addClass("error-form");
             }
         });
         //check if file field empty
         var isFileEmptyError = false;
         $(":input[name='file[]']").each(function(i){
             if($(this).val() == "") {
-                fileEmptyError = true;
+                isFileEmptyError = true;
+                $(this).addClass("error-form");
             }
         });
 

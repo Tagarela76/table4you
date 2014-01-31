@@ -63,10 +63,11 @@ main:
                 addMore: Добавить еще
                 load: Загрузить
             error:
-                peopleCount: Заполните поле
+                peopleCount: Укажите кол-во гостей
             errors: Ошибки при заполении формы    
       createMap:
         header: Создать карту
+        restaurantList: Список ресторанов
       orders:
         header: Заказы
           

@@ -26,7 +26,7 @@ class ActiveTable
      * @var Table\RestaurantBundle\Entity\TableType $tableType
      * 
      * @ORM\ManyToOne(targetEntity="Table\RestaurantBundle\Entity\TableType", inversedBy="activeTables")
-     * @ORM\JoinColumn(name="restaurant_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="table_type_id", referencedColumnName="id", onDelete="CASCADE")
      * */
     private $tableType;
 
@@ -36,14 +36,28 @@ class ActiveTable
      * @ORM\Column(name="table_number", type="integer")
      */
     private $tableNumber;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="top", type="integer")
+     */
+    private $top;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="left", type="integer")
+     */
+    private $left;
 
     /**
-     * @var Table\RestaurantBundle\Entity\Restaurant $restaurant
+     * @var Table\RestaurantBundle\Entity\TableMap $tableMap
      * 
-     * @ORM\ManyToOne(targetEntity="Table\RestaurantBundle\Entity\Restaurant", inversedBy="activeTables")
-     * @ORM\JoinColumn(name="restaurant_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\ManyToOne(targetEntity="Table\RestaurantBundle\Entity\TableMap", inversedBy="activeTables")
+     * @ORM\JoinColumn(name="table_map_id", referencedColumnName="id", onDelete="CASCADE")
      * */
-    private $restaurant;
+    private $tableMap;
 
     /**
      * Get id
@@ -99,28 +113,5 @@ class ActiveTable
     public function getTableNumber()
     {
         return $this->tableNumber;
-    }
-    
-    /**
-     * Set restaurant
-     *
-     * @param Table\RestaurantBundle\Entity\Restaurant $restaurant
-     * @return ActiveTable
-     */
-    public function setRestaurant($restaurant)
-    {
-        $this->restaurant = $restaurant;
-    
-        return $this;
-    }
-
-    /**
-     * Get restaurant
-     *
-     * @return Table\RestaurantBundle\Entity\Restaurant 
-     */
-    public function getRestaurant()
-    {
-        return $this->restaurant;
-    }
+    } 
 }

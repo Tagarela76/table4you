@@ -44,5 +44,6 @@ main:
             errors: Errors while edit form    
       createMap:
         header: Create a map
+        restaurantList: Restaurant list
       orders:
         header: Orders    

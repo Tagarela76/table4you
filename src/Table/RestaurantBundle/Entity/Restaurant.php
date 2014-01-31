@@ -178,9 +178,9 @@ class Restaurant
     protected $news;
     
     /**
-     * @ORM\OneToMany(targetEntity="ActiveTable", mappedBy="restaurant", orphanRemoval=true, cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="TableMap", mappedBy="restaurant", orphanRemoval=true, cascade={"persist", "remove"})
      */
-    protected $activeTables;
+    protected $tableMaps;
     
     /**
      * @var Application\Sonata\UserBundle\Entity\User $editor
@@ -199,7 +199,7 @@ class Restaurant
         $this->additionalPhotos = new ArrayCollection();
         $this->additionalMenuPhotos = new ArrayCollection();
         $this->news = new ArrayCollection();
-        $this->activeTables = new ArrayCollection();
+        $this->tableMaps = new ArrayCollection();
     }
 
     /**
@@ -874,24 +874,24 @@ class Restaurant
     }
     
     /**
-     * Get activeTables
+     * Get tableMaps
      *
-     * @return Table\RestaurantBundle\Entity\ActiveTable[] 
+     * @return Table\RestaurantBundle\Entity\TableMap[] 
      */
-    public function getActiveTables()
+    public function getTableMaps()
     {
-        return $this->activeTables;
+        return $this->tableMaps;
     }
 
     /**
-     * Set activeTables
+     * Set tableMaps
      *
-     * @param Table\RestaurantBundle\Entity\ActiveTable[] $activeTables
+     * @param Table\RestaurantBundle\Entity\TableMap[] $tableMaps
      * @return Restaurant
      */
-    public function setActiveTables($activeTables)
+    public function setTableMaps($tableMaps)
     {
-        $this->activeTables = $activeTables;
+        $this->tableMaps = $tableMaps;
     }
     
     /**

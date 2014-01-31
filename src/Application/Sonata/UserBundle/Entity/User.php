@@ -42,6 +42,7 @@ class User extends BaseUser
      */
     protected $restaurants;
 
+    const ROLE_SUPER_ADMIN = "ROLE_SUPER_ADMIN";
     /**
      * Get id
      *

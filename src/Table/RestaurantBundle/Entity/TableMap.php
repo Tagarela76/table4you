@@ -10,13 +10,13 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * TableType
+ * TableMap
  *
- * @ORM\Table(name="table_type")
- * @ORM\Entity(repositoryClass="Table\RestaurantBundle\Entity\Repository\TableTypeRepository")
+ * @ORM\Table(name="table_map")
+ * @ORM\Entity(repositoryClass="Table\RestaurantBundle\Entity\Repository\TableMapRepository")
  * @Vich\Uploadable
  */
-class TableType
+class TableMap
 {
     /**
      * @var integer
@@ -28,18 +28,11 @@ class TableType
     private $id;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="people_count", type="integer")
-     */
-    private $peopleCount;
-
-    /**
      * @Assert\File(
      *     maxSize="20M",
      *     mimeTypes={"image/png", "image/jpeg", "image/pjpeg"}
      * )
-     * @Vich\UploadableField(mapping="table_type", fileNameProperty="fileName")
+     * @Vich\UploadableField(mapping="table_map", fileNameProperty="fileName")
      */
     protected $file;
 
@@ -49,16 +42,37 @@ class TableType
     protected $fileName;
     
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="floor", type="integer")
+     */
+    private $floor;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="hall", type="integer", nullable=true)
+     */
+    private $hall;
+    
+    /**
+     * @var Table\RestaurantBundle\Entity\Restaurant $restaurant
+     * 
+     * @ORM\ManyToOne(targetEntity="Table\RestaurantBundle\Entity\Restaurant", inversedBy="tableMaps")
+     * @ORM\JoinColumn(name="restaurant_id", referencedColumnName="id", onDelete="CASCADE")
+     * */
+    private $restaurant;
+
+    /**
      * @ORM\OneToMany(targetEntity="ActiveTable", mappedBy="tableType", orphanRemoval=true, cascade={"persist", "remove"})
      */
     protected $activeTables;
-    
     
     public function __construct()
     {
         $this->activeTables = new ArrayCollection();
     }
-    
+
     /**
      * Get id
      *
@@ -70,33 +84,79 @@ class TableType
     }
 
     /**
-     * Set peopleCount
+     * Set floor
      *
-     * @param integer $peopleCount
-     * @return TableType
+     * @param integer $floor
+     * @return TableMap
      */
-    public function setPeopleCount($peopleCount)
+    public function setFloor($floor)
     {
-        $this->peopleCount = $peopleCount;
+        $this->floor = $floor;
     
         return $this;
     }
 
     /**
-     * Get peopleCount
+     * Get floor
      *
      * @return integer 
      */
-    public function getPeopleCount()
+    public function getFloor()
     {
-        return $this->peopleCount;
+        return $this->floor;
+    }
+
+    /**
+     * Set hall
+     *
+     * @param integer $hall
+     * @return TableMap
+     */
+    public function setHall($hall)
+    {
+        $this->hall = $hall;
+    
+        return $this;
+    }
+
+    /**
+     * Get hall
+     *
+     * @return integer 
+     */
+    public function getHall()
+    {
+        return $this->hall;
+    }
+    
+    /**
+     * Set restaurant
+     *
+     * @param Table\RestaurantBundle\Entity\Restaurant $restaurant
+     * @return TableMap
+     */
+    public function setRestaurant($restaurant)
+    {
+        $this->restaurant = $restaurant;
+    
+        return $this;
+    }
+
+    /**
+     * Get restaurant
+     *
+     * @return Table\RestaurantBundle\Entity\Restaurant 
+     */
+    public function getRestaurant()
+    {
+        return $this->restaurant;
     }
     
     public function getFile()
     {
         return $this->file;
     }
-
+    
     /**
      * 
      * @return string
@@ -116,7 +176,7 @@ class TableType
      * 
      * @param string $fileName
      * 
-     * @return TableType
+     * @return TableMap
      */
     public function setFileName($fileName)
     {
@@ -137,15 +197,14 @@ class TableType
      * 
      * @param Table\RestaurantBundle\Entity\TableMap[] $activeTables
      * 
-     * @return TableType
+     * @return TableMap
      */
     public function setActiveTables($activeTables)
     {
         $this->activeTables = $activeTables;
         return $this;
     }
-
-        
+    
     /**
      * @return string
      */
