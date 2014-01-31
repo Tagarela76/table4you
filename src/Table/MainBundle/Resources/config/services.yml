@@ -31,4 +31,7 @@ services:
         arguments: [@doctrine.orm.entity_manager, @service_container]    
   news_manager:
         class: Table\RestaurantBundle\Model\NewsManager
-        arguments: [@doctrine.orm.entity_manager, @service_container]       
+        arguments: [@doctrine.orm.entity_manager, @service_container]
+  table_type_manager:
+        class: Table\RestaurantBundle\Model\TableTypeManager
+        arguments: [@doctrine.orm.entity_manager, @service_container] 

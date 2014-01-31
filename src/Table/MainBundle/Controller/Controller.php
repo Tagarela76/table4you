@@ -96,4 +96,9 @@ class Controller extends BaseController
     {
         return $this->get('news_manager');
     }
+    
+    public function getTableTypeManager()
+    {
+        return $this->get('table_type_manager');
+    }
 }

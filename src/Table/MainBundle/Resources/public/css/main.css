@@ -1799,3 +1799,7 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     background: linear-gradient(to bottom, #feb200 0%,#e2601b 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feb200', endColorstr='#e2601b',GradientType=0 );
 }
+
+.validationError {
+    display: none;
+}

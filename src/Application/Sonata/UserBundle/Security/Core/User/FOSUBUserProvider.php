@@ -90,7 +90,7 @@ class FOSUBUserProvider extends BaseClass
                 $user->setEmail($accessToken . "@table4you.com");
 
                 // encode password
-                $factory = $this->get('security.encoder_factory');
+                $factory = $this->container->get('security.encoder_factory');
                 $encoder = $factory->getEncoder($user);
                 $password = $encoder->encodePassword($userTokenId, $user->getSalt());
 

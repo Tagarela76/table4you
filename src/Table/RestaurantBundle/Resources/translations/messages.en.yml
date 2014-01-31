@@ -28,4 +28,21 @@ main:
         userCannotOrderTable: "our service allows to book no more than one table."
   restaurant:
       label:
-          top: TOP       
+          top: TOP 
+  tableMap:
+      tableList:
+        header: Table list
+        add: Add a table
+        tableOn: Table on
+        form:
+            label:
+                tableOn: table on
+                addMore: add more
+                load: Load
+            error:
+                peopleCount: Fill field
+            errors: Errors while edit form    
+      createMap:
+        header: Create a map
+      orders:
+        header: Orders    
