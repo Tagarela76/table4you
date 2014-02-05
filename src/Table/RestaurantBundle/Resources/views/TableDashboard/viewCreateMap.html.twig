@@ -1,0 +1,70 @@
+{% extends 'TableMainBundle::layout_table_editor.html.twig' %}
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}    
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}    
+{% block content %}
+    <div class="container-fluid">
+        <div class="row-fluid">
+            {% include 'TableRestaurantBundle:TableDashboard:tableMapTabs.html.twig' %} 
+        </div>
+    </div>
+    <div class="container-fluid">
+        <form  id="table-map-form" action="{{ path('table_updateTableMap') }}" enctype="multipart/form-data" method="post"> 
+            <div class="row-fluid">
+                <div class="span5">
+                    {% trans %}main.tableMap.createMap.restaurantList{% endtrans %}
+                    <select name="restaurantId" id="restaurantId" onchange="page.tableMap.refreshRestaurantList();">
+                        {% for restaurant in restaurantList %}  
+                            <option {% if restaurantId == restaurant.id %}selected{%endif%} value="{{restaurant.id}}">{{restaurant.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span8">
+                    <div class="container-fluid" id="mapFieldsContainer">
+                        <div class="row-fluid">
+                            <span class="span3">
+                                {% trans %}main.tableMap.createMap.form.label.loadMap{% endtrans %}
+                                <input type="file" name="mapFile[]" size="30" />
+                            </span>
+                            <span class="span3">
+                                {% trans %}main.tableMap.createMap.form.label.floor{% endtrans %}
+                                <input type="text" name="mapFloor[]" size="2" />
+                            </span>
+                            <span class="span3">
+                                {% trans %}main.tableMap.createMap.form.label.hall{% endtrans %}
+                                <input type="text" name="mapHall[]" size="2" />
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="span2">
+                    <div class="container-fluid">
+                        <div class="row-fluid">
+                            <div class="span5">
+                                <input type="button" onClick="page.tableMap.validateAddForm();" value="{% trans %}main.tableMap.createMap.form.label.save{% endtrans %}" />
+                            </div>
+                            <div class="span5">
+                                <a href="#" onclick="page.tableMap.addNewRow(); return false;">
+                                    <img src="{{ asset('bundles/tablerestaurant/images/add_table_type_btn.png') }}" />
+                                </a>
+                                <label class="validationError">{% trans %}main.tableMap.createMap.form.errors{% endtrans %}</label>
+                                <input type="hidden" id="mapFileLabel" value="{% trans %}main.tableMap.createMap.form.label.loadMap{% endtrans %}" />
+                                <input type="hidden" id="mapFloorLabel" value="{% trans %}main.tableMap.createMap.form.label.floor{% endtrans %}" />
+                                <input type="hidden" id="mapHallLabel" value="{% trans %}main.tableMap.createMap.form.label.hall{% endtrans %}" />
+                                <input type="hidden" id="deleteRowIcon" value="{{ asset('bundles/tablerestaurant/images/deleteFile.png') }}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form> 
+    </div> 
+    <div class="container-fluid" id="tableMapContainer" style="border: 1px solid #ccc;">
+        {% include 'TableRestaurantBundle:TableDashboard:viewTableMap.html.twig' %} 
+    </div>
+{% endblock %}  

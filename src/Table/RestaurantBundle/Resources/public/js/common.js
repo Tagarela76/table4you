@@ -1,3 +1,86 @@
+function TableMap() {
+    this.refreshRestaurantList = function() {
+        var restaurantId = $("#restaurantId").val();
+        location.href = Routing.generate('table_viewCreateMap') + "/" + restaurantId;
+    }
+    
+    this.addNewRow = function() {
+        //should be no more than 10
+        var containerCount = $(":input[name='mapFloor[]']").length; 
+        if (containerCount != 10) {
+            var deleteRowIcon = $("#deleteRowIcon").val();
+            var mapFileLabel = $("#mapFileLabel").val();
+            var mapFloorLabel = $("#mapFloorLabel").val();
+            var mapHallLabel = $("#mapHallLabel").val();
+            var rowContainer = "<div class='row-fluid'>" +
+                               "<span class='span3'>" + mapFileLabel +
+                               "<input type='file' name='mapFile[]' size='30' />" +
+                               "</span>" +
+                               "<span class='span3'>" + mapFloorLabel +
+                               "<input type='text' name='mapFloor[]' size='2' />" +
+                               "</span>" +
+                               "<span class='span3'>" + mapHallLabel + 
+                               "<input type='text' name='mapHall[]' size='2' />" +
+                               "<a href='#' onclick='page.common.removeFileField(this); return false;'> " +
+                               "<img alt='Delete' src='" + deleteRowIcon + "'>" +
+                               "</a>" +
+                               "</span>" +
+                               "</div>";
+
+            $('#mapFieldsContainer').append(rowContainer);
+        }
+    }
+
+    this.removeRow = function(element) {
+        $(element).closest("div").remove();
+    }
+    
+    this.validateAddForm = function() {
+        //reset errors
+        $(".validationError").css("display", "none");
+        
+        //check if floor field empty
+        var isFloorEmptyError = false;
+        $(":input[name='mapFloor[]']").each(function(i){
+            if($(this).val() == "") {
+                isFloorEmptyError = true;
+                $(this).addClass("error-form");
+            }
+        });
+        //check if file field empty
+        var isFileEmptyError = false;
+        $(":input[name='mapFile[]']").each(function(i){
+            if($(this).val() == "") {
+                isFileEmptyError = true;
+                $(this).addClass("error-form");
+            }
+        });
+
+        //validate
+        if (isFloorEmptyError || isFileEmptyError) {
+            //display error
+           $(".validationError").css("display", "block");
+        } else {
+            // submit form
+            $("#table-map-form").submit(); 
+        }
+        
+    }
+    
+    this.deleteTableMap = function(tableMapId) {
+        var restaurantId = $("#restaurantId").val();
+        $.ajax({
+            url: Routing.generate('table_deleteTableMap'),
+            data: {tableMapId: tableMapId, restaurantId: restaurantId},
+            type: "POST",
+            dataType: "html",
+            success: function() {
+                location.reload();
+            }
+        });
+    }
+}
+
 function TableType() {
     
     this.validateEditForm = function(el) {
@@ -333,6 +416,7 @@ function Page() {
     this.newsFilter = new NewsFilter();
     this.userProfile = new UserProfile();
     this.tableType = new TableType();
+    this.tableMap = new TableMap();
 }
 
 //global page object

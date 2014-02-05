@@ -1,1 +1,14 @@
-Table order
+{% extends 'TableMainBundle::layout_table_editor.html.twig' %}
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}    
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}    
+{% block content %}
+    <div class="container-fluid">
+        <div class="row-fluid">
+            {% include 'TableRestaurantBundle:TableDashboard:tableMapTabs.html.twig' %} 
+        </div>
+    </div>
+{% endblock %}  

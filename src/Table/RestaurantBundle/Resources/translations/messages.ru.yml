@@ -64,10 +64,23 @@ main:
                 load: Загрузить
             error:
                 peopleCount: Укажите кол-во гостей
-            errors: Ошибки при заполении формы    
+            errors: Ошибки при заполении формы
+        choiceTable: Выбрать столик    
       createMap:
         header: Создать карту
         restaurantList: Список ресторанов
+        form: 
+            label:
+                loadMap: Загрузить карту этажа
+                floor: Указать этаж
+                hall: Указать номер зала
+                save: Сохранить
+            errors: Ошибки при заполении формы  
+        floor: этаж
+        hall: зал
+        editRestaurant: Редактирование карты ресторана
+        edit: Редактировать
+        save: Сохранить
       orders:
         header: Заказы
           

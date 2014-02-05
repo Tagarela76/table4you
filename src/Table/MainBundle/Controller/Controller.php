@@ -101,4 +101,9 @@ class Controller extends BaseController
     {
         return $this->get('table_type_manager');
     }
+    
+    public function getTableMapManager()
+    {
+        return $this->get('table_map_manager');
+    }
 }

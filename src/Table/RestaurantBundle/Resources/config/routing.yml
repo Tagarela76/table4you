@@ -44,9 +44,21 @@ table_getGeoRestaurants:
        expose: true  
 
 # Interactive table map
-table_editor_dashboard:
+table_viewTableTypeList:
     pattern:  /table_editor
-    defaults: { _controller: TableRestaurantBundle:TableDashboard:viewEditorDashboard }      
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:viewTableTypeList }      
+    
+table_viewCreateMap:
+    pattern:  /viewCreateMap/{restaurantId}
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:viewCreateMap, restaurantId: 0 }    
+    requirements:
+        restaurantId: \d+     
+    options:
+       expose: true   
+       
+table_viewTableOrderList:
+    pattern:  /viewTableOrderList
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:viewTableOrderList }      
     
 table_updateTableTypeList:
     pattern:  /updateTableTypeList
@@ -70,4 +82,20 @@ table_deleteTableType:
     requirements:
         _method: POST  
     options:
-       expose: true         
+       expose: true 
+       
+table_updateTableMap:
+    pattern:  /updateTableMap
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:updateTableMap, _format: json }
+    requirements:
+        _method: POST  
+    options:
+       expose: true   
+     
+table_deleteTableMap:
+    pattern:  /deleteTableMap
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:deleteTableMap, _format: json }
+    requirements:
+        _method: POST  
+    options:
+       expose: true        

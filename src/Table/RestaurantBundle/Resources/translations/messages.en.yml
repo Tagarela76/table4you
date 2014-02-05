@@ -41,9 +41,22 @@ main:
                 load: Load
             error:
                 peopleCount: Fill field
-            errors: Errors while edit form    
+            errors: Errors while edit form   
+        choiceTable: Choice table    
       createMap:
         header: Create a map
         restaurantList: Restaurant list
+        form:
+            label:
+                loadMap: Load Map
+                floor: Floor
+                hall: Hall
+                save: Save
+            errors: Errors while edit form 
+        floor: floor
+        hall: hall  
+        editRestaurant: Edit restaurant map
+        edit: Edit
+        save: Save
       orders:
         header: Orders    
