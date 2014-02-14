@@ -178,14 +178,14 @@
 {
     left: 0px;
     position: absolute;
-    z-index: 99999;
+    z-index: 99;
 }
 
 .thslide_nav_next
 {
     right: 0px;
     position: absolute;
-    z-index: 99999;
+    z-index: 99;
 }
 
 .thslide_nav_previous a,
