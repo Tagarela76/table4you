@@ -1616,6 +1616,7 @@ background-image: url(images/selects-2.png);}*/
     border-right-width: 20px;
     border-color: #d8d5d5;
     border-style: solid;
+    background: #d8d5d5;
 }
 .fancybox-overlay .fancybox-nav, .fancybox-overlay .fancybox-prev{
     width: 10%;
