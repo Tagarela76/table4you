@@ -52,6 +52,10 @@ main:
                 floor: Floor
                 hall: Hall
                 save: Save
+                tableNumber: Table number
+                cancel: Cancel
+            error:
+                floor: Fill field    
             errors: Errors while edit form 
         floor: floor
         hall: hall  
@@ -60,3 +64,8 @@ main:
         save: Save
       orders:
         header: Orders    
+        restaurant: Restaurant
+        viewOrder: View Order Mode
+        list:
+            table: Table
+            persons: persons

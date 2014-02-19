@@ -10,17 +10,20 @@
 
         {% block stylesheets %}
         <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/bootstrap.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/jquery-ui.css') }}">
         <!--[if lt IE 9]>
             <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/ie-css.css') }}">
         <![endif]-->
         <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/main.css') }}">
-            {# FANCYBOX #}
+        {# FANCYBOX #}
         <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/fancy-box/jquery.fancybox.css') }}">
         <!-- Optionally add helpers - button, thumbnail and/or media -->
         <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/fancy-box/helpers/jquery.fancybox-buttons.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/fancy-box/helpers/jquery.fancybox-thumbs.css') }}">
-            {# FANCYBOX #}
+        {# FANCYBOX #}
+        
+        {# Jquery UI #}
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/jquery-ui/css/jquery-ui-1.9.2.custom.css') }}">
+        {# Jquery UI #}
         {% endblock %}
 
         {% block javascripts %}
@@ -39,6 +42,10 @@
         <script src="{{ asset('bundles/tablemain/fancy-box/helpers/jquery.fancybox-media.js') }}"></script>
         <script src="{{ asset('bundles/tablemain/fancy-box/helpers/jquery.fancybox-thumbs.js') }}"></script>
             {# FANCYBOX #}
+        
+        {# Jquery UI #}
+        <script src="{{ asset('bundles/tablemain/jquery-ui/js/jquery-ui-1.9.2.custom.js') }}"></script>
+        {# Jquery UI #}
         {% endblock %}
 
     </head>

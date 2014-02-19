@@ -57,8 +57,10 @@ table_viewCreateMap:
        expose: true   
        
 table_viewTableOrderList:
-    pattern:  /viewTableOrderList
-    defaults: { _controller: TableRestaurantBundle:TableDashboard:viewTableOrderList }      
+    pattern:  /viewTableOrderList/{restaurantId}
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:viewTableOrderList, restaurantId: 0 } 
+    options:
+       expose: true   
     
 table_updateTableTypeList:
     pattern:  /updateTableTypeList
@@ -98,4 +100,37 @@ table_deleteTableMap:
     requirements:
         _method: POST  
     options:
-       expose: true        
+       expose: true   
+       
+table_editTableMap:
+    pattern:  /editTableMap
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:editTableMap, _format: json }
+    requirements:
+        _method: POST  
+    options:
+       expose: true       
+       
+table_addActiveTable:
+    pattern:  /addActiveTable
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:addActiveTable, _format: json }
+    requirements:
+        _method: POST  
+    options:
+       expose: true     
+       
+table_loadActiveTabless:
+    pattern:  /loadActiveTables
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:loadActiveTables, _format: json }
+    requirements:
+        _method: GET  
+    options:
+       expose: true 
+       
+table_viewActiveTableOrderList:
+    pattern:  /viewActiveTableOrderList
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:viewActiveTableOrderList }
+    requirements:
+        _method: GET  
+    options:
+       expose: true 
+       

@@ -1,3 +1,81 @@
+
+function ActiveTable() {
+
+    this.initTableData = function(top, left, tableType) {
+        $("#tableTop").val(top);
+        $("#tableLeft").val(left);
+        $("#tableType").val(tableType);
+    }
+    
+    this.loadActiveTables = function() {
+        var mapId = $("#mapId").val();
+        // get Active Tables
+        $.ajax({
+            url: Routing.generate('table_loadActiveTabless'),
+            data: {mapId: mapId},
+            type: "GET",
+            dataType: "json",
+            success: function(response) { 
+                for (var i = 0; i < response.length; i++) {
+                    var imgContainer = "";
+                    var activeTable = response[i];
+                    var left = activeTable.left + $("#tableMapDroppable").position().left;
+                    var top = activeTable.top + $("#tableMapDroppable").position().top;
+                    imgContainer += "<img tabletypeid='" + activeTable.tableTypeId + "' " +
+                            "class='active-table-draggable' " +
+                            "src='" + activeTable.src + "' " +
+                            "style='position: absolute; " +
+                            "left: " + left + "px; "+
+                            "top: " + top + "px;'>";
+
+                    $('#activeTablesContainer').append(imgContainer);
+                }
+            }  
+	}); 
+    }
+    
+    this.deleteActiveTable = function(activeTableId) {
+
+       /* $.ajax({
+            url: Routing.generate('table_deleteTableMap'),
+            data: {tableMapId: tableMapId, restaurantId: restaurantId},
+            type: "POST",
+            dataType: "html",
+            success: function() {
+                location.reload();
+            }
+        });*/
+    }
+    
+    this.validateAddForm = function() {
+        //reset errors
+        $(".validationError").css("display", "none");
+        
+        //validate
+        if ($(":input[name='tableNumber']").val() == "") {
+            //display error
+           $(".validationError").css("display", "block");
+        } else {
+            // submit form
+            $("#add-table-on-the-map").submit(); 
+        }
+        
+    }
+    
+    this.deleteActiveTable = function(activeTableId) {
+
+       /* $.ajax({
+            url: Routing.generate('table_deleteTableMap'),
+            data: {tableMapId: tableMapId, restaurantId: restaurantId},
+            type: "POST",
+            dataType: "html",
+            success: function() {
+                location.reload();
+            }
+        });*/
+    }
+}
+
 function TableMap() {
     this.refreshRestaurantList = function() {
         var restaurantId = $("#restaurantId").val();
@@ -33,6 +111,23 @@ function TableMap() {
 
     this.removeRow = function(element) {
         $(element).closest("div").remove();
+    }
+    
+    this.validateEditForm = function(el) {
+        //reset errors
+        $(".validationError").css("display", "none");
+        // Get parent form
+        var form = $(el).closest('form');
+        //check if people count field empty
+        if (form.find($('input[name="mapFloor"]')).val() == "") {
+            //display error
+            $(".validationError").css("display", "block");
+            form.find($('input[name="mapFloor"]')).addClass("error-form");
+        } else {
+            // submit form
+            form.submit(); 
+        }
+        
     }
     
     this.validateAddForm = function() {
@@ -197,6 +292,52 @@ function RestaurantMap() {
 
 function TableOrder() {
 
+    this.loadOrderList = function(tableId) {
+        $.ajax({
+            url: Routing.generate('table_viewActiveTableOrderList'),
+            data: {tableId: tableId},
+            type: "GET",
+            dataType: "html",
+            success: function(response) { 
+                $('#activeTableOrderContainer').html(response);
+            }  
+	}); 
+    }
+    
+    this.loadActiveTables = function() {
+        var mapId = $("#mapId").val();
+        // get Active Tables
+        $.ajax({
+            url: Routing.generate('table_loadActiveTabless'),
+            data: {mapId: mapId},
+            type: "GET",
+            dataType: "json",
+            success: function(response) { 
+                for (var i = 0; i < response.length; i++) {
+                    var imgContainer = "";
+                    var activeTable = response[i];
+                    var left = activeTable.left + $("#tableMapDroppable").position().left;
+                    var top = activeTable.top + $("#tableMapDroppable").position().top;
+                    imgContainer += "<img tabletypeid='" + activeTable.tableTypeId + "' " +
+                            "class='' " +
+                            "src='" + activeTable.src + "' " +
+                            "style='position: absolute; " +
+                            "left: " + left + "px; "+
+                            "top: " + top + "px;' " +
+                            "onclick='page.tableOrder.loadOrderList(" + activeTable.id + ");'>";
+
+                    $('#activeTablesContainer').append(imgContainer);
+                }
+            }  
+	}); 
+    }
+    
+    this.refreshRestaurantList = function() {
+        var restaurantId = $("#restaurantId").val();
+        location.href = Routing.generate('table_viewTableOrderList') + "/" + restaurantId;
+    }
+    
+    // old Methods
     this.selectRestaurantFloor = function(obj, floor) {
         // remove active class from all
         $(".floors").removeClass('active');
@@ -417,6 +558,8 @@ function Page() {
     this.userProfile = new UserProfile();
     this.tableType = new TableType();
     this.tableMap = new TableMap();
+    this.activeTable = new ActiveTable();
+    this.t = new ActiveTable();
 }
 
 //global page object

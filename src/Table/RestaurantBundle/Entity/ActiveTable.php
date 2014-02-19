@@ -4,6 +4,7 @@ namespace Table\RestaurantBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * ActiveTable
@@ -38,18 +39,18 @@ class ActiveTable
     private $tableNumber;
     
     /**
-     * @var integer
+     * @var float
      *
-     * @ORM\Column(name="top", type="integer")
+     * @ORM\Column(name="top_position", type="float", scale=2)
      */
-    private $top;
+    private $topPosition;
     
     /**
-     * @var integer
+     * @var float
      *
-     * @ORM\Column(name="left", type="integer")
+     * @ORM\Column(name="left_position", type="float", scale=2)
      */
-    private $left;
+    private $leftPosition;
 
     /**
      * @var Table\RestaurantBundle\Entity\TableMap $tableMap
@@ -59,6 +60,16 @@ class ActiveTable
      * */
     private $tableMap;
 
+    /**
+     * @ORM\OneToMany(targetEntity="ActiveTableOrder", mappedBy="activeTable", orphanRemoval=true, cascade={"persist", "remove"})
+     */
+    protected $activeTableOrders;
+    
+    public function __construct()
+    {
+        $this->activeTableOrders = new ArrayCollection();
+    }
+    
     /**
      * Get id
      *
@@ -114,4 +125,75 @@ class ActiveTable
     {
         return $this->tableNumber;
     } 
+    
+    /**
+     * Get topPosition
+     *
+     * @return float 
+     */
+    public function getTopPosition()
+    {
+        return $this->topPosition;
+    }
+
+    /**
+     * Get leftPosition
+     *
+     * @return float 
+     */
+    public function getLeftPosition()
+    {
+        return $this->leftPosition;
+    }
+
+    /**
+     * Get tableMap
+     *
+     * @return Table\RestaurantBundle\Entity\TableMap 
+     */
+    public function getTableMap()
+    {
+        return $this->tableMap;
+    }
+
+    /**
+     * Set top positionPosition
+     *
+     * @param float $topPosition
+     * @return ActiveTable
+     */
+    public function setTopPosition($topPosition)
+    {
+        $this->topPosition = $topPosition;
+        
+        return $this;
+    }
+
+    /**
+     * Set Left position
+     *
+     * @param float $leftPosition
+     * @return ActiveTable
+     */
+    public function setLeftPosition($leftPosition)
+    {
+        $this->leftPosition = $leftPosition;
+        
+        return $this;
+    }
+
+    /**
+     * Set tableMap
+     *
+     * @param Table\RestaurantBundle\Entity\TableMap  $tableMap
+     * @return ActiveTable
+     */
+    public function setTableMap($tableMap)
+    {
+        $this->tableMap = $tableMap;
+        
+        return $this;
+    }
+
+
 }

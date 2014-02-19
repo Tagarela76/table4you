@@ -75,6 +75,10 @@ main:
                 floor: Указать этаж
                 hall: Указать номер зала
                 save: Сохранить
+                tableNumber: Указать номер стола
+                cancel: Отмена
+            error:
+                floor: Укажите этаж    
             errors: Ошибки при заполении формы  
         floor: этаж
         hall: зал
@@ -83,4 +87,9 @@ main:
         save: Сохранить
       orders:
         header: Заказы
+        restaurant: Ресторан
+        viewOrder: режим просмотра заказов
+        list:
+            table: Стол
+            persons: персоны
           

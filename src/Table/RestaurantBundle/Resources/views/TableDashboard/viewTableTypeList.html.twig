@@ -12,19 +12,13 @@
         </div>
         <div class="row-fluid">
             <div class="span10">
-                {% trans %}main.tableMap.tableList.add{% endtrans %}
-            </div>
-            <div class="span2">
-                <a data-toggle="modal" href="#addTableTypePopup">
-                    <img src="{{ asset('bundles/tablerestaurant/images/add_table_type_btn.png') }}" />
-                </a>  
+                {# ==Modal Window for addTableType==#}
+                    {% include 'TableRestaurantBundle:TableDashboard:addTableType.html.twig' %}
+                {# ==Modal Window for addTableType==#}
             </div>
         </div>
         <div class="row-fluid" id="tableTypeContainer">
             {% include 'TableRestaurantBundle:TableDashboard:tableTypeList.html.twig' %} 
         </div>   
     </div>
-    {# ==Modal Window for addTableType==#}
-        {% include 'TableRestaurantBundle:TableDashboard:addTableType.html.twig' %}
-    {# ==Modal Window for addTableType==#}
 {% endblock %}  

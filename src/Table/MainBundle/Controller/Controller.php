@@ -106,4 +106,14 @@ class Controller extends BaseController
     {
         return $this->get('table_map_manager');
     }
+    
+    public function getActiveTableManager()
+    {
+        return $this->get('active_table_manager');
+    }
+    
+    public function getActiveTableOrderManager()
+    {
+        return $this->get('active_table_order_manager');
+    }
 }

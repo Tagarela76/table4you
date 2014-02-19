@@ -1,0 +1,22 @@
+<div class="row-fluid">
+    <div class="span5">
+        {% trans %}main.tableMap.orders.list.table{% endtrans %} {{activeTable.tableNumber}}
+    </div>   
+    <div class="span6">
+        Reserve
+    </div>  
+</div>
+{% for tableOrder in tableOrderList %}  
+    <div class="row-fluid" style="border: 1px solid #ccc;">
+        <div class="span10">
+            <p>{{tableOrder.reserveDate|date('d.m.y')}}</p>
+            <p>{{tableOrder.reserveTime|date('H:s')}}</p>
+            <p>{{tableOrder.peopleCount}} {% trans %}main.tableMap.orders.list.persons{% endtrans %}</p>
+            <p>{{tableOrder.userName}}</p>
+            <p>{{tableOrder.userPhone}}</p>
+        </div>
+        <div class="span1">
+            Delete
+        </div>
+    </div>
+{% endfor %}

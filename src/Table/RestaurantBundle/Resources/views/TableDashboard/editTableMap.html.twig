@@ -1,0 +1,32 @@
+<div id="editTableMapPopup_{{tableMap.id}}" class="modal hide" data-backdrop="static">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">X</a>
+    </div>
+    <div class="modal-body" >
+        <form id="edit-table-map-form_{{tableMap.id}}" action="{{ path('table_editTableMap') }}" enctype="multipart/form-data" method="post">       
+            <div class="container-fluid">   
+                <div class="row-fluid">
+                    <span class="span3">
+                        {% trans %}main.tableMap.createMap.form.label.loadMap{% endtrans %}
+                        <input type="file" name="mapFile" size="30" />
+                    </span>
+                    <span class="span3">
+                        {% trans %}main.tableMap.createMap.form.label.floor{% endtrans %}
+                        <input type="text" name="mapFloor" size="2" value="{{tableMap.floor}}"/>
+                    </span>
+                    <span class="span3">
+                        {% trans %}main.tableMap.createMap.form.label.hall{% endtrans %}
+                        <input type="text" name="mapHall" size="2" value="{{tableMap.hall}}"/>
+                    </span>
+                </div>  
+                <div class="row-fluid">
+                    <label class="validationError">{% trans %}main.tableMap.createMap.form.error.floor{% endtrans %}</label>
+                    <div class="offset5 span5">
+                        <input type="button" onClick="page.tableMap.validateEditForm(this);" value="{% trans %}main.tableMap.createMap.form.label.save{% endtrans %}" />
+                        <input type="hidden" name="tableMapId" value="{{tableMap.id}}" />
+                    </div>   
+                </div>    
+            </div>
+        </form>    
+    </div>
+</div>
