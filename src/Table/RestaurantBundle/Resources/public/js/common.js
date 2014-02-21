@@ -90,16 +90,16 @@ function TableMap() {
             var mapFileLabel = $("#mapFileLabel").val();
             var mapFloorLabel = $("#mapFloorLabel").val();
             var mapHallLabel = $("#mapHallLabel").val();
-            var rowContainer = "<div class='row-fluid'>" +
-                               "<span class='span3'>" + mapFileLabel +
-                               "<input type='file' name='mapFile[]' size='30' />" +
+            var rowContainer = "<div class='row-fluid add_file_map'>" +
+                               "<span class='span12'><div class='list_text'>" + mapFileLabel +
+                               "</div><div id='customization_name'></div><div class='customization'><div>Выбрать файл</div><input type='file' name='mapFile[]' size='30' id='customization_file'/></div>"+
                                "</span>" +
-                               "<span class='span3'>" + mapFloorLabel +
-                               "<input type='text' name='mapFloor[]' size='2' />" +
+                               "<span class='span4'><div class='list_text'>" + mapFloorLabel +
+                               "</div><input type='text' name='mapFloor[]' size='2' />" +
                                "</span>" +
-                               "<span class='span3'>" + mapHallLabel + 
-                               "<input type='text' name='mapHall[]' size='2' />" +
-                               "<a href='#' onclick='page.common.removeFileField(this); return false;'> " +
+                               "<span class='span5'><div class='list_text'>" + mapHallLabel +
+                               "</div><input type='text' name='mapHall[]' size='2'/></span>" +
+                               "<span class='span2'><a href='#' onclick='page.common.removeFileField(this); return false;'> " +
                                "<img alt='Delete' src='" + deleteRowIcon + "'>" +
                                "</a>" +
                                "</span>" +
@@ -512,12 +512,11 @@ function Common() {
             var peopleCountLabel = $("#peopleCountLabel").val();
             var deleteFileIcon = $("#deleteFileIcon").val();
             var fileContainer = "<div class='row-fluid'>" +
-                    "<span class='span5'>" + peopleCountLabel +
-                    "<input type='text' name='peopleCount[]' size='2'>" +
-                    "</span>" +
-                    "<span class='span5'>" +
-                    "<input type='file' name='file[]' size='30' >" +
-                    "<a href='#' onclick='page.common.removeFileField(this); return false;'> " +
+                    "<span class='span12 add_more_file'><div class='number_tables'>" + peopleCountLabel +
+                    "<input type='text' name='peopleCount[]' size='2'>мест(а)</div>" +
+                    "<div id='customization_name'></div>"+
+                    "<div class='customization'><div>Выбрать файл</div><input type='file' name='file[]' size='30' id='customization_file'></div>" +
+                    "<a href='#' onclick='page.common.removeFileField(this); return false;' id='delete_file_customization'> " +
                     "<img alt='Delete' src='" + deleteFileIcon + "'>" +
                     "</a></span></div>";
 

@@ -1,5 +1,6 @@
 <div>
     <ul class="nav nav-tabs" data-tabs="tabs">
+        <a href="{{ path('table_main_homepage') }}" class="logo-mini"></a>
         <li{% if app.request.attributes.get('_route') == "table_viewTableTypeList" %} class="active" {% endif %}>
             <a href="{{ path('table_viewTableTypeList') }}">{% trans %}main.tableMap.tableList.header{% endtrans %}</a>
         </li>
