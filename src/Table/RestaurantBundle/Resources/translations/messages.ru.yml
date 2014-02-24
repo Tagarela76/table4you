@@ -92,4 +92,21 @@ main:
         list:
             table: Стол
             persons: персоны
+            date: Дата
+            timeFrom: Время с
+        form:
+            label:
+                date: "Дата:"
+                time: "Время:"
+                peopleCount: Количество человек
+                customerData: "Данные о клиенте:"
+                customerName: Имя
+                customerLastName: Фамилия
+                customerPhone: Телефон
+                customerEmail: E-mail
+                smsNotification: Уведомления sms
+                emailNotification: Уведомления e-mail
+                smokingHall: Зал для курящих
+                comment: Комментарий
+                reserve: Бронировать    
           

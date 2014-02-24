@@ -66,10 +66,7 @@
     $(function() {
         // Init Active Tables
         page.activeTable.loadActiveTables();
-        // Make it draggable
-        $(".active-table-draggable").draggable({
-            cursor: 'move'
-        });
+        
         $(".table-type-draggable").draggable({
             helper: "clone",
             cursor: 'move'
@@ -91,8 +88,9 @@
                         position: 'absolute'
                     });
                 }
+                
                 // init data
-                page.activeTable.initTableData((ui.position.top - $("#tableMapDroppable").position().top), (ui.position.left - $("#tableMapDroppable").position().left), ui.draggable[0].tabletypeid);
+                page.activeTable.initTableData((ui.position.top - $("#tableMapDroppable").position().top), (ui.position.left - $("#tableMapDroppable").position().left), $(ui.draggable[0]).attr("tabletypeid"));
                 $("#tableNumberContainer").modal('show');
 
             }

@@ -1,22 +1,69 @@
+{% if activeTable is not null %}
+    <div class="row-fluid">
+        <div class="span5">
+            {% trans %}main.tableMap.orders.list.table{% endtrans %} {{activeTable.tableNumber}}
+        </div>   
+        <div class="span6">
+            <a onclick="page.tableOrder.initTableData({{activeTable.id}});" data-toggle="modal" href="#reservePopup4Admin">
+                Reserve
+            </a>  
+        </div>  
+    </div>
+{% endif %}
 <div class="row-fluid">
-    <div class="span5">
-        {% trans %}main.tableMap.orders.list.table{% endtrans %} {{activeTable.tableNumber}}
+    <div class="span3">
+        {% trans %}main.tableMap.orders.list.date{% endtrans %} 
     </div>   
-    <div class="span6">
-        Reserve
+    <div class="span7">
+        <input type="text" size="5" id="tableOrderDatepicker">
     </div>  
 </div>
-{% for tableOrder in tableOrderList %}  
-    <div class="row-fluid" style="border: 1px solid #ccc;">
-        <div class="span10">
-            <p>{{tableOrder.reserveDate|date('d.m.y')}}</p>
-            <p>{{tableOrder.reserveTime|date('H:s')}}</p>
-            <p>{{tableOrder.peopleCount}} {% trans %}main.tableMap.orders.list.persons{% endtrans %}</p>
-            <p>{{tableOrder.userName}}</p>
-            <p>{{tableOrder.userPhone}}</p>
-        </div>
-        <div class="span1">
-            Delete
-        </div>
+<div class="row-fluid">
+    <div class="span3">
+        {% trans %}main.tableMap.orders.list.timeFrom{% endtrans %}
     </div>
-{% endfor %}
+    <div class="span7">
+        <input type="text" size="5" id="tableOrderTimepicker">
+    </div>
+</div>
+{% if tableOrderList is not null %}
+    {% for tableOrder in tableOrderList %}  
+        <div class="row-fluid" style="border: 1px solid #ccc;">
+            <div class="span10">
+                <p>{{tableOrder.reserveDate|date('d.m.y')}}</p>
+                <p>{{tableOrder.reserveTime|date('H:s')}}</p>
+                <p>{{tableOrder.peopleCount}} {% trans %}main.tableMap.orders.list.persons{% endtrans %}</p>
+                <p>{{tableOrder.userName}}</p>
+                <p>{{tableOrder.userPhone}}</p>
+            </div>
+            <div class="span1">
+                <a href='#' onclick='page.tableOrder.deleteActiveTableOrder({{ tableOrder.id }}); return false;'>
+                    <img src="{{ asset('bundles/tablerestaurant/images/delete_table_type_btn.png') }}" />
+                </a>
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}
+{% if activeTable is not null %}
+    {# ==Modal Window for Reserve==#}
+        {% include 'TableRestaurantBundle:TableDashboard:viewReservePopup4Admin.html.twig' %} 
+    {# ==Modal Window for Reserve==#}
+{% endif %}
+    
+<script>
+    $(function() {
+        // Init calendar
+        $.datepicker.setDefaults($.datepicker.regional['ru']);
+        $( "#tableOrderDatepicker" ).datepicker({
+                showOn: "button",
+                buttonImage: "{{ asset('bundles/tablemain/images/calendar.png') }}",
+                buttonImageOnly: true
+        });
+        
+        // Init time entry
+        $('#tableOrderTimepicker').timeEntry({
+            show24Hours: true,
+            spinnerImage: ''
+        });
+    });    
+</script>

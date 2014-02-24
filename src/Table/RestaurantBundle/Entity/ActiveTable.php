@@ -195,5 +195,11 @@ class ActiveTable
         return $this;
     }
 
-
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return strval($this->getTableNumber());
+    }
 }

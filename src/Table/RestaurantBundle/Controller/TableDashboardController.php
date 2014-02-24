@@ -11,6 +11,10 @@ use Application\Sonata\UserBundle\Entity\User;
 use Table\RestaurantBundle\Entity\TableMap;
 use Symfony\Component\HttpFoundation\Response;
 use Table\RestaurantBundle\Entity\ActiveTable;
+use Table\RestaurantBundle\Entity\ActiveTableOrder;
+use Table\RestaurantBundle\Form\Type\ActiveTableOrderForm4AdminType;
+use Application\Sonata\UserBundle\Form\Type\RestRegistrationFormType;
+use Symfony\Component\HttpFoundation\Request;
 
 class TableDashboardController extends Controller
 {
@@ -437,7 +441,9 @@ class TableDashboardController extends Controller
             'baseUrl' => $baseUrl,
             'restaurantId' => $restaurantId,
             'tableMapObj' => $tableMapObj,
-            'mapId' => $mapId
+            'mapId' => $mapId,
+            'activeTable' => null,
+            'tableOrderList' => null
         );
     }
     
@@ -455,10 +461,134 @@ class TableDashboardController extends Controller
         $activeTable = $this->getActiveTableManager()->findOneById($tableId);
         //get Order list
         $tableOrderList = $this->getActiveTableOrderManager()->findByActiveTable($tableId);
+        
+        //init form for table reserve
+        $activeTableOrder = new ActiveTableOrder();
+        $form = $this->createForm(new ActiveTableOrderForm4AdminType(), $activeTableOrder);
+        
         return array(
             'activeTable' => $activeTable,
-            'tableOrderList' => $tableOrderList
+            'tableOrderList' => $tableOrderList,
+            'form' => $form
         );
     }
+    
+    /**
+     * Delete Table Oreder
+     */
+    public function deleteActiveTableOrderAction()
+    {
+        // get Current user
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        // Check if user auth in app
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException("Access denied");
+        }
+        // get Table Type ID
+        $tableOrderId = $this->getRequest()->request->get('tableOrderId');
 
+        // init table Order
+        $tableOrder = $this->getActiveTableOrderManager()->findOneById($tableOrderId);
+
+        // get Table 
+        $activeTable = $tableOrder->getActiveTable();
+        // delete Table Order
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($tableOrder);
+        $em->flush();
+
+        //get Order list
+        $tableOrderList = $this->getActiveTableOrderManager()->findByActiveTable($activeTable->getId());
+
+        return $this->render('TableRestaurantBundle:TableDashboard:viewActiveTableOrderList.html.twig', array(
+                    'tableOrderList' => $tableOrderList,
+                    'activeTable' => $activeTable,
+        ));
+    }
+
+    /**
+     * Reserve active table
+     * 
+     * @param int $activeTableId
+     * 
+     * @param Request $request
+     * 
+     * @Template()
+     */
+    public function reserveActiveTableOrderAction($activeTableId, Request $request)
+    {
+        $activeTableOrder = new ActiveTableOrder();
+        $form = $this->createForm(new ActiveTableOrderForm4AdminType(), $activeTableOrder);
+        $activeTable = $this->getActiveTableManager()->findOneById($activeTableId);
+
+        $successReserve = false; // we should know if table reserve was successfull
+        if ($request->isMethod('POST')) {
+            $form->bind($request);
+            
+            if ($form->isValid()) {
+                // Register New User
+                $user = new User();
+                $userForm = $this->createForm(new RestRegistrationFormType(), $user);
+
+                $userForm->bind(array(
+                    "firstname" => $activeTableOrder->getUserName(), // It is firstname in server
+                    "lastname" => $activeTableOrder->getUserLastName(),
+                    "email" => $activeTableOrder->getUserEmail(),
+                    "username" => $activeTableOrder->getUserEmail(), // the same as email
+                    "plainPassword" => array(
+                        "first" => $activeTableOrder->getUserEmail(),
+                        "second" => $activeTableOrder->getUserEmail()
+                    ),
+                    "phone" => $activeTableOrder->getUserPhone()
+                ));
+               
+                if ($userForm->isValid()) {
+
+                    $user = $userForm->getData();
+                    $user->setEnabled(false);
+
+                    // send confirmation
+                    $token = sha1(uniqid(mt_rand(), true)); // Or whatever you prefer to generate a token
+
+                    $user->setConfirmationToken($token);
+
+                    //$mailer = $this->container->get('fos_user.mailer');
+                    //$mailer->sendConfirmationEmailMessage($user);
+
+                    // add user
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($user);
+                    $em->flush();
+                    
+                    // Let's add Order and connected it to a new user
+                    
+                    // Get New User
+                    $user = $this->userManager->findUserBy(array("username" => $activeTableOrder->getUserEmail()));
+                    // get table order date
+                    $activeTableOrder = $form->getData();
+                    // add Order
+                    // format reserve date
+                    $activeTableOrder->setReserveDate(new \DateTime($activeTableOrder->getReserveDate()));
+                    // set User Data
+                    $activeTableOrder->setUser($user);
+                    // set Table Data
+                    $activeTableOrder->setActiveTable($activeTable);
+                    // set status 0
+                    if (is_null($activeTableOrder->getStatus())) {
+                        $activeTableOrder->setStatus(0);
+                    }
+
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($activeTableOrder);
+                    $em->flush();
+                    $successReserve = true;
+                }
+            }
+        }
+        return array(
+            'form' => $form,
+            'activeTable' => $activeTable,
+            'successReserve' => $successReserve
+        );
+    }
 }

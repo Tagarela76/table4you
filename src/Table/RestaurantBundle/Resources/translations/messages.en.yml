@@ -69,3 +69,20 @@ main:
         list:
             table: Table
             persons: persons
+            date: Date
+            timeFrom: Time from
+        form:
+            label:
+                date: "Date:"
+                time: "Time:"
+                peopleCount: People Count
+                customerData: Customer Data
+                customerName: Name
+                customerLastName: Last Name
+                customerPhone: Phone
+                customerEmail: E-mail
+                smsNotification: SMS Notification
+                emailNotification: E-mail Notification
+                smokingHall: Hall for smoking
+                comment: Comment
+                reserve: Reserve

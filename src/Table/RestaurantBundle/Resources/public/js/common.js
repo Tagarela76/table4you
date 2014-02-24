@@ -24,29 +24,20 @@ function ActiveTable() {
                     imgContainer += "<img tabletypeid='" + activeTable.tableTypeId + "' " +
                             "class='active-table-draggable' " +
                             "src='" + activeTable.src + "' " +
-                            "style='position: absolute; " +
+                            "style='position: absolute; width: 50px;" +
                             "left: " + left + "px; "+
                             "top: " + top + "px;'>";
 
                     $('#activeTablesContainer').append(imgContainer);
+                    // Make it draggable
+                    $(".active-table-draggable").draggable({
+                        cursor: 'move'
+                    });
                 }
             }  
 	}); 
     }
-    
-    this.deleteActiveTable = function(activeTableId) {
 
-       /* $.ajax({
-            url: Routing.generate('table_deleteTableMap'),
-            data: {tableMapId: tableMapId, restaurantId: restaurantId},
-            type: "POST",
-            dataType: "html",
-            success: function() {
-                location.reload();
-            }
-        });*/
-    }
-    
     this.validateAddForm = function() {
         //reset errors
         $(".validationError").css("display", "none");
@@ -292,6 +283,32 @@ function RestaurantMap() {
 
 function TableOrder() {
 
+    this.initTableData = function(activeTableId) {
+        $("#activeTableOrder4AdminForm_activeTable").val(activeTableId);
+    }
+    
+    this.initFancyTimeBox = function() {
+
+        var timeParams = {
+            changedEl: ".table-order-form select",
+            visRows: 8,
+            scrollArrows: true
+        }
+        cuSel(timeParams);
+    }
+    
+    this.deleteActiveTableOrder = function(tableOrderId) {
+
+        $.ajax({
+            url: Routing.generate('table_deleteActiveTableOrder'),
+            data: {tableOrderId: tableOrderId},
+            type: "POST",
+            dataType: "html",
+            success: function(responce) {
+                $('#activeTableOrderContainer').html(responce);
+            }
+        });
+    }
     this.loadOrderList = function(tableId) {
         $.ajax({
             url: Routing.generate('table_viewActiveTableOrderList'),
@@ -319,9 +336,8 @@ function TableOrder() {
                     var left = activeTable.left + $("#tableMapDroppable").position().left;
                     var top = activeTable.top + $("#tableMapDroppable").position().top;
                     imgContainer += "<img tabletypeid='" + activeTable.tableTypeId + "' " +
-                            "class='' " +
                             "src='" + activeTable.src + "' " +
-                            "style='position: absolute; " +
+                            "style='position: absolute; width: 50px;" +
                             "left: " + left + "px; "+
                             "top: " + top + "px;' " +
                             "onclick='page.tableOrder.loadOrderList(" + activeTable.id + ");'>";

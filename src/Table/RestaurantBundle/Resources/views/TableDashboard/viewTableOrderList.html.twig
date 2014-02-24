@@ -63,7 +63,9 @@
                 {# Add existing tables Container#}
                 <div id="activeTablesContainer"></div>    
             </div>
-            <div class="span4" id="activeTableOrderContainer"></div>
+            <div class="span4" id="activeTableOrderContainer">
+                {% include 'TableRestaurantBundle:TableDashboard:viewActiveTableOrderList.html.twig' %} 
+            </div>
             <input type="hidden" name="mapId" id="mapId" value="{{mapId}}" />
         </div>
     </div>

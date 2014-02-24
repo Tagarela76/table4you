@@ -22,14 +22,6 @@ class ActiveTableOrder
     private $id;
 
     /**
-     * @var Table\RestaurantBundle\Entity\Restaurant $restaurant
-     * 
-     * @ORM\ManyToOne(targetEntity="Table\RestaurantBundle\Entity\Restaurant", inversedBy="tableOrders")
-     * @ORM\JoinColumn(name="restaurant_id", referencedColumnName="id", onDelete="CASCADE")
-     * */
-    private $restaurant;
-
-    /**
      * @var \Date
      *
      * @ORM\Column(name="reserve_date", type="date")
@@ -116,19 +108,20 @@ class ActiveTableOrder
     protected $statusName;
     
     /**
-     * Restaurant name
-     *
-     * @var string 
-     */
-    protected $restaurantName;
-    
-    /**
      * User Name
      *
      * @var string 
      */
     protected $userName;
     
+    /**
+     * User Last Name
+     *
+     * @var string 
+     */
+    protected $userLastName;
+
+
     /**
      * User Phone
      *
@@ -169,29 +162,6 @@ class ActiveTableOrder
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set restaurant
-     *
-     * @param Table\RestaurantBundle\Entity\Restaurant $restaurant
-     * @return ActiveTableOrder
-     */
-    public function setRestaurant($restaurant)
-    {
-        $this->restaurant = $restaurant;
-    
-        return $this;
-    }
-
-    /**
-     * Get restaurant
-     *
-     * @return Table\RestaurantBundle\Entity\Restaurant $restaurant 
-     */
-    public function getRestaurant()
-    {
-        return $this->restaurant;
     }
 
     /**
@@ -355,37 +325,6 @@ class ActiveTableOrder
     {
         return $this->isSmokingZone;
     }
-    
-    /**
-     * Get resaurantName
-     *
-     * @return string 
-     */
-    public function getRestaurantName()
-    {
-        // We can get restaurant name only if we have restaurant
-        if (is_null($this->getRestaurant())) {
-            return null;
-        }
-        if (is_null($this->restaurantName)) {
-            $restaurantName = $this->getRestaurant()->getName();
-            $this->setRestaurantName($restaurantName);
-            return $restaurantName;
-        } else {
-            return $this->restaurantName;
-        }        
-    }
-
-    /**
-     * Set restaurantName
-     *
-     * @param string $restaurantName
-     * @return ActiveTableOrder
-     */
-    public function setRestaurantName($restaurantName)
-    {
-        $this->restaurantName = $restaurantName;
-    }
 
     /**
      * Get userName
@@ -396,14 +335,34 @@ class ActiveTableOrder
     {
         // We can get user name only if we have user
         if (is_null($this->getUser())) {
-            return null;
+            return $this->userName;
         }
         if (is_null($this->userName)) {
-            $userName = $this->getUser()->getUsername(); 
+            $userName = $this->getUser()->getFirstName(); 
             $this->setUserName($userName);
             return $userName;
         } else {
             return $this->userName;
+        }  
+    }
+    
+    /**
+     * Get userLastName
+     *
+     * @return string 
+     */
+    public function getUserLastName()
+    {
+        // We can get user last name only if we have user
+        if (is_null($this->getUser())) {
+            return $this->userLastName;
+        }
+        if (is_null($this->userLastName)) {
+            $userLastName = $this->getUser()->getLastName(); 
+            $this->setUserLastName($userLastName);
+            return $userLastName;
+        } else {
+            return $this->userLastName;
         }  
     }
 
@@ -416,7 +375,7 @@ class ActiveTableOrder
     {
         // We can get user phone only if we have user
         if (is_null($this->getUser())) {
-            return null;
+            return $this->userPhone;
         }
         if (is_null($this->userPhone)) {
             $userPhone = $this->getUser()->getPhone();
@@ -436,7 +395,7 @@ class ActiveTableOrder
     {
         // We can get user email only if we have user
         if (is_null($this->getUser())) {
-            return null;
+            return $this->userEmail;
         }
         if (is_null($this->userEmail)) {
             $userEmail = $this->getUser()->getEmail();
@@ -456,6 +415,17 @@ class ActiveTableOrder
     public function setUserName($userName)
     {
         $this->userName = $userName;
+    }
+    
+    /**
+     * Set userLastName
+     *
+     * @param string $userLastName
+     * @return ActiveTableOrder
+     */
+    public function setUserLastName($userLastName)
+    {
+        $this->userLastName = $userLastName;
     }
 
     /**
