@@ -11,14 +11,23 @@
             {% include 'TableRestaurantBundle:TableDashboard:tableMapTabs.html.twig' %} 
         </div>
         <div class="row-fluid">
-            <div class="span10">
+            <div class="span12">
                 {# ==Modal Window for addTableType==#}
                     {% include 'TableRestaurantBundle:TableDashboard:addTableType.html.twig' %}
                 {# ==Modal Window for addTableType==#}
             </div>
         </div>
         <div class="row-fluid" id="tableTypeContainer">
-            {% include 'TableRestaurantBundle:TableDashboard:tableTypeList.html.twig' %} 
+            <table class="title-top_restoraunt">
+                <tbody>
+                    <tr>
+                        <td><span></span></td>
+                        <td><span><span>{% trans %}main.tableMap.createMap.header{% endtrans %}</span></span></td>
+                        <td><span></span></td>
+                    </tr>
+                </tbody>
+            </table><br>
+            {% include 'TableRestaurantBundle:TableDashboard:tableTypeList.html.twig' %}
         </div>   
     </div>
 {% endblock %}  
