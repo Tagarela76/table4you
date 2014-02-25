@@ -80,6 +80,7 @@ main:
                 save: Сохранить
                 tableNumber: Указать номер стола
                 cancel: Отмена
+                selectTheFile: Выбрать файл
             error:
                 floor: Укажите этаж    
             errors: Ошибки при заполении формы  

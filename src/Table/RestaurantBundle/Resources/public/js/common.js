@@ -105,9 +105,12 @@ function TableMap() {
             var mapFileLabel = $("#mapFileLabel").val();
             var mapFloorLabel = $("#mapFloorLabel").val();
             var mapHallLabel = $("#mapHallLabel").val();
+            var selectTheFileLabel = $("#selectTheFileLabel").val();
             var rowContainer = "<div class='row-fluid add-file-map'>" +
                                "<span class='span12'><div class='list-text-floor-hall'>" + mapFileLabel +
-                               "</div><span class='btn btn-success btn-file'><span>Выбрать файл</span><input type='file' name='file[]' id='image' size='1'></span><span class='files-download'></span>"+
+                               "</div><span class='btn btn-success btn-file'><span>" + selectTheFileLabel + 
+                               "</span><input type='file' name='file[]' id='image' size='1'>"  +
+                               "</span><span class='files-download'></span>"+
                                "</span>" +
                                "<span class='span4'><div class='list-text-floor-hall'>" + mapFloorLabel +
                                "</div><input type='text' name='mapFloor[]' size='2' />" +
@@ -115,7 +118,7 @@ function TableMap() {
                                "<span class='span5'><div class='list-text-floor-hall'>" + mapHallLabel +
                                "</div><input type='text' name='mapHall[]' size='2'/></span>" +
                                "<span class='span2'><a href='#' onclick='page.common.removeFileField(this); return false;'> " +
-                               "<img alt='Delete' src='" + deleteRowIcon + "'>" +
+                               "<img src='" + deleteRowIcon + "'>" +
                                "</a>" +
                                "</span>" +
                                "</div>";
@@ -224,8 +227,8 @@ function TableType() {
         });
         //check if file field empty
         var isFileEmptyError = false;
-        $(":input[name='file[]']").each(function(i){
-            if($(this).val() == "") {
+        $(":input[name='file[]']").each(function(i){ 
+            if($(this).val() == "") { console.log();
                 isFileEmptyError = true;
                 $(this).addClass("error-form");
             }
@@ -551,11 +554,16 @@ function Common() {
         if (fileContaunerCount != 10) {
             var peopleCountLabel = $("#peopleCountLabel").val();
             var deleteFileIcon = $("#deleteFileIcon").val();
+            var selectTheFileLabel = $("#selectTheFileLabel").val();
+            var numberOfPlaces = $("#numberOfPlaces").val();
             var fileContainer = "<div class='row-fluid'>" +
-                    "<span class='span12 add-more-file'><div class='number-tables'>" + peopleCountLabel +
-                    "<input type='text' name='peopleCount[]' size='2'>мест(а)</div>" +
+                    "<span class='span12 add-more-file'>" +
+                    "<div class='number-tables'>" + peopleCountLabel +
+                    "<input type='text' name='peopleCount[]' size='2'>" +
+                    " " + numberOfPlaces + "</div>" +
                     "<span class='btn btn-success btn-file'>"+
-                    "<span>Выбрать файл</span><input type='file' name='file[]' id='image' size='1'></span>" +
+                    "<span>" + selectTheFileLabel + "</span>" +
+                    "<input type='file' name='file[]' id='image' size='1'></span>" +
                     "<span class='files-download'></span>"+
                     "<a href='#' onclick='page.common.removeFileField(this); return false;' id='delete-file-customization'> " +
                     "<img alt='Delete' src='" + deleteFileIcon + "'>" +
