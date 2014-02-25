@@ -60,8 +60,10 @@ main:
         form:
             label:
                 tableOn: Столик на
+                numberOfPlaces: мест(а)
                 addMore: Добавить еще
                 load: Загрузить
+                selectTheFile: Выбрать файл
             error:
                 peopleCount: Укажите кол-во гостей
             errors: Ошибки при заполении формы
@@ -69,10 +71,10 @@ main:
         addTable: Добавить стол  
       createMap:
         header: Создать карту
-        restaurantList: Список ресторанов
+        restaurantList: Выбрать ресторан
         form: 
             label:
-                loadMap: Загрузить карту этажа
+                loadMap: Загрузить карту
                 floor: Указать этаж
                 hall: Указать номер зала
                 save: Сохранить
@@ -81,7 +83,7 @@ main:
             error:
                 floor: Укажите этаж    
             errors: Ошибки при заполении формы  
-        floor: этаж
+        floor: этаж.
         hall: зал
         editRestaurant: Редактирование карты ресторана
         edit: Редактировать

@@ -1,46 +1,39 @@
-<div class="row-fluid">    
-    {% for tableMap in tableMapList %}  
-        <div class="span2">
-            <a {% if tableMap.id == mapId%} class="active" {% endif %} href="{{ path('table_viewCreateMap', {'restaurantId': restaurantId, 'mapId': tableMap.id}) }}">
-                {{tableMap.floor}} {% trans %}main.tableMap.createMap.floor{% endtrans %} 
-                {% if tableMap.hall is not null %}
-                    {{tableMap.hall}} {% trans %}main.tableMap.createMap.hall{% endtrans %} 
-                {% endif %}
-            </a>
-                
-            <a data-toggle="modal" href="#editTableMapPopup_{{tableMap.id}}">
-                <img src="{{ asset('bundles/tablerestaurant/images/edit_table_type_btn.png') }}" />
-            </a>   
-            <a href='#' onclick='page.tableMap.deleteTableMap({{ tableMap.id }}); return false;'>
-                <img src="{{ asset('bundles/tablerestaurant/images/delete_table_type_btn.png') }}" />
-            </a>    
-        </div>
-        {# ==Modal Window for editTableMap==#}
+<div class="row-fluid title-tabs">
+    <ul>
+        {% for tableMap in tableMapList %}
+            <li {% if tableMap.id == mapId%} class="active" {% endif %}>
+                <a href="{{ path('table_viewCreateMap', {'restaurantId': restaurantId, 'mapId': tableMap.id}) }}">
+                    {{tableMap.floor}} {% trans %}main.tableMap.createMap.floor{% endtrans %}
+                    {% if tableMap.hall is not null %}
+                        {{tableMap.hall}} {% trans %}main.tableMap.createMap.hall{% endtrans %}
+                    {% endif %}
+                </a>
+
+                <a data-toggle="modal" href="#editTableMapPopup_{{tableMap.id}}">
+                    <img src="{{ asset('bundles/tablerestaurant/images/edit_table_type_btn_small.png') }}" />
+                </a>
+                <a href='#' onclick='page.tableMap.deleteTableMap({{ tableMap.id }}); return false;'>
+                    <img src="{{ asset('bundles/tablerestaurant/images/deleteFile_small.png') }}" />
+                </a>
+            </li>
+            {# ==Modal Window for editTableMap==#}
             {% include 'TableRestaurantBundle:TableDashboard:editTableMap.html.twig' %}
-        {# ==Modal Window for editTableMap==#}
-    {% endfor %}
+            {# ==Modal Window for editTableMap==#}
+
+        {% endfor %}
+    </ul>
 </div>
-{% if tableMapObj is not null %}
-    <div class="row-fluid" style="border: 1px solid #ccc;">
-        <div class="span12">
-            {% trans %}main.tableMap.createMap.editRestaurant{% endtrans %} {{ tableMapObj.restaurant.name }}
-            {{ tableMapObj.floor }} {% trans %}main.tableMap.createMap.floor{% endtrans %}
-            {% if tableMapObj.hall is not null %}
-                {{tableMapObj.hall}} {% trans %}main.tableMap.createMap.hall{% endtrans %} 
-            {% endif %}
-        </div>
-    </div>
-{% endif %}
 
 <div class="row-fluid" id="interactive-map-container">
-    <div class="span8 table-map-droppable" id="tableMapDroppable" style="height: 500px; width: 500px; margin: 0; padding: 0;">
-        {% if tableMapObj is not null %}
+    <div class="span8 table-map-droppable" id="tableMapDroppable">
+        {% if tableMapObj is not null and tableMapObj.file is not null %}
             <img src="{{baseUrl}}{{ vich_uploader_asset(tableMapObj, 'file') }}" alt="{{ tableMapObj.restaurant.name }}" />
         {% endif %}    
         {# Add existing tables Container#}
         <div id="activeTablesContainer"></div>    
     </div>
-    <div class="span4" id="table-container" style="border: 1px solid #ccc;">
+
+    <div class="span4 table-map-droppable-right" id="table-container">
         <div class="row-fluid">
             <div class="span12">
                 <a href="{{ path('table_viewTableTypeList')}}">
@@ -49,7 +42,7 @@
             </div>    
         </div>
         {% for tableType in tableTypeList %}  
-            <div class="row-fluid" style="border: 1px solid #ccc;">
+            <div class="row-fluid">
                 <div class="span4">
                     <img tabletypeid="{{tableType.id}}" class="table-type-draggable" src="{{baseUrl}}{{ vich_uploader_asset(tableType, 'file') }}" alt="{{ tableType.peopleCount }}" />
                 </div>

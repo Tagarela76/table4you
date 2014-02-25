@@ -105,16 +105,16 @@ function TableMap() {
             var mapFileLabel = $("#mapFileLabel").val();
             var mapFloorLabel = $("#mapFloorLabel").val();
             var mapHallLabel = $("#mapHallLabel").val();
-            var rowContainer = "<div class='row-fluid'>" +
-                               "<span class='span3'>" + mapFileLabel +
-                               "<input type='file' name='mapFile[]' size='30' />" +
+            var rowContainer = "<div class='row-fluid add-file-map'>" +
+                               "<span class='span12'><div class='list-text-floor-hall'>" + mapFileLabel +
+                               "</div><span class='btn btn-success btn-file'><span>Выбрать файл</span><input type='file' name='file[]' id='image' size='1'></span><span class='files-download'></span>"+
                                "</span>" +
-                               "<span class='span3'>" + mapFloorLabel +
-                               "<input type='text' name='mapFloor[]' size='2' />" +
+                               "<span class='span4'><div class='list-text-floor-hall'>" + mapFloorLabel +
+                               "</div><input type='text' name='mapFloor[]' size='2' />" +
                                "</span>" +
-                               "<span class='span3'>" + mapHallLabel + 
-                               "<input type='text' name='mapHall[]' size='2' />" +
-                               "<a href='#' onclick='page.common.removeFileField(this); return false;'> " +
+                               "<span class='span5'><div class='list-text-floor-hall'>" + mapHallLabel +
+                               "</div><input type='text' name='mapHall[]' size='2'/></span>" +
+                               "<span class='span2'><a href='#' onclick='page.common.removeFileField(this); return false;'> " +
                                "<img alt='Delete' src='" + deleteRowIcon + "'>" +
                                "</a>" +
                                "</span>" +
@@ -552,12 +552,12 @@ function Common() {
             var peopleCountLabel = $("#peopleCountLabel").val();
             var deleteFileIcon = $("#deleteFileIcon").val();
             var fileContainer = "<div class='row-fluid'>" +
-                    "<span class='span5'>" + peopleCountLabel +
-                    "<input type='text' name='peopleCount[]' size='2'>" +
-                    "</span>" +
-                    "<span class='span5'>" +
-                    "<input type='file' name='file[]' size='30' >" +
-                    "<a href='#' onclick='page.common.removeFileField(this); return false;'> " +
+                    "<span class='span12 add-more-file'><div class='number-tables'>" + peopleCountLabel +
+                    "<input type='text' name='peopleCount[]' size='2'>мест(а)</div>" +
+                    "<span class='btn btn-success btn-file'>"+
+                    "<span>Выбрать файл</span><input type='file' name='file[]' id='image' size='1'></span>" +
+                    "<span class='files-download'></span>"+
+                    "<a href='#' onclick='page.common.removeFileField(this); return false;' id='delete-file-customization'> " +
                     "<img alt='Delete' src='" + deleteFileIcon + "'>" +
                     "</a></span></div>";
 
@@ -611,3 +611,24 @@ $(function() {
     page = new Page();
     restaurantPage = new Page();
 });
+
+
+(function (jQuery){
+    jQuery(function (){
+        jQuery('.btn-file').each(function (){
+            var self = this;
+            jQuery('input[type=file]', this).change(function (){
+                // remove existing file info
+                jQuery(self).next().remove();
+                // get value
+                var value = jQuery(this).val();
+                // get file name
+                var fileName = value.substring(value.lastIndexOf('/')+1);
+                // get file extension
+                var fileExt = fileName.split('.').pop().toLowerCase();
+                // append file info
+                jQuery('<span class="files-download"><span> '+ fileName +' </span></span>').insertAfter(self);
+            });
+        });
+    });
+})(jQuery);
