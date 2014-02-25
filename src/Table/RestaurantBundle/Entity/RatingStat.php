@@ -34,7 +34,7 @@ class RatingStat
      * @var Application\Sonata\UserBundle\Entity\User $user
      * 
      * @ORM\ManyToOne(targetEntity="Application\Sonata\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
      *
      * */
     private $user;

@@ -125,6 +125,28 @@ class TableType
     }
     
     /**
+     * 
+     * @return Table\RestaurantBundle\Entity\TableMap[]
+     */
+    public function getActiveTables()
+    {
+        return $this->activeTables;
+    }
+
+    /**
+     * 
+     * @param Table\RestaurantBundle\Entity\TableMap[] $activeTables
+     * 
+     * @return TableType
+     */
+    public function setActiveTables($activeTables)
+    {
+        $this->activeTables = $activeTables;
+        return $this;
+    }
+
+        
+    /**
      * @return string
      */
     public function __toString()

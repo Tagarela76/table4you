@@ -1,3 +1,199 @@
+
+function ActiveTable() {
+
+    this.loadActiveTable = function(activeTableId) {
+
+        $.ajax({
+            url: Routing.generate('table_loadActiveTable') + "/" + activeTableId,
+            type: "GET",
+            dataType: "html",
+            success: function(response) { 
+                $("#table-container").html(response);
+            }  
+	}); 
+    }
+    
+    this.closeAddTablePopup = function() {
+        // close modal window
+        $('#tableNumberContainer').modal('hide');
+    }
+    
+    this.initTableData = function(top, left, tableType) {
+        $("#tableTop").val(top);
+        $("#tableLeft").val(left);
+        $("#tableType").val(tableType);
+    }
+    
+    this.loadActiveTables = function() {
+        var mapId = $("#mapId").val();
+        // get Active Tables
+        $.ajax({
+            url: Routing.generate('table_loadActiveTables'),
+            data: {mapId: mapId},
+            type: "GET",
+            dataType: "json",
+            success: function(response) { 
+                for (var i = 0; i < response.length; i++) {
+                    var imgContainer = "";
+                    var activeTable = response[i];
+                    var left = activeTable.left + $("#tableMapDroppable").position().left;
+                    var top = activeTable.top + $("#tableMapDroppable").position().top;
+                    var styles = "position: absolute; " +
+                            "left: " + left + "px; "+
+                            "top: " + top + "px;" ;
+                    
+                    imgContainer += "<div onclick='page.activeTable.loadActiveTable" +
+                            "(" + activeTable.id + ");' " +
+                            "class='active-table-draggable' " +
+                            "style='" + styles + "width: 60px;'>" +
+                            "<span class='badge'>" + activeTable.tableNumber + 
+                            "</span>" +
+                            "<img tabletypeid='" + activeTable.tableTypeId + "' " +
+                            " " +
+                            "src='" + activeTable.src + "'></div>";
+
+                    $('#activeTablesContainer').append(imgContainer);
+                    // Make it draggable
+                    $(".active-table-draggable").draggable({
+                        cursor: 'move'
+                    });
+                }
+            }  
+	}); 
+    }
+
+    this.validateAddForm = function() {
+        //reset errors
+        $(".validationError").css("display", "none");
+        
+        //validate
+        if ($(":input[name='tableNumber']").val() == "") {
+            //display error
+           $(".validationError").css("display", "block");
+        } else {
+            // submit form
+            $("#add-table-on-the-map").submit(); 
+        }
+        
+    }
+    
+    this.deleteActiveTable = function(activeTableId) {
+
+       /* $.ajax({
+            url: Routing.generate('table_deleteTableMap'),
+            data: {tableMapId: tableMapId, restaurantId: restaurantId},
+            type: "POST",
+            dataType: "html",
+            success: function() {
+                location.reload();
+            }
+        });*/
+    }
+}
+
+function TableMap() {
+    this.refreshRestaurantList = function() {
+        var restaurantId = $("#restaurantId").val();
+        location.href = Routing.generate('table_viewCreateMap') + "/" + restaurantId;
+    }
+    
+    this.addNewRow = function() {
+        //should be no more than 10
+        var containerCount = $(":input[name='mapFloor[]']").length; 
+        if (containerCount != 10) {
+            var deleteRowIcon = $("#deleteRowIcon").val();
+            var mapFileLabel = $("#mapFileLabel").val();
+            var mapFloorLabel = $("#mapFloorLabel").val();
+            var mapHallLabel = $("#mapHallLabel").val();
+            var selectTheFileLabel = $("#selectTheFileLabel").val();
+            var rowContainer = "<div class='row-fluid add-file-map'>" +
+                               "<span class='span12'><div class='list-text-floor-hall'>" + mapFileLabel +
+                               "</div><span class='btn btn-success btn-file'><span>" + selectTheFileLabel + 
+                               "</span><input type='file' name='file[]' id='image' size='1'>"  +
+                               "</span><span class='files-download'></span>"+
+                               "</span>" +
+                               "<span class='span4'><div class='list-text-floor-hall'>" + mapFloorLabel +
+                               "</div><input type='text' name='mapFloor[]' size='2' />" +
+                               "</span>" +
+                               "<span class='span5'><div class='list-text-floor-hall'>" + mapHallLabel +
+                               "</div><input type='text' name='mapHall[]' size='2'/></span>" +
+                               "<span class='span2'><a href='#' onclick='page.common.removeFileField(this); return false;'> " +
+                               "<img src='" + deleteRowIcon + "'>" +
+                               "</a>" +
+                               "</span>" +
+                               "</div>";
+
+            $('#mapFieldsContainer').append(rowContainer);
+        }
+    }
+
+    this.removeRow = function(element) {
+        $(element).closest("div").remove();
+    }
+    
+    this.validateEditForm = function(el) {
+        //reset errors
+        $(".validationError").css("display", "none");
+        // Get parent form
+        var form = $(el).closest('form');
+        //check if people count field empty
+        if (form.find($('input[name="mapFloor"]')).val() == "") {
+            //display error
+            $(".validationError").css("display", "block");
+            form.find($('input[name="mapFloor"]')).addClass("error-form");
+        } else {
+            // submit form
+            form.submit(); 
+        }
+        
+    }
+    
+    this.validateAddForm = function() {
+        //reset errors
+        $(".validationError").css("display", "none");
+        
+        //check if floor field empty
+        var isFloorEmptyError = false;
+        $(":input[name='mapFloor[]']").each(function(i){
+            if($(this).val() == "") {
+                isFloorEmptyError = true;
+                $(this).addClass("error-form");
+            }
+        });
+        //check if file field empty
+        var isFileEmptyError = false;
+        $(":input[name='mapFile[]']").each(function(i){
+            if($(this).val() == "") {
+                isFileEmptyError = true;
+                $(this).addClass("error-form");
+            }
+        });
+
+        //validate
+        if (isFloorEmptyError || isFileEmptyError) {
+            //display error
+           $(".validationError").css("display", "block");
+        } else {
+            // submit form
+            $("#table-map-form").submit(); 
+        }
+        
+    }
+    
+    this.deleteTableMap = function(tableMapId) {
+        var restaurantId = $("#restaurantId").val();
+        $.ajax({
+            url: Routing.generate('table_deleteTableMap'),
+            data: {tableMapId: tableMapId, restaurantId: restaurantId},
+            type: "POST",
+            dataType: "html",
+            success: function() {
+                location.reload();
+            }
+        });
+    }
+}
+
 function TableType() {
     
     this.validateEditForm = function(el) {
@@ -9,6 +205,7 @@ function TableType() {
         if (form.find($('input[name="peopleCount"]')).val() == "") {
             //display error
             $(".validationError").css("display", "block");
+            form.find($('input[name="peopleCount"]')).addClass("error-form");
         } else {
             // submit form
             form.submit(); 
@@ -24,14 +221,16 @@ function TableType() {
         var isPeopleCountEmptyError = false;
         $(":input[name='peopleCount[]']").each(function(i){
             if($(this).val() == "") {
-                peopleCountEmptyError = true;
+                isPeopleCountEmptyError = true;
+                $(this).addClass("error-form");
             }
         });
         //check if file field empty
         var isFileEmptyError = false;
-        $(":input[name='file[]']").each(function(i){
-            if($(this).val() == "") {
-                fileEmptyError = true;
+        $(":input[name='file[]']").each(function(i){ 
+            if($(this).val() == "") { console.log();
+                isFileEmptyError = true;
+                $(this).addClass("error-form");
             }
         });
 
@@ -111,6 +310,77 @@ function RestaurantMap() {
 
 function TableOrder() {
 
+    this.initTableData = function(activeTableId) {
+        $("#activeTableOrder4AdminForm_activeTable").val(activeTableId);
+    }
+    
+    this.initFancyTimeBox = function() {
+
+        var timeParams = {
+            changedEl: ".table-order-form select",
+            visRows: 8,
+            scrollArrows: true
+        }
+        cuSel(timeParams);
+    }
+    
+    this.deleteActiveTableOrder = function(tableOrderId) {
+
+        $.ajax({
+            url: Routing.generate('table_deleteActiveTableOrder'),
+            data: {tableOrderId: tableOrderId},
+            type: "POST",
+            dataType: "html",
+            success: function(responce) {
+                $('#activeTableOrderContainer').html(responce);
+            }
+        });
+    }
+    this.loadOrderList = function(tableId) {
+        $.ajax({
+            url: Routing.generate('table_viewActiveTableOrderList'),
+            data: {tableId: tableId},
+            type: "GET",
+            dataType: "html",
+            success: function(response) { 
+                $('#activeTableOrderContainer').html(response);
+            }  
+	}); 
+    }
+    
+    this.loadActiveTables = function() {
+        var mapId = $("#mapId").val();
+        // get Active Tables
+        $.ajax({
+            url: Routing.generate('table_loadActiveTabless'),
+            data: {mapId: mapId},
+            type: "GET",
+            dataType: "json",
+            success: function(response) { 
+                for (var i = 0; i < response.length; i++) {
+                    var imgContainer = "";
+                    var activeTable = response[i];
+                    var left = activeTable.left + $("#tableMapDroppable").position().left;
+                    var top = activeTable.top + $("#tableMapDroppable").position().top;
+                    imgContainer += "<img tabletypeid='" + activeTable.tableTypeId + "' " +
+                            "src='" + activeTable.src + "' " +
+                            "style='position: absolute; width: 50px;" +
+                            "left: " + left + "px; "+
+                            "top: " + top + "px;' " +
+                            "onclick='page.tableOrder.loadOrderList(" + activeTable.id + ");'>";
+
+                    $('#activeTablesContainer').append(imgContainer);
+                }
+            }  
+	}); 
+    }
+    
+    this.refreshRestaurantList = function() {
+        var restaurantId = $("#restaurantId").val();
+        location.href = Routing.generate('table_viewTableOrderList') + "/" + restaurantId;
+    }
+    
+    // old Methods
     this.selectRestaurantFloor = function(obj, floor) {
         // remove active class from all
         $(".floors").removeClass('active');
@@ -284,13 +554,18 @@ function Common() {
         if (fileContaunerCount != 10) {
             var peopleCountLabel = $("#peopleCountLabel").val();
             var deleteFileIcon = $("#deleteFileIcon").val();
+            var selectTheFileLabel = $("#selectTheFileLabel").val();
+            var numberOfPlaces = $("#numberOfPlaces").val();
             var fileContainer = "<div class='row-fluid'>" +
-                    "<span class='span5'>" + peopleCountLabel +
+                    "<span class='span12 add-more-file'>" +
+                    "<div class='number-tables'>" + peopleCountLabel +
                     "<input type='text' name='peopleCount[]' size='2'>" +
-                    "</span>" +
-                    "<span class='span5'>" +
-                    "<input type='file' name='file[]' size='30' >" +
-                    "<a href='#' onclick='page.common.removeFileField(this); return false;'> " +
+                    " " + numberOfPlaces + "</div>" +
+                    "<span class='btn btn-success btn-file'>"+
+                    "<span>" + selectTheFileLabel + "</span>" +
+                    "<input type='file' name='file[]' id='image' size='1'></span>" +
+                    "<span class='files-download'></span>"+
+                    "<a href='#' onclick='page.common.removeFileField(this); return false;' id='delete-file-customization'> " +
                     "<img alt='Delete' src='" + deleteFileIcon + "'>" +
                     "</a></span></div>";
 
@@ -330,6 +605,9 @@ function Page() {
     this.newsFilter = new NewsFilter();
     this.userProfile = new UserProfile();
     this.tableType = new TableType();
+    this.tableMap = new TableMap();
+    this.activeTable = new ActiveTable();
+    this.t = new ActiveTable();
 }
 
 //global page object
@@ -341,3 +619,24 @@ $(function() {
     page = new Page();
     restaurantPage = new Page();
 });
+
+
+(function (jQuery){
+    jQuery(function (){
+        jQuery('.btn-file').each(function (){
+            var self = this;
+            jQuery('input[type=file]', this).change(function (){
+                // remove existing file info
+                jQuery(self).next().remove();
+                // get value
+                var value = jQuery(this).val();
+                // get file name
+                var fileName = value.substring(value.lastIndexOf('/')+1);
+                // get file extension
+                var fileExt = fileName.split('.').pop().toLowerCase();
+                // append file info
+                jQuery('<span class="files-download"><span> '+ fileName +' </span></span>').insertAfter(self);
+            });
+        });
+    });
+})(jQuery);

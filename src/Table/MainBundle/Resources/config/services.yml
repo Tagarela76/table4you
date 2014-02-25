@@ -35,3 +35,12 @@ services:
   table_type_manager:
         class: Table\RestaurantBundle\Model\TableTypeManager
         arguments: [@doctrine.orm.entity_manager, @service_container] 
+  table_map_manager:
+        class: Table\RestaurantBundle\Model\TableMapManager
+        arguments: [@doctrine.orm.entity_manager, @service_container] 
+  active_table_manager:
+        class: Table\RestaurantBundle\Model\ActiveTableManager
+        arguments: [@doctrine.orm.entity_manager, @service_container]       
+  active_table_order_manager:
+        class: Table\RestaurantBundle\Model\ActiveTableOrderManager
+        arguments: [@doctrine.orm.entity_manager, @service_container]         

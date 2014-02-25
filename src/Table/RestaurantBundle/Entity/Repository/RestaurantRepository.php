@@ -126,4 +126,21 @@ class RestaurantRepository extends EntityRepository
         return $query;
     }
 
+    /**
+     * 
+     * Get Restaurants for editor user
+     * 
+     * @param integer $userId
+     * 
+     * 
+     * @return Table\RestaurantBundle\Entity\Restaurant[]
+     */
+    public function getEditorRestaurants($userId)
+    {
+        $query = $this->createQueryBuilder('restaurant')
+                ->andWhere("restaurant.editorId = :editorId")
+                ->setParameter('editorId', $userId)
+                ->orderBy('restaurant.name', 'ASC');
+        return $query;
+    }
 }

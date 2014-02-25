@@ -1,25 +1,30 @@
 <div id="editTableTypePopup_{{tableType.id}}" class="modal hide" data-backdrop="static">
     <div class="modal-header">
-        <a class="close" data-dismiss="modal">X</a>
+        <a class="close" data-dismiss="modal"></a>
     </div>
     <div class="modal-body" >
-        <form id="edit-table-type-form_{{tableType.id}}" action="{{ path('table_editTableType') }}" enctype="multipart/form-data" method="post">       
+        <form id="edit-table-type-form_{{tableType.id}}" action="{{ path('table_editTableType') }}" enctype="multipart/form-data" method="post" class="edit-table-type-form">
             <div class="container-fluid">   
                 <div class="row-fluid">
                     <div class="row-fluid">
-                        <span class="span5">
-                            {% trans %}main.tableMap.tableList.form.label.tableOn{% endtrans %}
-                            <input type="text" name="peopleCount" size="2" value="{{tableType.peopleCount}}"/>
-                        </span>    
-                        <span class="span5">
-                            <input type="file" name="file" size="30" />
+                        <span class="span12">
+                            <div class="number-tables">
+                                {% trans %}main.tableMap.tableList.form.label.tableOn{% endtrans %}
+                                <input type="text" name="peopleCount" size="2" value="{{tableType.peopleCount}}"/>
+                                мест(а){% trans %}main.tableMap.tableList.form.label.numberOfPlaces{% endtrans %}
+                            </div>
+                        <span class="btn btn-success btn-file">
+                            <span>{% trans %}main.tableMap.tableList.form.label.selectTheFile{% endtrans %}</span>
+                            <input type="file" name="file" id="image" size="1">
+                        </span>
+                        <span class="files-download"></span>
                         </span>
                     </div>    
                 </div>
                 <div class="row-fluid">
                     <label class="validationError">{% trans %}main.tableMap.tableList.form.error.peopleCount{% endtrans %}</label>
-                    <div class="offset5 span5">
-                        <input type="button" onClick="page.tableType.validateEditForm(this);" value="{% trans %}main.tableMap.tableList.form.label.load{% endtrans %}" />
+                    <div class="offset9 span3">
+                        <input type="button" onClick="page.tableType.validateEditForm(this);" value="{% trans %}main.tableMap.tableList.form.label.load{% endtrans %}" class="but-load-file" />
                         <input type="hidden" name="tableTypeId" value="{{tableType.id}}" />
                     </div>   
                 </div>    

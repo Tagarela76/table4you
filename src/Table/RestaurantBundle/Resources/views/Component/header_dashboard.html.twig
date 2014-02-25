@@ -1,10 +1,12 @@
-<div class="row">
+<div class="row header-dashboard">
     <div class="span3">
         <a class="logo-main" href="{{ path('table_main_homepage') }}" title="logotip">
             <img src="{{ asset('bundles/tablemain/images/logotip.png') }}" alt="logotip"/>
         </a>
     </div>
-    <div class="span2">
+    <div class="span3">
+    </div>
+    <div class="span6">
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
             <a href="{{ path('fos_user_security_logout') }}">
                 {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}

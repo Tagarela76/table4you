@@ -44,9 +44,23 @@ table_getGeoRestaurants:
        expose: true  
 
 # Interactive table map
-table_editor_dashboard:
+table_viewTableTypeList:
     pattern:  /table_editor
-    defaults: { _controller: TableRestaurantBundle:TableDashboard:viewEditorDashboard }      
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:viewTableTypeList }      
+    
+table_viewCreateMap:
+    pattern:  /viewCreateMap/{restaurantId}
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:viewCreateMap, restaurantId: 0 }    
+    requirements:
+        restaurantId: \d+     
+    options:
+       expose: true   
+       
+table_viewTableOrderList:
+    pattern:  /viewTableOrderList/{restaurantId}
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:viewTableOrderList, restaurantId: 0 } 
+    options:
+       expose: true   
     
 table_updateTableTypeList:
     pattern:  /updateTableTypeList
@@ -70,4 +84,74 @@ table_deleteTableType:
     requirements:
         _method: POST  
     options:
-       expose: true         
+       expose: true 
+       
+table_updateTableMap:
+    pattern:  /updateTableMap
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:updateTableMap, _format: json }
+    requirements:
+        _method: POST  
+    options:
+       expose: true   
+     
+table_deleteTableMap:
+    pattern:  /deleteTableMap
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:deleteTableMap, _format: json }
+    requirements:
+        _method: POST  
+    options:
+       expose: true   
+       
+table_editTableMap:
+    pattern:  /editTableMap
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:editTableMap, _format: json }
+    requirements:
+        _method: POST  
+    options:
+       expose: true       
+       
+table_addActiveTable:
+    pattern:  /addActiveTable
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:addActiveTable, _format: json }
+    requirements:
+        _method: POST  
+    options:
+       expose: true     
+       
+table_loadActiveTables:
+    pattern:  /loadActiveTables
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:loadActiveTables, _format: json }
+    requirements:
+        _method: GET  
+    options:
+       expose: true 
+       
+table_viewActiveTableOrderList:
+    pattern:  /viewActiveTableOrderList
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:viewActiveTableOrderList }
+    requirements:
+        _method: GET  
+    options:
+       expose: true 
+       
+table_deleteActiveTableOrder:
+    pattern:  /deleteActiveTableOrder
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:deleteActiveTableOrder, _format: json }
+    requirements:
+        _method: POST  
+    options:
+       expose: true       
+       
+table_reserveActiveTableOrder:
+    pattern:  /reserveActiveTableOrder/{activeTableId}
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:reserveActiveTableOrder }
+    options:
+       expose: true    
+       
+table_loadActiveTable:
+    pattern:  /loadActiveTable/{activeTableId}
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:loadActiveTable }
+    requirements:
+        _method: GET  
+    options:
+       expose: true        

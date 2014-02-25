@@ -123,4 +123,20 @@ class RestaurantManager
     {
         return $this->getRestaurantRepo()->searchRestaurants($request, $this->container);
     }
+    
+    /**
+     * @param integer $userId
+     * 
+     * @param boolean $superAdmin
+     * 
+     * @return Table\RestaurantBundle\Entity\Restaurant[]
+     */
+    public function getEditorRestaurants($userId, $superAdmin = false)
+    {
+        if ($superAdmin) {
+            // get all restaurants
+            return $this->getRestaurants()->getQuery()->getResult();
+        }
+        return $this->getRestaurantRepo()->getEditorRestaurants($userId);
+    }
 }

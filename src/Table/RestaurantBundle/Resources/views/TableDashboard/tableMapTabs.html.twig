@@ -1,0 +1,14 @@
+<div>
+    <ul class="nav nav-tabs" data-tabs="tabs">
+        <a href="{{ path('table_main_homepage') }}" class="logo-mini"></a>
+        <li{% if app.request.attributes.get('_route') == "table_viewTableTypeList" %} class="active" {% endif %}>
+            <a href="{{ path('table_viewTableTypeList') }}">{% trans %}main.tableMap.tableList.header{% endtrans %}</a>
+        </li>
+        <li{% if app.request.attributes.get('_route') == "table_viewCreateMap" %} class="active" {% endif %}>
+            <a href="{{ path('table_viewCreateMap') }}">{% trans %}main.tableMap.createMap.header{% endtrans %}</a>
+        </li>
+        <li{% if app.request.attributes.get('_route') == "table_viewTableOrderList" %} class="active" {% endif %}>
+            <a href="{{ path('table_viewTableOrderList') }}">{% trans %}main.tableMap.orders.header{% endtrans %}</a>
+        </li>
+    </ul>
+</div>
