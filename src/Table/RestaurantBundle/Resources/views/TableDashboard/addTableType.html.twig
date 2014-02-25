@@ -3,28 +3,27 @@
         <div class="row-fluid"  id="fileFieldsContainer">
             <div class="row-fluid">
                 <span class="span12">
-                    <div class="number_tables">
+                    <div class="number-tables">
                         {% trans %}main.tableMap.tableList.form.label.tableOn{% endtrans %}
                         <input type="text" name="peopleCount[]" size="2"/>
-                        мест(а)
+                        {% trans %}main.tableMap.tableList.form.label.numberOfPlaces{% endtrans %}
                     </div>
-                    <div id="customization_name"></div>
-                    <div class="customization">
-                        <div>Выбрать файл</div>
-                        <input type="file" name="file[]" id="customization_file" size="1">
-                    </div>
-                    <!--<div id="delete_file_customization"></div>-->
+                    <span class="btn btn-success btn-file">
+                        <span>{% trans %}main.tableMap.tableList.form.label.selectTheFile{% endtrans %}</span>
+                        <input type="file" name="file[]" id="image" size="1">
+                    </span>
+                    <span class="files-download"></span>
                 </span>
             </div>    
         </div>
         <div class="row-fluid">
             <div class="span12">
-                <div class="load_file">
+                <div class="load-file">
                     <a href="#" onclick="page.common.addNewFileField(); return false;">
                         {% trans %}main.tableMap.tableList.form.label.addMore{% endtrans %}
                     </a>
                     <label class="validationError">{% trans %}main.tableMap.tableList.form.errors{% endtrans %}</label>
-                    <input type="button" onClick="page.tableType.validateAddForm();" value="{% trans %}main.tableMap.tableList.form.label.load{% endtrans %}" class="but_load_file" />
+                    <input type="button" onClick="page.tableType.validateAddForm();" value="{% trans %}main.tableMap.tableList.form.label.load{% endtrans %}" class="but-load-file" />
                     <input type="hidden" id="peopleCountLabel" value="{% trans %}main.tableMap.tableList.form.label.tableOn{% endtrans %}" />
                     <input type="hidden" id="deleteFileIcon" value="{{ asset('bundles/tablerestaurant/images/deleteFile.png') }}" />
                 </div>
@@ -33,25 +32,5 @@
     </div>
 </form>
 <script>
-    jQuery(document).ready(function() {
 
-        jQuery('#customization_file').change(function()
-        {
-
-
-
-                jQuery('#customization_file').each(function() {
-                    var name = this.value;
-                    reWin = /.*\\(.*)/;
-                    var fileTitle = name.replace(reWin, "$1");
-                    reUnix = /.*\/(.*)/;
-                    fileTitle = fileTitle.replace(reUnix, "$1");
-                    jQuery('#customization_name').html(fileTitle);
-                });
-
-
-
-        });
-
-    });
 </script>

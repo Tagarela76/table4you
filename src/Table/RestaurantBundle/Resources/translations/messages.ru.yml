@@ -60,8 +60,10 @@ main:
         form:
             label:
                 tableOn: Столик на
+                numberOfPlaces: мест(а)
                 addMore: Добавить еще
                 load: Загрузить
+                selectTheFile: Выбрать файл
             error:
                 peopleCount: Укажите кол-во гостей
             errors: Ошибки при заполении формы

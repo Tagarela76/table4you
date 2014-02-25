@@ -1,4 +1,4 @@
-<div class="row-fluid title_tabs">
+<div class="row-fluid title-tabs">
     <ul>
         {% for tableMap in tableMapList %}
             <li {% if tableMap.id == mapId%} class="active" {% endif %}>
@@ -24,18 +24,6 @@
     </ul>
 </div>
 
-{#{% if tableMapObj is not null %}
-    <div class="row-fluid">
-        <div class="span12">
-            {% trans %}main.tableMap.createMap.editRestaurant{% endtrans %} {{ tableMapObj.restaurant.name }}
-            {{ tableMapObj.floor }} {% trans %}main.tableMap.createMap.floor{% endtrans %}
-            {% if tableMapObj.hall is not null %}
-                {{tableMapObj.hall}} {% trans %}main.tableMap.createMap.hall{% endtrans %} 
-            {% endif %}
-        </div>
-    </div>
-{% endif %}#}
-
 <div class="row-fluid" id="interactive-map-container">
     <div class="span8 table-map-droppable" id="tableMapDroppable">
         {% if tableMapObj is not null and tableMapObj.file is not null %}
@@ -47,7 +35,7 @@
     <div class="span4 table-map-droppable-right">
         <div class="row-fluid">
             <div class="span12">
-                <a href="#" class="add_table_but">{% trans %}main.tableMap.tableList.choiceTable{% endtrans %}</a>
+                <a href="#" class="add-table-but">{% trans %}main.tableMap.tableList.choiceTable{% endtrans %}</a>
             </div>    
         </div>
         {% for tableType in tableTypeList %}  

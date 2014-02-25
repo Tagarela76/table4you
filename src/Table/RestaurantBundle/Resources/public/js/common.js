@@ -90,14 +90,14 @@ function TableMap() {
             var mapFileLabel = $("#mapFileLabel").val();
             var mapFloorLabel = $("#mapFloorLabel").val();
             var mapHallLabel = $("#mapHallLabel").val();
-            var rowContainer = "<div class='row-fluid add_file_map'>" +
-                               "<span class='span12'><div class='list_text'>" + mapFileLabel +
-                               "</div><div id='customization_name'></div><div class='customization'><div>Выбрать файл</div><input type='file' name='mapFile[]' size='30' id='customization_file'/></div>"+
+            var rowContainer = "<div class='row-fluid add-file-map'>" +
+                               "<span class='span12'><div class='list-text-floor-hall'>" + mapFileLabel +
+                               "</div><span class='btn btn-success btn-file'><span>Выбрать файл</span><input type='file' name='file[]' id='image' size='1'></span><span class='files-download'></span>"+
                                "</span>" +
-                               "<span class='span4'><div class='list_text'>" + mapFloorLabel +
+                               "<span class='span4'><div class='list-text-floor-hall'>" + mapFloorLabel +
                                "</div><input type='text' name='mapFloor[]' size='2' />" +
                                "</span>" +
-                               "<span class='span5'><div class='list_text'>" + mapHallLabel +
+                               "<span class='span5'><div class='list-text-floor-hall'>" + mapHallLabel +
                                "</div><input type='text' name='mapHall[]' size='2'/></span>" +
                                "<span class='span2'><a href='#' onclick='page.common.removeFileField(this); return false;'> " +
                                "<img alt='Delete' src='" + deleteRowIcon + "'>" +
@@ -512,11 +512,12 @@ function Common() {
             var peopleCountLabel = $("#peopleCountLabel").val();
             var deleteFileIcon = $("#deleteFileIcon").val();
             var fileContainer = "<div class='row-fluid'>" +
-                    "<span class='span12 add_more_file'><div class='number_tables'>" + peopleCountLabel +
+                    "<span class='span12 add-more-file'><div class='number-tables'>" + peopleCountLabel +
                     "<input type='text' name='peopleCount[]' size='2'>мест(а)</div>" +
-                    "<div id='customization_name'></div>"+
-                    "<div class='customization'><div>Выбрать файл</div><input type='file' name='file[]' size='30' id='customization_file'></div>" +
-                    "<a href='#' onclick='page.common.removeFileField(this); return false;' id='delete_file_customization'> " +
+                    "<span class='btn btn-success btn-file'>"+
+                    "<span>Выбрать файл</span><input type='file' name='file[]' id='image' size='1'></span>" +
+                    "<span class='files-download'></span>"+
+                    "<a href='#' onclick='page.common.removeFileField(this); return false;' id='delete-file-customization'> " +
                     "<img alt='Delete' src='" + deleteFileIcon + "'>" +
                     "</a></span></div>";
 
@@ -570,3 +571,24 @@ $(function() {
     page = new Page();
     restaurantPage = new Page();
 });
+
+
+(function (jQuery){
+    jQuery(function (){
+        jQuery('.btn-file').each(function (){
+            var self = this;
+            jQuery('input[type=file]', this).change(function (){
+                // remove existing file info
+                jQuery(self).next().remove();
+                // get value
+                var value = jQuery(this).val();
+                // get file name
+                var fileName = value.substring(value.lastIndexOf('/')+1);
+                // get file extension
+                var fileExt = fileName.split('.').pop().toLowerCase();
+                // append file info
+                jQuery('<span class="files-download"><span> '+ fileName +' </span></span>').insertAfter(self);
+            });
+        });
+    });
+})(jQuery);

@@ -1628,8 +1628,9 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
 .validationError {display: none;}
 
 /* Page added tables */
-.header-dashboard .span6+.span3{width: 150px;text-align: right;}
-.header-dashboard .span3 a{
+.header-dashboard .span3+.span6{width: 372px;text-align: right;}
+.header-dashboard .span6 a{
+    display: block;
     font-family: Trebuchet MS;
     color: #a7a4a4;
     font-size: 16px;
@@ -1637,7 +1638,7 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     font-weight: normal;
     padding-right: 2px;
 }
-.header-dashboard .span3 a:hover{text-decoration: none;}
+.header-dashboard .span6 a:hover{text-decoration: none;}
 .content .content-table-editor{width: 816px;margin-left: 0;}
 .content-table-editor .nav-tabs {
     background: url(./images/img-header-dashbord.png) no-repeat;
@@ -1674,9 +1675,9 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9bd34', endColorstr='#e04c00',GradientType=0 );
 }
 .content-table-editor .nav-tabs li+li{margin-left: 1px;}
-#table-type-form #fileFieldsContainer .row-fluid .number_tables input,
-#tableTypeContainer .modal-body .row-fluid .number_tables input,
-.editTableMapPopup .modal-body .row-fluid .number_tables input{
+#table-type-form #fileFieldsContainer .row-fluid .number-tables input,
+#tableTypeContainer .modal-body .row-fluid .number-tables input,
+.editTableMapPopup .modal-body .row-fluid .number-tables input{
     width: 39px;
     margin: 0 4px;
     padding: 5px 6px;
@@ -1704,16 +1705,69 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     font-size: 17px;
     font-family: Arial;
 }
-#table-type-form .number_tables, .modal-body .number_tables{
+#table-type-form .number-tables, .modal-body .number-tables{
     float: left;
     margin-right: 43px;
 }
-.modal-body .number_tables{margin-left: 20px;}
-#table-type-form #customization_name,
-.modal-body #customization_name,
-#table-map-form #customization_name,
-#table-map-form .specify_floor_room input,
-#table-map-form .add_file_map input,
+
+.content-table-editor .btn-file {
+    position: relative;
+    overflow: hidden;
+    margin-right: 4px;
+    float: right;
+    text-align: center;
+    overflow: hidden;
+    width: 149px;
+    height: 32px;
+    padding: 0;
+    margin-right: 40px;
+    cursor: pointer;
+    -moz-border-radius: 7px 7px 7px 7px;
+    -webkit-border-radius: 7px 7px 7px 7px;
+    -o-border-radius: 7px 7px 7px 7px;
+    border-radius: 7px 7px 7px 7px;
+    background: #f9bd34;
+    background: -moz-linear-gradient(top, #f9bd34 0%, #f09a32 53%, #ed7a00 60%, #e04c00 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f9bd34), color-stop(53%,#f09a32), color-stop(60%,#ed7a00), color-stop(100%,#e04c00));
+    background: -webkit-linear-gradient(top, #f9bd34 0%,#f09a32 53%,#ed7a00 60%,#e04c00 100%);
+    background: -o-linear-gradient(top, #f9bd34 0%,#f09a32 53%,#ed7a00 60%,#e04c00 100%);
+    background: -ms-linear-gradient(top, #f9bd34 0%,#f09a32 53%,#ed7a00 60%,#e04c00 100%);
+    background: linear-gradient(to bottom, #f9bd34 0%,#f09a32 53%,#ed7a00 60%,#e04c00 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9bd34', endColorstr='#e04c00',GradientType=0 );
+}
+.content-table-editor .btn-file span{
+    color: #fefcfb;
+    font-size: 17px;
+    font-family: Arial;
+    line-height: 32px;
+}
+.btn-file input { position: absolute; top: 0; right: 0; margin: 0; opacity: 0; filter: alpha(opacity=0);
+    transform: translate(-300px, 0) scale(4); font-size: 23px; direction: ltr; cursor: pointer; }
+.files-download{
+    width: 366px;
+    height: 18px;
+    float: left;
+    padding: 6px 6px;
+    margin-right: 17px;
+    border: 0;
+    overflow: hidden;
+    -moz-border-radius: 7px 7px 7px 7px;
+    -webkit-border-radius: 7px 7px 7px 7px;
+    -o-border-radius: 7px 7px 7px 7px;
+    border-radius: 7px 7px 7px 7px;
+    -moz-box-shadow: inset 1px 0px 3px rgba(238, 238, 238, 0.7), inset -2px 0px 3px rgba(238, 238, 238,0.7), inset 0px 2px 0px rgba(0, 0, 0, 0.6);
+    -webkit-box-shadow: inset 1px 0px 3px rgba(238, 238, 238, 0.7), inset -2px 0px 3px rgba(238, 238, 238,0.7), inset 0px 2px 0px rgba(0, 0, 0, 0.6);
+    box-shadow: inset 1px 0px 3px rgba(238, 238, 238, 0.7), inset -2px 0px 3px rgba(238, 238, 238,0.7), inset 0px 2px 0px rgba(0, 0, 0, 0.6);
+    border-right: 1px solid #d9d9d9;
+    border-left: 1px solid #d9d9d9;
+    border-top: 1px solid #f2f2f2;
+    border-bottom: 1px solid #f2f2f2;
+    background: #fff;
+}
+.files-download span{margin-left: -78px;}
+.modal-body .number-tables{margin-left: 20px;}
+#table-map-form .specify-floor-room input,
+#table-map-form .add-file-map input,
 .editTableMapPopup .modal-body input{
     width: 366px;
     height: 18px;
@@ -1734,17 +1788,25 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     border-bottom: 1px solid #f2f2f2;
     background: #fff;
 }
-.editTableMapPopup .modal-body #customization_name{width: 452px;}
-#table-map-form .add_file_map .span4{margin: 0;}
-#table-map-form .specify_floor_room input,
-#table-map-form .add_file_map .span4 input,
-#table-map-form .add_file_map .span5 input,
+#table-map-form .files-download{width: 452px;}
+#table-map-form .btn-file{margin: 0;}
+#table-map-form .add-file-map .span4{margin: 0;}
+#table-map-form .specify-floor-room input,
+#table-map-form .add-file-map .span4 input,
+#table-map-form .add-file-map .span5 input,
 .editTableMapPopup .modal-body .span5 input,
 .editTableMapPopup .modal-body .span4 input{
     width: 82px;
     margin: 0;
 }
-#table-map-form #customization_name{width: 452px;}
+.modal-body .files-download{
+    margin-right: 0px;
+    width: 452px;
+}
+.modal-body .btn-file{margin-right: 20px;}
+.edit-table-type-form .files-download span{line-height: 20px;}
+.edit-table-type-form .number-tables{margin-right: 10px;}
+.edit-table-type-form .files-download{width: 350px;}
 #table-type-form .customization,
 .modal-body .customization,
 #table-map-form .customization{
@@ -1776,25 +1838,19 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     font-family: Arial;
     line-height: 32px;
 }
-#table-type-form .customization #customization_file,
-#tableTypeContainer .modal-body .customization #customization_file,
-.editTableMapPopup .modal-body .customization #customization_file,
-#table-map-form .customization #customization_file{
-    margin-top: -50px; margin-left:-410px; -moz-opacity: 0; filter: alpha(opacity=0); opacity: 0; font-size: 150px; height: 100px;
-}
-#delete_file_customization{
+#delete-file-customization{
     width: 17px;
     height: 23px;
-    float: left;
-    margin-left: 22px;
+    position: absolute;
+    right: 2px;
     margin-top: 3px;
     cursor: pointer;
 }
-#table-type-form .load_file{float: right;}
-#table-type-form .but_load_file,
-#tableTypeContainer .but_load_file,
-#table-map-form .but_load_file,
-#tableMapContainer .editTableMapPopup .but_load_file{
+#table-type-form .load-file{float: right;}
+#table-type-form .but-load-file,
+#tableTypeContainer .but-load-file,
+#table-map-form .but-load-file,
+#tableMapContainer .editTableMapPopup .but-load-file{
     width: 149px;
     height: 32px;
     color: #fefcfb;
@@ -1816,9 +1872,9 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     background: linear-gradient(to bottom, #f9bd34 0%,#f09a32 53%,#ed7a00 60%,#e04c00 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9bd34', endColorstr='#e04c00',GradientType=0 );
 }
-#table-map-form .but_load_file{margin: 0;}
-#table-type-form .load_file a,
-.add_file{
+#table-map-form .but-load-file{margin: 0;}
+#table-type-form .load-file a,
+.add-file{
     display: block;
     float: left;
     width: 147px;
@@ -1844,10 +1900,11 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(187,188,189,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#bbbcbd',GradientType=0 );
 }
-#table-type-form .load_file a:hover,
-.add_file:hover{text-decoration: none;color: #454545;}
-.add_file{margin-left: 69px;}
-#table-type-form #fileFieldsContainer .add_more_file .number_tables input{margin: 0 8px;}
+#table-type-form .load-file a:hover,
+.add-file:hover{text-decoration: none;color: #454545;}
+.add-file{margin-left: 69px;}
+.add-more-file{position: relative;}
+#table-type-form #fileFieldsContainer .add-more-file .number-tables input{margin: 0 8px;}
 #tableTypeContainer .hr{
     display: block;
     height: 2px;
@@ -1896,8 +1953,8 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
 #tableTypeContainer .row-fluid .span2 p{display: inline-block;margin: 0;margin-left: 25px;}
 #tableTypeContainer .modal-body form,
 .editTableMapPopup .modal-body form{margin-top: 25px;}
-#tableTypeContainer .modal-body .row-fluid .offset9 .but_load_file,
-.editTableMapPopup .modal-body .row-fluid .offset9 .but_load_file{margin-left: 5px;}
+#tableTypeContainer .modal-body .row-fluid .offset9 .but-load-file,
+.editTableMapPopup .modal-body .row-fluid .offset9 .but-load-file{margin-left: 5px;}
 
 /* Page added maps */
 #table-map-form #restaurantId{
@@ -1920,10 +1977,10 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     background: #fff;
 }
 #table-map-form #restaurantId:focus{outline: none;}
-#mapFieldsContainer .specify_floor_room{margin-top: 18px;}
-#table-map-form .span12 .list_text,
-#mapFieldsContainer .specify_floor_room .list_text,
-.editTableMapPopup .list_text{
+#mapFieldsContainer .specify-floor-room{margin-top: 18px;}
+#table-map-form .span12 .list-text-floor-hall,
+#mapFieldsContainer .specify-floor-room .list-text-floor-hall,
+.editTableMapPopup .list-text-floor-hall{
     width: 142px;
     float: left;
     margin: 4px 10px 0 4px;
@@ -1931,39 +1988,39 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     font-size: 16px;
     font-family: Arial;
 }
-.editTableMapPopup .span12 .list_text{margin-left: 15px;margin-bottom: 25px;}
+.editTableMapPopup .span12 .list-text-floor-hall{margin-left: 15px;margin-bottom: 25px;}
 .editTableMapPopup .span4{margin-left: 11px;}
-#mapFieldsContainer .add_file_map .span12{margin-bottom: 20px;}
-#mapFieldsContainer .add_file_map .span5 .list_text,
-#mapFieldsContainer .specify_floor_room .span5 .list_text,
-.editTableMapPopup .modal-body .span5 .list_text{
+#mapFieldsContainer .add-file-map .span12{margin-bottom: 20px;}
+#mapFieldsContainer .add-file-map .span5 .list-text-floor-hall,
+#mapFieldsContainer .specify-floor-room .span5 .list-text-floor-hall,
+.editTableMapPopup .modal-body .span5 .list-text-floor-hall{
     width: 150px;
     margin-left: 77px;
     margin-right: 30px;
 }
-#mapFieldsContainer .add_file_map{
+#mapFieldsContainer .add-file-map{
 
 }
-#table-type-form #fileFieldsContainer .row-fluid .number_tables input:focus,
-#table-map-form .specify_floor_room input:focus,
-#table-map-form .add_file_map input:focus{
+#table-type-form #fileFieldsContainer .row-fluid .number-tables input:focus,
+#table-map-form .specify-floor-room input:focus,
+#table-map-form .add-file-map input:focus{
     border: 1px solid #fe8504;
     outline: none;
     box-shadow: none;
 }
-.hr_line{
+.hr-line{
     height: 1px;
     border: 0;
     background: #aeacac;
 }
 
-.add_file_map{margin-top: 20px;}
-.add_file_map .span2 a{
+.add-file-map{margin-top: 20px;}
+.add-file-map .span2 a{
     float: right;
-    margin-right: 10px;
+    margin-right: -16px;
     margin-top: 4px;
 }
-#tableMapContainer .title_tabs{border-bottom: 1px solid #aeacac;margin: 0;}
+#tableMapContainer .title-tabs{border-bottom: 1px solid #aeacac;margin: 0;}
 #interactive-map-container .span8{
     height: 356px;
     width: 530px;
@@ -1990,7 +2047,7 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     font-size: 17px;
     font-family: Arial;
 }
-#interactive-map-container .table-map-droppable-right .row-fluid .span12 .add_table_but{
+#interactive-map-container .table-map-droppable-right .row-fluid .span12 .add-table-but{
     display: inline-block;
     width: 147px;
     height: 30px;
@@ -2014,9 +2071,9 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(187,188,189,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#bbbcbd',GradientType=0 );
 }
-#interactive-map-container .table-map-droppable-right .row-fluid .span12 .add_table_but:hover{text-decoration: none;}
-#tableMapContainer .title_tabs ul{margin: 0;/*overflow: hidden;*/}
-#tableMapContainer .title_tabs ul li{
+#interactive-map-container .table-map-droppable-right .row-fluid .span12 .add-table-but:hover{text-decoration: none;}
+#tableMapContainer .title-tabs ul{margin: 0;/*overflow: hidden;*/}
+#tableMapContainer .title-tabs ul li{
     list-style: none;
     float: left;
     width: 96px;
@@ -2033,7 +2090,7 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
-#tableMapContainer .title_tabs ul li.active{
+#tableMapContainer .title-tabs ul li.active{
     width: 195px;
     background: #e3e3e3;
     text-align: left;
@@ -2041,7 +2098,7 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     left: 1px;
     margin-left: -1px;
 }
-#tableMapContainer .title_tabs ul li a{
+#tableMapContainer .title-tabs ul li a{
     font-family: Tahoma;
     font-size: 14px;
     color: #666666;
@@ -2050,19 +2107,19 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     width: 100%;
     height: 100%;
 }
-#tableMapContainer .title_tabs ul li a:hover{text-decoration: none;}
-#tableMapContainer .title_tabs ul li a+a{display: none;}
-#tableMapContainer .title_tabs ul li.active a,
-#tableMapContainer .title_tabs ul li.active a+a{display: block;}
-#tableMapContainer .title_tabs ul li.active a{padding-left: 15px;width: 120px;}
-#tableMapContainer .title_tabs ul li.active a+a{
+#tableMapContainer .title-tabs ul li a:hover{text-decoration: none;}
+#tableMapContainer .title-tabs ul li a+a{display: none;}
+#tableMapContainer .title-tabs ul li.active a,
+#tableMapContainer .title-tabs ul li.active a+a{display: block;}
+#tableMapContainer .title-tabs ul li.active a{padding-left: 15px;width: 120px;}
+#tableMapContainer .title-tabs ul li.active a+a{
     position: absolute;
     width: 17px;
     height: 30px;
     right: 33px;
     padding: 0;
 }
-#tableMapContainer .title_tabs ul li.active a+a+a{right: 9px;}
+#tableMapContainer .title-tabs ul li.active a+a+a{right: 9px;}
 
 
 
