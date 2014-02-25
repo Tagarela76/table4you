@@ -1,0 +1,96 @@
+<div class="row-fluid title-tabs">
+    <ul>
+        {% for tableMap in tableMapList %}
+            <li {% if tableMap.id == mapId%} class="active" {% endif %}>
+                <a href="{{ path('table_viewCreateMap', {'restaurantId': restaurantId, 'mapId': tableMap.id}) }}">
+                    {{tableMap.floor}} {% trans %}main.tableMap.createMap.floor{% endtrans %}
+                    {% if tableMap.hall is not null %}
+                        {{tableMap.hall}} {% trans %}main.tableMap.createMap.hall{% endtrans %}
+                    {% endif %}
+                </a>
+
+                <a data-toggle="modal" href="#editTableMapPopup_{{tableMap.id}}">
+                    <img src="{{ asset('bundles/tablerestaurant/images/edit_table_type_btn_small.png') }}" />
+                </a>
+                <a href='#' onclick='page.tableMap.deleteTableMap({{ tableMap.id }}); return false;'>
+                    <img src="{{ asset('bundles/tablerestaurant/images/deleteFile_small.png') }}" />
+                </a>
+            </li>
+            {# ==Modal Window for editTableMap==#}
+            {% include 'TableRestaurantBundle:TableDashboard:editTableMap.html.twig' %}
+            {# ==Modal Window for editTableMap==#}
+
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="row-fluid" id="interactive-map-container">
+    <div class="span8 table-map-droppable" id="tableMapDroppable">
+        {% if tableMapObj is not null and tableMapObj.file is not null %}
+            <img src="{{baseUrl}}{{ vich_uploader_asset(tableMapObj, 'file') }}" alt="{{ tableMapObj.restaurant.name }}" />
+        {% endif %}    
+        {# Add existing tables Container#}
+        <div id="activeTablesContainer"></div>    
+    </div>
+
+    <div class="span4 table-map-droppable-right" id="table-container">
+        <div class="row-fluid">
+            <div class="span12">
+                <a href="{{ path('table_viewTableTypeList')}}">
+                    {% trans %}main.tableMap.tableList.addTable{% endtrans %}
+                </a>
+            </div>    
+        </div>
+        {% for tableType in tableTypeList %}  
+            <div class="row-fluid">
+                <div class="span4">
+                    <img tabletypeid="{{tableType.id}}" class="table-type-draggable" src="{{baseUrl}}{{ vich_uploader_asset(tableType, 'file') }}" alt="{{ tableType.peopleCount }}" />
+                </div>
+                <div class="span6">
+                    {% trans %}main.tableMap.tableList.tableOn{% endtrans %} {{ tableType.peopleCount }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{# ==Modal Window for saveTable==#}
+    {% include 'TableRestaurantBundle:TableDashboard:addActiveTable.html.twig' %}
+{# ==Modal Window for saveTable==#}
+<script>
+    
+    $(function() {
+        // Init Active Tables
+        page.activeTable.loadActiveTables();
+        
+        $(".table-type-draggable").draggable({
+            helper: "clone",
+            cursor: 'move'
+        });
+        $(".table-map-droppable").droppable({
+            tolerance: 'fit',
+            drop: function (event, ui) {
+                var $canvas = $(this);
+                if (!ui.draggable.hasClass('canvas-element')) {
+                    var $canvasElement = ui.draggable.clone();
+                    $canvasElement.addClass('canvas-element');
+                    $canvasElement.draggable({
+                        containment: '.table-map-droppable'
+                    });
+                    $canvas.append($canvasElement);
+                    $canvasElement.css({
+                        left: (ui.position.left),
+                        top: (ui.position.top),
+                        position: 'absolute'
+                    });
+                }
+                // not for editable tables
+                if (!ui.draggable.hasClass('active-table-draggable')) {
+                    // init data
+                    page.activeTable.initTableData((ui.position.top - $("#tableMapDroppable").position().top), (ui.position.left - $("#tableMapDroppable").position().left), $(ui.draggable[0]).attr("tabletypeid"));
+                    $("#tableNumberContainer").modal('show');
+                }
+            }
+        });
+
+    });    
+</script>

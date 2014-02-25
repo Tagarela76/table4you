@@ -4,6 +4,7 @@ namespace Table\RestaurantBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * ActiveTable
@@ -26,7 +27,7 @@ class ActiveTable
      * @var Table\RestaurantBundle\Entity\TableType $tableType
      * 
      * @ORM\ManyToOne(targetEntity="Table\RestaurantBundle\Entity\TableType", inversedBy="activeTables")
-     * @ORM\JoinColumn(name="restaurant_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="table_type_id", referencedColumnName="id", onDelete="CASCADE")
      * */
     private $tableType;
 
@@ -36,15 +37,39 @@ class ActiveTable
      * @ORM\Column(name="table_number", type="integer")
      */
     private $tableNumber;
+    
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="top_position", type="float", scale=2)
+     */
+    private $topPosition;
+    
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="left_position", type="float", scale=2)
+     */
+    private $leftPosition;
 
     /**
-     * @var Table\RestaurantBundle\Entity\Restaurant $restaurant
+     * @var Table\RestaurantBundle\Entity\TableMap $tableMap
      * 
-     * @ORM\ManyToOne(targetEntity="Table\RestaurantBundle\Entity\Restaurant", inversedBy="activeTables")
-     * @ORM\JoinColumn(name="restaurant_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\ManyToOne(targetEntity="Table\RestaurantBundle\Entity\TableMap", inversedBy="activeTables")
+     * @ORM\JoinColumn(name="table_map_id", referencedColumnName="id", onDelete="CASCADE")
      * */
-    private $restaurant;
+    private $tableMap;
 
+    /**
+     * @ORM\OneToMany(targetEntity="ActiveTableOrder", mappedBy="activeTable", orphanRemoval=true, cascade={"persist", "remove"})
+     */
+    protected $activeTableOrders;
+    
+    public function __construct()
+    {
+        $this->activeTableOrders = new ArrayCollection();
+    }
+    
     /**
      * Get id
      *
@@ -99,28 +124,82 @@ class ActiveTable
     public function getTableNumber()
     {
         return $this->tableNumber;
-    }
+    } 
     
     /**
-     * Set restaurant
+     * Get topPosition
      *
-     * @param Table\RestaurantBundle\Entity\Restaurant $restaurant
+     * @return float 
+     */
+    public function getTopPosition()
+    {
+        return $this->topPosition;
+    }
+
+    /**
+     * Get leftPosition
+     *
+     * @return float 
+     */
+    public function getLeftPosition()
+    {
+        return $this->leftPosition;
+    }
+
+    /**
+     * Get tableMap
+     *
+     * @return Table\RestaurantBundle\Entity\TableMap 
+     */
+    public function getTableMap()
+    {
+        return $this->tableMap;
+    }
+
+    /**
+     * Set top positionPosition
+     *
+     * @param float $topPosition
      * @return ActiveTable
      */
-    public function setRestaurant($restaurant)
+    public function setTopPosition($topPosition)
     {
-        $this->restaurant = $restaurant;
-    
+        $this->topPosition = $topPosition;
+        
         return $this;
     }
 
     /**
-     * Get restaurant
+     * Set Left position
      *
-     * @return Table\RestaurantBundle\Entity\Restaurant 
+     * @param float $leftPosition
+     * @return ActiveTable
      */
-    public function getRestaurant()
+    public function setLeftPosition($leftPosition)
     {
-        return $this->restaurant;
+        $this->leftPosition = $leftPosition;
+        
+        return $this;
+    }
+
+    /**
+     * Set tableMap
+     *
+     * @param Table\RestaurantBundle\Entity\TableMap  $tableMap
+     * @return ActiveTable
+     */
+    public function setTableMap($tableMap)
+    {
+        $this->tableMap = $tableMap;
+        
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return strval($this->getTableNumber());
     }
 }

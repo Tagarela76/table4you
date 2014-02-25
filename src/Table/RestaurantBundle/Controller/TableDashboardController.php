@@ -7,15 +7,24 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use FOS\UserBundle\Model\UserInterface;
 use Table\RestaurantBundle\Entity\TableType;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Application\Sonata\UserBundle\Entity\User;
+use Table\RestaurantBundle\Entity\TableMap;
+use Symfony\Component\HttpFoundation\Response;
+use Table\RestaurantBundle\Entity\ActiveTable;
+use Table\RestaurantBundle\Entity\ActiveTableOrder;
+use Table\RestaurantBundle\Form\Type\ActiveTableOrderForm4AdminType;
+use Application\Sonata\UserBundle\Form\Type\RestRegistrationFormType;
+use Symfony\Component\HttpFoundation\Request;
 
 class TableDashboardController extends Controller
 {
+
     /**
-     * View Editor Dashboard
+     * View TableType List
      * 
      * @Template()
      */
-    public function viewEditorDashboardAction()
+    public function viewTableTypeListAction()
     {
         // get Current user
         $user = $this->container->get('security.context')->getToken()->getUser();
@@ -24,19 +33,96 @@ class TableDashboardController extends Controller
         if (!is_object($user) || !$user instanceof UserInterface) {
             // redirect on homepage
             return $this->redirect(
-                        $this->generateUrl("table_main_homepage")
+                            $this->generateUrl("table_main_homepage")
             );
         }
         $tableTypeList = $this->getTableTypeManager()->findAll();
+
         // assign base_url
         $baseUrl = $this->container->getParameter('base_folder_url');
-        
+
+
+        // we should now if user is super admin
+        $isUserIsSuperAdmin = false;
+        if (in_array(User::ROLE_SUPER_ADMIN, $user->getRoles())) {
+            $isUserIsSuperAdmin = true;
+        }
+        // get restaurant list
+        $restaurantList = $this->getRestaurantManager()->getEditorRestaurants($user->getId(), $isUserIsSuperAdmin);
+
         return array(
             'tableTypeList' => $tableTypeList,
-            'baseUrl' => $baseUrl
+            'baseUrl' => $baseUrl,
+            'restaurantList' => $restaurantList
         );
     }
-    
+
+    /**
+     * Create Map
+     * 
+     * @param int $restaurantId
+     * 
+     * @Template()
+     */
+    public function viewCreateMapAction($restaurantId)
+    {
+        // get Current user
+        $user = $this->container->get('security.context')->getToken()->getUser();
+
+        // Check if user auth in app
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            // redirect on homepage
+            return $this->redirect(
+                            $this->generateUrl("table_main_homepage")
+            );
+        }
+
+        // we should now if user is super admin
+        $isUserIsSuperAdmin = false;
+        if (in_array(User::ROLE_SUPER_ADMIN, $user->getRoles())) {
+            $isUserIsSuperAdmin = true;
+        }
+        // get restaurant list
+        $restaurantList = $this->getRestaurantManager()->getEditorRestaurants($user->getId(), $isUserIsSuperAdmin);
+        if (!$restaurantId) {
+            // set Restaurant id as first restaurant in list
+            $restaurantId = $restaurantList[0]->getId();
+        }
+        // get Map list
+        $tableMapList = $this->getTableMapManager()->findByRestaurant($restaurantId);
+        
+        // get map id
+        $mapId = $this->getRequest()->query->get('mapId');
+         
+        if ($tableMapList) {
+            if (is_null($mapId)) {
+                // Get first
+                $tableMapObj = $tableMapList[0];
+                $mapId = $tableMapList[0]->getId();
+            } else {
+                $tableMapObj = $this->getTableMapManager()->findOneById($mapId);
+            }
+          
+        } else {
+            $tableMapObj = null;
+        }
+      
+        // get Table Type list
+        $tableTypeList = $this->getTableTypeManager()->findAll();
+        // assign base_url
+        $baseUrl = $this->container->getParameter('base_folder_url');
+
+        return array(
+            'restaurantList' => $restaurantList,
+            'tableMapList' => $tableMapList,
+            'tableTypeList' => $tableTypeList,
+            'baseUrl' => $baseUrl,
+            'restaurantId' => $restaurantId,
+            'tableMapObj' => $tableMapObj,
+            'mapId' => $mapId
+        );
+    }
+
     /**
      * Add new Table Types
      * 
@@ -56,16 +142,16 @@ class TableDashboardController extends Controller
             $tableType = new TableType();
             $tableType->setPeopleCount($peopleCount);
             $tableType->setFile($fileArray[$key]);
-            
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($tableType);
             $em->flush();
         }
         return $this->redirect(
-            $this->generateUrl("table_editor_dashboard")
+                        $this->generateUrl("table_viewTableTypeList")
         );
     }
-    
+
     /**
      * Update Table Type
      */
@@ -81,7 +167,7 @@ class TableDashboardController extends Controller
         $peopleCount = $this->getRequest()->request->get('peopleCount');
         $file = $this->getRequest()->files->get('file');
         $tableTypeId = $this->getRequest()->request->get('tableTypeId');
-        
+
         // init table Type
         $tableType = $this->getTableTypeManager()->findOneById($tableTypeId);
         $tableType->setPeopleCount($peopleCount);
@@ -93,9 +179,9 @@ class TableDashboardController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->persist($tableType);
         $em->flush();
-        
+
         return $this->redirect(
-            $this->generateUrl("table_editor_dashboard")
+                        $this->generateUrl("table_viewTableTypeList")
         );
     }
 
@@ -112,7 +198,7 @@ class TableDashboardController extends Controller
         }
         // get Table Type ID
         $tableTypeId = $this->getRequest()->request->get('tableTypeId');
-        
+
         // init table Type
         $tableType = $this->getTableTypeManager()->findOneById($tableTypeId);
 
@@ -120,15 +206,407 @@ class TableDashboardController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->remove($tableType);
         $em->flush();
-        
+
         // refresh table Type list
         $tableTypeList = $this->getTableTypeManager()->findAll();
-        
+
         // assign base_url
         $baseUrl = $this->container->getParameter('base_folder_url');
         return $this->render('TableRestaurantBundle:TableDashboard:tableTypeList.html.twig', array(
-            'tableTypeList' => $tableTypeList,
-            'baseUrl' => $baseUrl
+                    'tableTypeList' => $tableTypeList,
+                    'baseUrl' => $baseUrl
         ));
+    }
+
+    /**
+     * Add new Table Maps
+     * 
+     */
+    public function updateTableMapAction()
+    {
+        // get Current user
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        // Check if user auth in app
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException("Access denied");
+        }
+        // collect data
+        $restaurantId = $this->getRequest()->request->get('restaurantId');
+        $restaurant = $this->getRestaurantManager()->findOneById($restaurantId);
+        $floorArray = $this->getRequest()->request->get('mapFloor');
+        $fileArray = $this->getRequest()->files->get('mapFile');
+        $mapHallArray = $this->getRequest()->request->get('mapHall');
+        foreach ($floorArray as $key => $floor) {
+            $tableMap = new TableMap();
+            $tableMap->setRestaurant($restaurant);
+            $tableMap->setFloor($floor);
+            $tableMap->setFile($fileArray[$key]);
+
+            if ($mapHallArray[$key] != "") {
+                $tableMap->setHall($mapHallArray[$key]);
+            }
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($tableMap);
+            $em->flush();
+        }
+        return $this->redirect(
+                        $this->generateUrl("table_viewCreateMap")
+        );
+    }
+    
+    /**
+     * Delete Table Map
+     */
+    public function deleteTableMapAction()
+    {
+        // get Current user
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        // Check if user auth in app
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException("Access denied");
+        }
+        // collect Data
+        $tableMapId = $this->getRequest()->request->get('tableMapId');
+        
+        // init table Map
+        $tableMap = $this->getTableMapManager()->findOneById($tableMapId);
+
+        // delete Table Map
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($tableMap);
+        $em->flush();
+        return new Response("success");
+    }
+    
+    /**
+     * Update Table Map
+     */
+    public function editTableMapAction()
+    {
+        // get Current user
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        // Check if user auth in app
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException("Access denied");
+        }
+        // collect data
+        $tableMapId = $this->getRequest()->request->get('tableMapId');
+        $floor = $this->getRequest()->request->get('mapFloor');
+        $file = $this->getRequest()->files->get('mapFile');
+        $mapHall = $this->getRequest()->request->get('mapHall');
+
+        // init table Map
+        $tableMap = $this->getTableMapManager()->findOneById($tableMapId);
+        $tableMap->setFloor($floor);
+        if (!is_null($mapHall)) {
+            $tableMap->setHall($mapHall);
+        }
+        // Update file if isset
+        if (!is_null($file)) {
+            $tableMap->setFile($file);
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($tableMap);
+        $em->flush();
+
+        return $this->redirect(
+                        $this->generateUrl("table_viewCreateMap")
+        );
+    }
+    
+    /**
+     * Add Active Table
+     */
+    public function addActiveTableAction()
+    {
+        // get Current user
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        // Check if user auth in app
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException("Access denied");
+        }
+        // collect data
+        $tableNumber = $this->getRequest()->request->get('tableNumber');
+        $tableTop = $this->getRequest()->request->get('tableTop');
+        $tableLeft = $this->getRequest()->request->get('tableLeft');
+        $mapId = $this->getRequest()->request->get('mapId');
+        $tableTypeId = $this->getRequest()->request->get('tableType');
+        
+        // create new Active Table
+        $tableMap = $this->getTableMapManager()->findOneById($mapId);
+        $tableType = $this->getTableTypeManager()->findOneById($tableTypeId);
+        $activeTable = new ActiveTable();
+        $activeTable->setLeftPosition($tableLeft);
+        $activeTable->setTableMap($tableMap);
+        $activeTable->setTableNumber($tableNumber);
+        $activeTable->setTableType($tableType);
+        $activeTable->setTopPosition($tableTop);
+        
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($activeTable);
+        $em->flush();
+
+        return $this->redirect(
+                        $this->generateUrl("table_viewCreateMap")
+        );
+    }
+    
+    /**
+     * 
+     * Get Active Tables
+     * 
+     * @return string
+     */
+    public function loadActiveTablesAction()
+    {
+        // get Active Tabled list
+        $mapId = $this->getRequest()->query->get('mapId');
+        $activeTableList = $this->getActiveTableManager()->findByTableMap($mapId);
+        $baseUrl = $this->container->getParameter('base_folder_url');
+
+        $helper = $this->container->get('vich_uploader.templating.helper.uploader_helper');
+        $activeTables = array();
+        foreach ($activeTableList as $activeTable) {
+            if (!is_null($activeTable)) {
+                $activeTableObj = array();
+                $path = $helper->asset($activeTable->getTableType(), 'file');
+                $activeTableObj['id'] = $activeTable->getId();
+                $activeTableObj['src'] = $baseUrl . $path;
+                $activeTableObj['left'] = $activeTable->getLeftPosition();
+                $activeTableObj['top'] = $activeTable->getTopPosition();
+                $activeTableObj['tableTypeId'] = $activeTable->getTableType()->getId();
+                $activeTableObj['tableNumber'] = $activeTable->getTableNumber();
+                $activeTables[] = $activeTableObj;
+            }
+        }
+        return $activeTables;
+    }
+    
+    /**
+     * view Table Order List
+     * 
+     * @param int $restaurantId
+     * 
+     * @Template()
+     */
+    public function viewTableOrderListAction($restaurantId)
+    {
+        // get Current user
+        $user = $this->container->get('security.context')->getToken()->getUser();
+
+        // Check if user auth in app
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            // redirect on homepage
+            return $this->redirect(
+                            $this->generateUrl("table_main_homepage")
+            );
+        }
+
+        // we should now if user is super admin
+        $isUserIsSuperAdmin = false;
+        if (in_array(User::ROLE_SUPER_ADMIN, $user->getRoles())) {
+            $isUserIsSuperAdmin = true;
+        }
+        // get restaurant list
+        $restaurantList = $this->getRestaurantManager()->getEditorRestaurants($user->getId(), $isUserIsSuperAdmin);
+        if (!$restaurantId) {
+            // set Restaurant id as first restaurant in list
+            $restaurantId = $restaurantList[0]->getId();
+        }
+        // get Map list
+        $tableMapList = $this->getTableMapManager()->findByRestaurant($restaurantId);
+        
+        // get map id
+        $mapId = $this->getRequest()->query->get('mapId');
+         
+        if ($tableMapList) {
+            if (is_null($mapId)) {
+                // Get first
+                $tableMapObj = $tableMapList[0];
+                $mapId = $tableMapList[0]->getId();
+            } else {
+                $tableMapObj = $this->getTableMapManager()->findOneById($mapId);
+            }
+          
+        } else {
+            $tableMapObj = null;
+        }
+
+        // assign base_url
+        $baseUrl = $this->container->getParameter('base_folder_url');
+
+        return array(
+            'restaurantList' => $restaurantList,
+            'tableMapList' => $tableMapList,
+            'baseUrl' => $baseUrl,
+            'restaurantId' => $restaurantId,
+            'tableMapObj' => $tableMapObj,
+            'mapId' => $mapId,
+            'activeTable' => null,
+            'tableOrderList' => null
+        );
+    }
+    
+    /**
+     * view Active Table Order List
+     * 
+     * 
+     * @Template()
+     */
+    public function viewActiveTableOrderListAction()
+    {
+        // get table id
+        $tableId = $this->getRequest()->query->get('tableId');
+        // init table
+        $activeTable = $this->getActiveTableManager()->findOneById($tableId);
+        //get Order list
+        $tableOrderList = $this->getActiveTableOrderManager()->findByActiveTable($tableId);
+        
+        //init form for table reserve
+        $activeTableOrder = new ActiveTableOrder();
+        $form = $this->createForm(new ActiveTableOrderForm4AdminType(), $activeTableOrder);
+        
+        return array(
+            'activeTable' => $activeTable,
+            'tableOrderList' => $tableOrderList,
+            'form' => $form
+        );
+    }
+    
+    /**
+     * Delete Table Oreder
+     */
+    public function deleteActiveTableOrderAction()
+    {
+        // get Current user
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        // Check if user auth in app
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException("Access denied");
+        }
+        // get Table Type ID
+        $tableOrderId = $this->getRequest()->request->get('tableOrderId');
+
+        // init table Order
+        $tableOrder = $this->getActiveTableOrderManager()->findOneById($tableOrderId);
+
+        // get Table 
+        $activeTable = $tableOrder->getActiveTable();
+        // delete Table Order
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($tableOrder);
+        $em->flush();
+
+        //get Order list
+        $tableOrderList = $this->getActiveTableOrderManager()->findByActiveTable($activeTable->getId());
+
+        return $this->render('TableRestaurantBundle:TableDashboard:viewActiveTableOrderList.html.twig', array(
+                    'tableOrderList' => $tableOrderList,
+                    'activeTable' => $activeTable,
+        ));
+    }
+
+    /**
+     * Reserve active table
+     * 
+     * @param int $activeTableId
+     * 
+     * @param Request $request
+     * 
+     * @Template()
+     */
+    public function reserveActiveTableOrderAction($activeTableId, Request $request)
+    {
+        $activeTableOrder = new ActiveTableOrder();
+        $form = $this->createForm(new ActiveTableOrderForm4AdminType(), $activeTableOrder);
+        $activeTable = $this->getActiveTableManager()->findOneById($activeTableId);
+
+        $successReserve = false; // we should know if table reserve was successfull
+        if ($request->isMethod('POST')) {
+            $form->bind($request);
+            
+            if ($form->isValid()) {
+                // Register New User
+                $user = new User();
+                $userForm = $this->createForm(new RestRegistrationFormType(), $user);
+
+                $userForm->bind(array(
+                    "firstname" => $activeTableOrder->getUserName(), // It is firstname in server
+                    "lastname" => $activeTableOrder->getUserLastName(),
+                    "email" => $activeTableOrder->getUserEmail(),
+                    "username" => $activeTableOrder->getUserEmail(), // the same as email
+                    "plainPassword" => array(
+                        "first" => $activeTableOrder->getUserEmail(),
+                        "second" => $activeTableOrder->getUserEmail()
+                    ),
+                    "phone" => $activeTableOrder->getUserPhone()
+                ));
+               
+                if ($userForm->isValid()) {
+
+                    $user = $userForm->getData();
+                    $user->setEnabled(false);
+
+                    // send confirmation
+                    $token = sha1(uniqid(mt_rand(), true)); // Or whatever you prefer to generate a token
+
+                    $user->setConfirmationToken($token);
+
+                    //$mailer = $this->container->get('fos_user.mailer');
+                    //$mailer->sendConfirmationEmailMessage($user);
+
+                    // add user
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($user);
+                    $em->flush();
+                    
+                    // Let's add Order and connected it to a new user
+                    
+                    // Get New User
+                    $user = $this->userManager->findUserBy(array("username" => $activeTableOrder->getUserEmail()));
+                    // get table order date
+                    $activeTableOrder = $form->getData();
+                    // add Order
+                    // format reserve date
+                    $activeTableOrder->setReserveDate(new \DateTime($activeTableOrder->getReserveDate()));
+                    // set User Data
+                    $activeTableOrder->setUser($user);
+                    // set Table Data
+                    $activeTableOrder->setActiveTable($activeTable);
+                    // set status 0
+                    if (is_null($activeTableOrder->getStatus())) {
+                        $activeTableOrder->setStatus(0);
+                    }
+
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($activeTableOrder);
+                    $em->flush();
+                    $successReserve = true;
+                }
+            }
+        }
+        return array(
+            'form' => $form,
+            'activeTable' => $activeTable,
+            'successReserve' => $successReserve
+        );
+    }
+    
+    /**
+     * 
+     * Get Active Table
+     * 
+     * @param int $activeTableId
+     * 
+     * @Template()
+     */
+    public function loadActiveTableAction($activeTableId)
+    {
+        $activeTable = $this->getActiveTableManager()->findOneById($activeTableId);
+        
+        return array(
+            'activeTable' => $activeTable
+        );
     }
 }

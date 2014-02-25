@@ -10,17 +10,25 @@
 
         {% block stylesheets %}
         <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/bootstrap.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/jquery-ui.css') }}">
         <!--[if lt IE 9]>
             <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/ie-css.css') }}">
         <![endif]-->
         <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/main.css') }}">
-            {# FANCYBOX #}
+        {# FANCYBOX #}
         <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/fancy-box/jquery.fancybox.css') }}">
         <!-- Optionally add helpers - button, thumbnail and/or media -->
         <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/fancy-box/helpers/jquery.fancybox-buttons.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/fancy-box/helpers/jquery.fancybox-thumbs.css') }}">
-            {# FANCYBOX #}
+        {# FANCYBOX #}
+        
+        {# Jquery UI #}
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/jquery-ui.css') }}">
+        {# Jquery UI #}
+            
+        {# TimeEntry #}
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablerestaurant/jquery.timeentry/jquery.timeentry.css') }}">
+        {# TimeEntry #}
+            
         {% endblock %}
 
         {% block javascripts %}
@@ -39,6 +47,15 @@
         <script src="{{ asset('bundles/tablemain/fancy-box/helpers/jquery.fancybox-media.js') }}"></script>
         <script src="{{ asset('bundles/tablemain/fancy-box/helpers/jquery.fancybox-thumbs.js') }}"></script>
             {# FANCYBOX #}
+        
+        {# Jquery UI #}
+            <script src="{{ asset('bundles/tablemain/js/jquery-ui-1.10.3.custom.js') }}"></script>
+        {# Jquery UI #}
+        
+        {# TimeEntry #}
+            <script src="{{ asset('bundles/tablerestaurant/jquery.timeentry/jquery.timeentry.js') }}"></script>
+        {# TimeEntry #}
+            
         {% endblock %}
 
     </head>
@@ -52,7 +69,7 @@
                 </div>
             </div>
             <div class="row content">
-                <div class="span12">
+                <div class="span12 content-table-editor">
                     {% block content %}
 
                     {% endblock %}

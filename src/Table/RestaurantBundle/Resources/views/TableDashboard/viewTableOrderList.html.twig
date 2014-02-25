@@ -1,1 +1,72 @@
-Table order
+{% extends 'TableMainBundle::layout_table_editor.html.twig' %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(function() {
+            // Init Active Tables
+            page.tableOrder.loadActiveTables();
+        });    
+    </script>
+{% endblock %}    
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}    
+{% block content %}
+    <div class="container-fluid">
+        <div class="row-fluid">
+            {% include 'TableRestaurantBundle:TableDashboard:tableMapTabs.html.twig' %} 
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span5">
+                {% trans %}main.tableMap.createMap.restaurantList{% endtrans %}
+                <select name="restaurantId" id="restaurantId" onchange="page.tableOrder.refreshRestaurantList();">
+                    {% for restaurant in restaurantList %}  
+                        <option {% if restaurantId == restaurant.id %}selected{%endif%} value="{{restaurant.id}}">{{restaurant.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div> 
+    <div class="container-fluid" id="tableMapContainer" style="border: 1px solid #ccc;">
+        <div class="row-fluid">    
+            {% for tableMap in tableMapList %}  
+                <div class="span2">
+                    <a {% if tableMap.id == mapId%} class="active" {% endif %} href="{{ path('table_viewTableOrderList', {'restaurantId': restaurantId, 'mapId': tableMap.id}) }}">
+                        {{tableMap.floor}} {% trans %}main.tableMap.createMap.floor{% endtrans %} 
+                        {% if tableMap.hall is not null %}
+                            {{tableMap.hall}} {% trans %}main.tableMap.createMap.hall{% endtrans %} 
+                        {% endif %}
+                    </a>   
+                </div>
+            {% endfor %}
+        </div>
+        {% if tableMapObj is not null %}
+            <div class="row-fluid" style="border: 1px solid #ccc;">
+                <div class="span12">
+                    {% trans %}main.tableMap.orders.restaurant{% endtrans %} {{ tableMapObj.restaurant.name }}
+                    {{ tableMapObj.floor }} {% trans %}main.tableMap.createMap.floor{% endtrans %}
+                    {% if tableMapObj.hall is not null %}
+                        {{tableMapObj.hall}} {% trans %}main.tableMap.createMap.hall{% endtrans %} 
+                    {% endif %}
+                    {% trans %}main.tableMap.orders.viewOrder{% endtrans %}  
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="row-fluid" id="interactive-map-container">
+            <div id="tableMapDroppable" class="span8 table-map-droppable" style="height: 500px; width: 500px; margin: 0; padding: 0;">
+                {% if tableMapObj is not null %}
+                    <img src="{{baseUrl}}{{ vich_uploader_asset(tableMapObj, 'file') }}" alt="{{ tableMapObj.restaurant.name }}" />
+                {% endif %}    
+                {# Add existing tables Container#}
+                <div id="activeTablesContainer"></div>    
+            </div>
+            <div class="span4" id="activeTableOrderContainer">
+                {% include 'TableRestaurantBundle:TableDashboard:viewActiveTableOrderList.html.twig' %} 
+            </div>
+            <input type="hidden" name="mapId" id="mapId" value="{{mapId}}" />
+        </div>
+    </div>
+{% endblock %}

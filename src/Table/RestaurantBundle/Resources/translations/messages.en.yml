@@ -39,10 +39,54 @@ main:
                 tableOn: table on
                 addMore: add more
                 load: Load
+                selectTheFile: Choose file
             error:
                 peopleCount: Fill field
-            errors: Errors while edit form    
+            errors: Errors while edit form   
+        choiceTable: Choice table    
+        addTable: Add table 
       createMap:
         header: Create a map
+        restaurantList: Restaurant list
+        form:
+            label:
+                loadMap: Load Map
+                floor: Floor
+                hall: Hall
+                save: Save
+                tableNumber: Table number
+                cancel: Cancel
+                selectTheFile: Choose file
+            error:
+                floor: Fill field    
+            errors: Errors while edit form 
+        floor: floor
+        hall: hall  
+        editRestaurant: Edit restaurant map
+        edit: Edit
+        save: Save
+        table: Table
       orders:
         header: Orders    
+        restaurant: Restaurant
+        viewOrder: View Order Mode
+        list:
+            table: Table
+            persons: persons
+            date: Date
+            timeFrom: Time from
+        form:
+            label:
+                date: "Date:"
+                time: "Time:"
+                peopleCount: People Count
+                customerData: Customer Data
+                customerName: Name
+                customerLastName: Last Name
+                customerPhone: Phone
+                customerEmail: E-mail
+                smsNotification: SMS Notification
+                emailNotification: E-mail Notification
+                smokingHall: Hall for smoking
+                comment: Comment
+                reserve: Reserve

@@ -1,12 +1,11 @@
 {% for tableType in tableTypeList %}  
     {% if tableType.peopleCount !=0 %}
         <div class="row-fluid">
-            <div class="span4">
-                <img src="{{baseUrl}}{{ vich_uploader_asset(tableType, 'file') }}" alt="{{ tableType.peopleCount }}" />
+            <div class="span10">
+                <div><img src="{{baseUrl}}{{ vich_uploader_asset(tableType, 'file') }}" alt="{{ tableType.peopleCount }}" /></div>
+                <div>{% trans %}main.tableMap.tableList.tableOn{% endtrans %} {{ tableType.peopleCount }}</div>
             </div>
-            <div class="span6">
-                {% trans %}main.tableMap.tableList.tableOn{% endtrans %} {{ tableType.peopleCount }}
-            </div>
+
             <div class="span2">
                 <p>
                     <a data-toggle="modal" href="#editTableTypePopup_{{tableType.id}}">
@@ -15,11 +14,12 @@
                 </p>    
                 <p>
                     <a href='#' onclick='page.tableType.deleteTableType({{ tableType.id }}); return false;'>
-                        <img src="{{ asset('bundles/tablerestaurant/images/delete_table_type_btn.png') }}" />
+                        <img src="{{ asset('bundles/tablerestaurant/images/deleteFile.png') }}" />
                     </a>
                 </p>    
             </div>
         </div>
+        <span class="hr"></span>
         {# ==Modal Window for editTableType==#}
             {% include 'TableRestaurantBundle:TableDashboard:editTableType.html.twig' %}
         {# ==Modal Window for editTableType==#}

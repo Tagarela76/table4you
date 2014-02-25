@@ -60,13 +60,58 @@ main:
         form:
             label:
                 tableOn: Столик на
+                numberOfPlaces: мест(а)
                 addMore: Добавить еще
                 load: Загрузить
+                selectTheFile: Выбрать файл
             error:
-                peopleCount: Заполните поле
-            errors: Ошибки при заполении формы    
+                peopleCount: Укажите кол-во гостей
+            errors: Ошибки при заполении формы
+        choiceTable: Выбрать столик    
+        addTable: Добавить стол  
       createMap:
         header: Создать карту
+        restaurantList: Выбрать ресторан
+        form: 
+            label:
+                loadMap: Загрузить карту
+                floor: Указать этаж
+                hall: Указать номер зала
+                save: Сохранить
+                tableNumber: Указать номер стола
+                cancel: Отмена
+                selectTheFile: Выбрать файл
+            error:
+                floor: Укажите этаж    
+            errors: Ошибки при заполении формы  
+        floor: этаж.
+        hall: зал
+        editRestaurant: Редактирование карты ресторана
+        edit: Редактировать
+        save: Сохранить
+        table: Стол
       orders:
         header: Заказы
+        restaurant: Ресторан
+        viewOrder: режим просмотра заказов
+        list:
+            table: Стол
+            persons: персоны
+            date: Дата
+            timeFrom: Время с
+        form:
+            label:
+                date: "Дата:"
+                time: "Время:"
+                peopleCount: Количество человек
+                customerData: "Данные о клиенте:"
+                customerName: Имя
+                customerLastName: Фамилия
+                customerPhone: Телефон
+                customerEmail: E-mail
+                smsNotification: Уведомления sms
+                emailNotification: Уведомления e-mail
+                smokingHall: Зал для курящих
+                comment: Комментарий
+                reserve: Бронировать    
           
