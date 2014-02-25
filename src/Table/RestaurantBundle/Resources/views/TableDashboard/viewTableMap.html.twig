@@ -40,10 +40,12 @@
         {# Add existing tables Container#}
         <div id="activeTablesContainer"></div>    
     </div>
-    <div class="span4" style="border: 1px solid #ccc;">
+    <div class="span4" id="table-container" style="border: 1px solid #ccc;">
         <div class="row-fluid">
             <div class="span12">
-                {% trans %}main.tableMap.tableList.choiceTable{% endtrans %}
+                <a href="{{ path('table_viewTableTypeList')}}">
+                    {% trans %}main.tableMap.tableList.addTable{% endtrans %}
+                </a>
             </div>    
         </div>
         {% for tableType in tableTypeList %}  
@@ -88,11 +90,12 @@
                         position: 'absolute'
                     });
                 }
-                
-                // init data
-                page.activeTable.initTableData((ui.position.top - $("#tableMapDroppable").position().top), (ui.position.left - $("#tableMapDroppable").position().left), $(ui.draggable[0]).attr("tabletypeid"));
-                $("#tableNumberContainer").modal('show');
-
+                // not for editable tables
+                if (!ui.draggable.hasClass('active-table-draggable')) {
+                    // init data
+                    page.activeTable.initTableData((ui.position.top - $("#tableMapDroppable").position().top), (ui.position.left - $("#tableMapDroppable").position().left), $(ui.draggable[0]).attr("tabletypeid"));
+                    $("#tableNumberContainer").modal('show');
+                }
             }
         });
 

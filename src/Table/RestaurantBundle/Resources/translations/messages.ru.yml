@@ -66,6 +66,7 @@ main:
                 peopleCount: Укажите кол-во гостей
             errors: Ошибки при заполении формы
         choiceTable: Выбрать столик    
+        addTable: Добавить стол  
       createMap:
         header: Создать карту
         restaurantList: Список ресторанов
@@ -85,6 +86,7 @@ main:
         editRestaurant: Редактирование карты ресторана
         edit: Редактировать
         save: Сохранить
+        table: Стол
       orders:
         header: Заказы
         restaurant: Ресторан

@@ -376,6 +376,7 @@ class TableDashboardController extends Controller
                 $activeTableObj['left'] = $activeTable->getLeftPosition();
                 $activeTableObj['top'] = $activeTable->getTopPosition();
                 $activeTableObj['tableTypeId'] = $activeTable->getTableType()->getId();
+                $activeTableObj['tableNumber'] = $activeTable->getTableNumber();
                 $activeTables[] = $activeTableObj;
             }
         }
@@ -589,6 +590,23 @@ class TableDashboardController extends Controller
             'form' => $form,
             'activeTable' => $activeTable,
             'successReserve' => $successReserve
+        );
+    }
+    
+    /**
+     * 
+     * Get Active Table
+     * 
+     * @param int $activeTableId
+     * 
+     * @Template()
+     */
+    public function loadActiveTableAction($activeTableId)
+    {
+        $activeTable = $this->getActiveTableManager()->findOneById($activeTableId);
+        
+        return array(
+            'activeTable' => $activeTable
         );
     }
 }

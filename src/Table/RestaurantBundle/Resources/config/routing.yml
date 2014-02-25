@@ -118,7 +118,7 @@ table_addActiveTable:
     options:
        expose: true     
        
-table_loadActiveTabless:
+table_loadActiveTables:
     pattern:  /loadActiveTables
     defaults: { _controller: TableRestaurantBundle:TableDashboard:loadActiveTables, _format: json }
     requirements:
@@ -145,7 +145,13 @@ table_deleteActiveTableOrder:
 table_reserveActiveTableOrder:
     pattern:  /reserveActiveTableOrder/{activeTableId}
     defaults: { _controller: TableRestaurantBundle:TableDashboard:reserveActiveTableOrder }
-    requirements:
-        _method: POST  
     options:
-       expose: true       
+       expose: true    
+       
+table_loadActiveTable:
+    pattern:  /loadActiveTable/{activeTableId}
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:loadActiveTable }
+    requirements:
+        _method: GET  
+    options:
+       expose: true        

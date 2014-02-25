@@ -1,6 +1,23 @@
 
 function ActiveTable() {
 
+    this.loadActiveTable = function(activeTableId) {
+
+        $.ajax({
+            url: Routing.generate('table_loadActiveTable') + "/" + activeTableId,
+            type: "GET",
+            dataType: "html",
+            success: function(response) { 
+                $("#table-container").html(response);
+            }  
+	}); 
+    }
+    
+    this.closeAddTablePopup = function() {
+        // close modal window
+        $('#tableNumberContainer').modal('hide');
+    }
+    
     this.initTableData = function(top, left, tableType) {
         $("#tableTop").val(top);
         $("#tableLeft").val(left);
@@ -11,7 +28,7 @@ function ActiveTable() {
         var mapId = $("#mapId").val();
         // get Active Tables
         $.ajax({
-            url: Routing.generate('table_loadActiveTabless'),
+            url: Routing.generate('table_loadActiveTables'),
             data: {mapId: mapId},
             type: "GET",
             dataType: "json",
@@ -21,12 +38,19 @@ function ActiveTable() {
                     var activeTable = response[i];
                     var left = activeTable.left + $("#tableMapDroppable").position().left;
                     var top = activeTable.top + $("#tableMapDroppable").position().top;
-                    imgContainer += "<img tabletypeid='" + activeTable.tableTypeId + "' " +
-                            "class='active-table-draggable' " +
-                            "src='" + activeTable.src + "' " +
-                            "style='position: absolute; width: 50px;" +
+                    var styles = "position: absolute; " +
                             "left: " + left + "px; "+
-                            "top: " + top + "px;'>";
+                            "top: " + top + "px;" ;
+                    
+                    imgContainer += "<div onclick='page.activeTable.loadActiveTable" +
+                            "(" + activeTable.id + ");' " +
+                            "class='active-table-draggable' " +
+                            "style='" + styles + "width: 60px;'>" +
+                            "<span class='badge'>" + activeTable.tableNumber + 
+                            "</span>" +
+                            "<img tabletypeid='" + activeTable.tableTypeId + "' " +
+                            " " +
+                            "src='" + activeTable.src + "'></div>";
 
                     $('#activeTablesContainer').append(imgContainer);
                     // Make it draggable

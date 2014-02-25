@@ -43,6 +43,7 @@ main:
                 peopleCount: Fill field
             errors: Errors while edit form   
         choiceTable: Choice table    
+        addTable: Add table 
       createMap:
         header: Create a map
         restaurantList: Restaurant list
@@ -62,6 +63,7 @@ main:
         editRestaurant: Edit restaurant map
         edit: Edit
         save: Save
+        table: Table
       orders:
         header: Orders    
         restaurant: Restaurant
