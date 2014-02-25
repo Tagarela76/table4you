@@ -2003,7 +2003,9 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
 }
 #table-type-form #fileFieldsContainer .row-fluid .number-tables input:focus,
 #table-map-form .specify-floor-room input:focus,
-#table-map-form .add-file-map input:focus{
+#table-map-form .add-file-map input:focus,
+.editTableMapPopup .modal-body .span4 input:focus,
+.editTableMapPopup .modal-body .span5 input:focus{
     border: 1px solid #fe8504;
     outline: none;
     box-shadow: none;
