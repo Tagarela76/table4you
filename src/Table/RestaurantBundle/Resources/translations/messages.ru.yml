@@ -90,6 +90,7 @@ main:
         edit: Редактировать
         save: Сохранить
         table: Стол
+        cancel: Отменить
       orders:
         header: Заказы
         restaurant: Ресторан

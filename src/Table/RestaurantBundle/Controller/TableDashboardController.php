@@ -609,4 +609,86 @@ class TableDashboardController extends Controller
             'activeTable' => $activeTable
         );
     }
+    
+    /**
+     * View TableType List Container
+     * 
+     * @Template()
+     */
+    public function viewTableTypeContainerAction()
+    {
+        // get Current user
+        $user = $this->container->get('security.context')->getToken()->getUser();
+
+        // Check if user auth in app
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            // redirect on homepage
+            return $this->redirect(
+                            $this->generateUrl("table_main_homepage")
+            );
+        }
+        $tableTypeList = $this->getTableTypeManager()->findAll();
+
+        // assign base_url
+        $baseUrl = $this->container->getParameter('base_folder_url');
+
+        return array(
+            'tableTypeList' => $tableTypeList,
+            'baseUrl' => $baseUrl
+        );
+    }
+    
+    /**
+     * Delete Active Table 
+     */
+    public function deleteActiveTableAction()
+    {
+        // get Current user
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        // Check if user auth in app
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException("Access denied");
+        }
+        // get Active Table ID
+        $activeTableId = $this->getRequest()->request->get('activeTableId');
+
+        // init Active table 
+        $activeTable = $this->getActiveTableManager()->findOneById($activeTableId);
+
+        // delete Active Table
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($activeTable);
+        $em->flush();
+
+        return new Response("success");
+    }
+    
+    /**
+     * Update Active table
+     * 
+     */
+    public function updateActiveTableAction()
+    {
+        // get Current user
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        // Check if user auth in app
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException("Access denied");
+        }
+        // collect data
+        $activeTableId = $this->getRequest()->request->get('activeTableId');
+        $leftPosition = $this->getRequest()->request->get('leftPosition');
+        $topPosition = $this->getRequest()->request->get('topPosition');
+        
+        // init Active table 
+        $activeTable = $this->getActiveTableManager()->findOneById($activeTableId);
+        $activeTable->setLeftPosition($leftPosition);
+        $activeTable->setTopPosition($topPosition);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($activeTable);
+        $em->flush();
+        
+        return new Response("success");
+    }
 }

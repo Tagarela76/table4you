@@ -66,6 +66,7 @@ main:
         edit: Edit
         save: Save
         table: Table
+        cancel: Cancel
       orders:
         header: Orders    
         restaurant: Restaurant

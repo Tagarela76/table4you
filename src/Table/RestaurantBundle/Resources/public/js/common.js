@@ -1,6 +1,37 @@
 
 function ActiveTable() {
+    var that = this;
+    
+    this.updateActiveTablePosition = function(activeTableId) {
+        
+        // Get new position
+        var left = $("#activeTable_" + activeTableId).position().left - $("#tableMapDroppable").position().left;
+        var top = $("#activeTable_" + activeTableId).position().top - $("#tableMapDroppable").position().top;
 
+        // Get new position
+        $.ajax({
+            url: Routing.generate('table_updateActiveTable'),
+            data: {activeTableId: activeTableId, leftPosition: left, topPosition: top},
+            type: "POST",
+            dataType: "html",
+            success: function() { 
+                location.reload();
+            }  
+	}); 
+    }
+    
+    this.loadTableTypeContainer = function() {
+
+        $.ajax({
+            url: Routing.generate('table_loadTableTypeContainer'),
+            type: "GET",
+            dataType: "html",
+            success: function(response) { 
+                $("#table-container").html(response);
+            }  
+	}); 
+    }
+    
     this.loadActiveTable = function(activeTableId) {
 
         $.ajax({
@@ -42,9 +73,10 @@ function ActiveTable() {
                             "left: " + left + "px; "+
                             "top: " + top + "px;" ;
                     
-                    imgContainer += "<div onclick='page.activeTable.loadActiveTable" +
+                    imgContainer += "<div id='activeTable_" + activeTable.id + "'" +
+                            " onclick='page.activeTable.loadActiveTable" +
                             "(" + activeTable.id + ");' " +
-                            "class='active-table-draggable' " +
+                            "class='active-table-draggable canvas-element' " +
                             "style='" + styles + "width: 60px;'>" +
                             "<span class='badge'>" + activeTable.tableNumber + 
                             "</span>" +
@@ -55,7 +87,8 @@ function ActiveTable() {
                     $('#activeTablesContainer').append(imgContainer);
                     // Make it draggable
                     $(".active-table-draggable").draggable({
-                        cursor: 'move'
+                        cursor: 'move',
+                        containment: '.table-map-droppable'
                     });
                 }
             }  
@@ -79,15 +112,15 @@ function ActiveTable() {
     
     this.deleteActiveTable = function(activeTableId) {
 
-       /* $.ajax({
-            url: Routing.generate('table_deleteTableMap'),
-            data: {tableMapId: tableMapId, restaurantId: restaurantId},
+        $.ajax({
+            url: Routing.generate('table_deleteActiveTable'),
+            data: {activeTableId: activeTableId},
             type: "POST",
             dataType: "html",
             success: function() {
                 location.reload();
             }
-        });*/
+        });
     }
 }
 
