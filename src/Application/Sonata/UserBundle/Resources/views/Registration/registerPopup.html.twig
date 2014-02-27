@@ -1,0 +1,33 @@
+<script src="{{ asset('bundles/applicationsonatauser/js/jquery.form.js') }}"></script>
+<script src="{{ asset('bundles/applicationsonatauser/js/registration.js') }}"></script>
+<script>
+    $(function() { 
+        $('#fos-registration-form').submit(function() { 
+            $(this).ajaxSubmit({
+                type: 'post',
+                beforeSubmit: function() {
+                   $("#registrationPreloader").show();
+                },
+                success: function(response) { 
+                    $("#registrationPreloader").hide();
+                    $("#modal-registration").html(response);
+                }
+            });
+            return false;
+        });    
+    });  
+</script>
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/applicationsonatauser/css/main.css') }}">
+
+<div class="modal hide modal-registration" data-backdrop="static" id="register">
+    <div class="modal-header modal-registration-title">
+        <a class="close" data-dismiss="modal"></a>
+        <img id="registrationPreloader" style="display: none;" src="{{ asset('bundles/tablemain/images/ajax-loader.gif') }}" />
+        <h3>{% trans %}main.register.form.title{% endtrans %}</h3>
+    </div>
+    <div class="modal-body">
+        <div class="modal-registration" id="modal-registration">
+            {% include "FOSUserBundle:Registration:register_content.html.twig" %}
+        </div>
+    </div>
+</div> 
