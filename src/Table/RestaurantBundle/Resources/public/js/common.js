@@ -385,7 +385,7 @@ function TableOrder() {
         var mapId = $("#mapId").val();
         // get Active Tables
         $.ajax({
-            url: Routing.generate('table_loadActiveTabless'),
+            url: Routing.generate('table_loadActiveTables'),
             data: {mapId: mapId},
             type: "GET",
             dataType: "json",
@@ -395,11 +395,15 @@ function TableOrder() {
                     var activeTable = response[i];
                     var left = activeTable.left + $("#tableMapDroppable").position().left;
                     var top = activeTable.top + $("#tableMapDroppable").position().top;
-                    imgContainer += "<img tabletypeid='" + activeTable.tableTypeId + "' " +
-                            "src='" + activeTable.src + "' " +
-                            "style='position: absolute; width: 50px;" +
+                    
+                    var styles = "position: absolute; " +
                             "left: " + left + "px; "+
-                            "top: " + top + "px;' " +
+                            "top: " + top + "px;" ;
+                    imgContainer += "<span style='" + styles + " z-index: 9;' class='badge'>" + activeTable.tableNumber + 
+                            "</span>" +
+                            "<img tabletypeid='" + activeTable.tableTypeId + "' " +
+                            "src='" + activeTable.src + "' " +
+                            "style='" + styles + " width: 50px;' " +
                             "onclick='page.tableOrder.loadOrderList(" + activeTable.id + ");'>";
 
                     $('#activeTablesContainer').append(imgContainer);
