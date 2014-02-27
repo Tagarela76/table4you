@@ -2,7 +2,7 @@
 form:
     phone: 
       label: 'Телефон:'
-      placeholder: '+7(ххх)(ххххххх)'
+      placeholder: '+7хххххххххх'
     lastname: 'Фамилия:'
     captcha:
       label: 'Проверочный код:'

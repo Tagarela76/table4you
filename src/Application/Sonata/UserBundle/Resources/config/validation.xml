@@ -124,6 +124,25 @@
             </option>
         </constraint>
         
+         <property name="phone">
+            <constraint name="Regex">
+                <option name="pattern">/^\+7\d{10}$/</option>
+                <option name="match">true</option>
+                <option name="message">fos_user.phone.mismatch</option>
+                <option name="groups">
+                    <value>Registration</value>
+                    <value>rest</value>
+                </option>
+            </constraint>
+            <constraint name="NotBlank">
+                <option name="message">fos_user.phone.blank</option>
+                <option name="groups">
+                    <value>Registration</value>
+                    <value>rest</value>
+                </option>
+            </constraint>
+        </property>
+        
      </class>
 
 
