@@ -5,86 +5,86 @@
         </div>
     {% endfor %}
 {% endfor %}
-<form novalidate id="fos-registration-form" action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+<form novalidate id="fos-registration-form" action="{{ path('fos_user_registration_register') }}" {{ form_enctype(formReg) }} method="POST" class="fos_user_registration_register">
     <div id="fos_user_registration_form">
-        {{ form_start(form) }}
-        {{ form_errors(form) }}
+        {{ form_start(formReg) }}
+        {{ form_errors(formReg) }}
 
         <div>
-            {{ form_widget(form.username) }}
+            {{ form_widget(formReg.username) }}
         </div>
         
         <div>
-            {{ form_label(form.firstname) }}
-            {{ form_errors(form.firstname) }}
-            {% if form.firstname.vars.errors|length %}
-                {{ form_widget(form.firstname, {'attr':{'class':'error-form-registration'} }) }}
+            {{ form_label(formReg.firstname) }}
+            {{ form_errors(formReg.firstname) }}
+            {% if formReg.firstname.vars.errors|length %}
+                {{ form_widget(formReg.firstname, {'attr':{'class':'error-form-registration'} }) }}
             {%  else %}
-                {{ form_widget(form.firstname) }}
+                {{ form_widget(formReg.firstname) }}
             {% endif %}
         </div>
 
         <div>
-            {{ form_label(form.lastname) }}
-            {{ form_errors(form.lastname) }}
-            {% if form.lastname.vars.errors|length %}
-                {{ form_widget(form.lastname, {'attr':{'class':'error-form-registration'} }) }}
+            {{ form_label(formReg.lastname) }}
+            {{ form_errors(formReg.lastname) }}
+            {% if formReg.lastname.vars.errors|length %}
+                {{ form_widget(formReg.lastname, {'attr':{'class':'error-form-registration'} }) }}
             {%  else %}
-                {{ form_widget(form.lastname) }}
+                {{ form_widget(formReg.lastname) }}
             {% endif %}
         </div>
 
         <div>
-            {{ form_label(form.email) }}
+            {{ form_label(formReg.email) }}
 
-            {% if form.email.vars.errors|length > 0 %}
+            {% if formReg.email.vars.errors|length > 0 %}
             <ul>
-                {% for error in form.email.vars.errors %}
+                {% for error in formReg.email.vars.errors %}
                     <li>{{ error.message|raw }}</li>
                 {% endfor %}
             </ul>
             {% endif %}
 
-            {% if form.email.vars.errors|length %}
-                {{ form_widget(form.email, {'attr':{'class':'error-form-registration'} }) }}
+            {% if formReg.email.vars.errors|length %}
+                {{ form_widget(formReg.email, {'attr':{'class':'error-form-registration'} }) }}
             {%  else %}
-                {{ form_widget(form.email) }}
+                {{ form_widget(formReg.email) }}
             {% endif %}
         </div>
 
         <div class="password-registration">
-            {{ form_errors(form.plainPassword) }}
-            {% if form.plainPassword.first.vars.errors|length or form.plainPassword.second.vars.errors|length %}
+            {{ form_errors(formReg.plainPassword) }}
+            {% if formReg.plainPassword.first.vars.errors|length or formReg.plainPassword.second.vars.errors|length %}
                 <div id="fos_user_registration_form_plainPassword">
-                    {{ form_row(form.plainPassword.first, {'attr':{'class':'error-form-registration'} }) }}
-                    {{ form_row(form.plainPassword.second, {'attr':{'class':'error-form-registration'} }) }}
+                    {{ form_row(formReg.plainPassword.first, {'attr':{'class':'error-form-registration'} }) }}
+                    {{ form_row(formReg.plainPassword.second, {'attr':{'class':'error-form-registration'} }) }}
                 </div>
             {%  else %}
                 <div id="fos_user_registration_form_plainPassword">
-                    {{ form_row(form.plainPassword.first) }}
-                    {{ form_row(form.plainPassword.second) }}
+                    {{ form_row(formReg.plainPassword.first) }}
+                    {{ form_row(formReg.plainPassword.second) }}
                 </div> 
             {% endif %}
             {% include "TableMainBundle:Component:ajaxPreloader.html.twig" %}
         </div>
 
         <div>
-            {{ form_label(form.phone) }}
-            {{ form_errors(form.phone) }}
-            {% if form.phone.vars.errors|length %}
-                {{ form_widget(form.phone, {'attr':{'class':'error-form-registration'} }) }}
+            {{ form_label(formReg.phone) }}
+            {{ form_errors(formReg.phone) }}
+            {% if formReg.phone.vars.errors|length %}
+                {{ form_widget(formReg.phone, {'attr':{'class':'error-form-registration'} }) }}
             {%  else %}
-                {{ form_widget(form.phone) }}
+                {{ form_widget(formReg.phone) }}
             {% endif %}
         </div>
 
         <div class="captcha-img">
-            {{ form_label(form.captcha) }}
-            {{ form_errors(form.captcha) }}
-            {% if form.captcha.vars.errors|length %}
-                {{ form_widget(form.captcha, {'attr':{'class':'error-form-registration'} }) }}
+            {{ form_label(formReg.captcha) }}
+            {{ form_errors(formReg.captcha) }}
+            {% if formReg.captcha.vars.errors|length %}
+                {{ form_widget(formReg.captcha, {'attr':{'class':'error-form-registration'} }) }}
             {%  else %}
-                {{ form_widget(form.captcha) }}
+                {{ form_widget(formReg.captcha) }}
             {% endif %}
         </div>
 
@@ -92,6 +92,6 @@
             <input type="submit" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" />
             <img id="registrationPreloader" style="display: none;" src="{{ asset('bundles/tablemain/images/ajax-loader.gif') }}" />
         </div>
-        {{ form_end(form) }}
+        {{ form_end(formReg) }}
     </div>
 </form>

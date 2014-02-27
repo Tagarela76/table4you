@@ -69,7 +69,7 @@ class RegistrationController extends BaseController
         }
 
         return $this->container->get('templating')->renderResponse('ApplicationSonataUserBundle:Registration:register.html.' . $this->getEngine(), array(
-                    'form' => $form->createView(),
+                    'formReg' => $form->createView(),
         ));
     }
 

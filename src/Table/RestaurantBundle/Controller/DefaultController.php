@@ -195,6 +195,8 @@ class DefaultController extends Controller
 
         // assign base_url
         $baseUrl = $this->container->getParameter('base_folder_url');
+        // registration form (header)
+        $regForm = $this->container->get('fos_user.registration.form');
         return array(
             'restaurant' => $restaurant,
             'anonim' => $anonim,
@@ -209,7 +211,8 @@ class DefaultController extends Controller
             'additionalPhotos' => $additionalPhotos,
             'menuPhotos' => $menuPhotos,
             'baseUrl' => $baseUrl,
-            'newsList' => $newsList->getQuery()->getResult()
+            'newsList' => $newsList->getQuery()->getResult(),
+            'formReg' => $regForm->createView()
         );
     }
 
@@ -276,7 +279,9 @@ class DefaultController extends Controller
             $searchCity = 1;
         }
         /*         * ** */
-
+        
+        // registration form (header)
+        $regForm = $this->container->get('fos_user.registration.form');
         return $this->render('TableRestaurantBundle:Default:rating.html.twig', array(
                     'restaurant' => $restaurant,
                     'isRatingDisabled' => $isRatingDisabled,
@@ -285,7 +290,8 @@ class DefaultController extends Controller
                     'cityList' => $cityList,
                     'categoryList' => $categoryList,
                     'kitchenList' => $kitchenList,
-                    'searchCity' => $searchCity
+                    'searchCity' => $searchCity,
+                    'formReg' => $regForm->createView()
         ));
     }
 
@@ -364,7 +370,8 @@ class DefaultController extends Controller
         $breadcrumbs->addItem(
                 $this->get('translator')->trans('main.breadcrumbs.label.profile')
         );
-
+        // registration form (header)
+        $regForm = $this->container->get('fos_user.registration.form');
         return array(
             'tableOrderHistory' => $orderHistory->getQuery()->getResult(),
             'isRatingDisabled' => $isRatingDisabled,
@@ -377,7 +384,8 @@ class DefaultController extends Controller
             'searchCity' => $searchCity,
             'breadcrumbs' => $breadcrumbs,
             'newsList' => $newsList->getQuery()->getResult(),
-            'anonim' => $anonim
+            'anonim' => $anonim,
+            'formReg' => $regForm->createView()
         );
     }
 
@@ -458,7 +466,8 @@ class DefaultController extends Controller
 
         // get restaurant for this news
         $restaurant = $news->getRestaurant();
-
+        // registration form (header)
+        $regForm = $this->container->get('fos_user.registration.form');
         return array(
             'news' => $news,
             'restaurant' => $restaurant,
@@ -471,7 +480,8 @@ class DefaultController extends Controller
             'kitchenList' => $kitchenList,
             'searchCity' => $searchCity,
             'breadcrumbs' => $breadcrumbs,
-            'newsList' => $newsList->getQuery()->getResult()
+            'newsList' => $newsList->getQuery()->getResult(),
+            'formReg' => $regForm->createView()
         );
     }
 
@@ -537,7 +547,8 @@ class DefaultController extends Controller
         );
 
         $restaurantsList = $this->getRestaurantManager()->findAll();
-
+        // registration form (header)
+        $regForm = $this->container->get('fos_user.registration.form');
         return array(
             'cityList' => $cityList,
             'categoryList' => $categoryList,
@@ -545,7 +556,8 @@ class DefaultController extends Controller
             'searchCity' => $searchCity,
             'breadcrumbs' => $breadcrumbs,
             'newsList' => $newsList->getQuery()->getResult(),
-            'restaurantsList' => $restaurantsList
+            'restaurantsList' => $restaurantsList,
+            'formReg' => $regForm->createView()
         );
     }
 
