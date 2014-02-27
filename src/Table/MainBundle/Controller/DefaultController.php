@@ -107,7 +107,7 @@ class DefaultController extends Controller
                 'kitchenList' => $kitchenList,
                 'searchCity' => $searchCity,
                 'newsList' => $newsList->getQuery()->getResult(),
-                'form' => $regForm->createView()
+                'formReg' => $regForm->createView()
             );
         }
     }
@@ -139,13 +139,15 @@ class DefaultController extends Controller
         /*         * ** */
         /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN RIGHT SIDEBAR */
         $newsList = $this->getNewsManager()->findByCity($searchCity);
-
+        // registration form (header)
+        $regForm = $this->container->get('fos_user.registration.form');
         return array(
             'cityList' => $cityList,
             'categoryList' => $categoryList,
             'kitchenList' => $kitchenList,
             'searchCity' => $searchCity,
-            'newsList' => $newsList->getQuery()->getResult()
+            'newsList' => $newsList->getQuery()->getResult(),
+            'formReg' => $regForm->createView()
         );
     }
 

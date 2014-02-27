@@ -70,7 +70,8 @@ class ProfileController extends BaseSecurityController
         $breadcrumbs->addItem(
                 $this->container->get('translator')->trans('main.breadcrumbs.label.profile')
         );
-
+        // registration form (header)
+        $regForm = $this->container->get('fos_user.registration.form');
         return $this->container->get('templating')->renderResponse(
                 'ApplicationSonataUserBundle:Profile:show.html.twig', array(
                     'user' => $user,
@@ -79,7 +80,8 @@ class ProfileController extends BaseSecurityController
                     'kitchenList' => $kitchenList,
                     'searchCity' => $searchCity,
                     'breadcrumbs' => $breadcrumbs,
-                    'newsList' => $newsList->getQuery()->getResult()
+                    'newsList' => $newsList->getQuery()->getResult(),
+                    'formReg' => $regForm->createView()
         ));
     }
 
@@ -150,6 +152,8 @@ class ProfileController extends BaseSecurityController
                 $user->getEmail() == $user->getUsername() . "@table4you.com") {
             $isInvalidEmail = true;
         }
+        // registration form (header)
+        $regForm = $this->container->get('fos_user.registration.form');
         return $this->container->get('templating')->renderResponse(
                 'ApplicationSonataUserBundle:Profile:edit_profile.html.twig', array(
             'form' => $form->createView(),
@@ -159,7 +163,8 @@ class ProfileController extends BaseSecurityController
             'searchCity' => $searchCity,
             'breadcrumbs' => $breadcrumbs,
             'newsList' => $newsList->getQuery()->getResult(),
-            'isInvalidEmail' => $isInvalidEmail
+            'isInvalidEmail' => $isInvalidEmail,
+            'formReg' => $regForm->createView()
         ));
     }
 
