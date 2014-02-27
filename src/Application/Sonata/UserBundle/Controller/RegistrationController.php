@@ -15,26 +15,6 @@ class RegistrationController extends BaseController
 
     public function registerAction()
     {
-        
-        /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN HEADER */
-        // get city list
-        $cityList = $this->container->get('city_manager')->findAll();
-        /// get all category list
-        $categoryList = $this->container->get('restaurant_category_manager')->findAll();
-        // get all kitchen list
-        $kitchenList = $this->container->get('restaurant_kitchen_manager')->findAll();
-
-        // get current city
-        $searchCity = $this->container->get('request')->query->get('searchCity');
-        // if null set default -> krasnodar
-        if (is_null($searchCity)) {
-            $searchCity = 1;
-        }
-        /*         * ** */
-
-        /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN RIGHT SIDEBAR */
-        $newsList = $this->container->get('news_manager')->getNews();
-
         $form = $this->container->get('fos_user.registration.form');
         $formHandler = $this->container->get('fos_user.registration.form.handler');
         $confirmationEnabled = $this->container->getParameter('fos_user.registration.confirmation.enabled');
@@ -50,12 +30,7 @@ class RegistrationController extends BaseController
                         throw new NotFoundHttpException(sprintf('The user with email "%s" does not exist', $user->getEmail()));
                     }
                     return $response = $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:checkEmail.html.' . $this->getEngine(), array(
-                        'user' => $user,
-                        'cityList' => $cityList,
-                        'categoryList' => $categoryList,
-                        'kitchenList' => $kitchenList,
-                        'searchCity' => $searchCity,
-                        'newsList' => $newsList->getQuery()->getResult()
+                        'user' => $user
                     ));
                 } else {
                     $authUser = true;
@@ -64,12 +39,7 @@ class RegistrationController extends BaseController
                     }
 
                     return $response = $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:confirmed.html.' . $this->getEngine(), array(
-                        'user' => $user,
-                        'cityList' => $cityList,
-                        'categoryList' => $categoryList,
-                        'kitchenList' => $kitchenList,
-                        'searchCity' => $searchCity,
-                        'newsList' => $newsList->getQuery()->getResult()
+                        'user' => $user
                     ));
                 }
 

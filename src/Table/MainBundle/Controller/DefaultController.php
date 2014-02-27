@@ -75,7 +75,7 @@ class DefaultController extends Controller
         } else {
             $restaurantList = $this->getRestaurantManager()->findByCity($searchCity);
         }
-  
+        
         // if filter render only restaurant list
         if ($filter) {
             return $this->render(
@@ -93,7 +93,8 @@ class DefaultController extends Controller
                             )
             );
         } else {
-
+            // registration form 
+            $regForm = $this->container->get('fos_user.registration.form');
             return array(
                 'restaurantsList' => $this->getPaginator()->paginate(
                         $restaurantList, $page, Restaurant::PER_PAGE_COUNT
@@ -105,7 +106,8 @@ class DefaultController extends Controller
                 'categoryList' => $categoryList,
                 'kitchenList' => $kitchenList,
                 'searchCity' => $searchCity,
-                'newsList' => $newsList->getQuery()->getResult()
+                'newsList' => $newsList->getQuery()->getResult(),
+                'form' => $regForm->createView()
             );
         }
     }
