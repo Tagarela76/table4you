@@ -290,7 +290,7 @@ function RestaurantMap() {
             zoom: 17
         });
         L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
-            key: 'BC9A493B41014CAABB98F0471D759707',
+            key: '8ee2a50541944fb9bcedded5165f09d9',
             styleId: 997,
             attribution: '',
             maxZoom: 18
