@@ -132,6 +132,7 @@
                 <option name="groups">
                     <value>Registration</value>
                     <value>rest</value>
+                    <value>Profile</value>
                 </option>
             </constraint>
             <constraint name="NotBlank">
@@ -139,6 +140,7 @@
                 <option name="groups">
                     <value>Registration</value>
                     <value>rest</value>
+                    <value>Profile</value>
                 </option>
             </constraint>
         </property>

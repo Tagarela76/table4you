@@ -152,19 +152,25 @@ class ProfileController extends BaseSecurityController
                 $user->getEmail() == $user->getUsername() . "@table4you.com") {
             $isInvalidEmail = true;
         }
+        // Check if user  fill phone
+        $isEmptyPhone = false;
+        if (is_null($user->getPhone())) {
+            $isEmptyPhone = true;
+        }
         // registration form (header)
         $regForm = $this->container->get('fos_user.registration.form');
         return $this->container->get('templating')->renderResponse(
-                'ApplicationSonataUserBundle:Profile:edit_profile.html.twig', array(
-            'form' => $form->createView(),
-            'cityList' => $cityList,
-            'categoryList' => $categoryList,
-            'kitchenList' => $kitchenList,
-            'searchCity' => $searchCity,
-            'breadcrumbs' => $breadcrumbs,
-            'newsList' => $newsList->getQuery()->getResult(),
-            'isInvalidEmail' => $isInvalidEmail,
-            'formReg' => $regForm->createView()
+            'ApplicationSonataUserBundle:Profile:edit_profile.html.twig', array(
+                'form' => $form->createView(),
+                'cityList' => $cityList,
+                'categoryList' => $categoryList,
+                'kitchenList' => $kitchenList,
+                'searchCity' => $searchCity,
+                'breadcrumbs' => $breadcrumbs,
+                'newsList' => $newsList->getQuery()->getResult(),
+                'isInvalidEmail' => $isInvalidEmail,
+                'formReg' => $regForm->createView(),
+                'isEmptyPhone' => $isEmptyPhone
         ));
     }
 
