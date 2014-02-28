@@ -20,6 +20,7 @@ profile:
       error: 'Пожалуйста, укажите реальный e-mail'
     phone:
       label: 'Телефон:'
+      error: 'Пожалуйста, укажите телефон, чтобы иметь возможность заказывать столик'
     currentPassword:
       form: 'Пароль'
     new_password:

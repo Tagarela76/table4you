@@ -20,6 +20,7 @@ profile:
       error: 'Please, change email'
     phone:
       label: 'Phone:' 
+      error: 'Please, to be possible reserve table, fill phone'
     currentPassword:
       form: 'Password'  
     new_password:

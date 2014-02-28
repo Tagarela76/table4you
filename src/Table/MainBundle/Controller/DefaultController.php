@@ -75,22 +75,23 @@ class DefaultController extends Controller
         } else {
             $restaurantList = $this->getRestaurantManager()->findByCity($searchCity);
         }
-        
+
         // if filter render only restaurant list
         if ($filter) {
             return $this->render(
-                            'TableRestaurantBundle:Default:restaurantList.html.twig', array(
-                        'restaurantsList' => $this->getPaginator()->paginate(
-                                $restaurantList, $page, Restaurant::PER_PAGE_COUNT
-                        ),
-                        'anonim' => $anonim,
-                        'restaurantsWhoHadHasAlreadyRating' => $restaurantsWhoHadHasAlreadyRating,
-                        'isRatingDisabled' => $isRatingDisabled,
-                        'cityList' => $cityList,
-                        'categoryList' => $categoryList,
-                        'kitchenList' => $kitchenList,
-                        'searchCity' => $searchCity
-                            )
+                'TableRestaurantBundle:Default:restaurantList.html.twig', array(
+                    'restaurantsList' => $this->getPaginator()->paginate(
+                            $restaurantList, $page, Restaurant::PER_PAGE_COUNT
+                    ),
+                    'anonim' => $anonim,
+                    'restaurantsWhoHadHasAlreadyRating' => $restaurantsWhoHadHasAlreadyRating,
+                    'isRatingDisabled' => $isRatingDisabled,
+                    'cityList' => $cityList,
+                    'categoryList' => $categoryList,
+                    'kitchenList' => $kitchenList,
+                    'searchCity' => $searchCity
+
+                )
             );
         } else {
             // registration form 
@@ -169,8 +170,8 @@ class DefaultController extends Controller
         $user = $this->container->get('security.context')->getToken()->getUser();
         // only for auth users
         if (is_object($user) && $user instanceof UserInterface) {
-            if ($user->getEmail() == $user->getUsername() . "@gmail.com" || 
-                $user->getEmail() == $user->getUsername() . "@table4you.com") {
+            if ($user->getEmail() == $user->getUsername() . "@gmail.com" ||
+                    $user->getEmail() == $user->getUsername() . "@table4you.com") {
                 return new Response('false');
             }
         }
