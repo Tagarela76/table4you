@@ -24,8 +24,10 @@
             {# infinitive scrolling #}
             
             {# include leaflet map#}
-            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablerestaurant/leaflet/css/leaflet.css') }}">
-            
+            <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css" />
+            <!--[if lte IE 8]>
+                <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.ie.css" />
+            <![endif]-->
             <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablerestaurant/css/map.css') }}">
             {# FANCYBOX #}
             <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/fancy-box/jquery.fancybox.css') }}">
@@ -81,8 +83,7 @@
 	    </script>
             
             {# include leaflet map#}
-            <script src="{{ asset('bundles/tablerestaurant/leaflet/js/leaflet.js') }}"></script>
-
+            <script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
             {# FANCYBOX #}
             <script src="{{ asset('bundles/tablemain/fancy-box/jquery.fancybox.pack.js') }}"></script>
             <!-- Optionally add helpers - button, thumbnail and/or media -->
