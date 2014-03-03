@@ -124,7 +124,17 @@
             </option>
         </constraint>
         
-         <property name="phone">
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">phone</option>
+            <option name="message">fos_user.phone.already_used</option>
+            <option name="groups">
+                <value>Registration</value>
+                <value>rest</value>
+                <value>Profile</value>
+            </option>
+        </constraint>
+        
+        <property name="phone">
             <constraint name="Regex">
                 <option name="pattern">/^\+7\d{10}$/</option>
                 <option name="match">true</option>
