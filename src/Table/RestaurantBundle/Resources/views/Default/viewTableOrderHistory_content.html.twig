@@ -16,9 +16,16 @@
         </td>
         <td>
             {% include 'TableRestaurantBundle:Default:rating.html.twig' with {'restaurant': tableOrder.restaurant, 'isRatingDisabled': isRatingDisabled, 'restaurantsWhoHadHasAlreadyRating': restaurantsWhoHadHasAlreadyRating, 'id': tableOrder.id} %}
-            <a class="btn btn-primary" data-toggle="modal" data-target="#reserve_{{ tableOrder.restaurant.id }}" href="{{ path('table_order_reserve', {'id': tableOrder.restaurant.id}) }}">
-                {% trans %}main.order.button{% endtrans %}
-            </a>
+            {% if phoneFormatError %}
+                <a class="btn btn-primary" href="{{ path('sonata_user_profile_edit') }}">
+                    {% trans %}main.order.button{% endtrans %}
+                </a>
+            {% else%}
+                <a class="btn btn-primary" data-toggle="modal" data-target="#reserve_{{ tableOrder.restaurant.id }}" href="{{ path('table_order_reserve', {'id': tableOrder.restaurant.id}) }}">
+                    {% trans %}main.order.button{% endtrans %}
+                </a>
+            {% endif %}
+                
             {# ==Modal Window for reserve==#}
             <div class="modal fade hide modal-reserve" data-backdrop="static" id="reserve_{{ tableOrder.restaurant.id }}">
 

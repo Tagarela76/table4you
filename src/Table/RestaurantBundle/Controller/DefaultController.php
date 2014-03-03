@@ -193,6 +193,14 @@ class DefaultController extends Controller
             }
         }
 
+        $phoneFormatError = false;
+        // validate Phone
+        if (!$anonim) {
+            if (!preg_match("/^\+7\d{10}$/", $user->getPhone())) {
+                $phoneFormatError = true;
+            }
+        }
+        
         // assign base_url
         $baseUrl = $this->container->getParameter('base_folder_url');
         // registration form (header)
@@ -212,7 +220,8 @@ class DefaultController extends Controller
             'menuPhotos' => $menuPhotos,
             'baseUrl' => $baseUrl,
             'newsList' => $newsList->getQuery()->getResult(),
-            'formReg' => $regForm->createView()
+            'formReg' => $regForm->createView(),
+            'phoneFormatError' => $phoneFormatError
         );
     }
 
@@ -370,6 +379,15 @@ class DefaultController extends Controller
         $breadcrumbs->addItem(
                 $this->get('translator')->trans('main.breadcrumbs.label.profile')
         );
+        
+        $phoneFormatError = false;
+        // validate Phone
+        if (!$anonim) {
+            if (!preg_match("/^\+7\d{10}$/", $user->getPhone())) {
+                $phoneFormatError = true;
+            }
+        }
+        
         // registration form (header)
         $regForm = $this->container->get('fos_user.registration.form');
         return array(
@@ -385,7 +403,8 @@ class DefaultController extends Controller
             'breadcrumbs' => $breadcrumbs,
             'newsList' => $newsList->getQuery()->getResult(),
             'anonim' => $anonim,
-            'formReg' => $regForm->createView()
+            'formReg' => $regForm->createView(),
+            'phoneFormatError' => $phoneFormatError
         );
     }
 
@@ -464,6 +483,14 @@ class DefaultController extends Controller
             throw $this->createNotFoundException('The page does not exist');
         }
 
+        $phoneFormatError = false;
+        // validate Phone
+        if (!$anonim) {
+            if (!preg_match("/^\+7\d{10}$/", $user->getPhone())) {
+                $phoneFormatError = true;
+            }
+        }
+        
         // get restaurant for this news
         $restaurant = $news->getRestaurant();
         // registration form (header)
@@ -481,7 +508,8 @@ class DefaultController extends Controller
             'searchCity' => $searchCity,
             'breadcrumbs' => $breadcrumbs,
             'newsList' => $newsList->getQuery()->getResult(),
-            'formReg' => $regForm->createView()
+            'formReg' => $regForm->createView(),
+            'phoneFormatError' => $phoneFormatError
         );
     }
 
@@ -584,6 +612,10 @@ class DefaultController extends Controller
             if ($anonim) {
                 $homeUrl = $this->generateUrl("table_main_auth_page");
                 $reserveButton = "<a class='btn btn-primary' href='{$homeUrl}'>{$reserveLabel}</a>";
+            } elseif (!preg_match("/^\+7\d{10}$/", $user->getPhone())) {
+                $reserveUrl = $this->generateUrl("sonata_user_profile_edit");
+                $reserveButton = "<a class='btn btn-primary' " .
+                        "href='{$reserveUrl}'>{$reserveLabel}</a>";
             } else {
                 $reserveUrl = $this->generateUrl("table_order_reserve", array(
                     "id" => $restaurant->getId()

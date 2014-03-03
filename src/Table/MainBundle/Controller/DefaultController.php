@@ -76,6 +76,13 @@ class DefaultController extends Controller
             $restaurantList = $this->getRestaurantManager()->findByCity($searchCity);
         }
 
+        $phoneFormatError = false;
+        // validate Phone
+        if (!$anonim) {
+            if (!preg_match("/^\+7\d{10}$/", $user->getPhone())) {
+                $phoneFormatError = true;
+            }
+        }
         // if filter render only restaurant list
         if ($filter) {
             return $this->render(
@@ -89,7 +96,8 @@ class DefaultController extends Controller
                     'cityList' => $cityList,
                     'categoryList' => $categoryList,
                     'kitchenList' => $kitchenList,
-                    'searchCity' => $searchCity
+                    'searchCity' => $searchCity,
+                    'phoneFormatError' => $phoneFormatError
 
                 )
             );
@@ -108,7 +116,8 @@ class DefaultController extends Controller
                 'kitchenList' => $kitchenList,
                 'searchCity' => $searchCity,
                 'newsList' => $newsList->getQuery()->getResult(),
-                'formReg' => $regForm->createView()
+                'formReg' => $regForm->createView(),
+                'phoneFormatError' => $phoneFormatError
             );
         }
     }

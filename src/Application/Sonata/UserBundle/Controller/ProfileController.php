@@ -154,7 +154,7 @@ class ProfileController extends BaseSecurityController
         }
         // Check if user  fill phone
         $isEmptyPhone = false;
-        if (is_null($user->getPhone())) {
+        if (!preg_match("/^\+7\d{10}$/", $user->getPhone()) ) {
             $isEmptyPhone = true;
         }
         // registration form (header)
