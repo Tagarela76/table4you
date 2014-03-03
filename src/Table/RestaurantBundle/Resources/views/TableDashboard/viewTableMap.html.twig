@@ -34,23 +34,7 @@
     </div>
 
     <div class="span4 table-map-droppable-right" id="table-container">
-        <div class="row-fluid">
-            <div class="span12">
-                <a href="{{ path('table_viewTableTypeList')}}">
-                    {% trans %}main.tableMap.tableList.addTable{% endtrans %}
-                </a>
-            </div>    
-        </div>
-        {% for tableType in tableTypeList %}  
-            <div class="row-fluid">
-                <div class="span4">
-                    <img tabletypeid="{{tableType.id}}" class="table-type-draggable" src="{{baseUrl}}{{ vich_uploader_asset(tableType, 'file') }}" alt="{{ tableType.peopleCount }}" />
-                </div>
-                <div class="span6">
-                    {% trans %}main.tableMap.tableList.tableOn{% endtrans %} {{ tableType.peopleCount }}
-                </div>
-            </div>
-        {% endfor %}
+        {% include 'TableRestaurantBundle:TableDashboard:viewTableTypeContainer.html.twig' %}      
     </div>
 </div>
 {# ==Modal Window for saveTable==#}
@@ -62,35 +46,5 @@
         // Init Active Tables
         page.activeTable.loadActiveTables();
         
-        $(".table-type-draggable").draggable({
-            helper: "clone",
-            cursor: 'move'
-        });
-        $(".table-map-droppable").droppable({
-            tolerance: 'fit',
-            drop: function (event, ui) {
-                var $canvas = $(this);
-                if (!ui.draggable.hasClass('canvas-element')) {
-                    var $canvasElement = ui.draggable.clone();
-                    $canvasElement.addClass('canvas-element');
-                    $canvasElement.draggable({
-                        containment: '.table-map-droppable'
-                    });
-                    $canvas.append($canvasElement);
-                    $canvasElement.css({
-                        left: (ui.position.left),
-                        top: (ui.position.top),
-                        position: 'absolute'
-                    });
-                }
-                // not for editable tables
-                if (!ui.draggable.hasClass('active-table-draggable')) {
-                    // init data
-                    page.activeTable.initTableData((ui.position.top - $("#tableMapDroppable").position().top), (ui.position.left - $("#tableMapDroppable").position().left), $(ui.draggable[0]).attr("tabletypeid"));
-                    $("#tableNumberContainer").modal('show');
-                }
-            }
-        });
-
     });    
 </script>

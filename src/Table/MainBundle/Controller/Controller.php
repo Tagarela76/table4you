@@ -116,4 +116,9 @@ class Controller extends BaseController
     {
         return $this->get('active_table_order_manager');
     }
+    
+    public function getHelperManager()
+    {
+        return $this->get('helper_manager');
+    }
 }
