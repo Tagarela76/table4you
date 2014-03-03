@@ -5,3 +5,4 @@ fos_user:
     phone:
         mismatch: Phone should have format +7хххххххххх
         blank: Please, fill the phone
+        already_used: Phone have already registered
