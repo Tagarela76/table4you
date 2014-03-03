@@ -22,7 +22,7 @@ class ActiveTableOrderForm4AdminType extends AbstractType
                     'label' => 'main.tableMap.orders.form.label.date',
                     'required' => true
                 ))
-                ->add('peopleCount', 'text', array(
+                ->add('peopleCount', 'number', array(
                     'translation_domain' => 'messages',
                     'label' => 'main.tableMap.orders.form.label.peopleCount',
                     'required' => true

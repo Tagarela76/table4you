@@ -350,7 +350,7 @@ function TableOrder() {
     this.initFancyTimeBox = function() {
 
         var timeParams = {
-            changedEl: ".table-order-form select",
+            changedEl: "#table-order-form select",
             visRows: 8,
             scrollArrows: true
         }
@@ -399,13 +399,14 @@ function TableOrder() {
                     var styles = "position: absolute; " +
                             "left: " + left + "px; "+
                             "top: " + top + "px;" ;
-                    imgContainer += "<span style='" + styles + " z-index: 9;' class='badge'>" + activeTable.tableNumber + 
+                    
+                    imgContainer += "<span style='" + styles + "z-index: 9;' class='badge'>" + activeTable.tableNumber + 
                             "</span>" +
+                            "<div id='tableContainer_" + activeTable.id + "' style='" + styles + "width: 60px;'>" +
                             "<img tabletypeid='" + activeTable.tableTypeId + "' " +
-                            "src='" + activeTable.src + "' " +
-                            "style='" + styles + " width: 50px;' " +
-                            "onclick='page.tableOrder.loadOrderList(" + activeTable.id + ");'>";
-
+                            "onclick='page.tableOrder.loadOrderList(" + activeTable.id + ");' "+
+                            "src='" + activeTable.src + "'></div>";
+                    
                     $('#activeTablesContainer').append(imgContainer);
                 }
             }  

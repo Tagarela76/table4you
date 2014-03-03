@@ -8,3 +8,13 @@ Table\RestaurantBundle\Entity\TableOrder:
             - Date: ~
         reserveTime:
             - Time: ~
+            
+Table\RestaurantBundle\Entity\ActiveTableOrder:
+    properties:
+        peopleCount:
+            - NotBlank: ~
+        reserveDate:
+            - Date: ~
+        reserveTime:
+            - Time: ~
+            

@@ -43,4 +43,7 @@ services:
         arguments: [@doctrine.orm.entity_manager, @service_container]       
   active_table_order_manager:
         class: Table\RestaurantBundle\Model\ActiveTableOrderManager
-        arguments: [@doctrine.orm.entity_manager, @service_container]         
+        arguments: [@doctrine.orm.entity_manager, @service_container]        
+  helper_manager:
+        class: Table\RestaurantBundle\Model\HelperManager
+        arguments: [@doctrine.orm.entity_manager, @service_container]     

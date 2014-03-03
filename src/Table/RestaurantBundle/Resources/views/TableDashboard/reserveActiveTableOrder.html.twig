@@ -1,172 +1,175 @@
-<script>
-
-    $(function() {
-        page.tableOrder.initFancyTimeBox();
-        $.datepicker.setDefaults($.datepicker.regional['ru']);
-        $('.reserveDate').datepicker({
-            dateFormat: 'yy-mm-dd',
-            altField: "#activeTableOrder4AdminForm_reserveDate",
-            altFormat: "yy-mm-dd"
-        })
-
-        $('#table-order-form').submit(function() {
-            $(this).ajaxSubmit({
-                type: 'post',
-                beforeSubmit: function() {
-                    $("#reservePreloader").show();
-                },
-                success: function(response) {
-                    $("#reservePreloader").hide();
-                    $("#table-order-form-container").html(response);
-                }
-            });
-            return false;
-        });
-    });
-</script>
-{% for type, messages in app.session.flashBag.all %}
-    {% for message in messages %}
-        <div class="{{ type }}">
-           {{ message|trans({}, 'FOSUserBundle') }}
-        </div>
-    {% endfor %}
-{% endfor %}
-<form novalidate id="table-order-form" action="{{ path('table_reserveActiveTableOrder', {'activeTableId': activeTable.id}) }}" {{ form_enctype(form) }} method="POST" class="">       
-{{ form_start(form) }}
-    <div class="container-fluid">
-        <div class="row-fluid">
-            <div class="span5">
-                <div class="row-fluid">
-                    {{ form_label(form.reserveDate) }}
-                    <div class="reserveDate"></div>        
-                    {{ form_errors(form.reserveDate) }}
-                    {% if form.reserveDate.vars.errors|length %}
-                        {{ form_widget(form.reserveDate, {'attr':{'class':'error-form-reserve'} }) }}
-                    {%  else %}
-                        {{ form_widget(form.reserveDate) }}
-                    {% endif %}
-                </div>
-            </div>
-            <div class="span5">
-                <div class="row-fluid">    
-                    {{ form_label(form.reserveTime) }}
-                    {{ form_errors(form.reserveTime) }}
-                    {% if form.reserveTime.vars.errors|length %}
-                        {{ form_widget(form.reserveTime, {'attr':{'class':'error-form-reserve'} }) }}
-                    {%  else %}
-                        {{ form_widget(form.reserveTime) }}
-                    {% endif %}
-                </div>
-                <div class="row-fluid">    
-                    {{ form_label(form.peopleCount) }}
-                    {{ form_errors(form.peopleCount) }}
-                    {% if form.peopleCount.vars.errors|length %}
-                        {{ form_widget(form.peopleCount, {'attr':{'class':'error-form-reserve'} }) }}
-                    {%  else %}
-                        {{ form_widget(form.peopleCount) }}
-                    {% endif %}
-                </div>    
-                <div class="row-fluid">   
-                    <div class="span5">
-                        <p>
-                            {% if form.isSms.vars.errors|length %}
-                                {{ form_widget(form.isSms, {'attr':{'class':'error-form-reserve'} }) }}
-                            {%  else %}
-                                {{ form_widget(form.isSms) }}
-                            {% endif %}
-                            {{ form_label(form.isSms) }}
-                            {{ form_errors(form.isSms) }}
-                        </p>
-                    </div>    
-                    <div class="span5">
-                        <p>
-                            {{ form_label(form.isSmokingZone) }}
-                            {{ form_errors(form.isSmokingZone) }}
-                            {% if form.isSmokingZone.vars.errors|length %}
-                                {{ form_widget(form.isSmokingZone, {'attr':{'class':'error-form-reserve'} }) }}
-                            {%  else %}
-                                {{ form_widget(form.isSmokingZone) }}
-                            {% endif %}
-                        </p>
-                    </div>  
-                </div> 
-                <div class="row-fluid">   
-                    <div class="span6">
-                        <p>
-                            {% if form.isEmail.vars.errors|length %}
-                                {{ form_widget(form.isEmail, {'attr':{'class':'error-form-reserve'} }) }}
-                            {%  else %}
-                                {{ form_widget(form.isEmail) }}
-                            {% endif %}
-                            {{ form_label(form.isEmail) }}
-                            {{ form_errors(form.isEmail) }}
-                        </p>
-                    </div>   
-                </div>    
-            </div>
-        </div>    
-        <div class="row-fluid">
-            <div class="span5">
-                <div class="row-fluid"> 
-                    <label>{% trans %}main.tableMap.orders.form.label.customerData{% endtrans %}</label>
-                </div> 
-                <div class="row-fluid"> 
-                    {{ form_label(form.userName) }}
-                    {{ form_errors(form.userName) }}
-                    {% if form.userName.vars.errors|length %}
-                        {{ form_widget(form.userName, {'attr':{'class':'error-form-reserve'} }) }}
-                    {%  else %}
-                        {{ form_widget(form.userName) }}
-                    {% endif %}
-                    {{ form_errors(form.userName) }}
-                </div>  
-                <div class="row-fluid"> 
-                    {{ form_label(form.userLastName) }}
-                    {{ form_errors(form.userLastName) }}
-                    {% if form.userLastName.vars.errors|length %}
-                        {{ form_widget(form.userLastName, {'attr':{'class':'error-form-reserve'} }) }}
-                    {%  else %}
-                        {{ form_widget(form.userLastName) }}
-                    {% endif %}
-                    {{ form_errors(form.userLastName) }}
-                </div> 
-                <div class="row-fluid"> 
-                    {% if form.wish.vars.errors|length %}
-                        {{ form_widget(form.wish, {'attr':{'class':'error-form-reserve'} }) }}
-                    {%  else %}
-                        {{ form_widget(form.wish) }}
-                    {% endif %}
-                    {{ form_errors(form.wish) }}
-                </div> 
-            </div>
-            <div class="span5">
-                <div class="row-fluid"> 
-                    {{ form_label(form.userPhone) }}
-                    {{ form_errors(form.userPhone) }}
-                    {% if form.userPhone.vars.errors|length %}
-                        {{ form_widget(form.userPhone, {'attr':{'class':'error-form-reserve'} }) }}
-                    {%  else %}
-                        {{ form_widget(form.userPhone) }}
-                    {% endif %}
-                    {{ form_errors(form.userPhone) }}
-                </div>  
-                <div class="row-fluid"> 
-                    {{ form_label(form.userEmail) }}
-                    {{ form_errors(form.userEmail) }}
-                    {% if form.userEmail.vars.errors|length %}
-                        {{ form_widget(form.userEmail, {'attr':{'class':'error-form-reserve'} }) }}
-                    {%  else %}
-                        {{ form_widget(form.userEmail) }}
-                    {% endif %}
-                    {{ form_errors(form.userEmail) }}
-                </div> 
-                <div class="row-fluid"> 
-                    {{ form_widget(form.activeTable) }}
-                    <input type="submit" value="{% trans %}main.tableMap.orders.form.label.reserve{% endtrans %}" />
-                    <img id="reservePreloader" style="display: none;" src="{{ asset('bundles/tablemain/images/ajax-loader.gif') }}" />
-                </div> 
-            </div>
-        </div> 
+{# Render success message #}
+{% if successReserve %}
+    <div class="alert">
+            {% trans %}main.order.form.message.success{% endtrans %}
     </div>
-{{ form_end(form) }}
-</form> 
+{% else %}
+    <script>
+
+        $(function() {
+           // page.tableOrder.initFancyTimeBox();
+            $.datepicker.setDefaults($.datepicker.regional['ru']);
+            $('.reserveDate').datepicker({
+                dateFormat: 'yy-mm-dd',
+                altField: "#activeTableOrder4AdminForm_reserveDate",
+                altFormat: "yy-mm-dd"
+            })
+
+            $('#table-order-form').submit(function() {
+                $(this).ajaxSubmit({
+                    type: 'post',
+                    beforeSubmit: function() {
+                        $("#reservePreloader").show();
+                    },
+                    success: function(response) {
+                        $("#reservePreloader").hide();
+                        $("#table-order-form-container").html(response);
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+    {% for type, messages in app.session.flashBag.all %}
+        {% for message in messages %}
+            <div class="{{ type }}">
+               {{ message|trans({}, 'FOSUserBundle') }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    <form novalidate id="table-order-form" action="{{ path('table_reserveActiveTableOrder', {'activeTableId': activeTable.id}) }}" {{ form_enctype(form) }} method="POST" class="">       
+    {{ form_start(form) }}
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span5">
+                    <div class="row-fluid">
+                        {{ form_label(form.reserveDate) }}
+                        <div class="reserveDate"></div>        
+                        {{ form_errors(form.reserveDate) }}
+                        {% if form.reserveDate.vars.errors|length %}
+                            {{ form_widget(form.reserveDate, {'attr':{'class':'error-form-reserve'} }) }}
+                        {%  else %}
+                            {{ form_widget(form.reserveDate) }}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="span5">
+                    <div class="row-fluid">    
+                        {{ form_label(form.reserveTime) }}
+                        {{ form_errors(form.reserveTime) }}
+                        {% if form.reserveTime.vars.errors|length %}
+                            {{ form_widget(form.reserveTime, {'attr':{'class':'error-form-reserve'} }) }}
+                        {%  else %}
+                            {{ form_widget(form.reserveTime) }}
+                        {% endif %}
+                    </div>
+                    <div class="row-fluid">    
+                        {{ form_label(form.peopleCount) }}
+                        {{ form_errors(form.peopleCount) }}
+                        {% if form.peopleCount.vars.errors|length %}
+                            {{ form_widget(form.peopleCount, {'attr':{'class':'error-form-reserve'} }) }}
+                        {%  else %}
+                            {{ form_widget(form.peopleCount) }}
+                        {% endif %}
+                    </div>    
+                    <div class="row-fluid">   
+                        <div class="span5">
+                            <p>
+                                {% if form.isSms.vars.errors|length %}
+                                    {{ form_widget(form.isSms, {'attr':{'class':'error-form-reserve'} }) }}
+                                {%  else %}
+                                    {{ form_widget(form.isSms) }}
+                                {% endif %}
+                                {{ form_label(form.isSms) }}
+                                {{ form_errors(form.isSms) }}
+                            </p>
+                        </div>    
+                        <div class="span5">
+                            <p>
+                                {{ form_label(form.isSmokingZone) }}
+                                {{ form_errors(form.isSmokingZone) }}
+                                {% if form.isSmokingZone.vars.errors|length %}
+                                    {{ form_widget(form.isSmokingZone, {'attr':{'class':'error-form-reserve'} }) }}
+                                {%  else %}
+                                    {{ form_widget(form.isSmokingZone) }}
+                                {% endif %}
+                            </p>
+                        </div>  
+                    </div> 
+                    <div class="row-fluid">   
+                        <div class="span6">
+                            <p>
+                                {% if form.isEmail.vars.errors|length %}
+                                    {{ form_widget(form.isEmail, {'attr':{'class':'error-form-reserve'} }) }}
+                                {%  else %}
+                                    {{ form_widget(form.isEmail) }}
+                                {% endif %}
+                                {{ form_label(form.isEmail) }}
+                                {{ form_errors(form.isEmail) }}
+                            </p>
+                        </div>   
+                    </div>    
+                </div>
+            </div>    
+            <div class="row-fluid">
+                <div class="span5">
+                    <div class="row-fluid"> 
+                        <label>{% trans %}main.tableMap.orders.form.label.customerData{% endtrans %}</label>
+                    </div> 
+                    <div class="row-fluid"> 
+                        {{ form_label(form.userName) }}
+                        {% if form.userName.vars.errors|length %}
+                            {{ form_widget(form.userName, {'attr':{'class':'error-form-reserve'} }) }}
+                        {%  else %}
+                            {{ form_widget(form.userName) }}
+                        {% endif %}
+                        {{ form_errors(form.userName) }}
+                    </div>  
+                    <div class="row-fluid"> 
+                        {{ form_label(form.userLastName) }}
+                        {% if form.userLastName.vars.errors|length %}
+                            {{ form_widget(form.userLastName, {'attr':{'class':'error-form-reserve'} }) }}
+                        {%  else %}
+                            {{ form_widget(form.userLastName) }}
+                        {% endif %}
+                        {{ form_errors(form.userLastName) }}
+                    </div> 
+                    <div class="row-fluid"> 
+                        {% if form.wish.vars.errors|length %}
+                            {{ form_widget(form.wish, {'attr':{'class':'error-form-reserve'} }) }}
+                        {%  else %}
+                            {{ form_widget(form.wish) }}
+                        {% endif %}
+                        {{ form_errors(form.wish) }}
+                    </div> 
+                </div>
+                <div class="span5">
+                    <div class="row-fluid"> 
+                        {{ form_label(form.userPhone) }}
+                        {% if form.userPhone.vars.errors|length %}
+                            {{ form_widget(form.userPhone, {'attr':{'class':'error-form-reserve'} }) }}
+                        {%  else %}
+                            {{ form_widget(form.userPhone) }}
+                        {% endif %}
+                        {{ form_errors(form.userPhone) }}
+                    </div>  
+                    <div class="row-fluid"> 
+                        {{ form_label(form.userEmail) }}
+                        {% if form.userEmail.vars.errors|length %}
+                            {{ form_widget(form.userEmail, {'attr':{'class':'error-form-reserve'} }) }}
+                        {%  else %}
+                            {{ form_widget(form.userEmail) }}
+                        {% endif %}
+                        {{ form_errors(form.userEmail) }}
+                    </div> 
+                    <div class="row-fluid"> 
+                        {{ form_widget(form.activeTable) }}
+                        <input type="submit" value="{% trans %}main.tableMap.orders.form.label.reserve{% endtrans %}" />
+                        <img id="reservePreloader" style="display: none;" src="{{ asset('bundles/tablemain/images/ajax-loader.gif') }}" />
+                    </div> 
+                </div>
+            </div> 
+        </div>
+    {{ form_end(form) }}
+    </form> 
+{% endif %}

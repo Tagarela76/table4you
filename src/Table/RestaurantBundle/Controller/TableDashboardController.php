@@ -20,6 +20,20 @@ class TableDashboardController extends Controller
 {
 
     /**
+     * Get user manager
+     * 
+     * @return UserManager
+     */
+    protected function getUserManager()
+    {
+        return $this->get('fos_user.user_manager');
+    }
+    
+    protected function getUserMailer() 
+    {
+        return $this->container->get('fos_user.mailer');
+    }
+    /**
      * View TableType List
      * 
      * @Template()
@@ -470,7 +484,8 @@ class TableDashboardController extends Controller
         return array(
             'activeTable' => $activeTable,
             'tableOrderList' => $tableOrderList,
-            'form' => $form
+            'form' => $form,
+            'successReserve' => false // BY default
         );
     }
     
@@ -525,36 +540,39 @@ class TableDashboardController extends Controller
         $successReserve = false; // we should know if table reserve was successfull
         if ($request->isMethod('POST')) {
             $form->bind($request);
+      
+            // Register New User (collect data to userform)
+            $user = new User();
+            $userForm = $this->createForm(new RestRegistrationFormType(), $user);
+
+            // generste password(5 numbers)
+            $userPassword = rand(11111, 99999);
+            $userForm->bind(array(
+                "firstname" => $activeTableOrder->getUserName(), // It is firstname in server
+                "lastname" => $activeTableOrder->getUserLastName(),
+                "email" => $activeTableOrder->getUserEmail(),
+                "username" => $activeTableOrder->getUserEmail(), // the same as email
+                "plainPassword" => array(
+                    "first" => $userPassword,
+                    "second" => $userPassword
+                ),
+                "phone" => $activeTableOrder->getUserPhone()
+            ));
             
             if ($form->isValid()) {
-                // Register New User
-                $user = new User();
-                $userForm = $this->createForm(new RestRegistrationFormType(), $user);
-
-                $userForm->bind(array(
-                    "firstname" => $activeTableOrder->getUserName(), // It is firstname in server
-                    "lastname" => $activeTableOrder->getUserLastName(),
-                    "email" => $activeTableOrder->getUserEmail(),
-                    "username" => $activeTableOrder->getUserEmail(), // the same as email
-                    "plainPassword" => array(
-                        "first" => $activeTableOrder->getUserEmail(),
-                        "second" => $activeTableOrder->getUserEmail()
-                    ),
-                    "phone" => $activeTableOrder->getUserPhone()
-                ));
-               
+       
                 if ($userForm->isValid()) {
 
                     $user = $userForm->getData();
-                    $user->setEnabled(false);
+                    $user->setEnabled(true);
 
                     // send confirmation
                     $token = sha1(uniqid(mt_rand(), true)); // Or whatever you prefer to generate a token
 
                     $user->setConfirmationToken($token);
 
-                    //$mailer = $this->container->get('fos_user.mailer');
-                    //$mailer->sendConfirmationEmailMessage($user);
+                    $mailer = $this->getUserMailer();
+                    $mailer->sendConfirmationEmailMessage($user);
 
                     // add user
                     $em = $this->getDoctrine()->getManager();
@@ -564,7 +582,8 @@ class TableDashboardController extends Controller
                     // Let's add Order and connected it to a new user
                     
                     // Get New User
-                    $user = $this->userManager->findUserBy(array("username" => $activeTableOrder->getUserEmail()));
+                    $user = $this->getUserManager()->findUserBy(array("username" => $activeTableOrder->getUserEmail()));
+                    
                     // get table order date
                     $activeTableOrder = $form->getData();
                     // add Order
@@ -586,6 +605,19 @@ class TableDashboardController extends Controller
                 }
             }
         }
+        // Merge User errors to active order errors
+        $helperManager = $this->getHelperManager();
+        if (!$userForm->isValid()) {
+            foreach ($userForm->createView()->children as $key => $childrenErrors) {
+                if (!empty($childrenErrors->vars['errors'])) {
+                   $errors[$helperManager->getActiveOrderTableKeyForUserData($key)] = $childrenErrors->vars['errors'][0];
+                } 
+            }
+            foreach ($errors as $key =>$error) {
+                $form->get($key)->addError($error);
+            }
+        }
+
         return array(
             'form' => $form,
             'activeTable' => $activeTable,
