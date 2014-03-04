@@ -1,6 +1,11 @@
 {% extends 'TableMainBundle::layout_table_editor.html.twig' %}
 {% block javascripts %}
     {{ parent() }}
+    <script>
+        $(function() { 
+            page.common.allowDigitsOnly("valid-number");
+        });  
+    </script>
 {% endblock %}    
 {% block stylesheets %}
     {{ parent() }}
@@ -39,11 +44,11 @@
                         <div class="row-fluid specify-floor-room">
                             <span class="span4">
                                 <div class="list-text-floor-hall">{% trans %}main.tableMap.createMap.form.label.floor{% endtrans %}</div>
-                                <input type="text" name="mapFloor[]" size="2" />
+                                <input type="text" name="mapFloor[]" size="2" class="valid-number" />
                             </span>
                             <span class="span5">
                                 <div class="list-text-floor-hall">{% trans %}main.tableMap.createMap.form.label.hall{% endtrans %}</div>
-                                <input type="text" name="mapHall[]" size="2" />
+                                <input type="text" name="mapHall[]" size="2" class="valid-number" />
                             </span>
                         </div>
                     </div>
