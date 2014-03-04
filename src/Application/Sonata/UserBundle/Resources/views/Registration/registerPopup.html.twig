@@ -1,5 +1,6 @@
 <script src="{{ asset('bundles/applicationsonatauser/js/jquery.form.js') }}"></script>
 <script src="{{ asset('bundles/applicationsonatauser/js/registration.js') }}"></script>
+<script src="{{ asset('bundles/tablerestaurant/js/jquery.maskedinput.js') }}"></script>
 <script>
     $(function() { 
         $('#fos-registration-form').submit(function() { 
@@ -14,7 +15,9 @@
                 }
             });
             return false;
-        });    
+        });   
+        // format phone number
+        $("#fos_user_registration_form_phone").mask("+79999999999");
     });  
 </script>
 <link rel="stylesheet" type="text/css" href="{{ asset('bundles/applicationsonatauser/css/main.css') }}">

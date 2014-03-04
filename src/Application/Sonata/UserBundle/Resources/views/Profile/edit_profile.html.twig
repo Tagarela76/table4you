@@ -1,17 +1,14 @@
-{#
-
-This file is part of the Sonata package.
-
-(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
-
-For the full copyright and license information, please view the LICENSE
-file that was distributed with this source code.
-
-#}
 {% extends "TableMainBundle::layout.html.twig" %}
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('bundles/applicationsonatauser/js/profile-password-validation.js') }}"></script>
+    <script src="{{ asset('bundles/tablerestaurant/js/jquery.maskedinput.js') }}"></script>
+    <script>
+        $(function() { 
+            // format phone number
+            $("#sonata_user_profile_form_phone").mask("+79999999999");
+        });  
+    </script>
 {% endblock %}
 {% block content %}
     <div class="sonata-user-edit-profile"  id="restaurantList_main">
