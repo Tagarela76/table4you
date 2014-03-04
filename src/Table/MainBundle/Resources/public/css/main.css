@@ -2134,3 +2134,7 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     padding: 0;
 }
 #tableMapContainer .title-tabs ul li.active a+a+a{right: 9px;}
+
+.files-download p {
+    margin-top: 10px;
+}

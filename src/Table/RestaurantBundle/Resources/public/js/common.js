@@ -146,10 +146,10 @@ function TableMap() {
                                "</span><span class='files-download'></span>"+
                                "</span>" +
                                "<span class='span4'><div class='list-text-floor-hall'>" + mapFloorLabel +
-                               "</div><input type='text' name='mapFloor[]' size='2' />" +
+                               "</div><input type='text' name='mapFloor[]' size='2' class='valid-number'/>" +
                                "</span>" +
                                "<span class='span5'><div class='list-text-floor-hall'>" + mapHallLabel +
-                               "</div><input type='text' name='mapHall[]' size='2'/></span>" +
+                               "</div><input type='text' name='mapHall[]' size='2' class='valid-number'/></span>" +
                                "<span class='span2'><a href='#' onclick='page.common.removeFileField(this); return false;'> " +
                                "<img src='" + deleteRowIcon + "'>" +
                                "</a>" +
@@ -157,6 +157,7 @@ function TableMap() {
                                "</div>";
 
             $('#mapFieldsContainer').append(rowContainer);
+            page.common.allowDigitsOnly("valid-number");
         }
     }
 
