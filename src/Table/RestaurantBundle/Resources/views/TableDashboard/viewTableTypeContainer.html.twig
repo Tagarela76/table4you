@@ -1,10 +1,12 @@
-<div class="row-fluid">
-    <div class="span12">
-        <a href="{{ path('table_viewTableTypeList')}}">
-            {% trans %}main.tableMap.tableList.addTable{% endtrans %}
-        </a>
-    </div>    
-</div>
+{% if is_granted('ROLE_SUPER_ADMIN') %}
+    <div class="row-fluid">
+        <div class="span12">
+            <a href="{{ path('table_viewTableTypeList')}}">
+                {% trans %}main.tableMap.tableList.addTable{% endtrans %}
+            </a>
+        </div>    
+    </div>
+{% endif %}
 {% for tableType in tableTypeList %}  
     <div class="row-fluid">
         <div class="span4">

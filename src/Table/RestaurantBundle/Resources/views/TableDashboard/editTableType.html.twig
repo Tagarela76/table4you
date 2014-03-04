@@ -11,13 +11,13 @@
                             <div class="number-tables">
                                 {% trans %}main.tableMap.tableList.form.label.tableOn{% endtrans %}
                                 <input type="text" name="peopleCount" size="2" value="{{tableType.peopleCount}}"/>
-                                мест(а){% trans %}main.tableMap.tableList.form.label.numberOfPlaces{% endtrans %}
+                                {% trans %}main.tableMap.tableList.form.label.numberOfPlaces{% endtrans %}
                             </div>
                         <span class="btn btn-success btn-file">
                             <span>{% trans %}main.tableMap.tableList.form.label.selectTheFile{% endtrans %}</span>
                             <input type="file" name="file" id="image" size="1">
                         </span>
-                        <span class="files-download"></span>
+                            <span class="files-download"><p>{{tableType.fileName}}</p></span>
                         </span>
                     </div>    
                 </div>

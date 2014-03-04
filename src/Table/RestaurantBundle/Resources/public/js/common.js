@@ -146,10 +146,10 @@ function TableMap() {
                                "</span><span class='files-download'></span>"+
                                "</span>" +
                                "<span class='span4'><div class='list-text-floor-hall'>" + mapFloorLabel +
-                               "</div><input type='text' name='mapFloor[]' size='2' />" +
+                               "</div><input type='text' name='mapFloor[]' size='2' class='valid-number'/>" +
                                "</span>" +
                                "<span class='span5'><div class='list-text-floor-hall'>" + mapHallLabel +
-                               "</div><input type='text' name='mapHall[]' size='2'/></span>" +
+                               "</div><input type='text' name='mapHall[]' size='2' class='valid-number'/></span>" +
                                "<span class='span2'><a href='#' onclick='page.common.removeFileField(this); return false;'> " +
                                "<img src='" + deleteRowIcon + "'>" +
                                "</a>" +
@@ -157,6 +157,7 @@ function TableMap() {
                                "</div>";
 
             $('#mapFieldsContainer').append(rowContainer);
+            page.common.allowDigitsOnly("valid-number");
         }
     }
 
@@ -567,6 +568,14 @@ function NewsFilter() {
 
 function Common() {
 
+    var that = this;
+    
+    this.allowDigitsOnly = function(elClass){
+        $('input.' + elClass).bind('keypress', function(e) { 
+            return ( e.which!=8 && e.which!=0 && (e.which<48 || e.which>57)) ? false : true ;
+        });
+    }
+    
     this.closeModalWindow = function(element) {
         $('.modal-backdrop fade in').remove();
     }
@@ -597,7 +606,7 @@ function Common() {
             var fileContainer = "<div class='row-fluid'>" +
                     "<span class='span12 add-more-file'>" +
                     "<div class='number-tables'>" + peopleCountLabel +
-                    "<input type='text' name='peopleCount[]' size='2'>" +
+                    "<input type='text' name='peopleCount[]' size='2' class='valid-number'>" +
                     " " + numberOfPlaces + "</div>" +
                     "<span class='btn btn-success btn-file'>"+
                     "<span>" + selectTheFileLabel + "</span>" +
@@ -608,6 +617,7 @@ function Common() {
                     "</a></span></div>";
 
             $('#fileFieldsContainer').append(fileContainer);
+            that.allowDigitsOnly("valid-number");
         }
     }
 
