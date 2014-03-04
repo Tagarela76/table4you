@@ -12,15 +12,15 @@
                         <span>{% trans %}main.tableMap.tableList.form.label.selectTheFile{% endtrans %}</span>
                             <input type="file" name="file[]" id="image" size="1">
                         </span>
-                    <span class="files-download"></span>
+                    <span class="files-download">{{tableMap.fileName}}</span>
                     </span>
                     <span class="span4">
                         <div class="list-text-floor-hall">{% trans %}main.tableMap.createMap.form.label.floor{% endtrans %}</div>
-                        <input type="text" name="mapFloor" size="2" value="{{tableMap.floor}}"/>
+                        <input type="text" name="mapFloor" size="2" value="{{tableMap.floor}}" class="valid-number"/>
                     </span>
                     <span class="span5">
                         <div class="list-text-floor-hall">{% trans %}main.tableMap.createMap.form.label.hall{% endtrans %}</div>
-                        <input type="text" name="mapHall" size="2" value="{{tableMap.hall}}"/>
+                        <input type="text" name="mapHall" size="2" value="{{tableMap.hall}}" class="valid-number"/>
                     </span>
                 </div>  
                 <div class="row-fluid">
