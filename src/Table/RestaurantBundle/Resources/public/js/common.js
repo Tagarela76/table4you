@@ -567,6 +567,14 @@ function NewsFilter() {
 
 function Common() {
 
+    var that = this;
+    
+    this.allowDigitsOnly = function(elClass){
+        $('input.' + elClass).bind('keypress', function(e) { 
+            return ( e.which!=8 && e.which!=0 && (e.which<48 || e.which>57)) ? false : true ;
+        });
+    }
+    
     this.closeModalWindow = function(element) {
         $('.modal-backdrop fade in').remove();
     }
@@ -597,7 +605,7 @@ function Common() {
             var fileContainer = "<div class='row-fluid'>" +
                     "<span class='span12 add-more-file'>" +
                     "<div class='number-tables'>" + peopleCountLabel +
-                    "<input type='text' name='peopleCount[]' size='2'>" +
+                    "<input type='text' name='peopleCount[]' size='2' class='valid-number'>" +
                     " " + numberOfPlaces + "</div>" +
                     "<span class='btn btn-success btn-file'>"+
                     "<span>" + selectTheFileLabel + "</span>" +
@@ -608,6 +616,7 @@ function Common() {
                     "</a></span></div>";
 
             $('#fileFieldsContainer').append(fileContainer);
+            that.allowDigitsOnly("valid-number");
         }
     }
 
