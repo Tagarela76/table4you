@@ -17,26 +17,9 @@ class TableOrderFormType extends AbstractType
                     'translation_domain' => 'messages',
                     'label' => 'main.order.form.label.reserveTime'
                 ))
-              /*  ->add('reserveDate', 'genemu_jquerydate', array(
-                    'widget' => 'single_text',
-                    'translation_domain' => 'messages',
-                    'label' => 'main.order.form.label.reserveDate'
-                ))
-               * 
-               */
                 ->add('reserveDate','hidden',array(
                     'translation_domain' => 'messages',
                     'label' => 'main.order.form.label.reserveDate',
-                    'required' => true
-                ))
-                ->add('floor', 'hidden', array(
-                    'translation_domain' => 'messages',
-                    'label' => 'main.order.form.label.floor',
-                    'required' => true
-                ))
-                ->add('tableNumber', 'text', array(
-                    'translation_domain' => 'messages',
-                    'label' => 'main.order.form.label.tableNumber',
                     'required' => true
                 ))
                 ->add('peopleCount', 'text', array(
@@ -64,6 +47,7 @@ class TableOrderFormType extends AbstractType
                         'placeholder' => 'main.order.form.placeholder.wish'
                      )
                 ))
+                ->add('activeTable', 'hidden')
                 ->add('captcha', 'captcha', array(
                     'label' => 'main.order.form.label.captcha',
                     'translation_domain' => 'messages',
@@ -78,7 +62,7 @@ class TableOrderFormType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Table\RestaurantBundle\Entity\TableOrder',
+            'data_class' => 'Table\RestaurantBundle\Entity\ActiveTableOrder',
         ));
     }
 

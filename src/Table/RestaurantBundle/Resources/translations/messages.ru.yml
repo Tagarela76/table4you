@@ -81,6 +81,7 @@ main:
                 tableNumber: Указать номер стола
                 cancel: Отмена
                 selectTheFile: Выбрать файл
+                addMore: Добавить еще
             error:
                 floor: Укажите этаж    
             errors: Ошибки при заполении формы  

@@ -126,6 +126,9 @@ class TableDashboardController extends Controller
         // assign base_url
         $baseUrl = $this->container->getParameter('base_folder_url');
 
+        // Get Active Tables List
+        $activeTableList = $this->getActiveTableManager()->findByTableMap($mapId);
+        
         return array(
             'restaurantList' => $restaurantList,
             'tableMapList' => $tableMapList,
@@ -133,7 +136,8 @@ class TableDashboardController extends Controller
             'baseUrl' => $baseUrl,
             'restaurantId' => $restaurantId,
             'tableMapObj' => $tableMapObj,
-            'mapId' => $mapId
+            'mapId' => $mapId,
+            'activeTableList' => $activeTableList
         );
     }
 
@@ -249,6 +253,7 @@ class TableDashboardController extends Controller
         $restaurant = $this->getRestaurantManager()->findOneById($restaurantId);
         $floorArray = $this->getRequest()->request->get('mapFloor');
         $fileArray = $this->getRequest()->files->get('mapFile');
+        
         $mapHallArray = $this->getRequest()->request->get('mapHall');
         foreach ($floorArray as $key => $floor) {
             $tableMap = new TableMap();
@@ -449,6 +454,9 @@ class TableDashboardController extends Controller
 
         // assign base_url
         $baseUrl = $this->container->getParameter('base_folder_url');
+        
+        // Get Active Tables List
+        $activeTableList = $this->getActiveTableManager()->findByTableMap($mapId);
 
         return array(
             'restaurantList' => $restaurantList,
@@ -458,7 +466,8 @@ class TableDashboardController extends Controller
             'tableMapObj' => $tableMapObj,
             'mapId' => $mapId,
             'activeTable' => null,
-            'tableOrderList' => null
+            'tableOrderList' => null,
+            'activeTableList' => $activeTableList
         );
     }
     

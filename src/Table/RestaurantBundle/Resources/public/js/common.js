@@ -54,46 +54,6 @@ function ActiveTable() {
         $("#tableLeft").val(left);
         $("#tableType").val(tableType);
     }
-    
-    this.loadActiveTables = function() {
-        var mapId = $("#mapId").val();
-        // get Active Tables
-        $.ajax({
-            url: Routing.generate('table_loadActiveTables'),
-            data: {mapId: mapId},
-            type: "GET",
-            dataType: "json",
-            success: function(response) { 
-                for (var i = 0; i < response.length; i++) {
-                    var imgContainer = "";
-                    var activeTable = response[i];
-                    var left = activeTable.left + $("#tableMapDroppable").position().left;
-                    var top = activeTable.top + $("#tableMapDroppable").position().top;
-                    var styles = "position: absolute; " +
-                            "left: " + left + "px; "+
-                            "top: " + top + "px;" ;
-                    
-                    imgContainer += "<div id='activeTable_" + activeTable.id + "'" +
-                            " onclick='page.activeTable.loadActiveTable" +
-                            "(" + activeTable.id + ");' " +
-                            "class='active-table-draggable canvas-element' " +
-                            "style='" + styles + "width: 60px;'>" +
-                            "<span class='badge'>" + activeTable.tableNumber + 
-                            "</span>" +
-                            "<img tabletypeid='" + activeTable.tableTypeId + "' " +
-                            " " +
-                            "src='" + activeTable.src + "'></div>";
-
-                    $('#activeTablesContainer').append(imgContainer);
-                    // Make it draggable
-                    $(".active-table-draggable").draggable({
-                        cursor: 'move',
-                        containment: '.table-map-droppable'
-                    });
-                }
-            }  
-	}); 
-    }
 
     this.validateAddForm = function() {
         //reset errors
@@ -125,6 +85,11 @@ function ActiveTable() {
 }
 
 function TableMap() {
+    
+    this.loadMapScheme = function(mapScheme) {
+        $('#tableMapDroppable').css('background-image', 'url(' + mapScheme + ')');
+    }
+    
     this.refreshRestaurantList = function() {
         var restaurantId = $("#restaurantId").val();
         location.href = Routing.generate('table_viewCreateMap') + "/" + restaurantId;
@@ -140,8 +105,6 @@ function TableMap() {
             var mapHallLabel = $("#mapHallLabel").val();
             var selectTheFileLabel = $("#selectTheFileLabel").val();
             var rowContainer = "<div class='row-fluid add-file-map'>" +
-
-
                                "<span class='span12'><div class='list-text-floor-hall'>" + mapFileLabel + "</div>"+
                                "<div class='fileinput fileinput-new' data-provides='fileinput'>"+
                                    "<div class='input-group'>"+
@@ -151,7 +114,7 @@ function TableMap() {
                                         "</div>"+
                                         "<span class='input-group-addon btn btn-default btn-file'>"+
                                             "<span class='fileinput-new'>" + selectTheFileLabel + "</span>"+
-                                            "<input type='file' name='file[]' size='1'>"+
+                                            "<input type='file' name='mapFile[]' size='1'>"+
                                             "</span>"+
                                         "</div>"+
                                "</div><a href='#' onclick='page.common.removeFileField(this); return false;'>" +
@@ -354,6 +317,59 @@ function RestaurantMap() {
 
 function TableOrder() {
 
+    var that = this;
+    
+    this.selectActiveTable = function(activeTableId) {
+        $("#tableOrderForm_activeTable").val(activeTableId);
+        // unshine all
+        $(".active-table-img").css("box-shadow", "");
+        // shine
+        $("#activeTable_" + activeTableId).css("box-shadow", "5px 5px 25px #eb7b12");
+    }
+    
+    this.loadMapScheme = function(mapScheme) {
+        $('#table-map-image-container').css('background-image', 'url(' + mapScheme + ')');
+    }
+    
+    this.loadMap = function(obj, tableMapId) {
+        // remove active class from all
+        $(".halls").removeClass('active');
+        // set active for current obj
+        $(obj).addClass('active');
+        
+        // refresh map
+        $.ajax({
+            url: Routing.generate('table_loadMapPicture'),
+            data: {tableMapId: tableMapId},
+            type: "GET",
+            dataType: "html",
+            success: function(responce) {
+                // update map scheme
+                that.loadMapScheme(responce);
+            }
+        });
+    }
+    
+    this.selectRestaurantMap = function(obj, floor) {
+        // remove active class from all
+        $(".floors").removeClass('active');
+        // set active for current obj
+        $(obj).addClass('active');
+        
+        // get restaurant id
+        var restaurantId = $("#restaurantId").val();
+        // change table map
+        $.ajax({
+            url: Routing.generate('table_refreshTableMap'),
+            data: {restaurantId: restaurantId, floor: floor},
+            type: "GET",
+            dataType: "html",
+            success: function(responce) {
+                $('#restaurantTableMapContainer').html(responce);
+            }
+        });
+    }
+    
     this.initTableData = function(activeTableId) {
         $("#activeTableOrder4AdminForm_activeTable").val(activeTableId);
     }
@@ -392,50 +408,13 @@ function TableOrder() {
 	}); 
     }
     
-    this.loadActiveTables = function() {
-        var mapId = $("#mapId").val();
-        // get Active Tables
-        $.ajax({
-            url: Routing.generate('table_loadActiveTables'),
-            data: {mapId: mapId},
-            type: "GET",
-            dataType: "json",
-            success: function(response) { 
-                for (var i = 0; i < response.length; i++) {
-                    var imgContainer = "";
-                    var activeTable = response[i];
-                    var left = activeTable.left + $("#tableMapDroppable").position().left;
-                    var top = activeTable.top + $("#tableMapDroppable").position().top;
-                    
-                    var styles = "position: absolute; " +
-                            "left: " + left + "px; "+
-                            "top: " + top + "px;" ;
-                    
-                    imgContainer += "<span style='" + styles + "z-index: 9;' class='badge'>" + activeTable.tableNumber + 
-                            "</span>" +
-                            "<div id='tableContainer_" + activeTable.id + "' style='" + styles + "width: 60px;'>" +
-                            "<img tabletypeid='" + activeTable.tableTypeId + "' " +
-                            "onclick='page.tableOrder.loadOrderList(" + activeTable.id + ");' "+
-                            "src='" + activeTable.src + "'></div>";
-                    
-                    $('#activeTablesContainer').append(imgContainer);
-                }
-            }  
-	}); 
-    }
-    
     this.refreshRestaurantList = function() {
         var restaurantId = $("#restaurantId").val();
         location.href = Routing.generate('table_viewTableOrderList') + "/" + restaurantId;
     }
     
     // old Methods
-    this.selectRestaurantFloor = function(obj, floor) {
-        // remove active class from all
-        $(".floors").removeClass('active');
-        $('#tableOrderForm_floor').val(floor);
-        $(obj).addClass('active');
-    }
+    
 
     this.view = function(restaurantId) {
         var reserveTitle = $("#reserveTitle").val();

@@ -14,10 +14,80 @@ use Table\RestaurantBundle\Entity\RatingStat;
 use Table\RestaurantBundle\Entity\RestaurantSchedule;
 use Table\RestaurantBundle\Entity\Restaurant;
 use Table\RestaurantBundle\Entity\TableType;
+use Table\RestaurantBundle\Entity\ActiveTableOrder;
 
 class DefaultController extends Controller
 {
 
+    /**
+     * Load map picture
+     * 
+     */
+    public function loadMapPictureAction()
+    {
+        // get Current user
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            // redirect on homepage
+            return $this->redirect(
+                $this->generateUrl("table_main_homepage")
+            );
+        }
+    
+        // Get table map Id
+        $tableMapId = $this->getRequest()->query->get('tableMapId');
+
+        // init table map
+        $tableMap = $this->getTableMapManager()->findOneBYId($tableMapId);
+        // get image src
+        $helper = $this->container->get('vich_uploader.templating.helper.uploader_helper');
+        $path = $helper->asset($tableMap, 'file');
+        $baseUrl = $this->container->getParameter('base_folder_url');
+        return new Response($baseUrl . $path);
+    }
+    
+    /**
+     * View Table Map
+     * 
+     * @Template()
+     */
+    public function viewTableMapAction()
+    {
+        // Get restaurant id
+        $restaurantId = $this->getRequest()->query->get('restaurantId');
+
+        // get Current user
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            // redirect on homepage
+            return $this->redirect(
+                $this->generateUrl("table_main_homepage")
+            );
+        }
+    
+        // Get floor 
+        $floor = $this->getRequest()->query->get('floor');
+        // Get table map list
+        $tableMapList = $this->getTableMapManager()->getTableMapListByFloorGroupByHall($restaurantId, $floor);
+        
+        // get tableMapObj (init first elem)
+        $tableMapObjId = $tableMapList[0]->getId();
+        $tableMapObj = $this->getTableMapManager()->findOneById($tableMapObjId);
+ 
+        // Get Active Tables List
+        $activeTableList = $this->getActiveTableManager()->findByTableMap($tableMapObjId);
+       
+        // assign base_url
+        $baseUrl = $this->container->getParameter('base_folder_url');
+        return array(
+            'tableMapObj' => $tableMapObj,
+            'baseUrl' => $baseUrl,
+            'tableMapList' => $tableMapList,
+            'restaurantId' => $restaurantId,
+            'activeTableList' => $activeTableList
+        );
+    }
+    
     /**
      * Reserve table
      * 
@@ -29,77 +99,87 @@ class DefaultController extends Controller
      */
     public function reserveAction($id, Request $request)
     {
-        $tableOrder = new TableOrder();
-        $form = $this->createForm(new TableOrderFormType(), $tableOrder);
+        $activeTableOrder = new ActiveTableOrder();
+        $form = $this->createForm(new TableOrderFormType(), $activeTableOrder);
         $restaurant = $this->getRestaurantManager()->findOneById($id);
         // get Current user
         $user = $this->container->get('security.context')->getToken()->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
             // redirect on homepage
             return $this->redirect(
-                            $this->generateUrl("table_main_homepage")
+                $this->generateUrl("table_main_homepage")
             );
         }
+        
+        // Get Floor list
+        $floorList = $this->getTableMapManager()->getRestaurantTableMapFloorList($id);
+        
+        // Get floor (Let's do first elem as current)
+        $floor = $floorList[0]['floor'];
+        // Get table map list
+        $tableMapList = $this->getTableMapManager()->getTableMapListByFloorGroupByHall($id, $floor);
 
-        // Generate public URL for restaurant map
-        if (!is_null($restaurant->getMapPhoto())) {
-            $provider = $this->getMediaService()
-                    ->getProvider($restaurant->getMapPhoto()->getProviderName());
-
-            $format = $provider->getFormatName($restaurant->getMapPhoto(), "reference");
-            $publicMapURL = $provider->generatePublicUrl($restaurant->getMapPhoto(), $format);
-        } else {
-            $publicMapURL = false;
-        }
-
+        // get tableMapObj (init first elem)
+        $tableMapObjId = $tableMapList[0]->getId();
+        $tableMapObj = $this->getTableMapManager()->findOneById($tableMapObjId);
+ 
+        // Get Active Tables List
+        $activeTableList = $this->getActiveTableManager()->findByTableMap($tableMapObjId);
+      
         $successReserve = false; // we should know if table reserve was successfull
         if ($request->isMethod('POST') && !$this->getRequest()->request->get('fromMap')) {
             $form->bind($request);
 
             // get table order date
-            $tableOrder = $form->getData();
+            $activeTableOrder = $form->getData();
 
             // Check if user can do table order
             // devide reserve time on parts
-            $reserveHour = $tableOrder->getReserveTime()->format('H');
-            $reserveMin = $tableOrder->getReserveTime()->format('i');
+            $reserveHour = $activeTableOrder->getReserveTime()->format('H');
+            $reserveMin = $activeTableOrder->getReserveTime()->format('i');
             // get reserve date and time
-            $reserveDateTime = new \DateTime($tableOrder->getReserveDate());
+            $reserveDateTime = new \DateTime($activeTableOrder->getReserveDate());
             $reserveDateTime->setTime($reserveHour, $reserveMin);
 
-            if (!$this->getTableOrderManager()->isUserCanReserveTable($user, $reserveDateTime)) {
+        /*    if (!$this->getTableOrderManager()->isUserCanReserveTable($user, $reserveDateTime)) {
                 // render Warning Notification, user cannot order other tables!!!
                 return $this->render('TableRestaurantBundle:Default:user.cannot.order.table.html.twig', array(
                             'user' => $user
                 ));
-            }
-
+            }*/
+   
             if ($form->isValid()) {
                 // add Order
                 // format reserve date
-                $tableOrder->setReserveDate(new \DateTime($tableOrder->getReserveDate()));
+                $activeTableOrder->setReserveDate(new \DateTime($activeTableOrder->getReserveDate()));
                 // set User Data
-                $tableOrder->setUser($user);
-                // set Restaurant Data
-                $tableOrder->setRestaurant($restaurant);
+                $activeTableOrder->setUser($user);
+
                 // set status 0
-                if (is_null($tableOrder->getStatus())) {
-                    $tableOrder->setStatus(0);
+                if (is_null($activeTableOrder->getStatus())) {
+                    $activeTableOrder->setStatus(0);
                 }
-                if (is_null($tableOrder->getFloor())) {
-                    $tableOrder->setFloor(1);
-                }
+
+                // init active table
+                $activeTable = $this->getActiveTableManager()->findOneById($activeTableOrder->getActiveTable());
+                $activeTableOrder->setActiveTable($activeTable);
                 $em = $this->getDoctrine()->getManager();
-                $em->persist($tableOrder);
+                $em->persist($activeTableOrder);
                 $em->flush();
                 $successReserve = true;
             }
         }
+        // assign base_url
+        $baseUrl = $this->container->getParameter('base_folder_url');
         return array(
             'form' => $form,
             'restaurant' => $restaurant,
-            'publicMapURL' => $publicMapURL,
-            'successReserve' => $successReserve
+            'tableMapObj' => $tableMapObj,
+            'baseUrl' => $baseUrl,
+            'floorList' => $floorList,
+            'tableMapList' => $tableMapList,
+            'successReserve' => $successReserve,
+            'activeTableList' => $activeTableList
         );
     }
 

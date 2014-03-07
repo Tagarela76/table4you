@@ -8,7 +8,6 @@
     $(function() {
         page.tableOrder.initFancySelectBox();
 
-        $("a#restaurantMap").fancybox();
         $.datepicker.setDefaults($.datepicker.regional['ru']);
         $('.reserveDate').datepicker({
             dateFormat: 'yy-mm-dd',
@@ -29,6 +28,9 @@
             });
             return false;
         });
+
+        // load Map Scheme as background
+        page.tableOrder.loadMapScheme("{{baseUrl}}{{ vich_uploader_asset(tableMapObj, 'file') }}");
     });
 </script>
 
@@ -39,89 +41,79 @@
 {# Render success message #}
 {% if successReserve %}
 <div class="alert">
-        {% trans %}main.order.form.message.success{% endtrans %}
+    {% trans %}main.order.form.message.success{% endtrans %}
 </div>
 {% else %}
 <div id="table-order-form-container">  
-        {% for type, messages in app.session.flashBag.all %}
-            {% for message in messages %}
-    <div class="{{ type }}">
-                   {{ message|trans({}, 'FOSUserBundle') }}
-    </div>
-            {% endfor %}
+    {% for type, messages in app.session.flashBag.all %}
+        {% for message in messages %}
+            <div class="{{ type }}">
+               {{ message|trans({}, 'FOSUserBundle') }}
+            </div>
         {% endfor %}
+    {% endfor %}
     <form novalidate id="table-order-form" action="{{ path('table_order_reserve', {'id': restaurant.id}) }}" {{ form_enctype(form) }} method="POST" class="table-order-form">       
     {{ form_start(form) }}
         <div class="container-fluid">
             <div class="row-fluid">
                 <div class="span5">
                     <div class="row-fluid">
-                            {{ form_label(form.reserveDate) }}
-                        <div class="reserveDate">
-                        </div>        
-                    {{ form_errors(form.reserveDate) }}
-                    {% if form.reserveDate.vars.errors|length %}
-                        {{ form_widget(form.reserveDate, {'attr':{'class':'error-form-reserve'} }) }}
-                    {%  else %}
-                        {{ form_widget(form.reserveDate) }}
-                    {% endif %}
+                        {{ form_label(form.reserveDate) }}
+                        <div class="reserveDate"></div>        
+                        {{ form_errors(form.reserveDate) }}
+                        {% if form.reserveDate.vars.errors|length %}
+                            {{ form_widget(form.reserveDate, {'attr':{'class':'error-form-reserve'} }) }}
+                        {%  else %}
+                            {{ form_widget(form.reserveDate) }}
+                        {% endif %}
                     </div>
                     <div class="row-fluid label-font-size-modal">     
-                    {{ form_label(form.reserveTime) }}
-                    {{ form_errors(form.reserveTime) }}
-                    {% if form.reserveTime.vars.errors|length %}
-                        {{ form_widget(form.reserveTime, {'attr':{'class':'error-form-reserve'} }) }}
-                    {%  else %}
-                        {{ form_widget(form.reserveTime) }}
-                    {% endif %}
+                        {{ form_label(form.reserveTime) }}
+                        {{ form_errors(form.reserveTime) }}
+                        {% if form.reserveTime.vars.errors|length %}
+                            {{ form_widget(form.reserveTime, {'attr':{'class':'error-form-reserve'} }) }}
+                        {%  else %}
+                            {{ form_widget(form.reserveTime) }}
+                        {% endif %}
                     </div>
                 </div>
-                <div class="span6">
-                    <div class="restaurant-photo-modal">
-                        <a id="restaurantMap" href="{{ publicMapURL }}">
-                                {% thumbnail restaurant.mapPhoto, 'reference' %}
-                        </a>     
-                    </div>
+                <div class="span6" id="restaurantTableMapContainer">
+                    {% include 'TableRestaurantBundle:Default:viewTableMap.html.twig' with {'restaurantId': restaurant.id}%}
+                    {{ form_errors(form.activeTable) }}
                 </div>
             </div>    
             <div class="row-fluid">
                 <div class="span5">
                     <div class="span3 label-font-size_modal">
-                            {{ form_label(form.tableNumber) }}
+                        {#    {{ form_label(form.tableNumber) }}
                             {{ form_errors(form.tableNumber) }}
                             {% if form.tableNumber.vars.errors|length %}
                                 {{ form_widget(form.tableNumber, {'attr':{'class':'error-form-reserve'} }) }}
                             {%  else %}
                                 {{ form_widget(form.tableNumber) }}
                             {% endif %}
+                        #}
                     </div>
                     <div class="span3 label-font-size_modal">
-                           {{ form_label(form.peopleCount) }}
-                           {{ form_errors(form.peopleCount) }}
-                           {% if form.peopleCount.vars.errors|length %}
-                               {{ form_widget(form.peopleCount, {'attr':{'class':'error-form-reserve'} }) }}
-                           {%  else %}
-                               {{ form_widget(form.peopleCount) }}
-                           {% endif %}
+                       {{ form_label(form.peopleCount) }}
+                       {{ form_errors(form.peopleCount) }}
+                       {% if form.peopleCount.vars.errors|length %}
+                           {{ form_widget(form.peopleCount, {'attr':{'class':'error-form-reserve'} }) }}
+                       {%  else %}
+                           {{ form_widget(form.peopleCount) }}
+                       {% endif %}
                     </div>
                 </div>
                 <div class="span6">
-                            {% if form.floor.vars.errors|length %}
-                                {{ form_widget(form.floor, {'attr':{'class':'error-form-reserve'} }) }}
-                            {%  else %}
-                                {{ form_widget(form.floor) }}
-                            {% endif %}
-                            {{ form_errors(form.floor) }}
                     <ul class="floor-tabs">
-                            {% for i in 1..restaurant.floors %}
-                        <li>
-                            <a class="floors {% if i==1%}active{%endif%}" href="#" onclick="page.tableOrder.selectRestaurantFloor(this, {{i}});
-                                        return false;">
-                                {{ i }} {% trans %}main.order.form.label.floor{% endtrans %}
-                            </a>
-                        </li>
-                            {% endfor %}                   
-                    </ul>    
+                        {% for floorObj in floorList %} 
+                            <li>
+                                <a class="floors {% if floorObj.floor == tableMapObj.floor%}active{%endif%}" href="#" onclick="page.tableOrder.selectRestaurantMap(this, {{floorObj.floor}}); return false;">
+                                {{ floorObj.floor }} {% trans %}main.order.form.label.floor{% endtrans %}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>       
                 </div>  
             </div>
             <div class="row-fluid">
@@ -129,13 +121,13 @@
                     <div class="choose-zone">
                         <label>{% trans %}main.order.form.label.notice{% endtrans %}</label>
                         <p>
-                                    {% if form.isSms.vars.errors|length %}
-                                        {{ form_widget(form.isSms, {'attr':{'class':'error-form-reserve'} }) }}
-                                    {%  else %}
-                                        {{ form_widget(form.isSms) }}
-                                    {% endif %}
-                                    {{ form_label(form.isSms) }}
-                                    {{ form_errors(form.isSms) }}
+                            {% if form.isSms.vars.errors|length %}
+                                {{ form_widget(form.isSms, {'attr':{'class':'error-form-reserve'} }) }}
+                            {%  else %}
+                                {{ form_widget(form.isSms) }}
+                            {% endif %}
+                            {{ form_label(form.isSms) }}
+                            {{ form_errors(form.isSms) }}
                         </p>
                         <p>
                             {{ form_label(form.isSmokingZone) }}
@@ -147,31 +139,28 @@
                             {% endif %}
                         </p>
                         <p>    
-                                    {% if form.isEmail.vars.errors|length %}
-                                        {{ form_widget(form.isEmail, {'attr':{'class':'error-form-reserve'} }) }}
-                                    {%  else %}
-                                        {{ form_widget(form.isEmail) }}
-                                    {% endif %}
-                                    {{ form_label(form.isEmail) }}
-                                    {{ form_errors(form.isEmail) }}
+                            {% if form.isEmail.vars.errors|length %}
+                                {{ form_widget(form.isEmail, {'attr':{'class':'error-form-reserve'} }) }}
+                            {%  else %}
+                                {{ form_widget(form.isEmail) }}
+                            {% endif %}
+                            {{ form_label(form.isEmail) }}
+                            {{ form_errors(form.isEmail) }}
                         </p>
                     </div>       
                 </div>
                 <div class="span6">
-                            {% if form.wish.vars.errors|length %}
-                                {{ form_widget(form.wish, {'attr':{'class':'error-form-reserve'} }) }}
-                            {%  else %}
-                                {{ form_widget(form.wish) }}
-                            {% endif %}
-                            {{ form_errors(form.wish) }}
+                    {% if form.wish.vars.errors|length %}
+                        {{ form_widget(form.wish, {'attr':{'class':'error-form-reserve'} }) }}
+                    {%  else %}
+                        {{ form_widget(form.wish) }}
+                    {% endif %}
+                    {{ form_errors(form.wish) }}
                 </div>
             </div> 
             <div class="row-fluid">
                 <div class="span12">
                     <div class="captcha-img">
-                        <!--<div class="span3">
-                                {{ form_label(form.captcha) }}
-                        </div>-->
                         <div class="span5">
                             {% if form.captcha.vars.errors|length %}
                             {{ form_widget(form.captcha, {'attr':{'class':'error-form-reserve'} }) }}
@@ -183,6 +172,7 @@
                     </div>
                     <div class="span6">
                         <div class="button-reserve">
+                            {{ form_widget(form.activeTable) }}
                             <input type="submit" value="{% trans %}main.order.form.label.submit{% endtrans %}" />
                         </div>
                         <img id="reservePreloader" style="display: none;" src="{{ asset('bundles/tablemain/images/ajax-loader.gif') }}" />

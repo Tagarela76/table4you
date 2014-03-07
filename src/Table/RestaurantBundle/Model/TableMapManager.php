@@ -87,4 +87,45 @@ class TableMapManager
     {
         return $this->getTableMapRepo()->findByRestaurant($restaurantId);
     }
+    
+    /**
+     * 
+     * Get ordered table map list
+     * 
+     * @param integer $restaurantId
+     * 
+     * @return Table\RestaurantBundle\Entity\TableMap[]
+     */
+    public function getTableMapList($restaurantId)
+    {
+        return $this->getTableMapRepo()->getTableMapList($restaurantId);
+    }
+    
+    /**
+     * 
+     * Get ordered table map floor list
+     * 
+     * @param integer $restaurantId
+     * 
+     * @return Table\RestaurantBundle\Entity\TableMap[]
+     */
+    public function getRestaurantTableMapFloorList($restaurantId)
+    {
+        return $this->getTableMapRepo()->getRestaurantTableMapFloorList($restaurantId);
+    }
+    
+    /**
+     * 
+     * Get ordered table map list group by hall
+     * 
+     * @param integer $restaurantId
+     * 
+     * @param integer $floor
+     * 
+     * @return Table\RestaurantBundle\Entity\TableMap[]
+     */
+    public function getTableMapListByFloorGroupByHall($restaurantId, $floor)
+    {
+        return $this->getTableMapRepo()->getTableMapListByFloorGroupByHall($restaurantId, $floor);
+    }
 }
