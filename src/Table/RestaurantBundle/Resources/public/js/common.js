@@ -140,20 +140,30 @@ function TableMap() {
             var mapHallLabel = $("#mapHallLabel").val();
             var selectTheFileLabel = $("#selectTheFileLabel").val();
             var rowContainer = "<div class='row-fluid add-file-map'>" +
-                               "<span class='span12'><div class='list-text-floor-hall'>" + mapFileLabel +
-                               "</div><span class='btn btn-success btn-file'><span>" + selectTheFileLabel + 
-                               "</span><input type='file' name='file[]' id='image' size='1'>"  +
-                               "</span><span class='files-download'></span>"+
-                               "</span>" +
-                               "<span class='span4'><div class='list-text-floor-hall'>" + mapFloorLabel +
-                               "</div><input type='text' name='mapFloor[]' size='2' class='valid-number'/>" +
-                               "</span>" +
-                               "<span class='span5'><div class='list-text-floor-hall'>" + mapHallLabel +
-                               "</div><input type='text' name='mapHall[]' size='2' class='valid-number'/></span>" +
-                               "<span class='span2'><a href='#' onclick='page.common.removeFileField(this); return false;'> " +
-                               "<img src='" + deleteRowIcon + "'>" +
-                               "</a>" +
-                               "</span>" +
+
+
+                               "<span class='span12'><div class='list-text-floor-hall'>" + mapFileLabel + "</div>"+
+                               "<div class='fileinput fileinput-new' data-provides='fileinput'>"+
+                                   "<div class='input-group'>"+
+                                        "<div class='form-control files-download' data-trigger='fileinput'>"+
+                                            "<i class='glyphicon glyphicon-file fileinput-exists'></i>"+
+                                            "<span class='fileinput-filename'></span>"+
+                                        "</div>"+
+                                        "<span class='input-group-addon btn btn-default btn-file'>"+
+                                            "<span class='fileinput-new'>" + selectTheFileLabel + "</span>"+
+                                            "<input type='file' name='file[]' size='1'>"+
+                                            "</span>"+
+                                        "</div>"+
+                               "</div><a href='#' onclick='page.common.removeFileField(this); return false;'>" +
+                                "<img src='" + deleteRowIcon + "'>" +
+                                "</a>" +
+                                "</span>"+
+
+                                "<span class='span4'><div class='list-text-floor-hall'>" + mapFloorLabel +
+                                "</div><input type='text' name='mapFloor[]' size='2' class='valid-number'/>" +
+                                "</span>" +
+                                "<span class='span5'><div class='list-text-floor-hall'>" + mapHallLabel +
+                                "</div><input type='text' name='mapHall[]' size='2' class='valid-number'/></span>" +
                                "</div>";
 
             $('#mapFieldsContainer').append(rowContainer);
@@ -603,18 +613,21 @@ function Common() {
             var deleteFileIcon = $("#deleteFileIcon").val();
             var selectTheFileLabel = $("#selectTheFileLabel").val();
             var numberOfPlaces = $("#numberOfPlaces").val();
-            var fileContainer = "<div class='row-fluid'>" +
+            var fileContainer =
+                    "<div class='row-fluid'>" +
                     "<span class='span12 add-more-file'>" +
                     "<div class='number-tables'>" + peopleCountLabel +
                     "<input type='text' name='peopleCount[]' size='2' class='valid-number'>" +
                     " " + numberOfPlaces + "</div>" +
-                    "<span class='btn btn-success btn-file'>"+
-                    "<span>" + selectTheFileLabel + "</span>" +
-                    "<input type='file' name='file[]' id='image' size='1'></span>" +
-                    "<span class='files-download'></span>"+
+                    "<div class='fileinput fileinput-new' data-provides='fileinput'>"+
+                    "<div class='input-group'>"+
+                        "<div class='form-control files-download' data-trigger='fileinput'><i class='glyphicon glyphicon-file fileinput-exists'></i> <span class='fileinput-filename'></span></div>"+
+                        "<span class='input-group-addon btn btn-default btn-file'><span class='fileinput-new'>" + selectTheFileLabel + "</span><input type='file' name='...'></span>"+
+                        "</div>"+
+                    "</span></div>"+
                     "<a href='#' onclick='page.common.removeFileField(this); return false;' id='delete-file-customization'> " +
                     "<img alt='Delete' src='" + deleteFileIcon + "'>" +
-                    "</a></span></div>";
+                    "</a></div>";
 
             $('#fileFieldsContainer').append(fileContainer);
             that.allowDigitsOnly("valid-number");
@@ -668,23 +681,8 @@ $(function() {
     restaurantPage = new Page();
 });
 
+jQuery('.fileinput').fileinput();
 
-(function (jQuery){
-    jQuery(function (){
-        jQuery('.btn-file').each(function (){
-            var self = this;
-            jQuery('input[type=file]', this).change(function (){
-                // remove existing file info
-                jQuery(self).next().remove();
-                // get value
-                var value = jQuery(this).val();
-                // get file name
-                var fileName = value.substring(value.lastIndexOf('/')+1);
-                // get file extension
-                var fileExt = fileName.split('.').pop().toLowerCase();
-                // append file info
-                jQuery('<span class="files-download"><span> '+ fileName +' </span></span>').insertAfter(self);
-            });
-        });
-    });
-})(jQuery);
+
+
+
