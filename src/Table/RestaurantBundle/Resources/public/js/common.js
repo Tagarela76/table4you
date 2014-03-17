@@ -613,19 +613,7 @@ function Common() {
             var deleteFileIcon = $("#deleteFileIcon").val();
             var selectTheFileLabel = $("#selectTheFileLabel").val();
             var numberOfPlaces = $("#numberOfPlaces").val();
-            var fileContainer = "<!--<div class='row-fluid'>" +
-                    "<span class='span12 add-more-file'>" +
-                    "<div class='number-tables'>" + peopleCountLabel +
-                    "<input type='text' name='peopleCount[]' size='2' class='valid-number'>" +
-                    " " + numberOfPlaces + "</div>" +
-                    "<span class='btn btn-success btn-file'>"+
-                    "<span>" + selectTheFileLabel + "</span>" +
-                    "<input type='file' name='file[]' id='image' size='1'></span>" +
-                    "<span class='files-download'></span>"+
-                    "<a href='#' onclick='page.common.removeFileField(this); return false;' id='delete-file-customization'> " +
-                    "<img alt='Delete' src='" + deleteFileIcon + "'>" +
-                    "</a></span></div>-->"+
-
+            var fileContainer =
                     "<div class='row-fluid'>" +
                     "<span class='span12 add-more-file'>" +
                     "<div class='number-tables'>" + peopleCountLabel +
@@ -692,27 +680,6 @@ $(function() {
     page = new Page();
     restaurantPage = new Page();
 });
-
-
-/*(function (jQuery){
-    jQuery(function (){
-        jQuery('.btn-file').each(function (){
-            var self = this;
-            jQuery('input[type=file]', this).change(function (){
-                // remove existing file info
-                jQuery(self).next().remove();
-                // get value
-                var value = jQuery(this).val();
-                // get file name
-                var fileName = value.substring(value.lastIndexOf('/')+1);
-                // get file extension
-                var fileExt = fileName.split('.').pop().toLowerCase();
-                // append file info
-                jQuery('<span class="files-download"><span> '+ fileName +' </span></span>').insertAfter(self);
-            });
-        });
-    });
-})(jQuery);*/
 
 jQuery('.fileinput').fileinput();
 

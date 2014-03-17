@@ -8,13 +8,6 @@
                 <div class="row-fluid">
                     <span class="span12">
                         <div class="list-text-floor-hall">{% trans %}main.tableMap.createMap.form.label.loadMap{% endtrans %}</div>
-                        <!--<span class="btn btn-success btn-file">
-                            <span>{% trans %}main.tableMap.tableList.form.label.selectTheFile{% endtrans %}</span>
-                                <input type="file" name="file[]" id="image" size="1">
-                            </span>
-                        <span class="files-download">{{tableMap.fileName}}</span>-->
-
-
                         <div class="fileinput fileinput-new" data-provides="fileinput">
                             <div class="input-group">
                                 <div class="form-control files-download" data-trigger="fileinput">
@@ -28,8 +21,6 @@
                             </div>
                         </div>
                     </span>
-
-
                     <span class="span4">
                         <div class="list-text-floor-hall">{% trans %}main.tableMap.createMap.form.label.floor{% endtrans %}</div>
                         <input type="text" name="mapFloor" size="2" value="{{tableMap.floor}}" class="valid-number"/>
