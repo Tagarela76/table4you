@@ -1726,7 +1726,7 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     position: relative;
     overflow: hidden;
     margin-right: 4px;
-    float: right;
+    float: left;
     text-align: center;
     overflow: hidden;
     width: 149px;
@@ -1753,6 +1753,10 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     font-family: Arial;
     line-height: 32px;
 }
+.content-table-editor .add-file-map .span12 a{
+    float: right;
+    margin-top: 4px;
+}
 .btn-file input { position: absolute; top: 0; right: 0; margin: 0; opacity: 0; filter: alpha(opacity=0);
     transform: translate(-300px, 0) scale(4); font-size: 23px; direction: ltr; cursor: pointer; }
 .files-download{
@@ -1776,7 +1780,6 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     border-bottom: 1px solid #f2f2f2;
     background: #fff;
 }
-.files-download span{margin-left: -78px;}
 .modal-body .number-tables{margin-left: 20px;}
 #table-map-form .specify-floor-room input,
 #table-map-form .add-file-map input,
@@ -1814,6 +1817,16 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
 .modal-body .files-download{
     margin-right: 0px;
     width: 452px;
+}
+#table-map-form .container-fluid .load-file{position: relative;float: right;margin-right: 28px;}
+.editTableMapPopup .modal-body .input-group .btn-file{margin-right: 0px;margin-left: 14px;}
+#table-type-form #fileFieldsContainer .row-fluid .number-tables input.error-form,
+.error-input .files-download,
+#tableTypeContainer .modal-body .row-fluid .number-tables input.error-form,
+#table-map-form .specify-floor-room input.error-form,
+.editTableMapPopup .modal-body .span4 .error-form{
+    border: 1px solid #FF0000;
+    box-shadow: none;
 }
 .modal-body .btn-file{margin-right: 20px;}
 .edit-table-type-form .files-download span{line-height: 20px;}
@@ -1858,7 +1871,7 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     margin-top: 3px;
     cursor: pointer;
 }
-#table-type-form .load-file{float: right;}
+#table-type-form .load-file{float: right;position: relative;}
 #table-type-form .but-load-file,
 #tableTypeContainer .but-load-file,
 #table-map-form .but-load-file,
@@ -1884,6 +1897,17 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     background: linear-gradient(to bottom, #f9bd34 0%,#f09a32 53%,#ed7a00 60%,#e04c00 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9bd34', endColorstr='#e04c00',GradientType=0 );
 }
+#table-type-form .validationError, #table-map-form .validationError, .editTableMapPopup .validationError{
+    margin: 0px 45px 0px 0px;
+    position: absolute;
+    top: 35px;
+    right: 0;
+    color: #FF0000;
+    font-size: 11px;
+}
+.editTableMapPopup .validationError{margin: 0px 40px 0px 0px;}
+.editTableMapPopup form .row-fluid{position: relative;}
+#table-map-form .validationError{margin-right: 2px;}
 #table-map-form .but-load-file{margin: 0;}
 #table-type-form .load-file a,
 .add-file{
@@ -1916,7 +1940,7 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
 .add-file:hover{text-decoration: none;color: #454545;}
 .add-file{margin-left: 69px;}
 .add-more-file{position: relative;}
-#table-type-form #fileFieldsContainer .add-more-file .number-tables input{margin: 0 8px;}
+#table-type-form #fileFieldsContainer .add-more-file .number-tables input{margin: 0 4px 0 9px;}
 #tableTypeContainer .hr{
     display: block;
     height: 2px;
@@ -1937,36 +1961,46 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
 }
 #tableTypeContainer .row-fluid{
     margin: 0;
-    height: 95px;
     display: table;
     vertical-align: middle;
-    line-height: 95px;
 }
-#tableTypeContainer .modal-body .row-fluid{line-height: 0px;height: 65px;}
-#tableTypeContainer .row-fluid .span10{
+#tableTypeContainer .modal-body .row-fluid{line-height: 0px;height: 65px;position: relative;}
+#tableTypeContainer .modal-body .btn-file{margin-left: 67px;margin-right: 0;}
+#tableTypeContainer .row-fluid div.span12{
     min-height: 10px;
-    display: inline-block;
     vertical-align: middle;
     float: none;
+    display: table-row;
 }
-#tableTypeContainer .row-fluid .span10 div{
-    float: left;
+#tableTypeContainer .row-fluid div.span12 div{
     width: 142px;
-    height: 95px;
+    display: table-cell;
+    padding: 15px 10px 15px 0px;
 }
-#tableTypeContainer .row-fluid .span2{
-    margin-left: 13px;
+#tableTypeContainer .row-fluid div.span12 div+div+div{
+    width: 532px;
     text-align: right;
-    min-height: 10px;
-    display: inline-block;
     vertical-align: middle;
-    float: none;
+    padding: 0;
 }
-#tableTypeContainer .row-fluid .span2 p{display: inline-block;margin: 0;margin-left: 25px;}
+#tableTypeContainer .row-fluid div.span12 div+div+div p{
+    display: table-cell;
+    float: right;
+    margin: 0;
+    margin-left: 25px;
+}
 #tableTypeContainer .modal-body form,
 .editTableMapPopup .modal-body form{margin-top: 25px;}
 #tableTypeContainer .modal-body .row-fluid .offset9 .but-load-file,
 .editTableMapPopup .modal-body .row-fluid .offset9 .but-load-file{margin-left: 5px;}
+#tableTypeContainer .modal-body .row-fluid .validationError{
+    margin: 0px 21px 0px 0px;
+    position: absolute;
+    top: 35px;
+    right: 0px;
+    color: #FF0000;
+    font-size: 11px;
+}
 
 /* Page added maps */
 #table-map-form #restaurantId{
@@ -2034,7 +2068,8 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     margin-right: -16px;
     margin-top: 4px;
 }
-#tableMapContainer .title-tabs{border-bottom: 1px solid #aeacac;margin: 0;}
+#tableMapContainer .title-tabs{margin: 0;height: 31px;}
+#interactive-map-container {border-top: 1px solid #a4a1a1;}
 #interactive-map-container .span8{
     height: 356px;
     width: 530px;
@@ -2097,6 +2132,7 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     border-bottom: 0;
     text-align: center;
     line-height: 31px;
+    margin-right: -1px;
     -webkit-border-top-left-radius: 10px;
     -webkit-border-top-right-radius: 10px;
     -moz-border-radius-topleft: 10px;
@@ -2138,3 +2174,116 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
 .files-download p {
     margin-top: 10px;
 }
+
+/* Page Orders */
+.content-table-editor .order-choose-restaurant{
+    float: left;
+    width: 152px;
+    padding-left: 4px;
+    color: #454545;
+    font-family: Arial;
+    font-size: 17px;
+    font-weight: normal;
+    line-height: 1.8;
+}
+.content-table-editor select#restaurantId{
+    width: 466px;
+    height: 32px;
+    float: left;
+    margin-right: 17px;
+    border: 0;
+    -moz-border-radius: 7px 7px 7px 7px;
+    -webkit-border-radius: 7px 7px 7px 7px;
+    -o-border-radius: 7px 7px 7px 7px;
+    border-radius: 7px 7px 7px 7px;
+    -moz-box-shadow: inset 1px 0px 3px rgba(238, 238, 238, 0.7), inset -2px 0px 3px rgba(238, 238, 238,0.7), inset 0px 2px 0px rgba(0, 0, 0, 0.6);
+    -webkit-box-shadow: inset 1px 0px 3px rgba(238, 238, 238, 0.7), inset -2px 0px 3px rgba(238, 238, 238,0.7), inset 0px 2px 0px rgba(0, 0, 0, 0.6);
+    box-shadow: inset 1px 0px 3px rgba(238, 238, 238, 0.7), inset -2px 0px 3px rgba(238, 238, 238,0.7), inset 0px 2px 0px rgba(0, 0, 0, 0.6);
+    border-right: 1px solid #d9d9d9;
+    border-left: 1px solid #d9d9d9;
+    border-top: 1px solid #f2f2f2;
+    border-bottom: 1px solid #f2f2f2;
+    background: #fff;
+}
+.content-table-editor select#restaurantId:focus{outline: none;}
+.tableMapContainer .row-fluid ul.tab-on-the-floors{list-style: none;margin: 0;}
+.tableMapContainer .row-fluid ul.tab-on-the-floors li{
+    list-style: none;
+    float: left;
+    width: 96px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #a4a1a1;
+    border-bottom: 0;
+    text-align: center;
+    line-height: 31px;
+    margin-right: -1px;
+    -webkit-border-top-left-radius: 10px;
+    -webkit-border-top-right-radius: 10px;
+    -moz-border-radius-topleft: 10px;
+    -moz-border-radius-topright: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.tableMapContainer .row-fluid ul.tab-on-the-floors li.active{
+    width: 110px;
+    background: #e3e3e3;
+    position: relative;
+    left: 1px;
+    margin-left: -1px;
+}
+.tableMapContainer .row-fluid ul.tab-on-the-floors li a{
+    font-family: Tahoma;
+    font-size: 14px;
+    color: #666666;
+    display: block;
+    float: left;
+    width: 100%;
+    height: 100%;
+}
+.tableMapContainer .row-fluid ul.tab-on-the-floors li a:hover{text-decoration: none;}
+.tableMapContainer #interactive-map-container{border-top: 1px solid #a4a1a1;}
+.tableMapContainer>.row-fluid{margin: 0;}
+.tableMapContainer #interactive-map-container #tableMapDroppable{
+    width: 541px;
+    height: 365px;
+    margin: 0;
+    padding: 0;
+    border-right: 1px solid #a4a1a1;
+}
+.tableMapContainer #interactive-map-container #tableMapDroppable img{width: 100%; height: 100%; margin: 10px 12px 0 0;}
+.tableMapContainer #interactive-map-container #activeTableOrderContainer{margin-left: 16px;margin-top: 28px;}
+.tableMapContainer #interactive-map-container #activeTableOrderContainer .row-fluid>div{
+    float: left;
+    font-family: Arial;
+    color: #454545;
+    font-size: 17px;
+    margin-right: 13px;
+    line-height: 1.8;
+}
+.tableMapContainer #interactive-map-container #activeTableOrderContainer .row-fluid .table-order-input{margin: 0;float: right;margin-right: 7px;}
+.tableMapContainer #interactive-map-container #activeTableOrderContainer .table-order-input input{
+    width: 135px;
+    height: 18px;
+    float: right;
+    padding: 6px 6px;
+    border: 0;
+    -moz-border-radius: 7px 7px 7px 7px;
+    -webkit-border-radius: 7px 7px 7px 7px;
+    -o-border-radius: 7px 7px 7px 7px;
+    border-radius: 7px 7px 7px 7px;
+    -moz-box-shadow: inset 1px 0px 3px rgba(238, 238, 238, 0.7), inset -2px 0px 3px rgba(238, 238, 238,0.7), inset 0px 2px 0px rgba(0, 0, 0, 0.6);
+    -webkit-box-shadow: inset 1px 0px 3px rgba(238, 238, 238, 0.7), inset -2px 0px 3px rgba(238, 238, 238,0.7), inset 0px 2px 0px rgba(0, 0, 0, 0.6);
+    box-shadow: inset 1px 0px 3px rgba(238, 238, 238, 0.7), inset -2px 0px 3px rgba(238, 238, 238,0.7), inset 0px 2px 0px rgba(0, 0, 0, 0.6);
+    border-right: 1px solid #d9d9d9;
+    border-left: 1px solid #d9d9d9;
+    border-top: 1px solid #f2f2f2;
+    border-bottom: 1px solid #f2f2f2;
+    background: #fff;
+}
+.tableMapContainer #interactive-map-container #activeTableOrderContainer .table-order-input input:focus{
+    border: 1px solid #fe8504;
+    outline: none;
+    box-shadow: none;
+}
+.tableMapContainer #interactive-map-container #activeTableOrderContainer .table-order-input img{margin-right: 25px;}
