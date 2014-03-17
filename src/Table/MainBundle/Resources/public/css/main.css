@@ -2021,6 +2021,13 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     border-top: 1px solid #f2f2f2;
     border-bottom: 1px solid #f2f2f2;
     background: #fff;
+    line-height: 28px;
+}
+#table-map-form #restaurantId:hover{background: #fff;}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    ::i-block-chrome,#table-map-form #restaurantId {
+        border-top: 2px solid #8A8A8A;
+    }
 }
 #table-map-form #restaurantId:focus{outline: none;}
 #mapFieldsContainer .specify-floor-room{margin-top: 18px;}
