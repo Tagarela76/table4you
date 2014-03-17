@@ -2,7 +2,7 @@
     
     $(function() {
         // load Map Scheme as background
-        page.tableMap.loadMapScheme("{{baseUrl}}{{ vich_uploader_asset(tableMapObj, 'file') }}");
+       // page.tableMap.loadMapScheme("{# {{baseUrl}}{{ vich_uploader_asset(tableMapObj, 'file') }} #}");
         $(".table-map-droppable").droppable({
             tolerance: 'fit',
             drop: function (event, ui) {

@@ -676,8 +676,6 @@ $(function() {
     restaurantPage = new Page();
 });
 
-jQuery('.fileinput').fileinput();
-
 
 
 
