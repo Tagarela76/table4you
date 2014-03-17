@@ -1,22 +1,21 @@
 {% for tableType in tableTypeList %}  
     {% if tableType.peopleCount !=0 %}
         <div class="row-fluid">
-            <div class="span10">
+            <div class="span12">
                 <div><img src="{{baseUrl}}{{ vich_uploader_asset(tableType, 'file') }}" alt="{{ tableType.peopleCount }}" /></div>
                 <div>{% trans %}main.tableMap.tableList.tableOn{% endtrans %} {{ tableType.peopleCount }}</div>
-            </div>
-
-            <div class="span2">
-                <p>
-                    <a data-toggle="modal" href="#editTableTypePopup_{{tableType.id}}">
-                        <img src="{{ asset('bundles/tablerestaurant/images/edit_table_type_btn.png') }}" />
-                    </a>
-                </p>    
-                <p>
-                    <a href='#' onclick='page.tableType.deleteTableType({{ tableType.id }}); return false;'>
-                        <img src="{{ asset('bundles/tablerestaurant/images/deleteFile.png') }}" />
-                    </a>
-                </p>    
+                <div>
+                    <p>
+                        <a href='#' onclick='page.tableType.deleteTableType({{ tableType.id }}); return false;'>
+                            <img src="{{ asset('bundles/tablerestaurant/images/deleteFile.png') }}" />
+                        </a>
+                    </p>
+                    <p>
+                        <a data-toggle="modal" href="#editTableTypePopup_{{tableType.id}}">
+                            <img src="{{ asset('bundles/tablerestaurant/images/edit_table_type_btn.png') }}" />
+                        </a>
+                    </p>
+                </div>
             </div>
         </div>
         <span class="hr"></span>

@@ -22,16 +22,16 @@
                 {# ==Modal Window for addTableType==#}
             </div>
         </div>
+        <table class="title-top_restoraunt">
+            <tbody>
+            <tr>
+                <td><span></span></td>
+                <td><span><span>{% trans %}main.tableMap.tableList.header{% endtrans %}</span></span></td>
+                <td><span></span></td>
+            </tr>
+            </tbody>
+        </table>
         <div class="row-fluid" id="tableTypeContainer">
-            <table class="title-top_restoraunt">
-                <tbody>
-                    <tr>
-                        <td><span></span></td>
-                        <td><span><span>{% trans %}main.tableMap.createMap.header{% endtrans %}</span></span></td>
-                        <td><span></span></td>
-                    </tr>
-                </tbody>
-            </table><br>
             {% include 'TableRestaurantBundle:TableDashboard:tableTypeList.html.twig' %}
         </div>   
     </div>

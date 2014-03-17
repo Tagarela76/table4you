@@ -1,7 +1,7 @@
 {% if is_granted('ROLE_SUPER_ADMIN') %}
     <div class="row-fluid">
         <div class="span12">
-            <a href="{{ path('table_viewTableTypeList')}}">
+            <a href="{{ path('table_viewTableTypeList')}}" class="add-table-but">
                 {% trans %}main.tableMap.tableList.addTable{% endtrans %}
             </a>
         </div>    
