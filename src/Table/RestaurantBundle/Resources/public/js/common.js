@@ -151,7 +151,7 @@ function TableMap() {
                                         "</div>"+
                                         "<span class='input-group-addon btn btn-default btn-file'>"+
                                             "<span class='fileinput-new'>" + selectTheFileLabel + "</span>"+
-                                            "<input type='file' name='file[]' id='image' size='1'>"+
+                                            "<input type='file' name='file[]' size='1'>"+
                                             "</span>"+
                                         "</div>"+
                                "</div><a href='#' onclick='page.common.removeFileField(this); return false;'>" +
@@ -622,7 +622,7 @@ function Common() {
                     "<div class='fileinput fileinput-new' data-provides='fileinput'>"+
                     "<div class='input-group'>"+
                         "<div class='form-control files-download' data-trigger='fileinput'><i class='glyphicon glyphicon-file fileinput-exists'></i> <span class='fileinput-filename'></span></div>"+
-                        "<span class='input-group-addon btn btn-default btn-file'><span class='fileinput-new'>" + selectTheFileLabel + "</span><!--<span class='fileinput-exists'>Change</span>--><input type='file' name='...'></span>"+
+                        "<span class='input-group-addon btn btn-default btn-file'><span class='fileinput-new'>" + selectTheFileLabel + "</span><input type='file' name='...'></span>"+
                         "</div>"+
                     "</span></div>"+
                     "<a href='#' onclick='page.common.removeFileField(this); return false;' id='delete-file-customization'> " +

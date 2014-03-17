@@ -42,7 +42,7 @@
                                         </div>
                                         <span class="input-group-addon btn btn-default btn-file">
                                             <span class="fileinput-new">{% trans %}main.tableMap.tableList.form.label.selectTheFile{% endtrans %}</span>
-                                            <input type="file" name="file[]" id="image" size="1">
+                                            <input type="file" name="file[]" size="1">
                                         </span>
                                     </div>
                                 </div>
@@ -64,7 +64,7 @@
                         <div class="row-fluid">
                             <div class="span12">
                                 <div class="load-file">
-                                    <a href="#" class="add-file" onclick="page.tableMap.addNewRow(); return false;">Добавить еще</a>
+                                    <a href="#" class="add-file" onclick="page.tableMap.addNewRow(); return false;">{% trans %}main.tableMap.tableList.form.label.addMore{% endtrans %}</a>
                                     <input type="button" onClick="page.tableMap.validateAddForm();" value="{% trans %}main.tableMap.createMap.form.label.save{% endtrans %}" class="but-load-file" />
                                     <input type="hidden" id="mapFileLabel" value="{% trans %}main.tableMap.createMap.form.label.loadMap{% endtrans %}" />
                                     <input type="hidden" id="mapFloorLabel" value="{% trans %}main.tableMap.createMap.form.label.floor{% endtrans %}" />

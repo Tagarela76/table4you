@@ -2261,8 +2261,8 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     margin-right: 13px;
     line-height: 1.8;
 }
-.tableMapContainer #interactive-map-container #activeTableOrderContainer .row-fluid .tableOrderInput{margin: 0;float: right;margin-right: 7px;}
-.tableMapContainer #interactive-map-container #activeTableOrderContainer .tableOrderInput input{
+.tableMapContainer #interactive-map-container #activeTableOrderContainer .row-fluid .table-order-input{margin: 0;float: right;margin-right: 7px;}
+.tableMapContainer #interactive-map-container #activeTableOrderContainer .table-order-input input{
     width: 135px;
     height: 18px;
     float: right;
@@ -2281,9 +2281,9 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     border-bottom: 1px solid #f2f2f2;
     background: #fff;
 }
-.tableMapContainer #interactive-map-container #activeTableOrderContainer .tableOrderInput input:focus{
+.tableMapContainer #interactive-map-container #activeTableOrderContainer .table-order-input input:focus{
     border: 1px solid #fe8504;
     outline: none;
     box-shadow: none;
 }
-.tableMapContainer #interactive-map-container #activeTableOrderContainer .tableOrderInput img{margin-right: 25px;}
+.tableMapContainer #interactive-map-container #activeTableOrderContainer .table-order-input img{margin-right: 25px;}
