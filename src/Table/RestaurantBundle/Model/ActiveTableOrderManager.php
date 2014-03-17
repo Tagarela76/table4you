@@ -99,4 +99,61 @@ class ActiveTableOrderManager
         return $this->getActiveTableOrderRepo()->findByActiveTable($activeTable);
     }
    
+    /**
+     * 
+     * @param integer $user
+     * 
+     * @param Request $request
+     * 
+     * @param integer $orderStatus
+     * 
+     * @return Table\RestaurantBundle\Entity\ActiveTableOrder[]
+     */
+    public function filterOrderHistory($user, $request, $orderStatus = null)
+    {
+        return $this->getActiveTableOrderRepo()->filterOrderHistory($user, $request, $orderStatus);
+    }
+    
+    /**
+     * @param integer $user
+     * 
+     * @param integer $orderStatus
+     * 
+     * @return Table\RestaurantBundle\Entity\ActiveTableOrder[]
+     */
+    public function getOrderHistory($user, $orderStatus = null )
+    {
+        return $this->getActiveTableOrderRepo()->getOrderHistory($user, $orderStatus);
+    }
+    
+    /**
+     * 
+     * @param integer $user
+     * 
+     * @param \DateTime $reserveDateTime
+     * 
+     * @return Table\RestaurantBundle\Entity\ActiveTableOrder[]
+     */
+    public function isUserCanReserveTable($user, $reserveDateTime)
+    {
+        return $this->getActiveTableOrderRepo()->isUserCanReserveTable($user, $reserveDateTime);
+    }
+    
+    /**
+     * 
+     * @param integer $id
+     * 
+     * @param \DateTime $dateTime
+     * 
+     * @return array[]
+     */
+    public function getBookedTablesByRestaurant($id, $dateTime = null)
+    {
+        $bookedTablesArray = array();
+        $bookedTables = $this->getActiveTableOrderRepo()->getBookedTablesByRestaurant($id, $dateTime);
+        foreach ($bookedTables as $bookedTable) {
+            $bookedTablesArray[] = $bookedTable['id'];
+        } 
+        return $bookedTablesArray;
+    }
 }

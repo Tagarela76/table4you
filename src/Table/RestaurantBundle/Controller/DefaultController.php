@@ -20,6 +20,52 @@ class DefaultController extends Controller
 {
 
     /**
+     * Refreash Booked Tables list
+     * 
+     * @Template()
+     */
+    public function refreshBookedTableListAction()
+    {
+        // Get restaurant id
+        $restaurantId = $this->getRequest()->query->get('restaurantId');
+
+        // get Current user
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            // redirect on homepage
+            return $this->redirect(
+                $this->generateUrl("table_main_homepage")
+            );
+        }
+    
+        // Get floor 
+        $floor = $this->getRequest()->query->get('floor');
+        // Get table map list
+        $tableMapList = $this->getTableMapManager()->getTableMapListByFloorGroupByHall($restaurantId, $floor);
+        
+        // get tableMapObj (init first elem)
+        $tableMapObjId = $tableMapList[0]->getId();
+        $tableMapObj = $this->getTableMapManager()->findOneById($tableMapObjId);
+ 
+        // Get Active Tables List
+        $activeTableList = $this->getActiveTableManager()->findByTableMap($tableMapObjId);
+       
+        // get Booked Tables 
+        $bookedTables = $this->getActiveTableOrderManager()->getBookedTablesByRestaurant($restaurantId);  
+        
+        // assign base_url
+        $baseUrl = $this->container->getParameter('base_folder_url');
+        return array(
+            'tableMapObj' => $tableMapObj,
+            'baseUrl' => $baseUrl,
+            'tableMapList' => $tableMapList,
+            'restaurantId' => $restaurantId,
+            'activeTableList' => $activeTableList,
+            'bookedTables' => $bookedTables
+        );
+    }
+    
+    /**
      * Load map picture
      * 
      */
@@ -77,6 +123,9 @@ class DefaultController extends Controller
         // Get Active Tables List
         $activeTableList = $this->getActiveTableManager()->findByTableMap($tableMapObjId);
        
+        // get Booked Tables 
+        $bookedTables = $this->getActiveTableOrderManager()->getBookedTablesByRestaurant($restaurantId);  
+        
         // assign base_url
         $baseUrl = $this->container->getParameter('base_folder_url');
         return array(
@@ -84,7 +133,8 @@ class DefaultController extends Controller
             'baseUrl' => $baseUrl,
             'tableMapList' => $tableMapList,
             'restaurantId' => $restaurantId,
-            'activeTableList' => $activeTableList
+            'activeTableList' => $activeTableList,
+            'bookedTables' => $bookedTables
         );
     }
     
@@ -110,7 +160,7 @@ class DefaultController extends Controller
                 $this->generateUrl("table_main_homepage")
             );
         }
-        
+
         // Get Floor list
         $floorList = $this->getTableMapManager()->getRestaurantTableMapFloorList($id);
         
@@ -125,13 +175,12 @@ class DefaultController extends Controller
  
         // Get Active Tables List
         $activeTableList = $this->getActiveTableManager()->findByTableMap($tableMapObjId);
-      
+        // get table order data
+        $activeTableOrder = $form->getData();
+        
         $successReserve = false; // we should know if table reserve was successfull
         if ($request->isMethod('POST') && !$this->getRequest()->request->get('fromMap')) {
             $form->bind($request);
-
-            // get table order date
-            $activeTableOrder = $form->getData();
 
             // Check if user can do table order
             // devide reserve time on parts
@@ -168,7 +217,11 @@ class DefaultController extends Controller
                 $em->flush();
                 $successReserve = true;
             }
-        }
+        } 
+        // get Booked Tables 
+        $bookedTables = $this->getActiveTableOrderManager()->getBookedTablesByRestaurant($id);  
+        // assign style for booked tables
+        $bookedTableStyle = "box-shadow: 10px 10px 5px red;";
         // assign base_url
         $baseUrl = $this->container->getParameter('base_folder_url');
         return array(
@@ -179,7 +232,9 @@ class DefaultController extends Controller
             'floorList' => $floorList,
             'tableMapList' => $tableMapList,
             'successReserve' => $successReserve,
-            'activeTableList' => $activeTableList
+            'activeTableList' => $activeTableList,
+            'bookedTables' => $bookedTables,
+            'bookedTableStyle' => $bookedTableStyle
         );
     }
 
@@ -426,9 +481,9 @@ class DefaultController extends Controller
         $searchStr = $this->getRequest()->query->get('searchStr');
 
         if (!is_null($filterDate) || !is_null($searchStr)) {
-            $orderHistory = $this->getTableOrderManager()->filterOrderHistory($user->getId(), $this->getRequest(), TableOrder::ORDER_ACCEPT_STATUS_CODE);
+            $orderHistory = $this->getActiveTableOrderManager()->filterOrderHistory($user->getId(), $this->getRequest(), TableOrder::ORDER_ACCEPT_STATUS_CODE);
         } else {
-            $orderHistory = $this->getTableOrderManager()->getOrderHistory($user->getId(), TableOrder::ORDER_ACCEPT_STATUS_CODE);
+            $orderHistory = $this->getActiveTableOrderManager()->getOrderHistory($user->getId(), TableOrder::ORDER_ACCEPT_STATUS_CODE);
         }
 
         /* THIS INFORMATION SHOULD BE IN EACH  CONTROLLER BECAUSE WE USE IT IN HEADER */

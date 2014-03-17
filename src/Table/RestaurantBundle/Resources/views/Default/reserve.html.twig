@@ -12,7 +12,9 @@
         $('.reserveDate').datepicker({
             dateFormat: 'yy-mm-dd',
             altField: "#tableOrderForm_reserveDate",
-            altFormat: "yy-mm-dd"
+            altFormat: "yy-mm-dd",
+            minDate: '0',
+            maxDate: '+1m' 
         })
 
         $('#table-order-form').submit(function() {

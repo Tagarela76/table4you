@@ -319,6 +319,22 @@ function TableOrder() {
 
     var that = this;
     
+    this.refreshBookedTableList = function() {
+
+        // get restaurant id
+        var restaurantId = $("#restaurantId").val();
+        // change table map
+        $.ajax({
+            url: Routing.generate('table_refreshBookedTableList'),
+            data: {restaurantId: restaurantId},
+            type: "GET",
+            dataType: "html",
+            success: function(responce) {
+                $('#restaurantTableMapContainer').html(responce);
+            }
+        });
+    }
+    
     this.selectActiveTable = function(activeTableId) {
         $("#tableOrderForm_activeTable").val(activeTableId);
         // unshine all

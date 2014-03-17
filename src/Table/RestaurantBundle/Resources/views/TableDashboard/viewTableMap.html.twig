@@ -65,7 +65,7 @@
     <div class="span8 table-map-droppable" id="tableMapDroppable">
         {% for activeTable in activeTableList %}
             <img title="{{activeTable.tableNumber}} {% trans %}main.tableMap.createMap.table{% endtrans %}" 
-                 id="activeTable_{{activeTable.id}}" onmousemove='page.activeTable.loadActiveTable({{activeTable.id}});' 
+                 id="activeTable_{{activeTable.id}}" onmousedown='page.activeTable.loadActiveTable({{activeTable.id}});' 
                  class='active-table-draggable canvas-element' 
                  style="width: 60px; left: {{activeTable.leftPosition}}px; top: {{activeTable.topPosition}}px;"
                  tabletypeid='{{activeTable.tableType.id}}' src="{{baseUrl}}{{ vich_uploader_asset(activeTable.tableType, 'file') }}" />

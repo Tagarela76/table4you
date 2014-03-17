@@ -12,5 +12,166 @@ use Doctrine\ORM\EntityRepository;
  */
 class ActiveTableOrderRepository extends EntityRepository
 {
+
+    /**
+     *  Filter Order History
+     * 
+     * @param integer $user
+     * 
+     * @param Request $request
+     * 
+     * @param integer $orderStatus
+     * 
+     * @return Table\RestaurantBundle\Entity\Repository[]
+     */
+    public function filterOrderHistory($user, $request, $orderStatus = null)
+    {
+        $filterDate = $request->query->get('filterDate');
+        $searchStr = $request->query->get('searchStr');
+
+        $query = $this->createQueryBuilder('orderHistory')
+                ->where('orderHistory.user = :user')
+                ->setParameter('user', $user);
+        if (!is_null($orderStatus)) {
+            $query->andWhere('orderHistory.status = :orderStatus')
+                    ->setParameter('orderStatus', $orderStatus);
+        }
+
+        if (!is_null($filterDate) && $filterDate != "") {
+            $query->andWhere('orderHistory.reserveDate = :reserveDate')
+                    ->setParameter('reserveDate', $filterDate);
+        }
+        if (!is_null($searchStr) && $searchStr != "") {
+            $query->leftJoin('orderHistory.activeTable', 'activeTable')
+                    ->leftJoin('activeTable.tableMap', 'tableMap')
+                    ->leftJoin('tableMap.restaurant', 'restaurant')
+                    ->leftJoin('restaurant.city', 'city')
+                    ->andWhere("restaurant.name like '%$searchStr%' or city.name like '%$searchStr%' or restaurant.street like '%$searchStr%'");
+        }
+
+        return $query;
+    }
+
+    /**
+     * 
+     * Get Order History
+     * 
+     * @param integer $user
+     * 
+     * @param integer $orderStatus
+     * 
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function getOrderHistory($user, $orderStatus = null)
+    {
+        $query = $this->createQueryBuilder('tableOrder');
+        $query->where('tableOrder.user = :user')
+                ->setParameter('user', $user);
+        if (!is_null($orderStatus)) {
+            $query->andWhere('tableOrder.status = :orderStatus')
+                    ->setParameter('orderStatus', $orderStatus);
+        }
+
+
+        return $query;
+    }
+
+    /**
+     *  Check if user can order table
+     * 
+     * @param integer $user
+     * 
+     * @param \DateTime $reserveDateTime
+     * 
+     * @return Table\RestaurantBundle\Entity\Repository[]
+     */
+    public function isUserCanReserveTable($user, $reserveDateTime)
+    {
+        $query = $this->createQueryBuilder('orderHistory')
+                // for define user
+                ->where('orderHistory.user = :user')
+                ->setParameter('user', $user);
+
+        // Check only for complete and not processed order
+        $query->andWhere('orderHistory.status = 0 or orderHistory.status=2');
+
+        // check date. Search for the same date and time[+-1.5 h]
+        $query->andWhere('orderHistory.reserveDate = :reserveDate')
+                ->setParameter('reserveDate', $reserveDateTime->format('Y-m-d'));
+
+        // get start time
+        $startTime = clone $reserveDateTime; // first init
+        $startTime->modify("-90 minutes");
+        // get end time
+        $endTime = clone $reserveDateTime; // first init
+        $endTime->modify("+90 minutes");
+
+        $query->andWhere('orderHistory.reserveTime BETWEEN :startTime AND :endTime')
+                ->setParameter('startTime', $startTime->format('H:i:s'))
+                ->setParameter('endTime', $endTime->format('H:i:s'));
+
+        $result = $query->getQuery()->getResult();
+
+        if (count($result) == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     
+    /**
+     *  Get Free Booked By restaurant
+     * 
+     * @param integer $id 
+     * 
+     * @param \DateTime $dateTime 
+     * 
+     * @return Table\RestaurantBundle\Entity\Repository[]
+     */
+    public function getBookedTablesByRestaurant($id, $dateTime = null)
+    {
+        $query = $this->createQueryBuilder('activeTableOrder')
+                ->select('activeTable.id')
+                ->leftJoin('activeTableOrder.activeTable', 'activeTable')
+                ->leftJoin('activeTable.tableMap', 'tableMap')
+                ->leftJoin('tableMap.restaurant', 'restaurant')
+                ->where("restaurant.id = :restaurantId")
+                ->setParameter('restaurantId', $id);
+        
+        if (is_null($dateTime)) {
+            $dateTime = new \DateTime("now");
+        }
+        $startTime = clone $dateTime; // first init
+        $endTime = clone $dateTime; // first init
+        // devide on date & time
+        $date = $dateTime->format("Y-m-d");
+        $time = $dateTime->format("H:i");   
+        switch (true) {
+            case ($time < "16:00") :           
+                // get start time (+-1.5h)
+                $startTime->modify("-90 minutes");
+                // get end time
+                $endTime->modify("+90 minutes"); 
+                break;
+            case ($time >= "16:00" && $time < "19:00") :
+                // get start time (+-2.5h)
+                $startTime->modify("-150 minutes");
+                // get end time
+                $endTime->modify("+150 minutes");
+                break;
+            case ($time >= "19:00") :       
+                // modify only end time
+                $endTime->setTime(23, 59);
+                break;
+        }
+        $query->andWhere('activeTableOrder.reserveDate = :reserveDate')
+              ->setParameter('reserveDate', $date)
+              ->andWhere('activeTableOrder.reserveTime BETWEEN :startTime AND :endTime')
+              ->setParameter('startTime', $startTime->format('H:i:s'))
+              ->setParameter('endTime', $endTime->format('H:i:s'))
+              ->distinct('activeTable.id');
+
+        return $query->getQuery()->getResult();
+    }
+
 }

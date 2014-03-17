@@ -195,3 +195,11 @@ table_loadMapPicture:
         _method: GET  
     options:
        expose: true        
+       
+table_refreshBookedTableList:
+    pattern:  /refreshBookedTableList
+    defaults: { _controller: TableRestaurantBundle:Default:refreshBookedTableList }
+    requirements:
+        _method: GET  
+    options:
+       expose: true         
