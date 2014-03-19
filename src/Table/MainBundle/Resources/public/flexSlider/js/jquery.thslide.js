@@ -8,8 +8,8 @@ www.juliendecaudin.com
 (function ($) {
     $.fn.thslide = function (callerSettings) {
         var settings = $.extend({
-            navPreviousWrapper: '.thslide_nav_previous a',
-            navNextWrapper: '.thslide_nav_next a',
+            navPreviousWrapper: '.thslide_nav_previous input',
+            navNextWrapper: '.thslide_nav_next input',
             listWrapper: '.thslide_list ul',
             itemOffset: 1000, //distance in pixel between the left-hand side of an item and the following one
             itemVisible: 5, //number of items visible by the user

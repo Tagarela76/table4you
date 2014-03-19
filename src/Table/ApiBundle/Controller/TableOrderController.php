@@ -29,7 +29,7 @@ class TableOrderController extends Controller
                 'errorStr' => $this->get('translator')->trans("validation.errors.user.You should auth at first")
             );
         }
-        $orderHistory = $this->getTableOrderManager()->getOrderHistory($user)->getQuery()->getResult();
+        $orderHistory = $this->getActiveTableOrderManager()->getOrderHistory($user)->getQuery()->getResult();
         
         $response = array();
         foreach ($orderHistory as $order) {
@@ -84,7 +84,7 @@ class TableOrderController extends Controller
         $reserveDateTime = new \DateTime($tableOrder->getReserveDate());
         $reserveDateTime->setTime($reserveHour, $reserveMin);
 
-        if (!$this->getTableOrderManager()->isUserCanReserveTable($user, $reserveDateTime)) {
+        if (!$this->getActiveTableOrderManager()->isUserCanReserveTable($user, $reserveDateTime)) {
             // render Warning Notification, user cannot order other tables!!!
             return array(
                 'success' => false, 

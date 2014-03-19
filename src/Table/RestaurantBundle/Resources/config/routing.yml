@@ -180,3 +180,26 @@ table_updateActiveTable:
     options:
        expose: true         
        
+table_refreshTableMap:
+    pattern:  /viewTableMap
+    defaults: { _controller: TableRestaurantBundle:Default:viewTableMap }
+    requirements:
+        _method: GET  
+    options:
+       expose: true 
+       
+table_loadMapPicture:
+    pattern:  /loadMapPicture
+    defaults: { _controller: TableRestaurantBundle:Default:loadMapPicture }
+    requirements:
+        _method: GET  
+    options:
+       expose: true        
+       
+table_refreshBookedTableList:
+    pattern:  /refreshBookedTableList
+    defaults: { _controller: TableRestaurantBundle:Default:refreshBookedTableList }
+    requirements:
+        _method: GET  
+    options:
+       expose: true         

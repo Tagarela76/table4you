@@ -1,0 +1,30 @@
+<script>
+    $(function() {
+        // load Map Scheme as background
+        page.tableOrder.loadMapScheme("{{baseUrl}}{{ vich_uploader_asset(tableMapObj, 'file') }}");
+    });
+</script>
+<div class="restaurant-photo-modal">
+    <ul>
+       {% for tableMap in tableMapList %}  
+            {% if tableMap.hall is not null %}
+                <li>
+                    <a href="#" class="halls{% if tableMapObj.id == tableMap.id %} active{% endif %}"onclick="page.tableOrder.loadMap(this, {{tableMap.id}})">{{tableMap.hall}} {% trans %}main.tableMap.createMap.hall{% endtrans %}</a>
+                </li>    
+            {% endif %}   
+        {% endfor %}
+    </ul>        
+    {% if tableMapObj is not null and tableMapObj.file is not null %}
+        <div id="table-map-image-container">
+            {% for activeTable in activeTableList %}
+                <img id="activeTable_{{activeTable.id}}" title="{{activeTable.tableNumber}} {% trans %}main.tableMap.createMap.table{% endtrans %}" 
+                     onClick='page.tableOrder.selectActiveTable({{activeTable.id}});'
+                     class="active-table-img"
+                     style="width: 60px; margin-left: {{activeTable.leftPosition}}px; margin-top: {{activeTable.topPosition}}px; box-shadow: 10px 10px 5px {% if activeTable.id in bookedTables %}red{% else %}green{% endif %};"
+                     src="{{baseUrl}}{{ vich_uploader_asset(activeTable.tableType, 'file') }}"  />
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+{# additional info#}
+<input type="hidden" id="restaurantId" value="{{restaurantId}}" />
