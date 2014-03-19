@@ -188,22 +188,28 @@
     z-index: 99;
 }
 
-.thslide_nav_previous a,
-.thslide_nav_next a
-{
-    display:block;
+.thslide_nav_previous input,
+.thslide_nav_next input{
+    display: block;
     width: 32px;
     height: 110px;
-    text-decoration:none;
-    background-color: rgba(178,172,172,0.65);
+    text-decoration: none;
+    border: none;
+    background: none;
+    background-color: rgba(178,172,172,0.35);
+    background-image: url(../images/sprite-arrows.png);
+    background-position: 9px 47px;
     background-repeat: no-repeat;
 }
+.thslide_nav_next input{
+    background-position: -46px 47px;
+}
 
-.thslide_nav_next a, .thslide_nav_previous a {
+.thslide_nav_next input, .thslide_nav_previous input {
     position: relative;
 }
 
-.thslide_nav_previous a:after {
+.thslide_nav_previous input:after {
     right: 35%;
     top: 50%;
     border: solid transparent;
@@ -218,7 +224,7 @@
     margin-top: -10px;
 }
 
-.thslide_nav_next a:after {
+.thslide_nav_next input:after {
     left: 35%;
     top: 50%;
     border: solid transparent;

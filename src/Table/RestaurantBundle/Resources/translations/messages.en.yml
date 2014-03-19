@@ -57,6 +57,7 @@ main:
                 tableNumber: Table number
                 cancel: Cancel
                 selectTheFile: Choose file
+                addMore: add more
             error:
                 floor: Fill field    
             errors: Errors while edit form 

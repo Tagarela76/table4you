@@ -17,4 +17,6 @@ Table\RestaurantBundle\Entity\ActiveTableOrder:
             - Date: ~
         reserveTime:
             - Time: ~
+        activeTable:
+            - NotBlank: ~    
             

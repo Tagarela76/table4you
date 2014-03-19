@@ -551,7 +551,7 @@ input:focus{outline: 0 none}
     height: 62px;
     float: left;
 }
-.restaurant-photo-modal img{
+.cdrestaurant-photo-modal img{
     width: 404px;
     height: 324px;
 }
@@ -2021,6 +2021,13 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     border-top: 1px solid #f2f2f2;
     border-bottom: 1px solid #f2f2f2;
     background: #fff;
+    line-height: 28px;
+}
+#table-map-form #restaurantId:hover{background: #fff;}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    ::i-block-chrome,#table-map-form #restaurantId {
+        border-top: 2px solid #8A8A8A;
+    }
 }
 #table-map-form #restaurantId:focus{outline: none;}
 #mapFieldsContainer .specify-floor-room{margin-top: 18px;}
@@ -2287,3 +2294,9 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     box-shadow: none;
 }
 .tableMapContainer #interactive-map-container #activeTableOrderContainer .table-order-input img{margin-right: 25px;}
+
+#table-map-image-container {
+    width: 390px;
+    height: 320px;
+    margin: 0px !important;
+}

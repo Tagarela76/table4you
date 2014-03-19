@@ -1,3 +1,40 @@
+<script>
+    
+    $(function() {
+        // load Map Scheme as background
+        page.tableMap.loadMapScheme("{{baseUrl}}{{ vich_uploader_asset(tableMapObj, 'file') }}");
+        $(".table-map-droppable").droppable({
+            tolerance: 'fit',
+            drop: function (event, ui) {
+                var $canvas = $(this);
+                if (!ui.draggable.hasClass('canvas-element')) {
+                    var $canvasElement = ui.draggable.clone();
+                    $canvasElement.addClass('canvas-element');
+                    $canvasElement.draggable({
+                        containment: '.table-map-droppable'
+                    });
+                    $canvas.append($canvasElement);
+                    $canvasElement.css({
+                        left: (ui.position.left),
+                        top: (ui.position.top),
+                        position: 'absolute'
+                    });
+                }
+                // not for editable tables
+                if (!ui.draggable.hasClass('active-table-draggable')) {
+                    // init data
+                    page.activeTable.initTableData((ui.position.top - $("#tableMapDroppable").position().top), (ui.position.left - $("#tableMapDroppable").position().left), $(ui.draggable[0]).attr("tabletypeid"));
+                    $("#tableNumberContainer").modal('show');
+                }
+            }
+        });
+        // Make it draggable
+        $(".active-table-draggable").draggable({
+            cursor: 'move',
+            containment: '.table-map-droppable'
+        });
+    });    
+</script>
 <div class="row-fluid title-tabs">
     <ul>
         {% for tableMap in tableMapList %}
@@ -26,11 +63,13 @@
 
 <div class="row-fluid" id="interactive-map-container">
     <div class="span8 table-map-droppable" id="tableMapDroppable">
-        {% if tableMapObj is not null and tableMapObj.file is not null %}
-            <img src="{{baseUrl}}{{ vich_uploader_asset(tableMapObj, 'file') }}" alt="{{ tableMapObj.restaurant.name }}" />
-        {% endif %}    
-        {# Add existing tables Container#}
-        <div id="activeTablesContainer"></div>    
+        {% for activeTable in activeTableList %}
+            <img title="{{activeTable.tableNumber}} {% trans %}main.tableMap.createMap.table{% endtrans %}" 
+                 id="activeTable_{{activeTable.id}}" onmousedown='page.activeTable.loadActiveTable({{activeTable.id}});' 
+                 class='active-table-draggable canvas-element' 
+                 style="width: 60px; left: {{activeTable.leftPosition}}px; top: {{activeTable.topPosition}}px;"
+                 tabletypeid='{{activeTable.tableType.id}}' src="{{baseUrl}}{{ vich_uploader_asset(activeTable.tableType, 'file') }}" />
+        {% endfor %}      
     </div>
 
     <div class="span4 table-map-droppable-right" id="table-container">
@@ -40,11 +79,3 @@
 {# ==Modal Window for saveTable==#}
     {% include 'TableRestaurantBundle:TableDashboard:addActiveTable.html.twig' %}
 {# ==Modal Window for saveTable==#}
-<script>
-    
-    $(function() {
-        // Init Active Tables
-        page.activeTable.loadActiveTables();
-        
-    });    
-</script>
