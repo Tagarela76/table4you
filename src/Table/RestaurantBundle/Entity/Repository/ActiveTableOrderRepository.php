@@ -85,8 +85,43 @@ class ActiveTableOrderRepository extends EntityRepository
      * 
      * @return Table\RestaurantBundle\Entity\Repository[]
      */
-    public function isUserCanReserveTable($user, $reserveDateTime)
+    public function isUserCanReserveTable($user, $reserveDateTime = null)
     {
+        // get current time
+        $currentDateTime = new \DateTime("now");
+        if (is_null($reserveDateTime)) {
+            $reserveDateTime = $currentDateTime;
+        }
+        
+        // Check rule
+        // 1. Guest can book a table in the period till 16-00 not later than 30 minutes
+        // In the period from 16-00 guest cannot be booked later than 1 hour
+        
+        // Get interval between current time and booked time
+        $interval = $currentDateTime->diff($reserveDateTime); // invert mustn't be 1
+        if ($interval->invert == 1) {
+            return false;
+        }
+        $time = $reserveDateTime->format("H:i");   
+        switch (true) {
+            case ($time < "16:00") :           
+                if ($interval->y == 0 && 
+                        $interval->m == 0 && 
+                        $interval->d == 0 && 
+                        $interval->h == 0 &&
+                        $interval->i < 30) {
+                    return false;
+                }
+                break;
+            case ($time >= "16:00") :       
+                if ($interval->y == 0 && 
+                        $interval->m == 0 && 
+                        $interval->d == 0 && 
+                        $interval->h < 1) {
+                    return false;
+                }
+                break;
+        }
         $query = $this->createQueryBuilder('orderHistory')
                 // for define user
                 ->where('orderHistory.user = :user')
@@ -95,16 +130,16 @@ class ActiveTableOrderRepository extends EntityRepository
         // Check only for complete and not processed order
         $query->andWhere('orderHistory.status = 0 or orderHistory.status=2');
 
-        // check date. Search for the same date and time[+-1.5 h]
+        // check date. Search for the same date and time[+-1 h]
         $query->andWhere('orderHistory.reserveDate = :reserveDate')
                 ->setParameter('reserveDate', $reserveDateTime->format('Y-m-d'));
 
         // get start time
         $startTime = clone $reserveDateTime; // first init
-        $startTime->modify("-90 minutes");
+        $startTime->modify("-60 minutes");
         // get end time
         $endTime = clone $reserveDateTime; // first init
-        $endTime->modify("+90 minutes");
+        $endTime->modify("+60 minutes");
 
         $query->andWhere('orderHistory.reserveTime BETWEEN :startTime AND :endTime')
                 ->setParameter('startTime', $startTime->format('H:i:s'))

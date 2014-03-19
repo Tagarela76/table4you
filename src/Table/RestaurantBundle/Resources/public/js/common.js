@@ -676,6 +676,3 @@ $(function() {
     restaurantPage = new Page();
 });
 
-
-
-

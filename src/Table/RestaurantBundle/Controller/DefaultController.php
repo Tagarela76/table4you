@@ -190,12 +190,12 @@ class DefaultController extends Controller
             $reserveDateTime = new \DateTime($activeTableOrder->getReserveDate());
             $reserveDateTime->setTime($reserveHour, $reserveMin);
 
-        /*    if (!$this->getTableOrderManager()->isUserCanReserveTable($user, $reserveDateTime)) {
+            if (!$this->getActiveTableOrderManager()->isUserCanReserveTable($user, $reserveDateTime)) {
                 // render Warning Notification, user cannot order other tables!!!
                 return $this->render('TableRestaurantBundle:Default:user.cannot.order.table.html.twig', array(
                             'user' => $user
                 ));
-            }*/
+            }
    
             if ($form->isValid()) {
                 // add Order

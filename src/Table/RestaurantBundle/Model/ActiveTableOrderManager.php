@@ -134,7 +134,7 @@ class ActiveTableOrderManager
      * 
      * @return Table\RestaurantBundle\Entity\ActiveTableOrder[]
      */
-    public function isUserCanReserveTable($user, $reserveDateTime)
+    public function isUserCanReserveTable($user, $reserveDateTime = null)
     {
         return $this->getActiveTableOrderRepo()->isUserCanReserveTable($user, $reserveDateTime);
     }
