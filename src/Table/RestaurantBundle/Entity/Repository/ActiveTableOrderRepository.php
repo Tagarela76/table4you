@@ -72,7 +72,6 @@ class ActiveTableOrderRepository extends EntityRepository
                     ->setParameter('orderStatus', $orderStatus);
         }
 
-
         return $query;
     }
 

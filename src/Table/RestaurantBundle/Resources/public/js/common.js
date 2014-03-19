@@ -320,7 +320,6 @@ function TableOrder() {
     var that = this;
     
     this.refreshBookedTableList = function() {
-
         // get restaurant id
         var restaurantId = $("#restaurantId").val();
         // change table map

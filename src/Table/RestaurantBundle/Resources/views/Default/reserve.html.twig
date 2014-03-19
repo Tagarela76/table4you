@@ -111,7 +111,7 @@
                         {% for floorObj in floorList %} 
                             <li>
                                 <a class="floors {% if floorObj.floor == tableMapObj.floor%}active{%endif%}" href="#" onclick="page.tableOrder.selectRestaurantMap(this, {{floorObj.floor}}); return false;">
-                                {{ floorObj.floor }} {% trans %}main.order.form.label.floor{% endtrans %}
+                                    {{ floorObj.floor }} {% trans %}main.order.form.label.floor{% endtrans %}
                                 </a>
                             </li>
                         {% endfor %}
