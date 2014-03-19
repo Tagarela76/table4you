@@ -1,7 +1,11 @@
 <script>
     $(function() {
-        // load Map Scheme as background
-        page.tableOrder.loadMapScheme("{{baseUrl}}{{ vich_uploader_asset(tableMapObj, 'file') }}");
+        {% if tableMapObj is not null %}
+            // load Map Scheme as background
+            {% if tableMapObj.file is not null %}
+                page.tableOrder.loadMapScheme("{{baseUrl}}{{ vich_uploader_asset(tableMapObj, 'file') }}");
+            {% endif %}
+        {% endif %}
     });
 </script>
 <div class="restaurant-photo-modal">

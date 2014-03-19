@@ -220,8 +220,7 @@ class DefaultController extends Controller
         } 
         // get Booked Tables 
         $bookedTables = $this->getActiveTableOrderManager()->getBookedTablesByRestaurant($id);  
-        // assign style for booked tables
-        $bookedTableStyle = "box-shadow: 10px 10px 5px red;";
+
         // assign base_url
         $baseUrl = $this->container->getParameter('base_folder_url');
         return array(
@@ -233,8 +232,7 @@ class DefaultController extends Controller
             'tableMapList' => $tableMapList,
             'successReserve' => $successReserve,
             'activeTableList' => $activeTableList,
-            'bookedTables' => $bookedTables,
-            'bookedTableStyle' => $bookedTableStyle
+            'bookedTables' => $bookedTables
         );
     }
 

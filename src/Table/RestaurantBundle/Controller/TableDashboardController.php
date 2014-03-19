@@ -129,6 +129,7 @@ class TableDashboardController extends Controller
         // Get Active Tables List
         $activeTableList = $this->getActiveTableManager()->findByTableMap($mapId);
         
+        
         return array(
             'restaurantList' => $restaurantList,
             'tableMapList' => $tableMapList,
@@ -457,6 +458,8 @@ class TableDashboardController extends Controller
         
         // Get Active Tables List
         $activeTableList = $this->getActiveTableManager()->findByTableMap($mapId);
+        // get Booked Tables 
+        $bookedTables = $this->getActiveTableOrderManager()->getBookedTablesByRestaurant($restaurantId); 
 
         return array(
             'restaurantList' => $restaurantList,
@@ -467,7 +470,8 @@ class TableDashboardController extends Controller
             'mapId' => $mapId,
             'activeTable' => null,
             'tableOrderList' => null,
-            'activeTableList' => $activeTableList
+            'activeTableList' => $activeTableList,
+            'bookedTables' => $bookedTables
         );
     }
     
@@ -567,6 +571,21 @@ class TableDashboardController extends Controller
                 ),
                 "phone" => $activeTableOrder->getUserPhone()
             ));
+            
+            // Check if user can do table order
+            // devide reserve time on parts
+            $reserveHour = $activeTableOrder->getReserveTime()->format('H');
+            $reserveMin = $activeTableOrder->getReserveTime()->format('i');
+            // get reserve date and time
+            $reserveDateTime = new \DateTime($activeTableOrder->getReserveDate());
+            $reserveDateTime->setTime($reserveHour, $reserveMin);
+            
+            if (!$this->getActiveTableOrderManager()->isUserCanReserveTable($user, $reserveDateTime)) {
+                // render Warning Notification, user cannot order other tables!!!
+                return $this->render('TableRestaurantBundle:Default:user.cannot.order.table.html.twig', array(
+                            'user' => $user
+                ));
+            }
             
             if ($form->isValid()) {
        
