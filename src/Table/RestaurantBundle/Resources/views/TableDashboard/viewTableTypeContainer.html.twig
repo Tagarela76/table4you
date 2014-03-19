@@ -8,16 +8,18 @@
     </div>
 {% endif %}
 {% for tableType in tableTypeList %}  
-    <div class="row-fluid">
-        <div class="span4">
-            {% if tableType.file is not null %}
-                <img tabletypeid="{{tableType.id}}" class="table-type-draggable" src="{{baseUrl}}{{ vich_uploader_asset(tableType, 'file') }}" alt="{{ tableType.peopleCount }}" />
-            {% endif %}
+    {% if tableType.peopleCount !=0 %}
+        <div class="row-fluid">
+            <div class="span4">
+                {% if tableType.file is not null %}
+                    <img tabletypeid="{{tableType.id}}" class="table-type-draggable" src="{{baseUrl}}{{ vich_uploader_asset(tableType, 'file') }}" alt="{{ tableType.peopleCount }}" />
+                {% endif %}
+            </div>
+            <div class="span6">
+                {% trans %}main.tableMap.tableList.tableOn{% endtrans %} {{ tableType.peopleCount }}
+            </div>
         </div>
-        <div class="span6">
-            {% trans %}main.tableMap.tableList.tableOn{% endtrans %} {{ tableType.peopleCount }}
-        </div>
-    </div>
+    {% endif %}
 {% endfor %}
 <script>
     
