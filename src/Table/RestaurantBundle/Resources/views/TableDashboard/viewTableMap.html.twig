@@ -1,10 +1,10 @@
 <script>
     
     $(function() {
-        {% if tableMapObj is not null %}
+        {#   {% if tableMapObj is not null %}
             // load Map Scheme as background
-            page.tableMap.loadMapScheme("{{baseUrl}}{{ vich_uploader_asset(tableMapObj, 'file') }}");
-        {% endif %}
+         //   page.tableMap.loadMapScheme("{{baseUrl}}{{ vich_uploader_asset(tableMapObj, 'file') }}");
+        {% endif %}#}
             
         $(".table-map-droppable").droppable({
             tolerance: 'fit',
