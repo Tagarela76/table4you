@@ -10,7 +10,9 @@
 {% for tableType in tableTypeList %}  
     <div class="row-fluid">
         <div class="span4">
-            <img tabletypeid="{{tableType.id}}" class="table-type-draggable" src="{{baseUrl}}{{ vich_uploader_asset(tableType, 'file') }}" alt="{{ tableType.peopleCount }}" />
+            {% if tableType.file is not null %}
+                <img tabletypeid="{{tableType.id}}" class="table-type-draggable" src="{{baseUrl}}{{ vich_uploader_asset(tableType, 'file') }}" alt="{{ tableType.peopleCount }}" />
+            {% endif %}
         </div>
         <div class="span6">
             {% trans %}main.tableMap.tableList.tableOn{% endtrans %} {{ tableType.peopleCount }}
