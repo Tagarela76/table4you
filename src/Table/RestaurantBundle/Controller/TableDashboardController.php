@@ -165,6 +165,21 @@ class TableDashboardController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($tableType);
             $em->flush();
+            
+            // resize image
+            $helper = $this->container->get('vich_uploader.templating.helper.uploader_helper');
+            $imagePath = getcwd() . $helper->asset($tableType, 'file');
+            
+            // check if file exist
+            if (file_exists($imagePath) && getimagesize($imagePath)) {
+                // resize
+                $resizedImage = new \abeautifulsite\SimpleImage($imagePath);
+                $resizedImage->best_fit(TableType::IMAGE_HEIGHT, TableType::IMAGE_WIDTH)->save($imagePath);
+            } else {
+                // delete entity
+               // $em->remove($tableType);
+               // $em->flush();
+            }
         }
         return $this->redirect(
                         $this->generateUrl("table_viewTableTypeList")
@@ -198,6 +213,22 @@ class TableDashboardController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->persist($tableType);
         $em->flush();
+        if (!is_null($file)) {
+            // resize image
+            $helper = $this->container->get('vich_uploader.templating.helper.uploader_helper');
+            $imagePath = getcwd() . $helper->asset($tableType, 'file');
+            
+            // check if file exist
+            if (file_exists($imagePath) && getimagesize($imagePath)) {
+                // resize
+                $resizedImage = new \abeautifulsite\SimpleImage($imagePath);
+                $resizedImage->best_fit(TableType::IMAGE_HEIGHT, TableType::IMAGE_WIDTH)->save($imagePath);
+            } else {
+                // delete entity
+               // $em->remove($tableType);
+               // $em->flush();
+            }
+        }
 
         return $this->redirect(
                         $this->generateUrl("table_viewTableTypeList")
@@ -268,6 +299,21 @@ class TableDashboardController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($tableMap);
             $em->flush();
+            
+            // resize image
+            $helper = $this->container->get('vich_uploader.templating.helper.uploader_helper');
+            $imagePath = getcwd() . $helper->asset($tableMap, 'file');
+            
+            // check if file exist
+            if (file_exists($imagePath) && getimagesize($imagePath)) {
+                // resize
+                $resizedImage = new \abeautifulsite\SimpleImage($imagePath);
+                $resizedImage->best_fit(TableMap::IMAGE_HEIGHT, TableMap::IMAGE_WIDTH)->save($imagePath);
+            } else {
+                // delete entity
+               // $em->remove($tableMap);
+               // $em->flush();
+            }
         }
         return $this->redirect(
                         $this->generateUrl("table_viewCreateMap")
@@ -329,6 +375,23 @@ class TableDashboardController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->persist($tableMap);
         $em->flush();
+        
+        if (!is_null($file)) {
+            // resize image
+            $helper = $this->container->get('vich_uploader.templating.helper.uploader_helper');
+            $imagePath = getcwd() . $helper->asset($tableMap, 'file');
+            
+            // check if file exist
+            if (file_exists($imagePath) && getimagesize($imagePath)) {
+                // resize
+                $resizedImage = new \abeautifulsite\SimpleImage($imagePath);
+                $resizedImage->best_fit(TableMap::IMAGE_HEIGHT, TableMap::IMAGE_WIDTH)->save($imagePath);
+            } else {
+                // delete entity
+               // $em->remove($tableMap);
+               // $em->flush();
+            }
+        }
 
         return $this->redirect(
                         $this->generateUrl("table_viewCreateMap")

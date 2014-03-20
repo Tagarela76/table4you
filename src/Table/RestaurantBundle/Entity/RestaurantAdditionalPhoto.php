@@ -31,7 +31,7 @@ class RestaurantAdditionalPhoto
     protected $id;
     
     /**
-     * @Assert\File(
+     * @Assert\Image(
      *     maxSize="20M",
      *     mimeTypes={"image/png", "image/jpeg", "image/pjpeg"}
      * )

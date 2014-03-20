@@ -18,6 +18,9 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class TableType
 {
+    const IMAGE_HEIGHT = 60;
+    const IMAGE_WIDTH = 60;
+    
     /**
      * @var integer
      *
@@ -35,7 +38,7 @@ class TableType
     private $peopleCount;
 
     /**
-     * @Assert\File(
+     * @Assert\Image(
      *     maxSize="20M",
      *     mimeTypes={"image/png", "image/jpeg", "image/pjpeg"}
      * )
