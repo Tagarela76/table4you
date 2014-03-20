@@ -2300,3 +2300,7 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     height: 320px;
     margin: 0px !important;
 }
+
+#tableMapDroppable, #table-map-image-container {
+    background-repeat: no-repeat;
+}
