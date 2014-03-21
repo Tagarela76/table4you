@@ -77,13 +77,15 @@ main:
                 loadMap: Загрузить карту
                 floor: Указать этаж
                 hall: Указать номер зала
-                save: Сохранить
-                tableNumber: Указать номер стола
+                save: Применить
+                tableNumber: Номер стола
+                title: Разместить стол на карте
                 cancel: Отмена
                 selectTheFile: Выбрать файл
                 addMore: Добавить еще
             error:
-                floor: Укажите этаж    
+                floor: Укажите этаж
+                numberTable: Укажите номер стола
             errors: Ошибки при заполении формы  
         floor: этаж.
         hall: зал

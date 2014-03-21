@@ -2103,6 +2103,7 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     font-size: 17px;
     font-family: Arial;
 }
+#interactive-map-container .table-map-droppable-right .row-fluid .span4 {margin-left: 15px;}
 #interactive-map-container .table-map-droppable-right .row-fluid .span12 .add-table-but{
     display: inline-block;
     width: 147px;
@@ -2304,4 +2305,75 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
 #tableMapDroppable, #table-map-image-container {
     background-repeat: no-repeat;
     position: relative;
+}
+#tableNumberContainer{width: 286px;margin-left: -143px;}
+#tableNumberContainer .modal-header span{
+    color: #454545;
+    font-family: Arial;
+    font-weight: bold;
+    font-size: 17px;
+    line-height: 30px;
+}
+#tableNumberContainer .modal-body .container-fluid{padding-top: 24px;}
+#tableNumberContainer .modal-body .row-fluid .span12{position: relative;}
+#tableNumberContainer .modal-body .row-fluid .span12 label{
+    float: left;
+    color: #454545;
+    font-size: 16px;
+    font-family: Arial;
+    padding-left: 14px;
+    padding-right: 18px;
+    margin-top: 6px;
+}
+#tableNumberContainer .modal-body .row-fluid .span12 input.number-table{
+    width: 132px;
+    height: 18px;
+    float: left;
+    padding: 6px 6px;
+    border: 0;
+    overflow: hidden;
+    -moz-border-radius: 7px 7px 7px 7px;
+    -webkit-border-radius: 7px 7px 7px 7px;
+    -o-border-radius: 7px 7px 7px 7px;
+    border-radius: 7px 7px 7px 7px;
+    -moz-box-shadow: inset 1px 0px 3px rgba(238, 238, 238, 0.7), inset -2px 0px 3px rgba(238, 238, 238,0.7), inset 0px 2px 0px rgba(0, 0, 0, 0.6);
+    -webkit-box-shadow: inset 1px 0px 3px rgba(238, 238, 238, 0.7), inset -2px 0px 3px rgba(238, 238, 238,0.7), inset 0px 2px 0px rgba(0, 0, 0, 0.6);
+    box-shadow: inset 1px 0px 3px rgba(238, 238, 238, 0.7), inset -2px 0px 3px rgba(238, 238, 238,0.7), inset 0px 2px 0px rgba(0, 0, 0, 0.6);
+    border-right: 1px solid #d9d9d9;
+    border-left: 1px solid #d9d9d9;
+    border-top: 1px solid #f2f2f2;
+    border-bottom: 1px solid #f2f2f2;
+    background: #fff;
+}
+#tableNumberContainer .modal-body .row-fluid .span12 input.number-table:focus{border: 1px solid #fe8504;outline: none;box-shadow: none;}
+#tableNumberContainer .modal-body .row-fluid+.row-fluid .span12{text-align: center;}
+#tableNumberContainer .modal-body .row-fluid .span12 .btn-save{
+    width: 149px;
+    height: 32px;
+    color: #fefcfb;
+    float: none;
+    font-size: 17px;
+    font-family: Arial;
+    border: 0;
+    box-shadow: none;
+    -moz-border-radius: 7px 7px 7px 7px;
+    -webkit-border-radius: 7px 7px 7px 7px;
+    -o-border-radius: 7px 7px 7px 7px;
+    border-radius: 7px 7px 7px 7px;
+    background: #f9bd34;
+    background: -moz-linear-gradient(top, #f9bd34 0%, #f09a32 53%, #ed7a00 60%, #e04c00 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f9bd34), color-stop(53%,#f09a32), color-stop(60%,#ed7a00), color-stop(100%,#e04c00));
+    background: -webkit-linear-gradient(top, #f9bd34 0%,#f09a32 53%,#ed7a00 60%,#e04c00 100%);
+    background: -o-linear-gradient(top, #f9bd34 0%,#f09a32 53%,#ed7a00 60%,#e04c00 100%);
+    background: -ms-linear-gradient(top, #f9bd34 0%,#f09a32 53%,#ed7a00 60%,#e04c00 100%);
+    background: linear-gradient(to bottom, #f9bd34 0%,#f09a32 53%,#ed7a00 60%,#e04c00 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9bd34', endColorstr='#e04c00',GradientType=0 );
+}
+#tableNumberContainer .modal-body .row-fluid .span12 .validationError{
+    margin: 0px 29px 0px 0px;
+    position: absolute;
+    bottom: -10px;
+    right: 0;
+    color: #FF0000;
+    font-size: 11px;
 }
