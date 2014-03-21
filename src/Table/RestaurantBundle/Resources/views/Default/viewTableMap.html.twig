@@ -24,7 +24,7 @@
                 <img id="activeTable_{{activeTable.id}}" title="{{activeTable.tableNumber}} {% trans %}main.tableMap.createMap.table{% endtrans %}" 
                      onClick='page.tableOrder.selectActiveTable({{activeTable.id}});'
                      class="active-table-img"
-                     style="width: 60px; margin-left: {{activeTable.leftPosition}}px; margin-top: {{activeTable.topPosition}}px; box-shadow: 10px 10px 5px {% if activeTable.id in bookedTables %}red{% else %}green{% endif %};"
+                     style="width: 60px; position: relative;  left: {{activeTable.leftPosition}}px; top: {{activeTable.topPosition}}px; box-shadow: 10px 10px 5px {% if activeTable.id in bookedTables %}red{% else %}green{% endif %};"
                      src="{{baseUrl}}{{ vich_uploader_asset(activeTable.tableType, 'file') }}"  />
             {% endfor %}
         </div>
