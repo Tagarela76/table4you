@@ -5,8 +5,8 @@ function ActiveTable() {
     this.updateActiveTablePosition = function(activeTableId) {
         
         // Get new position
-        var left = $("#activeTable_" + activeTableId).position().left - $("#tableMapDroppable").position().left;
-        var top = $("#activeTable_" + activeTableId).position().top - $("#tableMapDroppable").position().top;
+        var left = $("#activeTable_" + activeTableId).position().left/* - $("#tableMapDroppable").position().left*/;
+        var top = $("#activeTable_" + activeTableId).position().top/* - $("#tableMapDroppable").position().top*/;
 
         // Get new position
         $.ajax({
