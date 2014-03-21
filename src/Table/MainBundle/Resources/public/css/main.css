@@ -2296,8 +2296,8 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
 .tableMapContainer #interactive-map-container #activeTableOrderContainer .table-order-input img{margin-right: 25px;}
 
 #table-map-image-container {
-    width: 390px;
-    height: 320px;
+    width: 500px;
+    height: 500px;
     margin: 0px !important;
 }
 
