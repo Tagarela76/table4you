@@ -11,7 +11,7 @@
 <div class="restaurant-photo-modal">
     <ul>
        {% for tableMap in tableMapList %}  
-            {% if tableMap.hall is not null %}
+            {% if tableMap.hall is not null and tableMap.hall %}
                 <li>
                     <a href="#" class="halls{% if tableMapObj.id == tableMap.id %} active{% endif %}"onclick="page.tableOrder.loadMap(this, {{tableMap.id}})">{{tableMap.hall}} {% trans %}main.tableMap.createMap.hall{% endtrans %}</a>
                 </li>    
