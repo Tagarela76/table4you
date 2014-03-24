@@ -31,7 +31,7 @@ class RestaurantAdditionalPhoto
     protected $id;
     
     /**
-     * @Assert\Image(
+     * @Assert\File(
      *     maxSize="20M",
      *     mimeTypes={"image/png", "image/jpeg", "image/pjpeg"}
      * )
@@ -45,7 +45,7 @@ class RestaurantAdditionalPhoto
     protected $fileName;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Restaurant", inversedBy="additionalPhotos")
+     * @ORM\ManyToOne(targetEntity="Restaurant", inversedBy="additionalAdditionalPhotos")
      * @ORM\JoinColumn(name="restaurant_id", referencedColumnName="id")
      */
     protected $restaurant;
@@ -57,8 +57,7 @@ class RestaurantAdditionalPhoto
      * @var string
      */
     protected $thumbFileName;
-
-
+    
     public function getId()
     {
         return $this->id;
@@ -105,7 +104,7 @@ class RestaurantAdditionalPhoto
             return null;
         }
         if (is_null($this->thumbFileName)) {
-            $imageArray = explode(".", $this->getFileName()); 
+            $imageArray = explode(".", $this->getFileName());
             //1 Get extension
             $imageExt = end($imageArray);
             //2. Init thumb name
@@ -115,9 +114,10 @@ class RestaurantAdditionalPhoto
                     $imageName .= $imagePart;
                 }
             }
-            $thumbImage = $imageName . "_thumb." . $imageExt;           
+            $thumbImage = $imageName . "_thumb." . $imageExt;
             $this->setThumbFileName($thumbImage);
             return $thumbImage;
+                
         } else {
             return $this->thumbFileName;
         }
@@ -127,8 +127,7 @@ class RestaurantAdditionalPhoto
     {
         $this->thumbFileName = $thumbFileName;
     }
-
-        
+    
     /**
      * @return string
      */
