@@ -1,0 +1,7 @@
+{% for activeTable in activeTableList %}
+    <img title="{{activeTable.tableNumber}} {% trans %}main.tableMap.createMap.table{% endtrans %}" 
+         id="tableContainer_{{activeTable.id}}" onclick='page.tableOrder.loadOrderList({{activeTable.id}});'
+         class="active-table-img"
+         style="width: 60px; position: absolute; left: {{activeTable.leftPosition}}px; top: {{activeTable.topPosition}}px; box-shadow: 10px 10px 5px {% if activeTable.id in bookedTables %}red{% else %}green{% endif %};"
+         tabletypeid='{{activeTable.tableType.id}}' src="{{baseUrl}}{{ vich_uploader_asset(activeTable.tableType, 'file') }}"  />
+{% endfor %} 

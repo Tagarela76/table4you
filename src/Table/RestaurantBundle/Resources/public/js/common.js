@@ -319,6 +319,24 @@ function TableOrder() {
 
     var that = this;
     
+    this.refreshBookedTableListInAdminDashboard = function(filterDate) {
+        // get map id
+        var mapId = $("#mapId").val();
+        
+        // Get time
+        var filterTime = $("#tableOrderTimepicker").val();
+        // change table map
+        $.ajax({
+            url: Routing.generate('table_refreshBookedTableListInAdminDashboard'),
+            data: {mapId: mapId, filterDate: filterDate, filterTime: filterTime},
+            type: "GET",
+            dataType: "html",
+            success: function(responce) {
+                $('#table-map-image-container').html(responce);
+            }
+        });
+    }
+    
     this.refreshBookedTableList = function() {
         // get restaurant id
         var restaurantId = $("#restaurantId").val();
@@ -666,7 +684,6 @@ function Page() {
     this.tableType = new TableType();
     this.tableMap = new TableMap();
     this.activeTable = new ActiveTable();
-    this.t = new ActiveTable();
 }
 
 //global page object
