@@ -24,7 +24,7 @@
     width: 100%;
 }
 
-#barousel_thslide_menus .barousel_image img
+#barousel_thslide_menus .barousel_image img, #barousel_thslide_add_photos .barousel_image img
 {
     position:absolute;
     width: 100%;
@@ -239,12 +239,6 @@
     margin-top: -10px;
 }
 
-/*.thslide_nav_previous a:hover,
-.thslide_nav_next a:hover
-{
-    background-color:#999;
-}*/
-
 .thslide_list
 {
     float:left;
@@ -266,18 +260,17 @@
 .thslide_list li
 {
     float:left;
-    margin-right:16px;
     height: 110px;
-    width: 192px;
 }
 
-#barousel_thslide_menus .thslide_list li{margin-right:17px;}
+#barousel_thslide_menus .thslide_list li, #barousel_thslide_add_photos .thslide_list li {
+    margin-right:17px;
+}
 
 .thslide_list li a
 {
     display:block;
     position:relative;
-    width: 192px;
     height: 110px;
     text-decoration:none;
 }
@@ -297,24 +290,12 @@
     height:62px;    
 }
 
-/*.thslide_list li a:hover span,
-.thslide_list li a.current span
-{    
-    border:3px solid #fff55b;
-}*/
-
-/* Specific implementation */
-/*#barousel_thslide
-{
-    height:400px;
-}*/
-
 #barousel_thslide .barousel_content
 {
     bottom:81px;
 }
 
-#thslide_barousel_nav, #thslide_barousel_nav_menus
+#thslide_barousel_nav_add_photos, #thslide_barousel_nav_menus
 {
     position:absolute;
     bottom:0;
@@ -363,35 +344,35 @@
 
 #nav
 {
-	position:fixed;
-	top:3px;
-	left:537px;
-	width:250px;
+    position:fixed;
+    top:3px;
+    left:537px;
+    width:250px;
 }
 
 #nav li
 {	
-	font-size:0.88em;
-	font-weight:bold;
+    font-size:0.88em;
+    font-weight:bold;
 }
 
 #nav li a
 {
-	display:block;	
-	text-decoration:none;
-	padding:7px 10px;
+    display:block;	
+    text-decoration:none;
+    padding:7px 10px;
 }
 
 #nav li a:hover
 {
-	color:#fff;
+    color:#fff;
 }
 
 #nav_barousel
 {
-	background-color:#fff55b;
+    background-color:#fff55b;
 }
-    
+
 #nav_thslide
 {
     background-color:#6ec1dd;
@@ -404,7 +385,7 @@
 
 #footer
 {
-	margin:10px 5px 0 5px;
+    margin:10px 5px 0 5px;
 }
 
 /*--------------------------------------------------=> UTILITY CLASSES */
@@ -484,8 +465,16 @@
 
 /* Menu */
 #barousel_thslide_menus .thslide_list li{
-     width: 86px;
- }
-#barousel_thslide_menus .thslide_list li a{
     width: 86px;
+}
+#barousel_thslide_menus .thslide_list li a {
+    width: 86px;
+}
+
+/* Additional photos */
+#barousel_thslide_add_photos .thslide_list li{
+    width: 189px;
+}
+#barousel_thslide_add_photos .thslide_list li a {
+    width: 189px;
 }
