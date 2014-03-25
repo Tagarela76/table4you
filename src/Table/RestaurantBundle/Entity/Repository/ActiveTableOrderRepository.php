@@ -179,7 +179,7 @@ class ActiveTableOrderRepository extends EntityRepository
         $endTime = clone $dateTime; // first init
         // devide on date & time
         $date = $dateTime->format("Y-m-d");
-        $time = $dateTime->format("H:i");   
+        $time = $dateTime->format("H:i");    
         switch (true) {
             case ($time < "16:00") :           
                 // get start time (+-1.5h)
@@ -197,7 +197,7 @@ class ActiveTableOrderRepository extends EntityRepository
                 // modify only end time
                 $endTime->setTime(23, 59);
                 break;
-        }
+        }  
         $query->andWhere('activeTableOrder.reserveDate = :reserveDate')
               ->setParameter('reserveDate', $date)
               ->andWhere('activeTableOrder.reserveTime BETWEEN :startTime AND :endTime')

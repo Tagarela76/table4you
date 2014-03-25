@@ -203,3 +203,11 @@ table_refreshBookedTableList:
         _method: GET  
     options:
        expose: true         
+       
+table_refreshBookedTableListInAdminDashboard:
+    pattern:  /refreshBookedTableListInAdminDashboard
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:refreshBookedTableList }
+    requirements:
+        _method: GET  
+    options:
+       expose: true           

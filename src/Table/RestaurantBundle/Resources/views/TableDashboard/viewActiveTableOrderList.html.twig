@@ -26,6 +26,11 @@
         <input type="text" size="5" id="tableOrderTimepicker">
     </div>
 </div>
+<div class="row-fluid">
+    <div class="span2">
+        <input class="button" type="button" value="{% trans %}main.tableMap.orders.list.filter{% endtrans %} " onclick="page.tableOrder.refreshBookedTableListInAdminDashboard($('#tableOrderDatepicker').val())"/>
+    </div>
+</div>
 {% if tableOrderList is not null %}
     {% for tableOrder in tableOrderList %}  
         <div class="row-fluid" style="border: 1px solid #ccc;">
@@ -57,7 +62,11 @@
         $( "#tableOrderDatepicker" ).datepicker({
                 showOn: "button",
                 buttonImage: "{{ asset('bundles/tablemain/images/calendar.png') }}",
-                buttonImageOnly: true
+                buttonImageOnly: true,
+                onSelect: function(filterDate) {
+                    page.tableOrder.refreshBookedTableListInAdminDashboard(filterDate);
+                    $("#filterDate").val(filterDate);
+                }
         });
         
         // Init time entry

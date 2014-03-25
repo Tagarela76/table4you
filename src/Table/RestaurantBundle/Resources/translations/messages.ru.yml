@@ -101,6 +101,7 @@ main:
             persons: персоны
             date: Дата
             timeFrom: Время с
+            filter: Фильтровать
         form:
             label:
                 date: "Дата:"

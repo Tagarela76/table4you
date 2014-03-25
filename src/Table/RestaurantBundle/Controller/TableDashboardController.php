@@ -18,6 +18,50 @@ use Symfony\Component\HttpFoundation\Request;
 
 class TableDashboardController extends Controller
 {
+    /**
+     * Refreash Booked Tables list
+     * 
+     * @Template()
+     */
+    public function refreshBookedTableListAction()
+    {
+        // Get map id
+        $mapId = $this->getRequest()->query->get('mapId');
+        
+        // init map obj
+        $tableMap = $this->getTableMapManager()->findOneById($mapId);
+        // Get Filter Date
+        $filterDate = $this->getRequest()->query->get('filterDate');
+        // Get Filter Time
+        $filterTime = $this->getRequest()->query->get('filterTime');
+        
+        // transform to date time
+        $dateTime = new \DateTime($filterDate . " " . $filterTime);
+        
+        // get Current user
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            // redirect on homepage
+            return $this->redirect(
+                $this->generateUrl("table_main_homepage")
+            );
+        }
+
+        // Get Active Tables List
+        $activeTableList = $this->getActiveTableManager()->findByTableMap($mapId);
+       
+        // get Booked Tables 
+        $bookedTables = $this->getActiveTableOrderManager()->getBookedTablesByRestaurant($tableMap->getRestaurant()->getId(), $dateTime);  
+        
+        // assign base_url
+        $baseUrl = $this->container->getParameter('base_folder_url');
+        
+        return $this->render('TableRestaurantBundle:TableDashboard:viewRefreshedBookedTableList.html.twig', array(
+            'baseUrl' => $baseUrl,
+            'activeTableList' => $activeTableList,
+            'bookedTables' => $bookedTables
+        ));
+    }
 
     /**
      * Get user manager
