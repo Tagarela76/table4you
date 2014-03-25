@@ -298,8 +298,7 @@ class TableDashboardController extends Controller
             }
             $em = $this->getDoctrine()->getManager();
             $em->persist($tableMap);
-            $em->flush();
-            
+            $em->flush();    
             // resize image
             $helper = $this->container->get('vich_uploader.templating.helper.uploader_helper');
             $imagePath = getcwd() . $helper->asset($tableMap, 'file');
@@ -316,7 +315,10 @@ class TableDashboardController extends Controller
             }
         }
         return $this->redirect(
-                        $this->generateUrl("table_viewCreateMap")
+            $this->generateUrl(
+                "table_viewCreateMap", array(
+                    "restaurantId" => $restaurant->getId()
+                ))
         );
     }
     
@@ -431,7 +433,10 @@ class TableDashboardController extends Controller
         $em->flush();
 
         return $this->redirect(
-                        $this->generateUrl("table_viewCreateMap")
+            $this->generateUrl(
+                "table_viewCreateMap", array(
+                    "restaurantId" => $tableMap->getRestaurant()->getId()
+                )) . "?mapId={$mapId}"
         );
     }
     
