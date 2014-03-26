@@ -319,6 +319,18 @@ function TableOrder() {
 
     var that = this;
     
+    this.viewFilter = function() {
+
+        $.ajax({
+            url: Routing.generate('table_viewActiveTableOrderFilter'),
+            type: "GET",
+            dataType: "html",
+            success: function(response) { 
+                $("#activeTableOrderContainer").html(response);
+            }  
+	}); 
+    }
+    
     this.refreshBookedTableListInAdminDashboard = function(filterDate) {
         // get map id
         var mapId = $("#mapId").val();
@@ -429,10 +441,10 @@ function TableOrder() {
             }
         });
     }
-    this.loadOrderList = function(tableId) {
+    this.loadOrderList = function(tableId, acceptReserve) {
         $.ajax({
             url: Routing.generate('table_viewActiveTableOrderList'),
-            data: {tableId: tableId},
+            data: {tableId: tableId, acceptReserve: acceptReserve},
             type: "GET",
             dataType: "html",
             success: function(response) { 

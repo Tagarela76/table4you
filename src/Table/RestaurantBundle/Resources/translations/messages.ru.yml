@@ -102,6 +102,7 @@ main:
             date: Дата
             timeFrom: Время с
             filter: Фильтровать
+            reserve: Reserve
         form:
             label:
                 date: "Дата:"

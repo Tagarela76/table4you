@@ -3,6 +3,7 @@
 namespace Table\RestaurantBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Table\RestaurantBundle\Entity\ActiveTableOrder;
 
 /**
  * TableOrderRepository
@@ -204,6 +205,42 @@ class ActiveTableOrderRepository extends EntityRepository
               ->setParameter('startTime', $startTime->format('H:i:s'))
               ->setParameter('endTime', $endTime->format('H:i:s'))
               ->distinct('activeTable.id');
+
+        return $query->getQuery()->getResult();
+    }
+    
+    /**
+     * 
+     * Get Order History by Active Table
+     * 
+     * @param integer $activeTable
+     * 
+     * 
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function getActiveTableOrderHistory($activeTable)
+    {
+        $query = $this->createQueryBuilder('tableOrder');
+        $query->where('tableOrder.activeTable = :activeTable')
+                ->setParameter('activeTable', $activeTable);
+        
+        // Show all completed and not processed orders
+        $orderNothingDidStatus = ActiveTableOrder::ORDER_NOTHING_DID_STATUS_CODE;
+        $orderAcceptStatus = ActiveTableOrder::ORDER_ACCEPT_STATUS_CODE;
+        $query->andWhere('tableOrder.status = :orderNothingDidStatus OR tableOrder.status = :orderAcceptStatus')
+              ->setParameter('orderNothingDidStatus', $orderNothingDidStatus)
+              ->setParameter('orderAcceptStatus', $orderAcceptStatus);  
+        
+        // Show only actual orders, not earlier that now
+        // Get current DateTime
+        $currentDateTime = new \DateTime("now");
+        $currentDate = $currentDateTime->format("Y-m-d");
+        $currentTime = $currentDateTime->format("H:i");
+        $query->andWhere('(tableOrder.reserveDate > :currentDate) OR (tableOrder.reserveDate = :currentDate AND tableOrder.reserveTime > :currentTime)')
+              ->setParameter('currentDate', $currentDate)
+              ->setParameter('currentTime', $currentTime); 
+        
+        $query->orderBy('tableOrder.reserveDate, tableOrder.reserveTime', 'ASC');
 
         return $query->getQuery()->getResult();
     }

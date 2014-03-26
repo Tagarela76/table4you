@@ -78,6 +78,7 @@ main:
             date: Date
             timeFrom: Time from
             filter: Filter
+            reserve: Reserve
         form:
             label:
                 date: "Date:"

@@ -38,10 +38,10 @@
               <argument>ApplicationSonataAdminBundle</argument>
           </call>
       </service>
-      <service id="sonata.admin.tableOrder" class="Application\Sonata\AdminBundle\Controller\TableOrderAdmin">
+      <service id="sonata.admin.activeTableOrder" class="Application\Sonata\AdminBundle\Controller\ActiveTableOrderAdmin">
           <tag name="sonata.admin" manager_type="orm" group="Restaurant" label="restaurant.tableOrder.label"/>
           <argument />
-          <argument>Table\RestaurantBundle\Entity\TableOrder</argument>
+          <argument>Table\RestaurantBundle\Entity\ActiveTableOrder</argument>
           <argument>SonataAdminBundle:CRUD</argument>
           <call method="setTranslationDomain">
               <argument>ApplicationSonataAdminBundle</argument>
