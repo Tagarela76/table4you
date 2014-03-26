@@ -13,7 +13,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ActiveTableOrderAdmin extends Admin
 {
-
     /**
      * Send accept order  notifiction to customer
      * 
@@ -139,8 +138,7 @@ class ActiveTableOrderAdmin extends Admin
         }
 
         // sent sms if needed
-        if (!is_null($phone = $activeTableOrder->getUser()->getPhone())) {
-            
+        if (!is_null($phone = $activeTableOrder->getUser()->getPhone())) {            
             if ($activeTableOrder->getIsSms()) {
                 // get sms text 
                 $text = $container->get('templating')->render(
@@ -224,7 +222,6 @@ class ActiveTableOrderAdmin extends Admin
 
                     // sent notification to custorem 
                     $this->sendRejectTableOrderNotification4customer($object);
-
                     break;
                 // accept
                 case ActiveTableOrder::ORDER_ACCEPT_STATUS_CODE :
