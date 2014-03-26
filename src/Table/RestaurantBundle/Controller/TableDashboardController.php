@@ -19,6 +19,16 @@ use Symfony\Component\HttpFoundation\Request;
 class TableDashboardController extends Controller
 {
     /**
+     * View Active Table Order Filter
+     * 
+     * @Template()
+     */
+    public function viewActiveTableOrderFilterAction()
+    {
+        return array();
+    }
+    
+    /**
      * Refreash Booked Tables list
      * 
      * @Template()
@@ -597,10 +607,12 @@ class TableDashboardController extends Controller
     {
         // get table id
         $tableId = $this->getRequest()->query->get('tableId');
+        // Can we reserve it?
+        $acceptReserve = $this->getRequest()->query->get('acceptReserve');
         // init table
         $activeTable = $this->getActiveTableManager()->findOneById($tableId);
         //get Order list
-        $tableOrderList = $this->getActiveTableOrderManager()->findByActiveTable($tableId);
+        $tableOrderList = $this->getActiveTableOrderManager()->getActiveTableOrderHistory($tableId);
         
         //init form for table reserve
         $activeTableOrder = new ActiveTableOrder();
@@ -610,7 +622,8 @@ class TableDashboardController extends Controller
             'activeTable' => $activeTable,
             'tableOrderList' => $tableOrderList,
             'form' => $form,
-            'successReserve' => false // BY default
+            'successReserve' => false, // BY default
+            'acceptReserve' => $acceptReserve
         );
     }
     
@@ -630,16 +643,20 @@ class TableDashboardController extends Controller
 
         // init table Order
         $tableOrder = $this->getActiveTableOrderManager()->findOneById($tableOrderId);
-
+        // Reject Order
+        $tableOrder->setStatus(ActiveTableOrder::ORDER_REJECT_STATUS_CODE);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($tableOrder);
+        $em->flush();
+        
+        // Send reject message to customer
+        $response = $this->getActiveTableOrderManager()->sendRejectTableOrderNotification4customer($tableOrder);
+        
         // get Table 
         $activeTable = $tableOrder->getActiveTable();
-        // delete Table Order
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($tableOrder);
-        $em->flush();
 
         //get Order list
-        $tableOrderList = $this->getActiveTableOrderManager()->findByActiveTable($activeTable->getId());
+        $tableOrderList = $this->getActiveTableOrderManager()->getActiveTableOrderHistory($activeTable->getId());
 
         return $this->render('TableRestaurantBundle:TableDashboard:viewActiveTableOrderList.html.twig', array(
                     'tableOrderList' => $tableOrderList,
