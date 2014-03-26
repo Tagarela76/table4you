@@ -210,4 +210,12 @@ table_refreshBookedTableListInAdminDashboard:
     requirements:
         _method: GET  
     options:
-       expose: true           
+       expose: true  
+       
+table_viewActiveTableOrderFilter:
+    pattern:  /viewActiveTableOrderFilter
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:viewActiveTableOrderFilter }
+    requirements:
+        _method: GET  
+    options:
+       expose: true             
