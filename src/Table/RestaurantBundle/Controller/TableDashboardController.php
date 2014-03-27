@@ -450,7 +450,10 @@ class TableDashboardController extends Controller
         }
 
         return $this->redirect(
-                        $this->generateUrl("table_viewCreateMap")
+            $this->generateUrl(
+                "table_viewCreateMap", array(
+                    "restaurantId" => $tableMap->getRestaurant()->getId()
+                )) . "?mapId={$tableMapId}"
         );
     }
     
