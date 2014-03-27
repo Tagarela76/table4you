@@ -46,7 +46,7 @@
             <li {% if tableMap.id == mapId%} class="active" {% endif %}>
                 <a href="{{ path('table_viewCreateMap', {'restaurantId': restaurantId, 'mapId': tableMap.id}) }}">
                     {{tableMap.floor}} {% trans %}main.tableMap.createMap.floor{% endtrans %}
-                    {% if tableMap.hall is not null %}
+                    {% if tableMap.hall is not null  and tableMap.hall%}
                         {{tableMap.hall}} {% trans %}main.tableMap.createMap.hall{% endtrans %}
                     {% endif %}
                 </a>

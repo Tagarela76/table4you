@@ -104,6 +104,8 @@ main:
             persons: персоны
             date: Дата
             timeFrom: Время с
+            filter: Фильтровать
+            reserve: Резервировать
         form:
             label:
                 date: "Дата:"

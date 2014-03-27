@@ -319,6 +319,36 @@ function TableOrder() {
 
     var that = this;
     
+    this.viewFilter = function() {
+
+        $.ajax({
+            url: Routing.generate('table_viewActiveTableOrderFilter'),
+            type: "GET",
+            dataType: "html",
+            success: function(response) { 
+                $("#activeTableOrderContainer").html(response);
+            }  
+	}); 
+    }
+    
+    this.refreshBookedTableListInAdminDashboard = function(filterDate) {
+        // get map id
+        var mapId = $("#mapId").val();
+        
+        // Get time
+        var filterTime = $("#tableOrderTimepicker").val();
+        // change table map
+        $.ajax({
+            url: Routing.generate('table_refreshBookedTableListInAdminDashboard'),
+            data: {mapId: mapId, filterDate: filterDate, filterTime: filterTime},
+            type: "GET",
+            dataType: "html",
+            success: function(responce) {
+                $('#table-map-image-container').html(responce);
+            }
+        });
+    }
+    
     this.refreshBookedTableList = function() {
         // get restaurant id
         var restaurantId = $("#restaurantId").val();
@@ -411,10 +441,10 @@ function TableOrder() {
             }
         });
     }
-    this.loadOrderList = function(tableId) {
+    this.loadOrderList = function(tableId, acceptReserve) {
         $.ajax({
             url: Routing.generate('table_viewActiveTableOrderList'),
-            data: {tableId: tableId},
+            data: {tableId: tableId, acceptReserve: acceptReserve},
             type: "GET",
             dataType: "html",
             success: function(response) { 
@@ -666,7 +696,6 @@ function Page() {
     this.tableType = new TableType();
     this.tableMap = new TableMap();
     this.activeTable = new ActiveTable();
-    this.t = new ActiveTable();
 }
 
 //global page object

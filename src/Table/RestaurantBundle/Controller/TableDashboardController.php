@@ -18,6 +18,60 @@ use Symfony\Component\HttpFoundation\Request;
 
 class TableDashboardController extends Controller
 {
+    /**
+     * View Active Table Order Filter
+     * 
+     * @Template()
+     */
+    public function viewActiveTableOrderFilterAction()
+    {
+        return array();
+    }
+    
+    /**
+     * Refreash Booked Tables list
+     * 
+     * @Template()
+     */
+    public function refreshBookedTableListAction()
+    {
+        // Get map id
+        $mapId = $this->getRequest()->query->get('mapId');
+        
+        // init map obj
+        $tableMap = $this->getTableMapManager()->findOneById($mapId);
+        // Get Filter Date
+        $filterDate = $this->getRequest()->query->get('filterDate');
+        // Get Filter Time
+        $filterTime = $this->getRequest()->query->get('filterTime');
+        
+        // transform to date time
+        $dateTime = new \DateTime($filterDate . " " . $filterTime);
+        
+        // get Current user
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            // redirect on homepage
+            return $this->redirect(
+                $this->generateUrl("table_main_homepage")
+            );
+        }
+
+        // Get Active Tables List
+        $activeTableList = $this->getActiveTableManager()->findByTableMap($mapId);
+       
+        // get Booked Tables 
+        $bookedTables = $this->getActiveTableOrderManager()->getBookedTablesByRestaurant($tableMap->getRestaurant()->getId(), $dateTime);  
+        
+        // assign base_url
+        $baseUrl = $this->container->getParameter('base_folder_url');
+        
+        return $this->render('TableRestaurantBundle:TableDashboard:viewRefreshedBookedTableList.html.twig', array(
+            'baseUrl' => $baseUrl,
+            'activeTableList' => $activeTableList,
+            'bookedTables' => $bookedTables
+        ));
+    }
 
     /**
      * Get user manager
@@ -298,8 +352,7 @@ class TableDashboardController extends Controller
             }
             $em = $this->getDoctrine()->getManager();
             $em->persist($tableMap);
-            $em->flush();
-            
+            $em->flush();    
             // resize image
             $helper = $this->container->get('vich_uploader.templating.helper.uploader_helper');
             $imagePath = getcwd() . $helper->asset($tableMap, 'file');
@@ -316,7 +369,10 @@ class TableDashboardController extends Controller
             }
         }
         return $this->redirect(
-                        $this->generateUrl("table_viewCreateMap")
+            $this->generateUrl(
+                "table_viewCreateMap", array(
+                    "restaurantId" => $restaurant->getId()
+                ))
         );
     }
     
@@ -394,7 +450,10 @@ class TableDashboardController extends Controller
         }
 
         return $this->redirect(
-                        $this->generateUrl("table_viewCreateMap")
+            $this->generateUrl(
+                "table_viewCreateMap", array(
+                    "restaurantId" => $tableMap->getRestaurant()->getId()
+                )) . "?mapId={$tableMapId}"
         );
     }
     
@@ -431,7 +490,10 @@ class TableDashboardController extends Controller
         $em->flush();
 
         return $this->redirect(
-                        $this->generateUrl("table_viewCreateMap")
+            $this->generateUrl(
+                "table_viewCreateMap", array(
+                    "restaurantId" => $tableMap->getRestaurant()->getId()
+                )) . "?mapId={$mapId}"
         );
     }
     
@@ -548,10 +610,12 @@ class TableDashboardController extends Controller
     {
         // get table id
         $tableId = $this->getRequest()->query->get('tableId');
+        // Can we reserve it?
+        $acceptReserve = $this->getRequest()->query->get('acceptReserve');
         // init table
         $activeTable = $this->getActiveTableManager()->findOneById($tableId);
         //get Order list
-        $tableOrderList = $this->getActiveTableOrderManager()->findByActiveTable($tableId);
+        $tableOrderList = $this->getActiveTableOrderManager()->getActiveTableOrderHistory($tableId);
         
         //init form for table reserve
         $activeTableOrder = new ActiveTableOrder();
@@ -561,7 +625,8 @@ class TableDashboardController extends Controller
             'activeTable' => $activeTable,
             'tableOrderList' => $tableOrderList,
             'form' => $form,
-            'successReserve' => false // BY default
+            'successReserve' => false, // BY default
+            'acceptReserve' => $acceptReserve
         );
     }
     
@@ -581,16 +646,20 @@ class TableDashboardController extends Controller
 
         // init table Order
         $tableOrder = $this->getActiveTableOrderManager()->findOneById($tableOrderId);
-
+        // Reject Order
+        $tableOrder->setStatus(ActiveTableOrder::ORDER_REJECT_STATUS_CODE);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($tableOrder);
+        $em->flush();
+        
+        // Send reject message to customer
+        $response = $this->getActiveTableOrderManager()->sendRejectTableOrderNotification4customer($tableOrder);
+        
         // get Table 
         $activeTable = $tableOrder->getActiveTable();
-        // delete Table Order
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($tableOrder);
-        $em->flush();
 
         //get Order list
-        $tableOrderList = $this->getActiveTableOrderManager()->findByActiveTable($activeTable->getId());
+        $tableOrderList = $this->getActiveTableOrderManager()->getActiveTableOrderHistory($activeTable->getId());
 
         return $this->render('TableRestaurantBundle:TableDashboard:viewActiveTableOrderList.html.twig', array(
                     'tableOrderList' => $tableOrderList,

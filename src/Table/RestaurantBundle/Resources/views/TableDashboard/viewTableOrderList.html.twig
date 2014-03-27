@@ -41,7 +41,7 @@
                     <li {% if tableMap.id == mapId%} class="active" {% endif %}>
                         <a href="{{ path('table_viewTableOrderList', {'restaurantId': restaurantId, 'mapId': tableMap.id}) }}">
                             {{tableMap.floor}} {% trans %}main.tableMap.createMap.floor{% endtrans %}
-                            {% if tableMap.hall is not null %}
+                            {% if tableMap.hall is not null  and tableMap.hall %}
                                 {{tableMap.hall}} {% trans %}main.tableMap.createMap.hall{% endtrans %}
                             {% endif %}
                         </a>
@@ -52,16 +52,10 @@
         </div>
         <div class="row-fluid" id="interactive-map-container">
             <div id="table-map-image-container" class="span8">
-                {% for activeTable in activeTableList %}
-                    <img title="{{activeTable.tableNumber}} {% trans %}main.tableMap.createMap.table{% endtrans %}" 
-                         id="tableContainer_{{activeTable.id}}" onclick='page.tableOrder.loadOrderList({{activeTable.id}});'
-                         class="active-table-img"
-                         style="width: 60px; position: absolute; left: {{activeTable.leftPosition}}px; top: {{activeTable.topPosition}}px; box-shadow: 10px 10px 5px {% if activeTable.id in bookedTables %}red{% else %}green{% endif %};"
-                         tabletypeid='{{activeTable.tableType.id}}' src="{{baseUrl}}{{ vich_uploader_asset(activeTable.tableType, 'file') }}"  />
-                {% endfor %} 
+                {% include 'TableRestaurantBundle:TableDashboard:viewRefreshedBookedTableList.html.twig' %} 
             </div>
             <div class="span4" id="activeTableOrderContainer">
-                {% include 'TableRestaurantBundle:TableDashboard:viewActiveTableOrderList.html.twig' %} 
+                {% include 'TableRestaurantBundle:TableDashboard:viewActiveTableOrderFilter.html.twig' %} 
             </div>
             <input type="hidden" name="mapId" id="mapId" value="{{mapId}}" />
         </div>

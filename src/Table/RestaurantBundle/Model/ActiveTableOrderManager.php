@@ -156,4 +156,63 @@ class ActiveTableOrderManager
         } 
         return $bookedTablesArray;
     }
+    
+    /**
+     * @param integer $activeTable
+     * 
+     * 
+     * @return Table\RestaurantBundle\Entity\ActiveTableOrder[]
+     */
+    public function getActiveTableOrderHistory($activeTable)
+    {
+        return $this->getActiveTableOrderRepo()->getActiveTableOrderHistory($activeTable);
+    }
+    
+    /**
+     * Send reject order notifiction to customer
+     * 
+     * @param Table\RestaurantBundle\Entity\ActiveTableOrder $activeTableOrder
+     */
+    public function sendRejectTableOrderNotification4customer($activeTableOrder)
+    {
+        // get User Mail
+        $userEmail = $activeTableOrder->getUser()->getEmail();
+        // get subject
+        $trans = $this->container->get('translator');
+        $subject = $trans->trans('main.mail.tableOrder.notification.reject.subject', array(), 'ApplicationSonataAdminBundle');
+
+        // sent email if needed
+        if ($activeTableOrder->getIsEmail()) {
+            // add logo
+            $logo = $this->container->getParameter('site_url') . 'uploads/t4ylogo.png';
+            $message = \Swift_Message::newInstance()
+                    ->setSubject($subject)
+                    ->setFrom("noreply@table4you.com")
+                    ->setTo($userEmail)
+                    ->setBody(
+                    $this->container->get('templating')->render(
+                            'TableMainBundle:Mail:rejectTableOrderNotification4customer.html.twig', array(
+                        'tableOrder' => $activeTableOrder,
+                        'logo' => $logo
+                            )
+                    ), 'text/html', 'utf-8'
+            );
+            $this->container->get('mailer')->send($message);
+        }
+
+        // sent sms if needed
+        if (!is_null($phone = $activeTableOrder->getUser()->getPhone())) {
+            
+            if ($activeTableOrder->getIsSms()) {
+                // get sms text 
+                $text = $this->container->get('templating')->render(
+                            'TableMainBundle:Mail:rejectTableOrderSMS4customer.html.twig', array(
+                                'tableOrder' => $activeTableOrder
+                            )
+                );
+                // send sms
+                $response = $this->container->get('sms_manager')->sendMessage($phone, $text);
+            }
+        }
+    }
 }
