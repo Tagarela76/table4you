@@ -54,11 +54,11 @@
             </div>
         {% endfor %}
     {% endfor %}
-    <form novalidate id="table-order-form" action="{{ path('table_order_reserve', {'id': restaurant.id}) }}" {{ form_enctype(form) }} method="POST" class="table-order-form">       
+    <form novalidate id="table-order-form" action="{{ path('table_order_reserve', {'id': restaurant.id}) }}" {{ form_enctype(form) }} method="POST" class="table-order-form">
     {{ form_start(form) }}
         <div class="container-fluid">
             <div class="row-fluid">
-                <div class="span5">
+                <div class="span4">
                     <div class="row-fluid">
                         {{ form_label(form.reserveDate) }}
                         <div class="reserveDate"></div>        
@@ -79,7 +79,7 @@
                         {% endif %}
                     </div>
                 </div>
-                <div class="span6" id="restaurantTableMapContainer">
+                <div class="span8" id="restaurantTableMapContainer">
                     {% include 'TableRestaurantBundle:Default:viewTableMap.html.twig' with {'restaurantId': restaurant.id}%}
                     {{ form_errors(form.activeTable) }}
                 </div>
@@ -87,14 +87,14 @@
             <div class="row-fluid">
                 <div class="span5">
                     <div class="span3 label-font-size_modal">
-                        {#    {{ form_label(form.tableNumber) }}
+                            {{ form_label(form.tableNumber) }}
                             {{ form_errors(form.tableNumber) }}
                             {% if form.tableNumber.vars.errors|length %}
                                 {{ form_widget(form.tableNumber, {'attr':{'class':'error-form-reserve'} }) }}
                             {%  else %}
                                 {{ form_widget(form.tableNumber) }}
                             {% endif %}
-                        #}
+
                     </div>
                     <div class="span3 label-font-size_modal">
                        {{ form_label(form.peopleCount) }}

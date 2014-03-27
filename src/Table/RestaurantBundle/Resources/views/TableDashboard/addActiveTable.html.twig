@@ -1,28 +1,26 @@
 <div id="tableNumberContainer" class="modal hide" data-backdrop="static">
     <div class="modal-header">
+        <span>{% trans %}main.tableMap.createMap.form.label.title{% endtrans %}</span>
         <a class="close" data-dismiss="modal"></a>
     </div>
     <div class="modal-body" >
         <form id="add-table-on-the-map" action="{{ path('table_addActiveTable') }}" enctype="multipart/form-data" method="post">       
             <div class="container-fluid">   
                 <div class="row-fluid">
-                    <span class="span3">
-                        {% trans %}main.tableMap.createMap.form.label.tableNumber{% endtrans %}
-                        <input type="text" name="tableNumber" size="2" value=""/>
+                    <span class="span12">
+                        <label>{% trans %}main.tableMap.createMap.form.label.tableNumber{% endtrans %}</label>
+                        <input class="number-table" type="text" name="tableNumber" size="2" value=""/>
+                        <label class="validationError">{% trans %}main.tableMap.createMap.form.error.numberTable{% endtrans %}</label>
                     </span>
                 </div>  
                 <div class="row-fluid">
-                    <label class="validationError">{% trans %}main.tableMap.createMap.form.error.floor{% endtrans %}</label>
-                    <div class="span2">
-                        <input type="button" onClick="page.activeTable.validateAddForm(this);" value="{% trans %}main.tableMap.createMap.form.label.save{% endtrans %}" />
+                    <div class="span12">
+                        <input class="btn-save" onClick="page.activeTable.validateAddForm(this);" type="button" value="{% trans %}main.tableMap.createMap.form.label.save{% endtrans %}" />
                         <input type="hidden" name="tableTop" id="tableTop" />
                         <input type="hidden" name="tableLeft" id="tableLeft" />
                         <input type="hidden" name="mapId" id="mapId" value="{{mapId}}" />
                         <input type="hidden" name="tableType" id="tableType" />
-                    </div> 
-                    <div class="span2">
-                        <input type="button" onClick="page.activeTable.closeAddTablePopup();" value="{% trans %}main.tableMap.createMap.form.label.cancel{% endtrans %}" />
-                    </div> 
+                    </div>
                 </div>    
             </div>
         </form>    

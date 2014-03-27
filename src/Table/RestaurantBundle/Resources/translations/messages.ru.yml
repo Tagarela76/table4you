@@ -72,18 +72,21 @@ main:
       createMap:
         header: Создать карту
         restaurantList: Выбрать ресторан
+        changeLocationTable: Вы можете изменить место положения стола, либо удалить его.
         form: 
             label:
                 loadMap: Загрузить карту
                 floor: Указать этаж
                 hall: Указать номер зала
-                save: Сохранить
-                tableNumber: Указать номер стола
+                save: Применить
+                tableNumber: Номер стола
+                title: Разместить стол на карте
                 cancel: Отмена
                 selectTheFile: Выбрать файл
                 addMore: Добавить еще
             error:
-                floor: Укажите этаж    
+                floor: Укажите этаж
+                numberTable: Укажите номер стола
             errors: Ошибки при заполении формы  
         floor: этаж.
         hall: зал
@@ -102,7 +105,7 @@ main:
             date: Дата
             timeFrom: Время с
             filter: Фильтровать
-            reserve: Reserve
+            reserve: Резервировать
         form:
             label:
                 date: "Дата:"
