@@ -1,9 +1,9 @@
 {% if activeTable is not null %}
-    <div class="row-fluid">
-        <div class="span5">
+    <div class="row-fluid active-Table-Order-Reserve">
+        <div class="span4">
             {% trans %}main.tableMap.orders.list.table{% endtrans %} {{activeTable.tableNumber}}
         </div>   
-        <div class="span6">
+        <div class="span7">
             <a onclick="page.tableOrder.initTableData({{activeTable.id}});" data-toggle="modal" href="#reservePopup4Admin">
                 Reserve
             </a>  

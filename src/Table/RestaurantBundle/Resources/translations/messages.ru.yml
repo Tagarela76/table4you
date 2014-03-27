@@ -72,6 +72,7 @@ main:
       createMap:
         header: Создать карту
         restaurantList: Выбрать ресторан
+        changeLocationTable: Вы можете изменить место положения стола, либо удалить его.
         form: 
             label:
                 loadMap: Загрузить карту
