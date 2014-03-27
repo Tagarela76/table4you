@@ -87,6 +87,7 @@
             <div class="row-fluid">
                 <div class="span5">
                     <div class="span3 label-font-size_modal">
+                        {#
                             {{ form_label(form.tableNumber) }}
                             {{ form_errors(form.tableNumber) }}
                             {% if form.tableNumber.vars.errors|length %}
@@ -94,6 +95,7 @@
                             {%  else %}
                                 {{ form_widget(form.tableNumber) }}
                             {% endif %}
+                        #}
 
                     </div>
                     <div class="span3 label-font-size_modal">
