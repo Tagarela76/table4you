@@ -2104,7 +2104,7 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
 #tableMapContainer .title-tabs{margin: 0;height: 31px;}
 #interactive-map-container {border-top: 1px solid #a4a1a1;}
 #interactive-map-container .span8{
-    height: 346px;
+    height: 500px;
     width: 541px;
     padding: 10px 12px 0 0;
     border-right: 1px solid #a9a6a6;
