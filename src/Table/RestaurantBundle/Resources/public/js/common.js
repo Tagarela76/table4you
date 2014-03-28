@@ -2,6 +2,17 @@
 function ActiveTable() {
     var that = this;
     
+    this.cancelTableMove = function(tableId) {
+        // Get Table Obj
+        var tableObj = $("#activeTable_" + tableId);
+        // Get Old Coordinates
+        var leftPosition = tableObj.attr("leftPosition");
+        var topPosition = tableObj.attr("topPosition");
+        // Cancel moving 
+        tableObj.css("left", leftPosition + "px");
+        tableObj.css("top", topPosition + "px");
+    }
+    
     this.updateActiveTablePosition = function(activeTableId) {
         
         // Get new position

@@ -252,12 +252,6 @@ class ActiveTableOrderAdmin extends Admin
                     'label' => 'restaurant.tableOrder.time',
                     'widget' => 'single_text',
                 ))
-                ->add('floor', 'text', array(
-                    'label' => 'restaurant.tableOrder.floor'
-                ))
-                ->add('tableNumber', 'text', array(
-                    'label' => 'restaurant.tableOrder.tableNumber'
-                ))
                 ->add('peopleCount', 'text', array(
                     'label' => 'restaurant.tableOrder.peopleCount'
                 ))
@@ -295,20 +289,14 @@ class ActiveTableOrderAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-                ->add('restaurant.name', null, array(
+              /*  ->add('restaurant.name', null, array(
                     'label' => 'restaurant.tableOrder.restaurantName'
-                ))
+                ))*/
                 ->add('reserveDate', "doctrine_orm_string", array(
                     'label' => 'restaurant.tableOrder.date'
                 ))
                 ->add('reserveTime', "doctrine_orm_string", array(
                     'label' => 'restaurant.tableOrder.time',
-                ))
-                ->add('floor', null, array(
-                    'label' => 'restaurant.tableOrder.floor'
-                ))
-                ->add('tableNumber', null, array(
-                    'label' => 'restaurant.tableOrder.tableNumber'
                 ))
                 ->add('peopleCount', null, array(
                     'label' => 'restaurant.tableOrder.peopleCount'
@@ -331,9 +319,6 @@ class ActiveTableOrderAdmin extends Admin
                 ))
                 ->add('reserveTime', null, array(
                     'label' => 'restaurant.tableOrder.time',
-                ))
-                ->add('tableNumber', null, array(
-                    'label' => 'restaurant.tableOrder.tableNumber'
                 ))
                 ->add('peopleCount', null, array(
                     'label' => 'restaurant.tableOrder.peopleCount'

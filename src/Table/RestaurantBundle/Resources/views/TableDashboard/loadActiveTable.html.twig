@@ -3,7 +3,7 @@
         {% trans %}main.tableMap.createMap.table{% endtrans %} № {{activeTable.tableNumber }}
     </div>
     <div class="span7">
-        <input type="button" onclick='page.activeTable.loadTableTypeContainer(); return false;' value="{% trans %}main.tableMap.createMap.cancel{% endtrans %}"/>
+        <input type="button" onclick='page.activeTable.loadTableTypeContainer(); page.activeTable.cancelTableMove("{{activeTable.id}}"); return false;' value="{% trans %}main.tableMap.createMap.cancel{% endtrans %}"/>
     </div>
 </div>
 <div class="row-fluid confirmation-drag-confirm">

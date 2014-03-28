@@ -616,7 +616,7 @@ class TableDashboardController extends Controller
         $activeTable = $this->getActiveTableManager()->findOneById($tableId);
         //get Order list
         $tableOrderList = $this->getActiveTableOrderManager()->getActiveTableOrderHistory($tableId);
-        
+    //var_dump($tableOrderList[0]->getRestaurant()); die();    
         //init form for table reserve
         $activeTableOrder = new ActiveTableOrder();
         $form = $this->createForm(new ActiveTableOrderForm4AdminType(), $activeTableOrder);

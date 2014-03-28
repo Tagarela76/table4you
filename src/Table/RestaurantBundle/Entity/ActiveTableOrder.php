@@ -135,6 +135,21 @@ class ActiveTableOrder
      * @var string 
      */
     protected $userEmail;
+    
+    /**
+     * 
+     * Restaurant
+     *
+     * @var Table\RestaurantBundle\Entity\Restaurant
+     */
+    protected $restaurant;
+    
+    /**
+     * Restaurant name
+     *
+     * @var string 
+     */
+    protected $restaurantName;
 
     public static $STATUS_LIST = array(
         self::ORDER_NOTHING_DID_STATUS_CODE => "Не обработано",
@@ -575,6 +590,68 @@ class ActiveTableOrder
         } else {
             return $this->statusName;
         }
+    }
+    
+    /**
+     * Get restaurant
+     *
+     * @return Table\RestaurantBundle\Entity\Restaurant 
+     */
+    public function getRestaurant()
+    {
+        // We can get restaurant
+        if (is_null($this->getActiveTable())) {
+            return $this->restaurant;
+        } 
+        if (is_null($this->restaurant)) {
+            $restaurant = $this->getActiveTable()->getTableMap()->getRestaurant();
+            $this->setRestaurant($restaurant);
+            return $restaurant;
+        } else {
+            return $this->restaurant;
+        } 
+    }
+
+    /**
+     * Set restaurant
+     *
+     * @param Table\RestaurantBundle\Entity\Restaurant $restaurant
+     * @return ActiveTableOrder
+     */
+    public function setRestaurant($restaurant)
+    {
+        $this->restaurant = $restaurant;
+    }
+    
+    /**
+     * Get resaurantName
+     *
+     * @return string 
+     */
+    public function getRestaurantName()
+    {
+        // We can get restaurant name only if we have restaurant
+        if (is_null($this->getRestaurant())) {
+            return null;
+        }
+        if (is_null($this->restaurantName)) {
+            $restaurantName = $this->getRestaurant()->getName();
+            $this->setRestaurantName($restaurantName);
+            return $restaurantName;
+        } else {
+            return $this->restaurantName;
+        }        
+    }
+
+    /**
+     * Set restaurantName
+     *
+     * @param string $restaurantName
+     * @return TableOrder
+     */
+    public function setRestaurantName($restaurantName)
+    {
+        $this->restaurantName = $restaurantName;
     }
     
     /**
