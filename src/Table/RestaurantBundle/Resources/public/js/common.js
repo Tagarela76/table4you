@@ -625,6 +625,10 @@ function Common() {
                 $('.modal').css("margin-left", "-188px");
                 $('#restaurantMap_' + restaurantId).css("width", "345px");
                 $('.restaurant-map-body').html(responce);
+                /*$('.close').click(function(){
+                    $('#restaurantMap_' + restaurantId).css("width", "816px");
+                    $('.modal').css("margin-left", "-408px");
+                });*/
             }
         });
     }

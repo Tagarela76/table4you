@@ -30,7 +30,11 @@ input:focus{outline: 0 none}
 /* Main page */
 .header{
     margin-top: 28px;
-    margin-bottom: 16px;
+    margin-bottom: 22px;
+}
+.header .span3 a.logo-main{
+    margin-top: 7px;
+    display: block;
 }
 .list-city{
     padding-top: 10px;
@@ -192,6 +196,7 @@ input:focus{outline: 0 none}
 }
 .restaurant-container .restaurant-card p.restaurant-adress {margin-bottom: 0px;}
 .restaurant-container .restaurant-content p.restaurant-adress{margin-bottom: -1px;}
+.restaurant-container .restaurant-card p.restaurant-adress{margin-bottom: 10px;}
 .restaurant-container .restaurant-content .restaurant-content-name a{color:#454545; font-size: 24px;}
 .restaurant-container .restaurant-content .restaurant-content-font{
     font-size: 12.9px;
@@ -315,6 +320,7 @@ input:focus{outline: 0 none}
     width: 816px;
     /*position: absolute;*/
 }
+/*.modal-map{width: 816px!important;}*/
 .modal-registration, .modal-login{width: 345px;}
 .modal, .modal label, .modal input, .modal ul li, .modal h3 {font-family: Helvetica, sans-serif;}
 .modal-body {
@@ -832,12 +838,14 @@ input#tableOrderForm_peopleCount:focus{
     top:7.5px; 
 }*/
 .table-order-form{margin: 0;}
-.table-order-form .floor-tabs {margin-top: 2px;}
+.table-order-form .floor-tabs {margin-top: 2px;overflow: hidden;}
+.table-order-form .floor-tabs-hall{margin-bottom: 7px;}
 #table-order-form-container  .table-order-form .label-font-size-modal label{font-size: 15px;}
 #table-order-form-container  .table-order-form .label-font-size_modal label,
 #table-order-form-container  .table-order-form .choose-zone label{font-size: 16px;}
-#tableOrderForm_reserveTime,
+#tableOrderForm_reserveTime{margin-top: -13px;}
 #activeTableOrder4AdminForm_reserveTime{margin-top: -10px;}
+#tableOrderForm_reserveTime .cusel,
 #activeTableOrder4AdminForm_reserveTime .cusel{top: 11px;}
 /*.cusel, .cuselFrameRight, .jScrollPaneDrag, .jScrollArrowUp, .jScrollArrowDown {
 background: url(images/selects-2.png) no-repeat;}*/
@@ -2326,7 +2334,7 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
 
 #table-map-image-container {
     width: 500px;
-    height: 500px;
+    height: 346px;
     /*margin: 0px !important;*/
 }
 
@@ -2464,21 +2472,21 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     color: #9c9a9a;
     cursor: context-menu;
 }
-.modal-body #table-order-form .ui-datepicker{width: 360px;}
-.modal-body #table-order-form .ui-datepicker table{margin: 0 20px;width: 89%;}
-.modal-body #table-order-form .ui-datepicker-calendar th {padding: 7px 4px;font-weight: bold;}
-.modal-body #table-order-form .ui-datepicker .ui-datepicker-header{border-radius: 4px 4px 0 0;}
-.modal-body #table-order-form .ui-state-default,
-.modal-body #table-order-form .ui-state-default{background: none;}
-.modal-body #table-order-form .ui-datepicker td a{
+.modal-body .table-order-form-top .ui-datepicker{width: 360px;}
+.modal-body .table-order-form-top .ui-datepicker table{margin: 0 20px;width: 89%;}
+.modal-body .table-order-form-top .ui-datepicker-calendar th {padding: 7px 4px;font-weight: bold;}
+.modal-body .table-order-form-top .ui-datepicker .ui-datepicker-header{border-radius: 4px 4px 0 0;}
+.modal-body .table-order-form-top .ui-state-default,
+.modal-body .table-order-form-top .ui-state-default{background: none;}
+.modal-body .table-order-form-top .ui-datepicker td a{
     font-family: Trebuchet MS;
     color: #484746;
     font-size: 17px;
     border: 1px solid transparent;
     width: 18px;
 }
-.modal-body #table-order-form .ui-datepicker td .ui-state-active,
-.modal-body #table-order-form .ui-datepicker td .ui-state-hover{
+.modal-body .table-order-form-top .ui-datepicker td .ui-state-active,
+.modal-body .table-order-form-top .ui-datepicker td .ui-state-hover{
     border: 1px solid #fe8504;
     border-radius: 6px;
     background: #eae8e8 url(images/ui-bg_glass_100_fdf5ce_1x400.png) 50% 50% repeat-x;
@@ -2486,9 +2494,9 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     width: 18px;
     height: 15px;
 }
-.modal-body #table-order-form .ui-datepicker .ui-datepicker-prev{left: 20%;}
-.modal-body #table-order-form .ui-datepicker .ui-datepicker-next{right: 20%;}
-.modal-body #table-order-form .table-order-form-top{margin-bottom: 0px;}
+.modal-body .table-order-form-top .ui-datepicker .ui-datepicker-prev{left: 20%;}
+.modal-body .table-order-form-top .ui-datepicker .ui-datepicker-next{right: 20%;}
+.modal-body .table-order-form-top .table-order-form-top{margin-bottom: 0px;}
 .modal-body #table-order-form .table-order-form-bottom-input label{float: left;margin-left: 14px;color: #454545;margin-top: 5px;}
 .modal-body #table-order-form .table-order-form-bottom-input input{
     float: right;
