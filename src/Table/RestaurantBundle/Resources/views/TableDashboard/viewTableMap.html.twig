@@ -69,7 +69,7 @@
 <div class="row-fluid" id="interactive-map-container">
     <div class="span8 table-map-droppable" id="tableMapDroppable">
         {% for activeTable in activeTableList %}
-            <img title="{{activeTable.tableNumber}} {% trans %}main.tableMap.createMap.table{% endtrans %}" 
+            <img leftPosition="{{activeTable.leftPosition}}" topPosition="{{activeTable.topPosition}}" title="{{activeTable.tableNumber}} {% trans %}main.tableMap.createMap.table{% endtrans %}" 
                  id="activeTable_{{activeTable.id}}" onmousedown='page.activeTable.loadActiveTable({{activeTable.id}});' 
                  class='active-table-draggable canvas-element' 
                  style="position: absolute; left: {{activeTable.leftPosition}}px; top: {{activeTable.topPosition}}px;"
