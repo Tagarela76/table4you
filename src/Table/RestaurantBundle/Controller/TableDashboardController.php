@@ -711,14 +711,7 @@ class TableDashboardController extends Controller
             // get reserve date and time
             $reserveDateTime = new \DateTime($activeTableOrder->getReserveDate());
             $reserveDateTime->setTime($reserveHour, $reserveMin);
-            
-            if (!$this->getActiveTableOrderManager()->isUserCanReserveTable($user, $reserveDateTime)) {
-                // render Warning Notification, user cannot order other tables!!!
-                return $this->render('TableRestaurantBundle:Default:user.cannot.order.table.html.twig', array(
-                            'user' => $user
-                ));
-            }
-            
+        
             if ($form->isValid()) {
        
                 if ($userForm->isValid()) {
@@ -765,6 +758,7 @@ class TableDashboardController extends Controller
                 }
             }
         }
+        
         // Merge User errors to active order errors
         $helperManager = $this->getHelperManager();
         if (!$userForm->isValid()) {

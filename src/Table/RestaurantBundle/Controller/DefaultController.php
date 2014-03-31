@@ -185,7 +185,7 @@ class DefaultController extends Controller
             // Check if user can do table order
             $reserveDateTime = new \DateTime($activeTableOrder->getReserveDate() . " " . $activeTableOrder->getReserveTime());
 
-            if (!$this->getActiveTableOrderManager()->isUserCanReserveTable($user, $reserveDateTime)) {
+            if (!$this->getActiveTableOrderManager()->isUserCanReserveTable($user->getId(), $reserveDateTime)) {
                 // render Warning Notification, user cannot order other tables!!!
                 return $this->render('TableRestaurantBundle:Default:user.cannot.order.table.html.twig', array(
                             'user' => $user

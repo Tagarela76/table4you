@@ -117,8 +117,8 @@ main:
                 customerLastName: Фамилия
                 customerPhone: Телефон
                 customerEmail: E-mail
-                smsNotification: Уведомления sms
-                emailNotification: Уведомления e-mail
+                smsNotification: sms
+                emailNotification: e-mail
                 smokingHall: Зал для курящих
                 comment: Комментарий
                 reserve: Бронировать    
