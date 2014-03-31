@@ -17,7 +17,6 @@ class ActiveTableDTO
     private $topPosition;
     private $leftPosition;
     
-
     public function __construct(ActiveTable $activeTable, $container)
     {
         $this->id = $activeTable->getId();

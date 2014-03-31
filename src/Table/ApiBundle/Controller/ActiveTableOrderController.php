@@ -99,7 +99,6 @@ class ActiveTableOrderController extends Controller
         }
             
         if ($form->isValid()) {
-            
             // add Order
             // format reserve date
             $activeTableOrder->setReserveDate(new \DateTime($activeTableOrder->getReserveDate()));
