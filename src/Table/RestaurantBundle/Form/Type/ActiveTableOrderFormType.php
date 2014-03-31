@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class TableOrderFormType extends AbstractType
+class ActiveTableOrderFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -68,6 +68,6 @@ class TableOrderFormType extends AbstractType
 
     public function getName()
     {
-        return 'tableOrderForm';
+        return 'activeTableOrderForm';
     }
 }

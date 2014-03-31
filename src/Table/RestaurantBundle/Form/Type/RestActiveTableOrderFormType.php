@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class RestTableOrderFormType extends AbstractType
+class RestActiveTableOrderFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -15,61 +15,52 @@ class RestTableOrderFormType extends AbstractType
                     'widget' => 'choice',
                     'minutes' => array("0", "30"),
                     'translation_domain' => 'messages',
-                    'label' => 'main.order.form.label.reserveTime'
+                    'label' => 'main.tableMap.orders.form.label.time'
                 ))
                 ->add('reserveDate','hidden',array(
                     'translation_domain' => 'messages',
-                    'label' => 'main.order.form.label.reserveDate',
+                    'label' => 'main.tableMap.orders.form.label.date',
                     'required' => true
                 ))
-                ->add('floor', 'hidden', array(
+                ->add('peopleCount', 'number', array(
                     'translation_domain' => 'messages',
-                    'label' => 'main.order.form.label.floor',
-                    'required' => true
-                ))
-                ->add('tableNumber', 'text', array(
-                    'translation_domain' => 'messages',
-                    'label' => 'main.order.form.label.tableNumber',
-                    'required' => true
-                ))
-                ->add('peopleCount', 'text', array(
-                    'translation_domain' => 'messages',
-                    'label' => 'main.order.form.label.peopleCount',
+                    'label' => 'main.tableMap.orders.form.label.peopleCount',
                     'required' => true
                 ))
                 ->add('isSmokingZone', 'checkbox', array(
                     'translation_domain' => 'messages',
-                    'label' => 'main.order.form.label.isSmokingZone'
+                    'label' => 'main.tableMap.orders.form.label.smokingHall'
                 ))
                 ->add('isSms', 'checkbox', array(
                     'translation_domain' => 'messages',
-                    'label' => 'main.order.form.label.isSms'
+                    'label' => 'main.tableMap.orders.form.label.smsNotification'
                 ))
                 ->add('isEmail', 'checkbox', array(
                     'translation_domain' => 'messages',
-                    'label' => 'main.order.form.label.isEmail'
+                    'label' => 'main.tableMap.orders.form.label.emailNotification'
                 ))
                 ->add('wish', 'textarea', array(
                     'translation_domain' => 'messages',
                     'attr' => array(
                         'cols' => '5', 
                         'rows' => '5',
-                        'placeholder' => 'main.order.form.placeholder.wish'
+                        'placeholder' => 'main.tableMap.orders.form.label.comment'
                      )
                 ))
+                ->add('activeTable', 'hidden')
             ;
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Table\RestaurantBundle\Entity\TableOrder',
+            'data_class' => 'Table\RestaurantBundle\Entity\ActiveTableOrder',
             'csrf_protection' => false
         ));
     }
 
     public function getName()
     {
-        return 'table_order_rest_form';
+        return 'active_table_order_rest_form';
     }
 }

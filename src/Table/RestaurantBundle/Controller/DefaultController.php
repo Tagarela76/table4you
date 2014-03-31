@@ -6,7 +6,7 @@ use Table\MainBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Table\RestaurantBundle\Entity\TableOrder;
-use Table\RestaurantBundle\Form\Type\TableOrderFormType;
+use Table\RestaurantBundle\Form\Type\ActiveTableOrderFormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\UserBundle\Model\UserInterface;
@@ -150,7 +150,7 @@ class DefaultController extends Controller
     public function reserveAction($id, Request $request)
     {
         $activeTableOrder = new ActiveTableOrder();
-        $form = $this->createForm(new TableOrderFormType(), $activeTableOrder);
+        $form = $this->createForm(new ActiveTableOrderFormType(), $activeTableOrder);
         $restaurant = $this->getRestaurantManager()->findOneById($id);
         // get Current user
         $user = $this->container->get('security.context')->getToken()->getUser();
@@ -183,12 +183,7 @@ class DefaultController extends Controller
             $form->bind($request);
 
             // Check if user can do table order
-            // devide reserve time on parts
-            $reserveHour = $activeTableOrder->getReserveTime()->format('H');
-            $reserveMin = $activeTableOrder->getReserveTime()->format('i');
-            // get reserve date and time
-            $reserveDateTime = new \DateTime($activeTableOrder->getReserveDate());
-            $reserveDateTime->setTime($reserveHour, $reserveMin);
+            $reserveDateTime = new \DateTime($activeTableOrder->getReserveDate() . " " . $activeTableOrder->getReserveTime());
 
             if (!$this->getActiveTableOrderManager()->isUserCanReserveTable($user, $reserveDateTime)) {
                 // render Warning Notification, user cannot order other tables!!!
