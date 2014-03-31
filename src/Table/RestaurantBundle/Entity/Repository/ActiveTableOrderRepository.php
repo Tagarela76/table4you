@@ -128,7 +128,7 @@ class ActiveTableOrderRepository extends EntityRepository
                 ->setParameter('user', $user);
 
         // Check only for complete and not processed order
-        $query->andWhere('activeTableOrder.status = 0 or activeTableOrder.status=2');
+        $query->andWhere('activeTableOrder.status = 0 or activeTableOrder.status = 2');
 
         // check date. Search for the same date and time[+-1 h]
         // get start time
@@ -155,7 +155,6 @@ class ActiveTableOrderRepository extends EntityRepository
                     ->setParameter('startTime', $startTime->format('H:i:s'))
                     ->setParameter('endTime', $endTime->format('H:i:s'));
         }
-var_dump($query->getQuery()->getResult()); die();  
 
         $result = $query->getQuery()->getResult();
 
