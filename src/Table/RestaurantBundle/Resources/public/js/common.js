@@ -280,9 +280,6 @@ function RestaurantMap() {
 
     this.openMap = function(restaurantId) {
         
-        // change modal window width and left margin
-       // $("#restaurantMap_" + restaurantId).css("width", "816px");
-        
         // rebuilt map
         $("#restaurant-map-body_" + restaurantId).html("<div class=\"restaurant-map\"  id=\"restaurant-map_"+restaurantId+"\"></div>");
         var mapTitle = $("#map-title").val();
@@ -305,7 +302,7 @@ function RestaurantMap() {
 
         var map = L.map('restaurant-map_' + restaurantId, {
             center: new L.LatLng(latitude, longitude),
-            zoom: 17
+            zoom: 18
         });
         L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
             key: '8ee2a50541944fb9bcedded5165f09d9',

@@ -133,6 +133,8 @@ sonata_media:
             allowed_extensions: ['jpg', 'png', 'gif', 'jpeg']
             allowed_mime_types: ['image/jpg','image/jpeg','image/png','image/x-png', 'image/gif']   
 fos_user:
+    group:
+      group_class: Application\Sonata\UserBundle\Entity\Group
     db_driver:      orm
     firewall_name:  main
     user_class:     Application\Sonata\UserBundle\Entity\User
@@ -228,17 +230,16 @@ knp_paginator:
     template:
         pagination: KnpPaginatorBundle:Pagination:sliding.html.twig     # sliding pagination controls template
         sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template     
-
 fos_rest:
-    param_fetcher_listener: true
-    body_listener: true
-    view:
-        view_response_listener: force
-    format_listener:
-        default_priorities: ['json', 'html', '*/*']
-        prefer_extension: true
-    param_fetcher_listener: true
-    allowed_methods_listener: true    
+   param_fetcher_listener: true
+   body_listener: true
+   view:
+       view_response_listener: force
+   format_listener:
+       #default_priorities: ['json', 'html', '*/*']
+       #prefer_extension: true
+       #param_fetcher_listener: true
+       #allowed_methods_listener: true    
 
 sensio_framework_extra:
     view:    { annotations: false }

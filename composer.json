@@ -41,14 +41,15 @@
         "behat/mink-extension": "1.2.*@dev",
         "behat/mink-browserkit-driver": "1.1.*@dev",
         "behat/mink-goutte-driver": "1.0.*@dev",
-        "friendsofsymfony/rest-bundle": "0.13.*@dev",
+        "friendsofsymfony/rest-bundle": "1.4.*@dev",
         "jms/serializer-bundle": "0.12.*@dev",
         "genemu/form-bundle": "2.2.*",
         "vich/uploader-bundle": "dev-master",
         "knplabs/gaufrette": "0.2.*@dev",
         "knplabs/knp-gaufrette-bundle" : "dev-master",
         "hwi/oauth-bundle": "0.3.*@dev",
-        "abeautifulsite/simpleimage": "dev-master"
+        "abeautifulsite/simpleimage": "dev-master",
+        "willdurand/geocoder": "@stable"
     },
     "scripts": {
         "post-install-cmd": [
