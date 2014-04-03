@@ -46,7 +46,7 @@ class TableDashboardController extends Controller
         $filterTime = $this->getRequest()->query->get('filterTime');
         
         // transform to date time
-        $dateTime = new \DateTime($filterDate . " " . $filterTime);
+        $dateTime = new \DateTime($filterDate . " " . $filterTime, new \DateTimeZone(ActiveTableOrder::RESERVE_TIMEZONE));
         
         // get Current user
         $user = $this->container->get('security.context')->getToken()->getUser();
@@ -709,7 +709,7 @@ class TableDashboardController extends Controller
             $reserveHour = $activeTableOrder->getReserveTime()->format('H');
             $reserveMin = $activeTableOrder->getReserveTime()->format('i');
             // get reserve date and time
-            $reserveDateTime = new \DateTime($activeTableOrder->getReserveDate());
+            $reserveDateTime = new \DateTime($activeTableOrder->getReserveDate(), new \DateTimeZone(ActiveTableOrder::RESERVE_TIMEZONE));
             $reserveDateTime->setTime($reserveHour, $reserveMin);
         
             if ($form->isValid()) {
@@ -741,7 +741,7 @@ class TableDashboardController extends Controller
                     $activeTableOrder = $form->getData();
                     // add Order
                     // format reserve date
-                    $activeTableOrder->setReserveDate(new \DateTime($activeTableOrder->getReserveDate()));
+                    $activeTableOrder->setReserveDate(new \DateTime($activeTableOrder->getReserveDate(), new \DateTimeZone(ActiveTableOrder::RESERVE_TIMEZONE)));
                     // set User Data
                     $activeTableOrder->setUser($user);
                     // set Table Data
