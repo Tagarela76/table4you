@@ -99,6 +99,12 @@ class Restaurant
     protected $address;
     
     /**
+     *
+     * @var string 
+     */
+    protected $clearAddress;
+    
+    /**
      * @var float
      *
      * @ORM\Column(name="latitude", type="float", nullable=true)
@@ -472,8 +478,9 @@ class Restaurant
     public function getAddress()
     {
         if (is_null($this->address)) {
-            $address = $this->getHouse() . " " . $this->getStreet() . " " .
-                    $this->getCity()->getName(); 
+            $address = $this->getCity()->getName() . ", " .
+                    $this->getStreet() . ", " .
+                    $this->getHouse();
             $address = str_replace(' ', '+', $address);
             $this->setAddress($address);
             return $address;
@@ -492,6 +499,32 @@ class Restaurant
     }
     
     /**
+     * Get clearAddress
+     * 
+     * @return string
+     */
+    public function getClearAddress()
+    {
+        if (is_null($this->clearAddress)) {
+            $clearAddress = $this->getHouse() . " " . $this->getStreet() . " " .
+                    $this->getCity()->getName(); 
+            $this->setClearAddress($clearAddress);
+            return $clearAddress;
+        } else {
+            return $this->clearAddress;
+        }
+    }
+
+    /**
+     * 
+     * @param string $clearAddress
+     */
+    public function setClearAddress($clearAddress)
+    {
+        $this->clearAddress = $clearAddress;
+    }
+    
+    /**
      * Calculate Latitude
      * 
      * @return float
@@ -502,17 +535,20 @@ class Restaurant
             return false;
         } 
 
-        $geocode = file_get_contents('http://maps.google.com/maps/api/geocode/json?address=' . $this->getAddress() . '&sensor=false');
-        //weak internet connection
-        if (!$geocode) {
-            return false;
-        }
-        $output = json_decode($geocode);
-        if (empty($output->results)) {
-            return false;
-        }
-        $latitude = $output->results[0]->geometry->location->lat;
+        $params = array(
+            'geocode' => $this->getAddress(),
+            'format'  => 'json',
+            'results' => 1
+        );
+        $response = json_decode(file_get_contents('http://geocode-maps.yandex.ru/1.x/?' . http_build_query($params, '', '&')));
 
+        if ($response->response->GeoObjectCollection->metaDataProperty->GeocoderResponseMetaData->found > 0) {
+            $output = $response->response->GeoObjectCollection->featureMember[0]->GeoObject->Point->pos;
+        } else {
+            return false;
+        }
+        $output = explode(" ", $output);
+        $latitude = $output[1];
         return $latitude; 
     }
 
@@ -551,17 +587,21 @@ class Restaurant
         if (is_null($this->getAddress())) {
             return false;
         }
-        $geocode = file_get_contents('http://maps.google.com/maps/api/geocode/json?address=' . $this->getAddress() . '&sensor=false');
-        //weak internet connection
-        if (!$geocode) {
-            return false;
-        }
-        $output = json_decode($geocode);
-        if (empty($output->results)) {
-            return false;
-        }
-        $longitude = $output->results[0]->geometry->location->lng;
 
+        $params = array(
+            'geocode' => $this->getAddress(),
+            'format'  => 'json', 
+            'results' => 1
+        );
+        $response = json_decode(file_get_contents('http://geocode-maps.yandex.ru/1.x/?' . http_build_query($params, '', '&')));
+
+        if ($response->response->GeoObjectCollection->metaDataProperty->GeocoderResponseMetaData->found > 0) {
+            $output = $response->response->GeoObjectCollection->featureMember[0]->GeoObject->Point->pos;
+        } else {
+            return false;
+        }
+        $output = explode(" ", $output);
+        $longitude = $output[0];
         return $longitude;
     }
 
