@@ -140,9 +140,12 @@ class ActiveTableOrderController extends Controller
             );
         } 
         // Collect Data
-        $restaurantId = $this->getRequest()->get('restaurantId');
+        $mapId = $this->getRequest()->get('mapId');
         $reserveTms = $this->getRequest()->get('reserveTms');
         
+        // Init Map
+        $tableMap = $this->getTableMapManager()->findOneById($mapId);
+        $restaurantId = $tableMap->getRestaurant()->getId();
         // transform to date time
         $dateTime = new \DateTime("now", new \DateTimeZone(ActiveTableOrder::RESERVE_TIMEZONE));
         $dateTime->setTimestamp($reserveTms);
