@@ -183,7 +183,7 @@ class DefaultController extends Controller
             $form->bind($request);
 
             // Check if user can do table order
-            $reserveDateTime = new \DateTime($activeTableOrder->getReserveDate() . " " . $activeTableOrder->getReserveTime());
+            $reserveDateTime = new \DateTime($activeTableOrder->getReserveDate() . " " . $activeTableOrder->getReserveTime(), new \DateTimeZone(ActiveTableOrder::RESERVE_TIMEZONE));
 
             if (!$this->getActiveTableOrderManager()->isUserCanReserveTable($user->getId(), $reserveDateTime)) {
                 // render Warning Notification, user cannot order other tables!!!
@@ -195,7 +195,7 @@ class DefaultController extends Controller
             if ($form->isValid()) {
                 // add Order
                 // format reserve date
-                $activeTableOrder->setReserveDate(new \DateTime($activeTableOrder->getReserveDate()));
+                $activeTableOrder->setReserveDate(new \DateTime($activeTableOrder->getReserveDate(), new \DateTimeZone(ActiveTableOrder::RESERVE_TIMEZONE)));
                 // set User Data
                 $activeTableOrder->setUser($user);
 

@@ -12,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ActiveTableOrder
 {
+    const RESERVE_TIMEZONE = "Europe/Moscow";
+        
     /**
      * @var integer
      *

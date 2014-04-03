@@ -121,8 +121,15 @@ table_api.reserve:
     pattern:  /api/rest/wsse/reserve
     defaults: { _controller: TableApiBundle:ActiveTableOrder:reserve, _format: json }
     requirements:
-        _method: POST         
-        
+        _method: POST   
+
+# Get Booked table list 
+table_api.get_booked_table_list:
+    pattern:  /api/rest/wsse/getBookedTableList
+    defaults: { _controller: TableApiBundle:ActiveTableOrder:getBookedTableList, _format: json }
+    requirements:
+        _method: POST  
+              
 # Api for News     
 table_api.news_all:
     pattern:  /api/rest/getNewsList/{city}

@@ -121,4 +121,38 @@ class ActiveTableOrderController extends Controller
 
         return \FOS\RestBundle\View\View::create($form, \FOS\Rest\Util\Codes::HTTP_BAD_REQUEST);
     }
+    
+        
+    /**
+     * Get Booked Table List
+     * 
+     * 
+     * @Rest\View
+     */
+    public function getBookedTableListAction()
+    {
+        $user = $this->get('security.context')->getToken()->getUser(); 
+        // user can be anon.
+        if ($user == "anon.") {
+            return array(
+                'success' => false, 
+                'errorStr' => $this->get('translator')->trans("validation.errors.user.You should auth at first")
+            );
+        } 
+        // Collect Data
+        $restaurantId = $this->getRequest()->get('restaurantId');
+        $reserveTms = $this->getRequest()->get('reserveTms');
+        
+        // transform to date time
+        $dateTime = new \DateTime("now", new \DateTimeZone(ActiveTableOrder::RESERVE_TIMEZONE));
+        $dateTime->setTimestamp($reserveTms);
+
+        // get Booked Tables 
+        $bookedTables = $this->getActiveTableOrderManager()->getBookedTablesByRestaurant($restaurantId, $dateTime); 
+
+        return array(
+            "success" => true,
+            "response" => $bookedTables
+        );
+    }
 }
