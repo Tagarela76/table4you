@@ -30,9 +30,10 @@
             });
             return false;
         });
-
-        // load Map Scheme as background
-        page.tableOrder.loadMapScheme("{{baseUrl}}{{ vich_uploader_asset(tableMapObj, 'file') }}");
+        {% if tableMapObj is not null %}  
+            // load Map Scheme as background
+            page.tableOrder.loadMapScheme("{{baseUrl}}{{ vich_uploader_asset(tableMapObj, 'file') }}");
+        {% endif %}    
     });
 </script>
 

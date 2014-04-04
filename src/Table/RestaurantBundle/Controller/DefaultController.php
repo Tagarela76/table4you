@@ -163,18 +163,27 @@ class DefaultController extends Controller
 
         // Get Floor list
         $floorList = $this->getTableMapManager()->getRestaurantTableMapFloorList($id);
-        
+   
         // Get floor (Let's do first elem as current)
-        $floor = $floorList[0]['floor'];
-        // Get table map list
-        $tableMapList = $this->getTableMapManager()->getTableMapListByFloorGroupByHall($id, $floor);
+        if (!empty($floorList)) {
+            $floor = $floorList[0]['floor'];
+            // Get table map list
+            $tableMapList = $this->getTableMapManager()->getTableMapListByFloorGroupByHall($id, $floor);
+        }        
+            
+        if (!empty($tableMapList)) {
+            // get tableMapObj (init first elem)
+            $tableMapObjId = $tableMapList[0]->getId();
+            $tableMapObj = $this->getTableMapManager()->findOneById($tableMapObjId);
 
-        // get tableMapObj (init first elem)
-        $tableMapObjId = $tableMapList[0]->getId();
-        $tableMapObj = $this->getTableMapManager()->findOneById($tableMapObjId);
- 
-        // Get Active Tables List
-        $activeTableList = $this->getActiveTableManager()->findByTableMap($tableMapObjId);
+            // Get Active Tables List
+            $activeTableList = $this->getActiveTableManager()->findByTableMap($tableMapObjId);
+        } else {
+            $tableMapObj = null;
+            $tableMapList = false; 
+            $activeTableList = false;
+        }
+            
         // get table order data
         $activeTableOrder = $form->getData();
         
