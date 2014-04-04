@@ -51,15 +51,15 @@
         </div>
         <div class="restaurant-content-reserve">    
             {% if anonim %}
-                <a class="btn btn-primary" data-toggle="modal" data-target="#login" href="{{ path('fos_user_security_login') }}">
+                <a onclick="$('html, body').animate({scrollTop: 0}, 'fast');" class="btn btn-primary" data-toggle="modal" data-target="#login" href="{{ path('fos_user_security_login') }}">
                     {% trans %}main.order.button{% endtrans %}
                 </a>
             {% elseif phoneFormatError %}
-                <a class="btn btn-primary" href="{{ path('sonata_user_profile_edit') }}">
+                <a onclick="$('html, body').animate({scrollTop: 0}, 'fast');" class="btn btn-primary" href="{{ path('sonata_user_profile_edit') }}">
                     {% trans %}main.order.button{% endtrans %}
                 </a>
             {% else%}
-                <a class="btn btn-primary" data-toggle="modal" data-target="#reserve_{{ restaurant.id }}" href="{{ path('table_order_reserve', {'id': restaurant.id}) }}">
+                <a onclick="$('html, body').animate({scrollTop: 0}, 'fast');" class="btn btn-primary" data-toggle="modal" data-target="#reserve_{{ restaurant.id }}" href="{{ path('table_order_reserve', {'id': restaurant.id}) }}">
                     {% trans %}main.order.button{% endtrans %}
                 </a>
             {% endif %}
