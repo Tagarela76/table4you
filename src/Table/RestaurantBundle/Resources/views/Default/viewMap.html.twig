@@ -58,7 +58,7 @@
                 for (var i = 0; i < response.length; i++) {
                     var restaurantsPoints = response[i];
                     if (restaurantsPoints.longitude && restaurantsPoints.latitude) {
-                        var marker = L.marker(new L.LatLng(restaurantsPoints.latitude, restaurantsPoints.longitude), {icon: restaurantIcon, zoom: 17});
+                        var marker = L.marker(new L.LatLng(restaurantsPoints.latitude, restaurantsPoints.longitude), {/*icon: restaurantIcon,*/ zoom: 17});
                         marker.bindPopup(restaurantsPoints.content);
                         markers.addLayer(marker);
                     }
