@@ -320,6 +320,7 @@ function RestaurantMap() {
                 map.invalidateSize();
             }, 10);
         });
+        $('html, body').animate({scrollTop: 0}, 'fast');
     }
 }
 
