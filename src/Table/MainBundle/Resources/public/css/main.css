@@ -2492,7 +2492,6 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     background: #eae8e8 url(images/ui-bg_glass_100_fdf5ce_1x400.png) 50% 50% repeat-x;
     font-weight: normal;
     width: 18px;
-    height: 15px;
 }
 .modal-body .table-order-form-top .ui-datepicker .ui-datepicker-prev{left: 20%;}
 .modal-body .table-order-form-top .ui-datepicker .ui-datepicker-next{right: 20%;}
