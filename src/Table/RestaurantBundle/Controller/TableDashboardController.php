@@ -183,7 +183,6 @@ class TableDashboardController extends Controller
         // Get Active Tables List
         $activeTableList = $this->getActiveTableManager()->findByTableMap($mapId);
         
-        
         return array(
             'restaurantList' => $restaurantList,
             'tableMapList' => $tableMapList,
@@ -865,11 +864,13 @@ class TableDashboardController extends Controller
         $activeTableId = $this->getRequest()->request->get('activeTableId');
         $leftPosition = $this->getRequest()->request->get('leftPosition');
         $topPosition = $this->getRequest()->request->get('topPosition');
+        $angle = $this->getRequest()->request->get('tableAngle');
         
         // init Active table 
         $activeTable = $this->getActiveTableManager()->findOneById($activeTableId);
         $activeTable->setLeftPosition($leftPosition);
         $activeTable->setTopPosition($topPosition);
+        $activeTable->setAngle($angle);
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($activeTable);

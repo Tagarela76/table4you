@@ -16,13 +16,15 @@ function ActiveTable() {
     this.updateActiveTablePosition = function(activeTableId) {
         
         // Get new position
-        var left = $("#activeTable_" + activeTableId).position().left/* - $("#tableMapDroppable").position().left*/;
-        var top = $("#activeTable_" + activeTableId).position().top/* - $("#tableMapDroppable").position().top*/;
+        var left = $("#activeTable_" + activeTableId).position().left;
+        var top = $("#activeTable_" + activeTableId).position().top;
+        var tableAngle = $("#activeTable_" + activeTableId).getRotateAngle();
 
         // Get new position
         $.ajax({
             url: Routing.generate('table_updateActiveTable'),
-            data: {activeTableId: activeTableId, leftPosition: left, topPosition: top},
+            data: {activeTableId: activeTableId, leftPosition: left, 
+                topPosition: top, tableAngle: tableAngle[0]},
             type: "POST",
             dataType: "html",
             success: function() { 
@@ -150,8 +152,24 @@ function TableMap() {
     }
     
     this.validateEditForm = function(el) {
+        
         //reset errors
         $(".validationError").css("display", "none");
+        $(".validationFileError").css("display", "none");
+        
+        var isError = false;
+        
+        var mapFile = $('input[name="mapFile"]').val(); 
+        if (mapFile != "") {
+            // Check image format
+            var mapFileArray = mapFile.split(".");
+            var ext = mapFileArray[mapFileArray.length - 1];
+            if (ext != "jpg" || ext != "jpeg" || ext != "JPEG" || ext != "png") {
+                $('input[name="mapFile"]').addClass("error-form");
+                $(".validationFileError").css("display", "block");
+                isError = true;
+            }
+        }
         // Get parent form
         var form = $(el).closest('form');
         //check if people count field empty
@@ -159,7 +177,9 @@ function TableMap() {
             //display error
             $(".validationError").css("display", "block");
             form.find($('input[name="mapFloor"]')).addClass("error-form");
-        } else {
+            isError = true;
+        } 
+        if (!isError) {
             // submit form
             form.submit(); 
         }
@@ -180,15 +200,26 @@ function TableMap() {
         });
         //check if file field empty
         var isFileEmptyError = false;
+        var isFileIncorrectError = false;
         $(":input[name='mapFile[]']").each(function(i){
+            // Check image format
+            var mapFileArray = $(this).val().split(".");
+            var ext = mapFileArray[mapFileArray.length - 1];
+            if (ext != "jpg" || ext != "jpeg" || ext != "JPEG" || ext != "png") {
+                isFileIncorrectError = true;
+            }   
             if($(this).val() == "") {
                 isFileEmptyError = true;
+                
+            }
+            if (isFileEmptyError || isFileIncorrectError) {
                 $(this).addClass("error-form");
             }
+            
         });
 
         //validate
-        if (isFloorEmptyError || isFileEmptyError) {
+        if (isFloorEmptyError || isFileEmptyError || isFileIncorrectError) {
             //display error
            $(".validationError").css("display", "block");
         } else {
