@@ -471,7 +471,7 @@ input:focus{outline: 0 none}
     position: relative;
     height: 50px;
 }
-#table-order-form-container div.button-reserve{float: right;}
+#table-order-form-container div.button-reserve{float: right; margit-top: 4px;}
 #table-order-form-container div.button-reserve input{
     background: #feb200;
     background: -moz-linear-gradient(top, #feb200 0%, #e2601b 100%);
@@ -2591,3 +2591,32 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
 }
 .tableMapContainer #interactive-map-container #activeTableOrderContainer .row-fluid #activeTableOrder4AdminForm_reserveTime{line-height: 1.5;height: 32px;margin-bottom: 29px;margin-right: 0;}
 .tableMapContainer #interactive-map-container #activeTableOrderContainer #table-order-form .table-order-form-bottom{margin-top: 15px;padding-top: 23px;border-top: 1px solid #d6d7d8;}
+#activeTableOrderForm_reserveTime .cusel{
+    width: 117px!important;
+    position: relative;
+    top: 8px;
+}
+#activeTableOrderForm_peopleCount, #activeTableOrderForm_wish, #activeTableOrderForm_captcha{
+    width: 232px;
+    height: 18px;
+    float: right;
+    padding: 6px 6px;
+    border: 0;
+    -moz-border-radius: 7px 7px 7px 7px;
+    -webkit-border-radius: 7px 7px 7px 7px;
+    -o-border-radius: 7px 7px 7px 7px;
+    border-radius: 7px 7px 7px 7px;
+    -moz-box-shadow: inset 1px 0px 3px rgba(238, 238, 238, 0.7), inset -2px 0px 3px rgba(238, 238, 238,0.7), inset 0px 2px 0px rgba(0, 0, 0, 0.6);
+    -webkit-box-shadow: inset 1px 0px 3px rgba(238, 238, 238, 0.7), inset -2px 0px 3px rgba(238, 238, 238,0.7), inset 0px 2px 0px rgba(0, 0, 0, 0.6);
+    box-shadow: inset 1px 0px 3px rgba(238, 238, 238, 0.7), inset -2px 0px 3px rgba(238, 238, 238,0.7), inset 0px 2px 0px rgba(0, 0, 0, 0.6);
+    border-right: 1px solid #d9d9d9;
+    border-left: 1px solid #d9d9d9;
+    border-top: 1px solid #f2f2f2;
+    border-bottom: 1px solid #f2f2f2;
+    background: #fff;
+}
+#activeTableOrderForm_peopleCount{
+    width: 70px;
+    height: 24px;
+    float: left;
+}
