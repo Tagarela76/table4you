@@ -38,6 +38,19 @@
             cursor: 'move',
             containment: '.table-map-droppable'
         });
+        
+        // Rotate Tables
+        var startAngle = 0
+        $(".active-table-draggable").rotate({ 
+           bind: 
+             { 
+                click: function(){
+                    startAngle += 45;
+                    $(this).rotate({ animateTo:startAngle})
+                }
+             } 
+
+        });
     });    
 </script>
 <div class="row-fluid title-tabs">

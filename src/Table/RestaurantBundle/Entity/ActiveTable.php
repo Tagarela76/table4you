@@ -51,6 +51,13 @@ class ActiveTable
      * @ORM\Column(name="left_position", type="float", scale=2)
      */
     private $leftPosition;
+    
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="angle", type="integer")
+     */
+    private $angle;
 
     /**
      * @var Table\RestaurantBundle\Entity\TableMap $tableMap
@@ -145,6 +152,16 @@ class ActiveTable
     {
         return $this->leftPosition;
     }
+    
+    /**
+     * Get angle
+     *
+     * @return integer 
+     */
+    public function getAngle()
+    {
+        return $this->angle;
+    }
 
     /**
      * Get tableMap
@@ -181,7 +198,21 @@ class ActiveTable
         
         return $this;
     }
-
+    
+    /**
+     * Set Angle
+     *
+     * @param integer $angle
+     * 
+     * @return ActiveTable
+     */
+    public function setAngle($angle)
+    {
+        $this->angle = $angle;
+        
+        return $this;
+    }
+    
     /**
      * Set tableMap
      *

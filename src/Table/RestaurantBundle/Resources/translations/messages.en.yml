@@ -60,6 +60,8 @@ main:
                 addMore: add more
             error:
                 floor: Fill field    
+                numberTable: Fill table number
+                file: Only jpg и png
             errors: Errors while edit form 
         floor: floor
         hall: hall  

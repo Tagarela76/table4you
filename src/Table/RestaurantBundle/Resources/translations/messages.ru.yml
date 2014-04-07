@@ -88,6 +88,7 @@ main:
             error:
                 floor: Укажите этаж
                 numberTable: Укажите номер стола
+                file: Формат должен быть jpg и png
             errors: Ошибки при заполении формы  
         floor: этаж.
         hall: зал
