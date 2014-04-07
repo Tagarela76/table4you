@@ -183,16 +183,17 @@ class DefaultController extends Controller
             $tableMapList = false; 
             $activeTableList = false;
         }
-            
-        // get table order data
-        $activeTableOrder = $form->getData();
-        
         $successReserve = false; // we should know if table reserve was successfull
         if ($request->isMethod('POST') && !$this->getRequest()->request->get('fromMap')) {
             $form->bind($request);
+            // get table order data
+            $activeTableOrder = $form->getData();
+            
+            // Format reserve time
+            $reserveTime = $activeTableOrder->getReserveTime()->format("H:i:s");
 
             // Check if user can do table order
-            $reserveDateTime = new \DateTime($activeTableOrder->getReserveDate() . " " . $activeTableOrder->getReserveTime(), new \DateTimeZone(ActiveTableOrder::RESERVE_TIMEZONE));
+            $reserveDateTime = new \DateTime($activeTableOrder->getReserveDate() . " " . $reserveTime, new \DateTimeZone(ActiveTableOrder::RESERVE_TIMEZONE));
 
             if (!$this->getActiveTableOrderManager()->isUserCanReserveTable($user->getId(), $reserveDateTime)) {
                 // render Warning Notification, user cannot order other tables!!!
@@ -205,9 +206,10 @@ class DefaultController extends Controller
                 // add Order
                 // format reserve date
                 $activeTableOrder->setReserveDate(new \DateTime($activeTableOrder->getReserveDate(), new \DateTimeZone(ActiveTableOrder::RESERVE_TIMEZONE)));
+                
                 // set User Data
                 $activeTableOrder->setUser($user);
-
+ 
                 // set status 0
                 if (is_null($activeTableOrder->getStatus())) {
                     $activeTableOrder->setStatus(0);
@@ -216,6 +218,7 @@ class DefaultController extends Controller
                 // init active table
                 $activeTable = $this->getActiveTableManager()->findOneById($activeTableOrder->getActiveTable());
                 $activeTableOrder->setActiveTable($activeTable);
+                
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($activeTableOrder);
                 $em->flush();
@@ -224,7 +227,7 @@ class DefaultController extends Controller
         } 
         // get Booked Tables 
         $bookedTables = $this->getActiveTableOrderManager()->getBookedTablesByRestaurant($id);  
-
+       // var_dump($successReserve, $form->getErrors()); die();
         // assign base_url
         $baseUrl = $this->container->getParameter('base_folder_url');
         return array(
