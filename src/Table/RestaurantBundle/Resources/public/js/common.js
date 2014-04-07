@@ -99,6 +99,33 @@ function ActiveTable() {
 
 function TableMap() {
     
+    this.rotateTables = function() {
+        
+        // Get Tables
+        $.ajax({
+            url: Routing.generate('table_getActiveTableList'),
+            type: "GET",
+            dataType: "json",
+            success: function(response) { 
+                for (var i = 0; i < response.length; i++) {
+                    var activeTable = response[i]; console.log(activeTable);
+                    // Rotate Tables
+                    var startAngle = 0;
+                    $(".active-table_" + activeTable.id).rotate({ 
+                        angle:activeTable.angle, 
+                        bind: 
+                            { 
+                                click: function(){
+                                    startAngle += 45;
+                                    $(this).rotate({ animateTo:startAngle})
+                                }
+                            } 
+                    });
+                }
+            }  
+	});    
+    }
+    
     this.loadMapScheme = function(mapScheme) {
         $('#tableMapDroppable').css('background-image', 'url(' + mapScheme + ')');
     }
@@ -405,9 +432,10 @@ function TableOrder() {
     }
     
     this.selectActiveTable = function(activeTableId) {
-        $("#tableOrderForm_activeTable").val(activeTableId);
+        
+        $("#activeTableOrderForm_activeTable").val(activeTableId);
         // unshine all
-        $(".active-table-img").css("box-shadow", "");
+       // $(".active-table-img").css("box-shadow", "");
         // shine
         $("#activeTable_" + activeTableId).css("box-shadow", "5px 5px 25px #eb7b12");
     }

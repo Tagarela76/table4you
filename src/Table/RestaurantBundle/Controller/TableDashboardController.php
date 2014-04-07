@@ -878,4 +878,30 @@ class TableDashboardController extends Controller
         
         return new Response("success");
     }
+    
+    /**
+     * Get ActiveTable List in jsone format
+     * 
+     */
+    public function getActiveTableListAction()
+    {
+        // get Current user
+        $anonim = false;
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            $anonim = true;
+        }
+        
+        $tableList = $this->getActiveTableManager()->findAll();
+        // create new object
+        $activeTableList = array();
+        $activeTable = array();
+        foreach ($tableList as $table) {
+            $activeTable['id'] = $table->getId();
+            $activeTable['angle'] = $table->getAngle();
+
+            $activeTableList[] = $activeTable;
+        }
+        return $activeTableList;
+    }
 }
