@@ -55,7 +55,7 @@ class ActiveTable
     /**
      * @var float
      *
-     * @ORM\Column(name="angle", type="integer")
+     * @ORM\Column(name="angle", type="integer", options={"default" = 0}, nullable=true)
      */
     private $angle;
 

@@ -230,8 +230,8 @@ class TableDashboardController extends Controller
                 $resizedImage->best_fit(TableType::IMAGE_HEIGHT, TableType::IMAGE_WIDTH)->save($imagePath);
             } else {
                 // delete entity
-               // $em->remove($tableType);
-               // $em->flush();
+                $em->remove($tableType);
+                $em->flush();
             }
         }
         return $this->redirect(
