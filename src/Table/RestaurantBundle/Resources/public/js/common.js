@@ -180,25 +180,29 @@ function TableMap() {
     
     this.validateEditForm = function(el) {
         
+        // Get parent form
+        var form = $(el).closest('form');
+        
         //reset errors
         $(".validationError").css("display", "none");
         $(".validationFileError").css("display", "none");
+        form.find($('input[name="mapFloor"]')).removeClass("error-form");
+        form.find($('input[name="mapFile"]')).removeClass("error-form");
         
         var isError = false;
         
-        var mapFile = $('input[name="mapFile"]').val(); 
+        var mapFile = form.find($('input[name="mapFile"]')).val(); 
         if (mapFile != "") {
             // Check image format
             var mapFileArray = mapFile.split(".");
             var ext = mapFileArray[mapFileArray.length - 1];
-            if (ext != "jpg" || ext != "jpeg" || ext != "JPEG" || ext != "png") {
-                $('input[name="mapFile"]').addClass("error-form");
+            if (ext != "jpg" && ext != "jpeg" && ext != "JPEG" && ext != "png") {
+                form.find($('input[name="mapFile"]')).addClass("error-form");
                 $(".validationFileError").css("display", "block");
                 isError = true;
             }
         }
-        // Get parent form
-        var form = $(el).closest('form');
+        
         //check if people count field empty
         if (form.find($('input[name="mapFloor"]')).val() == "") {
             //display error
@@ -232,7 +236,7 @@ function TableMap() {
             // Check image format
             var mapFileArray = $(this).val().split(".");
             var ext = mapFileArray[mapFileArray.length - 1];
-            if (ext != "jpg" || ext != "jpeg" || ext != "JPEG" || ext != "png") {
+            if (ext != "jpg" && ext != "jpeg" && ext != "JPEG" && ext != "png") {
                 isFileIncorrectError = true;
             }   
             if($(this).val() == "") {
@@ -263,8 +267,8 @@ function TableMap() {
             data: {tableMapId: tableMapId, restaurantId: restaurantId},
             type: "POST",
             dataType: "html",
-            success: function() {
-                location.reload();
+            success: function() { 
+                location.href = Routing.generate('table_viewCreateMap') + "/" + restaurantId;
             }
         });
     }
@@ -273,16 +277,33 @@ function TableMap() {
 function TableType() {
     
     this.validateEditForm = function(el) {
-        //reset errors
-        $(".validationError").css("display", "none");
         // Get parent form
         var form = $(el).closest('form');
+        //reset errors
+        $(".validationError").css("display", "none"); 
+        form.find($('input[name="file"]')).removeClass("error-form");
+        form.find($('input[name="peopleCount"]')).removeClass("error-form"); 
+        
+        var isError = false;
+        // Check image format
+        var file = form.find($('input[name="file"]')).val(); 
+        if (file != "") {
+            var fileArray = file.split(".");
+            var ext = fileArray[fileArray.length - 1];
+            if (ext != "jpg" && ext != "jpeg" && ext != "JPEG" && ext != "png") {
+                form.find($('input[name="file"]')).addClass("error-form");
+                $(".validationError").css("display", "block");
+                isError = true;
+            }
+        }
         //check if people count field empty
         if (form.find($('input[name="peopleCount"]')).val() == "") {
             //display error
             $(".validationError").css("display", "block");
             form.find($('input[name="peopleCount"]')).addClass("error-form");
-        } else {
+            isError = true;
+        } 
+        if (!isError) {
             // submit form
             form.submit(); 
         }
