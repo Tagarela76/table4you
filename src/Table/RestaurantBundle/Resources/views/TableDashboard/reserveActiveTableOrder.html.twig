@@ -61,21 +61,21 @@
                 <div class="span5">
                     <div class="row-fluid reserve-time">
                         {{ form_label(form.reserveTime) }}
-                        {{ form_errors(form.reserveTime) }}
                         {% if form.reserveTime.vars.errors|length %}
                             {{ form_widget(form.reserveTime, {'attr':{'class':'error-form-reserve'} }) }}
                         {%  else %}
                             {{ form_widget(form.reserveTime) }}
                         {% endif %}
+                        {{ form_errors(form.reserveTime) }}
                     </div>
                     <div class="row-fluid table-order-form-top-input">
                         {{ form_label(form.peopleCount) }}
-                        {{ form_errors(form.peopleCount) }}
                         {% if form.peopleCount.vars.errors|length %}
                             {{ form_widget(form.peopleCount, {'attr':{'class':'error-form-reserve'} }) }}
                         {%  else %}
                             {{ form_widget(form.peopleCount) }}
                         {% endif %}
+                        {{ form_errors(form.peopleCount) }}
                     </div>    
                     <div class="row-fluid ">
                         <div class="span5">

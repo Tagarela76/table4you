@@ -475,11 +475,12 @@ function TableOrder() {
     }
     
     this.selectActiveTable = function(activeTableId) {
-        
+
         $("#activeTableOrderForm_activeTable").val(activeTableId);
         
         $(".active-table-img").removeClass("active-table-selected");
         $("#activeTable_" + activeTableId).addClass("active-table-selected");
+
     }
     
     this.loadMapScheme = function(mapScheme) {
@@ -531,12 +532,12 @@ function TableOrder() {
     
     this.initFancyTimeBox = function() {
 
-        var timeParams = {
+        /*var timeParams = {
             changedEl: "#table-order-form select",
             visRows: 8,
             scrollArrows: true
         }
-        cuSel(timeParams);
+        cuSel(timeParams);*/
     }
     
     this.deleteActiveTableOrder = function(tableOrderId) {
@@ -588,12 +589,12 @@ function TableOrder() {
     
     this.initFancySelectBox = function() {
 
-        var timeParams = {
+        /*var timeParams = {
             changedEl: ".table-order-form select",
             visRows: 8,
             scrollArrows: true
         }
-        cuSel(timeParams);
+        cuSel(timeParams);*/
     }
 }
 
