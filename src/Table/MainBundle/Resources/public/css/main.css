@@ -2622,3 +2622,20 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     height: 24px;
     float: left;
 }
+
+.active-table-img {
+    position: absolute;  
+    -webkit-transform-origin: 50% 50%;
+}
+
+.active-table-booked {
+    box-shadow: 5px 5px 25px red;
+}
+
+.active-table-free {
+    box-shadow: 5px 5px 25px green;
+}
+
+.active-table-selected {
+    box-shadow: 5px 5px 25px #eb7b12;
+}

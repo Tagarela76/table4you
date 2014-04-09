@@ -407,6 +407,28 @@ function TableOrder() {
 
     var that = this;
     
+    this.refreshBookedTableListInClientDashboard = function(filterDate) {
+        // get map id
+        var mapId = $("#mapId").val();
+        
+        // Get time
+        var filterTimeHour = $("#activeTableOrderForm_reserveTime_hour").val();
+        var filterTimeMinute = $("#activeTableOrderForm_reserveTime_minute").val(); 
+
+        $.ajax({
+            url: Routing.generate('table_refreshBookedTableListInClientDashboard'),
+            data: {mapId: mapId, filterDate: filterDate, 
+                filterTimeHour: filterTimeHour, filterTimeMinute: filterTimeMinute},
+            type: "GET",
+            dataType: "html",
+            success: function(responce) {
+                $('#table-map-image-container').html(responce);
+                // Reset Selected Table
+                $("#activeTableOrderForm_activeTable").val("");
+            }
+        });
+    }
+    
     this.viewFilter = function() {
 
         $.ajax({
@@ -455,10 +477,9 @@ function TableOrder() {
     this.selectActiveTable = function(activeTableId) {
         
         $("#activeTableOrderForm_activeTable").val(activeTableId);
-        // unshine all
-       // $(".active-table-img").css("box-shadow", "");
-        // shine
-        $("#activeTable_" + activeTableId).css("box-shadow", "5px 5px 25px #eb7b12");
+        
+        $(".active-table-img").removeClass("active-table-selected");
+        $("#activeTable_" + activeTableId).addClass("active-table-selected");
     }
     
     this.loadMapScheme = function(mapScheme) {
