@@ -471,7 +471,12 @@ input:focus{outline: 0 none}
     position: relative;
     height: 50px;
 }
-#table-order-form-container div.button-reserve{float: right; margit-top: 4px;}
+#table-order-form-container textarea:focus{
+    border: 1px solid #fe8504;
+    outline: none;
+    box-shadow: none;
+}
+#table-order-form-container div.button-reserve{float: right; margin-top: 4px;}
 #table-order-form-container div.button-reserve input{
     background: #feb200;
     background: -moz-linear-gradient(top, #feb200 0%, #e2601b 100%);
@@ -845,14 +850,11 @@ input#tableOrderForm_peopleCount:focus{
 #table-order-form-container  .table-order-form .choose-zone label{font-size: 16px;}
 #tableOrderForm_reserveTime{margin-top: -13px;}
 #activeTableOrder4AdminForm_reserveTime{margin-top: -10px;}
-#tableOrderForm_reserveTime .cusel,
-#activeTableOrder4AdminForm_reserveTime .cusel{top: 11px;}
-/*.cusel, .cuselFrameRight, .jScrollPaneDrag, .jScrollArrowUp, .jScrollArrowDown {
-background: url(images/selects-2.png) no-repeat;}*/
-/*.cusel:hover, .cusel:hover .cuselFrameRight, .cusel:focus, .cusel:focus .cuselFrameRight, .cuselFocus, .cuselFocus .cuselFrameRight {
-background-image: url(images/selects-2.png);}*/
-#tableOrderForm_reserveTime .cusel,
-#activeTableOrder4AdminForm_reserveTime .cusel{
+#tableOrderForm_reserveTime select,
+#activeTableOrder4AdminForm_reserveTime select{top: 4px;position: relative;}
+#tableOrderForm_reserveTime select,
+#activeTableOrder4AdminForm_reserveTime select,
+#activeTableOrderForm_reserveTime select{
     background: none;
     background: -moz-linear-gradient(top, #e2e0e0 0%, #f1f0f0 99%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e2e0e0), color-stop(99%,#f1f0f0));
@@ -871,21 +873,23 @@ background-image: url(images/selects-2.png);}*/
     box-shadow: inset 1px 0px 3px rgba(238, 238, 238, 0.7), inset -2px 0px 3px rgba(238, 238, 238,0.7), inset 0px 2px 1px rgba(0, 0, 0, 0.7);
     width: 110px!important;
 }
-#activeTableOrder4AdminForm_reserveTime .cusel{width: 175px!important;}
-#tableOrderForm_reserveTime #cuselFrame-tableOrderForm_reserveTime_hour,
-#activeTableOrder4AdminForm_reserveTime #cuselFrame-activeTableOrder4AdminForm_reserveTime_hour{margin-right: 5px;}
-#tableOrderForm_reserveTime #cuselFrame-tableOrderForm_reserveTime_minute,
-#activeTableOrder4AdminForm_reserveTime #cuselFrame-activeTableOrder4AdminForm_reserveTime_minute{margin-left: 5px;}
-#tableOrderForm_reserveTime .cusel:focus,
-#activeTableOrder4AdminForm_reserveTime .cusel:focus{
-    background: url(images/selects-2.png) no-repeat;
-    box-shadow: none;
-    border: 1px solid #fff;
+#activeTableOrder4AdminForm_reserveTime select{width: 175px!important;}
+#activeTableOrderForm_reserveTime select{
+    width: 117px!important;
+    position: relative;
+    top: 4px;
 }
-#tableOrderForm_reserveTime .cuselFrameRight,
-#activeTableOrder4AdminForm_reserveTime .cuselFrameRight{background-position: -168px -61px}
-#tableOrderForm_reserveTime .cusel:focus .cuselFrameRight,
-#activeTableOrder4AdminForm_reserveTime .cusel:focus .cuselFrameRight{background: url(images/selects-2.png) no-repeat right top;}
+#tableOrderForm_reserveTime #cuselFrame-tableOrderForm_reserveTime_hour,
+#activeTableOrder4AdminForm_reserveTime select{margin-right: 5px;}
+#tableOrderForm_reserveTime #cuselFrame-tableOrderForm_reserveTime_minute,
+#activeTableOrder4AdminForm_reserveTime select{margin-left: 5px;}
+#tableOrderForm_reserveTime select:focus,
+#activeTableOrder4AdminForm_reserveTime select:focus,
+#activeTableOrderForm_reserveTime select:focus{
+    border: 1px solid #fe8504;
+    outline: none;
+    box-shadow: none;
+}
 .table-order-form .floor-tabs li a {font-size: 16px;}
 .order-search{
     margin-top: 15px;
@@ -1670,6 +1674,8 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     background: -ms-linear-gradient(top, #feb200 0%,#e2601b 100%);
     background: linear-gradient(to bottom, #feb200 0%,#e2601b 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feb200', endColorstr='#e2601b',GradientType=0 );
+    color: #000;
+    border-radius: 6px;
 }
 .validationError {display: none;}
 
@@ -2335,6 +2341,7 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
 #table-map-image-container {
     width: 500px;
     height: 346px;
+    overflow: hidden;
     /*margin: 0px !important;*/
 }
 
@@ -2493,8 +2500,8 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     font-weight: normal;
     width: 18px;
 }
-.modal-body .table-order-form-top .ui-datepicker .ui-datepicker-prev{left: 20%;}
-.modal-body .table-order-form-top .ui-datepicker .ui-datepicker-next{right: 20%;}
+.modal-body .ui-datepicker .ui-datepicker-prev{left: 18%;}
+.modal-body .ui-datepicker .ui-datepicker-next{right: 18%;}
 .modal-body .table-order-form-top .table-order-form-top{margin-bottom: 0px;}
 .modal-body #table-order-form .table-order-form-bottom-input label{float: left;margin-left: 14px;color: #454545;margin-top: 5px;}
 .modal-body #table-order-form .table-order-form-bottom-input input{
@@ -2591,11 +2598,6 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
 }
 .tableMapContainer #interactive-map-container #activeTableOrderContainer .row-fluid #activeTableOrder4AdminForm_reserveTime{line-height: 1.5;height: 32px;margin-bottom: 29px;margin-right: 0;}
 .tableMapContainer #interactive-map-container #activeTableOrderContainer #table-order-form .table-order-form-bottom{margin-top: 15px;padding-top: 23px;border-top: 1px solid #d6d7d8;}
-#activeTableOrderForm_reserveTime .cusel{
-    width: 117px!important;
-    position: relative;
-    top: 8px;
-}
 #activeTableOrderForm_peopleCount, #activeTableOrderForm_wish, #activeTableOrderForm_captcha{
     width: 232px;
     height: 18px;
@@ -2615,8 +2617,20 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     border-bottom: 1px solid #f2f2f2;
     background: #fff;
 }
+#activeTableOrderForm_peopleCount:focus, #activeTableOrderForm_wish:focus, #activeTableOrderForm_captcha:focus{
+    border: 1px solid #fe8504;
+    outline: none;
+    box-shadow: none;
+}
 #activeTableOrderForm_peopleCount{
     width: 70px;
     height: 24px;
     float: left;
 }
+.active-table-img{
+    box-shadow: rgb(235, 123, 18) 0px 0px 19px -1px;
+    background-color: rgba(255, 123, 0, 0.4);
+    border-radius: 8px;
+    z-index: 999;
+}
+.reserve-table-img{opacity: 0.4;}
