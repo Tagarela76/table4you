@@ -4,9 +4,13 @@
             {% trans %}main.tableMap.orders.list.table{% endtrans %} {{activeTable.tableNumber}}
         </div>   
         <div class="span7">
-            <a onclick="page.tableOrder.initTableData({{activeTable.id}});" data-toggle="modal" href="#reservePopup4Admin">
+            {% if acceptReserve %}
+                <a onclick="page.tableOrder.initTableData({{activeTable.id}});" data-toggle="modal" href="#reservePopup4Admin">
+            {% endif %} 
                 {% trans %}main.tableMap.orders.list.reserve{% endtrans %}
-            </a>  
+            {% if acceptReserve %}    
+                </a>  
+            {% endif %} 
         </div>
         <div class="span4">
             <a href='#' onclick='page.tableOrder.viewFilter(); return false;'>
@@ -47,6 +51,8 @@
                 showOn: "button",
                 buttonImage: "{{ asset('bundles/tablemain/images/calendar.png') }}",
                 buttonImageOnly: true,
+                minDate: '0',
+                maxDate: '+1m', 
                 onSelect: function(filterDate) {
                     page.tableOrder.refreshBookedTableListInAdminDashboard(filterDate);
                     $("#filterDate").val(filterDate);

@@ -1,8 +1,17 @@
 {% for activeTable in activeTableList %}
-    <img title="{{activeTable.tableNumber}} {% trans %}main.tableMap.createMap.table{% endtrans %}" 
-         id="tableContainer_{{activeTable.id}}" 
-        {% if activeTable.id in bookedTables %}onclick='page.tableOrder.loadOrderList({{activeTable.id}}, 0);'{% else %}onclick='page.tableOrder.loadOrderList({{activeTable.id}}, 1);'{%endif %}
-         class="active-table-img"
-         style="position: absolute; left: {{activeTable.leftPosition}}px; top: {{activeTable.topPosition}}px; box-shadow: 10px 10px 5px {% if activeTable.id in bookedTables %}red{% else %}green{% endif %}; -webkit-transform: rotate({{activeTable.angle}}deg); -webkit-transform-origin: 50% 50%;"
-         tabletypeid='{{activeTable.tableType.id}}' src="{{baseUrl}}{{ vich_uploader_asset(activeTable.tableType, 'file') }}"  />
+    {% if activeTable.id in bookedTables %}
+        {#BOOKED TABLE #}
+        <img title="{{activeTable.tableNumber}} {% trans %}main.tableMap.createMap.table{% endtrans %}" id="tableContainer_{{activeTable.id}}" 
+            onclick='page.tableOrder.loadOrderList({{activeTable.id}}, 0);' class="active-table-img active-table-booked"
+            style="left: {{activeTable.leftPosition}}px; top: {{activeTable.topPosition}}px; -webkit-transform: rotate({{activeTable.angle}}deg); "
+            tabletypeid='{{activeTable.tableType.id}}' src="{{baseUrl}}{{ vich_uploader_asset(activeTable.tableType, 'file') }}"  />
+        {#BOOKED TABLE #}
+    {% else %}
+        {#FREE TABLE #}
+        <img title="{{activeTable.tableNumber}} {% trans %}main.tableMap.createMap.table{% endtrans %}" id="tableContainer_{{activeTable.id}}" 
+            onclick='page.tableOrder.loadOrderList({{activeTable.id}}, 1);' class="active-table-img active-table-free"
+            style="left: {{activeTable.leftPosition}}px; top: {{activeTable.topPosition}}px; -webkit-transform: rotate({{activeTable.angle}}deg);"
+            tabletypeid='{{activeTable.tableType.id}}' src="{{baseUrl}}{{ vich_uploader_asset(activeTable.tableType, 'file') }}"  />
+        {#FREE TABLE #}
+    {% endif %}
 {% endfor %} 
