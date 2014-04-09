@@ -184,38 +184,53 @@ class ActiveTableOrderRepository extends EntityRepository
                 ->where("restaurant.id = :restaurantId")
                 ->setParameter('restaurantId', $id);
         
+        // Show all completed and not processed orders
+        $orderNothingDidStatus = ActiveTableOrder::ORDER_NOTHING_DID_STATUS_CODE;
+        $orderAcceptStatus = ActiveTableOrder::ORDER_ACCEPT_STATUS_CODE;
+        $query->andWhere('activeTableOrder.status = :orderNothingDidStatus OR activeTableOrder.status = :orderAcceptStatus')
+              ->setParameter('orderNothingDidStatus', $orderNothingDidStatus)
+              ->setParameter('orderAcceptStatus', $orderAcceptStatus); 
+        
         if (is_null($dateTime)) {
             $dateTime = new \DateTime("now");
         }
         $startTime = clone $dateTime; // first init
         $endTime = clone $dateTime; // first init
-        // devide on date & time
-        $date = $dateTime->format("Y-m-d");
-        $time = $dateTime->format("H:i");    
+  
         switch (true) {
-            case ($time < "16:00") :           
+            case ($dateTime->format("H:i") < "16:00") :           
                 // get start time (+-1.5h)
                 $startTime->modify("-90 minutes");
                 // get end time
                 $endTime->modify("+90 minutes"); 
                 break;
-            case ($time >= "16:00" && $time < "19:00") :
+            case ($dateTime->format("H:i") >= "16:00" && $dateTime->format("H:i") < "19:00") :
                 // get start time (+-2.5h)
                 $startTime->modify("-150 minutes");
                 // get end time
                 $endTime->modify("+150 minutes");
                 break;
-            case ($time >= "19:00") :       
+            case ($dateTime->format("H:i") >= "19:00") :       
                 // modify only end time
                 $endTime->setTime(23, 59);
                 break;
         }  
-        $query->andWhere('activeTableOrder.reserveDate = :reserveDate')
-              ->setParameter('reserveDate', $date)
-              ->andWhere('activeTableOrder.reserveTime BETWEEN :startTime AND :endTime')
-              ->setParameter('startTime', $startTime->format('H:i:s'))
-              ->setParameter('endTime', $endTime->format('H:i:s'))
-              ->distinct('activeTable.id');
+        if ($startTime->format('Y-m-d') == $endTime->format('Y-m-d')) {
+            // The same day
+            $query->andWhere('activeTableOrder.reserveDate = :reserveDate')
+                    ->setParameter('reserveDate', $dateTime->format("Y-m-d"));
+            $query->andWhere('activeTableOrder.reserveTime BETWEEN :startTime AND :endTime')
+                    ->setParameter('startTime', $startTime->format('H:i:s'))
+                    ->setParameter('endTime', $endTime->format('H:i:s'));
+        } else {
+            // start in one day amd finish in another
+            $query->andWhere('(activeTableOrder.reserveDate = :startDate AND activeTableOrder.reserveTime > :startTime)' .
+                    'OR (activeTableOrder.reserveDate = :endDate AND activeTableOrder.reserveTime < :endTime)')
+                    ->setParameter('startDate', $startTime->format('Y-m-d'))
+                    ->setParameter('endDate', $endTime->format('Y-m-d'))
+                    ->setParameter('startTime', $startTime->format('H:i:s'))
+                    ->setParameter('endTime', $endTime->format('H:i:s'));
+        }
 
         return $query->getQuery()->getResult();
     }

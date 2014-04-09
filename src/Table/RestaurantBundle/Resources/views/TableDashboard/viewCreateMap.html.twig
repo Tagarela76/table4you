@@ -1,6 +1,9 @@
 {% extends 'TableMainBundle::layout_table_editor.html.twig' %}
 {% block javascripts %}
     {{ parent() }}
+    {# Rotate plugin #}
+    <script src="{{ asset('bundles/tablerestaurant/js/jQueryRotate.js') }}"></script>
+    <script src="{{ asset('bundles/tablerestaurant/js/jquery.easing.min.js') }}"></script>
     <script>
         $(function() { 
             page.common.allowDigitsOnly("valid-number");

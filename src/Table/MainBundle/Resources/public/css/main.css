@@ -1677,7 +1677,7 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     color: #000;
     border-radius: 6px;
 }
-.validationError {display: none;}
+.validationError, .validationFileError {display: none;}
 
 /* Page added tables */
 .header-dashboard .span3+.span6{width: 372px;text-align: right;}
@@ -1937,15 +1937,17 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     background: linear-gradient(to bottom, #f9bd34 0%,#f09a32 53%,#ed7a00 60%,#e04c00 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9bd34', endColorstr='#e04c00',GradientType=0 );
 }
-#table-type-form .validationError, #table-map-form .validationError, .editTableMapPopup .validationError{
+#table-type-form .validationError, #table-map-form .validationError, .editTableMapPopup .validationError, .editTableMapPopup .validationFileError {
     margin: 0px 45px 0px 0px;
     position: absolute;
-    top: 35px;
+    top: 32px;
     right: 0;
     color: #FF0000;
     font-size: 11px;
 }
-.editTableMapPopup .validationError{margin: 0px 40px 0px 0px;}
+.editTableMapPopup .validationFileError {margin: 0px 40px 0px 0px; top: 42px;}
+
+.editTableMapPopup .validationError {margin: 0px 40px 0px 0px;}
 .editTableMapPopup form .row-fluid{position: relative;}
 #table-map-form .validationError{margin-right: 2px;}
 #table-map-form .but-load-file{margin: 0;}
@@ -2469,6 +2471,12 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
 .tableMapContainer #interactive-map-container #activeTableOrderContainer .active-Table-Order-Reserve .span7 a{display: block;text-align: center;margin-top: 10px;}
 /* Modal reserve admin*/
 .tableMapContainer #interactive-map-container #activeTableOrderContainer #table-order-form .row-fluid{width: 100%;padding: 0;}
+.tableMapContainer #interactive-map-container #activeTableOrderContainer #table-order-form .error-form-reserve,
+.modal-body #table-order-form .table-order-form-top-input .error-form-reserve{
+    border: 1px solid #FF0000;
+    box-shadow: none;
+}
+.modal-body #table-order-form .table-order-form-top-input ul{margin-left: 0;}
 .tableMapContainer #interactive-map-container #activeTableOrderContainer #table-order-form .row-fluid .span5{margin-right: 0;}
 .tableMapContainer #interactive-map-container #activeTableOrderContainer #table-order-form .row-fluid .span5{width: 379px;}
 .tableMapContainer #interactive-map-container #activeTableOrderContainer #table-order-form .table-order-form-bottom .span5+.span5{margin-top: 40px;}
@@ -2524,6 +2532,11 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     border-top: 1px solid #f2f2f2;
     border-bottom: 1px solid #f2f2f2;
     background: #fff;
+}
+.modal-body #table-order-form .table-order-form-bottom-input ul{
+    text-align: right;
+    float: right;
+    margin-right: 10px;
 }
 .modal-body #table-order-form .table-order-form-bottom-input textarea{
     width: 345px;
@@ -2627,10 +2640,32 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     height: 24px;
     float: left;
 }
-.active-table-img{
-    box-shadow: rgb(235, 123, 18) 0px 0px 19px -1px;
-    background-color: rgba(255, 123, 0, 0.4);
-    border-radius: 8px;
-    z-index: 999;
+.tableMapContainer #interactive-map-container #activeTableOrderContainer .reserve-table-info>.span10{
+    margin-right: 0;
 }
-.reserve-table-img{opacity: 0.4;}
+.tableMapContainer #interactive-map-container #activeTableOrderContainer .reserve-table-info+.reserve-table-info{border-top: 1px solid #adabab;}
+.tableMapContainer #interactive-map-container #activeTableOrderContainer .reserve-table-info>.span10 p{
+    margin: 0;
+    line-height: 1.3;
+    font-size: 17px;
+    font-family: Arial;
+    color: #454545;
+}
+.tableMapContainer #interactive-map-container #activeTableOrderContainer .reserve-table-info>.span2{
+    text-align: right;
+    margin-top: 35px;
+}
+
+.active-table-img {
+position: absolute;
+-webkit-transform-origin: 50% 50%;
+}
+.active-table-booked {opacity: 0.4;}
+.active-table-free {}
+.active-table-selected {
+box-shadow: rgb(235, 123, 18) 0px 0px 19px -1px;
+background-color: rgba(255, 123, 0, 0.4);
+border-radius: 8px;
+z-index: 999;
+}
+

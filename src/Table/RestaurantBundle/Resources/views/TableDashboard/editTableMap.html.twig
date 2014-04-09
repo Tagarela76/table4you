@@ -35,6 +35,8 @@
                         <input type="button" onClick="page.tableMap.validateEditForm(this);" value="{% trans %}main.tableMap.createMap.form.label.save{% endtrans %}" class="but-load-file"/>
                         <input type="hidden" name="tableMapId" value="{{tableMap.id}}" />
                     </div>
+                    <label class="validationFileError">{% trans %}main.tableMap.createMap.form.error.file{% endtrans %}</label>
+                    <div style="clear: both;"></div>
                     <label class="validationError">{% trans %}main.tableMap.createMap.form.error.floor{% endtrans %}</label>
                 </div>    
             </div>

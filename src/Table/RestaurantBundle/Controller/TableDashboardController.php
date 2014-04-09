@@ -183,7 +183,6 @@ class TableDashboardController extends Controller
         // Get Active Tables List
         $activeTableList = $this->getActiveTableManager()->findByTableMap($mapId);
         
-        
         return array(
             'restaurantList' => $restaurantList,
             'tableMapList' => $tableMapList,
@@ -231,8 +230,8 @@ class TableDashboardController extends Controller
                 $resizedImage->best_fit(TableType::IMAGE_HEIGHT, TableType::IMAGE_WIDTH)->save($imagePath);
             } else {
                 // delete entity
-               // $em->remove($tableType);
-               // $em->flush();
+                $em->remove($tableType);
+                $em->flush();
             }
         }
         return $this->redirect(
@@ -660,10 +659,17 @@ class TableDashboardController extends Controller
 
         //get Order list
         $tableOrderList = $this->getActiveTableOrderManager()->getActiveTableOrderHistory($activeTable->getId());
-
+        
+        //init form for table reserve
+        $activeTableOrder = new ActiveTableOrder();
+        $form = $this->createForm(new ActiveTableOrderForm4AdminType(), $activeTableOrder);
+   
         return $this->render('TableRestaurantBundle:TableDashboard:viewActiveTableOrderList.html.twig', array(
-                    'tableOrderList' => $tableOrderList,
-                    'activeTable' => $activeTable,
+                'tableOrderList' => $tableOrderList,
+                'activeTable' => $activeTable,
+                'acceptReserve' => $this->getRequest()->request->get('acceptReserve'),
+                'successReserve' => false,
+                'form' => $form->createView()
         ));
     }
 
@@ -713,7 +719,13 @@ class TableDashboardController extends Controller
             $reserveDateTime->setTime($reserveHour, $reserveMin);
         
             if ($form->isValid()) {
-       
+                // Check if we can reserve current table
+                // get Booked Tables 
+                $bookedActiveTables = $this->getActiveTableOrderManager()->getBookedTablesByRestaurant($activeTable->getTableMap()->getRestaurant()->getId(), $reserveDateTime);  
+                
+                if (in_array($activeTableOrder->getActiveTable(), $bookedActiveTables)) {
+                    return $this->render('TableRestaurantBundle:Default:table.has.allready.booked.html.twig');
+                }
                 if ($userForm->isValid()) {
 
                     $user = $userForm->getData();
@@ -865,16 +877,44 @@ class TableDashboardController extends Controller
         $activeTableId = $this->getRequest()->request->get('activeTableId');
         $leftPosition = $this->getRequest()->request->get('leftPosition');
         $topPosition = $this->getRequest()->request->get('topPosition');
+        $angle = $this->getRequest()->request->get('tableAngle');
         
         // init Active table 
         $activeTable = $this->getActiveTableManager()->findOneById($activeTableId);
         $activeTable->setLeftPosition($leftPosition);
         $activeTable->setTopPosition($topPosition);
+        $activeTable->setAngle($angle);
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($activeTable);
         $em->flush();
         
         return new Response("success");
+    }
+    
+    /**
+     * Get ActiveTable List in jsone format
+     * 
+     */
+    public function getActiveTableListAction()
+    {
+        // get Current user
+        $anonim = false;
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            $anonim = true;
+        }
+        
+        $tableList = $this->getActiveTableManager()->findAll();
+        // create new object
+        $activeTableList = array();
+        $activeTable = array();
+        foreach ($tableList as $table) {
+            $activeTable['id'] = $table->getId();
+            $activeTable['angle'] = $table->getAngle();
+
+            $activeTableList[] = $activeTable;
+        }
+        return $activeTableList;
     }
 }

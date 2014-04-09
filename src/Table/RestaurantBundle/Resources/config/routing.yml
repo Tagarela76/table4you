@@ -218,4 +218,20 @@ table_viewActiveTableOrderFilter:
     requirements:
         _method: GET  
     options:
-       expose: true             
+       expose: true      
+       
+table_getActiveTableList:
+    pattern:  /getActiveTableList
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:getActiveTableList, _format: json }
+    requirements:
+        _method: GET  
+    options:
+       expose: true       
+       
+table_refreshBookedTableListInClientDashboard:
+    pattern:  /refreshBookedTableListInClientDashboard
+    defaults: { _controller: TableRestaurantBundle:Default:refreshBookedTableListInClientDashboard }
+    requirements:
+        _method: GET  
+    options:
+       expose: true         

@@ -18,6 +18,45 @@ use Table\RestaurantBundle\Entity\ActiveTableOrder;
 
 class DefaultController extends Controller
 {
+    /**
+     * Refreash Booked Tables list
+     * 
+     * @Template()
+     */
+    public function refreshBookedTableListInClientDashboardAction()
+    {
+        // get Current user
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            // redirect on homepage
+            return $this->redirect(
+                $this->generateUrl("table_main_homepage")
+            );
+        }
+        
+        // Collect Data
+        $mapId = $this->getRequest()->query->get('mapId');
+        $filterDate = $this->getRequest()->query->get('filterDate');
+        $filterTimeHour = $this->getRequest()->query->get('filterTimeHour');
+        $filterTimeMinute = $this->getRequest()->query->get('filterTimeMinute');
+        
+        // init map obj
+        $tableMap = $this->getTableMapManager()->findOneById($mapId);        
+        // transform to date time
+        $dateTime = new \DateTime($filterDate . " " . $filterTimeHour . ":" . $filterTimeMinute, new \DateTimeZone(ActiveTableOrder::RESERVE_TIMEZONE));       
+        // get Booked Tables (Filter)
+        $bookedTables = $this->getActiveTableOrderManager()->getBookedTablesByRestaurant($tableMap->getRestaurant()->getId(), $dateTime);          
+        // assign base_url
+        $baseUrl = $this->container->getParameter('base_folder_url');
+        // Get Active Tables List
+        $activeTableList = $this->getActiveTableManager()->findByTableMap($mapId);
+        
+        return $this->render('TableRestaurantBundle:Default:viewActiveTableList.html.twig', array(
+            'baseUrl' => $baseUrl,
+            'activeTableList' => $activeTableList,
+            'bookedTables' => $bookedTables
+        ));
+    }
 
     /**
      * Refreash Booked Tables list
@@ -183,31 +222,40 @@ class DefaultController extends Controller
             $tableMapList = false; 
             $activeTableList = false;
         }
-            
-        // get table order data
-        $activeTableOrder = $form->getData();
-        
         $successReserve = false; // we should know if table reserve was successfull
         if ($request->isMethod('POST') && !$this->getRequest()->request->get('fromMap')) {
             $form->bind($request);
 
-            // Check if user can do table order
-            $reserveDateTime = new \DateTime($activeTableOrder->getReserveDate() . " " . $activeTableOrder->getReserveTime(), new \DateTimeZone(ActiveTableOrder::RESERVE_TIMEZONE));
-
-            if (!$this->getActiveTableOrderManager()->isUserCanReserveTable($user->getId(), $reserveDateTime)) {
-                // render Warning Notification, user cannot order other tables!!!
-                return $this->render('TableRestaurantBundle:Default:user.cannot.order.table.html.twig', array(
-                            'user' => $user
-                ));
-            }
-   
             if ($form->isValid()) {
+                // get table order data
+                $activeTableOrder = $form->getData();
+
+                // Format reserve time
+                $reserveTime = $activeTableOrder->getReserveTime()->format("H:i:s");
+
+                // Check if user can do table order
+                $reserveDateTime = new \DateTime($activeTableOrder->getReserveDate() . " " . $reserveTime, new \DateTimeZone(ActiveTableOrder::RESERVE_TIMEZONE));
+
+                if (!$this->getActiveTableOrderManager()->isUserCanReserveTable($user->getId(), $reserveDateTime)) {
+                    // render Warning Notification, user cannot order other tables!!!
+                    return $this->render('TableRestaurantBundle:Default:user.cannot.order.table.html.twig', array(
+                                'user' => $user
+                    ));
+                }
+
+                // Check if we can reserve current table
+                // get Booked Tables 
+                $bookedActiveTables = $this->getActiveTableOrderManager()->getBookedTablesByRestaurant($id, $reserveDateTime);  
+                if (in_array($activeTableOrder->getActiveTable(), $bookedActiveTables)) {
+                    return $this->render('TableRestaurantBundle:Default:table.has.allready.booked.html.twig');
+                }
                 // add Order
                 // format reserve date
                 $activeTableOrder->setReserveDate(new \DateTime($activeTableOrder->getReserveDate(), new \DateTimeZone(ActiveTableOrder::RESERVE_TIMEZONE)));
+                
                 // set User Data
                 $activeTableOrder->setUser($user);
-
+ 
                 // set status 0
                 if (is_null($activeTableOrder->getStatus())) {
                     $activeTableOrder->setStatus(0);
@@ -216,6 +264,7 @@ class DefaultController extends Controller
                 // init active table
                 $activeTable = $this->getActiveTableManager()->findOneById($activeTableOrder->getActiveTable());
                 $activeTableOrder->setActiveTable($activeTable);
+                
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($activeTableOrder);
                 $em->flush();
@@ -224,7 +273,7 @@ class DefaultController extends Controller
         } 
         // get Booked Tables 
         $bookedTables = $this->getActiveTableOrderManager()->getBookedTablesByRestaurant($id);  
-
+       // var_dump($successReserve, $form->getErrors()); die();
         // assign base_url
         $baseUrl = $this->container->getParameter('base_folder_url');
         return array(

@@ -16,13 +16,15 @@ function ActiveTable() {
     this.updateActiveTablePosition = function(activeTableId) {
         
         // Get new position
-        var left = $("#activeTable_" + activeTableId).position().left/* - $("#tableMapDroppable").position().left*/;
-        var top = $("#activeTable_" + activeTableId).position().top/* - $("#tableMapDroppable").position().top*/;
+        var left = $("#activeTable_" + activeTableId).position().left;
+        var top = $("#activeTable_" + activeTableId).position().top;
+        var tableAngle = $("#activeTable_" + activeTableId).getRotateAngle();
 
         // Get new position
         $.ajax({
             url: Routing.generate('table_updateActiveTable'),
-            data: {activeTableId: activeTableId, leftPosition: left, topPosition: top},
+            data: {activeTableId: activeTableId, leftPosition: left, 
+                topPosition: top, tableAngle: tableAngle[0]},
             type: "POST",
             dataType: "html",
             success: function() { 
@@ -97,6 +99,33 @@ function ActiveTable() {
 
 function TableMap() {
     
+    this.rotateTables = function() {
+        
+        // Get Tables
+        $.ajax({
+            url: Routing.generate('table_getActiveTableList'),
+            type: "GET",
+            dataType: "json",
+            success: function(response) { 
+                for (var i = 0; i < response.length; i++) {
+                    var activeTable = response[i]; console.log(activeTable);
+                    // Rotate Tables
+                    var startAngle = 0;
+                    $(".active-table_" + activeTable.id).rotate({ 
+                        angle:activeTable.angle, 
+                        bind: 
+                            { 
+                                click: function(){
+                                    startAngle += 45;
+                                    $(this).rotate({ animateTo:startAngle})
+                                }
+                            } 
+                    });
+                }
+            }  
+	});    
+    }
+    
     this.loadMapScheme = function(mapScheme) {
         $('#tableMapDroppable').css('background-image', 'url(' + mapScheme + ')');
     }
@@ -150,16 +179,38 @@ function TableMap() {
     }
     
     this.validateEditForm = function(el) {
-        //reset errors
-        $(".validationError").css("display", "none");
+        
         // Get parent form
         var form = $(el).closest('form');
+        
+        //reset errors
+        $(".validationError").css("display", "none");
+        $(".validationFileError").css("display", "none");
+        form.find($('input[name="mapFloor"]')).removeClass("error-form");
+        form.find($('input[name="mapFile"]')).removeClass("error-form");
+        
+        var isError = false;
+        
+        var mapFile = form.find($('input[name="mapFile"]')).val(); 
+        if (mapFile != "") {
+            // Check image format
+            var mapFileArray = mapFile.split(".");
+            var ext = mapFileArray[mapFileArray.length - 1];
+            if (ext != "jpg" && ext != "jpeg" && ext != "JPEG" && ext != "png") {
+                form.find($('input[name="mapFile"]')).addClass("error-form");
+                $(".validationFileError").css("display", "block");
+                isError = true;
+            }
+        }
+        
         //check if people count field empty
         if (form.find($('input[name="mapFloor"]')).val() == "") {
             //display error
             $(".validationError").css("display", "block");
             form.find($('input[name="mapFloor"]')).addClass("error-form");
-        } else {
+            isError = true;
+        } 
+        if (!isError) {
             // submit form
             form.submit(); 
         }
@@ -180,15 +231,26 @@ function TableMap() {
         });
         //check if file field empty
         var isFileEmptyError = false;
+        var isFileIncorrectError = false;
         $(":input[name='mapFile[]']").each(function(i){
+            // Check image format
+            var mapFileArray = $(this).val().split(".");
+            var ext = mapFileArray[mapFileArray.length - 1];
+            if (ext != "jpg" && ext != "jpeg" && ext != "JPEG" && ext != "png") {
+                isFileIncorrectError = true;
+            }   
             if($(this).val() == "") {
                 isFileEmptyError = true;
+                
+            }
+            if (isFileEmptyError || isFileIncorrectError) {
                 $(this).addClass("error-form");
             }
+            
         });
 
         //validate
-        if (isFloorEmptyError || isFileEmptyError) {
+        if (isFloorEmptyError || isFileEmptyError || isFileIncorrectError) {
             //display error
            $(".validationError").css("display", "block");
         } else {
@@ -205,8 +267,8 @@ function TableMap() {
             data: {tableMapId: tableMapId, restaurantId: restaurantId},
             type: "POST",
             dataType: "html",
-            success: function() {
-                location.reload();
+            success: function() { 
+                location.href = Routing.generate('table_viewCreateMap') + "/" + restaurantId;
             }
         });
     }
@@ -215,16 +277,33 @@ function TableMap() {
 function TableType() {
     
     this.validateEditForm = function(el) {
-        //reset errors
-        $(".validationError").css("display", "none");
         // Get parent form
         var form = $(el).closest('form');
+        //reset errors
+        $(".validationError").css("display", "none"); 
+        form.find($('input[name="file"]')).removeClass("error-form");
+        form.find($('input[name="peopleCount"]')).removeClass("error-form"); 
+        
+        var isError = false;
+        // Check image format
+        var file = form.find($('input[name="file"]')).val(); 
+        if (file != "") {
+            var fileArray = file.split(".");
+            var ext = fileArray[fileArray.length - 1];
+            if (ext != "jpg" && ext != "jpeg" && ext != "JPEG" && ext != "png") {
+                form.find($('input[name="file"]')).addClass("error-form");
+                $(".validationError").css("display", "block");
+                isError = true;
+            }
+        }
         //check if people count field empty
         if (form.find($('input[name="peopleCount"]')).val() == "") {
             //display error
             $(".validationError").css("display", "block");
             form.find($('input[name="peopleCount"]')).addClass("error-form");
-        } else {
+            isError = true;
+        } 
+        if (!isError) {
             // submit form
             form.submit(); 
         }
@@ -328,6 +407,28 @@ function TableOrder() {
 
     var that = this;
     
+    this.refreshBookedTableListInClientDashboard = function(filterDate) {
+        // get map id
+        var mapId = $("#mapId").val();
+        
+        // Get time
+        var filterTimeHour = $("#activeTableOrderForm_reserveTime_hour").val();
+        var filterTimeMinute = $("#activeTableOrderForm_reserveTime_minute").val(); 
+
+        $.ajax({
+            url: Routing.generate('table_refreshBookedTableListInClientDashboard'),
+            data: {mapId: mapId, filterDate: filterDate, 
+                filterTimeHour: filterTimeHour, filterTimeMinute: filterTimeMinute},
+            type: "GET",
+            dataType: "html",
+            success: function(responce) {
+                $('#table-map-image-container').html(responce);
+                // Reset Selected Table
+                $("#activeTableOrderForm_activeTable").val("");
+            }
+        });
+    }
+    
     this.viewFilter = function() {
 
         $.ajax({
@@ -374,11 +475,12 @@ function TableOrder() {
     }
     
     this.selectActiveTable = function(activeTableId) {
-        $("#tableOrderForm_activeTable").val(activeTableId);
-        // unshine all
-        $(".active-table-img").css("");
-        // shine
-        $("#activeTable_" + activeTableId).css("");
+
+        $("#activeTableOrderForm_activeTable").val(activeTableId);
+        
+        $(".active-table-img").removeClass("active-table-selected");
+        $("#activeTable_" + activeTableId).addClass("active-table-selected");
+
     }
     
     this.loadMapScheme = function(mapScheme) {
@@ -439,10 +541,11 @@ function TableOrder() {
     }
     
     this.deleteActiveTableOrder = function(tableOrderId) {
-
+        
+        var acceptReserve = $("#acceptReserve").val();
         $.ajax({
             url: Routing.generate('table_deleteActiveTableOrder'),
-            data: {tableOrderId: tableOrderId},
+            data: {tableOrderId: tableOrderId, acceptReserve: acceptReserve},
             type: "POST",
             dataType: "html",
             success: function(responce) {

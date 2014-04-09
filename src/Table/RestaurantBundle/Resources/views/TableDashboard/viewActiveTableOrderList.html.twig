@@ -4,15 +4,25 @@
             {% trans %}main.tableMap.orders.list.table{% endtrans %} {{activeTable.tableNumber}}
         </div>   
         <div class="span7">
-            <a onclick="page.tableOrder.initTableData({{activeTable.id}});" data-toggle="modal" href="#reservePopup4Admin">
+            {% if acceptReserve %}
+                <a onclick="page.tableOrder.initTableData({{activeTable.id}});" data-toggle="modal" href="#reservePopup4Admin">
+            {% endif %} 
                 {% trans %}main.tableMap.orders.list.reserve{% endtrans %}
-            </a>  
+            {% if acceptReserve %}    
+                </a>  
+            <input type="hidden" id="acceptReserve" value="{{acceptReserve}}" />
+            {% endif %} 
+        </div>
+        <div class="span4">
+            <a href='#' onclick='page.tableOrder.viewFilter(); return false;'>
+                <img src="{{ asset('bundles/tablerestaurant/images/return_arrow.png') }}" />
+            </a>
         </div>
     </div>
 {% endif %}
 {% if tableOrderList is not null %}
     {% for tableOrder in tableOrderList %}  
-        <div class="row-fluid" style="border: 1px solid #ccc;">
+        <div class="row-fluid reserve-table-info">
             <div class="span10">
                 <p>{{tableOrder.reserveDate|date('d.m.y')}}</p>
                 <p>{{tableOrder.reserveTime|date('H:s')}}</p>
@@ -20,9 +30,9 @@
                 <p>{{tableOrder.userName}}</p>
                 <p>{{tableOrder.userPhone}}</p>
             </div>
-            <div class="span1">
+            <div class="span2">
                 <a href='#' onclick='page.tableOrder.deleteActiveTableOrder({{ tableOrder.id }}); return false;'>
-                    <img src="{{ asset('bundles/tablerestaurant/images/delete_table_type_btn.png') }}" />
+                    <img src="{{ asset('bundles/tablerestaurant/images/deleteFile.png') }}" />
                 </a>
             </div>
         </div>
@@ -42,6 +52,8 @@
                 showOn: "button",
                 buttonImage: "{{ asset('bundles/tablemain/images/calendar.png') }}",
                 buttonImageOnly: true,
+                minDate: '0',
+                maxDate: '+1m', 
                 onSelect: function(filterDate) {
                     page.tableOrder.refreshBookedTableListInAdminDashboard(filterDate);
                     $("#filterDate").val(filterDate);

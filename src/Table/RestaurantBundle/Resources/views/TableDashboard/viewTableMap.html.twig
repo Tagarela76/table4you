@@ -38,6 +38,9 @@
             cursor: 'move',
             containment: '.table-map-droppable'
         });
+        
+        // Rotate Tables
+        page.tableMap.rotateTables();
     });    
 </script>
 <div class="row-fluid title-tabs">
@@ -71,7 +74,7 @@
         {% for activeTable in activeTableList %}
             <img leftPosition="{{activeTable.leftPosition}}" topPosition="{{activeTable.topPosition}}" title="{{activeTable.tableNumber}} {% trans %}main.tableMap.createMap.table{% endtrans %}" 
                  id="activeTable_{{activeTable.id}}" onmousedown='page.activeTable.loadActiveTable({{activeTable.id}});' 
-                 class='active-table-draggable canvas-element' 
+                 class='active-table-draggable canvas-element active-table_{{activeTable.id}}' 
                  style="position: absolute; left: {{activeTable.leftPosition}}px; top: {{activeTable.topPosition}}px;"
                  tabletypeid='{{activeTable.tableType.id}}' src="{{baseUrl}}{{ vich_uploader_asset(activeTable.tableType, 'file') }}" />
         {% endfor %}      

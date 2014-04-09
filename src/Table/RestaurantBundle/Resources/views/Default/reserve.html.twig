@@ -11,10 +11,14 @@
         $.datepicker.setDefaults($.datepicker.regional['ru']);
         $('.reserveDate').datepicker({
             dateFormat: 'yy-mm-dd',
-            altField: "#tableOrderForm_reserveDate",
+            altField: "#activeTableOrderForm_reserveDate",
             altFormat: "yy-mm-dd",
             minDate: '0',
-            maxDate: '+1m' 
+            maxDate: '+1m', 
+            onSelect: function(filterDate) {
+                page.tableOrder.refreshBookedTableListInClientDashboard(filterDate);
+                //$("#filterDate").val(filterDate);
+            }
         })
 
         $('#table-order-form').submit(function() {
@@ -33,7 +37,16 @@
         {% if tableMapObj is not null %}  
             // load Map Scheme as background
             page.tableOrder.loadMapScheme("{{baseUrl}}{{ vich_uploader_asset(tableMapObj, 'file') }}");
-        {% endif %}    
+        {% endif %}   
+        
+        {# Bind change on time container #}
+            $('#activeTableOrderForm_reserveTime_hour').change(function() {
+               page.tableOrder.refreshBookedTableListInClientDashboard($("#activeTableOrderForm_reserveDate").val());
+            });
+            $('#activeTableOrderForm_reserveTime_minute').change(function() {
+               page.tableOrder.refreshBookedTableListInClientDashboard($("#activeTableOrderForm_reserveDate").val());
+            });
+        {# Bind change on time container #}    
     });
 </script>
 

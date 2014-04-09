@@ -26,6 +26,7 @@ main:
       notification:
         dear: Dear
         userCannotOrderTable: "our service allows to book no more than one table."
+        cannotOrderCurrentTable: "Current table has allready booked at selected time." 
   restaurant:
       label:
           top: TOP 
@@ -60,6 +61,8 @@ main:
                 addMore: add more
             error:
                 floor: Fill field    
+                numberTable: Fill table number
+                file: Only jpg и png
             errors: Errors while edit form 
         floor: floor
         hall: hall  
