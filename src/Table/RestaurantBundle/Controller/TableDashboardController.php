@@ -659,10 +659,17 @@ class TableDashboardController extends Controller
 
         //get Order list
         $tableOrderList = $this->getActiveTableOrderManager()->getActiveTableOrderHistory($activeTable->getId());
-
+        
+        //init form for table reserve
+        $activeTableOrder = new ActiveTableOrder();
+        $form = $this->createForm(new ActiveTableOrderForm4AdminType(), $activeTableOrder);
+   
         return $this->render('TableRestaurantBundle:TableDashboard:viewActiveTableOrderList.html.twig', array(
-                    'tableOrderList' => $tableOrderList,
-                    'activeTable' => $activeTable,
+                'tableOrderList' => $tableOrderList,
+                'activeTable' => $activeTable,
+                'acceptReserve' => $this->getRequest()->request->get('acceptReserve'),
+                'successReserve' => false,
+                'form' => $form->createView()
         ));
     }
 
@@ -712,7 +719,13 @@ class TableDashboardController extends Controller
             $reserveDateTime->setTime($reserveHour, $reserveMin);
         
             if ($form->isValid()) {
-       
+                // Check if we can reserve current table
+                // get Booked Tables 
+                $bookedActiveTables = $this->getActiveTableOrderManager()->getBookedTablesByRestaurant($activeTable->getTableMap()->getRestaurant()->getId(), $reserveDateTime);  
+                
+                if (in_array($activeTableOrder->getActiveTable(), $bookedActiveTables)) {
+                    return $this->render('TableRestaurantBundle:Default:table.has.allready.booked.html.twig');
+                }
                 if ($userForm->isValid()) {
 
                     $user = $userForm->getData();

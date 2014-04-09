@@ -540,10 +540,11 @@ function TableOrder() {
     }
     
     this.deleteActiveTableOrder = function(tableOrderId) {
-
+        
+        var acceptReserve = $("#acceptReserve").val();
         $.ajax({
             url: Routing.generate('table_deleteActiveTableOrder'),
-            data: {tableOrderId: tableOrderId},
+            data: {tableOrderId: tableOrderId, acceptReserve: acceptReserve},
             type: "POST",
             dataType: "html",
             success: function(responce) {
