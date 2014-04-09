@@ -225,23 +225,30 @@ class DefaultController extends Controller
         $successReserve = false; // we should know if table reserve was successfull
         if ($request->isMethod('POST') && !$this->getRequest()->request->get('fromMap')) {
             $form->bind($request);
-            // get table order data
-            $activeTableOrder = $form->getData();
-            
-            // Format reserve time
-            $reserveTime = $activeTableOrder->getReserveTime()->format("H:i:s");
 
-            // Check if user can do table order
-            $reserveDateTime = new \DateTime($activeTableOrder->getReserveDate() . " " . $reserveTime, new \DateTimeZone(ActiveTableOrder::RESERVE_TIMEZONE));
-
-            if (!$this->getActiveTableOrderManager()->isUserCanReserveTable($user->getId(), $reserveDateTime)) {
-                // render Warning Notification, user cannot order other tables!!!
-                return $this->render('TableRestaurantBundle:Default:user.cannot.order.table.html.twig', array(
-                            'user' => $user
-                ));
-            }
-   
             if ($form->isValid()) {
+                // get table order data
+                $activeTableOrder = $form->getData();
+
+                // Format reserve time
+                $reserveTime = $activeTableOrder->getReserveTime()->format("H:i:s");
+
+                // Check if user can do table order
+                $reserveDateTime = new \DateTime($activeTableOrder->getReserveDate() . " " . $reserveTime, new \DateTimeZone(ActiveTableOrder::RESERVE_TIMEZONE));
+
+                if (!$this->getActiveTableOrderManager()->isUserCanReserveTable($user->getId(), $reserveDateTime)) {
+                    // render Warning Notification, user cannot order other tables!!!
+                    return $this->render('TableRestaurantBundle:Default:user.cannot.order.table.html.twig', array(
+                                'user' => $user
+                    ));
+                }
+
+                // Check if we can reserve current table
+                // get Booked Tables 
+                $bookedActiveTables = $this->getActiveTableOrderManager()->getBookedTablesByRestaurant($id, $reserveDateTime);  
+                if (in_array($activeTableOrder->getActiveTable(), $bookedActiveTables)) {
+                    return $this->render('TableRestaurantBundle:Default:table.has.allready.booked.html.twig');
+                }
                 // add Order
                 // format reserve date
                 $activeTableOrder->setReserveDate(new \DateTime($activeTableOrder->getReserveDate(), new \DateTimeZone(ActiveTableOrder::RESERVE_TIMEZONE)));

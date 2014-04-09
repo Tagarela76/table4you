@@ -1,0 +1,15 @@
+{% extends "TableMainBundle::layout4modal.html.twig" %}
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}      
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+<div class="alert">
+    {% trans %}main.order.notification.cannotOrderCurrentTable{% endtrans %}
+</div>
+{% endblock content %}
+
+{# empty Twig template #}
