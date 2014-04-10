@@ -1,4 +1,5 @@
 restaurant:
+  linkInAdminDashboard: Ссылка на создание/редактирование карты  
   restaurant: Ресторан
   restaurants: Рестораны
   additionalServices: Дополнительные услуги

@@ -119,23 +119,6 @@ class Restaurant
     protected $longitude;
     
     /**
-     * @var Application\Sonata\MediaBundle\Entity\Media $mapPhoto
-     * 
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
-     * @ORM\JoinColumn(name="map_photo", referencedColumnName="id")
-     *
-     * @Assert\NotBlank
-     * */
-    private $mapPhoto;
-    
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="floors", type="integer")
-     */
-    private $floors;
-    
-    /**
      * @var float
      *
      * @ORM\Column(name="rating", type="float", options={"default" = 0}, nullable=true)
@@ -195,6 +178,13 @@ class Restaurant
      * @ORM\JoinColumn(name="editor_id", referencedColumnName="id", onDelete="CASCADE")
      * */
     private $editor;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="linkInAdminDashboard", type="string", length=250, nullable=true)
+     */
+    private $linkInAdminDashboard;
     
     public function __construct()
     {
@@ -631,50 +621,6 @@ class Restaurant
     }
     
     /**
-     * Get mapPhoto
-     *
-     * @return Application\Sonata\MediaBundle\Entity\Media 
-     */
-    public function getMapPhoto()
-    {
-        return $this->mapPhoto;
-    }
-
-    /**
-     * Set mapPhoto
-     *
-     * @param Application\Sonata\MediaBundle\Entity\Media $mapPhoto
-     * @return Restaurant
-     */
-    public function setMapPhoto($mapPhoto)
-    {
-        $this->mapPhoto = $mapPhoto;
-    }
-    
-    /**
-     * Set floors
-     *
-     * @param integer $floors
-     * @return Restaurant
-     */
-    public function setFloors($floors)
-    {
-        $this->floors = $floors;
-    
-        return $this;
-    }
-
-    /**
-     * Get floors
-     *
-     * @return integer 
-     */
-    public function getFloors()
-    {
-        return $this->floors;
-    }
-    
-    /**
      * Set rating
      *
      * @param integer $rating
@@ -955,6 +901,29 @@ class Restaurant
     public function getEditor()
     {
         return $this->editor;
+    }
+    
+    /**
+     * Set linkInAdminDashboard
+     *
+     * @param string $linkInAdminDashboard
+     * @return Restaurant
+     */
+    public function setLinkInAdminDashboard($linkInAdminDashboard)
+    {
+        $this->linkInAdminDashboard = $linkInAdminDashboard;
+
+        return $this;
+    }
+
+    /**
+     * Get linkInAdminDashboard
+     *
+     * @return string 
+     */
+    public function getLinkInAdminDashboard()
+    {
+        return $this->linkInAdminDashboard;
     }
     
     /**
