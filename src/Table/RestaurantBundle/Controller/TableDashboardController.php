@@ -225,9 +225,15 @@ class TableDashboardController extends Controller
             
             // check if file exist
             if (file_exists($imagePath) && getimagesize($imagePath)) {
-                // resize
+                // resize (BIG versio)
+                // Get bigImagePath
+                $bigImagePath = str_replace($tableType->getFileName(), $tableType->getBigFileName(), $imagePath);
+                
+                $resizedBigImage = new \abeautifulsite\SimpleImage($imagePath);
+                $resizedBigImage->resize(TableType::IMAGE_WIDTH_BIG, TableType::IMAGE_HEIGHT_BIG)->save($bigImagePath);
+                
                 $resizedImage = new \abeautifulsite\SimpleImage($imagePath);
-                $resizedImage->best_fit(TableType::IMAGE_HEIGHT, TableType::IMAGE_WIDTH)->save($imagePath);
+                $resizedImage->resize(TableType::IMAGE_WIDTH, TableType::IMAGE_HEIGHT)->save($imagePath);
             } else {
                 // delete entity
                 $em->remove($tableType);
@@ -273,9 +279,15 @@ class TableDashboardController extends Controller
             
             // check if file exist
             if (file_exists($imagePath) && getimagesize($imagePath)) {
-                // resize
+                // resize (BIG versio)
+                // Get bigImagePath
+                $bigImagePath = str_replace($tableType->getFileName(), $tableType->getBigFileName(), $imagePath);
+                
+                $resizedBigImage = new \abeautifulsite\SimpleImage($imagePath);
+                $resizedBigImage->resize(TableType::IMAGE_WIDTH_BIG, TableType::IMAGE_HEIGHT_BIG)->save($bigImagePath);
+                
                 $resizedImage = new \abeautifulsite\SimpleImage($imagePath);
-                $resizedImage->best_fit(TableType::IMAGE_HEIGHT, TableType::IMAGE_WIDTH)->save($imagePath);
+                $resizedImage->resize(TableType::IMAGE_WIDTH, TableType::IMAGE_HEIGHT)->save($imagePath);
             } else {
                 // delete entity
                // $em->remove($tableType);
@@ -358,13 +370,19 @@ class TableDashboardController extends Controller
             
             // check if file exist
             if (file_exists($imagePath) && getimagesize($imagePath)) {
-                // resize
+                // resize (BIG versio)
+                // Get bigImagePath
+                $bigImagePath = str_replace($tableMap->getFileName(), $tableMap->getBigFileName(), $imagePath);
+                
+                $resizedBigImage = new \abeautifulsite\SimpleImage($imagePath);
+                $resizedBigImage->resize(TableMap::IMAGE_WIDTH_BIG, TableMap::IMAGE_HEIGHT_BIG)->save($bigImagePath);
+                
                 $resizedImage = new \abeautifulsite\SimpleImage($imagePath);
-                $resizedImage->best_fit(TableMap::IMAGE_HEIGHT, TableMap::IMAGE_WIDTH)->save($imagePath);
+                $resizedImage->resize(TableMap::IMAGE_WIDTH, TableMap::IMAGE_HEIGHT)->save($imagePath);
             } else {
                 // delete entity
-               // $em->remove($tableMap);
-               // $em->flush();
+                $em->remove($tableMap);
+                $em->flush();
             }
         }
         return $this->redirect(
@@ -438,9 +456,15 @@ class TableDashboardController extends Controller
             
             // check if file exist
             if (file_exists($imagePath) && getimagesize($imagePath)) {
-                // resize
+                // resize (BIG versio)
+                // Get bigImagePath
+                $bigImagePath = str_replace($tableMap->getFileName(), $tableMap->getBigFileName(), $imagePath);
+                
+                $resizedBigImage = new \abeautifulsite\SimpleImage($imagePath);
+                $resizedBigImage->resize(TableMap::IMAGE_WIDTH_BIG, TableMap::IMAGE_HEIGHT_BIG)->save($bigImagePath);
+                
                 $resizedImage = new \abeautifulsite\SimpleImage($imagePath);
-                $resizedImage->best_fit(TableMap::IMAGE_HEIGHT, TableMap::IMAGE_WIDTH)->save($imagePath);
+                $resizedImage->resize(TableMap::IMAGE_WIDTH, TableMap::IMAGE_HEIGHT)->save($imagePath);
             } else {
                 // delete entity
                // $em->remove($tableMap);

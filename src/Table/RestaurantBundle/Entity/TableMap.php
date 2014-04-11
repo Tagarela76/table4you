@@ -21,6 +21,9 @@ class TableMap
     const IMAGE_HEIGHT = 500;
     const IMAGE_WIDTH = 500;
     
+    const IMAGE_HEIGHT_BIG= 1000;
+    const IMAGE_WIDTH_BIG  = 1000;
+    
     /**
      * @var integer
      *
@@ -70,6 +73,14 @@ class TableMap
      * @ORM\OneToMany(targetEntity="ActiveTable", mappedBy="tableType", orphanRemoval=true, cascade={"persist", "remove"})
      */
     protected $activeTables;
+    
+    /**
+     *
+     * big file name
+     * 
+     * @var string
+     */
+    protected $bigFileName;
     
     public function __construct()
     {
@@ -205,6 +216,42 @@ class TableMap
     public function setActiveTables($activeTables)
     {
         $this->activeTables = $activeTables;
+        return $this;
+    }
+    
+    /**
+     * Get big image
+     * 
+     * @return string|null
+     */
+    public function getBigFileName()
+    {
+        if (is_null($this->getFileName())) {
+            return null;
+        }
+        if (is_null($this->bigFileName)) {
+            $imageArray = explode(".", $this->getFileName());
+            $ext = end($imageArray);
+            // unset last elem (ext)
+            unset($imageArray[count($imageArray) - 1]);
+            $bigImage = implode(".", $imageArray) . "_big." . $ext;
+            $this->setBigFileName($bigImage);
+            return $bigImage;
+                
+        } else {
+            return $this->bigFileName;
+        }
+    }
+
+    /**
+     * 
+     * @param string $bigFileName
+     * 
+     * @return TableMap
+     */
+    public function setBigFileName($bigFileName)
+    {
+        $this->bigFileName = $bigFileName;
         return $this;
     }
     

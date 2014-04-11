@@ -12,7 +12,7 @@ use Table\RestaurantBundle\Entity\TableMap;
 class TableMapDTO
 {
     private $id;
-    private $imageURL;
+    private $image;
     private $floor;
     private $hall;
 
@@ -22,12 +22,15 @@ class TableMapDTO
         
         // Get Map photo
         $helper = $container->get('vich_uploader.templating.helper.uploader_helper');
-        $imageURL = $container->getParameter('site_host') . 
+        $originImage = $container->getParameter('site_host') . 
                         $container->getParameter('base_folder_url') . 
                         $helper->asset($tableMap, 'file');
-
-        $this->imageURL = $imageURL;
-        
+        $bigImage = str_replace($tableMap->getFileName(), $tableMap->getBigFileName(), $originImage);
+        $image = array(
+            "origin" => $originImage,
+            "big" => $bigImage
+        );
+        $this->image = $image;
         $this->floor = $tableMap->getFloor();
         $this->hall = $tableMap->getHall();
     }
