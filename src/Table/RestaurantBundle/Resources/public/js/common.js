@@ -546,6 +546,11 @@ function TableOrder() {
         });
     }
     this.loadOrderList = function(tableId, acceptReserve) {
+        
+        // Remove active class for all
+        $(".active-table-img").removeClass("active-table-selected");
+        // Select Table
+        $("#tableContainer_" + tableId).addClass("active-table-selected");
         $.ajax({
             url: Routing.generate('table_viewActiveTableOrderList'),
             data: {tableId: tableId, acceptReserve: acceptReserve},
