@@ -26,8 +26,13 @@ class TableMapDTO
                         $container->getParameter('base_folder_url') . 
                         $helper->asset($tableMap, 'file');
         $bigImage = str_replace($tableMap->getFileName(), $tableMap->getBigFileName(), $originImage);
-
-        $this->image = $bigImage;
+        
+        if (@getimagesize($bigImage)) {
+            $this->image = $bigImage;
+        } else {
+            $this->image = "";
+        }
+        
         $this->floor = $tableMap->getFloor();
         $this->hall = $tableMap->getHall();
     }
