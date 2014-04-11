@@ -362,16 +362,8 @@ function RestaurantMap() {
         // rebuilt map
         $("#restaurant-map-body_" + restaurantId).html("<div class=\"restaurant-map\"  id=\"restaurant-map_"+restaurantId+"\"></div>");
         var mapTitle = $("#map-title").val();
-        $('.modal-header h3').html(mapTitle);
-        var mapIcon = $("#map-icon").val();
-        var restaurantIcon = L.icon({
-            iconUrl: mapIcon,
-           /* iconSize: [39, 41], // size of the icon
-            iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
-            shadowAnchor: [4, 62], // the same for the shadow
-            popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor*/
-        });
-
+        $('#restaurantMap_' + restaurantId + ' h3').html(mapTitle);
+        
         var latitude = $("#latitude_" + restaurantId).val();
         var longitude = $("#longitude_" + restaurantId).val();
         var restaurantName = $("#restaurantName_" + restaurantId).val();
@@ -390,7 +382,7 @@ function RestaurantMap() {
             maxZoom: 18
         }).addTo(map);
 
-        var marker = L.marker([latitude, longitude]/*, {icon: restaurantIcon}*/).addTo(map);
+        var marker = L.marker([latitude, longitude]).addTo(map);
         marker.bindPopup(restaurantContent);
 
         // Load full map (fix bug with leaflet map size)
