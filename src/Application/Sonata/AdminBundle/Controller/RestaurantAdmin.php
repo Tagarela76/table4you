@@ -122,6 +122,12 @@ class RestaurantAdmin extends Admin
         
         $longitude = $restaurant->calculateLongitude();
         $object->setLongitude($longitude);
+        
+        // Add link to admin 
+        $container = $this->getConfigurationPool()->getContainer();
+        $linkInAdminDashboard = $container->get('router')->generate(
+                'table_viewCreateMap', array('restaurantId' => $object->getId()));
+        $object->setLinkInAdminDashboard($linkInAdminDashboard);
     }
     
      /**
@@ -151,6 +157,12 @@ class RestaurantAdmin extends Admin
         
         $longitude = $restaurant->calculateLongitude();
         $object->setLongitude($longitude);
+        
+        // Add link to admin 
+        $container = $this->getConfigurationPool()->getContainer();
+        $linkInAdminDashboard = $container->get('router')->generate(
+                'table_viewCreateMap', array('restaurantId' => $object->getId()));
+        $object->setLinkInAdminDashboard($linkInAdminDashboard);
     }
     
     protected function configureFormFields(FormMapper $formMapper)
@@ -192,16 +204,12 @@ class RestaurantAdmin extends Admin
                 // falling back to server validation. See #5512 in redmine
                 ->add('photo', 'sonata_type_model_list', array(
                     'required' => false), array('link_parameters' => array('context' => 'image')))
-                ->add('mapPhoto', 'sonata_type_model_list', array(
-                    'required' => false), array('link_parameters' => array('context' => 'map_photo')))
+
                 ->add('additionalServices', 'sonata_type_model', array(
                     'by_reference' => true,
                     'multiple' => true,
                     'expanded' => true,
                     'required' => false
-                ))
-                ->add('floors', 'text', array(
-                    'label' => 'restaurant.floors'
                 ))
                 ->add('email', 'email', array(
                     'label' => 'restaurant.email',
@@ -245,7 +253,7 @@ class RestaurantAdmin extends Admin
                     'label' => 'address.city'
                 ))
                 ->add('street', null, array(
-                    'label' => 'address.street'
+                    'label' => 'address.street.label'
                 ))
                 ->add('house', null, array(
                     'label' => 'address.house'
@@ -268,7 +276,7 @@ class RestaurantAdmin extends Admin
                     'label' => 'address.city'
                 ))
                 ->add('street', null, array(
-                    'label' => 'address.street'
+                    'label' => 'address.street.label'
                 ))
                 ->add('house', null, array(
                     'label' => 'address.house'
@@ -281,6 +289,9 @@ class RestaurantAdmin extends Admin
                 ))
                 ->add('editor', null, array(
                     'label' => 'restaurant.editor'
+                ))
+                ->add('linkInAdminDashboard', 'url', array(
+                    'label' => 'restaurant.linkInAdminDashboard'
                 ))
         ;
     }
