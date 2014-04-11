@@ -204,13 +204,7 @@ class RestaurantAdmin extends Admin
                 // falling back to server validation. See #5512 in redmine
                 ->add('photo', 'sonata_type_model_list', array(
                     'required' => false), array('link_parameters' => array('context' => 'image')))
-                
-             /*   ->add('linkInAdminDashboard', 'string', array(
-                    'label' => 'restaurant.linkInAdminDashboard',
-                    'required' => false,
-                   // 'property_path' => 'uyiy'
-                    'template' => 'ApplicationSonataSonataBundle:CRUD:link_field.html.twig'
-                ))*/
+
                 ->add('additionalServices', 'sonata_type_model', array(
                     'by_reference' => true,
                     'multiple' => true,
