@@ -16,7 +16,7 @@ class ActiveTableDTO
     private $tableNumber;
     private $topPosition;
     private $leftPosition;
-    private $angle;
+    private $rotateAngle;
 
     public function __construct(ActiveTable $activeTable, $container)
     {
@@ -37,7 +37,7 @@ class ActiveTableDTO
         $this->tableNumber = $activeTable->getTableNumber();
         $this->topPosition = $activeTable->getTopPosition();
         $this->leftPosition = $activeTable->getLeftPosition();
-        $this->angle = $activeTable->getAngle();
+        $this->rotateAngle = $activeTable->getAngle();
     }
     
     public function getId()
@@ -65,11 +65,10 @@ class ActiveTableDTO
         return $this->leftPosition;
     }
 
-    public function getAngle()
+    public function getRotateAngle()
     {
-        return $this->angle;
+        return $this->rotateAngle;
     }
-
 }
 
 ?>
