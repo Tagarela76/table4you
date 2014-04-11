@@ -28,11 +28,8 @@ class ActiveTableDTO
                         $container->getParameter('base_folder_url') . 
                         $helper->asset($activeTable->getTableType(), 'file');
         $bigTableTypePicture = str_replace($activeTable->getTableType()->getFileName(), $activeTable->getTableType()->getBigFileName(), $originTableTypePicture);
-        $tableTypePicture = array(
-            "origin" => $originTableTypePicture,
-            "big" => $bigTableTypePicture
-        );        
-        $this->tableTypePicture = $tableTypePicture;
+      
+        $this->tableTypePicture = $bigTableTypePicture;
         
         $this->tableNumber = $activeTable->getTableNumber();
         $this->topPosition = $activeTable->getTopPosition();
