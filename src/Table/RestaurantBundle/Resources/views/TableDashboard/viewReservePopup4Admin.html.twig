@@ -4,8 +4,10 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/cusel.css') }}">
 <div id="reservePopup4Admin" class="modal hide" data-backdrop="true">  
     <div class="modal-header">
-        <a class="close" data-dismiss="modal"></a>
+        <a class="close" data-dismiss="modal" onclick="page.tableOrder.refreshOrderList($('#activeTableId').val());"></a>
         <h3>{% trans %}main.order.form.title{% endtrans %} {{activeTable.tableMap.restaurant.name}}</h3>
+        {# hidden field for storing table id #}
+        <input type="hidden" id="activeTableId"/>
     </div>
     <div class="modal-body">
         <div id="table-order-form-container">  

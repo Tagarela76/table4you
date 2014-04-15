@@ -399,6 +399,18 @@ function TableOrder() {
 
     var that = this;
     
+    this.refreshOrderList = function(tableId) { 
+        $.ajax({
+            url: Routing.generate('table_viewActiveTableOrderList'),
+            data: {tableId: tableId, acceptReserve: 1},
+            type: "GET",
+            dataType: "html",
+            success: function(response) { 
+                $('#activeTableOrderContainer').html(response);
+            }  
+	}); 
+    }
+    
     this.refreshBookedTableListInClientDashboard = function(filterDate) {
         // get map id
         var mapId = $("#mapId").val();
@@ -520,6 +532,7 @@ function TableOrder() {
     
     this.initTableData = function(activeTableId) {
         $("#activeTableOrder4AdminForm_activeTable").val(activeTableId);
+        $("#activeTableId").val(activeTableId);
     }
     
     this.initFancyTimeBox = function() {

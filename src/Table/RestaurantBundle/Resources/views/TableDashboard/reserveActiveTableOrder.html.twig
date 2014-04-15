@@ -1,7 +1,7 @@
 {# Render success message #}
 {% if successReserve %}
     <div class="alert">
-            {% trans %}main.order.form.message.success{% endtrans %}
+        {% trans %}main.order.form.message.success{% endtrans %}  
     </div>
 {% else %}
     <script>
@@ -24,8 +24,9 @@
                     beforeSubmit: function() {
                         $("#reservePreloader").show();
                     },
-                    success: function(response) {
+                    success: function(response) { 
                         $("#reservePreloader").hide();
+                        // return response
                         $("#table-order-form-container").html(response);
                     }
                 });
