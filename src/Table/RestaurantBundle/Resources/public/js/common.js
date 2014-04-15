@@ -399,6 +399,17 @@ function TableOrder() {
 
     var that = this;
     
+    this.initCalendar = function() {
+        $.datepicker.setDefaults($.datepicker.regional['ru']);
+        $('.reserveDate').datepicker({
+            dateFormat: 'yy-mm-dd',
+            altField: "#activeTableOrder4AdminForm_reserveDate",
+            altFormat: "yy-mm-dd",
+            minDate: '0',
+            maxDate: '+1m' 
+        })
+    }
+    
     this.refreshOrderList = function(tableId) { 
         $.ajax({
             url: Routing.generate('table_viewActiveTableOrderList'),

@@ -132,11 +132,13 @@ class ActiveTableOrderManager
      * 
      * @param \DateTime $reserveDateTime
      * 
+     * @param boolean $fromAdminArea
+     * 
      * @return Table\RestaurantBundle\Entity\ActiveTableOrder[]
      */
-    public function isUserCanReserveTable($user, $reserveDateTime = null)
+    public function isUserCanReserveTable($user, $reserveDateTime = null, $fromAdminArea = false)
     {
-        return $this->getActiveTableOrderRepo()->isUserCanReserveTable($user, $reserveDateTime);
+        return $this->getActiveTableOrderRepo()->isUserCanReserveTable($user, $reserveDateTime, $fromAdminArea);
     }
     
     /**

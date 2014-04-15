@@ -7,16 +7,8 @@
     <script>
 
         $(function() {
-            page.tableOrder.initFancyTimeBox();
-
-            $.datepicker.setDefaults($.datepicker.regional['ru']);
-            $('.reserveDate').datepicker({
-                dateFormat: 'yy-mm-dd',
-                altField: "#activeTableOrder4AdminForm_reserveDate",
-                altFormat: "yy-mm-dd",
-                minDate: '0',
-                maxDate: '+1m' 
-            })
+          //  page.tableOrder.initFancyTimeBox();
+            page.tableOrder.initCalendar();
 
             $('#table-order-form').submit(function() {
                 $(this).ajaxSubmit({
@@ -28,6 +20,7 @@
                         $("#reservePreloader").hide();
                         // return response
                         $("#table-order-form-container").html(response);
+                        page.tableOrder.initCalendar();
                     }
                 });
                 return false;
