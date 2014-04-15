@@ -14,9 +14,9 @@
             {% endif %} 
         </div>
         <div class="span4">
-            <a href='#' onclick='page.tableOrder.viewFilter(); return false;'>
-                <img src="{{ asset('bundles/tablerestaurant/images/return_arrow.png') }}" />
-            </a>
+            <input class="button button-cancel" onclick='page.tableOrder.viewFilter(); return false;' value="Отменить">
+                <!--<img src="{{ asset('bundles/tablerestaurant/images/return_arrow.png') }}" />-->
+
         </div>
     </div>
 {% endif %}

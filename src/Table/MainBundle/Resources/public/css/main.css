@@ -1130,8 +1130,18 @@ input#tableOrderForm_peopleCount:focus{
         overflow-y: overlay;
     }
 }
+@media (max-height: 690px){
+    .restaurantList-container .modal-body,
+    .tableMapContainer .modal-body {
+        height: 100%;
+        overflow: auto;
+        max-height: 560px;
+        overflow-y: overlay;
+    }
+}
 @media (max-height: 670px){
-    .restaurantList-container .modal-body {
+    .restaurantList-container .modal-body,
+    .tableMapContainer .modal-body {
         height: 100%;
         overflow: auto;
         max-height: 545px;
@@ -1139,7 +1149,8 @@ input#tableOrderForm_peopleCount:focus{
     }
 }
 @media (max-height: 650px){
-    .restaurantList-container .modal-body {
+    .restaurantList-container .modal-body,
+    .tableMapContainer .modal-body {
         height: 100%;
         overflow: auto;
         max-height: 530px;
@@ -1147,7 +1158,8 @@ input#tableOrderForm_peopleCount:focus{
     }
 }
 @media (max-height: 630px){
-    .restaurantList-container .modal-body {
+    .restaurantList-container .modal-body,
+    .tableMapContainer .modal-body {
         height: 100%;
         overflow: auto;
         max-height: 510px;
@@ -1155,7 +1167,8 @@ input#tableOrderForm_peopleCount:focus{
     }
 }
 @media (max-height: 610px){
-    .restaurantList-container .modal-body {
+    .restaurantList-container .modal-body,
+    .tableMapContainer .modal-body {
         height: 100%;
         overflow: auto;
         max-height: 490px;
@@ -1163,7 +1176,8 @@ input#tableOrderForm_peopleCount:focus{
     }
 }
 @media (max-height: 590px){
-    .restaurantList-container .modal-body {
+    .restaurantList-container .modal-body,
+    .tableMapContainer .modal-body {
         height: 100%;
         overflow: auto;
         max-height: 470px;
@@ -1171,7 +1185,8 @@ input#tableOrderForm_peopleCount:focus{
     }
 }
 @media (max-height: 570px){
-    .restaurantList-container .modal-body {
+    .restaurantList-container .modal-body,
+    .tableMapContainer .modal-body {
         height: 100%;
         overflow: auto;
         max-height: 450px;
@@ -1179,7 +1194,8 @@ input#tableOrderForm_peopleCount:focus{
     }
 }
 @media (max-height: 550px){
-    .restaurantList-container .modal-body {
+    .restaurantList-container .modal-body,
+    .tableMapContainer .modal-body {
         height: 100%;
         overflow: auto;
         max-height: 430px;
@@ -1187,7 +1203,8 @@ input#tableOrderForm_peopleCount:focus{
     }
 }
 @media (max-height: 530px){
-    .restaurantList-container .modal-body {
+    .restaurantList-container .modal-body,
+    .tableMapContainer .modal-body {
         height: 100%;
         overflow: auto;
         max-height: 410px;
@@ -1195,7 +1212,8 @@ input#tableOrderForm_peopleCount:focus{
     }
 }
 @media (max-height: 510px){
-    .restaurantList-container .modal-body {
+    .restaurantList-container .modal-body,
+    .tableMapContainer .modal-body {
         height: 100%;
         overflow: auto;
         max-height: 390px;
@@ -1203,7 +1221,8 @@ input#tableOrderForm_peopleCount:focus{
     }
 }
 @media (max-height: 490px){
-    .restaurantList-container .modal-body {
+    .restaurantList-container .modal-body,
+    .tableMapContainer .modal-body {
         height: 100%;
         overflow: auto;
         max-height: 370px;
@@ -1211,7 +1230,8 @@ input#tableOrderForm_peopleCount:focus{
     }
 }
 @media (max-height: 470px){
-    .restaurantList-container .modal-body {
+    .restaurantList-container .modal-body,
+    .tableMapContainer .modal-body{
         height: 100%;
         overflow: auto;
         max-height: 350px;
@@ -2533,6 +2553,32 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     border-bottom: 1px solid #f2f2f2;
     background: #fff;
 }
+.tableMapContainer #interactive-map-container #activeTableOrderContainer .row-fluid>div .button{
+    display: inline-block;
+    width: 147px;
+    height: 30px;
+    text-align: center;
+    line-height: 28px;
+    color: #454545;
+    font-size: 17px;
+    font-family: Arial;
+    border: 1px solid #c4c2c2;
+    border-bottom: none;
+    -moz-border-radius: 7px 7px 7px 7px;
+    -webkit-border-radius: 7px 7px 7px 7px;
+    -o-border-radius: 7px 7px 7px 7px;
+    border-radius: 7px 7px 7px 7px;
+    cursor: pointer;
+    background: rgb(255,255,255);
+    background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(187,188,189,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(187,188,189,1)));
+    background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(187,188,189,1) 100%);
+    background: -o-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(187,188,189,1) 100%);
+    background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(187,188,189,1) 100%);
+    background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(187,188,189,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#bbbcbd',GradientType=0 );
+}
+.tableMapContainer #interactive-map-container #activeTableOrderContainer .row-fluid>div .button-cancel{margin-left: 14px;}
 .modal-body #table-order-form .table-order-form-bottom-input ul{
     text-align: right;
     float: right;
