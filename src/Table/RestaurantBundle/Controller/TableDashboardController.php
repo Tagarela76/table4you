@@ -715,7 +715,8 @@ class TableDashboardController extends Controller
         $successReserve = false; // we should know if table reserve was successfull
         if ($request->isMethod('POST')) {
             $form->bind($request);
-      
+            // get table order date
+            $activeTableOrder = $form->getData();
             // Register New User (collect data to userform)
             $user = new User();
             $userForm = $this->createForm(new RestRegistrationFormType(), $user);
@@ -738,6 +739,7 @@ class TableDashboardController extends Controller
             // devide reserve time on parts
             $reserveHour = $activeTableOrder->getReserveTime()->format('H');
             $reserveMin = $activeTableOrder->getReserveTime()->format('i');
+            
             // get reserve date and time
             $reserveDateTime = new \DateTime($activeTableOrder->getReserveDate(), new \DateTimeZone(ActiveTableOrder::RESERVE_TIMEZONE));
             $reserveDateTime->setTime($reserveHour, $reserveMin);
@@ -772,9 +774,7 @@ class TableDashboardController extends Controller
                     
                     // Get New User
                     $user = $this->getUserManager()->findUserBy(array("username" => $activeTableOrder->getUserEmail()));
-                    
-                    // get table order date
-                    $activeTableOrder = $form->getData();
+              
                     // add Order
                     // format reserve date
                     $activeTableOrder->setReserveDate(new \DateTime($activeTableOrder->getReserveDate(), new \DateTimeZone(ActiveTableOrder::RESERVE_TIMEZONE)));
