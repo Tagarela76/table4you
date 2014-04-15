@@ -606,8 +606,8 @@ class TableDashboardController extends Controller
         
         // Get Active Tables List
         $activeTableList = $this->getActiveTableManager()->findByTableMap($mapId);
-        // get Booked Tables 
-        $bookedTables = $this->getActiveTableOrderManager()->getBookedTablesByRestaurant($restaurantId); 
+        //  Booked Tables (empty array for first init)
+        $bookedTables = array(); 
 
         return array(
             'restaurantList' => $restaurantList,

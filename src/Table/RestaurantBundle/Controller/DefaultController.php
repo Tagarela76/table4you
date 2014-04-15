@@ -162,8 +162,8 @@ class DefaultController extends Controller
         // Get Active Tables List
         $activeTableList = $this->getActiveTableManager()->findByTableMap($tableMapObjId);
        
-        // get Booked Tables 
-        $bookedTables = $this->getActiveTableOrderManager()->getBookedTablesByRestaurant($restaurantId);  
+        // Booked Tables (empty array for first init) 
+        $bookedTables = array();  
         
         // assign base_url
         $baseUrl = $this->container->getParameter('base_folder_url');
@@ -271,8 +271,8 @@ class DefaultController extends Controller
                 $successReserve = true;
             }
         } 
-        // get Booked Tables 
-        $bookedTables = $this->getActiveTableOrderManager()->getBookedTablesByRestaurant($id);  
+        // Booked Tables (empty array for first init)
+        $bookedTables = array();  
        // var_dump($successReserve, $form->getErrors()); die();
         // assign base_url
         $baseUrl = $this->container->getParameter('base_folder_url');
