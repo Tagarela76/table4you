@@ -572,8 +572,12 @@ function TableOrder() {
     }
     
     this.initTableData = function(activeTableId) {
+        // Set active table id
         $("#activeTableOrder4AdminForm_activeTable").val(activeTableId);
         $("#activeTableId").val(activeTableId);
+        // Get table number
+        var tableNumber = $("#tableContainer_" + activeTableId).attr('tableNumber');
+        $("#activeTableOrder4AdminForm_tableNumber").val(tableNumber);
     }
     
     this.initFancyTimeBox = function() {
