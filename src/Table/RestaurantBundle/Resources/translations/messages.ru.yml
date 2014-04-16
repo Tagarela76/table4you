@@ -110,6 +110,7 @@ main:
             timeFrom: Время с
             filter: Фильтровать
             reserve: Резервировать
+            cancel: Отменить
         form:
             label:
                 date: "Дата:"
