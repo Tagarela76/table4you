@@ -29,7 +29,7 @@ class DefaultController extends Controller
         
         // Get Active Tables by map id and table number
         $activeTableList = $this->getActiveTableManager()->findByTableMapAndNumber($mapId, $tableNumber);
-        // (We can find more than 1 table, so let's take the first
+        // We can find more than 1 table, so let's take the first
         if (!empty($activeTableList)) {
             $activeTable = $activeTableList[0];
             // Return table id

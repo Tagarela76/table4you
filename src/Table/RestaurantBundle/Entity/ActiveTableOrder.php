@@ -687,6 +687,7 @@ class ActiveTableOrder
      * Set tableNumber
      *
      * @param string $tableNumber
+     * 
      * @return TableOrder
      */
     public function setTableNumber($tableNumber)
