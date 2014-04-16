@@ -399,6 +399,29 @@ function TableOrder() {
 
     var that = this;
     
+    this.initCalendar = function() {
+        $.datepicker.setDefaults($.datepicker.regional['ru']);
+        $('.reserveDate').datepicker({
+            dateFormat: 'yy-mm-dd',
+            altField: "#activeTableOrder4AdminForm_reserveDate",
+            altFormat: "yy-mm-dd",
+            minDate: '0',
+            maxDate: '+1m' 
+        })
+    }
+    
+    this.refreshOrderList = function(tableId) { 
+        $.ajax({
+            url: Routing.generate('table_viewActiveTableOrderList'),
+            data: {tableId: tableId, acceptReserve: 1},
+            type: "GET",
+            dataType: "html",
+            success: function(response) { 
+                $('#activeTableOrderContainer').html(response);
+            }  
+	}); 
+    }
+    
     this.refreshBookedTableListInClientDashboard = function(filterDate) {
         // get map id
         var mapId = $("#mapId").val();
@@ -520,6 +543,7 @@ function TableOrder() {
     
     this.initTableData = function(activeTableId) {
         $("#activeTableOrder4AdminForm_activeTable").val(activeTableId);
+        $("#activeTableId").val(activeTableId);
     }
     
     this.initFancyTimeBox = function() {

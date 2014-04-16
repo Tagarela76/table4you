@@ -1,0 +1,16 @@
+{% extends "TableMainBundle::layout4modal.html.twig" %}
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}      
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+<div class="alert">
+    {% trans %}main.order.notification.dear{% endtrans %} {{user.username}}, 
+    {% trans %}main.order.notification.invalidTableOrderTime{% endtrans %}
+</div>
+{% endblock content %}
+
+{# empty Twig template #}

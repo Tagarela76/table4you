@@ -51,6 +51,7 @@ main:
         dear: Уважаемый
         userCannotOrderTable: "наш сервис позволяет забронировать не более одного столика."    
         cannotOrderCurrentTable: "Данный стол уже забронирован на выбранное вами время." 
+        invalidTableOrderTime: "Невозможно забронировать стол на выбранное вами время." 
   restaurant:
       label:
           top: Топ заведений

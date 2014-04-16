@@ -606,8 +606,8 @@ class TableDashboardController extends Controller
         
         // Get Active Tables List
         $activeTableList = $this->getActiveTableManager()->findByTableMap($mapId);
-        // get Booked Tables 
-        $bookedTables = $this->getActiveTableOrderManager()->getBookedTablesByRestaurant($restaurantId); 
+        //  Booked Tables (empty array for first init)
+        $bookedTables = array(); 
 
         return array(
             'restaurantList' => $restaurantList,
@@ -708,6 +708,9 @@ class TableDashboardController extends Controller
      */
     public function reserveActiveTableOrderAction($activeTableId, Request $request)
     {
+         // get Admin user
+        $adminUser = $this->container->get('security.context')->getToken()->getUser();
+        
         $activeTableOrder = new ActiveTableOrder();
         $form = $this->createForm(new ActiveTableOrderForm4AdminType(), $activeTableOrder);
         $activeTable = $this->getActiveTableManager()->findOneById($activeTableId);
@@ -715,7 +718,8 @@ class TableDashboardController extends Controller
         $successReserve = false; // we should know if table reserve was successfull
         if ($request->isMethod('POST')) {
             $form->bind($request);
-      
+            // get table order date
+            $activeTableOrder = $form->getData();
             // Register New User (collect data to userform)
             $user = new User();
             $userForm = $this->createForm(new RestRegistrationFormType(), $user);
@@ -738,11 +742,19 @@ class TableDashboardController extends Controller
             // devide reserve time on parts
             $reserveHour = $activeTableOrder->getReserveTime()->format('H');
             $reserveMin = $activeTableOrder->getReserveTime()->format('i');
+            
             // get reserve date and time
             $reserveDateTime = new \DateTime($activeTableOrder->getReserveDate(), new \DateTimeZone(ActiveTableOrder::RESERVE_TIMEZONE));
             $reserveDateTime->setTime($reserveHour, $reserveMin);
-        
+   
             if ($form->isValid()) {
+                // Check if admin can reserve table
+                if (!$this->getActiveTableOrderManager()->isUserCanReserveTable($adminUser->getId(), $reserveDateTime)) {
+                    // render Warning Notification, user cannot order other tables!!!
+                    return $this->render('TableRestaurantBundle:Default:invalid.table.order.time.html.twig', array(
+                                'user' => $adminUser
+                    ));
+                }
                 // Check if we can reserve current table
                 // get Booked Tables 
                 $bookedActiveTables = $this->getActiveTableOrderManager()->getBookedTablesByRestaurant($activeTable->getTableMap()->getRestaurant()->getId(), $reserveDateTime);  
@@ -772,9 +784,7 @@ class TableDashboardController extends Controller
                     
                     // Get New User
                     $user = $this->getUserManager()->findUserBy(array("username" => $activeTableOrder->getUserEmail()));
-                    
-                    // get table order date
-                    $activeTableOrder = $form->getData();
+              
                     // add Order
                     // format reserve date
                     $activeTableOrder->setReserveDate(new \DateTime($activeTableOrder->getReserveDate(), new \DateTimeZone(ActiveTableOrder::RESERVE_TIMEZONE)));
