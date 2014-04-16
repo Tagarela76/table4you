@@ -2657,7 +2657,7 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
 }
 .tableMapContainer #interactive-map-container #activeTableOrderContainer .row-fluid #activeTableOrder4AdminForm_reserveTime{line-height: 1.5;height: 32px;margin-bottom: 29px;margin-right: 0;}
 .tableMapContainer #interactive-map-container #activeTableOrderContainer #table-order-form .table-order-form-bottom{margin-top: 15px;padding-top: 23px;border-top: 1px solid #d6d7d8;}
-#activeTableOrderForm_peopleCount, #activeTableOrderForm_wish, #activeTableOrderForm_captcha{
+#activeTableOrderForm_peopleCount, #activeTableOrderForm_wish, #activeTableOrderForm_captcha, #activeTableOrderForm_tableNumber {
     width: 232px;
     height: 18px;
     float: right;
@@ -2676,12 +2676,12 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     border-bottom: 1px solid #f2f2f2;
     background: #fff;
 }
-#activeTableOrderForm_peopleCount:focus, #activeTableOrderForm_wish:focus, #activeTableOrderForm_captcha:focus{
+#activeTableOrderForm_peopleCount:focus, #activeTableOrderForm_wish:focus, #activeTableOrderForm_captcha:focus, #activeTableOrderForm_tableNumber:focus {
     border: 1px solid #fe8504;
     outline: none;
     box-shadow: none;
 }
-#activeTableOrderForm_peopleCount{
+#activeTableOrderForm_peopleCount, #activeTableOrderForm_tableNumber {
     width: 70px;
     height: 24px;
     float: left;

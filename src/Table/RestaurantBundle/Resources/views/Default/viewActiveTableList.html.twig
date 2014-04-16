@@ -9,7 +9,7 @@
     {% else %}
         {#FREE TABLE #}
         <img id="activeTable_{{activeTable.id}}" title="{{activeTable.tableNumber}} {% trans %}main.tableMap.createMap.table{% endtrans %}" 
-             class="active-table-img active-table-free"
+             class="active-table-img active-table-free" tableNumber="{{activeTable.tableNumber}}"
              onClick='page.tableOrder.selectActiveTable({{activeTable.id}});'
              style="left: {{activeTable.leftPosition}}px; top: {{activeTable.topPosition}}px; -webkit-transform: rotate({{activeTable.angle}}deg);"
              src="{{baseUrl}}{{ vich_uploader_asset(activeTable.tableType, 'file') }}"  />

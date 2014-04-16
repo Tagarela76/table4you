@@ -87,4 +87,18 @@ class ActiveTableManager
     {
         return $this->getActiveTableRepo()->findByTableMap($mapId);
     }
+    
+    /**
+     * 
+     * Find active table by map and number
+     * 
+     * @param integer $mapId
+     * @param integer $tableNumber
+     *
+     * @return Table\RestaurantBundle\Entity\ActiveTable
+     */
+    public function findByTableMapAndNumber($mapId, $tableNumber)
+    {
+        return $this->getActiveTableRepo()->findByTableMapAndNumber($mapId, $tableNumber);
+    }
 }

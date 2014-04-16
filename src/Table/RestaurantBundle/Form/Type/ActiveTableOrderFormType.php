@@ -22,6 +22,11 @@ class ActiveTableOrderFormType extends AbstractType
                     'label' => 'main.order.form.label.reserveDate',
                     'required' => true
                 ))
+                ->add('tableNumber', 'text', array(
+                    'translation_domain' => 'messages',
+                    'label' => 'main.order.form.label.tableNumber',
+                    'required' => true
+                ))
                 ->add('peopleCount', 'text', array(
                     'translation_domain' => 'messages',
                     'label' => 'main.order.form.label.peopleCount',

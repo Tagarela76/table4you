@@ -46,7 +46,13 @@
             $('#activeTableOrderForm_reserveTime_minute').change(function() {
                page.tableOrder.refreshBookedTableListInClientDashboard($("#activeTableOrderForm_reserveDate").val());
             });
-        {# Bind change on time container #}    
+        {# Bind change on time container #} 
+            
+        {# Bind change on tableNumber container #}
+            $('#activeTableOrderForm_tableNumber').keyup(function() {
+               page.tableOrder.enterTableNumberByHand(this);
+            });
+        {# Bind change on tableNumber container #}      
     });
 </script>
 
@@ -102,15 +108,13 @@
             <div class="row-fluid">
                 <div class="span5">
                     <div class="span3 label-font-size_modal">
-                        {#
-                            {{ form_label(form.tableNumber) }}
-                            {{ form_errors(form.tableNumber) }}
-                            {% if form.tableNumber.vars.errors|length %}
-                                {{ form_widget(form.tableNumber, {'attr':{'class':'error-form-reserve'} }) }}
-                            {%  else %}
-                                {{ form_widget(form.tableNumber) }}
-                            {% endif %}
-                        #}
+                        {{ form_label(form.tableNumber) }}
+                        {{ form_errors(form.tableNumber) }}
+                        {% if form.tableNumber.vars.errors|length %}
+                            {{ form_widget(form.tableNumber, {'attr':{'class':'error-form-reserve'} }) }}
+                        {%  else %}
+                            {{ form_widget(form.tableNumber) }}
+                        {% endif %}
                     </div>
                     <div class="span3 label-font-size_modal">
                        {{ form_label(form.peopleCount) }}
