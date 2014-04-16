@@ -152,6 +152,13 @@ class ActiveTableOrder
      * @var string 
      */
     protected $restaurantName;
+    
+    /**
+     * Table number
+     *
+     * @var integer 
+     */
+    protected $tableNumber;
 
     public static $STATUS_LIST = array(
         self::ORDER_NOTHING_DID_STATUS_CODE => "Не обработано",
@@ -654,6 +661,37 @@ class ActiveTableOrder
     public function setRestaurantName($restaurantName)
     {
         $this->restaurantName = $restaurantName;
+    }
+    
+    /**
+     * Get tableNumber
+     *
+     * @return string 
+     */
+    public function getTableNumber()
+    {
+        // We can get table number only if we have active table
+        if (is_null($this->getActiveTable())) {
+            return null;
+        }
+        if (is_null($this->tableNumber)) {
+            $tableNumber = $this->activeTable()->getTableNumber();
+            $this->setTableNumber($tableNumber);
+            return $tableNumber;
+        } else {
+            return $this->tableNumber;
+        }        
+    }
+
+    /**
+     * Set tableNumber
+     *
+     * @param string $tableNumber
+     * @return TableOrder
+     */
+    public function setTableNumber($tableNumber)
+    {
+        $this->tableNumber = $tableNumber;
     }
     
     /**

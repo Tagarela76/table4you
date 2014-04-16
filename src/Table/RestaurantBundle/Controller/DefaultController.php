@@ -19,6 +19,28 @@ use Table\RestaurantBundle\Entity\ActiveTableOrder;
 class DefaultController extends Controller
 {
     /**
+     * Enter table number by hand
+     */
+    public function enterTableNumberByHandAction()
+    {
+        // Collect Data
+        $mapId = $this->getRequest()->query->get('mapId');
+        $tableNumber = $this->getRequest()->query->get('tableNumber');
+        
+        // Get Active Tables by map id and table number
+        $activeTableList = $this->getActiveTableManager()->findByTableMapAndNumber($mapId, $tableNumber);
+        // (We can find more than 1 table, so let's take the first
+        if (!empty($activeTableList)) {
+            $activeTable = $activeTableList[0];
+            // Return table id
+            return new Response($activeTable->getId());
+        } else {
+            // Not found (generate empty response)
+            return new Response(""); // empty means nothing
+        }
+    }
+    
+    /**
      * Refreash Booked Tables list
      * 
      * @Template()

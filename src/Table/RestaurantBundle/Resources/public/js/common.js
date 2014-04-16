@@ -399,6 +399,30 @@ function TableOrder() {
 
     var that = this;
     
+    this.enterTableNumberByHand = function(el) { 
+        // Get entered table number
+        var tableNumber = $(el).val();
+        // get map id
+        var mapId = $("#mapId").val()
+        $.ajax({
+            url: Routing.generate('table_enterTableNumberByHand'),
+            data: {tableNumber: tableNumber, mapId: mapId},
+            type: "GET",
+            dataType: "html",
+            success: function(response) { 
+                // response - table id, if 0 - nothing found
+                if (response == "") {
+                    // Reset
+                    $("#activeTableOrderForm_activeTable").val("");
+                    $(".active-table-img").removeClass("active-table-selected");
+                  //  alert("Nothing Found!");
+                } else {
+                    that.selectActiveTable(response);
+                }
+            }  
+	}); 
+    }
+    
     this.initCalendar = function() {
         $.datepicker.setDefaults($.datepicker.regional['ru']);
         $('.reserveDate').datepicker({
@@ -490,9 +514,15 @@ function TableOrder() {
     }
     
     this.selectActiveTable = function(activeTableId) {
-
+        
+        // Get Table Number
+        var tableNumber = $("#activeTable_" + activeTableId).attr("tableNumber");
+        // Set Table Number
+        $("#activeTableOrderForm_tableNumber").val(tableNumber);
+        // Set Active Table
         $("#activeTableOrderForm_activeTable").val(activeTableId);
         
+        // Update styles
         $(".active-table-img").removeClass("active-table-selected");
         $("#activeTable_" + activeTableId).addClass("active-table-selected");
 

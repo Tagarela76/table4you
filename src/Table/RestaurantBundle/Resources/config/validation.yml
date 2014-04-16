@@ -19,4 +19,6 @@ Table\RestaurantBundle\Entity\ActiveTableOrder:
             - Time: ~
         activeTable:
             - NotBlank: ~    
+        tableNumber:
+            - NotBlank: ~      
             

@@ -12,4 +12,23 @@ use Doctrine\ORM\EntityRepository;
  */
 class ActiveTableRepository extends EntityRepository
 {
+    /**
+     * 
+     * Find active table by map and number
+     * 
+     * @param integer $mapId
+     * @param integer $tableNumber
+     * 
+     * @return Table\RestaurantBundle\Entity\Repository[]
+     */
+    public function findByTableMapAndNumber($mapId, $tableNumber)
+    {
+        $query = $this->createQueryBuilder('activeTable');
+        $query->where('activeTable.tableMap = :tableMap')
+                ->setParameter('tableMap', $mapId)
+                ->andWhere('activeTable.tableNumber = :tableNumber')
+                ->setParameter('tableNumber', $tableNumber);
+
+        return $query->getQuery()->getResult();
+    }
 }
