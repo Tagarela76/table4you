@@ -408,7 +408,7 @@ class DefaultController extends Controller
                 $phoneFormatError = true;
             }
         }
-        
+
         // assign base_url
         $baseUrl = $this->container->getParameter('base_folder_url');
         // registration form (header)

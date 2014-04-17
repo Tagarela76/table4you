@@ -671,7 +671,7 @@ class ActiveTableOrder
     public function getTableNumber()
     {
         // We can get table number only if we have active table
-        if (is_null($this->getActiveTable())) {
+        if (is_null($this->getActiveTable()) || !$this->getActiveTable() instanceof ActiveTableOrder) {
             return null;
         }
         if (is_null($this->tableNumber)) {

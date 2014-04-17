@@ -35,7 +35,10 @@
             </a>
         </p>
         <p class="restaurant-categories restaurant-adress">
-                {{ restaurant.city.name }}, {{ restaurant.street }}, {{ restaurant.house }}
+                {{ restaurant.city.name }}, {{ restaurant.street }}
+                {% if restaurant.house is not null %} 
+                    , {{ restaurant.house }}
+                {% endif %}
         </p>
         {% if restaurant.restaurantSchedule is not empty %}
         <p class="restaurant-content-font-category">
