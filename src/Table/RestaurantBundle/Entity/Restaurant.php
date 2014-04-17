@@ -51,7 +51,7 @@ class Restaurant
     /**
      * @var string
      *
-     * @ORM\Column(name="house", type="string", length=50)
+     * @ORM\Column(name="house", type="string", length=50, nullable=true)
      */
     private $house;
 

@@ -177,7 +177,8 @@ class RestaurantAdmin extends Admin
                     'help' => 'address.street.help'
                 ))
                 ->add('house', null, array(
-                    'label' => 'address.house'
+                    'label' => 'address.house',
+                    'required' => false
                 ))
                 ->add('restaurantSchedule', 'sonata_type_collection', array(
                     'label' => 'restaurant.schedule.schedule',

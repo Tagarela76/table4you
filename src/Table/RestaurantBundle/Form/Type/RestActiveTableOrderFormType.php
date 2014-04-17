@@ -11,21 +11,17 @@ class RestActiveTableOrderFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-                ->add('reserveTime', 'time', array(
-                    'widget' => 'choice',
-                    'minutes' => array("0", "30"),
+                ->add('reserveTime', 'hidden', array(
                     'translation_domain' => 'messages',
                     'label' => 'main.tableMap.orders.form.label.time'
                 ))
                 ->add('reserveDate','hidden',array(
                     'translation_domain' => 'messages',
-                    'label' => 'main.tableMap.orders.form.label.date',
-                    'required' => true
+                    'label' => 'main.tableMap.orders.form.label.date'
                 ))
                 ->add('peopleCount', 'number', array(
                     'translation_domain' => 'messages',
-                    'label' => 'main.tableMap.orders.form.label.peopleCount',
-                    'required' => true
+                    'label' => 'main.tableMap.orders.form.label.peopleCount'
                 ))
                 ->add('isSmokingZone', 'checkbox', array(
                     'translation_domain' => 'messages',
@@ -48,6 +44,7 @@ class RestActiveTableOrderFormType extends AbstractType
                      )
                 ))
                 ->add('activeTable', 'hidden')
+                ->add('tableNumber', 'text')
             ;
     }
 
