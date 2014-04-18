@@ -648,7 +648,6 @@ class TableDashboardController extends Controller
             'activeTable' => $activeTable,
             'tableOrderList' => $tableOrderList,
             'form' => $form,
-            'successReserve' => false, // BY default
             'acceptReserve' => $acceptReserve
         );
     }
@@ -692,7 +691,6 @@ class TableDashboardController extends Controller
                 'tableOrderList' => $tableOrderList,
                 'activeTable' => $activeTable,
                 'acceptReserve' => $this->getRequest()->request->get('acceptReserve'),
-                'successReserve' => false,
                 'form' => $form->createView()
         ));
     }
@@ -715,7 +713,6 @@ class TableDashboardController extends Controller
         $form = $this->createForm(new ActiveTableOrderForm4AdminType(), $activeTableOrder);
         $activeTable = $this->getActiveTableManager()->findOneById($activeTableId);
 
-        $successReserve = false; // we should know if table reserve was successfull
         if ($request->isMethod('POST')) {
             $form->bind($request);
             // get table order date
@@ -751,7 +748,7 @@ class TableDashboardController extends Controller
                 // Check if admin can reserve table
                 if (!$this->getActiveTableOrderManager()->isUserCanReserveTable($adminUser->getId(), $reserveDateTime)) {
                     // render Warning Notification, user cannot order other tables!!!
-                    return $this->render('TableRestaurantBundle:Default:invalid.table.order.time.html.twig', array(
+                    return $this->render('TableRestaurantBundle:TableDashboard:invalid.table.order.time.html.twig', array(
                                 'user' => $adminUser
                     ));
                 }
@@ -760,7 +757,7 @@ class TableDashboardController extends Controller
                 $bookedActiveTables = $this->getActiveTableOrderManager()->getBookedTablesByRestaurant($activeTable->getTableMap()->getRestaurant()->getId(), $reserveDateTime);  
                 
                 if (in_array($activeTableOrder->getActiveTable(), $bookedActiveTables)) {
-                    return $this->render('TableRestaurantBundle:Default:table.has.allready.booked.html.twig');
+                    return $this->render('TableRestaurantBundle:TableDashboard:table.has.allready.booked.html.twig');
                 }
                 if ($userForm->isValid()) {
 
@@ -800,7 +797,7 @@ class TableDashboardController extends Controller
                     $em = $this->getDoctrine()->getManager();
                     $em->persist($activeTableOrder);
                     $em->flush();
-                    $successReserve = true;
+                    return $this->render('TableRestaurantBundle:TableDashboard:table.order.success.html.twig'); 
                 }
             }
         }
@@ -820,8 +817,7 @@ class TableDashboardController extends Controller
 
         return array(
             'form' => $form,
-            'activeTable' => $activeTable,
-            'successReserve' => $successReserve
+            'activeTable' => $activeTable
         );
     }
     

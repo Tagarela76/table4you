@@ -1,0 +1,23 @@
+{% extends "TableMainBundle::layout4modal.html.twig" %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(function() {
+            setTimeout(function () { 
+                location.reload();
+            }, 1000);
+        });
+    </script>
+{% endblock %}      
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+<div class="alert">
+    {% trans %}main.order.notification.dear{% endtrans %} {{user.username}}, 
+    {% trans %}main.order.notification.invalidTableOrderTime{% endtrans %}
+</div>
+{% endblock content %}
+
+{# empty Twig template #}

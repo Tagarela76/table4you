@@ -399,6 +399,34 @@ function TableOrder() {
 
     var that = this;
     
+    this.refreshReserveWindow = function() {
+        $('#activeTableOrder4AdminForm_userPhone').mask('+79999999999');
+        
+        // Bind submit on reserve
+        that.bindSubmitOnReserve();
+        
+        // Init calendar
+        that.initCalendar();
+    }
+    
+    this.bindSubmitOnReserve = function() {
+        $('#table-order-form').submit(function() {
+            $(this).ajaxSubmit({
+                type: 'post',
+                beforeSubmit: function() {
+                    $("#reservePreloader").show();
+                },
+                success: function(response) { 
+                    $("#reservePreloader").hide();
+                    // return response
+                    $("#table-order-form-container").html(response);
+                    that.initCalendar();
+                }
+            });
+            return false;
+        });
+    }
+    
     this.enterTableNumberByHand = function(el) { 
         // Get entered table number
         var tableNumber = $(el).val();
