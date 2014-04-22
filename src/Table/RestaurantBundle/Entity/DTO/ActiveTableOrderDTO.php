@@ -17,6 +17,7 @@ class ActiveTableOrderDTO
     private $name;
     private $address;
     private $rating;
+    private $restaurantId;
 
     public function __construct(ActiveTableOrder $activeTableOrder)
     {
@@ -32,6 +33,35 @@ class ActiveTableOrderDTO
                 $activeTableOrder->getRestaurant()->getStreet() . ", " . 
                 $activeTableOrder->getRestaurant()->getHouse();
         $this->rating = $activeTableOrder->getRestaurant()->getRating();
+        $this->restaurantId = $activeTableOrder->getRestaurant()->getId();
+    }
+    
+    public function getId() {
+        return $this->id;
+    }
+
+    public function getDate() {
+        return $this->date;
+    }
+
+    public function getTime() {
+        return $this->time;
+    }
+
+    public function getName() {
+        return $this->name;
+    }
+
+    public function getAddress() {
+        return $this->address;
+    }
+
+    public function getRating() {
+        return $this->rating;
+    }
+
+    public function getRestaurantId() {
+        return $this->restaurantId;
     }
 }
 
