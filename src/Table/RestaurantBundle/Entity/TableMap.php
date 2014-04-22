@@ -18,11 +18,11 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class TableMap
 {
-    const IMAGE_HEIGHT = 500;
-    const IMAGE_WIDTH = 500;
+    const IMAGE_HEIGHT = 400;
+    const IMAGE_WIDTH = 400;
     
-    const IMAGE_HEIGHT_BIG= 1000;
-    const IMAGE_WIDTH_BIG  = 1000;
+    const IMAGE_HEIGHT_BIG= 800;
+    const IMAGE_WIDTH_BIG  = 800;
     
     /**
      * @var integer
