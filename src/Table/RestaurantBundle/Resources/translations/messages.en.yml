@@ -13,6 +13,9 @@ main:
           isEmail: e-mail
           notice: "Notice used:"
           submit: Reserve
+          confirmDeleteOrderMessage: "Do you really want to delete the order?"
+          confirmDeleteOrderOK: "Delete"
+          confirmDeleteOrderCancel: "Cancel"
         placeholder:
           wish: "Your wishes"
         message:

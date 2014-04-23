@@ -27,7 +27,7 @@
                 <div class="order-choose-restaurant">{% trans %}main.tableMap.createMap.restaurantList{% endtrans %}</div>
                 <select name="restaurantId" id="restaurantId" onchange="page.tableOrder.refreshRestaurantList();">
                     {% for restaurant in restaurantList %}  
-                        <option {% if restaurantId == restaurant.id %}selected{%endif%} value="{{restaurant.id}}">{{restaurant.name}}</option>
+                        <option {% if restaurantId == restaurant.id %}selected{% endif %} value="{{restaurant.id}}">{{restaurant.name}}</option>
                     {% endfor %}
                 </select>
             </div>

@@ -20,6 +20,11 @@
         </div>
     </div>
 {% endif %}
+{# HIDDEN INFO #}
+<input type="hidden" id="confirmDeleteOrderOK" value="{% trans %}main.order.form.label.confirmDeleteOrderOK{% endtrans %}" />
+<input type="hidden" id="confirmDeleteOrderCancel" value="{% trans %}main.order.form.label.confirmDeleteOrderCancel{% endtrans %}" />
+<input type="hidden" id="confirmDeleteOrderMessage" value="{% trans %}main.order.form.label.confirmDeleteOrderMessage{% endtrans %}" />
+                    
 {% if tableOrderList is not null %}
     {% for tableOrder in tableOrderList %}  
         <div class="row-fluid reserve-table-info">
@@ -32,8 +37,11 @@
             </div>
             <div class="span2">
                 <a href='#' onclick='page.tableOrder.deleteActiveTableOrder({{ tableOrder.id }}); return false;'>
-                    <img src="{{ asset('bundles/tablerestaurant/images/deleteFile.png') }}" />
+                    <img src="{{ asset('bundles/tablerestaurant/images/deleteFile.png') }}" />                 
                 </a>
+            </div>
+            <div class="span2">
+                <img id="deleteOrderPreloader_{{ tableOrder.id }}" style="display: none" src="{{ asset('bundles/tablemain/images/ajax-loader.gif') }}" />
             </div>
         </div>
     {% endfor %}

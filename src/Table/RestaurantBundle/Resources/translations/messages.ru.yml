@@ -38,6 +38,9 @@ main:
           isEmail: e-mail
           notice: "Напомнить по:"
           submit: Reserve
+          confirmDeleteOrderMessage: "Вы действительно хотите удалить резервирование столика и уведомить клиента об отмене его заказа?"
+          confirmDeleteOrderOK: "Удалить"
+          confirmDeleteOrderCancel: "Отмена"
         placeholder:
           wish: "Ваши пожелания"
         message:
