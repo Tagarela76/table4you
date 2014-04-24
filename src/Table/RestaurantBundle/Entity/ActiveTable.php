@@ -14,6 +14,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class ActiveTable
 {
+
     /**
      * @var integer
      *
@@ -37,21 +38,21 @@ class ActiveTable
      * @ORM\Column(name="table_number", type="integer")
      */
     private $tableNumber;
-    
+
     /**
      * @var float
      *
      * @ORM\Column(name="top_position", type="float", scale=2)
      */
     private $topPosition;
-    
+
     /**
      * @var float
      *
      * @ORM\Column(name="left_position", type="float", scale=2)
      */
     private $leftPosition;
-    
+
     /**
      * @var float
      *
@@ -71,12 +72,28 @@ class ActiveTable
      * @ORM\OneToMany(targetEntity="ActiveTableOrder", mappedBy="activeTable", orphanRemoval=true, cascade={"persist", "remove"})
      */
     protected $activeTableOrders;
-    
+
+    /**
+     * LeftPosition % 1.25
+     *
+     * @var float 
+     */
+    protected $leftPositionResized;
+
+    /**
+     * topPosition % 1.25
+     *
+     * @var float 
+     */
+    protected $topPositionResized;
+
+    const MAP_SCALE = 1.25;
+
     public function __construct()
     {
         $this->activeTableOrders = new ArrayCollection();
     }
-    
+
     /**
      * Get id
      *
@@ -96,7 +113,7 @@ class ActiveTable
     public function setTableType($tableType)
     {
         $this->tableType = $tableType;
-    
+
         return $this;
     }
 
@@ -119,7 +136,7 @@ class ActiveTable
     public function setTableNumber($tableNumber)
     {
         $this->tableNumber = $tableNumber;
-    
+
         return $this;
     }
 
@@ -131,8 +148,8 @@ class ActiveTable
     public function getTableNumber()
     {
         return $this->tableNumber;
-    } 
-    
+    }
+
     /**
      * Get topPosition
      *
@@ -152,7 +169,7 @@ class ActiveTable
     {
         return $this->leftPosition;
     }
-    
+
     /**
      * Get angle
      *
@@ -182,7 +199,7 @@ class ActiveTable
     public function setTopPosition($topPosition)
     {
         $this->topPosition = $topPosition;
-        
+
         return $this;
     }
 
@@ -195,10 +212,10 @@ class ActiveTable
     public function setLeftPosition($leftPosition)
     {
         $this->leftPosition = $leftPosition;
-        
+
         return $this;
     }
-    
+
     /**
      * Set Angle
      *
@@ -209,10 +226,10 @@ class ActiveTable
     public function setAngle($angle)
     {
         $this->angle = $angle;
-        
+
         return $this;
     }
-    
+
     /**
      * Set tableMap
      *
@@ -222,7 +239,69 @@ class ActiveTable
     public function setTableMap($tableMap)
     {
         $this->tableMap = $tableMap;
-        
+
+        return $this;
+    }
+
+    /**
+     * Get left postion after resize
+     * 
+     * @return float
+     */
+    public function getLeftPositionResized()
+    {
+        if (is_null($this->getLeftPosition())) {
+            return 0;
+        }
+        if (is_null($this->leftPositionResized)) {
+            $leftPositionResized = $this->getLeftPosition() / self::MAP_SCALE;
+            $this->setLeftPositionResized($leftPositionResized);
+            return $leftPositionResized;
+        } else {
+            return $this->leftPositionResized;
+        }
+    }
+
+    /**
+     * Get top postion after resize
+     * 
+     * @return float
+     */
+    public function getTopPositionResized()
+    {
+        if (is_null($this->getTopPosition())) {
+            return 0;
+        }
+        if (is_null($this->topPositionResized)) {
+            $topPositionResized = $this->getTopPosition() / self::MAP_SCALE;
+            $this->setTopPositionResized($topPositionResized);
+            return $topPositionResized;
+        } else {
+            return $this->topPositionResized;
+        }
+    }
+
+    /**
+     * Set leftPositionResized
+     *
+     * @param float  $leftPositionResized
+     * @return ActiveTable
+     */
+    public function setLeftPositionResized($leftPositionResized)
+    {
+        $this->leftPositionResized = $leftPositionResized;
+        return $this;
+    }
+
+    /**
+     * Set topPositionResized
+     *
+     * @param float  $topPositionResized
+     * @return ActiveTable
+     */
+    public function setTopPositionResized($topPositionResized)
+    {
+        $this->topPositionResized = $topPositionResized;
         return $this;
     }
 
@@ -233,4 +312,5 @@ class ActiveTable
     {
         return strval($this->getTableNumber());
     }
+
 }

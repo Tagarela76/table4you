@@ -18,6 +18,42 @@ use Table\RestaurantBundle\Entity\ActiveTableOrder;
 
 class DefaultController extends Controller
 {
+    
+    /**
+     * Refreash Booked Tables list
+     * 
+     * @Template()
+     */
+    public function viewActiveTableListAction()
+    {
+        // Get restaurant id
+        $restaurantId = $this->getRequest()->query->get('restaurantId');
+        // Get map id
+        $tableMapId = $this->getRequest()->query->get('tableMapId');
+
+        // get Current user
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            // redirect on homepage
+            return $this->redirect(
+                $this->generateUrl("table_main_homepage")
+            );
+        }
+        // Get Active Tables List
+        $activeTableList = $this->getActiveTableManager()->findByTableMap($tableMapId);
+       
+        // Booked Tables (empty array for first init) 
+        $bookedTables = array();  
+        
+        // assign base_url
+        $baseUrl = $this->container->getParameter('base_folder_url');
+        return array(
+            'baseUrl' => $baseUrl,
+            'activeTableList' => $activeTableList,
+            'bookedTables' => $bookedTables
+        );
+    }
+    
     /**
      * Enter table number by hand
      */
@@ -145,7 +181,7 @@ class DefaultController extends Controller
         $tableMapId = $this->getRequest()->query->get('tableMapId');
 
         // init table map
-        $tableMap = $this->getTableMapManager()->findOneBYId($tableMapId);
+        $tableMap = $this->getTableMapManager()->findOneById($tableMapId);
         // get image src
         $helper = $this->container->get('vich_uploader.templating.helper.uploader_helper');
         $path = $helper->asset($tableMap, 'file');

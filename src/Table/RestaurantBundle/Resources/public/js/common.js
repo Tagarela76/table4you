@@ -129,6 +129,7 @@ function TableMap() {
 
     this.loadMapScheme = function(mapScheme) {
         $('#tableMapDroppable').css('background-image', 'url(' + mapScheme + ')');
+        $('#tableMapDroppable').css('background-size', '500px 500px');
     }
 
     this.refreshRestaurantList = function() {
@@ -559,6 +560,7 @@ function TableOrder() {
 
     this.loadMapScheme = function(mapScheme) {
         $('#table-map-image-container').css('background-image', 'url(' + mapScheme + ')');
+        $('#table-map-image-container').css('background-size', '400px 400px');
     }
 
     this.loadMap = function(obj, tableMapId) {
@@ -576,6 +578,18 @@ function TableOrder() {
             success: function(responce) {
                 // update map scheme
                 that.loadMapScheme(responce);
+            }
+        });
+        // get restaurant id
+        var restaurantId = $("#restaurantId").val();
+        // refresh table list
+        $.ajax({
+            url: Routing.generate('table_viewActiveTableList'),
+            data: {restaurantId: restaurantId, tableMapId: tableMapId},
+            type: "GET",
+            dataType: "html",
+            success: function(response) { console.log(response);
+                $('#table-map-image-container').html(response);
             }
         });
     }
