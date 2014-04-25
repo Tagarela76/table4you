@@ -26,6 +26,8 @@ validation:
 main:
   order:
       form:
+        error:
+          incorrectTableNumber: Неправильный номер стола  
         label:
           captcha: Captcha
           reserveDate: "Дата:"

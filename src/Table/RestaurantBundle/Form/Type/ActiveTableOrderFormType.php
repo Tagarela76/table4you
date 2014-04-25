@@ -53,7 +53,7 @@ class ActiveTableOrderFormType extends AbstractType
                      )
                 ))
                 ->add('activeTable', 'hidden')
-                ->add('captcha', 'captcha', array(
+                ->add('reserve_captcha', 'captcha', array(
                     'label' => 'main.order.form.label.captcha',
                     'translation_domain' => 'messages',
                     'reload' => true,

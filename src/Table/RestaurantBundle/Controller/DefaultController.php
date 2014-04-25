@@ -15,6 +15,7 @@ use Table\RestaurantBundle\Entity\RestaurantSchedule;
 use Table\RestaurantBundle\Entity\Restaurant;
 use Table\RestaurantBundle\Entity\TableType;
 use Table\RestaurantBundle\Entity\ActiveTableOrder;
+use Symfony\Component\Form\FormError;
 
 class DefaultController extends Controller
 {
@@ -283,7 +284,17 @@ class DefaultController extends Controller
         $successReserve = false; // we should know if table reserve was successfull
         if ($request->isMethod('POST') && !$this->getRequest()->request->get('fromMap')) {
             $form->bind($request);
-
+            
+            // Check if table number exist
+            // Get Active Tables by map id and table number
+            $tableNumber = $request->request->get('activeTableOrderForm')['tableNumber'];
+            $abstractActiveTableList = $this->getActiveTableManager()->findByTableMapAndNumber($tableMapObjId, $tableNumber);
+            if (empty($abstractActiveTableList)) {
+                // Add error
+                $tableNumberError = $this->container->get('translator')->trans('main.order.form.error.incorrectTableNumber', array(), 'messages');
+                $form->get('tableNumber')->addError(new FormError($tableNumberError));
+            } 
+            
             if ($form->isValid()) {
                 // get table order data
                 $activeTableOrder = $form->getData();

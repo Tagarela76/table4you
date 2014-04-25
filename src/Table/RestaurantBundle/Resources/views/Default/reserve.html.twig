@@ -184,12 +184,12 @@
                 <div class="span12">
                     <div class="captcha-img">
                         <div class="span5">
-                            {% if form.captcha.vars.errors|length %}
-                            {{ form_widget(form.captcha, {'attr':{'class':'error-form-reserve'} }) }}
+                            {% if form.reserve_captcha.vars.errors|length %}
+                            {{ form_widget(form.reserve_captcha, {'attr':{'class':'error-form-reserve'} }) }}
                             {%  else %}
-                                {{ form_widget(form.captcha) }}
+                                {{ form_widget(form.reserve_captcha) }}
                             {% endif %}
-                            {{ form_errors(form.captcha) }}
+                            {{ form_errors(form.reserve_captcha) }}
                         </div>
                     </div>
                     <div class="span6">

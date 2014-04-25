@@ -1,4 +1,3 @@
-
 function ActiveTable() {
     var that = this;
 
@@ -401,6 +400,11 @@ function TableOrder() {
 
     var that = this;
 
+    this.loadMapSchemeAdmin = function(mapScheme) {
+        $('#table-map-image-container').css('background-image', 'url(' + mapScheme + ')');
+        $('#table-map-image-container').css('background-size', '500px 500px');
+    }
+    
     this.refreshReserveWindow = function() {
         $('#activeTableOrder4AdminForm_userPhone').mask('+79999999999');
 
