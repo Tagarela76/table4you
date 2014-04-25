@@ -498,6 +498,7 @@ function TableOrder() {
                 $('#table-map-image-container').html(responce);
                 // Reset Selected Table
                 $("#activeTableOrderForm_activeTable").val("");
+                $("#activeTableOrderForm_tableNumber").val("");
             }
         });
     }
