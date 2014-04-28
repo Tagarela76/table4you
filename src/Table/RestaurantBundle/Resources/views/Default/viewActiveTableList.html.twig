@@ -3,7 +3,7 @@
         {#BOOKED TABLE #}
         <img id="activeTable_{{activeTable.id}}" title="{{activeTable.tableNumber}} {% trans %}main.tableMap.createMap.table{% endtrans %}" 
              class="active-table-img active-table-booked"
-             style="left: {{activeTable.leftPositionResized}}px; top: {{activeTable.topPositionResized}}px; -webkit-transform: rotate({{activeTable.angle}}deg);"
+             style="left: {{activeTable.leftPositionResized}}px; top: {{activeTable.topPositionResized}}px; -webkit-transform: rotate({{activeTable.angle}}deg); transform: rotate({{activeTable.angle}}deg);"
              src="{{baseUrl}}{{ vich_uploader_asset(activeTable.tableType, 'file') }}"  />
         {#BOOKED TABLE #}
     {% else %}
@@ -11,7 +11,7 @@
         <img id="activeTable_{{activeTable.id}}" title="{{activeTable.tableNumber}} {% trans %}main.tableMap.createMap.table{% endtrans %}" 
              class="active-table-img active-table-free" tableNumber="{{activeTable.tableNumber}}"
              onClick='page.tableOrder.selectActiveTable({{activeTable.id}});'
-             style="left: {{activeTable.leftPositionResized}}px; top: {{activeTable.topPositionResized}}px; -webkit-transform: rotate({{activeTable.angle}}deg);"
+             style="left: {{activeTable.leftPositionResized}}px; top: {{activeTable.topPositionResized}}px; -webkit-transform: rotate({{activeTable.angle}}deg); transform: rotate({{activeTable.angle}}deg);"
              src="{{baseUrl}}{{ vich_uploader_asset(activeTable.tableType, 'file') }}"  />
     {% endif %}
 {% endfor %}
