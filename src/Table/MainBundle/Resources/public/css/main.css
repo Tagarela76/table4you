@@ -454,6 +454,7 @@ input:focus{outline: 0 none}
     color: #9c9a9a;
     margin-bottom: 10px !important;
 }
+body .row-fluid .reserver-texterea{margin-left: 0;}
 #table-order-form div.captcha-img label{
     display: inline;
     float: left;
@@ -471,6 +472,7 @@ input:focus{outline: 0 none}
     position: relative;
     height: 50px;
 }
+#table-order-form-container #activeTableOrderForm_wish{float: left;}
 #table-order-form-container textarea:focus{
     border: 1px solid #fe8504;
     outline: none;
@@ -637,12 +639,16 @@ div.boxChecked input, div.boxUnchecked input {
 
 /* Datapicker */
 .modal-body .ui-datepicker {
-    width: 240px;
+    width: 350px;
+    margin-top: 13px;
+    margin-bottom: 4px;
 }
 .modal-body .ui-datepicker td{padding: 0px;}
 .modal-body .ui-datepicker td span, .modal-body .ui-datepicker td a{
-    height: 14px;
-    line-height: 14px;
+    height: 16px;
+    line-height: 16px;
+    margin-top: 3px;
+    margin-bottom: 3px;
 }
 /* end MODAL */
 
@@ -843,11 +849,12 @@ input#tableOrderForm_peopleCount:focus{
     top:7.5px; 
 }*/
 .table-order-form{margin: 0;}
-.table-order-form .floor-tabs {margin-top: 2px;overflow: hidden;}
+.table-order-form .floor-tabs {margin-top: 2px;overflow: hidden;margin-bottom: 10px;}
 .table-order-form .floor-tabs-hall{margin-bottom: 7px;}
 #table-order-form-container  .table-order-form .label-font-size-modal label{font-size: 15px;}
 #table-order-form-container  .table-order-form .label-font-size_modal label,
 #table-order-form-container  .table-order-form .choose-zone label{font-size: 16px;}
+#table-order-form-container  .table-order-form .label-font-size_modal label+ul{margin: 0;}
 #tableOrderForm_reserveTime{margin-top: -13px;}
 #activeTableOrder4AdminForm_reserveTime{margin-top: -10px;}
 #tableOrderForm_reserveTime select,
@@ -875,14 +882,17 @@ input#tableOrderForm_peopleCount:focus{
 }
 #activeTableOrder4AdminForm_reserveTime select{width: 175px!important;}
 #activeTableOrderForm_reserveTime select{
-    width: 117px!important;
+    width: 168px!important;
     position: relative;
     top: 4px;
 }
 #tableOrderForm_reserveTime #cuselFrame-tableOrderForm_reserveTime_hour,
 #activeTableOrder4AdminForm_reserveTime select{margin-right: 5px;}
 #tableOrderForm_reserveTime #cuselFrame-tableOrderForm_reserveTime_minute,
-#activeTableOrder4AdminForm_reserveTime select{margin-left: 5px;}
+#activeTableOrder4AdminForm_reserveTime #activeTableOrder4AdminForm_reserveTime_minute{margin-left: 5px;}
+#activeTableOrderForm_reserveTime #activeTableOrderForm_reserveTime_hour{margin-right: 5px;}
+#activeTableOrderForm_reserveTime #activeTableOrderForm_reserveTime_minute{margin-left: 5px;}
+#activeTableOrder4AdminForm_reserveTime select{margin-left: 0;}
 #tableOrderForm_reserveTime select:focus,
 #activeTableOrder4AdminForm_reserveTime select:focus,
 #activeTableOrderForm_reserveTime select:focus{
@@ -1020,22 +1030,24 @@ input#tableOrderForm_peopleCount:focus{
 .table-order-history table.table-order-history-th .ui-datepicker-calendar th + th + th{text-align: center;}
 .error-li{margin: 0 !important;}
 @media (max-width: 860px){
-    .modal-reserve, .modal-map {
+    .modal-reserve, .modal-map, #reservePopup4Admin, .editTableTypePopup{
         width: 100%;
         max-width: 816px;
         margin-left: -50%;
     }
-    .modal-reserve .modal-body, .modal-map .modal-body {
+    .modal-reserve .modal-body, .modal-map .modal-body, #reservePopup4Admin .modal-body, .editTableTypePopup .modal-body {
         height: 100%;
         overflow: auto;
         max-height: 350px;
     }
 }
 @media (max-width: 1024px){
-    .modal-reserve .modal.fade.in, .modal-map .modal.fade.in {top: 5%;}
+    .modal-reserve .modal.fade.in, .modal-map .modal.fade.in, #reservePopup4Admin .modal.fade.in, .editTableTypePopup .modal.fade.in{top: 5%;}
 }
 @media (max-height: 690px){
-    .modal-reserve .modal-body {
+    .modal-reserve .modal-body,
+    #reservePopup4Admin .modal-body,
+    .editTableTypePopup .modal-body{
         height: 100%;
         overflow: auto;
         max-height: 560px;
@@ -1043,7 +1055,9 @@ input#tableOrderForm_peopleCount:focus{
     }
 }
 @media (max-height: 670px){
-    .modal-reserve .modal-body {
+    .modal-reserve .modal-body,
+    #reservePopup4Admin .modal-body,
+    .editTableTypePopup .modal-body{
         height: 100%;
         overflow: auto;
         max-height: 545px;
@@ -1051,7 +1065,9 @@ input#tableOrderForm_peopleCount:focus{
     }
 }
 @media (max-height: 650px){
-    .modal-reserve .modal-body {
+    .modal-reserve .modal-body,
+    #reservePopup4Admin .modal-body,
+    .editTableTypePopup .modal-body{
         height: 100%;
         overflow: auto;
         max-height: 530px;
@@ -1059,7 +1075,9 @@ input#tableOrderForm_peopleCount:focus{
     }
 }
 @media (max-height: 630px){
-    .modal-reserve .modal-body {
+    .modal-reserve .modal-body,
+    #reservePopup4Admin .modal-body,
+    .editTableTypePopup .modal-body{
         height: 100%;
         overflow: auto;
         max-height: 510px;
@@ -1067,7 +1085,9 @@ input#tableOrderForm_peopleCount:focus{
     }
 }
 @media (max-height: 610px){
-    .modal-reserve .modal-body {
+    .modal-reserve .modal-body,
+    #reservePopup4Admin .modal-body,
+    .editTableTypePopup .modal-body{
         height: 100%;
         overflow: auto;
         max-height: 490px;
@@ -1075,7 +1095,8 @@ input#tableOrderForm_peopleCount:focus{
     }
 }
 @media (max-height: 590px){
-    .modal-reserve .modal-body {
+    .modal-reserve .modal-body,
+    #reservePopup4Admin .modal-body{
         height: 100%;
         overflow: auto;
         max-height: 470px;
@@ -1083,7 +1104,9 @@ input#tableOrderForm_peopleCount:focus{
     }
 }
 @media (max-height: 570px){
-    .modal-reserve .modal-body {
+    .modal-reserve .modal-body,
+    #reservePopup4Admin .modal-bod,
+    .editTableTypePopup .modal-body{
         height: 100%;
         overflow: auto;
         max-height: 450px;
@@ -1091,7 +1114,9 @@ input#tableOrderForm_peopleCount:focus{
     }
 }
 @media (max-height: 550px){
-    .modal-reserve .modal-body {
+    .modal-reserve .modal-body,
+    #reservePopup4Admin .modal-body,
+    .editTableTypePopup .modal-body{
         height: 100%;
         overflow: auto;
         max-height: 430px;
@@ -1099,7 +1124,9 @@ input#tableOrderForm_peopleCount:focus{
     }
 }
 @media (max-height: 530px){
-    .modal-reserve .modal-body {
+    .modal-reserve .modal-body,
+    #reservePopup4Admin .modal-body,
+    .editTableTypePopup .modal-body{
         height: 100%;
         overflow: auto;
         max-height: 410px;
@@ -1107,7 +1134,9 @@ input#tableOrderForm_peopleCount:focus{
     }
 }
 @media (max-height: 510px){
-    .modal-reserve .modal-body {
+    .modal-reserve .modal-body,
+    #reservePopup4Admin .modal-body,
+    .editTableTypePopup .modal-body{
         height: 100%;
         overflow: auto;
         max-height: 390px;
@@ -1115,7 +1144,9 @@ input#tableOrderForm_peopleCount:focus{
     }
 }
 @media (max-height: 490px){
-    .modal-reserve .modal-body {
+    .modal-reserve .modal-body,
+    #reservePopup4Admin .modal-body,
+    .editTableTypePopup .modal-body{
         height: 100%;
         overflow: auto;
         max-height: 370px;
@@ -1123,7 +1154,9 @@ input#tableOrderForm_peopleCount:focus{
     }
 }
 @media (max-height: 470px){
-    .modal-reserve .modal-body {
+    .modal-reserve .modal-body,
+    #reservePopup4Admin .modal-body,
+    .editTableTypePopup .modal-body{
         height: 100%;
         overflow: auto;
         max-height: 560px;
@@ -1132,7 +1165,9 @@ input#tableOrderForm_peopleCount:focus{
 }
 @media (max-height: 690px){
     .restaurantList-container .modal-body,
-    .tableMapContainer .modal-body {
+    .tableMapContainer .modal-body,
+    #reservePopup4Admin .modal-body,
+    .editTableTypePopup .modal-body{
         height: 100%;
         overflow: auto;
         max-height: 560px;
@@ -1141,7 +1176,9 @@ input#tableOrderForm_peopleCount:focus{
 }
 @media (max-height: 670px){
     .restaurantList-container .modal-body,
-    .tableMapContainer .modal-body {
+    .tableMapContainer .modal-body,
+    #reservePopup4Admin .modal-body,
+    .editTableTypePopup .modal-body{
         height: 100%;
         overflow: auto;
         max-height: 545px;
@@ -1150,7 +1187,9 @@ input#tableOrderForm_peopleCount:focus{
 }
 @media (max-height: 650px){
     .restaurantList-container .modal-body,
-    .tableMapContainer .modal-body {
+    .tableMapContainer .modal-body,
+    #reservePopup4Admin .modal-body,
+    .editTableTypePopup .modal-body{
         height: 100%;
         overflow: auto;
         max-height: 530px;
@@ -1159,7 +1198,9 @@ input#tableOrderForm_peopleCount:focus{
 }
 @media (max-height: 630px){
     .restaurantList-container .modal-body,
-    .tableMapContainer .modal-body {
+    .tableMapContainer .modal-body,
+    #reservePopup4Admin .modal-body,
+    .editTableTypePopup .modal-body{
         height: 100%;
         overflow: auto;
         max-height: 510px;
@@ -1168,7 +1209,9 @@ input#tableOrderForm_peopleCount:focus{
 }
 @media (max-height: 610px){
     .restaurantList-container .modal-body,
-    .tableMapContainer .modal-body {
+    .tableMapContainer .modal-body,
+    #reservePopup4Admin .modal-body,
+    .editTableTypePopup .modal-body{
         height: 100%;
         overflow: auto;
         max-height: 490px;
@@ -1177,7 +1220,9 @@ input#tableOrderForm_peopleCount:focus{
 }
 @media (max-height: 590px){
     .restaurantList-container .modal-body,
-    .tableMapContainer .modal-body {
+    .tableMapContainer .modal-body,
+    #reservePopup4Admin .modal-body,
+    .editTableTypePopup .modal-body{
         height: 100%;
         overflow: auto;
         max-height: 470px;
@@ -1186,7 +1231,9 @@ input#tableOrderForm_peopleCount:focus{
 }
 @media (max-height: 570px){
     .restaurantList-container .modal-body,
-    .tableMapContainer .modal-body {
+    .tableMapContainer .modal-body,
+    #reservePopup4Admin .modal-body,
+    .editTableTypePopup .modal-body{
         height: 100%;
         overflow: auto;
         max-height: 450px;
@@ -1195,7 +1242,9 @@ input#tableOrderForm_peopleCount:focus{
 }
 @media (max-height: 550px){
     .restaurantList-container .modal-body,
-    .tableMapContainer .modal-body {
+    .tableMapContainer .modal-body,
+    #reservePopup4Admin .modal-body,
+    .editTableTypePopup .modal-body{
         height: 100%;
         overflow: auto;
         max-height: 430px;
@@ -1204,7 +1253,9 @@ input#tableOrderForm_peopleCount:focus{
 }
 @media (max-height: 530px){
     .restaurantList-container .modal-body,
-    .tableMapContainer .modal-body {
+    .tableMapContainer .modal-body,
+    #reservePopup4Admin .modal-body,
+    .editTableTypePopup .modal-body{
         height: 100%;
         overflow: auto;
         max-height: 410px;
@@ -1213,7 +1264,9 @@ input#tableOrderForm_peopleCount:focus{
 }
 @media (max-height: 510px){
     .restaurantList-container .modal-body,
-    .tableMapContainer .modal-body {
+    .tableMapContainer .modal-body,
+    #reservePopup4Admin .modal-body,
+    .editTableTypePopup .modal-body{
         height: 100%;
         overflow: auto;
         max-height: 390px;
@@ -1222,7 +1275,9 @@ input#tableOrderForm_peopleCount:focus{
 }
 @media (max-height: 490px){
     .restaurantList-container .modal-body,
-    .tableMapContainer .modal-body {
+    .tableMapContainer .modal-body,
+    #reservePopup4Admin .modal-body,
+    .editTableTypePopup .modal-body{
         height: 100%;
         overflow: auto;
         max-height: 370px;
@@ -1231,7 +1286,9 @@ input#tableOrderForm_peopleCount:focus{
 }
 @media (max-height: 470px){
     .restaurantList-container .modal-body,
-    .tableMapContainer .modal-body{
+    .tableMapContainer .modal-body,
+    #reservePopup4Admin .modal-body,
+    .editTableTypePopup .modal-body{
         height: 100%;
         overflow: auto;
         max-height: 350px;
@@ -1884,7 +1941,8 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
 .error-input .files-download,
 #tableTypeContainer .modal-body .row-fluid .number-tables input.error-form,
 #table-map-form .specify-floor-room input.error-form,
-.editTableMapPopup .modal-body .span4 .error-form{
+.editTableMapPopup .modal-body .span4 .error-form,
+#table-order-form .error-form-reserve{
     border: 1px solid #FF0000;
     box-shadow: none;
 }
@@ -2026,7 +2084,7 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     display: table;
     vertical-align: middle;
 }
-#tableTypeContainer .modal-body .row-fluid{line-height: 0px;height: 65px;position: relative;}
+#tableTypeContainer .modal-body .row-fluid{line-height: 0px;height: 65px;position: relative;width: 816px;}
 #tableTypeContainer .modal-body .btn-file{margin-left: 67px;margin-right: 0;}
 #tableTypeContainer .row-fluid div.span12{
     min-height: 10px;
@@ -2330,7 +2388,7 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     font-family: Arial;
     color: #454545;
     font-size: 17px;
-    margin-right: 13px;
+    /*margin-right: 13px;*/
     line-height: 1.8;
 }
 .tableMapContainer #interactive-map-container #activeTableOrderContainer .row-fluid .table-order-input{margin: 0;float: right;margin-right: 7px;}
@@ -2361,8 +2419,8 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
 .tableMapContainer #interactive-map-container #activeTableOrderContainer .table-order-input img{margin-right: 25px;}
 
 #table-map-image-container {
-    width: 500px;
-    height: 346px;
+    width: 400px;
+    height: 400px;
     overflow: hidden;
     /*margin: 0px !important;*/
 }
@@ -2480,7 +2538,7 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     border-right: 0;
     border-top: 0;
 }
-.tableMapContainer #interactive-map-container #activeTableOrderContainer .row-fluid{padding-left: 15px;padding-top: 28px;width: 258px;}
+.tableMapContainer #interactive-map-container #activeTableOrderContainer .row-fluid{padding-left: 15px;padding-top: 28px;width: 260px;}
 .tableMapContainer #interactive-map-container #activeTableOrderContainer .row-fluid+.row-fluid,
 .tableMapContainer #interactive-map-container #activeTableOrderContainer .active-Table-Order-Reserve,
 .tableMapContainer #interactive-map-container #activeTableOrderContainer .active-Table-Order-Reserve+.row-fluid{padding-top: 0;}
@@ -2490,7 +2548,7 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
 .tableMapContainer #interactive-map-container #activeTableOrderContainer .active-Table-Order-Reserve .span7{margin-left: 20px;}
 .tableMapContainer #interactive-map-container #activeTableOrderContainer .active-Table-Order-Reserve .span7 a{display: block;text-align: center;margin-top: 10px;}
 /* Modal reserve admin*/
-.tableMapContainer #interactive-map-container #activeTableOrderContainer #table-order-form .row-fluid{width: 100%;padding: 0;}
+.tableMapContainer #interactive-map-container #activeTableOrderContainer #table-order-form .row-fluid{width: 100%;padding: 0;width: 816px;}
 .tableMapContainer #interactive-map-container #activeTableOrderContainer #table-order-form .error-form-reserve,
 .modal-body #table-order-form .table-order-form-top-input .error-form-reserve{
     border: 1px solid #FF0000;
@@ -2498,7 +2556,8 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
 }
 .modal-body #table-order-form .table-order-form-top-input ul{margin-left: 0;}
 .tableMapContainer #interactive-map-container #activeTableOrderContainer #table-order-form .row-fluid .span5{margin-right: 0;}
-.tableMapContainer #interactive-map-container #activeTableOrderContainer #table-order-form .row-fluid .span5{width: 379px;}
+.tableMapContainer #interactive-map-container #activeTableOrderContainer #table-order-form .row-fluid .span5,
+.tableMapContainer #interactive-map-container #activeTableOrderContainer #table-order-form .row-fluid .span5 .row-fluid{width: 379px;}
 .tableMapContainer #interactive-map-container #activeTableOrderContainer #table-order-form .table-order-form-bottom .span5+.span5{margin-top: 40px;}
 .modal-body #table-order-form{margin: 0;}
 .modal-body #table-order-form label{
@@ -2506,6 +2565,11 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     font-family: Arial;
     color: #9c9a9a;
     cursor: context-menu;
+}
+.modal-body #table-order-form #restaurantTableMapContainer{
+    width: 400px;
+    height: 400px;
+    margin-left: 5px;
 }
 .modal-body .table-order-form-top .ui-datepicker{width: 360px;}
 .modal-body .table-order-form-top .ui-datepicker table{margin: 0 20px;width: 89%;}
@@ -2686,6 +2750,7 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     height: 24px;
     float: left;
 }
+.reserve-table-number, .reserve-amount-persons{width: 180px;}
 .tableMapContainer #interactive-map-container #activeTableOrderContainer .reserve-table-info>.span10{
     margin-right: 0;
 }
@@ -2721,4 +2786,29 @@ position: absolute;
     z-index: 999;
     opacity: 0.99;
 }
-
+ #alertify{
+     border: 0;
+     box-shadow: 0 2px 10px rgba(1,2,2,.3);
+     top: 150px;
+     width: 400px;
+ }
+#alertify .alertify-dialog {
+    padding: 20px;
+}
+#alertify .alertify-message{
+    color: #454545;
+    font-size: 17px;
+    font-family: Arial;
+}
+#alertify .alertify-button-ok,
+#alertify .alertify-button-cancel{
+    background: none;
+    border: 0;
+    color: #f38e00;
+    text-shadow: none;
+    font-family: Arial;
+    font-size: 17px;
+    font-weight: normal;
+}
+#alertify .alertify-button-ok:focus,
+#alertify .alertify-button-cancel:focus{box-shadow: none;}
