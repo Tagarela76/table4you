@@ -62,6 +62,13 @@
 
 {# Render success message #}
 {% if successReserve %}
+    <script>
+        $(function() {
+            setTimeout(function () { 
+                location.reload();
+            }, 1000);
+        });
+    </script>
 <div class="alert">
     {% trans %}main.order.form.message.success{% endtrans %}
 </div>
