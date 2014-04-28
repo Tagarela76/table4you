@@ -34,10 +34,10 @@
             });
             return false;
         });
-        {% if tableMapObj is not null %}  
+        {#    {% if tableMapObj is not null %}  
             // load Map Scheme as background
-            page.tableOrder.loadMapScheme("{{baseUrl}}{{ vich_uploader_asset(tableMapObj, 'file') }}");
-        {% endif %}   
+            page.tableOrder.loadMapScheme({{restaurant.id}}, "{{baseUrl}}{{ vich_uploader_asset(tableMapObj, 'file') }}");
+        {% endif %}   #}
         
         {# Bind change on time container #}
             $('#activeTableOrderForm_reserveTime_hour').change(function() {

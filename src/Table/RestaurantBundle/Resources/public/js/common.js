@@ -495,7 +495,7 @@ function TableOrder() {
             type: "GET",
             dataType: "html",
             success: function(responce) {
-                $('#table-map-image-container').html(responce);
+                $('#table-map-image-container_' + restaurantId).html(responce);
                 // Reset Selected Table
                 $("#activeTableOrderForm_activeTable").val("");
                 $("#activeTableOrderForm_tableNumber").val("");
@@ -563,12 +563,14 @@ function TableOrder() {
 
     }
 
-    this.loadMapScheme = function(mapScheme) {
-        $('#table-map-image-container').css('background-image', 'url(' + mapScheme + ')');
-        $('#table-map-image-container').css('background-size', '400px 400px');
+    this.loadMapScheme = function(restaurantId, mapScheme) { 
+        $('#table-map-image-container_' + restaurantId).css('background-image', 'url(' + mapScheme + ')');
+        $('#table-map-image-container_' + restaurantId).css('background-size', '400px 400px');
     }
 
     this.loadMap = function(obj, tableMapId) {
+        // get restaurant id
+        var restaurantId = $("#restaurantId").val();
         // remove active class from all
         $(".halls").removeClass('active');
         // set active for current obj
@@ -582,19 +584,17 @@ function TableOrder() {
             dataType: "html",
             success: function(responce) {
                 // update map scheme
-                that.loadMapScheme(responce);
+                that.loadMapScheme(restaurantId, responce);
             }
         });
-        // get restaurant id
-        var restaurantId = $("#restaurantId").val();
         // refresh table list
         $.ajax({
             url: Routing.generate('table_viewActiveTableList'),
             data: {restaurantId: restaurantId, tableMapId: tableMapId},
             type: "GET",
             dataType: "html",
-            success: function(response) { console.log(response);
-                $('#table-map-image-container').html(response);
+            success: function(response) { 
+                $('#table-map-image-container_' + restaurantId).html(response);
             }
         });
     }

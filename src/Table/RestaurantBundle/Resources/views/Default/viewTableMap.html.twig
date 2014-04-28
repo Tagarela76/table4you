@@ -3,7 +3,7 @@
         {% if tableMapObj is not null %}
             // load Map Scheme as background
             {% if tableMapObj.file is not null %}
-                page.tableOrder.loadMapScheme("{{baseUrl}}{{ vich_uploader_asset(tableMapObj, 'file') }}");
+                page.tableOrder.loadMapScheme({{restaurantId}}, "{{baseUrl}}{{ vich_uploader_asset(tableMapObj, 'file') }}");
             {% endif %}
         {% endif %}
     });
@@ -20,7 +20,7 @@
     </ul>        
     {% if tableMapObj is not null and tableMapObj.file is not null %}
         <input type="hidden" id="mapId" value="{{tableMapObj.id}}" />
-        <div id="table-map-image-container">
+        <div class="table-map-image-container" id="table-map-image-container_{{restaurantId}}">
             {% include 'TableRestaurantBundle:Default:viewActiveTableList.html.twig' %}
         </div>
     {% endif %}

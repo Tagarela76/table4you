@@ -2360,14 +2360,14 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
 }
 .tableMapContainer #interactive-map-container #activeTableOrderContainer .table-order-input img{margin-right: 25px;}
 
-#table-map-image-container {
+#table-map-image-container, .table-map-image-container {
     width: 400px;
     height: 400px;
     overflow: hidden;
     /*margin: 0px !important;*/
 }
 
-#tableMapDroppable, #table-map-image-container {
+#tableMapDroppable, #table-map-image-container, .table-map-image-container {
     background-repeat: no-repeat;
     position: relative;
 }
