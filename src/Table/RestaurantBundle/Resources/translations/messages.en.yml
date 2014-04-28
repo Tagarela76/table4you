@@ -1,6 +1,8 @@
 main:
   order:
       form:
+        error:
+            incorrectTableNumber: Incorrect table number
         label:
           captcha: Captcha
           reserveDate: "Date:"

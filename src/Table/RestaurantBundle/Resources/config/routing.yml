@@ -235,11 +235,19 @@ table_refreshBookedTableListInClientDashboard:
         _method: GET  
     options:
        expose: true    
-       
+   
 table_enterTableNumberByHand:
     pattern:  /enterTableNumberByHand
     defaults: { _controller: TableRestaurantBundle:Default:enterTableNumberByHand }
     requirements:
         _method: GET  
     options:
-       expose: true         
+       expose: true
+       
+table_viewActiveTableList:
+    pattern:  /viewActiveTableList
+    defaults: { _controller: TableRestaurantBundle:Default:viewActiveTableList }
+    requirements:
+        _method: GET  
+    options:
+       expose: true

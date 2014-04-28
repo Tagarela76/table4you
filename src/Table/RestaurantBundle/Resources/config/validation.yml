@@ -1,14 +1,3 @@
-Table\RestaurantBundle\Entity\TableOrder:
-    properties:
-        peopleCount:
-            - NotBlank: ~
-        tableNumber:
-            - NotBlank: ~
-        reserveDate:
-            - Date: ~
-        reserveTime:
-            - Time: ~
-            
 Table\RestaurantBundle\Entity\ActiveTableOrder:
     properties:
         peopleCount:

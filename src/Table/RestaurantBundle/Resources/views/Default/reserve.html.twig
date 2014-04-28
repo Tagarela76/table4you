@@ -34,10 +34,10 @@
             });
             return false;
         });
-        {% if tableMapObj is not null %}  
+        {#    {% if tableMapObj is not null %}  
             // load Map Scheme as background
-            page.tableOrder.loadMapScheme("{{baseUrl}}{{ vich_uploader_asset(tableMapObj, 'file') }}");
-        {% endif %}   
+            page.tableOrder.loadMapScheme({{restaurant.id}}, "{{baseUrl}}{{ vich_uploader_asset(tableMapObj, 'file') }}");
+        {% endif %}   #}
         
         {# Bind change on time container #}
             $('#activeTableOrderForm_reserveTime_hour').change(function() {
@@ -62,6 +62,13 @@
 
 {# Render success message #}
 {% if successReserve %}
+    <script>
+        $(function() {
+            setTimeout(function () { 
+                location.reload();
+            }, 1000);
+        });
+    </script>
 <div class="alert">
     {% trans %}main.order.form.message.success{% endtrans %}
 </div>
@@ -182,12 +189,12 @@
                 <div class="span12">
                     <div class="captcha-img">
                         <div class="span5">
-                            {% if form.captcha.vars.errors|length %}
-                            {{ form_widget(form.captcha, {'attr':{'class':'error-form-reserve'} }) }}
+                            {% if form.reserve_captcha.vars.errors|length %}
+                            {{ form_widget(form.reserve_captcha, {'attr':{'class':'error-form-reserve'} }) }}
                             {%  else %}
-                                {{ form_widget(form.captcha) }}
+                                {{ form_widget(form.reserve_captcha) }}
                             {% endif %}
-                            {{ form_errors(form.captcha) }}
+                            {{ form_errors(form.reserve_captcha) }}
                         </div>
                     </div>
                     <div class="span6">

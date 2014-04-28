@@ -641,7 +641,7 @@ div.boxChecked input, div.boxUnchecked input {
 .modal-body .ui-datepicker {
     width: 350px;
     margin-top: 13px;
-    margin-bottom: 4px;
+    margin-bottom: 13px;
 }
 .modal-body .ui-datepicker td{padding: 0px;}
 .modal-body .ui-datepicker td span, .modal-body .ui-datepicker td a{
@@ -885,6 +885,7 @@ input#tableOrderForm_peopleCount:focus{
     width: 168px!important;
     position: relative;
     top: 4px;
+    margin-bottom: 13px;
 }
 #tableOrderForm_reserveTime #cuselFrame-tableOrderForm_reserveTime_hour,
 #activeTableOrder4AdminForm_reserveTime select{margin-right: 5px;}
@@ -2199,7 +2200,7 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
 #interactive-map-container {border-top: 1px solid #a4a1a1;}
 #interactive-map-container .span8{
     height: 500px;
-    width: 541px;
+    width: 512px;;
     padding: 10px 12px 0 0;
     border-right: 1px solid #a9a6a6;
     background-position: 0 10px;
@@ -2417,15 +2418,13 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     box-shadow: none;
 }
 .tableMapContainer #interactive-map-container #activeTableOrderContainer .table-order-input img{margin-right: 25px;}
-
-#table-map-image-container {
+#table-map-image-container, .table-map-image-container {
     width: 400px;
     height: 400px;
     overflow: hidden;
     /*margin: 0px !important;*/
 }
-
-#tableMapDroppable, #table-map-image-container {
+#tableMapDroppable, #table-map-image-container, .table-map-image-container {
     background-repeat: no-repeat;
     position: relative;
 }
@@ -2739,6 +2738,7 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     border-top: 1px solid #f2f2f2;
     border-bottom: 1px solid #f2f2f2;
     background: #fff;
+    margin-bottom: 0;
 }
 #activeTableOrderForm_peopleCount:focus, #activeTableOrderForm_wish:focus, #activeTableOrderForm_captcha:focus, #activeTableOrderForm_tableNumber:focus {
     border: 1px solid #fe8504;
