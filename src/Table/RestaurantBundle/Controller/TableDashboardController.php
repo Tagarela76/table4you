@@ -117,7 +117,12 @@ class TableDashboardController extends Controller
         }
         // get restaurant list
         $restaurantList = $this->getRestaurantManager()->getEditorRestaurants($user->getId(), $isUserIsSuperAdmin);
-
+        if (empty($restaurantList)) {
+            // redirect on homepage
+            return $this->redirect(
+                $this->generateUrl("table_main_homepage")
+            );
+        }
         return array(
             'tableTypeList' => $tableTypeList,
             'baseUrl' => $baseUrl,
@@ -584,6 +589,12 @@ class TableDashboardController extends Controller
         }
         // get restaurant list
         $restaurantList = $this->getRestaurantManager()->getEditorRestaurants($user->getId(), $isUserIsSuperAdmin);
+        if (empty($restaurantList)) {
+            // redirect on homepage
+            return $this->redirect(
+                $this->generateUrl("table_main_homepage")
+            );
+        }
         if (!$restaurantId) {
             // set Restaurant id as first restaurant in list
             $restaurantId = $restaurantList[0]->getId();
