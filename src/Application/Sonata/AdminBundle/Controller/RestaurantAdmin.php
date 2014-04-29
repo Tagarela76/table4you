@@ -160,7 +160,7 @@ class RestaurantAdmin extends Admin
         
         // Add link to admin 
         $container = $this->getConfigurationPool()->getContainer();
-        $linkInAdminDashboard = $container->get('router')->generate(
+        $linkInAdminDashboard = $container->getParameter('site_host') . $container->get('router')->generate(
                 'table_viewCreateMap', array('restaurantId' => $object->getId()));
         $object->setLinkInAdminDashboard($linkInAdminDashboard);
     }
