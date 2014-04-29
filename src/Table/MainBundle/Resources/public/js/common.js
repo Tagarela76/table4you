@@ -1,5 +1,10 @@
 function Helper() {
 
+    this.refreshLoginWindowTitle = function(loginWindowTitle) {
+        
+        $('.modal-header h3').html(loginWindowTitle);
+    }
+    
     this.openRegisterWindow = function() {
         
         var registerTitle = $("#registerTitle").val();

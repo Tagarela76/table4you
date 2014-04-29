@@ -76,8 +76,9 @@ security:
         - { path: ^/table_admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/table_admin/login-check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
-        - { path: ^/table_editor, role: [ROLE_ADMIN] }
-
+        #- { path: ^/table_editor, role: [ROLE_ADMIN] }
+        - { path: ^/table_editor, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
