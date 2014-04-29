@@ -27,7 +27,7 @@
                 {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
             </a>
         {% else %}
-            <a onclick="page.helper.refreshLoginWindowTitle('{% trans %}main.login.buttonLabel{% endtrans %}');" data-toggle="modal" data-target="#login" href="{{ path('fos_user_security_login') }}">
+            <a onclick="page.helper.refreshLoginWindowTitle('{% trans %}main.login.form.title{% endtrans %}');" data-toggle="modal" data-target="#login" href="{{ path('fos_user_security_login') }}">
                 {% trans %}main.login.buttonLabel{% endtrans %}
             </a>
         {% endif %}
