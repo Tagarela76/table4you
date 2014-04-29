@@ -138,8 +138,8 @@ class RestaurantRepository extends EntityRepository
     public function getEditorRestaurants($userId)
     {
         $query = $this->createQueryBuilder('restaurant')
-                ->andWhere("restaurant.editorId = :editorId")
-                ->setParameter('editorId', $userId)
+                ->andWhere("restaurant.editor = :editor")
+                ->setParameter('editor', $userId)
                 ->orderBy('restaurant.name', 'ASC');
         return $query;
     }

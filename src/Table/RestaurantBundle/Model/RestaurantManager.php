@@ -137,6 +137,6 @@ class RestaurantManager
             // get all restaurants
             return $this->getRestaurants()->getQuery()->getResult();
         }
-        return $this->getRestaurantRepo()->getEditorRestaurants($userId);
+        return $this->getRestaurantRepo()->getEditorRestaurants($userId)->getQuery()->getResult();
     }
 }
