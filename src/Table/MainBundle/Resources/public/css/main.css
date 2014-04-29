@@ -454,7 +454,7 @@ input:focus{outline: 0 none}
     color: #9c9a9a;
     margin-bottom: 10px !important;
 }
-body .row-fluid .reserver-texterea{margin-left: 0;}
+body .row-fluid .reserver-texterea{margin-left: 5px;}
 #table-order-form div.captcha-img label{
     display: inline;
     float: left;
@@ -467,7 +467,7 @@ body .row-fluid .reserver-texterea{margin-left: 0;}
 #table-order-form-container textarea{
     display: block;
     resize: none;
-    width: 350px;
+    width: 385px;
     float: right;
     position: relative;
     height: 50px;
@@ -500,6 +500,7 @@ body .row-fluid .reserver-texterea{margin-left: 0;}
     cursor: pointer;
     box-shadow: none;
 }
+#table-order-form-container{width: 816px;}
 .modal-login #fos-login-form div.boxChecked label, .modal-login #fos-login-form div.boxUnchecked label, .table-order-form div.boxChecked label, .table-order-form div.boxUnchecked label{
     float: none;
     font-size: 13.6px !important;
