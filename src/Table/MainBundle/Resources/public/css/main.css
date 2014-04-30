@@ -851,7 +851,7 @@ input#tableOrderForm_peopleCount:focus{
 }*/
 .table-order-form{margin: 0;}
 .table-order-form .floor-tabs {margin-top: 2px;overflow: hidden;margin-bottom: 10px;}
-.table-order-form .floor-tabs-hall{margin-bottom: 7px;}
+.table-order-form .floor-tabs-hall{margin-bottom: 7px;height: 22px;}
 #table-order-form-container  .table-order-form .label-font-size-modal label{font-size: 15px;}
 #table-order-form-container  .table-order-form .label-font-size_modal label,
 #table-order-form-container  .table-order-form .choose-zone label{font-size: 16px;}
@@ -2762,6 +2762,7 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     font-size: 17px;
     font-family: Arial;
     color: #454545;
+    word-wrap: break-word;
 }
 .tableMapContainer #interactive-map-container #activeTableOrderContainer .reserve-table-info>.span2{
     text-align: right;
