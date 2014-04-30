@@ -53,13 +53,15 @@
                         {{tableMap.hall}} {% trans %}main.tableMap.createMap.hall{% endtrans %}
                     {% endif %}
                 </a>
-
-                <a data-toggle="modal" href="#editTableMapPopup_{{tableMap.id}}">
-                    <img src="{{ asset('bundles/tablerestaurant/images/edit_table_type_btn_small.png') }}" />
-                </a>
-                <a href='#' onclick='page.tableMap.deleteTableMap({{ tableMap.id }}); return false;'>
-                    <img src="{{ asset('bundles/tablerestaurant/images/deleteFile_small.png') }}" />
-                </a>
+                {# Open only for admin #}
+                {% if isUserIsSuperAdmin %}
+                    <a data-toggle="modal" href="#editTableMapPopup_{{tableMap.id}}">
+                        <img src="{{ asset('bundles/tablerestaurant/images/edit_table_type_btn_small.png') }}" />
+                    </a>
+                    <a href='#' onclick='page.tableMap.deleteTableMap({{ tableMap.id }}); return false;'>
+                        <img src="{{ asset('bundles/tablerestaurant/images/deleteFile_small.png') }}" />
+                    </a>
+                {%endif%}
             </li>
             {# ==Modal Window for editTableMap==#}
             {% include 'TableRestaurantBundle:TableDashboard:editTableMap.html.twig' %}

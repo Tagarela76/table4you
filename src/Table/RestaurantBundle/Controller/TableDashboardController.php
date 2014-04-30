@@ -209,7 +209,8 @@ class TableDashboardController extends Controller
             'restaurantId' => $restaurantId,
             'tableMapObj' => $tableMapObj,
             'mapId' => $mapId,
-            'activeTableList' => $activeTableList
+            'activeTableList' => $activeTableList,
+            'isUserIsSuperAdmin' => $isUserIsSuperAdmin
         );
     }
 
