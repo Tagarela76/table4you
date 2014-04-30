@@ -454,7 +454,7 @@ input:focus{outline: 0 none}
     color: #9c9a9a;
     margin-bottom: 10px !important;
 }
-body .row-fluid .reserver-texterea{margin-left: 0;}
+body .row-fluid .reserver-texterea{margin-left: 5px;}
 #table-order-form div.captcha-img label{
     display: inline;
     float: left;
@@ -467,7 +467,7 @@ body .row-fluid .reserver-texterea{margin-left: 0;}
 #table-order-form-container textarea{
     display: block;
     resize: none;
-    width: 350px;
+    width: 385px;
     float: right;
     position: relative;
     height: 50px;
@@ -500,6 +500,7 @@ body .row-fluid .reserver-texterea{margin-left: 0;}
     cursor: pointer;
     box-shadow: none;
 }
+#table-order-form-container{width: 816px;}
 .modal-login #fos-login-form div.boxChecked label, .modal-login #fos-login-form div.boxUnchecked label, .table-order-form div.boxChecked label, .table-order-form div.boxUnchecked label{
     float: none;
     font-size: 13.6px !important;
@@ -850,7 +851,7 @@ input#tableOrderForm_peopleCount:focus{
 }*/
 .table-order-form{margin: 0;}
 .table-order-form .floor-tabs {margin-top: 2px;overflow: hidden;margin-bottom: 10px;}
-.table-order-form .floor-tabs-hall{margin-bottom: 7px;}
+.table-order-form .floor-tabs-hall{margin-bottom: 7px;height: 22px;}
 #table-order-form-container  .table-order-form .label-font-size-modal label{font-size: 15px;}
 #table-order-form-container  .table-order-form .label-font-size_modal label,
 #table-order-form-container  .table-order-form .choose-zone label{font-size: 16px;}
@@ -2533,11 +2534,11 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
 #interactive-map-container .table-map-droppable-right .confirmation-drag-confirm .span4,
 #interactive-map-container .table-map-droppable-right .confirmation-drag-confirm .span7{line-height: 32px;}
 #interactive-map-container #activeTableOrderContainer{
-    width: 274px;
+    width: 304px;
     border-right: 0;
     border-top: 0;
 }
-.tableMapContainer #interactive-map-container #activeTableOrderContainer .row-fluid{padding-left: 15px;padding-top: 28px;width: 260px;}
+.tableMapContainer #interactive-map-container #activeTableOrderContainer .row-fluid{padding-left: 15px;padding-top: 28px;width: 289px;}
 .tableMapContainer #interactive-map-container #activeTableOrderContainer .row-fluid+.row-fluid,
 .tableMapContainer #interactive-map-container #activeTableOrderContainer .active-Table-Order-Reserve,
 .tableMapContainer #interactive-map-container #activeTableOrderContainer .active-Table-Order-Reserve+.row-fluid{padding-top: 0;}
@@ -2761,6 +2762,7 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     font-size: 17px;
     font-family: Arial;
     color: #454545;
+    word-break: break-all;
 }
 .tableMapContainer #interactive-map-container #activeTableOrderContainer .reserve-table-info>.span2{
     text-align: right;
