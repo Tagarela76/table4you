@@ -101,20 +101,27 @@ class TableDashboardController extends Controller
         if (!is_object($user) || !$user instanceof UserInterface) {
             // redirect on homepage
             return $this->redirect(
-                            $this->generateUrl("table_main_homepage")
+                $this->generateUrl("table_main_homepage")
             );
         }
-        $tableTypeList = $this->getTableTypeManager()->findAll();
-
-        // assign base_url
-        $baseUrl = $this->container->getParameter('base_folder_url');
-
-
         // we should now if user is super admin
         $isUserIsSuperAdmin = false;
         if (in_array(User::ROLE_SUPER_ADMIN, $user->getRoles())) {
             $isUserIsSuperAdmin = true;
         }
+        // Only admin has access to this area, so...
+        if (!$isUserIsSuperAdmin) {
+            // redirect on homepage
+            return $this->redirect(
+                $this->generateUrl("table_main_homepage")
+            );
+        }
+        
+        $tableTypeList = $this->getTableTypeManager()->findAll();
+
+        // assign base_url
+        $baseUrl = $this->container->getParameter('base_folder_url');
+
         // get restaurant list
         $restaurantList = $this->getRestaurantManager()->getEditorRestaurants($user->getId(), $isUserIsSuperAdmin);
         if (empty($restaurantList)) {
@@ -202,7 +209,8 @@ class TableDashboardController extends Controller
             'restaurantId' => $restaurantId,
             'tableMapObj' => $tableMapObj,
             'mapId' => $mapId,
-            'activeTableList' => $activeTableList
+            'activeTableList' => $activeTableList,
+            'isUserIsSuperAdmin' => $isUserIsSuperAdmin
         );
     }
 
