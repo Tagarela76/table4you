@@ -2534,11 +2534,11 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
 #interactive-map-container .table-map-droppable-right .confirmation-drag-confirm .span4,
 #interactive-map-container .table-map-droppable-right .confirmation-drag-confirm .span7{line-height: 32px;}
 #interactive-map-container #activeTableOrderContainer{
-    width: 274px;
+    width: 304px;
     border-right: 0;
     border-top: 0;
 }
-.tableMapContainer #interactive-map-container #activeTableOrderContainer .row-fluid{padding-left: 15px;padding-top: 28px;width: 260px;}
+.tableMapContainer #interactive-map-container #activeTableOrderContainer .row-fluid{padding-left: 15px;padding-top: 28px;width: 289px;}
 .tableMapContainer #interactive-map-container #activeTableOrderContainer .row-fluid+.row-fluid,
 .tableMapContainer #interactive-map-container #activeTableOrderContainer .active-Table-Order-Reserve,
 .tableMapContainer #interactive-map-container #activeTableOrderContainer .active-Table-Order-Reserve+.row-fluid{padding-top: 0;}
@@ -2762,7 +2762,7 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     font-size: 17px;
     font-family: Arial;
     color: #454545;
-    word-wrap: break-word;
+    word-break: break-all;
 }
 .tableMapContainer #interactive-map-container #activeTableOrderContainer .reserve-table-info>.span2{
     text-align: right;
