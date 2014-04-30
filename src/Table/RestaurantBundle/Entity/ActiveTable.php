@@ -88,7 +88,10 @@ class ActiveTable
     protected $topPositionResized;
 
     const MAP_SCALE = 1.25;
-
+    
+    const IMAGE_HEIGHT_CLIENT_SIDE = 48;
+    const IMAGE_WIDTH_CLIENT_SIDE = 48;
+    
     public function __construct()
     {
         $this->activeTableOrders = new ArrayCollection();
