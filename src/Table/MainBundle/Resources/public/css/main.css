@@ -2566,7 +2566,7 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     color: #9c9a9a;
     cursor: context-menu;
 }
-.modal-body #table-order-form #restaurantTableMapContainer{
+.modal-body #table-order-form .restaurantTableMapContainer{
     width: 400px;
     height: 400px;
     margin-left: 5px;

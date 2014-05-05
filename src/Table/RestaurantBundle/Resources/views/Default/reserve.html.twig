@@ -16,7 +16,7 @@
             minDate: '0',
             maxDate: '+1m', 
             onSelect: function(filterDate) {
-                page.tableOrder.refreshBookedTableListInClientDashboard(filterDate);
+                page.tableOrder.refreshBookedTableListInClientDashboard({{restaurant.id}}, filterDate);
                 //$("#filterDate").val(filterDate);
             }
         })
@@ -41,10 +41,10 @@
         
         {# Bind change on time container #}
             $('#activeTableOrderForm_reserveTime_hour').change(function() {
-               page.tableOrder.refreshBookedTableListInClientDashboard($("#activeTableOrderForm_reserveDate").val());
+               page.tableOrder.refreshBookedTableListInClientDashboard({{restaurant.id}}, $("#activeTableOrderForm_reserveDate").val());
             });
             $('#activeTableOrderForm_reserveTime_minute').change(function() {
-               page.tableOrder.refreshBookedTableListInClientDashboard($("#activeTableOrderForm_reserveDate").val());
+               page.tableOrder.refreshBookedTableListInClientDashboard({{restaurant.id}}, $("#activeTableOrderForm_reserveDate").val());
             });
         {# Bind change on time container #} 
             
@@ -129,7 +129,7 @@
                     </div>
 
                 </div>
-                <div class="span6" id="restaurantTableMapContainer">
+                <div class="span6 restaurantTableMapContainer" id="restaurantTableMapContainer_{{restaurant.id}}">
                     {% include 'TableRestaurantBundle:Default:viewTableMap.html.twig' with {'restaurantId': restaurant.id}%}
                     {{ form_errors(form.activeTable) }}
                 </div>
@@ -171,7 +171,7 @@
                     <ul class="floor-tabs">
                         {% for floorObj in floorList %}
                             <li>
-                                <a class="floors {% if floorObj.floor == tableMapObj.floor%}active{%endif%}" href="#" onclick="page.tableOrder.selectRestaurantMap(this, {{floorObj.floor}}); return false;">
+                                <a restaurantId="{{restaurant.id}}" class="floors {% if floorObj.floor == tableMapObj.floor%}active{%endif%}" href="#" onclick="page.tableOrder.selectRestaurantMap(this, {{floorObj.floor}}); return false;">
                                     {{ floorObj.floor }} {% trans %}main.order.form.label.floor{% endtrans %}
                                 </a>
                             </li>

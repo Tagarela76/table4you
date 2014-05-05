@@ -13,7 +13,7 @@
        {% for tableMap in tableMapList %}  
             {% if tableMap.hall is not null and tableMap.hall and tableMapList|length > 1 %}
                 <li>
-                    <a href="#" class="halls{% if tableMapObj.id == tableMap.id %} active{% endif %}"onclick="page.tableOrder.loadMap(this, {{tableMap.id}})">{{tableMap.hall}} {% trans %}main.tableMap.createMap.hall{% endtrans %}</a>
+                    <a restaurantId="{{restaurantId}}" href="#" class="halls{% if tableMapObj.id == tableMap.id %} active{% endif %}"onclick="page.tableOrder.loadMap(this, {{tableMap.id}})">{{tableMap.hall}} {% trans %}main.tableMap.createMap.hall{% endtrans %}</a>
                 </li>    
             {% endif %}   
         {% endfor %}

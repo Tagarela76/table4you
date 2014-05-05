@@ -480,13 +480,9 @@ function TableOrder() {
         });
     }
 
-    this.refreshBookedTableListInClientDashboard = function(filterDate) {
+    this.refreshBookedTableListInClientDashboard = function(restaurantId, filterDate) {
         // get map id
         var mapId = $("#mapId").val();
-        
-        // get restaurant id
-        var restaurantId = $("#restaurantId").val();
-
         // Get time
         var filterTimeHour = $("#activeTableOrderForm_reserveTime_hour").val();
         var filterTimeMinute = $("#activeTableOrderForm_reserveTime_minute").val();
@@ -536,6 +532,7 @@ function TableOrder() {
         });
     }
 
+    // Seems like unused!!!! TO DO : Check
     this.refreshBookedTableList = function() {
         // get restaurant id
         var restaurantId = $("#restaurantId").val();
@@ -546,7 +543,7 @@ function TableOrder() {
             type: "GET",
             dataType: "html",
             success: function(responce) {
-                $('#restaurantTableMapContainer').html(responce);
+                $('#restaurantTableMapContainer_' + restaurantId).html(responce);
             }
         });
     }
@@ -573,7 +570,7 @@ function TableOrder() {
 
     this.loadMap = function(obj, tableMapId) {
         // get restaurant id
-        var restaurantId = $("#restaurantId").val();
+        var restaurantId = $(obj).attr("restaurantId");
         // remove active class from all
         $(".halls").removeClass('active');
         // set active for current obj
@@ -609,7 +606,7 @@ function TableOrder() {
         $(obj).addClass('active');
 
         // get restaurant id
-        var restaurantId = $("#restaurantId").val();
+        var restaurantId = $(obj).attr("restaurantId"); 
         // change table map
         $.ajax({
             url: Routing.generate('table_refreshTableMap'),
@@ -617,7 +614,7 @@ function TableOrder() {
             type: "GET",
             dataType: "html",
             success: function(responce) {
-                $('#restaurantTableMapContainer').html(responce);
+                $('#restaurantTableMapContainer_' + restaurantId).html(responce);
             }
         });
     }
