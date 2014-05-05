@@ -483,6 +483,9 @@ function TableOrder() {
     this.refreshBookedTableListInClientDashboard = function(filterDate) {
         // get map id
         var mapId = $("#mapId").val();
+        
+        // get restaurant id
+        var restaurantId = $("#restaurantId").val();
 
         // Get time
         var filterTimeHour = $("#activeTableOrderForm_reserveTime_hour").val();
