@@ -312,5 +312,34 @@ class RestaurantAdmin extends Admin
             'context' => $this->getRequest()->get('context'),
         );
     }
+    
+    /**
+     * redefine method to Returns the list of batchs actions for bank review
+     *
+     * @return array the list of batchs actions
+     */
+    public function getBatchActions()
+    {
+        //get parent action
+        $actions = parent::getBatchActions();
+        
+        // check user permissions
+       // if ($this->hasRoute('edit') && $this->isGranted('EDIT') && $this->hasRoute('delete') && $this->isGranted('DELETE')) {
+            //set for moderation action
+            $actions['moderation'] = array(
+                'label' => $this->trans('action_moderation', array(), 'SonataAdminBundle'),
+                'ask_confirmation' => true // If true, a confirmation will be asked before performing the action
+            );
+            $actions['valid'] = array(
+                'label' => $this->trans('action_valid', array(), 'SonataAdminBundle'),
+                'ask_confirmation' => true // If true, a confirmation will be asked before performing the action
+            );
+            $actions['inValid'] = array(
+                'label' => $this->trans('action_invalid', array(), 'SonataAdminBundle'),
+                'ask_confirmation' => true // If true, a confirmation will be asked before performing the action
+            );
+      //  }
+        return $actions;
+    }
 
 }
