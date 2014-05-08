@@ -2204,7 +2204,7 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     width: 512px;;
     padding: 10px 12px 0 0;
     border-right: 1px solid #a9a6a6;
-    background-position: 0 10px;
+   // background-position: 0 10px;
 }
 #interactive-map-container .table-map-droppable-right{
     margin: 0;
