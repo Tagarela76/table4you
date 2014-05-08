@@ -32,7 +32,7 @@ class ActiveTableDTO
         if (@getimagesize($bigTableTypePicture)) {
             $this->tableTypePicture = $bigTableTypePicture;
         } else {
-            $this->tableTypePicture = "";
+            $this->tableTypePicture = $bigTableTypePicture; //Temporary solution
         }
         
         $this->tableNumber = $activeTable->getTableNumber();
