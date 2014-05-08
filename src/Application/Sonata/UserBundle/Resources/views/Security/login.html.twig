@@ -4,6 +4,15 @@
     <script src="{{ asset('bundles/applicationsonatauser/js/jquery.form.js') }}"></script>
     <script>
         $(function() { 
+            // Format window
+            // 1 Change title
+            $(".modal-login-title h3").html("{% trans %}main.login.form.title{% endtrans %}");
+            // 2 Chnage width
+            $( ".modal-login-title" ).parent( ".modal-reserve" ).attr("id", "login");
+            $( ".modal-login-title" ).parent( ".modal-reserve" ).addClass("modal-login");
+            $( ".modal-login-title" ).parent( ".modal-reserve" ).removeClass("modal-reserve");
+            $(".modal-login > div.modal-body").css("overflow", "hidden");
+ 
             $('#fos-login-form').submit(function() { 
                 $(this).ajaxSubmit({
                     type: 'post',

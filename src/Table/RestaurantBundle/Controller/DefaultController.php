@@ -255,7 +255,7 @@ class DefaultController extends Controller
         if (!is_object($user) || !$user instanceof UserInterface) {
             // redirect on homepage
             return $this->redirect(
-                $this->generateUrl("table_main_homepage")
+                $this->generateUrl("fos_user_security_login")
             );
         }
 
