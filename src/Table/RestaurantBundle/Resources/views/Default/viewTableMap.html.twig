@@ -19,11 +19,9 @@
         {% endfor %}
     </ul>        
     {% if tableMapObj is not null and tableMapObj.file is not null %}
-        <input type="hidden" id="mapId" value="{{tableMapObj.id}}" />
+        <input type="hidden" id="mapId_{{restaurantId}}" value="{{tableMapObj.id}}" />
         <div class="table-map-image-container" id="table-map-image-container_{{restaurantId}}">
             {% include 'TableRestaurantBundle:Default:viewActiveTableList.html.twig' %}
         </div>
     {% endif %}
 </div>
-{# additional info#}
-<input type="hidden" id="restaurantId" value="{{restaurantId}}" />

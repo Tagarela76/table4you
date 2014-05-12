@@ -414,8 +414,9 @@ function TableOrder() {
         // Init calendar
         that.initCalendar();
     }
-
-    this.bindSubmitOnReserve = function() {
+    
+    // Unused method!!!!
+    /*this.bindSubmitOnReserve = function() {
         $('#table-order-form').submit(function() {
             $(this).ajaxSubmit({
                 type: 'post',
@@ -431,7 +432,7 @@ function TableOrder() {
             });
             return false;
         });
-    }
+    }*/
 
     this.enterTableNumberByHand = function(el) {
         // Get entered table number
@@ -482,7 +483,7 @@ function TableOrder() {
 
     this.refreshBookedTableListInClientDashboard = function(restaurantId, filterDate) {
         // get map id
-        var mapId = $("#mapId").val();
+        var mapId = $("#mapId_" + restaurantId).val();
         // Get time
         var filterTimeHour = $("#activeTableOrderForm_reserveTime_hour").val();
         var filterTimeMinute = $("#activeTableOrderForm_reserveTime_minute").val();

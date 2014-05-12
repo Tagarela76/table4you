@@ -60,6 +60,7 @@ class ActiveTableOrderFormType extends AbstractType
                     'as_url' => true,
                     'width' => 125,
                     'height' => 30,
+                    'keep_value' => false
                 ))
             ;
     }

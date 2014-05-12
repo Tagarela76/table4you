@@ -448,23 +448,25 @@ input:focus{outline: 0 none}
     margin: 0;
 }
 #fos-login-form .register-frogot_pass .span6+.span6 a{margin-left: 80px;}
-#table-order-form-container .container-fluid{padding: 15px 20px 0 !important;}
-#table-order-form-container label{
+#table-order-form-container .container-fluid, .table-order-form-container .container-fluid { 
+    padding: 15px 20px 0 !important;
+}
+#table-order-form-container label, .table-order-form-container label {
     font-size: 18px;
     color: #9c9a9a;
     margin-bottom: 10px !important;
 }
 body .row-fluid .reserver-texterea{margin-left: 5px;}
-#table-order-form div.captcha-img label{
+#table-order-form div.captcha-img label, .table-order-form div.captcha-img label {
     display: inline;
     float: left;
 }
-#table-order-form div.captcha-img input{
+#table-order-form div.captcha-img input, .table-order-form div.captcha-img input {
     width: 111px;
     margin-left: 13px;
     height: 26px;
 }
-#table-order-form-container textarea{
+#table-order-form-container textarea, .table-order-form-container textarea {
     display: block;
     resize: none;
     width: 385px;
@@ -472,14 +474,19 @@ body .row-fluid .reserver-texterea{margin-left: 5px;}
     position: relative;
     height: 50px;
 }
-#table-order-form-container #activeTableOrderForm_wish{float: left;}
-#table-order-form-container textarea:focus{
+#table-order-form-container #activeTableOrderForm_wish, .table-order-form-container #activeTableOrderForm_wish {
+    float: left;
+}
+#table-order-form-container textarea:focus, .table-order-form-container textarea:focus {
     border: 1px solid #fe8504;
     outline: none;
     box-shadow: none;
 }
-#table-order-form-container div.button-reserve{float: right; margin-top: 4px;}
-#table-order-form-container div.button-reserve input{
+#table-order-form-container div.button-reserve, .table-order-form-container div.button-reserve {
+    float: right; 
+    margin-top: 4px;
+}
+#table-order-form-container div.button-reserve input, .table-order-form-container div.button-reserve input {
     background: #feb200;
     background: -moz-linear-gradient(top, #feb200 0%, #e2601b 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#feb200), color-stop(100%,#e2601b));
@@ -500,7 +507,9 @@ body .row-fluid .reserver-texterea{margin-left: 5px;}
     cursor: pointer;
     box-shadow: none;
 }
-#table-order-form-container{width: 816px;}
+#table-order-form-container, .table-order-form-container  {
+    width: 816px;
+}
 .modal-login #fos-login-form div.boxChecked label, .modal-login #fos-login-form div.boxUnchecked label, .table-order-form div.boxChecked label, .table-order-form div.boxUnchecked label{
     float: none;
     font-size: 13.6px !important;
@@ -609,7 +618,10 @@ div.boxChecked input, div.boxUnchecked input {
     float: left;
 }
 .modal-login #fos-login-form div.boxChecked label, .modal-login #fos-login-form div.boxUnchecked label,
-#table-order-form div.boxChecked label, #table-order-form div.boxUnchecked label{
+#table-order-form div.boxChecked label, 
+.table-order-form div.boxChecked label, 
+#table-order-form div.boxUnchecked label,
+.table-order-form div.boxUnchecked label {
     cursor: pointer;
     float: none!important;
     width: 125px!important;
@@ -852,10 +864,20 @@ input#tableOrderForm_peopleCount:focus{
 .table-order-form{margin: 0;}
 .table-order-form .floor-tabs {margin-top: 2px;overflow: hidden;margin-bottom: 10px;}
 .table-order-form .floor-tabs-hall{margin-bottom: 7px;height: 22px;}
-#table-order-form-container  .table-order-form .label-font-size-modal label{font-size: 15px;}
+#table-order-form-container  .table-order-form .label-font-size-modal label, 
+.table-order-form-container  .table-order-form .label-font-size-modal label{
+    font-size: 15px;
+}
 #table-order-form-container  .table-order-form .label-font-size_modal label,
-#table-order-form-container  .table-order-form .choose-zone label{font-size: 16px;}
-#table-order-form-container  .table-order-form .label-font-size_modal label+ul{margin: 0;}
+.table-order-form-container  .table-order-form .label-font-size_modal label
+#table-order-form-container  .table-order-form .choose-zone label,
+.table-order-form-container  .table-order-form .choose-zone label {
+    font-size: 16px;
+}
+#table-order-form-container  .table-order-form .label-font-size_modal label+ul,
+.table-order-form-container  .table-order-form .label-font-size_modal label+ul { 
+    margin: 0;
+}
 #tableOrderForm_reserveTime{margin-top: -13px;}
 #activeTableOrder4AdminForm_reserveTime{margin-top: -10px;}
 #tableOrderForm_reserveTime select,
@@ -1744,7 +1766,10 @@ input#tableOrderForm_peopleCount:focus{
     text-align: center;
 }
 body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-widget-header .ui-state-highlight,
-.modal-body #table-order-form .ui-state-highlight, .modal-body #table-order-form .ui-widget-content .ui-state-active{
+.modal-body #table-order-form .ui-state-highlight, 
+.modal-body .table-order-form .ui-state-highlight, 
+.modal-body #table-order-form .ui-widget-content .ui-state-active,
+.modal-body .table-order-form .ui-widget-content .ui-state-active {
     background: #feb200;
     background: -moz-linear-gradient(top, #feb200 0%, #e2601b 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#feb200), color-stop(100%,#e2601b));
@@ -1944,7 +1969,7 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
 #tableTypeContainer .modal-body .row-fluid .number-tables input.error-form,
 #table-map-form .specify-floor-room input.error-form,
 .editTableMapPopup .modal-body .span4 .error-form,
-#table-order-form .error-form-reserve{
+#table-order-form .error-form-reserve, .table-order-form .error-form-reserve {
     border: 1px solid #FF0000;
     box-shadow: none;
 }
@@ -2548,25 +2573,39 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
 .tableMapContainer #interactive-map-container #activeTableOrderContainer .active-Table-Order-Reserve .span7{margin-left: 20px;}
 .tableMapContainer #interactive-map-container #activeTableOrderContainer .active-Table-Order-Reserve .span7 a{display: block;text-align: center;margin-top: 10px;}
 /* Modal reserve admin*/
-.tableMapContainer #interactive-map-container #activeTableOrderContainer #table-order-form .row-fluid{width: 100%;padding: 0;width: 816px;}
+.tableMapContainer #interactive-map-container #activeTableOrderContainer #table-order-form .row-fluid,
+.tableMapContainer #interactive-map-container #activeTableOrderContainer .table-order-form .row-fluid {width: 100%;
+           padding: 0;
+           width: 816px;
+}
 .tableMapContainer #interactive-map-container #activeTableOrderContainer #table-order-form .error-form-reserve,
-.modal-body #table-order-form .table-order-form-top-input .error-form-reserve{
+.tableMapContainer #interactive-map-container #activeTableOrderContainer .table-order-form .error-form-reserve,
+.modal-body #table-order-form .table-order-form-top-input .error-form-reserve, 
+.modal-body .table-order-form .table-order-form-top-input .error-form-reserve {
     border: 1px solid #FF0000;
     box-shadow: none;
 }
-.modal-body #table-order-form .table-order-form-top-input ul{margin-left: 0;}
-.tableMapContainer #interactive-map-container #activeTableOrderContainer #table-order-form .row-fluid .span5{margin-right: 0;}
+.modal-body #table-order-form .table-order-form-top-input ul, 
+.modal-body .table-order-form .table-order-form-top-input ul { 
+    margin-left: 0;
+}
 .tableMapContainer #interactive-map-container #activeTableOrderContainer #table-order-form .row-fluid .span5,
-.tableMapContainer #interactive-map-container #activeTableOrderContainer #table-order-form .row-fluid .span5 .row-fluid{width: 379px;}
-.tableMapContainer #interactive-map-container #activeTableOrderContainer #table-order-form .table-order-form-bottom .span5+.span5{margin-top: 40px;}
-.modal-body #table-order-form{margin: 0;}
-.modal-body #table-order-form label{
+.tableMapContainer #interactive-map-container #activeTableOrderContainer .table-order-form .row-fluid .span5 {margin-right: 0;}
+.tableMapContainer #interactive-map-container #activeTableOrderContainer #table-order-form .row-fluid .span5,
+.tableMapContainer #interactive-map-container #activeTableOrderContainer .table-order-form .row-fluid .span5,
+.tableMapContainer #interactive-map-container #activeTableOrderContainer #table-order-form .row-fluid .span5 .row-fluid,
+.tableMapContainer #interactive-map-container #activeTableOrderContainer .table-order-form .row-fluid .span5 .row-fluid {width: 379px;}
+.tableMapContainer #interactive-map-container #activeTableOrderContainer #table-order-form .table-order-form-bottom .span5+.span5,
+.tableMapContainer #interactive-map-container #activeTableOrderContainer .table-order-form .table-order-form-bottom .span5+.span5 {margin-top: 40px;}
+.modal-body #table-order-form, .modal-body .table-order-form{margin: 0;}
+.modal-body #table-order-form label, .modal-body .table-order-form label {
     font-size: 16px;
     font-family: Arial;
     color: #9c9a9a;
     cursor: context-menu;
 }
-.modal-body #table-order-form .restaurantTableMapContainer{
+.modal-body #table-order-form .restaurantTableMapContainer, 
+.modal-body .table-order-form .restaurantTableMapContainer {
     width: 400px;
     height: 400px;
     margin-left: 5px;
@@ -2595,8 +2634,10 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
 .modal-body .ui-datepicker .ui-datepicker-prev{left: 18%;}
 .modal-body .ui-datepicker .ui-datepicker-next{right: 18%;}
 .modal-body .table-order-form-top .table-order-form-top{margin-bottom: 0px;}
-.modal-body #table-order-form .table-order-form-bottom-input label{float: left;margin-left: 14px;color: #454545;margin-top: 5px;}
-.modal-body #table-order-form .table-order-form-bottom-input input{
+.modal-body #table-order-form .table-order-form-bottom-input label,
+.modal-body .table-order-form .table-order-form-bottom-input label {float: left;margin-left: 14px;color: #454545;margin-top: 5px;}
+.modal-body #table-order-form .table-order-form-bottom-input input,
+.modal-body .table-order-form .table-order-form-bottom-input input {
     float: right;
     margin-right: 8px;
     width: 232px;
@@ -2643,12 +2684,14 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#bbbcbd',GradientType=0 );
 }
 .tableMapContainer #interactive-map-container #activeTableOrderContainer .row-fluid>div .button-cancel{margin-left: 14px;}
-.modal-body #table-order-form .table-order-form-bottom-input ul{
+.modal-body #table-order-form .table-order-form-bottom-input ul, 
+.modal-body .table-order-form .table-order-form-bottom-input ul {
     text-align: right;
     float: right;
     margin-right: 10px;
 }
-.modal-body #table-order-form .table-order-form-bottom-input textarea{
+.modal-body #table-order-form .table-order-form-bottom-input textarea,
+.modal-body .table-order-form .table-order-form-bottom-input textarea {
     width: 345px;
     height: 70px;
     margin-right: 8px;
@@ -2668,13 +2711,17 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     background: #fff;
 }
 .modal-body #table-order-form .table-order-form-bottom-input input:focus,
+.modal-body .table-order-form .table-order-form-bottom-input input:focus,
 .modal-body #table-order-form .table-order-form-bottom-input textarea:focus,
-.modal-body #table-order-form .table-order-form-top-input input:focus{
+.modal-body .table-order-form .table-order-form-bottom-input textarea:focus,
+.modal-body #table-order-form .table-order-form-top-input input:focus, 
+.modal-body .table-order-form .table-order-form-top-input input:focus {
     border: 1px solid #fe8504;
     outline: none;
     box-shadow: none;
 }
-.modal-body #table-order-form .table-order-form-top-input input{
+.modal-body #table-order-form .table-order-form-top-input input, 
+.modal-body .table-order-form .table-order-form-top-input input {
     width: 40px;
     font-size: 14px;
     color: #353535;
@@ -2696,7 +2743,8 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     -webkit-box-shadow: inset 1px 0px 3px rgba(238, 238, 238, 0.7), inset -2px 0px 3px rgba(238, 238, 238,0.7), inset 0px 2px 1px rgba(0, 0, 0, 0.7);
     box-shadow: inset 1px 0px 3px rgba(238, 238, 238, 0.7), inset -2px 0px 3px rgba(238, 238, 238,0.7), inset 0px 2px 1px rgba(0, 0, 0, 0.7);
 }
-.modal-body #table-order-form .btn-reserve{
+.modal-body #table-order-form .btn-reserve, 
+.modal-body .table-order-form .btn-reserve {
     margin: 44px 9px 0px 0;
     float: right;
     background: #feb200;
@@ -2720,7 +2768,8 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     box-shadow: none;
 }
 .tableMapContainer #interactive-map-container #activeTableOrderContainer .row-fluid #activeTableOrder4AdminForm_reserveTime{line-height: 1.5;height: 32px;margin-bottom: 29px;margin-right: 0;}
-.tableMapContainer #interactive-map-container #activeTableOrderContainer #table-order-form .table-order-form-bottom{margin-top: 15px;padding-top: 23px;border-top: 1px solid #d6d7d8;}
+.tableMapContainer #interactive-map-container #activeTableOrderContainer #table-order-form .table-order-form-bottom,
+.tableMapContainer #interactive-map-container #activeTableOrderContainer .table-order-form .table-order-form-bottom {margin-top: 15px;padding-top: 23px;border-top: 1px solid #d6d7d8;}
 #activeTableOrderForm_peopleCount, #activeTableOrderForm_wish, #activeTableOrderForm_captcha, #activeTableOrderForm_tableNumber {
     width: 232px;
     height: 18px;
