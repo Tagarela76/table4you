@@ -2202,7 +2202,7 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
 #interactive-map-container .span8{
     height: 500px;
     width: 512px;;
-    padding: 10px 12px 0 0;
+    padding: 0 12px 0 0;
     border-right: 1px solid #a9a6a6;
    // background-position: 0 10px;
 }

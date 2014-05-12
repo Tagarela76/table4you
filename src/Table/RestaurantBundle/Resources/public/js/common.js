@@ -116,7 +116,7 @@ function TableMap() {
                         bind:
                                 {
                                     click: function() {
-                                        startAngle += 45;
+                                        startAngle += 90;
                                         $(this).rotate({animateTo: startAngle})
                                     }
                                 }
