@@ -30,10 +30,11 @@
                 success: function(response) {
                     $("#reservePreloader").hide();
                     $("#table-order-form-container_" + {{restaurant.id}}).html(response);
-                    $("a.captcha_reload").click();
-                    $('a.captcha_reload').get(0).click();
-                    
-                    console.log( $($('a.captcha_reload').get(0)).trigger("click"));
+                    // Get captcha img id
+                    var captchaImg = $('#table-order-form_{{restaurant.id}} div.captcha-img img').attr("id");
+                    // Reload captcha pprogrammatically
+                    var func = "reload_" +captchaImg;
+                    eval( func )()
                 }
             });
             return false;

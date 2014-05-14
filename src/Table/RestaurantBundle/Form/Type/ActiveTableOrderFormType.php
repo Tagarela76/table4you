@@ -59,9 +59,16 @@ class ActiveTableOrderFormType extends AbstractType
                     'reload' => true,
                     'as_url' => true,
                     'width' => 125,
-                    'height' => 30,
-                    'keep_value' => false
+                    'height' => 30
                 ))
+                /*->add('reserve_captcha', 'genemu_captcha',array(
+                    'label' => 'main.order.form.label.captcha',
+                    'translation_domain' => 'messages',
+                    "mapped" => false,
+                    "enabled" => true,
+                    'width' => 125,
+                    'height' => 30
+                ))*/
             ;
     }
 
