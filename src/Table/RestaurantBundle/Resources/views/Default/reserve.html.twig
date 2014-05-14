@@ -31,9 +31,9 @@
                     $("#reservePreloader").hide();
                     $("#table-order-form-container_" + {{restaurant.id}}).html(response);
                     // Get captcha img id
-                    var captchaImg = $('#table-order-form_{{restaurant.id}} div.captcha-img img').attr("id");
+                    var captchaImgId = $('#table-order-form_{{restaurant.id}} div.captcha-img img').attr("id");
                     // Reload captcha pprogrammatically
-                    var func = "reload_" +captchaImg;
+                    var func = "reload_" +captchaImgId;
                     eval( func )()
                 }
             });
