@@ -265,6 +265,10 @@ class ActiveTableOrderAdmin extends Admin
                 ->add('userEmail', 'genemu_plain', array(
                     'label' => 'restaurant.tableOrder.email'
                 ))
+                ->add('tableNumber', 'genemu_plain', array(
+                    'label' => 'restaurant.tableOrder.tableNumber'
+                ))
+                
                 ->add('isSms', 'checkbox', array(
                     'label' => 'restaurant.tableOrder.isSms',
                     'required' => false
@@ -277,7 +281,8 @@ class ActiveTableOrderAdmin extends Admin
                     'attr' => array(
                         'cols' => '5', 'rows' => '5'
                     ),
-                    'label' => 'restaurant.tableOrder.wish'
+                    'label' => 'restaurant.tableOrder.wish',
+                    'required' => false
                 ))
                 ->add('status', 'choice', array(
                     'choices' => ActiveTableOrder::$STATUS_LIST,

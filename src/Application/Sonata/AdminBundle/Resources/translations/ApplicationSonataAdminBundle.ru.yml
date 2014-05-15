@@ -49,6 +49,7 @@ restaurant:
     status: Статус заказа 
     isSms: Уведомление через sms
     isEmail: Уведомление через e-mail
+    tableNumber: Номер столика
   floors: Количество этажей  
   workHours:
       from: Часы работы(от)

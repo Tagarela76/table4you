@@ -414,9 +414,9 @@ function TableOrder() {
         // Init calendar
         that.initCalendar();
     }
-    
-    // Unused method!!!!
-    /*this.bindSubmitOnReserve = function() {
+
+    /** Admin usage **/
+    this.bindSubmitOnReserve = function() {
         $('#table-order-form').submit(function() {
             $(this).ajaxSubmit({
                 type: 'post',
@@ -432,7 +432,7 @@ function TableOrder() {
             });
             return false;
         });
-    }*/
+    }
 
     this.enterTableNumberByHand = function(el) {
         // Get entered table number

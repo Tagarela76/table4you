@@ -571,11 +571,9 @@ class DefaultController extends Controller
         if (!is_object($user) || !$user instanceof UserInterface) {
             // redirect on homepage
             return $this->redirect(
-                            $this->generateUrl("table_main_homepage")
+                $this->generateUrl("table_main_homepage")
             );
         }
-
-        $user = $this->container->get('security.context')->getToken()->getUser();
 
         // Check if user auth in app
         $anonim = false;
