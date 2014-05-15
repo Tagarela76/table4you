@@ -376,12 +376,16 @@ function RestaurantMap() {
             center: new L.LatLng(latitude, longitude),
             zoom: 18
         });
-        L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
-            key: '8ee2a50541944fb9bcedded5165f09d9',
-            styleId: 997,
+        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             attribution: '',
             maxZoom: 18
         }).addTo(map);
+        /*L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
+            key: '8EE2A50541944FB9BCEDDED5165F09D9',
+            styleId: 997,
+            attribution: '',
+            maxZoom: 18
+        }).addTo(map);*/
 
         var marker = L.marker([latitude, longitude]).addTo(map);
         marker.bindPopup(restaurantContent);
