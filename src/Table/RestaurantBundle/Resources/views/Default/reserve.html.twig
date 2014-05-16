@@ -13,13 +13,16 @@
             dateFormat: 'yy-mm-dd',
             altField: "#activeTableOrderForm_reserveDate",
             altFormat: "yy-mm-dd",
-            minDate: '0',
+            //minDate: '0',
             maxDate: '+1m', 
             onSelect: function(filterDate) {
                 page.tableOrder.refreshBookedTableListInClientDashboard({{restaurant.id}}, filterDate);
-                //$("#filterDate").val(filterDate);
             }
-        })
+        });
+        // Set DateTime
+        $(".reserveDate").datepicker('setDate', '{{reserveDate}}');
+        // Refresh table List
+        page.tableOrder.refreshBookedTableListInClientDashboard({{restaurant.id}}, '{{reserveDate}}');
 
         $('#table-order-form_' + {{restaurant.id}}).submit(function() {
             $(this).ajaxSubmit({

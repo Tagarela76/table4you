@@ -345,6 +345,13 @@ class DefaultController extends Controller
        // var_dump($successReserve, $form->getErrors()); die();
         // assign base_url
         $baseUrl = $this->container->getParameter('base_folder_url');
+        /*additional, Important */
+        if (!$successReserve) {
+            $reserveDate = $form->getData()->getReserveDate();
+        } else {
+            $reserveDate = "";
+        }
+        
         return array(
             'form' => $form,
             'restaurant' => $restaurant,
@@ -354,7 +361,9 @@ class DefaultController extends Controller
             'tableMapList' => $tableMapList,
             'successReserve' => $successReserve,
             'activeTableList' => $activeTableList,
-            'bookedTables' => $bookedTables
+            'bookedTables' => $bookedTables,
+            /*additional, Important */
+            'reserveDate' => $reserveDate
         );
     }
 
