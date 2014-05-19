@@ -4,7 +4,12 @@
 <script src="{{ asset('bundles/tablemain/js/cusel-min-2.5.js') }}"></script>
 <script src="{{ asset('bundles/tablerestaurant/js/common.js') }}"></script>
 <script>
-
+    // Reload if click close
+    $(function() {
+        $("#reserve_{{ restaurant.id }} a.close").click(function() {
+            location.reload();
+        });
+    });
     $(function() {
         page.tableOrder.initFancySelectBox();
 
@@ -37,7 +42,7 @@
                     var captchaImgId = $('#table-order-form_{{restaurant.id}} div.captcha-img img').attr("id");
                     // Reload captcha pprogrammatically
                     var func = "reload_" +captchaImgId;
-                    eval( func )()
+                    eval( func )();
                 }
             });
             return false;
