@@ -12,11 +12,7 @@
                 {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
             </a>
             <a href="{{ path('table_order_history') }}">
-                {% if app.user.firstname %}
-                    {{app.user.firstname}}
-                {% else %}
-                    {{app.user.username}}
-                {% endif %}
+                {{app.user.publicName}}
             </a>
         {% endif %}
     </div>

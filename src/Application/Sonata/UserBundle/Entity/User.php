@@ -35,6 +35,9 @@ class User extends BaseUser
      */
     protected $id;
     
+    protected $publicName;
+
+
     /**
      * @var Table\RestaurantBundle\Entity\Restaurant[] $restaurants
      * 
@@ -60,5 +63,34 @@ class User extends BaseUser
     {
         return $this->id;
     }
+    
+    /**
+     * Get public name
+     * 
+     * @return string
+     */
+    public function getPublicName()
+    {
+        if (is_null($this->publicName)) {
+            if (is_null($this->getFirstname())) {
+                $publicName = $this->getUsername();
+            } else {
+                $publicName = $this->getFirstname();
+            }
+            $this->setPublicName($publicName);
+        }
+        return $this->publicName;
+    }
+
+    /**
+     * Set public name
+     * 
+     * @param string $publicName
+     */
+    public function setPublicName($publicName)
+    {
+        $this->publicName = $publicName;
+    }
+
     
 }

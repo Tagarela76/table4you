@@ -362,12 +362,10 @@ class ActiveTableOrder
             return $this->userName;
         }
         if (is_null($this->userName)) {
-            $userName = $this->getUser()->getFirstName(); 
+            $userName = $this->getUser()->getPublicName(); 
             $this->setUserName($userName);
-            return $userName;
-        } else {
-            return $this->userName;
-        }  
+        } 
+        return $this->userName;
     }
     
     /**

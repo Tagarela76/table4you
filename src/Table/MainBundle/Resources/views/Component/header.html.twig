@@ -34,11 +34,7 @@
 
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
             <a href="{{ path('table_order_history') }}">
-                {% if app.user.firstname %}
-                    {{app.user.firstname}}
-                {% else %}
-                    {{app.user.username}}
-                {% endif %}
+                {{app.user.publicName}}
             </a>
         {% else %}
             <a data-toggle="modal" href="#register">
