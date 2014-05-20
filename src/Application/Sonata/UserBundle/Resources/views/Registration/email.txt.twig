@@ -1,6 +1,6 @@
 {% block subject %}
     {% autoescape false %}
-    {{ 'registration.email.subject'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl}, 'FOSUserBundle') }}
+    {{ 'registration.email.subject'|trans({'%username%': user.publicName, '%confirmationUrl%': confirmationUrl}, 'FOSUserBundle') }}
     {% endautoescape %}
 {% endblock %}
 {% block body_text %}
