@@ -15,9 +15,12 @@ function ActiveTable() {
     this.updateActiveTablePosition = function(activeTableId) {
 
         // Get new position
-        var left = $("#activeTable_" + activeTableId).position().left;
-        var top = $("#activeTable_" + activeTableId).position().top;
+       // var left = $("#activeTable_" + activeTableId).position().left;
+       // var top = $("#activeTable_" + activeTableId).position().top;
         var tableAngle = $("#activeTable_" + activeTableId).getRotateAngle();
+
+        var left = $("#activeTable_" + activeTableId).css("left");
+        var top = $("#activeTable_" + activeTableId).css("top");
 
         // Get new position
         $.ajax({
@@ -108,18 +111,17 @@ function TableMap() {
             success: function(response) {
                 for (var i = 0; i < response.length; i++) {
                     var activeTable = response[i];
-                    console.log(activeTable);
                     // Rotate Tables
                     var startAngle = 0;
                     $(".active-table_" + activeTable.id).rotate({
                         angle: activeTable.angle,
                         bind:
-                                {
-                                    click: function() {
-                                        startAngle += 90;
-                                        $(this).rotate({animateTo: startAngle})
-                                    }
+                            {
+                                click: function() {
+                                    startAngle += 45;
+                                    $(this).rotate({animateTo: startAngle})
                                 }
+                            }
                     });
                 }
             }
@@ -326,7 +328,6 @@ function TableType() {
         var isFileEmptyError = false;
         $(":input[name='file[]']").each(function(i) {
             if ($(this).val() == "") {
-                console.log();
                 isFileEmptyError = true;
                 $(this).addClass("error-form");
             }
