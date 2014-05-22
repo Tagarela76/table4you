@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Form\FormError;
 use Table\RestaurantBundle\Entity\News;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class RegistrationController extends BaseController
 {
@@ -71,6 +72,21 @@ class RegistrationController extends BaseController
         return $this->container->get('templating')->renderResponse('ApplicationSonataUserBundle:Registration:register.html.' . $this->getEngine(), array(
                     'formReg' => $form->createView(),
         ));
+    }
+    
+    /**
+     * Tell the user his account is now confirmed
+     */
+    public function confirmedAction()
+    {
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+           // throw new AccessDeniedException('This user does not have access to this section.');
+        }
+
+        // Redirect to HOME page
+        $router = $this->container->get('router');
+        return new RedirectResponse($router->generate('table_main_homepage_confirmed') . "?confirmed=1", 307);
     }
 
 }

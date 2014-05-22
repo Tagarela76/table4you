@@ -83,6 +83,8 @@ class DefaultController extends Controller
                 $phoneFormatError = true;
             }
         }
+        
+        $confirmed = $this->getRequest()->query->get('confirmed');
         // if filter render only restaurant list
         if ($filter) {
             return $this->render(
@@ -97,7 +99,8 @@ class DefaultController extends Controller
                     'categoryList' => $categoryList,
                     'kitchenList' => $kitchenList,
                     'searchCity' => $searchCity,
-                    'phoneFormatError' => $phoneFormatError
+                    'phoneFormatError' => $phoneFormatError,
+                    'confirmed' => $confirmed
 
                 )
             );
@@ -117,7 +120,8 @@ class DefaultController extends Controller
                 'searchCity' => $searchCity,
                 'newsList' => $newsList->getQuery()->getResult(),
                 'formReg' => $regForm->createView(),
-                'phoneFormatError' => $phoneFormatError
+                'phoneFormatError' => $phoneFormatError,
+                'confirmed' => $confirmed
             );
         }
     }

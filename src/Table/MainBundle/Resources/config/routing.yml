@@ -15,3 +15,11 @@ table_main_validate_user_email:
     defaults: { _controller: TableMainBundle:Default:validateUserEmail }
     options:
        expose: true 
+       
+table_main_homepage_confirmed:
+    pattern:  /{page}
+    defaults: { _controller: TableMainBundle:Default:index, page: 1 }
+    requirements:
+        page: \d+   
+    options:
+       expose: true         
