@@ -48,7 +48,10 @@
         <ul class="restaurantSchedule">
             {% for schedule in restaurant.restaurantSchedule %}
                 <li>
-                    {{schedule.dayFromStr}} - {{schedule.dayToStr}} {{schedule.timeFrom|date('H:i')}} - {{schedule.timeTo|date('H:i')}}
+                    {%if schedule.dayFromStr != schedule.dayToStr %}
+                        {{schedule.dayFromStr}} - 
+                    {% endif %}
+                    {{schedule.dayToStr}} {{schedule.timeFrom|date('H:i')}} - {{schedule.timeTo|date('H:i')}}
                     {% if loop.index < restaurant.restaurantSchedule|length %}
                         ,
                     {% endif %}
