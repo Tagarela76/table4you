@@ -2344,7 +2344,7 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     line-height: 1.8;
 }
 .content-table-editor select#restaurantId{
-    width: 466px;
+    /*width: 466px;
     height: 32px;
     float: left;
     margin-right: 17px;
@@ -2360,7 +2360,22 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     border-left: 1px solid #d9d9d9;
     border-top: 1px solid #f2f2f2;
     border-bottom: 1px solid #f2f2f2;
-    background: #fff;
+    background: #fff;*/
+
+    -moz-border-radius: 7px 7px 7px 7px;
+    -webkit-border-radius: 7px 7px 7px 7px;
+    -o-border-radius: 7px 7px 7px 7px;
+    border-radius: 7px 7px 7px 7px;
+    border-color: #f0f0f0;
+    border: none;
+    -moz-box-shadow: inset 1px 0px 3px rgba(238, 238, 238, 0.7), inset -2px 0px 3px rgba(238, 238, 238,0.7), inset 0px 2px 0px rgba(0, 0, 0, 0.6);
+    -webkit-box-shadow: inset 1px 0px 3px rgba(238, 238, 238, 0.7), inset -2px 0px 3px rgba(238, 238, 238,0.7), inset 0px 2px 0px rgba(0, 0, 0, 0.6);
+    box-shadow: inset 1px 0px 3px rgba(238, 238, 238, 0.7), inset -2px 0px 3px rgba(238, 238, 238,0.7), inset 0px 2px 0px rgba(0, 0, 0, 0.6);
+    float: left;
+    height: 32px;
+    margin-right: 17px;
+    overflow: hidden;
+    width: 466px;
 }
 .content-table-editor select#restaurantId:focus{outline: none;}
 .tableMapContainer .row-fluid ul.tab-on-the-floors{list-style: none;margin: 0;}
@@ -2789,6 +2804,10 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     border-bottom: 1px solid #f2f2f2;
     background: #fff;
     margin-bottom: 0;
+}
+#activeTableOrderForm_wish{
+    width: 386px;
+    height: 56px;
 }
 #activeTableOrderForm_peopleCount:focus, #activeTableOrderForm_wish:focus, #activeTableOrderForm_captcha:focus, #activeTableOrderForm_tableNumber:focus {
     border: 1px solid #fe8504;
