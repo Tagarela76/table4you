@@ -805,6 +805,8 @@ class TableDashboardController extends Controller
 
                     $mailer = $this->getUserMailer();
                     $mailer->sendConfirmationEmailMessage($user);
+                    // Send sms message to new User (credentials)
+                    $this->getActiveTableOrderManager()->sendConfirmationSmsMessage($user);
 
                     // add user
                     $em = $this->getDoctrine()->getManager();

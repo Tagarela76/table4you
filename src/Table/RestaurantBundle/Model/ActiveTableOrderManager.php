@@ -217,4 +217,25 @@ class ActiveTableOrderManager
             }
         }
     }
+    
+    /**
+     * Send sms notifiction to new user(credentials
+     * 
+     * @param type $user
+     */
+    public function sendConfirmationSmsMessage($user)
+    {
+        // sent sms if needed
+        if (!is_null($phone = $user->getPhone())) {
+            // get sms text 
+            $text = $this->container->get('templating')->render(
+                'TableMainBundle:Mail:confirmationSmsMessage.html.twig', array(
+                    'username' => $user->getUserName(),
+                    'password' => $user->getPlainPassword()
+                )
+            );
+            // send sms
+            $this->container->get('sms_manager')->sendMessage($phone, $text);
+        }
+    }
 }

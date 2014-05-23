@@ -66,6 +66,13 @@ main:
         pleaseAcceptOrder: "Подтвердите или предложите альтернативу"
         reserveRequest: "Запрос бронирования"
         reserveReject: "Отказ от бронирования"
+    registration:
+      notification:
+          greeting: Благодарим Вас за регистрацию на нашем сервисе
+          yourData: "Ваши данные для входа на сайт:"
+          login: логин
+          password: пароль
+          wishes: "С наилучшими пожеланиями, команда сайта."
   breadcrumbs:
       label:
           home: Главная
