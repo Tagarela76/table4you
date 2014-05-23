@@ -748,11 +748,20 @@ class TableDashboardController extends Controller
 
             // generste password(5 numbers)
             $userPassword = rand(11111, 99999);
+            // Email cannot be empty, but we can do it hidden for client and fill it as
+            //phone_tabledev@gmail.com
+            if (is_null($activeTableOrder->getUserEmail()) || 
+                    $activeTableOrder->getUserEmail() == "") {
+                // cut + from phone
+                $email = substr($activeTableOrder->getUserPhone(), 1) . "tabledev@gmail.com";
+            } else {
+                $email = $activeTableOrder->getUserEmail();
+            }
             $userForm->bind(array(
                 "firstname" => $activeTableOrder->getUserName(), // It is firstname in server
                 "lastname" => $activeTableOrder->getUserLastName(),
-                "email" => $activeTableOrder->getUserEmail(),
-                "username" => $activeTableOrder->getUserEmail(), // the same as email
+                "email" => $email,
+                "username" => $email, // the same as email
                 "plainPassword" => array(
                     "first" => $userPassword,
                     "second" => $userPassword
