@@ -814,7 +814,7 @@ class TableDashboardController extends Controller
                     // Let's add Order and connected it to a new user
                     
                     // Get New User
-                    $user = $this->getUserManager()->findUserBy(array("username" => $activeTableOrder->getUserEmail()));
+                    $user = $this->getUserManager()->findUserBy(array("username" => $email));
               
                     // add Order
                     // format reserve date
