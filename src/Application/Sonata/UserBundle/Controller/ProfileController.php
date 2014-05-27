@@ -77,7 +77,7 @@ class ProfileController extends BaseSecurityController
             $isUserIsSuperAdmin = true;
         }
         // get restaurant list
-        $restaurantList = $this->getRestaurantManager()->getEditorRestaurants($user->getId(), $isUserIsSuperAdmin);
+        $restaurantList = $this->container->get('restaurant_manager')->getEditorRestaurants($user->getId(), $isUserIsSuperAdmin);
         if (!empty($restaurantList)) {
             $adminRestaurantId = $restaurantList[0]->getId();
         } else {
