@@ -34,6 +34,8 @@ main:
       title: Заведение на карте
   auth:
     text: Авторизируйтесь
+  tableMap:
+    buttonLabel: Мой ресторан
   please: пожалуйста
   or: или   
   mail:

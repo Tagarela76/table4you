@@ -13,6 +13,7 @@ use FOS\UserBundle\FOSUserEvents;
 use Symfony\Component\Form\FormError;
 use FOS\UserBundle\Controller\ProfileController as BaseSecurityController;
 use Table\RestaurantBundle\Entity\News;
+use Application\Sonata\UserBundle\Entity\User;
 
 /**
  * This class is inspired from the FOS Profile Controller, except :
@@ -70,10 +71,22 @@ class ProfileController extends BaseSecurityController
         $breadcrumbs->addItem(
                 $this->container->get('translator')->trans('main.breadcrumbs.label.profile')
         );
+        // we should now if user is super admin
+        $isUserIsSuperAdmin = false;
+        if (in_array(User::ROLE_SUPER_ADMIN, $user->getRoles())) {
+            $isUserIsSuperAdmin = true;
+        }
+        // get restaurant list
+        $restaurantList = $this->getRestaurantManager()->getEditorRestaurants($user->getId(), $isUserIsSuperAdmin);
+        if (!empty($restaurantList)) {
+            $adminRestaurantId = $restaurantList[0]->getId();
+        } else {
+            $adminRestaurantId = false;
+        }
         // registration form (header)
         $regForm = $this->container->get('fos_user.registration.form');
         return $this->container->get('templating')->renderResponse(
-                'ApplicationSonataUserBundle:Profile:show.html.twig', array(
+                        'ApplicationSonataUserBundle:Profile:show.html.twig', array(
                     'user' => $user,
                     'cityList' => $cityList,
                     'categoryList' => $categoryList,
@@ -81,7 +94,8 @@ class ProfileController extends BaseSecurityController
                     'searchCity' => $searchCity,
                     'breadcrumbs' => $breadcrumbs,
                     'newsList' => $newsList->getQuery()->getResult(),
-                    'formReg' => $regForm->createView()
+                    'formReg' => $regForm->createView(),
+                    'adminRestaurantId' => $adminRestaurantId
         ));
     }
 
@@ -148,13 +162,13 @@ class ProfileController extends BaseSecurityController
 
         // Check if user should fill email
         $isInvalidEmail = false;
-        if ($user->getEmail() == $user->getUsername() . "@gmail.com" || 
+        if ($user->getEmail() == $user->getUsername() . "@gmail.com" ||
                 $user->getEmail() == $user->getUsername() . "@table4you.com") {
             $isInvalidEmail = true;
         }
         // Check if user  fill phone
         $isEmptyPhone = false;
-        if (!preg_match("/^\+7\d{10}$/", $user->getPhone()) ) {
+        if (!preg_match("/^\+7\d{10}$/", $user->getPhone())) {
             $isEmptyPhone = true;
         }
         // registration form (header)

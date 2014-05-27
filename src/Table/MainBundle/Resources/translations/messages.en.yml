@@ -33,6 +33,8 @@ main:
       title: Заведение на карте    
   auth:
     text: Auth
+  tableMap:
+    buttonLabel: My restaurant
   register:
     text: Register
   please: please

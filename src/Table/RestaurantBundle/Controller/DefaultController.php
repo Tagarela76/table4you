@@ -16,6 +16,7 @@ use Table\RestaurantBundle\Entity\Restaurant;
 use Table\RestaurantBundle\Entity\TableType;
 use Table\RestaurantBundle\Entity\ActiveTableOrder;
 use Symfony\Component\Form\FormError;
+use Application\Sonata\UserBundle\Entity\User;
 
 class DefaultController extends Controller
 {
@@ -650,6 +651,18 @@ class DefaultController extends Controller
             }
         }
         
+        // we should now if user is super admin
+        $isUserIsSuperAdmin = false;
+        if (in_array(User::ROLE_SUPER_ADMIN, $user->getRoles())) {
+            $isUserIsSuperAdmin = true;
+        }
+        // get restaurant list
+        $restaurantList = $this->getRestaurantManager()->getEditorRestaurants($user->getId(), $isUserIsSuperAdmin);
+        if (!empty($restaurantList)) {
+            $adminRestaurantId = $restaurantList[0]->getId();
+        } else {
+            $adminRestaurantId = false;
+        }
         // registration form (header)
         $regForm = $this->container->get('fos_user.registration.form');
         return array(
@@ -666,7 +679,8 @@ class DefaultController extends Controller
             'newsList' => $newsList->getQuery()->getResult(),
             'anonim' => $anonim,
             'formReg' => $regForm->createView(),
-            'phoneFormatError' => $phoneFormatError
+            'phoneFormatError' => $phoneFormatError,
+            'adminRestaurantId' => $adminRestaurantId
         );
     }
 

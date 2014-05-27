@@ -5,4 +5,9 @@
     <a  href="{{ path('fos_user_profile_show') }}" {% if app.request.attributes.get('_route') == "fos_user_profile_show" %} class="active" {% endif %}>
         {% trans %}main.profile.buttonLabel{% endtrans %}
     </a>
+    {% if adminRestaurantId %}
+        <a  href="{{ path('table_viewCreateMap', {'restaurantId': adminRestaurantId}) }}">
+            {% trans %}main.tableMap.buttonLabel{% endtrans %}
+        </a>
+    {% endif %}
 </div>
