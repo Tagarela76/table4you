@@ -11,6 +11,9 @@
             <td><span></span></td>
         </tr>
     </table>
+    {% if restaurants is empty and filter %}
+        {% trans %}main.restaurant.response.nothingFound{% endtrans %}
+    {% endif %}    
     {% for restaurant in restaurantsList %}
     <div class="restaurant-container">
         <div class="restaurant-img-container">

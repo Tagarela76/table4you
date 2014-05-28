@@ -33,6 +33,6 @@
 .map-count-icon {
     text-align:center;
     vertical-align:middle;
-    line-height:40px;
+    line-height:80px;
     background-image: url('../images/label_on_the_map.png')
 }

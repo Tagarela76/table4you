@@ -33,6 +33,8 @@ main:
         userCannotOrderTable: "our service allows to book no more than one table."
         cannotOrderCurrentTable: "Current table has allready booked at selected time." 
   restaurant:
+      response:
+        nothingFound: "Nothing found."  
       label:
           top: TOP 
   tableMap:

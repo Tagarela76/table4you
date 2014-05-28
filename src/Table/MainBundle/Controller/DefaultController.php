@@ -100,8 +100,9 @@ class DefaultController extends Controller
                     'kitchenList' => $kitchenList,
                     'searchCity' => $searchCity,
                     'phoneFormatError' => $phoneFormatError,
-                    'confirmed' => $confirmed
-
+                    'confirmed' => $confirmed,
+                    'filter' => true,
+                    'restaurants' => $restaurantList->getQuery()->getResult()
                 )
             );
         } else {
@@ -121,7 +122,9 @@ class DefaultController extends Controller
                 'newsList' => $newsList->getQuery()->getResult(),
                 'formReg' => $regForm->createView(),
                 'phoneFormatError' => $phoneFormatError,
-                'confirmed' => $confirmed
+                'confirmed' => $confirmed,
+                'filter' => false,
+                'restaurants' => $restaurantList->getQuery()->getResult()
             );
         }
     }

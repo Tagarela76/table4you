@@ -59,6 +59,8 @@ main:
         cannotOrderCurrentTable: "Данный стол уже забронирован на выбранное вами время." 
         invalidTableOrderTime: "Невозможно забронировать стол на выбранное вами время." 
   restaurant:
+      response:
+        nothingFound: "По вашему запросу ничего не найдено."
       label:
           top: Топ заведений
   tableMap:
