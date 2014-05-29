@@ -19,8 +19,8 @@
             setView: true
         });
         
-        var greenIcon = L.icon({
-            iconUrl: '/table4you/web/bundles/tablerestaurant/leaflet/js/images/marker-icon-location.png',
+        var locateIcon = L.icon({
+            iconUrl: "{{ asset('bundles/tablerestaurant/leaflet/js/images/marker-icon-location.png') }}",
 
             iconSize:     [25, 40], // size of the icon
             shadowSize:   [50, 64], // size of the shadow
@@ -32,7 +32,7 @@
         map.on('locationfound', onLocationFound);
         function onLocationFound(e) { 
             map.setZoom(14);
-            L.marker(e.latlng, {icon: greenIcon}).addTo(map);
+            L.marker(e.latlng, {icon: locateIcon}).addTo(map);
         }
         // get Restaurants
         $.ajax({
