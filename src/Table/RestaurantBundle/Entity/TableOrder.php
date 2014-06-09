@@ -89,13 +89,6 @@ class TableOrder
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_smoking_zone", type="boolean")
-     */
-    private $isSmokingZone;
-    
-    /**
-     * @var boolean
-     *
      * @ORM\Column(name="is_sms", type="boolean")
      */
     private $isSms;
@@ -360,29 +353,6 @@ class TableOrder
     public function getFloor()
     {
         return $this->floor;
-    }
-    
-    /**
-     * Set isSmokingZone
-     *
-     * @param boolean $isSmokingZone
-     * @return TableOrder
-     */
-    public function setIsSmokingZone($isSmokingZone)
-    {
-        $this->isSmokingZone = $isSmokingZone;
-    
-        return $this;
-    }
-
-    /**
-     * Get isSmokingZone
-     *
-     * @return boolean 
-     */
-    public function getIsSmokingZone()
-    {
-        return $this->isSmokingZone;
     }
     
     /**

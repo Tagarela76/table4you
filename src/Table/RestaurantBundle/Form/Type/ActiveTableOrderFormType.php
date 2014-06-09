@@ -32,10 +32,6 @@ class ActiveTableOrderFormType extends AbstractType
                     'label' => 'main.order.form.label.peopleCount',
                     'required' => true
                 ))
-                ->add('isSmokingZone', 'checkbox', array(
-                    'translation_domain' => 'messages',
-                    'label' => 'main.order.form.label.isSmokingZone'
-                ))
                 ->add('isSms', 'checkbox', array(
                     'translation_domain' => 'messages',
                     'label' => 'main.order.form.label.isSms'

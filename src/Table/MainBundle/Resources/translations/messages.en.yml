@@ -46,7 +46,6 @@ main:
         tableOrder: "You have successfully reserved table"
         guest: "guest"
         for: "for"
-        notSmoke: "Not smoke hall"
         restaurant: "Restaurant"
         wishes: "wishes"
         endText: "This notification was formated automatically and no need to reply it."

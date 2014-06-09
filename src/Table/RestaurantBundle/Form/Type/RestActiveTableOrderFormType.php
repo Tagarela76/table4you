@@ -23,10 +23,6 @@ class RestActiveTableOrderFormType extends AbstractType
                     'translation_domain' => 'messages',
                     'label' => 'main.tableMap.orders.form.label.peopleCount'
                 ))
-                ->add('isSmokingZone', 'checkbox', array(
-                    'translation_domain' => 'messages',
-                    'label' => 'main.tableMap.orders.form.label.smokingHall'
-                ))
                 ->add('isSms', 'checkbox', array(
                     'translation_domain' => 'messages',
                     'label' => 'main.tableMap.orders.form.label.smsNotification'

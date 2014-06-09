@@ -30,10 +30,6 @@ class ActiveTableOrderForm4AdminType extends AbstractType
                     'label' => 'main.tableMap.orders.form.label.peopleCount',
                     'required' => true
                 ))
-                ->add('isSmokingZone', 'checkbox', array(
-                    'translation_domain' => 'messages',
-                    'label' => 'main.tableMap.orders.form.label.smokingHall'
-                ))
                 ->add('isSms', 'checkbox', array(
                     'translation_domain' => 'messages',
                     'label' => 'main.tableMap.orders.form.label.smsNotification'

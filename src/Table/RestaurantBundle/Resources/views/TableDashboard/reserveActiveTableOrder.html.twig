@@ -65,15 +65,6 @@
                                     {{ form_errors(form.isSms) }}
                                 </p>
                                 <p>
-                                    {% if form.isSmokingZone.vars.errors|length %}
-                                        {{ form_widget(form.isSmokingZone, {'attr':{'class':'error-form-reserve'} }) }}
-                                    {%  else %}
-                                        {{ form_widget(form.isSmokingZone)  }}
-                                    {% endif %}
-                                    {{ form_label(form.isSmokingZone) }}
-                                    {{ form_errors(form.isSmokingZone) }}
-                                </p>
-                                <p>
                                     {% if form.isEmail.vars.errors|length %}
                                         {{ form_widget(form.isEmail, {'attr':{'class':'error-form-reserve'} }) }}
                                     {%  else %}

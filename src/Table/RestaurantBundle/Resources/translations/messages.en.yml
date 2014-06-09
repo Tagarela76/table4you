@@ -9,7 +9,6 @@ main:
           reserveTime: "Time:"
           tableNumber: "Table number:"
           peopleCount: "People count:"
-          isSmokingZone: "Smoking zone"
           floor: Floor
           isSms: sms
           isEmail: e-mail
@@ -101,6 +100,5 @@ main:
                 customerEmail: E-mail
                 smsNotification: SMS Notification
                 emailNotification: E-mail Notification
-                smokingHall: Hall for smoking
                 comment: Comment
                 reserve: Reserve

@@ -72,14 +72,7 @@ class ActiveTableOrder
      *
      * @ORM\Column(name="wish", type="string", length=500, nullable=true)
      */
-    private $wish;
-    
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_smoking_zone", type="boolean")
-     */
-    private $isSmokingZone;
+    private $wish;   
     
     /**
      * @var boolean
@@ -325,29 +318,6 @@ class ActiveTableOrder
     public function getStatus()
     {
         return $this->status;
-    }
-    
-    /**
-     * Set isSmokingZone
-     *
-     * @param boolean $isSmokingZone
-     * @return ActiveTableOrder
-     */
-    public function setIsSmokingZone($isSmokingZone)
-    {
-        $this->isSmokingZone = $isSmokingZone;
-    
-        return $this;
-    }
-
-    /**
-     * Get isSmokingZone
-     *
-     * @return boolean 
-     */
-    public function getIsSmokingZone()
-    {
-        return $this->isSmokingZone;
     }
 
     /**

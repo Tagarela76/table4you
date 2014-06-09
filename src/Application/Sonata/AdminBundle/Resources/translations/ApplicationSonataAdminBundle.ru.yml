@@ -44,7 +44,6 @@ restaurant:
     time: Время бронирования
     tableNumber: Номер столика
     peopleCount: Кол-во гостей
-    isSmokingZone: Курящая зона
     wish: Пожелания  
     status: Статус заказа 
     isSms: Уведомление через sms

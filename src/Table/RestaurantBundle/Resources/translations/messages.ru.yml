@@ -34,7 +34,6 @@ main:
           reserveTime: "Время:"
           tableNumber: "Номер столика:"
           peopleCount: "Количество гостей:"
-          isSmokingZone: "Зал для курящих"
           floor: Этаж
           isSms: sms
           isEmail: e-mail
@@ -131,7 +130,6 @@ main:
                 customerEmail: E-mail
                 smsNotification: sms
                 emailNotification: e-mail
-                smokingHall: Зал для курящих
                 comment: Комментарий
                 reserve: Бронировать    
           

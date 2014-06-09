@@ -335,10 +335,6 @@ class TableOrderAdmin extends Admin
                 ->add('peopleCount', 'text', array(
                     'label' => 'restaurant.tableOrder.peopleCount'
                 ))
-                ->add('isSmokingZone', 'checkbox', array(
-                    'label' => 'restaurant.tableOrder.isSmokingZone',
-                    'required' => false
-                ))
                 ->add('userPhone', 'genemu_plain', array(
                     'label' => 'restaurant.tableOrder.phone'
                 ))

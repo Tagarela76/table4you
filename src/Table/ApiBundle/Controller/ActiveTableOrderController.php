@@ -71,7 +71,6 @@ class ActiveTableOrderController extends Controller
             "reserveDate" => $reserveDateTime,
             "activeTable" => $this->getRequest()->request->get('activeTable'),
             "peopleCount" => $this->getRequest()->request->get('peopleCount'),
-            "isSmokingZone" => $this->getRequest()->request->get('isSmokingZone'),
             "isSms" => $this->getRequest()->request->get('isSms'),
             "isEmail" => $this->getRequest()->request->get('isEmail'),
             "wish" => $this->getRequest()->request->get('wish'),
