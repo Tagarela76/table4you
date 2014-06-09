@@ -66,6 +66,7 @@ main:
                 selectTheFile: Choose file
                 addMore: add more
             error:
+                mapError:  jpg or png
                 floor: Fill field    
                 numberTable: Fill table number
                 file: Only jpg и png

@@ -222,7 +222,8 @@ function TableMap() {
     this.validateAddForm = function() {
         //reset errors
         $(".validationError").css("display", "none");
-
+        $(".validationMapError").css("display", "none");
+        
         //check if floor field empty
         var isFloorEmptyError = false;
         $(":input[name='mapFloor[]']").each(function(i) {
@@ -239,6 +240,8 @@ function TableMap() {
             var mapFileArray = $(this).val().split(".");
             var ext = mapFileArray[mapFileArray.length - 1];
             if (ext != "jpg" && ext != "jpeg" && ext != "JPEG" && ext != "png") {
+                //display error
+                $(".validationMapError").css("display", "block");
                 isFileIncorrectError = true;
             }
             if ($(this).val() == "") {

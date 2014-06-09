@@ -1781,7 +1781,7 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     color: #000;
     border-radius: 6px;
 }
-.validationError, .validationFileError {display: none;}
+.validationError, .validationFileError, .validationMapError {display: none;}
 
 /* Page added tables */
 .header-dashboard .span3+.span6{width: 372px;text-align: right;}
@@ -2046,6 +2046,15 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     margin: 0px 45px 0px 0px;
     position: absolute;
     top: 32px;
+    right: 0;
+    color: #FF0000;
+    font-size: 11px;
+}
+
+#table-map-form .validationMapError {
+    margin: 2px;
+    position: absolute;
+    top: 50px;
     right: 0;
     color: #FF0000;
     font-size: 11px;
