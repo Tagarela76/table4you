@@ -6,7 +6,7 @@
         {% trans %}main.profile.buttonLabel{% endtrans %}
     </a>
     {% if adminRestaurantId %}
-        <a  href="{{ path('table_viewTableOrderList', {'restaurantId': adminRestaurantId}) }}">
+        <a  href="{{ path('table_viewCreateMap', {'restaurantId': adminRestaurantId}) }}">
             {% trans %}main.tableMap.buttonLabel{% endtrans %}
         </a>
     {% endif %}
