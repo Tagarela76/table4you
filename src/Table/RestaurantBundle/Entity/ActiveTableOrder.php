@@ -637,12 +637,13 @@ class ActiveTableOrder
      * @return string 
      */
     public function getTableNumber()
-    {
-        // We can get table number only if we have active table
-        if (is_null($this->getActiveTable())) {
-            return 0;
-        }
+    {       
         if (is_null($this->tableNumber)) {
+            $activeTable = $this->getActiveTable();
+            // We can get table number only if we have active table
+            if (is_null($activeTable)) {
+                return 0;
+            }
             $tableNumber = $this->getActiveTable()->getTableNumber();
             $this->setTableNumber($tableNumber);
             return $tableNumber;
