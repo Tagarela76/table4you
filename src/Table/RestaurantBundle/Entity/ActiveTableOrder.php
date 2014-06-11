@@ -641,7 +641,7 @@ class ActiveTableOrder
         if (is_null($this->tableNumber)) {
             $activeTable = $this->getActiveTable();
             // We can get table number only if we have active table
-            if (is_null($activeTable)) {
+            if (!isset($activeTable) || !is_object($activeTable)) {
                 return 0;
             }
             $tableNumber = $activeTable->getTableNumber();
