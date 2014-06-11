@@ -640,12 +640,9 @@ class ActiveTableOrder
     {
         // We can get table number only if we have active table
         if (is_null($this->getActiveTable())) {
-            return null;
+            return 0;
         }
         if (is_null($this->tableNumber)) {
-            if (!isset($this->getActiveTable())) {
-                return null;
-            }
             $tableNumber = $this->getActiveTable()->getTableNumber();
             $this->setTableNumber($tableNumber);
             return $tableNumber;
