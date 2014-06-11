@@ -644,7 +644,7 @@ class ActiveTableOrder
             if (is_null($activeTable)) {
                 return 0;
             }
-            $tableNumber = $this->getActiveTable()->getTableNumber();
+            $tableNumber = $activeTable->getTableNumber();
             $this->setTableNumber($tableNumber);
             return $tableNumber;
         } else {
