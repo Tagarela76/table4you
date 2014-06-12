@@ -1,20 +1,7 @@
-{% trans %}main.mail.tableOrder.notification.greeting{% endtrans %}, {{tableOrder.user.publicName}}!
-
- <br>
-
-{% trans %}main.mail.tableOrder.notification.youWant{% endtrans %} №{{tableOrder.tableNumber}} {% trans %}main.mail.tableOrder.notification.for{% endtrans %} {{tableOrder.peopleCount}} {% trans %}main.mail.tableOrder.notification.guest{% endtrans %}, {% trans %}main.mail.tableOrder.notification.restaurant{% endtrans %} {{tableOrder.restaurant.name}}, {{tableOrder.reserveDate|date('d-m-Y')}}, {{tableOrder.reserveTime|date('H:i')}}, {% trans %}main.mail.tableOrder.notification.rejectMsg{% endtrans %}. 
-
+{% trans %}main.mail.tableOrder.notification.cancelReserve{% endtrans %} №{{tableOrder.tableNumber}} {% trans %}main.mail.tableOrder.notification.for{% endtrans %} {{tableOrder.peopleCount}} {% trans %}main.mail.tableOrder.notification.guest{% endtrans %} {% trans %}main.mail.tableOrder.notification.in{% endtrans %} {{tableOrder.restaurant.name}} {{tableOrder.reserveDate|date('d-m-Y')}} {{tableOrder.reserveTime|date('H:i')}}. 
 <br>
-
-{% trans %}main.mail.tableOrder.notification.endText{% endtrans %}
-
+{% trans %}main.mail.tableOrder.notification.choiceAnotherTime{% endtrans %}. 
 <br>
-
-{% trans %}main.mail.tableOrder.notification.thankYouText{% endtrans %}
-
-<br><br>
-
-{% trans %}main.mail.tableOrder.notification.signature{% endtrans %}
-
+{% trans %}main.mail.tableOrder.notification.signature{% endtrans %}.
 <br>
 <img src="{{logo}}" />

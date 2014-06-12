@@ -42,6 +42,11 @@ main:
   mail:
     tableOrder:
       notification:
+        choiceAnotherTime: Choice another time
+        in: In
+        cancelReserve: Cancel reserve
+        successReserve: Success reserve
+        greatRest: Great Rest
         greeting: "Hello"
         tableOrder: "You have successfully reserved table"
         guest: "guest"

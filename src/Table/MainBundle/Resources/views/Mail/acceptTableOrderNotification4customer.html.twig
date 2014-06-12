@@ -1,24 +1,7 @@
-{% trans %}main.mail.tableOrder.notification.greeting{% endtrans %}, {{tableOrder.user.publicName}}!
-
+{% trans %}main.mail.tableOrder.notification.successReserve{% endtrans %}.
 <br>
-
-{% trans %}main.mail.tableOrder.notification.tableOrder{% endtrans %} №{{tableOrder.tableNumber}} {% trans %}main.mail.tableOrder.notification.for{% endtrans %} {{tableOrder.peopleCount}} {% trans %}main.mail.tableOrder.notification.guest{% endtrans %}, {% trans %}main.mail.tableOrder.notification.restaurant{% endtrans %} {{tableOrder.restaurant.name}}, {{tableOrder.reserveDate|date('d-m-Y')}}, {{tableOrder.reserveTime|date('H:i')}}!
-
+{{tableOrder.restaurant.name}} {% trans %}main.mail.tableOrder.notification.table{% endtrans %} №{{tableOrder.tableNumber}} {% trans %}main.mail.tableOrder.notification.for{% endtrans %} {{tableOrder.peopleCount}} {% trans %}main.mail.tableOrder.notification.guest{% endtrans %} {{tableOrder.reserveDate|date('d-m-Y')}} {{tableOrder.reserveTime|date('H:i')}}.
 <br>
-
-{% trans %}main.mail.tableOrder.notification.wishes{% endtrans %}
-
-<br><br>
-
-{% trans %}main.mail.tableOrder.notification.endText{% endtrans %}
-
-<br>
-
-{% trans %}main.mail.tableOrder.notification.thankYouText{% endtrans %}
-
-<br><br>
-
-{% trans %}main.mail.tableOrder.notification.signature{% endtrans %}
-
+{% trans %}main.mail.tableOrder.notification.greatRest{% endtrans %}.
 <br>
 <img src="{{logo}}" />
