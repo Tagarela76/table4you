@@ -31,7 +31,8 @@ class CustomMailer implements MailerInterface
             'confirmationUrl' =>  $url,
             'siteName' => $this->parameters['site_name']
         )); 
-        $this->sendEmailMessage($rendered, $this->parameters['from_email']['confirmation'], $user->getEmail());
+        $fromEmail = array('info@table4you.ru' => 'Table4you');
+        $this->sendEmailMessage($rendered, $fromEmail,/*$this->parameters['from_email']['confirmation'],*/ $user->getEmail());
     }
 
     public function sendResettingEmailMessage(UserInterface $user)
