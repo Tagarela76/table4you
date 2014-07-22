@@ -326,10 +326,8 @@ class DefaultController extends Controller
                 // set User Data
                 $activeTableOrder->setUser($user);
  
-                // set status 0
-                if (is_null($activeTableOrder->getStatus())) {
-                    $activeTableOrder->setStatus(0);
-                }
+                // Set Status (Accept)
+                $activeTableOrder->setStatus(ActiveTableOrder::ORDER_ACCEPT_STATUS_CODE);
 
                 // init active table
                 $activeTable = $this->getActiveTableManager()->findOneById($activeTableOrder->getActiveTable());
@@ -339,6 +337,11 @@ class DefaultController extends Controller
                 $em->persist($activeTableOrder);
                 $em->flush();
                 $successReserve = true;
+                // Send confirm messages
+                //To customer
+                $this->getActiveTableOrderManager()->sendAcceptTableOrderNotification4customer($activeTableOrder);
+                // To admin
+                $this->getActiveTableOrderManager()->sendAcceptTableOrderNotification4admin($activeTableOrder);
             }
         } 
         // Booked Tables (empty array for first init)

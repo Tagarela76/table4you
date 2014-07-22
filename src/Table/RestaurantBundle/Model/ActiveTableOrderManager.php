@@ -219,6 +219,95 @@ class ActiveTableOrderManager
     }
     
     /**
+     * Send accept order  notifiction to customer
+     * 
+     * @param Table\RestaurantBundle\Entity\ActiveTableOrder $activeTableOrder
+     */
+    public function sendAcceptTableOrderNotification4customer($activeTableOrder)
+    {
+        // get User Mail
+        $userEmail = $activeTableOrder->getUser()->getEmail();
+        // get subject
+        $trans = $this->container->get('translator');
+        $subject = $trans->trans('main.mail.tableOrder.notification.accept.subject', array(), 'ApplicationSonataAdminBundle');
+
+        // send email notification
+        if ($activeTableOrder->getIsEmail()) {
+            // add logo
+            $logo = $this->container->getParameter('site_url') . 'uploads/t4ylogo.png';
+            $message = \Swift_Message::newInstance()
+                    ->setSubject($subject)
+                    ->setFrom("noreply@table4you.com")
+                    ->setTo($userEmail)
+                    ->setBody(
+                    $this->container->get('templating')->render(
+                            'TableMainBundle:Mail:acceptTableOrderNotification4customer.html.twig', array(
+                        'tableOrder' => $activeTableOrder,
+                        'logo' => $logo
+                            )
+                    ), 'text/html', 'utf-8'
+            );
+            $this->container->get('mailer')->send($message);
+        }
+
+        // format target email (sent sms) 
+        if (!is_null($phone = $activeTableOrder->getUser()->getPhone())) {
+            if ($activeTableOrder->getIsSms()) {
+                // get sms text 
+                $text = $this->container->get('templating')->render(
+                            'TableMainBundle:Mail:acceptTableOrderSMS4customer.html.twig', array(
+                                'tableOrder' => $activeTableOrder
+                            )
+                );
+                // send sms
+                $response = $this->container->get('sms_manager')->sendMessage($phone, $text);
+            }
+        }
+    }
+    
+    /**
+     * Send accept order notifiction to admin
+     * 
+     * @param Table\RestaurantBundle\Entity\ActiveTableOrder $activeTableOrder
+     */
+    public function sendAcceptTableOrderNotification4admin($activeTableOrder)
+    {
+        // get receiver Mail
+        $adminEmail = $activeTableOrder->getRestaurant()->getEmail();
+        // get subject
+        $trans = $this->container->get('translator');
+        $subject = $trans->trans('main.mail.tableOrder.notification.accept.subject', array(), 'ApplicationSonataAdminBundle');
+
+        // send email notification
+        // add logo
+        $logo = $this->container->getParameter('site_url') . 'uploads/t4ylogo.png';
+        $message = \Swift_Message::newInstance()
+                ->setSubject($subject)
+                ->setFrom("noreply@table4you.com")
+                ->setTo($adminEmail)
+                ->setBody(
+                $this->container->get('templating')->render(
+                        'TableMainBundle:Mail:acceptTableOrderNotification4admin.html.twig', array(
+                    'tableOrder' => $activeTableOrder,
+                    'logo' => $logo
+                        )
+                ), 'text/html', 'utf-8'
+        );
+        $this->container->get('mailer')->send($message);
+
+        if (!is_null($phone = $activeTableOrder->getRestaurant()->getPhone())) {
+            // get sms text 
+            $text = $this->container->get('templating')->render(
+                        'TableMainBundle:Mail:acceptTableOrderSMS4admin.html.twig', array(
+                            'tableOrder' => $activeTableOrder
+                        )
+            );
+            // send sms
+            $response = $this->container->get('sms_manager')->sendMessage($phone, $text);
+        }
+    }
+    
+    /**
      * Send sms notifiction to new user(credentials
      * 
      * @param type $user

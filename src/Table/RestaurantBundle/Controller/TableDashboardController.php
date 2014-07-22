@@ -825,14 +825,18 @@ class TableDashboardController extends Controller
                     $activeTableOrder->setUser($user);
                     // set Table Data
                     $activeTableOrder->setActiveTable($activeTable);
-                    // set status 0
-                    if (is_null($activeTableOrder->getStatus())) {
-                        $activeTableOrder->setStatus(0);
-                    }
+                    // Set Status (Accept)
+                    $activeTableOrder->setStatus(ActiveTableOrder::ORDER_ACCEPT_STATUS_CODE);
 
                     $em = $this->getDoctrine()->getManager();
                     $em->persist($activeTableOrder);
                     $em->flush();
+                    // Send confirm messages
+                    //To customer
+                    $this->getActiveTableOrderManager()->sendAcceptTableOrderNotification4customer($activeTableOrder);
+                    // To admin
+                    $this->getActiveTableOrderManager()->sendAcceptTableOrderNotification4admin($activeTableOrder);
+                    
                     return $this->render('TableRestaurantBundle:TableDashboard:table.order.success.html.twig'); 
                 }
             }
