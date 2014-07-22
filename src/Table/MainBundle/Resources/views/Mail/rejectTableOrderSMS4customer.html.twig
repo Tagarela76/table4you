@@ -1,3 +1,8 @@
-{% trans %}main.mail.tableOrder.notification.cancelReserve{% endtrans %} №{{tableOrder.tableNumber}} {% trans %}main.mail.tableOrder.notification.for{% endtrans %} {{tableOrder.peopleCount}} {% trans %}main.mail.tableOrder.notification.guest{% endtrans %} {% trans %}main.mail.tableOrder.notification.in{% endtrans %} {{tableOrder.restaurant.name}} {{tableOrder.reserveDate|date('d-m-Y')}} {{tableOrder.reserveTime|date('H:i')}}. 
+{% trans %}main.mail.tableOrder.notification.cancelReserve{% endtrans %} 
+№{{tableOrder.tableNumber}} {% trans %}main.mail.tableOrder.notification.for{% endtrans %} 
+{{tableOrder.peopleCount}} {% trans %}main.mail.tableOrder.notification.guest{% endtrans %} 
+{% trans %}main.mail.tableOrder.notification.in{% endtrans %} {{tableOrder.restaurant.name}},
+{{tableOrder.restaurant.city.name}}, {{tableOrder.restaurant.street}}, {tableOrder.restaurant.house}},
+{{tableOrder.reserveDate|date('d-m-Y')}} {{tableOrder.reserveTime|date('H:i')}}. 
 {% trans %}main.mail.tableOrder.notification.choiceAnotherTime{% endtrans %}. 
 {% trans %}main.mail.tableOrder.notification.signature{% endtrans %}.
