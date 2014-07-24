@@ -3,7 +3,7 @@
 {{tableOrder.peopleCount}} {% trans %}main.mail.tableOrder.notification.guest{% endtrans %}
 {% trans %}main.mail.tableOrder.notification.in{% endtrans %} 
 {{tableOrder.restaurant.name}},
-{{tableOrder.restaurant.city.name}}, {{tableOrder.restaurant.street}}, {tableOrder.restaurant.house}},
+{{tableOrder.restaurant.city.name}}, {{tableOrder.restaurant.street}}, {{tableOrder.restaurant.house}},
 {{tableOrder.reserveDate|date('d-m-Y')}} {{tableOrder.reserveTime|date('H:i')}}. 
 <br>
 {% trans %}main.mail.tableOrder.notification.choiceAnotherTime{% endtrans %}. 
