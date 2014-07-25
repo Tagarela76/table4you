@@ -113,10 +113,8 @@ class ActiveTableOrderController extends Controller
             // add Order
             // set User Data
             $activeTableOrder->setUser($user);
-            // set status 0
-            if (is_null($activeTableOrder->getStatus())) {
-                $activeTableOrder->setStatus(0);
-            }  
+            // Set Status (Accept)
+            $activeTableOrder->setStatus(ActiveTableOrder::ORDER_ACCEPT_STATUS_CODE);  
             $activeTableOrder->setActiveTable($activeTable);
             
             $em = $this->getDoctrine()->getManager();
@@ -124,6 +122,12 @@ class ActiveTableOrderController extends Controller
             $em->flush();
             $response = array();
             $response['success'] = true;
+            // Send confirm messages
+            //To customer
+            $this->getActiveTableOrderManager()->sendAcceptTableOrderNotification4customer($activeTableOrder);
+            // To admin
+            $this->getActiveTableOrderManager()->sendAcceptTableOrderNotification4admin($activeTableOrder);
+                
             return $response;
         }
 
