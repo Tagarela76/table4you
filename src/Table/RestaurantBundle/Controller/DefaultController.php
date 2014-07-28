@@ -322,7 +322,7 @@ class DefaultController extends Controller
                 // add Order
                 // format reserve date
                 $activeTableOrder->setReserveDate(new \DateTime($activeTableOrder->getReserveDate(), new \DateTimeZone(ActiveTableOrder::RESERVE_TIMEZONE)));
-                
+
                 // set User Data
                 $activeTableOrder->setUser($user);
  

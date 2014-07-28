@@ -12,6 +12,13 @@
                 success: function(response) { 
                     $("#registrationPreloader").hide();
                     $("#modal-registration").html(response);
+                    // Get captcha img id
+                    var captchaImgId = $('#fos-registration-form div.captcha-img img').attr("id");
+                    // Reload captcha pprogrammatically
+                    var func = "reload_" +captchaImgId;
+                    eval( func )();
+                    // format phone number
+                    $("#fos_user_registration_form_phone").mask("+79999999999");
                 }
             });
             return false;
