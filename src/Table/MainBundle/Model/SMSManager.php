@@ -8,12 +8,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SMSManager
 {
-   // const AUTH_USERNAME = "alla.kurochcka@yandex.ru";
-   // const AUTH_PASSWORD = "p6aW$^JiS%&K";
-    const AUTH_USERNAME = "dmitri.vd@gmail.com";
-    const AUTH_PASSWORD = "dmitri.vd";
-    const AUTH_URL = "http://atompark.com/members/sms/xml.php";
-    const SENDER = "table4you";
+    const SENDER = 'Table4You';
+    const LOGIN = 'Table4You';
+    const PASSWORD = 'pas4table4you';
     
     /**
      * @var \Symfony\Component\DependencyInjection\ContainerInterface
@@ -24,7 +21,11 @@ class SMSManager
      * @var \Doctrine\Common\Persistence\ObjectManager
      */
     private $em;
-
+    
+    private $login;
+    private $psw;
+    private $hash;
+    
     /**
      * @return \Symfony\Component\DependencyInjection\ContainerInterface
      */
@@ -39,66 +40,35 @@ class SMSManager
      *
      * @return void
      */
-    public function __construct(ObjectManager $em, ContainerInterface $container)
+    public function __construct(ObjectManager $em, ContainerInterface $container, $login = self::LOGIN, $paswd = self::PASSWORD)
     {
         $this->em = $em;
         $this->container = $container;
+        $this->login = $login;
+        $this->psw = $paswd;
+        $this->hash = md5($paswd);
     }
     
-    /**
-     * 
-     * Format xml for rewuest
-     * 
-     * @param string $phone
-     * 
-     * @return string
-     */
-    private function _getXmlRequest($phone, $message) 
+   
+   public function makeRequest($url)
     {
-        // generate sms id
-        $smsId = rand(5, 15);
-        $response = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>   
-                    <SMS>
-                    <operations> 
-                    <operation>SEND</operation>
-                    </operations>
-                    <authentification>   
-                    <username>".self::AUTH_USERNAME."</username> 
-                    <password><![CDATA[".self::AUTH_PASSWORD."]]></password>    
-                    </authentification>  
-                    <message>
-                    <sender>".self::SENDER."</sender>   
-                    <text>".$message."</text>  
-                    </message>   
-                    <numbers>
-                    <number messageID=\"".$smsId."\">{$phone}</number>
-                    </numbers>   
-                    </SMS>"; 
-            
-        return $response;            
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        $out = curl_exec($curl);
+        curl_close($curl);
+        
+        return $out;
     }
     
     public function sendMessage($phone, $message) 
     {
-        $xmlRequest = $this->_getXmlRequest($phone, $message);
+         $url = 'http://smsc.ru/sys/send.php?'
+                . 'login=' . $this->login
+                . '&psw=' . $this->hash
+                . '&phones=' . $phone
+                . '&mes=' . $message;
         
-        $curl = curl_init();
-        // curl options for request
-        $curlOptions = array(  
-            CURLOPT_URL => self::AUTH_URL, 
-            CURLOPT_FOLLOWLOCATION => false,  
-            CURLOPT_POST => true, 
-            CURLOPT_HEADER => false,  
-            CURLOPT_RETURNTRANSFER => true,   
-            CURLOPT_CONNECTTIMEOUT => 15, 
-            CURLOPT_TIMEOUT => 100,   
-            CURLOPT_POSTFIELDS => array('XML' => $xmlRequest)
-        ); 
-        curl_setopt_array($curl, $curlOptions);
-        if(false === ($result = curl_exec($curl))) {   
-            throw new Exception('Http request failed');
-        }  
-//var_dump($result); die();
-        curl_close($curl); 
+        return $this->makeRequest($url); 
     }
 }
