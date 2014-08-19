@@ -57,18 +57,22 @@ class SMSManager
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         $out = curl_exec($curl);
         curl_close($curl);
-        
+        echo $out;
         return $out;
     }
     
     public function sendMessage($phone, $message) 
     {
-         $url = 'http://smsc.ru/sys/send.php?'
+        $message =  iconv("UTF-8", "windows-1251", $message);
+
+        $message = urlencode($message);
+        $url = 'http://smsc.ru/sys/send.php?'
                 . 'login=' . $this->login
                 . '&psw=' . $this->hash
                 . '&phones=' . $phone
                 . '&mes=' . $message;
-        
+
         return $this->makeRequest($url); 
     }
 }
+
