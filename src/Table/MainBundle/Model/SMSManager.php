@@ -57,7 +57,7 @@ class SMSManager
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         $out = curl_exec($curl);
         curl_close($curl);
-        echo $out;
+        
         return $out;
     }
     
