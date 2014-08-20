@@ -70,6 +70,7 @@ class SMSManager
                 . 'login=' . $this->login
                 . '&psw=' . $this->hash
                 . '&phones=' . $phone
+                . '&sender=' .self::SENDER
                 . '&mes=' . $message;
 
         return $this->makeRequest($url); 
