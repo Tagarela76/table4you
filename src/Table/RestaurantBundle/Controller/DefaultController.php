@@ -288,7 +288,8 @@ class DefaultController extends Controller
             
             // Check if table number exist
             // Get Active Tables by map id and table number
-            $tableNumber = $request->request->get('activeTableOrderForm')['tableNumber'];
+            $tableNumber = $request->request->get('activeTableOrderForm');
+            $tableNumber = $tableNumber['tableNumber'];
             $abstractActiveTableList = $this->getActiveTableManager()->findByTableMapAndNumber($tableMapObjId, $tableNumber);
             if (empty($abstractActiveTableList)) {
                 // Add error
