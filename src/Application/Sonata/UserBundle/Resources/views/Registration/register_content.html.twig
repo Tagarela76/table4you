@@ -8,8 +8,11 @@
 {% endfor %}
 <form novalidate id="fos-registration-form" action="{{ path('fos_user_registration_register') }}" {{ form_enctype(formReg) }} method="POST" class="fos_user_registration_register">
     <div id="fos_user_registration_form">
-        {{ form_start(formReg) }}
-        {{ form_errors(formReg) }}
+
+        <div>
+                {{ form_errors(formReg) }}
+                {{ form_start(formReg) }}
+        </div>
 
         <div>
             {{ form_widget(formReg.username) }}

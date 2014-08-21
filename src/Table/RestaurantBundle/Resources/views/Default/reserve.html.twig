@@ -117,21 +117,21 @@
                         <div class="span12">
                             <div class="span3 label-font-size_modal reserve-table-number">
                                 {{ form_label(form.tableNumber) }}
-                                {{ form_errors(form.tableNumber) }}
                                 {% if form.tableNumber.vars.errors|length %}
                                     {{ form_widget(form.tableNumber, {'attr':{'class':'error-form-reserve'} }) }}
                                 {%  else %}
                                     {{ form_widget(form.tableNumber) }}
                                 {% endif %}
+                                {{ form_errors(form.tableNumber) }}
                             </div>
                             <div class="span3 label-font-size_modal reserve-amount-persons">
                                 {{ form_label(form.peopleCount) }}
-                                {{ form_errors(form.peopleCount) }}
                                 {% if form.peopleCount.vars.errors|length %}
                                     {{ form_widget(form.peopleCount, {'attr':{'class':'error-form-reserve'} }) }}
                                 {%  else %}
                                     {{ form_widget(form.peopleCount) }}
                                 {% endif %}
+                                {{ form_errors(form.peopleCount) }}
                             </div>
                         </div>
                     </div>

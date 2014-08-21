@@ -13,7 +13,7 @@
       $alert.addClass("alert-" + options.type);
     }
     if (options.allow_dismiss) {
-      $alert.append("<div class=\"registration-confirmation-title\"><span class=\"close\" data-dismiss=\"alert\">&times;</span></div>");
+      $alert.append("<div class=\"registration-confirmation-title\"><span class=\"close\" data-dismiss=\"alert\"></span></div>");
     }
     $alert.append(message);
     if (options.top_offset) {
