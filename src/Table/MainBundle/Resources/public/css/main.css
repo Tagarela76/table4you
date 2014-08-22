@@ -340,6 +340,7 @@ input:focus{outline: 0 none}
     -o-border-radius: 5px 5px 5px 5px;
     border-radius: 5px 5px 5px 5px;
 }
+#register.registration-check-email{margin-left: -409px!important;}
 .modal-registration-title, .modal-login-title, .modal-header{
     background: #e4e3e2;
     border: 0px;
@@ -380,7 +381,7 @@ input:focus{outline: 0 none}
 .modal-registration #fos_user_registration_form div.password-registration{position: relative;}
 .modal-registration #fos_user_registration_form div+div+div+div.password-registration+div,
 .modal-registration #fos_user_registration_form div.captcha-img{margin-top: 0px;}
-.modal-registration #fos_user_registration_form div ul li,
+.modal-registration #fos_user_registration_form ul li,
 .error-text-login,
 .sonata-user-edit-profile .user-edit-profile div ul li,
 .table-order-form .container-fluid ul li{
@@ -568,6 +569,7 @@ body .row-fluid .reserver-texterea{margin-left: 5px;}
     margin: 0px;
     height: 100%;
     position: relative;
+    overflow: hidden;
 }
 .password-registration #fos_user_registration_form_plainPassword div+div{
     width: 100%;
@@ -606,7 +608,7 @@ body .row-fluid .reserver-texterea{margin-left: 5px;}
     margin-left: 25px;
 }
 div.boxChecked {background: url(../images/checkbox-sprite.png) no-repeat 0 -2px;}
-div.boxUnchecked {background: url(../images/checkbox-sprite.png) no-repeat 0 -26px;float: left;}
+div.boxUnchecked {background: url(../images/checkbox-sprite.png) no-repeat 0 -26px;}
 div.boxChecked input, div.boxUnchecked input {
     cursor: pointer;
     margin: 0px;
@@ -668,7 +670,8 @@ div.boxChecked input, div.boxUnchecked input {
 .modal-registration #fos_user_registration_form div label.check-passwords {
     display: none;
     position: absolute;
-    top: 99px;
+    top: auto;
+    bottom: 6px;
     right: 5px;
     width: 12px;
     height: 13px;
@@ -874,9 +877,10 @@ input#tableOrderForm_peopleCount:focus{
 .table-order-form-container  .table-order-form .choose-zone label {
     font-size: 16px;
 }
-#table-order-form-container  .table-order-form .label-font-size_modal label+ul,
-.table-order-form-container  .table-order-form .label-font-size_modal label+ul { 
+#table-order-form-container  .table-order-form .label-font-size_modal ul,
+.table-order-form-container  .table-order-form .label-font-size_modal ul {
     margin: 0;
+    clear: both;
 }
 #tableOrderForm_reserveTime{margin-top: -13px;}
 #activeTableOrder4AdminForm_reserveTime{margin-top: -10px;}
@@ -960,11 +964,16 @@ input#tableOrderForm_peopleCount:focus{
     position: relative;
     z-index: 10;
 }
+.order-search .calendar-inp-field input{
+    padding-right: 35px;
+    width: 175px !important;
+}
 .calendar-inp-field img{
     position: absolute;
     right: 12px;
-    top: 9px;
+    top: 8px;
     z-index: 100;
+    cursor: pointer;
 }    
 .ord-form-search{
     margin-left: 5px;
@@ -1366,7 +1375,8 @@ input#tableOrderForm_peopleCount:focus{
 .wrap_search_categories .serch-text{width: 289px;}
 .wrap_search_categories .multiselect-container{
     margin-top: 2px;
-    width: 100%;
+    /*width: 100%;*/
+    min-width: 174px;
     padding: 3px 0px 10px;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.36);
     border: 0;
@@ -1423,11 +1433,12 @@ input#tableOrderForm_peopleCount:focus{
 }
 .wrap_search_categories input[type="text"]:focus{box-shadow: none;}
 .wrap_search_categories .multiselect-container .checkbox {
-    width: 153px;
-    /*height: 26px;*/
+    /*width: 153px;
+    height: 26px;*/
     display: block;
     position: relative;
-
+    padding-right: 19px;
+    text-align: left;
    }
 .wrap_search_categories .multiselect-container .checkbox  input{display: none;}
 
@@ -1762,7 +1773,7 @@ input#tableOrderForm_peopleCount:focus{
 }
 .modal-backdrop+.modal-backdrop{width: 0px; height:0px;}
 .modal-registration .alert{
-    width: 275px;
+    width: 746px;
     text-align: center;
 }
 body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-widget-header .ui-state-highlight,
@@ -1904,7 +1915,7 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
 .btn-file input { position: absolute; top: 0; right: 0; margin: 0; opacity: 0; filter: alpha(opacity=0);
     transform: translate(-300px, 0) scale(4); font-size: 23px; direction: ltr; cursor: pointer; }
 .files-download{
-    width: 366px;
+    width: 362px;
     height: 18px;
     float: left;
     padding: 6px 6px;
@@ -1969,7 +1980,7 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
 #tableTypeContainer .modal-body .row-fluid .number-tables input.error-form,
 #table-map-form .specify-floor-room input.error-form,
 .editTableMapPopup .modal-body .span4 .error-form,
-#table-order-form .error-form-reserve, .table-order-form .error-form-reserve {
+#table-order-form .error-form-reserve, #restaurantList_main .table-order-form .error-form-reserve {
     border: 1px solid #FF0000;
     box-shadow: none;
 }
@@ -2028,7 +2039,7 @@ body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-
     font-family: Arial;
     border: 0;
     box-shadow: none;
-    margin-right: 41px;
+    margin-right: 46px;
     -moz-border-radius: 7px 7px 7px 7px;
     -webkit-border-radius: 7px 7px 7px 7px;
     -o-border-radius: 7px 7px 7px 7px;
@@ -2917,6 +2928,7 @@ body .registration-confirmation .close{
     height: 14px;
     margin-top: 1px;
     opacity: 0.9;
+    right: 0;
 }
 body .registration-confirmation .close:hover{
     opacity: 0.4;

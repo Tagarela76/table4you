@@ -2,4 +2,9 @@
 
 {% block content %}
     <div class="alert">{{ 'registration.check_email'|trans({'%email%': user.email}, 'FOSUserBundle') }}</div>
+    <script>
+        $(document).ready(function() {
+            $('.alert').parents('#register').addClass('registration-check-email').css('width', '816');
+        });
+    </script>
 {% endblock content %}
