@@ -10,7 +10,7 @@ form:
     username: 'Имя:'
 registration:
     check_email: На Ваш email отправлено письмо для подтверждения регистрации.
-    confirmed: Спасибо, что выбрали наш сайт. Ваш акаунт успешно зарегистрирован.
+    confirmed: <div class='alert'>Спасибо, что выбрали наш сайт. Ваш аккаунт успешно зарегистрирован.</div>
     email:
         subject: Добро пожаловать %username%!
         message: |
