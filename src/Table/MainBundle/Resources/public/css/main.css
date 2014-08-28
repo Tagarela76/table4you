@@ -2949,4 +2949,5 @@ body .registration-confirmation .registration-confirmation-title{
     border-bottom: 1px solid #eee;
 }
 .alert{text-align: left;}
+body .registration-confirmation .alert{font-size: 14px;}
 .modal-reserve .modal-body .table-order-form-container>.alert{margin: -10px 10px 20px;}
