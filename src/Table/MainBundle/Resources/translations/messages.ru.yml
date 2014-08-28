@@ -70,7 +70,7 @@ main:
         guestReject: "но к сожалению, отказался от посещения ресторана"
         thankYou4understanding: "Спасибо за понимание"
         pleaseAcceptOrder: "Подтвердите или предложите альтернативу"
-        reserveRequest: "Запрос бронирования"
+        reserveRequest: "Стол зарезервирован"
         reserveReject: "Отказ от бронирования"
     registration:
       notification:

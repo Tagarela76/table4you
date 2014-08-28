@@ -63,36 +63,40 @@ class RestaurantAdmin extends Admin
         // additional restauratn photo
         // set for photos restaurant
         foreach ($object->getAdditionalPhotos() as $additionalPhoto) {
-            $imagePath = $helper->asset($additionalPhoto, 'file');
-            // check if file exist
-            if (file_exists($imagePath)) {
-                // get thumb image name
-                $thumbImage = $additionalPhoto->getThumbFileName(); 
-                if (!is_null($thumbImage)) {
-                    $thumbPath = str_replace($additionalPhoto->getFileName(), $thumbImage, $imagePath);
+            if (!is_null($additionalPhoto->getFile())) {
+                $imagePath = $helper->asset($additionalPhoto, 'file');
+                // check if file exist
+                if (file_exists($imagePath)) {
+                    // get thumb image name
+                    $thumbImage = $additionalPhoto->getThumbFileName();
+                    if (!is_null($thumbImage)) {
+                        $thumbPath = str_replace($additionalPhoto->getFileName(), $thumbImage, $imagePath);
 
-                    // create thumbnail
-                    $thumb = new \abeautifulsite\SimpleImage(getcwd() . $imagePath);
-                    $thumb->best_fit(RestaurantAdditionalPhoto::THUMB_HEIGHT, RestaurantAdditionalPhoto::THUMB_WIDTH)->save(getcwd() . $thumbPath);
+                        // create thumbnail
+                        $thumb = new \abeautifulsite\SimpleImage(getcwd() . $imagePath);
+                        $thumb->best_fit(RestaurantAdditionalPhoto::THUMB_HEIGHT, RestaurantAdditionalPhoto::THUMB_WIDTH)->save(getcwd() . $thumbPath);
+                    }
                 }
             }
         }
         // menu photos
         foreach ($object->getAdditionalMenuPhotos() as $menuPhoto) {
-            $imagePath = $helper->asset($menuPhoto, 'file');
-            // check if file exist
-            if (file_exists($imagePath)) {
-                // get thumb image name
-                $thumbImage = $menuPhoto->getThumbFileName(); 
-                if (!is_null($thumbImage)) {
-                    $thumbPath = str_replace($menuPhoto->getFileName(), $thumbImage, $imagePath);
+            if (!is_null($additionalPhoto->getFile())) {
+                $imagePath = $helper->asset($menuPhoto, 'file');
+                // check if file exist
+                if (file_exists($imagePath)) {
+                    // get thumb image name
+                    $thumbImage = $menuPhoto->getThumbFileName();
+                    if (!is_null($thumbImage)) {
+                        $thumbPath = str_replace($menuPhoto->getFileName(), $thumbImage, $imagePath);
 
-                    // create thumbnail
-                    $thumb = new \abeautifulsite\SimpleImage(getcwd() . $imagePath);
-                    $thumb->best_fit(RestaurantMenuPhoto::THUMB_HEIGHT, RestaurantMenuPhoto::THUMB_WIDTH)->save(getcwd() . $thumbPath);
+                        // create thumbnail
+                        $thumb = new \abeautifulsite\SimpleImage(getcwd() . $imagePath);
+                        $thumb->best_fit(RestaurantMenuPhoto::THUMB_HEIGHT, RestaurantMenuPhoto::THUMB_WIDTH)->save(getcwd() . $thumbPath);
+                    }
                 }
             }
-        } 
+        }
     }
     
     /**
