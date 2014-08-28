@@ -1774,7 +1774,7 @@ input#tableOrderForm_peopleCount:focus{
 .modal-backdrop+.modal-backdrop{width: 0px; height:0px;}
 .modal-registration .alert{
     width: 746px;
-    text-align: center;
+    text-align: left;
 }
 body .ui-state-highlight, body .ui-widget-content .ui-state-highlight, body .ui-widget-header .ui-state-highlight,
 .modal-body #table-order-form .ui-state-highlight, 
@@ -2919,7 +2919,7 @@ body .registration-confirmation{
     color: #000;
     text-shadow: none;
     text-align: center;
-    padding: 0 0 15px 0;
+    padding: 0;
 }
 body .registration-confirmation .close{
     background: url(../images/close-modal.png) no-repeat;
@@ -2947,5 +2947,6 @@ body .registration-confirmation .registration-confirmation-title{
     padding-bottom: 16px;
     padding: 9px 9px;
     border-bottom: 1px solid #eee;
-    margin-bottom: 15px;
 }
+.alert{text-align: left;}
+.modal-reserve .modal-body .table-order-form-container>.alert{margin: -10px 10px 20px;}
