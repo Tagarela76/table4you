@@ -45,7 +45,7 @@ main:
         in: в   
         cancelReserve: Отмена резерва стола  
         successReserve: Cтол успешно зарезервирован
-        greatRest: Приятного отдыха Table4you
+        greatRest: Приятного отдыха, Table4you
         greeting: "Здравствуйте"
         tableOrder: "Вами был успешно забронирован стол"
         guest: "гост(я,ей)"
