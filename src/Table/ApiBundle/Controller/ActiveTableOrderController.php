@@ -51,7 +51,7 @@ class ActiveTableOrderController extends Controller
         $reserveTime = $this->getRequest()->request->get('reserveTime');
         $reserveDate = $this->getRequest()->request->get('reserveDate');
         // get reserve date and time
-        $reserveDateTime = new \DateTime($reserveDate . " " . $reserveTime, new \DateTimeZone(ActiveTableOrder::RESERVE_TIMEZONE));
+        $reserveDateTime = new \DateTime($reserveDate . " " . $reserveTime);
         
         // init active table
         $activeTable = $this->getActiveTableManager()->findOneById($this->getRequest()->request->get('activeTable'));
