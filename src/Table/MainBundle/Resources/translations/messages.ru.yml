@@ -75,7 +75,7 @@ main:
         reserveReject: "Отказ от бронирования"
     registration:
       notification:
-          greeting: Благодарим Вас за регистрацию на нашем сервисе
+          greeting: Благодарим Вас за регистрацию на нашем сервисе, теперь вы можете резервировать столы он-лайн www.table4you.ru или через приложение в AppStore.
           yourData: "Ваши данные для входа на сайт:"
           login: логин
           password: пароль
