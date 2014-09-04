@@ -124,7 +124,7 @@
             </option>
         </constraint>
         
-        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+        <!--<constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">phone</option>
             <option name="message">fos_user.phone.already_used</option>
             <option name="groups">
@@ -132,7 +132,7 @@
                 <value>rest</value>
                 <value>Profile</value>
             </option>
-        </constraint>
+        </constraint>-->
         
         <property name="phone">
             <constraint name="Regex">
