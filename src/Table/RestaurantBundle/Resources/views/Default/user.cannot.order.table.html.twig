@@ -1,0 +1,23 @@
+{% extends "TableMainBundle::layout4modal.html.twig" %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(function() {
+            setTimeout(function () { 
+                location.reload();
+            }, 5000);
+        });
+    </script>
+{% endblock %}      
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+<div class="alert">
+    {% trans %}main.order.notification.dear{% endtrans %} {{user.publicName}}, 
+    {% trans %}main.order.notification.userCannotOrderTable{% endtrans %}
+</div>
+{% endblock content %}
+
+{# empty Twig template #}

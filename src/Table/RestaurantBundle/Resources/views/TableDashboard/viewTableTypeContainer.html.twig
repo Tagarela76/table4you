@@ -1,0 +1,33 @@
+{% if is_granted('ROLE_SUPER_ADMIN') %}
+    <div class="row-fluid">
+        <div class="span12">
+            <a href="{{ path('table_viewTableTypeList')}}" class="add-table-but">
+                {% trans %}main.tableMap.tableList.addTable{% endtrans %}
+            </a>
+        </div>    
+    </div>
+{% endif %}
+{% for tableType in tableTypeList %}  
+    {% if tableType.peopleCount !=0 %}
+        <div class="row-fluid">
+            <div class="span4">
+                {% if tableType.file is not null %}
+                    <img tabletypeid="{{tableType.id}}" class="table-type-draggable" src="{{baseUrl}}{{ vich_uploader_asset(tableType, 'file') }}" alt="{{ tableType.peopleCount }}" />
+                {% endif %}
+            </div>
+            <div class="span6">
+                {% trans %}main.tableMap.tableList.tableOn{% endtrans %} {{ tableType.peopleCount }}
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}
+<script>
+    
+    $(function() {
+        
+        $(".table-type-draggable").draggable({
+            helper: "clone",
+            cursor: 'move'
+        });
+    });    
+</script>

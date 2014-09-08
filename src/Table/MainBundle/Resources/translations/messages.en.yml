@@ -1,3 +1,86 @@
 main:
-  register: Registration
-  registerFormTitle: Registration
+  labels:
+    kitchen: 'Kitchen:'
+    address: 'Address:'
+    scedule: 'Scedule:'
+    additionalServices: 'Additional Services:'
+    category: 'Тип заведения:'
+    search:
+      kitchen: 'Kitchen'
+      category: 'Category'
+    photos: 
+        additional: Photo Gallery
+        menu: Menu photos
+    description: Description    
+    news: News
+  register:
+    buttonLabel: Registration
+    form:
+      title: Registration
+  login: 
+    buttonLabel: Login
+    form:
+      title: Authentication
+  profile:
+    buttonLabel: Profile
+  order:
+    button: Reserve
+    form:
+      title: Table Reserve
+    buttonLabel: Order history  
+  map:
+    form:
+      title: Заведение на карте    
+  auth:
+    text: Auth
+  tableMap:
+    buttonLabel: My restaurant
+  register:
+    text: Register
+  please: please
+  or: or
+  mail:
+    tableOrder:
+      notification:
+        choiceAnotherTime: Choice another time
+        in: In
+        cancelReserve: Cancel reserve
+        successReserve: Success reserve
+        greatRest: Great Rest
+        greeting: "Hello"
+        tableOrder: "You have successfully reserved table"
+        guest: "guest"
+        for: "for"
+        restaurant: "Restaurant"
+        wishes: "wishes"
+        endText: "This notification was formated automatically and no need to reply it."
+        thankYouText: "Thank you for reserve"
+        signature: "Sincerely, tema Table4U"
+        youWant: "you want reserve table"
+        rejectMsg: "Sorry, but you cannot reserve this table"
+        rejectSms: "Sorry, but you cannot reserve this table"
+        suggestionSms: "Please choice another table"
+        table: "table"
+        reserve: "reserve"
+        reserveConfirm: "Please confirm reserve"
+        reserveWarning: "Warning"
+        autoMsg4admin: "This notification was formated automatically and no need to reply it."
+        wantReserve: "want resevre"
+        guestInYourRestaurant: "Guest in your restaurant"
+        successfullyReserve: "reserve successfully"
+        guestReject: "guest reject"
+        thankYou4understanding: "Thank you for understanding"
+        pleaseAcceptOrder: "Please accept/reject order"
+        reserveRequest: "Reserve Request"
+        reserveReject: "Reject reserve"
+  breadcrumbs:
+      label:
+          home: Home
+          restaurant: Restaurant
+          profile: Profile
+          editProfile: Edit profile
+          news: Open News
+          map: Map
+  helper:
+      from: from
+      to: to        

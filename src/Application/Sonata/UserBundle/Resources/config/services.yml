@@ -1,4 +1,18 @@
+parameters:
+    my_user_provider.class: Application\Sonata\UserBundle\Security\Core\User\FOSUBUserProvider
+    
 services:
+    my_user_provider:
+        class: "%my_user_provider.class%"
+        #this is the place where the properties are passed to the UserProvider - see config.yml
+        arguments: [@fos_user.user_manager, @service_container, {facebook: facebook_id, twitter: twitter_id, vkontakte: vkontakte_id}]
+        
+    table_user_rest.registration.form.type:
+        class: Application\Sonata\UserBundle\Form\Type\RestRegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: table_user_rest_registration }   
+            
     table_user.registration.form.type:
         class: Application\Sonata\UserBundle\Form\Type\RegistrationFormType
         arguments: [%fos_user.model.user.class%]
@@ -8,3 +22,30 @@ services:
     security.authentication.provider.dao:
         class:  Application\Sonata\UserBundle\Security\Core\Authentication\Provider\CustomDaoAuthenticationProvider
         arguments: ["", "@security.user_checker", "", "@security.encoder_factory", "%security.authentication.hide_user_not_found%"]
+
+    fos_user.mailer.default:
+        class: Application\Sonata\UserBundle\Mailer\CustomMailer
+        arguments:
+            - @mailer
+            - @router
+            - @templating
+            - { site_name: %site_name%, confirmation.template: %fos_user.registration.confirmation.template%,resetting.template: %fos_user.resetting.email.template%,from_email: { confirmation: %fos_user.registration.confirmation.from_email%, resetting: %fos_user.resetting.email.from_email% } }
+
+    sonata.user.profile.form.type:
+        class: Application\Sonata\UserBundle\Form\Type\ProfileType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: sonata_user_profile }  
+    sonata.user.profile.form.handler.default:
+        class: Application\Sonata\UserBundle\Form\Handler\ProfileFormHandler
+        arguments: ["@sonata.user.profile.form", "@request", "@fos_user.user_manager"]
+        scope: request
+        public: false  
+        
+    wsse.security.authentication.provider:
+        class:  Application\Sonata\UserBundle\Security\Authentication\Provider\WsseProvider
+        arguments: ["", "%kernel.cache_dir%/security/nonces"]
+
+    wsse.security.authentication.listener:
+        class:  Application\Sonata\UserBundle\Security\Firewall\WsseListener
+        arguments: ["@security.context", "@security.authentication.manager"]    

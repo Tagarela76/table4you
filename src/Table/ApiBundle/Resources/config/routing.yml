@@ -1,0 +1,178 @@
+# Api for user
+table_api.login:
+    pattern: /api/rest/login
+    defaults: { _controller: TableApiBundle:User:login, _format: json }
+    requirements:
+        _method: POST  
+ 
+table_api.logout:
+    pattern: /api/rest/logout
+    defaults: { _controller: TableApiBundle:User:logout, _format: json }
+    requirements:
+        _method: POST  
+      
+table_api.getUserInfo:
+    pattern:  /api/rest/wsse/getUserInfo
+    defaults: { _controller: TableApiBundle:User:getUserInfo, _format: json }
+    requirements:
+        _method: GET         
+        
+table_api.forgotPassword:
+    pattern:  /api/rest/forgotPassword
+    defaults: { _controller: TableApiBundle:User:forgotPassword, _format: json }
+    requirements:
+        _method: POST   
+        
+table_api_register:
+    pattern:  /api/rest/register
+    defaults: { _controller: TableApiBundle:User:register, _format: json }
+    requirements:
+        _method: POST  
+        
+table_api.edit_profile:
+    pattern:  /api/rest/wsse/editProfile
+    defaults: { _controller: TableApiBundle:User:editProfile, _format: json }
+    requirements:
+        _method: POST          
+
+# API for restaurants
+table_api.update_rating:
+    pattern:  /api/rest/wsse/updateRating
+    defaults: { _controller: TableApiBundle:Restaurant:updateRating, _format: json }
+    requirements:
+        _method: POST   
+        
+table_api.restaurant_all:
+    pattern:  /api/rest/getRestaurants/{city}
+    defaults: { _controller: TableApiBundle:Restaurant:getRestaurants, city: null, _format: json }
+    requirements:
+        _method: GET    
+
+table_api.restaurant_one:
+    pattern:  /api/rest/getRestaurantById/{id}
+    defaults: { _controller: TableApiBundle:Restaurant:getRestaurantById, _format: json }
+    requirements:
+        _method: GET   
+        id: "\d+"
+        
+table_api.restaurant_geo_all:
+    pattern:  /api/rest/geoSearch/{city}
+    defaults: { _controller: TableApiBundle:Restaurant:geoSearch, city: null, _format: json }
+    requirements:
+        _method: GET   
+
+table_api.restaurant_search:
+    pattern:  /api/rest/search
+    defaults: { _controller: TableApiBundle:Restaurant:search, _format: json }
+    requirements:
+        _method: POST   
+
+table_api.restaurant_get_menu_photos:
+    pattern:  /api/rest/getMenuPhotos/{id}
+    defaults: { _controller: TableApiBundle:Restaurant:getMenuPhotos, _format: json }
+    requirements:
+        _method: GET   
+        id: "\d+" 
+  
+table_api.restaurant_get_additional_photos:
+    pattern:  /api/rest/getAdditionalPhotos/{id}
+    defaults: { _controller: TableApiBundle:Restaurant:getAdditionalPhotos, _format: json }
+    requirements:
+        _method: GET   
+        id: "\d+"             
+        
+# Api for Restaurant category
+table_api.restaurant_categories_all:
+    pattern:  /api/rest/getCategoriesList
+    defaults: { _controller: TableApiBundle:RestaurantCategory:getCategoriesList, _format: json }
+    requirements:
+        _method: GET    
+        
+# Api for Restaurant kitchen
+table_api.restaurant_kitchens_all:
+    pattern:  /api/rest/getKitchensList
+    defaults: { _controller: TableApiBundle:RestaurantKitchen:getKitchensList, _format: json }
+    requirements:
+        _method: GET        
+        
+# Api for Restaurant additional service
+table_api.restaurant_additional_services_all:
+    pattern:  /api/rest/getAdditionalServicesList
+    defaults: { _controller: TableApiBundle:RestaurantAdditionalService:getAdditionalServicesList, _format: json }
+    requirements:
+        _method: GET     
+        
+# Api for City
+table_api.cities_all:
+    pattern:  /api/rest/getCitiesList
+    defaults: { _controller: TableApiBundle:City:getCitiesList, _format: json }
+    requirements:
+        _method: GET         
+ 
+# Api for Order History      
+table_api.orders_all:
+    pattern:  /api/rest/wsse/getOrderHistory
+    defaults: { _controller: TableApiBundle:ActiveTableOrder:getOrderHistory, _format: json }
+    requirements:
+        _method: GET    
+  
+# Api for Reserve   
+table_api.reserve:
+    pattern:  /api/rest/wsse/reserve
+    defaults: { _controller: TableApiBundle:ActiveTableOrder:reserve, _format: json }
+    requirements:
+        _method: POST   
+
+# Get Booked table list 
+table_api.get_booked_table_list:
+    pattern:  /api/rest/wsse/getBookedTableList
+    defaults: { _controller: TableApiBundle:ActiveTableOrder:getBookedTableList, _format: json }
+    requirements:
+        _method: POST  
+              
+# Api for News     
+table_api.news_all:
+    pattern:  /api/rest/getNewsList/{city}
+    defaults: { _controller: TableApiBundle:TableNews:getNewsList, city: null, _format: json }
+    requirements:
+        _method: GET   
+        
+table_api.news_one:
+    pattern:  /api/rest/getNewsById/{id}
+    defaults: { _controller: TableApiBundle:TableNews:getNewsById, _format: json }
+    requirements:
+        _method: GET   
+        id: "\d+"        
+
+# Api for auth through social networks         
+table_api.auth_through_facebook:
+    pattern:  /api/rest/loginThroughtFacebook
+    defaults: { _controller: TableApiBundle:User:loginThroughtFacebook, _format: json }
+    requirements:
+        _method: POST  
+        
+table_api.auth_through_twitter:
+    pattern:  /api/rest/loginThroughtTwitter
+    defaults: { _controller: TableApiBundle:User:loginThroughtTwitter, _format: json }
+    requirements:
+        _method: POST         
+        
+table_api.auth_through_vkontakte:
+    pattern:  /api/rest/loginThroughtVkontakte
+    defaults: { _controller: TableApiBundle:User:loginThroughtVkontakte, _format: json }
+    requirements:
+        _method: POST          
+        
+# Api for Table Map     
+table_api.table_maps_by_restaurant:
+    pattern:  /api/rest/wsse/getRestaurantMapList/{restaurantId}
+    defaults: { _controller: TableApiBundle:TableMap:getRestaurantMapList, _format: json }
+    requirements:
+        _method: GET   
+        
+# Api for Active Table     
+table_api.table_active_table_list_by_map:
+    pattern:  /api/rest/wsse/getActiveTableList/{mapId}
+    defaults: { _controller: TableApiBundle:ActiveTable:getActiveTableList, _format: json }
+    requirements:
+        _method: GET                  

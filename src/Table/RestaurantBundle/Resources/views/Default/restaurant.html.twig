@@ -1,0 +1,100 @@
+<div class="restaurant-container">
+    <div class="restaurant-img-container">
+        <div class="restaurant-img">
+            <a href="{{ path('table_view_restaurant', {'id': restaurant.id}) }}" >
+                {% thumbnail restaurant.photo, 'reference' %}
+            </a> 
+        </div>
+    </div>
+    <div class="restaurant-content restaurant-card">
+        <p class="restaurant-content-name">
+            <a href="{{ path('table_view_restaurant', {'id': restaurant.id}) }}" >{{ restaurant.name }}</a>
+        </p>
+        <p class="restaurant-content-font-category">
+                {% trans %}main.labels.category{% endtrans %}
+        </p>
+        <p class="restaurant-categories">
+                {{ restaurant.categories|join(', ') }}
+        </p>
+        <p class="restaurant-content-font-category">
+                {% trans %}main.labels.kitchen{% endtrans %}
+        </p>
+        <p class="restaurant-categories">
+                {{ restaurant.kitchens|join(', ') }}
+        </p>
+        <p class="restaurant-content-font-category">
+                {% trans %}main.labels.additionalServices{% endtrans %}
+        </p>
+        <p class="restaurant-categories">
+                {{ restaurant.additionalServices|join(', ') }}
+        </p>
+        <p class="restaurant-content-font-category">
+                 {% trans %}main.labels.address{% endtrans %}
+            <a onclick="restaurantPage.restaurantMap.openMap({{restaurant.id}});" data-toggle="modal" href="#restaurantMap_{{restaurant.id}}">
+                <img src="{{ asset('bundles/tablerestaurant/images/label_card.png') }}" />
+            </a>
+        </p>
+        <p class="restaurant-categories restaurant-adress">
+                {{ restaurant.city.name }}, {{ restaurant.street }}
+                {% if restaurant.house is not null %} 
+                    , {{ restaurant.house }}
+                {% endif %}
+        </p>
+        {% if restaurant.restaurantSchedule is not empty %}
+        <p class="restaurant-content-font-category">
+                     {% trans %}main.labels.scedule{% endtrans %}
+        </p>
+        <p class="restaurant-categories">
+        <ul class="restaurantSchedule">
+            {% for schedule in restaurant.restaurantSchedule %}
+                <li>
+                    {%if schedule.dayFromStr != schedule.dayToStr %}
+                        {{schedule.dayFromStr}} - 
+                    {% endif %}
+                    {{schedule.dayToStr}} {{schedule.timeFrom|date('H:i')}} - {{schedule.timeTo|date('H:i')}}
+                    {% if loop.index < restaurant.restaurantSchedule|length %}
+                        ,
+                    {% endif %}
+                </li>    
+            {% endfor %}
+        </ul>     
+        </p>
+        {% endif %}    
+    </div>
+    <div class="restaurant-rating-{{ restaurant.id }}">
+            {% include 'TableRestaurantBundle:Default:rating.html.twig' with {'restaurant': restaurant, 'isRatingDisabled': isRatingDisabled, 'restaurantsWhoHadHasAlreadyRating': restaurantsWhoHadHasAlreadyRating, 'id': restaurant.id} %}
+    </div>
+    <div class="restaurant-content-reserve">
+        {% if anonim %}
+            <a class="btn btn-primary" data-toggle="modal" data-target="#login" href="{{ path('fos_user_security_login') }}">
+                {% trans %}main.order.button{% endtrans %}
+            </a>
+        {% elseif phoneFormatError %}
+            <a class="btn btn-primary" href="{{ path('sonata_user_profile_edit') }}">
+                {% trans %}main.order.button{% endtrans %}
+            </a>
+        {% else%}
+            <a class="btn btn-primary" data-toggle="modal" data-target="#reserve_{{ restaurant.id }}" href="{{ path('table_order_reserve', {'id': restaurant.id}) }}">
+                {% trans %}main.order.button{% endtrans %}
+            </a>
+        {% endif %}
+    </div>    
+</div>
+{# ==Modal Window for reserve==#}
+<div class="modal fade hide modal-reserve" data-backdrop="static" id="reserve_{{ restaurant.id }}">
+
+    <div class="modal-header modal-login-title">
+        <a class="close" data-dismiss="modal"></a>
+        <h3>{% trans %}main.order.form.title{% endtrans %} {{restaurant.name}}</h3>
+    </div>
+    <div class="modal-body" >
+
+    </div>
+</div>
+{# ==Modal Window for reserve==#}
+
+{# ==Modal Window for map==#}
+    {% include 'TableRestaurantBundle:Default:restaurantMap.html.twig' %} 
+    <input type="hidden" id="map-icon" value="{{ asset('bundles/tablerestaurant/images/label_on_the_map.png') }}" />
+    <input type="hidden" id="map-title" value="{% trans %}main.map.form.title{% endtrans %}" />
+{# ==Modal Window for map==#}

@@ -11,7 +11,8 @@ class RegistrationFormType extends BaseType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-                ->add('username', null, array('label' => 'form.username', 'translation_domain' => 'FOSUserBundle'))
+                ->add('username','hidden')
+                ->add('firstname', null, array('label' => 'form.username', 'translation_domain' => 'FOSUserBundle'))
                 ->add('lastname', null, array('label' => 'form.lastname', 'translation_domain' => 'FOSUserBundle'))
                 ->add('email', 'email', array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle'))
                 ->add('plainPassword', 'repeated', array(
@@ -22,13 +23,20 @@ class RegistrationFormType extends BaseType
                     'invalid_message' => 'fos_user.password.mismatch',
                 ))
                 ->add('phone', 'text', array(
-                    'label' => 'form.phone',
+                    'attr'=> array(
+                        'placeholder'=>'form.phone.placeholder'
+                     ),
+                    'label' => 'form.phone.label',
                     'translation_domain' => 'FOSUserBundle',
                     'required' => true,
                 ))
                 ->add('captcha', 'captcha', array(
+                    'label' => 'form.captcha.label',
+                    'translation_domain' => 'FOSUserBundle',
                     'reload' => true,
-                    'as_url' => true
+                    'as_url' => true,
+                    'width' => 125,
+                    'height' => 30,
                 ))
         ;
     }

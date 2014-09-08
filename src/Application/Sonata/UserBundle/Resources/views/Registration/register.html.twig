@@ -1,7 +1,8 @@
-{% extends "TableMainBundle::layout.html.twig" %}
+{% extends "TableMainBundle::layout-reg.html.twig" %}
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('bundles/applicationsonatauser/js/jquery.form.js') }}"></script>
+    <script src="{{ asset('bundles/applicationsonatauser/js/registration.js') }}"></script>
     <script>
         $(function() { 
             $('#fos-registration-form').submit(function() { 
@@ -13,6 +14,13 @@
                     success: function(response) { 
                         $("#registrationPreloader").hide();
                         $("#modal-registration").html(response);
+                        // Get captcha img id
+                        var captchaImgId = $('#fos-registration-form div.captcha-img img').attr("id");
+                        // Reload captcha pprogrammatically
+                        var func = "reload_" +captchaImgId;
+                        eval( func )();
+                        // format phone number
+                        $("#fos_user_registration_form_phone").mask("+79999999999");
                     }
                 });
                 return false;

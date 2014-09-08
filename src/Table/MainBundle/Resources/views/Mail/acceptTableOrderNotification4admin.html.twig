@@ -1,0 +1,29 @@
+{% trans %}main.mail.tableOrder.notification.greeting{% endtrans %}!
+
+<br>
+
+{% trans %}main.mail.tableOrder.notification.guestInYourRestaurant{% endtrans %} 
+{{tableOrder.user.publicName}} {% trans %}main.mail.tableOrder.notification.wantReserve{% endtrans %} 
+{% trans %}main.mail.tableOrder.notification.table{% endtrans %}
+№{{tableOrder.tableNumber}} {% trans %}main.mail.tableOrder.notification.for{% endtrans %} {{tableOrder.peopleCount}} 
+{% trans %}main.mail.tableOrder.notification.guest{% endtrans %}, 
+{% trans %}main.mail.tableOrder.notification.restaurant{% endtrans %} 
+{{tableOrder.restaurant.name}}, {{tableOrder.restaurant.city.name}}, {{tableOrder.restaurant.street}}, {{tableOrder.restaurant.house}},
+{{tableOrder.reserveDate|date('d-m-Y')}}, {{tableOrder.reserveTime|date('H:i')}}! 
+{% trans %}main.mail.tableOrder.notification.reserveConfirm{% endtrans %}
+
+<br>
+
+{% trans %}main.mail.tableOrder.notification.reserveWarning{% endtrans %}
+
+<br>
+
+{% trans %}main.mail.tableOrder.notification.autoMsg4admin{% endtrans %}
+
+<br><br>
+
+{% trans %}main.mail.tableOrder.notification.signature{% endtrans %}
+
+
+<br>
+<img src="{{logo}}" />

@@ -1,0 +1,253 @@
+table_order_reserve:
+    pattern:  /reserve/{id}
+    defaults: { _controller: TableRestaurantBundle:Default:reserve }
+    requirements:
+        id: \d+  
+    options:
+       expose: true     
+table_view_restaurant:
+    pattern:  /restaurant/{id}
+    defaults: { _controller: TableRestaurantBundle:Default:viewRestaurant }
+    requirements:
+        id: \d+    
+table_update_restaurant_rating:
+    pattern:  /updateRestaurantRating
+    defaults: { _controller: TableRestaurantBundle:Default:updateRestaurantRating }
+    options:
+       expose: true  
+table_order_history:
+    pattern:  /viewTableOrderHistory
+    defaults: { _controller: TableRestaurantBundle:Default:viewTableOrderHistory }
+    options:
+       expose: true   
+table_view_news:
+    pattern:  /news/{id}
+    defaults: { _controller: TableRestaurantBundle:Default:viewNews }
+    requirements:
+        id: \d+     
+table_all_news:
+    pattern:  /newsList/{city}
+    defaults: { _controller: TableRestaurantBundle:Default:newsList } 
+    options:
+       expose: true 
+
+table_map:
+    pattern:  /map
+    defaults: { _controller: TableRestaurantBundle:Default:viewMap }   
+
+table_getGeoRestaurants:
+    pattern:  /getGeoRestaurants
+    defaults: { _controller: TableRestaurantBundle:Default:getGeoRestaurants, _format: json }
+    requirements:
+        _method: GET  
+    options:
+       expose: true  
+
+# Interactive table map
+table_viewTableTypeList:
+    pattern:  /table_editor
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:viewTableTypeList }      
+    
+table_viewCreateMap:
+    pattern:  /viewCreateMap/{restaurantId}
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:viewCreateMap, restaurantId: 0 }    
+    requirements:
+        restaurantId: \d+     
+    options:
+       expose: true   
+       
+table_viewTableOrderList:
+    pattern:  /viewTableOrderList/{restaurantId}
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:viewTableOrderList, restaurantId: 0 } 
+    options:
+       expose: true   
+    
+table_updateTableTypeList:
+    pattern:  /updateTableTypeList
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:updateTableTypeList, _format: json }
+    requirements:
+        _method: POST  
+    options:
+       expose: true     
+       
+table_editTableType:
+    pattern:  /editTableType
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:editTableType, _format: json }
+    requirements:
+        _method: POST  
+    options:
+       expose: true     
+  
+table_deleteTableType:
+    pattern:  /deleteTableType
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:deleteTableType, _format: json }
+    requirements:
+        _method: POST  
+    options:
+       expose: true 
+       
+table_updateTableMap:
+    pattern:  /updateTableMap
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:updateTableMap, _format: json }
+    requirements:
+        _method: POST  
+    options:
+       expose: true   
+     
+table_deleteTableMap:
+    pattern:  /deleteTableMap
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:deleteTableMap, _format: json }
+    requirements:
+        _method: POST  
+    options:
+       expose: true   
+       
+table_editTableMap:
+    pattern:  /editTableMap
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:editTableMap, _format: json }
+    requirements:
+        _method: POST  
+    options:
+       expose: true       
+       
+table_addActiveTable:
+    pattern:  /addActiveTable
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:addActiveTable, _format: json }
+    requirements:
+        _method: POST  
+    options:
+       expose: true     
+       
+table_loadActiveTables:
+    pattern:  /loadActiveTables
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:loadActiveTables, _format: json }
+    requirements:
+        _method: GET  
+    options:
+       expose: true 
+       
+table_viewActiveTableOrderList:
+    pattern:  /viewActiveTableOrderList
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:viewActiveTableOrderList }
+    requirements:
+        _method: GET  
+    options:
+       expose: true 
+       
+table_deleteActiveTableOrder:
+    pattern:  /deleteActiveTableOrder
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:deleteActiveTableOrder, _format: json }
+    requirements:
+        _method: POST  
+    options:
+       expose: true       
+       
+table_reserveActiveTableOrder:
+    pattern:  /reserveActiveTableOrder/{activeTableId}
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:reserveActiveTableOrder }
+    options:
+       expose: true    
+       
+table_loadActiveTable:
+    pattern:  /loadActiveTable/{activeTableId}
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:loadActiveTable }
+    requirements:
+        _method: GET  
+    options:
+       expose: true        
+       
+table_loadTableTypeContainer:
+    pattern:  /loadTableTypeContainer
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:viewTableTypeContainer }
+    requirements:
+        _method: GET  
+    options:
+       expose: true   
+     
+table_deleteActiveTable:
+    pattern:  /deleteActiveTable
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:deleteActiveTable, _format: json }
+    requirements:
+        _method: POST  
+    options:
+       expose: true  
+       
+table_updateActiveTable:
+    pattern:  /updateActiveTable
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:updateActiveTable, _format: json }
+    requirements:
+        _method: POST  
+    options:
+       expose: true         
+       
+table_refreshTableMap:
+    pattern:  /viewTableMap
+    defaults: { _controller: TableRestaurantBundle:Default:viewTableMap }
+    requirements:
+        _method: GET  
+    options:
+       expose: true 
+       
+table_loadMapPicture:
+    pattern:  /loadMapPicture
+    defaults: { _controller: TableRestaurantBundle:Default:loadMapPicture }
+    requirements:
+        _method: GET  
+    options:
+       expose: true        
+       
+table_refreshBookedTableList:
+    pattern:  /refreshBookedTableList
+    defaults: { _controller: TableRestaurantBundle:Default:refreshBookedTableList }
+    requirements:
+        _method: GET  
+    options:
+       expose: true         
+       
+table_refreshBookedTableListInAdminDashboard:
+    pattern:  /refreshBookedTableListInAdminDashboard
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:refreshBookedTableList }
+    requirements:
+        _method: GET  
+    options:
+       expose: true  
+       
+table_viewActiveTableOrderFilter:
+    pattern:  /viewActiveTableOrderFilter
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:viewActiveTableOrderFilter }
+    requirements:
+        _method: GET  
+    options:
+       expose: true      
+       
+table_getActiveTableList:
+    pattern:  /getActiveTableList
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:getActiveTableList, _format: json }
+    requirements:
+        _method: GET  
+    options:
+       expose: true       
+       
+table_refreshBookedTableListInClientDashboard:
+    pattern:  /refreshBookedTableListInClientDashboard
+    defaults: { _controller: TableRestaurantBundle:Default:refreshBookedTableListInClientDashboard }
+    requirements:
+        _method: GET  
+    options:
+       expose: true    
+   
+table_enterTableNumberByHand:
+    pattern:  /enterTableNumberByHand
+    defaults: { _controller: TableRestaurantBundle:Default:enterTableNumberByHand }
+    requirements:
+        _method: GET  
+    options:
+       expose: true
+       
+table_viewActiveTableList:
+    pattern:  /viewActiveTableList
+    defaults: { _controller: TableRestaurantBundle:Default:viewActiveTableList }
+    requirements:
+        _method: GET  
+    options:
+       expose: true

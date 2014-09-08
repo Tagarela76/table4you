@@ -1,3 +1,12 @@
+   
+table_api:
+    resource: "@TableApiBundle/Resources/config/routing.yml"
+    prefix:   /
+    
+table_restaurant:
+    resource: "@TableRestaurantBundle/Resources/config/routing.yml"
+    prefix:   /
+
 table_main:
     resource: "@TableMainBundle/Resources/config/routing.yml"
     prefix:   /
@@ -10,7 +19,7 @@ sonata_user:
     resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
     prefix: /table_admin
 
-admin:
+table_admin:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
     prefix: /table_admin
 
@@ -28,7 +37,8 @@ media:
     prefix: /media
 
 fos_user_security:
-    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+    #resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+    resource: "@SonataUserBundle/Resources/config/routing.yml"
 
 fos_user_profile:
     resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
@@ -49,3 +59,26 @@ fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"    
 gregwar_captcha_routing:
     resource: "@GregwarCaptchaBundle/Resources/config/routing/routing.yml"
+    prefix: /_gcb
+
+#HWIOAuthBundle routes
+hwi_oauth_security:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix: /login
+ 
+hwi_oauth_connect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+    prefix: /login
+ 
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /login
+ 
+facebook_login:
+    pattern: /login/check-facebook
+ 
+twitter_login:
+    pattern: /login/check-twitter
+
+vkontakte_login:
+    pattern: /login/check-vkontakte    

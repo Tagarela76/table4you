@@ -1,0 +1,28 @@
+{% for activeTable in activeTableList %}
+    {% if activeTable.id in bookedTables %}
+        {#BOOKED TABLE #}
+        <img id="activeTable_{{activeTable.id}}" title="{{activeTable.tableNumber}} {% trans %}main.tableMap.createMap.table{% endtrans %}" 
+             class="active-table-img active-table-booked"
+             style="left: {{activeTable.leftPositionResized}}px; 
+             top: {{activeTable.topPositionResized}}px; 
+             -webkit-transform: rotate({{activeTable.angle}}deg); 
+             transform: rotate({{activeTable.angle}}deg);
+             height: {{ constant('IMAGE_HEIGHT_CLIENT_SIDE', activeTable) }} px;
+             width: {{ constant('IMAGE_WIDTH_CLIENT_SIDE', activeTable) }}px;"
+             src="{{baseUrl}}{{ vich_uploader_asset(activeTable.tableType, 'file') }}"  />
+        {#BOOKED TABLE #}
+    {% else %}
+        {#FREE TABLE #}
+        <img id="activeTable_{{activeTable.id}}" title="{{activeTable.tableNumber}} {% trans %}main.tableMap.createMap.table{% endtrans %}" 
+             class="active-table-img active-table-free" tableNumber="{{activeTable.tableNumber}}"
+             onClick='page.tableOrder.selectActiveTable({{activeTable.id}});'
+             style="left: {{activeTable.leftPositionResized}}px; 
+             top: {{activeTable.topPositionResized}}px; 
+             -webkit-transform: rotate({{activeTable.angle}}deg); 
+             transform: rotate({{activeTable.angle}}deg);
+             height: {{ constant('IMAGE_HEIGHT_CLIENT_SIDE', activeTable) }} px;
+             width: {{ constant('IMAGE_WIDTH_CLIENT_SIDE', activeTable) }}px;"
+             src="{{baseUrl}}{{ vich_uploader_asset(activeTable.tableType, 'file') }}"  />
+    {% endif %}
+{% endfor %}
+

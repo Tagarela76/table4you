@@ -19,34 +19,23 @@ class CustomPasswordStrengthValidator extends ConstraintValidator
         if (null !== $password && !is_scalar($password) && !(is_object($password) && method_exists($password, '__toString'))) {
             throw new UnexpectedTypeException($password, 'string');
         }
-        
+      
         // Get password
         $password = (string) $password;
+        $passwordCanBeBalnk = false;
 
-        $passLength = strlen($password);// Password Length
-
-        $letterCount = 0; // shoul be 1 at the end
-        // check on one letter
-        for ($i=0; $i < $passLength; $i++) {
-            if (preg_match('/[a-zA-Z]/', $password[$i])) {
-                $letterCount ++;
+        // Password can be blank for canBeBlankGroup
+        if ($password == "") {
+            if (in_array($constraint->canBeBlankGroup, $constraint->groups) ) {
+                $passwordCanBeBalnk = true;
             }
-        }
-        
-        $digitCount = 0; // shoul be 6at the end
-        // check on 6 digits
-        for ($i=0; $i < $passLength; $i++) {
-            if (preg_match('/\d/', $password[$i])) {
-                $digitCount ++;
+        } 
+        if (!$passwordCanBeBalnk) {
+            if (!preg_match('/^[a-zA-Z0-9:.,?!@]{5,12}[#$^]?$/', $password) ) {
+                $this->context->addViolation($constraint->message);
+
+                return;
             }
-        }
-
-        if (($passLength != $constraint->length) || 
-                ($letterCount != 1) ||
-                ($digitCount != 6)) {
-            $this->context->addViolation($constraint->message, array('{{ length }}' => $constraint->length));
-
-            return;
         }
     }
 }

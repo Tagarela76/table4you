@@ -1,0 +1,104 @@
+{% extends 'TableMainBundle::layout.html.twig' %}
+{% block javascripts %}
+    {{ parent() }}
+{# include leaflet map#}
+<script src="{{ asset('bundles/tablerestaurant/leaflet/js/leaflet.markercluster-src.js') }}"></script>
+<script>
+    $(function() {     
+        // init Map
+        var map = L.map('full-restaurant-map', {
+            zoom: 18
+        });
+        // Set Map Layer
+        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+            attribution: '',
+        }).addTo(map);
+
+        // My Location
+        map.locate({
+            setView: true
+        });
+        var LeafIcon = L.Icon.extend({
+            options: {
+                iconSize:     [25, 41],
+                shadowSize:   [29, 44],
+                iconAnchor:   [12, 41],
+                shadowAnchor: [4, 62],
+                popupAnchor:  [-3, -76]
+            }
+        });
+
+        var locateIcon = new LeafIcon({iconUrl: '{{ asset('bundles/tablerestaurant/leaflet/js/images/marker-icon-location.png') }}'});
+        
+        map.on('locationfound', onLocationFound);
+        function onLocationFound(e) { 
+            map.setZoom(14);
+            L.marker(e.latlng, {icon: locateIcon}).addTo(map);
+        }
+        // get Restaurants
+        $.ajax({
+            url: Routing.generate('table_getGeoRestaurants'),
+            type: "GET",
+            dataType: "json",
+            success: function(response) { 
+                // add all Restaurants
+                var markers = L.markerClusterGroup({
+                    removeOutsideVisibleBounds: false,
+                    iconCreateFunction: function(cluster) {
+                        return new L.divIcon({ 
+                            className: 'map-count-icon',
+                            iconSize: new L.Point(25, 40),
+                            html: '<b>' + cluster.getChildCount() + '</b>'
+                        });
+                    }
+                });
+                
+                for (var i = 0; i < response.length; i++) {
+                    var restaurantsPoints = response[i];
+                    if (restaurantsPoints.longitude && restaurantsPoints.latitude) {
+                        var marker = L.marker(new L.LatLng(restaurantsPoints.latitude, restaurantsPoints.longitude), {/*icon: restaurantIcon,*/ zoom: 17});
+                        marker.bindPopup(restaurantsPoints.content);
+                        markers.addLayer(marker);
+                    }
+                }
+                
+                map.addLayer(markers);
+            }  
+	}); 
+    });
+</script>
+{% endblock %}      
+{% block stylesheets %}
+    {{ parent() }}
+{# include leaflet map#}
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablerestaurant/leaflet/css/MarkerCluster.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablerestaurant/leaflet/css/MarkerCluster.Default.css') }}">
+<!--[if lte IE 8]>
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablerestaurant/leaflet/css/MarkerCluster.Default.ie.css') }}">
+<![endif]-->
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid" id="restaurantList_main">
+    
+    <div id="full-restaurant-map"></div>
+
+    {# hidden inforamation#}
+    <input type="hidden" id="reserveTitle" value="{% trans %}main.order.form.title{% endtrans %}" />
+    {% for restaurant in restaurantsList %}
+        {# ==Modal Window for reserve==#}
+        <div class="modal fade hide modal-reserve" data-backdrop="static" id="reserve_{{ restaurant.id }}">
+
+            <div class="modal-header modal-login-title">
+                <a class="close" data-dismiss="modal" onclick="page.common.closeModalWindow();"></a>
+                <h3>{% trans %}main.order.form.title{% endtrans %} {{restaurant.name}}</h3>
+            </div>
+            <div class="modal-body" >
+
+            </div>
+        </div>
+        {# ==Modal Window for reserve==#}
+    {% endfor %}
+</div>  
+{% endblock %}   
+

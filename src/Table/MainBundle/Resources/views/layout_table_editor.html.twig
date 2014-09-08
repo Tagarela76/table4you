@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+        <title>{% block title %}{% endblock %}</title>
+
+        <meta name="keywords" content="{% block keywords %}{% endblock %}">
+        <meta name="description" content="{% block description %}{% endblock %}">
+
+        {% block stylesheets %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/bootstrap.css') }}">
+        <!--[if lt IE 9]>
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/ie-css.css') }}">
+        <![endif]-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/main.css') }}">
+        {# FANCYBOX #}
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/fancy-box/jquery.fancybox.css') }}">
+        <!-- Optionally add helpers - button, thumbnail and/or media -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/fancy-box/helpers/jquery.fancybox-buttons.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/fancy-box/helpers/jquery.fancybox-thumbs.css') }}">
+        {# FANCYBOX #}
+        
+        {# Jquery UI #}
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/jquery-ui.css') }}">
+        {# Jquery UI #}
+            
+        {# TimeEntry #}
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablerestaurant/jquery.timeentry/jquery.timeentry.css') }}">
+        {# TimeEntry #}
+        
+        {# Alertify #}
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablerestaurant/alertify/css/alertify.core.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablerestaurant/alertify/css/alertify.default.css') }}">
+        {# Alertify #}
+        
+        {% endblock %}
+
+        {% block javascripts %}
+        <script src="{{ asset('bundles/tablemain/js/jquery.min.js') }}"></script>
+        <script src="{{ asset('bundles/tablemain/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('bundles/tablemain/js/bootstrap-dropdown.js') }}"></script>
+        <script src="{{ asset('bundles/tablemain/js/respond.min.js') }}"></script>
+        <script src="{{ asset('bundles/tablemain/js/placeholder-ie-support.js') }}"></script>
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+        <script src="{{ asset('bundles/tablerestaurant/js/common.js') }}"></script>
+        <script src="{{ asset('bundles/tablerestaurant/js/jasny-bootstrap.js') }}"></script>
+            {# FANCYBOX #}
+        <script src="{{ asset('bundles/tablemain/fancy-box/jquery.fancybox.pack.js') }}"></script>
+        <!-- Optionally add helpers - button, thumbnail and/or media -->
+        <script src="{{ asset('bundles/tablemain/fancy-box/helpers/jquery.fancybox-buttons.js') }}"></script>
+        <script src="{{ asset('bundles/tablemain/fancy-box/helpers/jquery.fancybox-media.js') }}"></script>
+        <script src="{{ asset('bundles/tablemain/fancy-box/helpers/jquery.fancybox-thumbs.js') }}"></script>
+            {# FANCYBOX #}
+        
+        {# Jquery UI #}
+            <script src="{{ asset('bundles/tablemain/js/jquery-ui-1.10.3.custom.js') }}"></script>
+        {# Jquery UI #}
+        
+        {# TimeEntry #}
+            <script src="{{ asset('bundles/tablerestaurant/jquery.timeentry/jquery.timeentry.js') }}"></script>
+        {# TimeEntry #}
+         
+        {# Alertify #}
+            <script src="{{ asset('bundles/tablerestaurant/alertify/js/alertify.js') }}"></script>
+        {# Alertify #}
+        
+        {% endblock %}
+
+    </head>
+    <body>
+        <div class="container">
+            <div class="row header">
+                <div class="span12">
+		    {% block header %}
+			{% include 'TableRestaurantBundle:Component:header_dashboard.html.twig' %}
+		    {% endblock %}
+                </div>
+            </div>
+            <div class="row content">
+                <div class="span12 content-table-editor">
+                    {% block content %}
+
+                    {% endblock %}
+                </div>
+            </div>
+            <div class="row footer">
+                <div class="span12">
+                    {% block footer %}
+			{% include 'TableMainBundle:Component:footer.html.twig' %}
+		    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

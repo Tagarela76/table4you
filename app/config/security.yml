@@ -9,15 +9,18 @@ security:
 
     providers:
         fos_userbundle:
-            id: fos_user.user_manager
+            id: fos_user.user_provider.username_email
 
-    firewalls:
-        # Disabling the security for the web debug toolbar, the profiler and Assetic.
+    firewalls:                         
+        wsse_secured:
+          pattern:   ^/api/rest/wsse/.*
+          stateless:    true
+          wsse: true
+          anonymous : false
+          
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
-        # -> custom firewall for the admin area of the URL
         admin:
             pattern:            /table_admin(.*)
             context:            user
@@ -30,13 +33,10 @@ security:
             logout:
                 path:           /table_admin/logout
             anonymous:          true
-
-        # -> end custom configuration
-
-        # defaut login area for standard users
-
-        # This firewall is used to handle the public login area
-        # This part is handled by the FOS User Bundle
+        editor:
+            pattern:            /table_editor(.*)
+            context:            user
+            anonymous:          true    
         main:
             pattern:             .*
             context:             user
@@ -46,8 +46,26 @@ security:
                 use_forward:    false
                 check_path:     /login_check
                 failure_path:   null
+            oauth:
+                resource_owners:
+                    facebook:           "/login/check-facebook"
+                    twitter:            "/login/check-twitter"
+                    vkontakte:          "/login/check-vkontakte"
+                login_path:        /login
+                failure_path:      /
+                default_target_path: /profile/ 
+                
+                provider: fos_userbundle
+                
+                oauth_user_provider:
+                    service: my_user_provider
+                    #service: hwi_oauth.user.provider.fosub_bridge
+                    
             logout:             true
-            anonymous:          true
+            anonymous:          true   
+        login:
+            pattern:  ^/login$
+            security: false
 
     access_control:
         - { path: ^/_wdt, role: IS_AUTHENTICATED_ANONYMOUSLY }
@@ -58,6 +76,9 @@ security:
         - { path: ^/table_admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/table_admin/login-check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
+        #- { path: ^/table_editor, role: [ROLE_ADMIN] }
+        - { path: ^/table_editor, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
 

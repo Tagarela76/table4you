@@ -1,0 +1,27 @@
+<script>
+    $(function() {
+        {% if tableMapObj is not null %}
+            // load Map Scheme as background
+            {% if tableMapObj.file is not null %}
+                page.tableOrder.loadMapScheme({{restaurantId}}, "{{baseUrl}}{{ vich_uploader_asset(tableMapObj, 'file') }}");
+            {% endif %}
+        {% endif %}
+    });
+</script>
+<div class="restaurant-photo-modal">
+    <ul class="floor-tabs floor-tabs-hall">
+       {% for tableMap in tableMapList %}  
+            {% if tableMap.hall is not null and tableMap.hall and tableMapList|length > 1 %}
+                <li>
+                    <a restaurantId="{{restaurantId}}" href="#" class="halls{% if tableMapObj.id == tableMap.id %} active{% endif %}"onclick="page.tableOrder.loadMap(this, {{tableMap.id}})">{{tableMap.hall}} {% trans %}main.tableMap.createMap.hall{% endtrans %}</a>
+                </li>    
+            {% endif %}   
+        {% endfor %}
+    </ul>        
+    {% if tableMapObj is not null and tableMapObj.file is not null %}
+        <input type="hidden" id="mapId_{{restaurantId}}" value="{{tableMapObj.id}}" />
+        <div class="table-map-image-container" id="table-map-image-container_{{restaurantId}}">
+            {% include 'TableRestaurantBundle:Default:viewActiveTableList.html.twig' %}
+        </div>
+    {% endif %}
+</div>

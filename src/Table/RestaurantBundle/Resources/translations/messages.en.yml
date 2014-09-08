@@ -1,0 +1,105 @@
+main:
+  order:
+      form:
+        error:
+            incorrectTableNumber: Incorrect table number
+        label:
+          captcha: Captcha
+          reserveDate: "Date:"
+          reserveTime: "Time:"
+          tableNumber: "Table number:"
+          peopleCount: "People count:"
+          floor: Floor
+          isSms: sms
+          isEmail: e-mail
+          notice: "Notice used:"
+          submit: Reserve
+          confirmDeleteOrderMessage: "Do you really want to delete the order?"
+          confirmDeleteOrderOK: "Delete"
+          confirmDeleteOrderCancel: "Cancel"
+        placeholder:
+          wish: "Your wishes"
+        message:
+          success: Your request is processing. Thanks!
+      history:
+        search: "Search:"
+        date: "Date:"
+        time: "Time:"
+        name: "Name:"
+        rating: "Rating:"
+      notification:
+        dear: Dear
+        userCannotOrderTable: "our service allows to book no more than one table."
+        cannotOrderCurrentTable: "Current table has allready booked at selected time." 
+  restaurant:
+      response:
+        nothingFound: "Nothing found."  
+      label:
+          top: TOP 
+  tableMap:
+      tableList:
+        header: Table list
+        add: Add a table
+        tableOn: Table on
+        form:
+            label:
+                tableOn: table on
+                addMore: add more
+                load: Load
+                selectTheFile: Choose file
+            error:
+                peopleCount: Fill field
+            errors: Errors while edit form   
+        choiceTable: Choice table    
+        addTable: Add table 
+      createMap:
+        header: Create a map
+        restaurantList: Restaurant list
+        form:
+            label:
+                loadMap: Load Map
+                floor: Floor
+                hall: Hall
+                save: Save
+                tableNumber: Table number
+                cancel: Cancel
+                selectTheFile: Choose file
+                addMore: add more
+            error:
+                mapError:  jpg or png
+                floor: Fill field    
+                numberTable: Fill table number
+                file: Only jpg и png
+            errors: Errors while edit form 
+        floor: floor
+        hall: hall  
+        editRestaurant: Edit restaurant map
+        edit: Edit
+        save: Save
+        table: Table
+        cancel: Cancel
+      orders:
+        header: Orders    
+        restaurant: Restaurant
+        viewOrder: View Order Mode
+        list:
+            table: Table
+            persons: persons
+            date: Date
+            timeFrom: Time from
+            filter: Filter
+            reserve: Reserve
+        form:
+            label:
+                date: "Date:"
+                time: "Time:"
+                peopleCount: People Count
+                customerData: Customer Data
+                customerName: Name
+                customerLastName: Last Name
+                customerPhone: Phone
+                customerEmail: E-mail
+                smsNotification: SMS Notification
+                emailNotification: E-mail Notification
+                comment: Comment
+                reserve: Reserve

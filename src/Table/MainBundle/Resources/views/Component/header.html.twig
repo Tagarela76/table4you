@@ -1,0 +1,62 @@
+<div class="row">
+    <div class="span3">
+        <a class="logo-main" href="{{ path('table_main_homepage') }}" title="logotip">
+            <img src="{{ asset('bundles/tablemain/images/logotip.png') }}" alt="logotip"/>
+        </a>
+    </div>
+    <div class="span7 list-city">
+        <select id="select-city" onchange="page.restaurantFilter.selectCity4Search();
+                    page.restaurantFilter.refreshRestaurantList();
+                    page.newsFilter.refreshNewsList();" >
+            {% for city in cityList %}
+            <option value="{{city.id}}" {% if searchCity == city.id %} selected {% endif %}>{{city.name}} </option>
+            {% endfor %}
+
+        </select>
+        <div class="social">
+            {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                <a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}"></a>
+                <a href="{{ path('hwi_oauth_service_redirect', {'service': 'twitter' }) }}"></a>
+                <a href="{{ path('hwi_oauth_service_redirect', {'service': 'vkontakte' }) }}"></a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="span2 log-in-top">
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <a href="{{ path('fos_user_security_logout') }}">
+                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+            </a>
+        {% else %}
+            <a onclick="page.helper.refreshLoginWindowTitle('{% trans %}main.login.form.title{% endtrans %}');" data-toggle="modal" data-target="#login" href="{{ path('fos_user_security_login') }}">
+                {% trans %}main.login.buttonLabel{% endtrans %}
+            </a>
+        {% endif %}
+
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <a href="{{ path('table_order_history') }}">
+                {{app.user.publicName}}
+            </a>
+        {% else %}
+            <a data-toggle="modal" href="#register">
+                {% trans %}main.register.buttonLabel{% endtrans %}
+            </a>
+        {% endif %}
+    </div>
+</div>
+{# ==Modal Window for login==#}
+<div class="modal fade hide modal-login" data-backdrop="static" id="login">
+
+    <div class="modal-header modal-login-title">
+        <a class="close" data-dismiss="modal"></a>
+        <img id="loginPreloader" style="display: none;" src="{{ asset('bundles/tablemain/images/ajax-loader.gif') }}" />
+        <h3>{% trans %}main.login.form.title{% endtrans %}</h3>
+    </div>
+    <div class="modal-body" >
+
+    </div>
+</div>
+{# ==Modal Window for login==#}
+
+{# ==Modal Window for registration==#}
+    {% include 'ApplicationSonataUserBundle:Registration:registerPopup.html.twig' %}
+{# ==Modal Window for registration==#}

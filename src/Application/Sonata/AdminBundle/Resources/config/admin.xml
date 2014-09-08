@@ -1,0 +1,100 @@
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+      <service id="sonata.admin.restaurantCategory" class="Application\Sonata\AdminBundle\Controller\RestaurantCategoryAdmin">
+          <tag name="sonata.admin" manager_type="orm" group="Restaurant" label="restaurant.category.categories"/>
+          <argument />
+          <argument>Table\RestaurantBundle\Entity\RestaurantCategory</argument>
+          <argument>SonataAdminBundle:CRUD</argument>
+          <call method="setTranslationDomain">
+              <argument>ApplicationSonataAdminBundle</argument>
+          </call>
+      </service>
+      <service id="sonata.admin.restaurantKitchen" class="Application\Sonata\AdminBundle\Controller\RestaurantKitchenAdmin">
+          <tag name="sonata.admin" manager_type="orm" group="Restaurant" label="restaurant.kitchen.kitchens"/>
+          <argument />
+          <argument>Table\RestaurantBundle\Entity\RestaurantKitchen</argument>
+          <argument>SonataAdminBundle:CRUD</argument>
+          <call method="setTranslationDomain">
+              <argument>ApplicationSonataAdminBundle</argument>
+          </call>
+      </service>
+      <service id="sonata.admin.restaurantAdditionalService" class="Application\Sonata\AdminBundle\Controller\RestaurantAdditionalServiceAdmin">
+          <tag name="sonata.admin" manager_type="orm" group="Restaurant" label="restaurant.additionalServices"/>
+          <argument />
+          <argument>Table\RestaurantBundle\Entity\RestaurantAdditionalService</argument>
+          <argument>SonataAdminBundle:CRUD</argument>
+          <call method="setTranslationDomain">
+              <argument>ApplicationSonataAdminBundle</argument>
+          </call>
+      </service>
+      <service id="sonata.admin.restaurant" class="Application\Sonata\AdminBundle\Controller\RestaurantAdmin">
+          <tag name="sonata.admin" manager_type="orm" group="Restaurant" label="restaurant.restaurants"/>
+          <argument />
+          <argument>Table\RestaurantBundle\Entity\Restaurant</argument>
+          <argument>SonataAdminBundle:CRUD</argument>
+          <call method="setTranslationDomain">
+              <argument>ApplicationSonataAdminBundle</argument>
+          </call>
+      </service>
+      <service id="sonata.admin.activeTableOrder" class="Application\Sonata\AdminBundle\Controller\ActiveTableOrderAdmin">
+          <tag name="sonata.admin" manager_type="orm" group="Restaurant" label="restaurant.tableOrder.label"/>
+          <argument />
+          <argument>Table\RestaurantBundle\Entity\ActiveTableOrder</argument>
+          <argument>SonataAdminBundle:CRUD</argument>
+          <call method="setTranslationDomain">
+              <argument>ApplicationSonataAdminBundle</argument>
+          </call>
+          <call method="setTemplate">
+              <argument>list</argument>
+              <argument>ApplicationSonataAdminBundle:CRUD:list.html.twig</argument>
+          </call>
+      </service>
+      <service id="sonata.admin.restaurantSchedule" class="Application\Sonata\AdminBundle\Controller\RestaurantScheduleAdmin">
+          <tag name="sonata.admin" manager_type="orm" group="Restaurant" label="restaurant.schedule.schedule"/>
+          <argument />
+          <argument>Table\RestaurantBundle\Entity\RestaurantSchedule</argument>
+          <argument>SonataAdminBundle:CRUD</argument>
+          <call method="setTranslationDomain">
+              <argument>ApplicationSonataAdminBundle</argument>
+          </call>
+      </service>
+      <service id="sonata.admin.city" class="Application\Sonata\AdminBundle\Controller\CityAdmin">
+          <tag name="sonata.admin" manager_type="orm" group="Restaurant" label="restaurant.city.city"/>
+          <argument />
+          <argument>Table\RestaurantBundle\Entity\City</argument>
+          <argument>SonataAdminBundle:CRUD</argument>
+          <call method="setTranslationDomain">
+              <argument>ApplicationSonataAdminBundle</argument>
+          </call>
+      </service>
+      <service id="sonata.admin.restaurantAdditionalPhoto" class="Application\Sonata\AdminBundle\Controller\RestaurantAdditionalPhotoAdmin">
+          <tag name="sonata.admin" manager_type="orm" group="Photos" label="restaurant.photo.additional"/>
+          <argument />
+          <argument>Table\RestaurantBundle\Entity\RestaurantAdditionalPhoto</argument>
+          <argument>SonataAdminBundle:CRUD</argument>
+          <call method="setTranslationDomain">
+              <argument>ApplicationSonataAdminBundle</argument>
+          </call>
+      </service>
+      <service id="sonata.admin.restaurantMenuPhoto" class="Application\Sonata\AdminBundle\Controller\RestaurantMenuPhotoAdmin">
+          <tag name="sonata.admin" manager_type="orm" group="Photos" label="restaurant.photo.menu"/>
+          <argument />
+          <argument>Table\RestaurantBundle\Entity\RestaurantMenuPhoto</argument>
+          <argument>SonataAdminBundle:CRUD</argument>
+          <call method="setTranslationDomain">
+              <argument>ApplicationSonataAdminBundle</argument>
+          </call>
+      </service>
+      <service id="sonata.admin.news" class="Application\Sonata\AdminBundle\Controller\NewsAdmin">
+          <tag name="sonata.admin" manager_type="orm" group="Restaurant" label="restaurant.news.news"/>
+          <argument />
+          <argument>Table\RestaurantBundle\Entity\News</argument>
+          <argument>SonataAdminBundle:CRUD</argument>
+          <call method="setTranslationDomain">
+              <argument>ApplicationSonataAdminBundle</argument>
+          </call>
+      </service>
+   </services>
+</container>

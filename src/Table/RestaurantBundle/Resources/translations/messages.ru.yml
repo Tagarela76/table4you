@@ -1,0 +1,136 @@
+validation:
+  errors:
+    restaurant:
+      additionalServices:
+        Unable to find restaurant additional service: Нет результата
+      category:
+        Unable to find restaurant categories: Нет результата
+      Unable to find restaurants: Нет результата
+      Unable to find cities: Нет результата
+      Restaurant not found: Ресторан не найден
+      kitchen:
+        Unable to find restaurant kitchens: Нет результата
+      news:
+        Unable to find news: Нет результата  
+        News not found: Новость не найдена
+      tableOrder:
+        Unable to find order: Нет результата  
+        Cannot reserve: Вы не можете забронировать этот стол на текущее время.
+        Rating is disabled: Вы уже выставляли рейтинг более чем двум заведениям сегодня
+        Rating not found: Укажите рейтинг
+        Rating is has already set: Для этого заведения уже был выставлен рейтинг сегодня
+        Cannot reserve this table: Данный стол уже забронирован на выбранное вами время.
+        Table not found: Стол, который вы хотите забронировать не найден.
+    city:
+        Unable to find cities: Нет результата
+main:
+  order:
+      form:
+        error:
+          incorrectTableNumber: Неправильный номер стола  
+        label:
+          captcha: Captcha
+          reserveDate: "Дата:"
+          reserveTime: "Время:"
+          tableNumber: "Номер столика:"
+          peopleCount: "Количество гостей:"
+          floor: Этаж
+          isSms: sms
+          isEmail: e-mail
+          notice: "Напомнить по:"
+          submit: Reserve
+          confirmDeleteOrderMessage: "Вы действительно хотите удалить резервирование столика и уведомить клиента об отмене его заказа?"
+          confirmDeleteOrderOK: "Удалить"
+          confirmDeleteOrderCancel: "Отмена"
+        placeholder:
+          wish: "Ваши пожелания"
+        message:
+          success: Спасибо! Ваш стол успешно забронирован, приятного отдыха.
+      history:
+        search: "Поиск:"
+        date: "Дата:"
+        time: "Время:"
+        name: "Название:"
+        rating: "Рейтинг:"
+      notification:
+        dear: Уважаемый
+        userCannotOrderTable: "наш сервис позволяет забронировать не более одного столика на одно и тоже время. Выберите другое время или дату."
+        cannotOrderCurrentTable: "Данный стол уже забронирован на выбранное вами время." 
+        invalidTableOrderTime: "Невозможно забронировать стол на выбранное вами время." 
+  restaurant:
+      response:
+        nothingFound: "По вашему запросу ничего не найдено."
+      label:
+          top: Топ заведений
+  tableMap:
+      tableList:
+        header: Список столов 
+        add: Добавить столик
+        tableOn: Столик на
+        form:
+            label:
+                tableOn: Столик на
+                numberOfPlaces: мест(а)
+                addMore: Добавить еще
+                load: Загрузить
+                selectTheFile: Выбрать файл
+            error:
+                peopleCount: Укажите кол-во гостей
+            errors: Ошибки при заполении формы
+        choiceTable: Выбрать столик    
+        addTable: Добавить стол  
+      createMap:
+        header: Создать карту
+        restaurantList: Выбрать ресторан
+        changeLocationTable: Вы можете изменить место положения стола, либо удалить его.
+        form: 
+            label:
+                loadMap: Загрузить карту
+                floor: Указать этаж
+                hall: Указать номер зала
+                save: Применить
+                tableNumber: Номер стола
+                title: Разместить стол на карте
+                cancel: Отмена
+                selectTheFile: Выбрать файл
+                addMore: Добавить еще
+            error:
+                floor: Укажите этаж
+                numberTable: Укажите номер стола
+                file: Формат должен быть jpg и png
+                mapError: файл должен быть формата jpg или png
+            errors: Ошибки при заполении формы  
+        floor: этаж.
+        hall: зал
+        editRestaurant: Редактирование карты ресторана
+        edit: Редактировать
+        save: Сохранить
+        table: Стол
+        cancel: Отменить
+      orders:
+        header: Заказы
+        restaurant: Ресторан
+        viewOrder: режим просмотра заказов
+        list:
+            table: Стол
+            persons: персоны
+            date: Дата
+            timeFrom: Время с
+            filter: Фильтровать
+            reserve: Резервировать
+            cancel: Отменить
+        form:
+            label:
+                date: "Дата:"
+                time: "Время:"
+                peopleCount: Количество человек
+                customerData: "Данные о клиенте:"
+                customerName: Имя
+                customerLastName: Фамилия
+                customerPhone: Телефон
+                customerEmail: E-mail
+                smsNotification: sms
+                emailNotification: e-mail
+                comment: Комментарий
+                reserve: Бронировать    
+          

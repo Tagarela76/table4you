@@ -1,0 +1,63 @@
+{% extends 'TableMainBundle::layout_table_editor.html.twig' %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(function() {
+            {% if tableMapObj is not null %}
+                // load Map Scheme as background
+                {% if tableMapObj.file is not null %}
+                    page.tableOrder.loadMapSchemeAdmin("{{baseUrl}}{{ vich_uploader_asset(tableMapObj, 'file') }}");
+                {% endif %}
+            {% endif %}
+        });    
+    </script>
+{% endblock %}    
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}    
+{% block content %}
+    <div class="container-fluid">
+        <div class="row-fluid">
+            {% include 'TableRestaurantBundle:TableDashboard:tableMapTabs.html.twig' %} 
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="order-choose-restaurant">{% trans %}main.tableMap.createMap.restaurantList{% endtrans %}</div>
+                <select name="restaurantId" id="restaurantId" onchange="page.tableOrder.refreshRestaurantList();">
+                    {% for restaurant in restaurantList %}  
+                        <option {% if restaurantId == restaurant.id %}selected{% endif %} value="{{restaurant.id}}">{{restaurant.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div> 
+    <div class="container-fluid tableMapContainer" id="tableMapContainer">
+        <div class="row-fluid">
+            <ul class="tab-on-the-floors">
+            {% for tableMap in tableMapList %}  
+
+                    <li {% if tableMap.id == mapId%} class="active" {% endif %}>
+                        <a href="{{ path('table_viewTableOrderList', {'restaurantId': restaurantId, 'mapId': tableMap.id}) }}">
+                            {{tableMap.floor}} {% trans %}main.tableMap.createMap.floor{% endtrans %}
+                            {% if tableMap.hall is not null  and tableMap.hall %}
+                                {{tableMap.hall}} {% trans %}main.tableMap.createMap.hall{% endtrans %}
+                            {% endif %}
+                        </a>
+                    </li>
+
+            {% endfor %}
+            </ul>
+        </div>
+        <div class="row-fluid" id="interactive-map-container">
+            <div id="table-map-image-container" class="span8">
+                {% include 'TableRestaurantBundle:TableDashboard:viewRefreshedBookedTableList.html.twig' %} 
+            </div>
+            <div class="span4" id="activeTableOrderContainer">
+                {% include 'TableRestaurantBundle:TableDashboard:viewActiveTableOrderFilter.html.twig' %} 
+            </div>
+            <input type="hidden" name="mapId" id="mapId" value="{{mapId}}" />
+        </div>
+    </div>
+{% endblock %}

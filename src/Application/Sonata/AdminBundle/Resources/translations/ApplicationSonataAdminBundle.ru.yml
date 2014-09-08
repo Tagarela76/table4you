@@ -1,0 +1,88 @@
+restaurant:
+  linkInAdminDashboard: Ссылка на создание/редактирование карты  
+  restaurant: Ресторан
+  restaurants: Рестораны
+  additionalServices: Дополнительные услуги
+  editor: Админ ресторана
+  kitchen:
+    kitchen: Кухня
+    kitchens: Кухни
+  category:
+    category: Категория
+    categories: Категории
+  schedule:
+    schedule: Расписание
+    day:
+      from: "Дни работы/От:"
+      to: "Дни работы/До:"
+  city:
+    city: Города
+  news:
+    news: Новости/Акции
+    title: Заголовок
+    content: Содержимое
+    restaurant: Ресторан
+    date:
+        start: Дата начала действия
+        end: Дата окончания действия
+    published: Публиковать
+    photo: Фото
+    
+  photo:
+      additional: Фото заведения
+      menu: Фото меню
+      file: Файл
+      fileName: Имя
+  tableOrder:
+    label: Заказ столика 
+    floor: Этаж
+    userName: Имя клиента
+    email: E-mail
+    phone: Номер телефона
+    restaurantName: Название заведения
+    date: Дата бронирования
+    time: Время бронирования
+    tableNumber: Номер столика
+    peopleCount: Кол-во гостей
+    wish: Пожелания  
+    status: Статус заказа 
+    isSms: Уведомление через sms
+    isEmail: Уведомление через e-mail
+    tableNumber: Номер столика
+  floors: Количество этажей  
+  workHours:
+      from: Часы работы(от)
+      to: Часы работы(до)
+  email: E-mail
+  phone: Телефон
+  description: Описание
+Name: Название
+address:
+  city: Город
+  street: 
+    label: Улица
+    help: "Указывайте только название улицы без слов 'улица', 'ул.' и подобное"    
+  house: Номер дома  
+Category Id: Категория
+Photo: Фото * # HTML5 validation does not show error on this field. See #5512 in Redmine
+Additional Services: Дополнительные услуги
+Restaurant List: Список ресторанов
+Restaurant Category List: Список категорий ресторана
+Restaurant Kitchen List: Список кухонь
+Restaurant Additional Service List: Список дополнительных услуг
+Map Photo:  Карта ресторана
+Table Order List: Заказ столиков
+Active Table Order List: Заказ столиков
+Restaurant Schedule List: Список расписаний ресторана
+City List: Список городов
+Restaurant Additional Photo List: Список фото заведения
+Restaurant Menu Photo List: Список фото меню заведения
+News List: Новости/Акции
+main:
+  mail:
+    tableOrder:
+      notification:
+        reject:
+          subject: "отказ бронирования"
+        accept:
+          subject: "подтверждение бронирования"

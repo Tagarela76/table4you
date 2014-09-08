@@ -1,0 +1,33 @@
+Table\RestaurantBundle\Entity\Restaurant:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            serialized_name: id
+        name:
+            expose: true
+            serialized_name: name
+        longitude:
+            expose: true
+            serialized_name: longitude
+        latitude:
+            expose: true
+            serialized_name: latitude    
+        photo:
+            expose: true
+            serialized_name: photo     
+        category:
+            expose: true
+            serialized_name: category  
+        kitchens:
+            expose: true
+            serialized_name: kitchens
+        city:     
+            expose: true
+            serialized_name: city
+        street:     
+            expose: true
+            serialized_name: street
+        house:     
+            expose: true
+            serialized_name: house    

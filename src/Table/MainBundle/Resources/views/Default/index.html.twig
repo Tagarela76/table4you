@@ -1,22 +1,39 @@
 {% extends 'TableMainBundle::layout.html.twig' %}
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-{% endblock %}      
-{% block content %}
-    <a class="btn btn-primary" data-toggle="modal" data-target="#register" href="{{ path('fos_user_registration_register') }}">
-        {% trans %}main.register{% endtrans %}
-    </a>
-    <div class="modal hide modal-registration" data-backdrop="static" id="register">
-
-        <div class="modal-header modal-registration-title">
-            <a class="close" data-dismiss="modal"></a>
-            <img id="registrationPreloader" style="display: none;" src="{{ asset('bundles/tablemain/images/ajax-loader.gif') }}" />
-            <h3>{% trans %}main.registerFormTitle{% endtrans %}</h3>
-        </div>
-        <div class="modal-body" >
-
-        </div>
-    </div>
+<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+<script src="{{ asset('bundles/tablemain/js/jquery.bootstrap-growl.js') }}"></script>
+<script>
+    $(function(){ 
+        {% if confirmed %}
+            $.bootstrapGrowl("{% trans from "FOSUserBundle" %}registration.confirmed{% endtrans %}", {
+                ele: 'body', // which element to append to
+                type: 'success', // (null, 'info', 'error', 'success')
+                offset: {from: 'top', amount: 100}, // 'top', or 'bottom'
+                align: 'center', // ('left', 'right', or 'center')
+                width: 816, // (integer, or 'auto')
+                delay: 4500, // Time while the message will be displayed. It's not equivalent to the *demo* timeOut!
+                allow_dismiss: true, // If true then will display a cross to close the popup.
+                stackup_spacing: 10 // spacing between consecutively stacked growls.
+            });
+        {% endif %}
+        // Rating
+        page.rating.initRating();
+        
+        // Infinite  ajax loading
+        page.infiniteLoad.initLoading('restaurant');
+    });
+        
+</script>    
+{# infinitive scrolling #}
+{% endblock %}    
+{% block stylesheets %}
+    {{ parent() }}
+    
+{% endblock %}    
+{% block content %}  
+    <div class="container-fluid" id="restaurantList_main">
+        {% include 'TableRestaurantBundle:Default:restaurantList.html.twig' %}
+    </div>  
 {% endblock %}    

@@ -1,0 +1,13 @@
+<div class="tabs-profile-page">
+    <a  href="{{ path('table_order_history') }}" {% if app.request.attributes.get('_route') == "table_order_history" %} class="active" {% endif %}>
+        {% trans %}main.order.buttonLabel{% endtrans %}
+    </a>
+    <a  href="{{ path('fos_user_profile_show') }}" {% if app.request.attributes.get('_route') == "fos_user_profile_show" %} class="active" {% endif %}>
+        {% trans %}main.profile.buttonLabel{% endtrans %}
+    </a>
+    {% if adminRestaurantId %}
+        <a  href="{{ path('table_viewTableOrderList', {'restaurantId': adminRestaurantId}) }}">
+            {% trans %}main.tableMap.buttonLabel{% endtrans %}
+        </a>
+    {% endif %}
+</div>

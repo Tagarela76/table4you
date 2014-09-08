@@ -2,6 +2,48 @@ parameters:
 #    table_main.example.class: Table\MainBundle\Example
 
 services:
-#    table_main.example:
-#        class: %table_main.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+  restaurant_manager:
+        class: Table\RestaurantBundle\Model\RestaurantManager
+        arguments: [@doctrine.orm.entity_manager, @service_container]   
+  restaurant_category_manager:
+        class: Table\RestaurantBundle\Model\RestaurantCategoryManager
+        arguments: [@doctrine.orm.entity_manager, @service_container]    
+  restaurant_kitchen_manager:
+        class: Table\RestaurantBundle\Model\RestaurantKitchenManager
+        arguments: [@doctrine.orm.entity_manager, @service_container] 
+  restaurant_additional_service_manager:
+        class: Table\RestaurantBundle\Model\RestaurantAdditionalServiceManager
+        arguments: [@doctrine.orm.entity_manager, @service_container]     
+  table_order_manager:
+        class: Table\RestaurantBundle\Model\TableOrderManager
+        arguments: [@doctrine.orm.entity_manager, @service_container]   
+  rating_stat_manager:
+        class: Table\RestaurantBundle\Model\RatingStatManager
+        arguments: [@doctrine.orm.entity_manager, @service_container]    
+  common_manager:
+        class: Table\MainBundle\Model\CommonManager
+        arguments: [@doctrine.orm.entity_manager, @service_container]  
+  city_manager:
+        class: Table\RestaurantBundle\Model\CityManager
+        arguments: [@doctrine.orm.entity_manager, @service_container]      
+  sms_manager:
+        class: Table\MainBundle\Model\SMSManager
+        arguments: [@doctrine.orm.entity_manager, @service_container]    
+  news_manager:
+        class: Table\RestaurantBundle\Model\NewsManager
+        arguments: [@doctrine.orm.entity_manager, @service_container]
+  table_type_manager:
+        class: Table\RestaurantBundle\Model\TableTypeManager
+        arguments: [@doctrine.orm.entity_manager, @service_container] 
+  table_map_manager:
+        class: Table\RestaurantBundle\Model\TableMapManager
+        arguments: [@doctrine.orm.entity_manager, @service_container] 
+  active_table_manager:
+        class: Table\RestaurantBundle\Model\ActiveTableManager
+        arguments: [@doctrine.orm.entity_manager, @service_container]       
+  active_table_order_manager:
+        class: Table\RestaurantBundle\Model\ActiveTableOrderManager
+        arguments: [@doctrine.orm.entity_manager, @service_container]        
+  helper_manager:
+        class: Table\RestaurantBundle\Model\HelperManager
+        arguments: [@doctrine.orm.entity_manager, @service_container]     

@@ -1,0 +1,186 @@
+{% extends 'TableMainBundle::layout.html.twig' %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/tablemain/flexSlider/js/jquery.barousel.js') }}"></script>
+    <script src="{{ asset('bundles/tablemain/flexSlider/js/jquery.thslide.js') }}"></script>
+    <script src="{{ asset('bundles/tablemain/flexSlider/js/modernizr.js') }}"></script>
+    <!-- Syntax Highlighter -->
+    <script src="{{ asset('bundles/tablemain/flexSlider/js/shCore.js') }}"></script>
+    <script src="{{ asset('bundles/tablemain/flexSlider/js/shBrushXml.js') }}"></script>
+    <script src="{{ asset('bundles/tablemain/flexSlider/js/shBrushJScript.js') }}"></script>
+
+    {# FANCYBOX #}
+    <script src="{{ asset('bundles/tablemain/fancy-box/jquery.fancybox.pack.js') }}"></script>
+    <!-- Optionally add helpers - button, thumbnail and/or media -->
+    <script src="{{ asset('bundles/tablemain/fancy-box/helpers/jquery.fancybox-buttons.js') }}"></script>
+    <script src="{{ asset('bundles/tablemain/fancy-box/helpers/jquery.fancybox-media.js') }}"></script>
+    <script src="{{ asset('bundles/tablemain/fancy-box/helpers/jquery.fancybox-thumbs.js') }}"></script>
+    {# FANCYBOX #}
+    <script>
+        // Slider
+        $(function(){
+          SyntaxHighlighter.all();
+        });
+
+        $(function() {       
+            // Rating
+            page.rating.initRating();
+
+            // fancyBOX
+            $("a.restaurantAdditionalPhotos").fancybox({
+                    prevEffect	: 'none',
+                    nextEffect	: 'none',
+                    padding: 0,
+                    helpers	: {
+                            title	: {
+                                    type: 'outside'
+                            },
+                            thumbs	: {
+                                    width	: 50,
+                                    height	: 50
+                            }
+                    }
+            });
+
+            $("a.restaurantMenuPhotos").fancybox({
+                    prevEffect	: 'none',
+                    nextEffect	: 'none',
+                    padding: 0,
+                    helpers	: {
+                            title	: {
+                                    type: 'outside'
+                            },
+                            thumbs	: {
+                                    width	: 50,
+                                    height	: 50
+                            }
+                    }
+            });
+        });
+
+        $(document).ready(function () {
+            //BAROUSEL + THSLIDE - CUSTOM NAVIGATION ( MENUS )
+            $('#barousel_thslide_add_photos').barousel({
+                navWrapper: '#thslide_barousel_nav_add_photos .thslide_list',
+                manualCarousel: 1,
+                navType: 3
+            });
+
+            $('#thslide_barousel_nav_add_photos').thslide({
+                itemOffset: 192,
+                infiniteScroll: 1,
+                itemVisible: 2
+            });
+
+            //BAROUSEL + THSLIDE - CUSTOM NAVIGATION ( ADDITIONAL PHOTOS )
+            $('#barousel_thslide_menus').barousel({
+                navWrapper: '#thslide_barousel_nav_menus .thslide_list',
+                manualCarousel: 1,
+                navType: 3
+            });
+
+            $('#thslide_barousel_nav_menus').thslide({
+                itemOffset: 86,
+                infiniteScroll: 1,
+                itemVisible: 5
+            });
+        });
+
+    </script> 
+    {# Rating #}
+{% endblock %}    
+{% block stylesheets %}
+    {{ parent() }}
+    {# SLIDER #}
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/flexSlider/css/barousel.css') }}">
+    {# SLIDER #}
+
+    {# FANCYBOX #}
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/fancy-box/jquery.fancybox.css') }}">
+    <!-- Optionally add helpers - button, thumbnail and/or media -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/fancy-box/helpers/jquery.fancybox-buttons.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/fancy-box/helpers/jquery.fancybox-thumbs.css') }}">
+    {# FANCYBOX #}
+{% endblock %}    
+{% block content %}
+<div class="container-fluid" id="restaurantList_main">
+    {#restaurant profile #}
+    {% include 'TableRestaurantBundle:Default:restaurant.html.twig' %}  
+        {# TABS #}
+    <div class="tabbable">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#barousel_thslide_add_photos" data-toggle="tab">{% trans %}main.labels.photos.additional{% endtrans %}</a>
+            </li>
+            <li>
+                <a href="#barousel_thslide_menus" data-toggle="tab">{% trans %}main.labels.photos.menu{% endtrans %}</a>
+            </li>
+            <li>
+                <a href="#description" data-toggle="tab">{% trans %}main.labels.description{% endtrans %}</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div id="barousel_thslide_add_photos" class="barousel tab-pane active">
+                <div class="barousel_image">
+                    {% for additionalPhoto in additionalPhotos %}
+                            <a class="restaurantAdditionalPhotos" rel="restaurantAdditionalPhotos" href="{{baseUrl}}{{ additionalPhoto }}">
+                                <img src="{{baseUrl}}{{ additionalPhoto }}" class="default"/>
+                            </a>
+                    {% endfor %}
+                </div>
+                <div id="thslide_barousel_nav_add_photos" class="thslide">
+                    <div class="thslide_nav_previous">
+                        <input type="button" />
+                    </div>
+                    <div class="thslide_list">
+                        <ul>
+                            {% for additionalPhoto in additionalPhotos %}
+                                <li>
+                                    <a href="#"><img src="{{baseUrl}}{{additionalPhoto}}" /></a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="thslide_nav_next">
+                        <input type="button"/>
+                    </div>
+                </div>
+            </div>
+            <div id="barousel_thslide_menus" class="barousel tab-pane">
+                <div class="barousel_image">
+                    {% for menuPhoto in menuPhotos %}
+                            <a class="restaurantMenuPhotos" rel="restaurantMenuPhotos" href="{{baseUrl}}{{ menuPhoto }}">
+                                <img src="{{baseUrl}}{{ menuPhoto }}" class="default"/>
+                            </a>
+
+                    {% endfor %}
+                </div>
+                <div id="thslide_barousel_nav_menus" class="thslide">
+                    <div class="thslide_nav_previous">
+                        <input type="button" />
+                    </div>
+                    <div class="thslide_list">
+                        <ul>
+                            {% for menuPhoto in menuPhotos %}
+                                <li>
+                                    <a href="#"><img src="{{baseUrl}}{{menuPhoto}}" /></a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="thslide_nav_next">
+                        <input type="button"/>
+                    </div>
+                </div>
+            </div>
+
+            <div id="description" class="tab-pane">
+                <hr>
+                <p>{% trans %}main.labels.description{% endtrans %}</p>
+                <p>{{ restaurant.description }}</p>
+            </div>
+        </div>
+    </div>
+    {# TABS #}
+</div>
+{% endblock %}    

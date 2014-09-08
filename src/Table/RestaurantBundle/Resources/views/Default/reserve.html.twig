@@ -1,0 +1,212 @@
+
+<script src="{{ asset('bundles/tablemain/js/jquery-ui-1.10.3.custom.js') }}"></script>
+<script src="{{ asset('bundles/applicationsonatauser/js/jquery.form.js') }}"></script>
+<script src="{{ asset('bundles/tablemain/js/cusel-min-2.5.js') }}"></script>
+<script src="{{ asset('bundles/tablerestaurant/js/common.js') }}"></script>
+<script>
+    // Reload if click close
+    $(function() {
+        $("#reserve_{{ restaurant.id }} a.close").click(function() {
+            location.reload();
+        });
+    });
+    $(function() {
+        page.tableOrder.initFancySelectBox();
+
+        $.datepicker.setDefaults($.datepicker.regional['ru']);
+        $('.reserveDate').datepicker({
+            dateFormat: 'yy-mm-dd',
+            altField: "#activeTableOrderForm_reserveDate",
+            altFormat: "yy-mm-dd",
+            //minDate: '0',
+            maxDate: '+1m', 
+            onSelect: function(filterDate) {
+                page.tableOrder.refreshBookedTableListInClientDashboard({{restaurant.id}}, filterDate);
+            }
+        });
+        // Set DateTime
+        $(".reserveDate").datepicker('setDate', '{{reserveDate}}');
+        // Refresh table List
+        page.tableOrder.refreshBookedTableListInClientDashboard({{restaurant.id}}, '{{reserveDate}}');
+
+        $('#table-order-form_' + {{restaurant.id}}).submit(function() {
+            $(this).ajaxSubmit({
+                type: 'post',
+                beforeSubmit: function() {
+                    $("#reservePreloader").show();
+                },
+                success: function(response) {
+                    $("#reservePreloader").hide();
+                    $("#table-order-form-container_" + {{restaurant.id}}).html(response);
+                    // Get captcha img id
+                    var captchaImgId = $('#table-order-form_{{restaurant.id}} div.captcha-img img').attr("id");
+                    // Reload captcha pprogrammatically
+                    var func = "reload_" +captchaImgId;
+                    eval( func )();
+                }
+            });
+            return false;
+        });
+        {# Bind change on time container #}
+            $('#activeTableOrderForm_reserveTime_hour').change(function() {
+               page.tableOrder.refreshBookedTableListInClientDashboard({{restaurant.id}}, $("#activeTableOrderForm_reserveDate").val());
+            });
+            $('#activeTableOrderForm_reserveTime_minute').change(function() {
+               page.tableOrder.refreshBookedTableListInClientDashboard({{restaurant.id}}, $("#activeTableOrderForm_reserveDate").val());
+            });
+        {# Bind change on time container #} 
+            
+        {# Bind change on tableNumber container #}
+            $('#activeTableOrderForm_tableNumber').keyup(function() {
+               page.tableOrder.enterTableNumberByHand(this);
+            });
+        {# Bind change on tableNumber container #}      
+    });
+</script>
+
+  
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/jquery-ui-1.10.3.custom.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/tablemain/css/cusel.css') }}">
+
+{# Render success message #}
+{% if successReserve %}
+    <script>
+        $(function() {
+            setTimeout(function () { 
+                location.reload();
+            }, 5000);
+        });
+    </script>
+<div class="alert">
+    {% trans %}main.order.form.message.success{% endtrans %}
+</div>
+{% else %}
+<div id="table-order-form-container_{{restaurant.id}}" class="table-order-form-container">  
+    {% for type, messages in app.session.flashBag.all %}
+        {% for message in messages %}
+            <div class="{{ type }}">
+               {{ message|trans({}, 'FOSUserBundle') }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    <form novalidate id="table-order-form_{{restaurant.id}}" action="{{ path('table_order_reserve', {'id': restaurant.id}) }}" {{ form_enctype(form) }} method="POST" class="table-order-form">
+    {{ form_start(form) }}
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span5">
+                    <div class="row-fluid">
+                        {{ form_label(form.reserveDate) }}
+                        <div class="reserveDate"></div>        
+                        {{ form_errors(form.reserveDate) }}
+                        {% if form.reserveDate.vars.errors|length %}
+                            {{ form_widget(form.reserveDate, {'attr':{'class':'error-form-reserve'} }) }}
+                        {%  else %}
+                            {{ form_widget(form.reserveDate) }}
+                        {% endif %}
+                    </div>
+                    <div class="row-fluid label-font-size-modal">
+                        {{ form_label(form.reserveTime) }}
+                        {{ form_errors(form.reserveTime) }}
+                        {% if form.reserveTime.vars.errors|length %}
+                            {{ form_widget(form.reserveTime, {'attr':{'class':'error-form-reserve'} }) }}
+                        {%  else %}
+                            {{ form_widget(form.reserveTime) }}
+                        {% endif %}
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div class="span3 label-font-size_modal reserve-table-number">
+                                {{ form_label(form.tableNumber) }}
+                                {% if form.tableNumber.vars.errors|length %}
+                                    {{ form_widget(form.tableNumber, {'attr':{'class':'error-form-reserve'} }) }}
+                                {%  else %}
+                                    {{ form_widget(form.tableNumber) }}
+                                {% endif %}
+                                {{ form_errors(form.tableNumber) }}
+                            </div>
+                            <div class="span3 label-font-size_modal reserve-amount-persons">
+                                {{ form_label(form.peopleCount) }}
+                                {% if form.peopleCount.vars.errors|length %}
+                                    {{ form_widget(form.peopleCount, {'attr':{'class':'error-form-reserve'} }) }}
+                                {%  else %}
+                                    {{ form_widget(form.peopleCount) }}
+                                {% endif %}
+                                {{ form_errors(form.peopleCount) }}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="span6 restaurantTableMapContainer" id="restaurantTableMapContainer_{{restaurant.id}}">
+                    {% include 'TableRestaurantBundle:Default:viewTableMap.html.twig' with {'restaurantId': restaurant.id}%}
+                    {{ form_errors(form.activeTable) }}
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span5">
+                    <div class="choose-zone">
+                        <label>{% trans %}main.order.form.label.notice{% endtrans %}</label>
+                        <p>
+                            {% if form.isSms.vars.errors|length %}
+                                {{ form_widget(form.isSms, {'attr':{'class':'error-form-reserve'} }) }}
+                            {%  else %}
+                                {{ form_widget(form.isSms) }}
+                            {% endif %}
+                            {{ form_label(form.isSms) }}
+                            {{ form_errors(form.isSms) }}
+                        </p>
+                        <p>    
+                            {% if form.isEmail.vars.errors|length %}
+                                {{ form_widget(form.isEmail, {'attr':{'class':'error-form-reserve'} }) }}
+                            {%  else %}
+                                {{ form_widget(form.isEmail) }}
+                            {% endif %}
+                            {{ form_label(form.isEmail) }}
+                            {{ form_errors(form.isEmail) }}
+                        </p>
+                    </div>       
+                </div>
+                <div class="span6 reserver-texterea">
+                    <ul class="floor-tabs">
+                        {% for floorObj in floorList %}
+                            <li>
+                                <a restaurantId="{{restaurant.id}}" class="floors {% if floorObj.floor == tableMapObj.floor%}active{%endif%}" href="#" onclick="page.tableOrder.selectRestaurantMap(this, {{floorObj.floor}}); return false;">
+                                    {{ floorObj.floor }} {% trans %}main.order.form.label.floor{% endtrans %}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    {% if form.wish.vars.errors|length %}
+                        {{ form_widget(form.wish, {'attr':{'class':'error-form-reserve'} }) }}
+                    {%  else %}
+                        {{ form_widget(form.wish) }}
+                    {% endif %}
+                    {{ form_errors(form.wish) }}
+                </div>
+            </div> 
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="captcha-img">
+                        <div class="span5">
+                            {% if form.reserve_captcha.vars.errors|length %}
+                            {{ form_widget(form.reserve_captcha, {'attr':{'class':'error-form-reserve'} }) }}
+                            {%  else %}
+                                {{ form_widget(form.reserve_captcha) }}
+                            {% endif %}
+                            {{ form_errors(form.reserve_captcha) }}
+                        </div>
+                    </div>
+                    <div class="span6">
+                        <div class="button-reserve">
+                            {{ form_widget(form.activeTable) }}
+                            <input type="submit" value="{% trans %}main.order.form.label.submit{% endtrans %}" />
+                        </div>
+                        <img id="reservePreloader" style="display: none;" src="{{ asset('bundles/tablemain/images/ajax-loader.gif') }}" />
+                    </div>
+                </div>
+            </div> 
+        </div>
+    {{ form_end(form) }}
+    </form>    
+</div>
+{% endif %}

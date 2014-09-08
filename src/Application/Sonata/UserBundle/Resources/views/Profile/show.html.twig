@@ -1,0 +1,23 @@
+{% extends "TableMainBundle::layout.html.twig" %}
+{% block content %}
+    {% include "TableMainBundle:Component:profilePageTabs.html.twig" %}
+    <div class="sonata-user-show" id="restaurantList_main">
+        <p>
+            <span class="user-profile-label">{{ 'profile.show.username.label'|trans({}, 'SonataUserBundle') }}</span>
+            <span>{{ app.user.firstname }}</span>
+        </p>
+        <p>
+            <span class="user-profile-label">{{ 'profile.show.lastname.label'|trans({}, 'SonataUserBundle') }}</span>
+            <span>{{ app.user.lastname }}</span>
+        </p>
+        <p>
+            <span class="user-profile-label">{{ 'profile.show.email.label'|trans({}, 'SonataUserBundle') }}</span>
+            <span>{{ app.user.email }}</span>
+        </p>
+        <p>
+            <span class="user-profile-label">{{ 'profile.show.phone.label'|trans({}, 'SonataUserBundle') }}</span>
+            <span>{{ app.user.phone }}</span>
+        </p>
+        <a class="user-profile-but" href="{{ path('sonata_user_profile_edit') }}">{{ "profile.show.button.label" | trans({}, 'SonataUserBundle')}}</a>
+    </div>
+{% endblock content %}

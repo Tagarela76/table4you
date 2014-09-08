@@ -1,25 +1,44 @@
 # Registration
 form:
-    phone: 'Телефон:'
+    phone: 
+      label: 'Телефон:'
+      placeholder: '+7хххххххххх'
     lastname: 'Фамилия:'
+    captcha:
+      label: 'Проверочный код:'
+      description: Пожалуйста введите буквы, которые показаны на рисунке ниже.
+    username: 'Имя:'
 registration:
     check_email: На Ваш email отправлено письмо для подтверждения регистрации.
-    confirmed: Спасибо, что выбрали наш сайт. Ваш аакаунт успешно зарегистрирован.
+    confirmed: <div class='alert'>Спасибо, что выбрали наш сайт. Ваш аккаунт успешно зарегистрирован.</div>
     email:
         subject: Добро пожаловать %username%!
         message: |
-            Благодарим Вас за регистрацию на нашем сайте.
+            Благодарим Вас за регистрацию на нашем сервисе
 
             Ваши данные для входа на сайт: логин: %username%, пароль: %password%.
 
             Для подтверждения регистрации перейдите пожалуйста по ссылке %confirmationUrl%
 
-            %site_name% подтверждение регистрации или войдите на сайт
+            С наилучшими пожеланиями, Table4you.
 
-            С наилучшими пожеланиями,
-            команда сайта.
 
 # Security
 "Bad credentials userName": Вы указали неверное имя пользователя. Попробуйте ввести логин еще раз.
 "Bad credentials password": Вы указали неверный пароль. Попробуйте ввести пароль еще раз.
    
+validation:
+  errors:
+    user:
+      User not found: Пользователь не найден
+      Wrong password: Неправильный пароль
+      You should auth at first: Вы должны сначала залогиниться
+      This user does not have access to this section: Этот пользователь не имеет доступа к этой области
+      Password already requested: Пароль уже запрашивали
+      Bad token id: Не указан токен id
+      Name is blank: Укажите имя
+      
+security:
+  login:
+    forgot_password: "Забыли пароль?"   
+    email: "E-mail:"

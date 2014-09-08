@@ -10,5 +10,5 @@ use Symfony\Component\Validator\Constraint;
 class CustomPasswordStrength extends Constraint
 {
     public $message = 'password_to_weak';
-    public $length = 7;
+    public $canBeBlankGroup = "Profile";
 }

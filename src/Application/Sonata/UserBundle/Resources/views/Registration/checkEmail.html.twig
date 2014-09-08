@@ -1,5 +1,10 @@
-{% extends "TableMainBundle::layout.html.twig" %}
+{% extends "TableMainBundle::layout4modal.html.twig" %}
 
 {% block content %}
-    <p>{{ 'registration.check_email'|trans({'%email%': user.email}, 'FOSUserBundle') }}</p>
+    <div class="alert">{{ 'registration.check_email'|trans({'%email%': user.email}, 'FOSUserBundle') }}</div>
+    <script>
+        $(document).ready(function() {
+            $('.alert').parents('#register').addClass('registration-check-email').css('width', '816');
+        });
+    </script>
 {% endblock content %}
