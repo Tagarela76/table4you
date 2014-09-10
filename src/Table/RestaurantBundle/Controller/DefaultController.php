@@ -453,13 +453,15 @@ class DefaultController extends Controller
         $helper = $this->container->get('vich_uploader.templating.helper.uploader_helper');
         foreach ($restaurant->getAdditionalPhotos() as $additionalPhoto) {
             if (!is_null($additionalPhoto->getFileName())) {
-                $additionalPhotos[] = $helper->asset($additionalPhoto, 'file');
+                $additionalPhotos[] = $helper->asset($additionalPhoto, 'restaurant_additional_photo');
             }
         }
 
         foreach ($restaurant->getAdditionalMenuPhotos() as $menuPhoto) {
             if (!is_null($menuPhoto->getFileName())) {
-                $menuPhotos[] = $helper->asset($menuPhoto, 'file');
+                //var_dump($menuPhoto);die();
+                
+                $menuPhotos[] = $helper->asset($menuPhoto, 'restaurant_menu_photo');
             }
         }
 

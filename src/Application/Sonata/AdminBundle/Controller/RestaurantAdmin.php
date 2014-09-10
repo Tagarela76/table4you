@@ -64,7 +64,7 @@ class RestaurantAdmin extends Admin
         // set for photos restaurant
         foreach ($object->getAdditionalPhotos() as $additionalPhoto) {
             if (!is_null($additionalPhoto->getFile())) {
-                $imagePath = $helper->asset($additionalPhoto, 'file');
+                $imagePath = $helper->asset($additionalPhoto, 'restaurant_additional_photo');
                 // check if file exist
                 if (file_exists($imagePath)) {
                     // get thumb image name
@@ -81,8 +81,8 @@ class RestaurantAdmin extends Admin
         }
         // menu photos
         foreach ($object->getAdditionalMenuPhotos() as $menuPhoto) {
-            if (!is_null($additionalPhoto->getFile())) {
-                $imagePath = $helper->asset($menuPhoto, 'file');
+            if (!is_null($menuPhoto->getFile())) {
+                $imagePath = $helper->asset($menuPhoto, 'restaurant_menu_photo');
                 // check if file exist
                 if (file_exists($imagePath)) {
                     // get thumb image name
