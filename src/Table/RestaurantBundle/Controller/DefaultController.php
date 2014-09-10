@@ -459,8 +459,6 @@ class DefaultController extends Controller
 
         foreach ($restaurant->getAdditionalMenuPhotos() as $menuPhoto) {
             if (!is_null($menuPhoto->getFileName())) {
-                //var_dump($menuPhoto);die();
-                
                 $menuPhotos[] = $helper->asset($menuPhoto, 'restaurant_menu_photo');
             }
         }
