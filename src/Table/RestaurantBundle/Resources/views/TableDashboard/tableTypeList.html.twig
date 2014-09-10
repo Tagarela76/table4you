@@ -2,7 +2,7 @@
     {% if tableType.peopleCount !=0 %}
         <div class="row-fluid">
             <div class="span12">
-                <div><img src="{{baseUrl}}{{ vich_uploader_asset(tableType, 'file') }}" alt="{{ tableType.peopleCount }}" /></div>
+                <div><img src="{{baseUrl}}{{ vich_uploader_asset(tableType, 'table_type') }}" alt="{{ tableType.peopleCount }}" /></div>
                 <div>{% trans %}main.tableMap.tableList.tableOn{% endtrans %} {{ tableType.peopleCount }}</div>
                 <div>
                     <p>
