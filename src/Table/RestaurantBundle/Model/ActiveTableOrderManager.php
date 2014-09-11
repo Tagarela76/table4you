@@ -189,7 +189,7 @@ class ActiveTableOrderManager
             $logo = $this->container->getParameter('site_url') . 'uploads/t4ylogo.png';
             $message = \Swift_Message::newInstance()
                     ->setSubject($subject)
-                    ->setFrom(array('info@table4you.com' => 'Table4You'))
+                    ->setFrom(array('info@table4you.com'=>'Table4You'))
                     ->setTo($userEmail)
                     ->setBody(
                     $this->container->get('templating')->render(
@@ -237,7 +237,7 @@ class ActiveTableOrderManager
             $logo = $this->container->getParameter('site_url') . 'uploads/t4ylogo.png';
             $message = \Swift_Message::newInstance()
                     ->setSubject($subject)
-                    ->setFrom(array('info@table4you.com' => 'Table4You'))
+                    ->setFrom(array('info@table4you.com'=>'Table4You'))
                     ->setTo($userEmail)
                     ->setBody(
                     $this->container->get('templating')->render(
@@ -283,7 +283,7 @@ class ActiveTableOrderManager
         $logo = $this->container->getParameter('site_url') . 'uploads/t4ylogo.png';
         $message = \Swift_Message::newInstance()
                 ->setSubject($subject)
-                ->setFrom(array('info@table4you.com' => 'Table4You'))
+                ->setFrom(array('info@table4you.com'=>'Table4You'))
                 ->setTo($adminEmail)
                 ->setBody(
                 $this->container->get('templating')->render(
