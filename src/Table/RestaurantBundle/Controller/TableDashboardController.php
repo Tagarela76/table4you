@@ -385,7 +385,7 @@ class TableDashboardController extends Controller
             $em->flush();    
             // resize image
             $helper = $this->container->get('vich_uploader.templating.helper.uploader_helper');
-            $imagePath = getcwd() . $helper->asset($tableMap, 'file');
+            $imagePath = getcwd() . $helper->asset($tableMap, 'table_map');
             
             // check if file exist
             if (file_exists($imagePath) && getimagesize($imagePath)) {
