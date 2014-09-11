@@ -3,7 +3,7 @@
         {% if tableMapObj is not null %}
             // load Map Scheme as background
             {% if tableMapObj.file is not null %}
-                page.tableOrder.loadMapScheme({{restaurantId}}, "{{baseUrl}}{{ vich_uploader_asset(tableMapObj, 'file') }}");
+                page.tableOrder.loadMapScheme({{restaurantId}}, "{{baseUrl}}{{ vich_uploader_asset(tableMapObj, 'table_map') }}");
             {% endif %}
         {% endif %}
     });
