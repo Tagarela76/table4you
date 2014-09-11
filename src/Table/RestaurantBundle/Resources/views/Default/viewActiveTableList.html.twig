@@ -9,7 +9,7 @@
              transform: rotate({{activeTable.angle}}deg);
              height: {{ constant('IMAGE_HEIGHT_CLIENT_SIDE', activeTable) }} px;
              width: {{ constant('IMAGE_WIDTH_CLIENT_SIDE', activeTable) }}px;"
-             src="{{baseUrl}}{{ vich_uploader_asset(activeTable.tableType, 'file') }}"  />
+             src="{{baseUrl}}{{ vich_uploader_asset(activeTable.tableType, 'taple_type') }}"  />
         {#BOOKED TABLE #}
     {% else %}
         {#FREE TABLE #}
@@ -22,7 +22,7 @@
              transform: rotate({{activeTable.angle}}deg);
              height: {{ constant('IMAGE_HEIGHT_CLIENT_SIDE', activeTable) }} px;
              width: {{ constant('IMAGE_WIDTH_CLIENT_SIDE', activeTable) }}px;"
-             src="{{baseUrl}}{{ vich_uploader_asset(activeTable.tableType, 'file') }}"  />
+             src="{{baseUrl}}{{ vich_uploader_asset(activeTable.tableType, 'taple_type') }}"  />
     {% endif %}
 {% endfor %}
 
