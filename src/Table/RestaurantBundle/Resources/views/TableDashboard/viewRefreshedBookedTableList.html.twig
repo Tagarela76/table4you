@@ -4,14 +4,14 @@
         <img title="{{activeTable.tableNumber}} {% trans %}main.tableMap.createMap.table{% endtrans %}" id="tableContainer_{{activeTable.id}}" 
             onclick='page.tableOrder.loadOrderList({{activeTable.id}}, 0);' class="active-table-img active-table-booked"
             style="left: {{activeTable.leftPosition}}px; top: {{activeTable.topPosition}}px; -webkit-transform: rotate({{activeTable.angle}}deg); transform: rotate({{activeTable.angle}}deg);"
-            tabletypeid='{{activeTable.tableType.id}}' tableNumber='{{activeTable.tableNumber}}' src="{{baseUrl}}{{ vich_uploader_asset(activeTable.tableType, 'file') }}"  />
+            tabletypeid='{{activeTable.tableType.id}}' tableNumber='{{activeTable.tableNumber}}' src="{{baseUrl}}{{ vich_uploader_asset(activeTable.tableType, 'table_type') }}"  />
         {#BOOKED TABLE #}
     {% else %}
         {#FREE TABLE #}
         <img title="{{activeTable.tableNumber}} {% trans %}main.tableMap.createMap.table{% endtrans %}" id="tableContainer_{{activeTable.id}}" 
             onclick='page.tableOrder.loadOrderList({{activeTable.id}}, 1);' class="active-table-img active-table-free"
             style="left: {{activeTable.leftPosition}}px; top: {{activeTable.topPosition}}px; -webkit-transform: rotate({{activeTable.angle}}deg); transform: rotate({{activeTable.angle}}deg);"
-            tabletypeid='{{activeTable.tableType.id}}' tableNumber='{{activeTable.tableNumber}}' src="{{baseUrl}}{{ vich_uploader_asset(activeTable.tableType, 'file') }}"  />
+            tabletypeid='{{activeTable.tableType.id}}' tableNumber='{{activeTable.tableNumber}}' src="{{baseUrl}}{{ vich_uploader_asset(activeTable.tableType, 'table_type') }}"  />
         {#FREE TABLE #}
     {% endif %}
 {% endfor %} 
