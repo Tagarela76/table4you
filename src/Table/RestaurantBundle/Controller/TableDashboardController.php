@@ -46,7 +46,8 @@ class TableDashboardController extends Controller
         $filterTime = $this->getRequest()->query->get('filterTime');
         
         // transform to date time
-        $dateTime = new \DateTime($filterDate . " " . $filterTime, new \DateTimeZone(ActiveTableOrder::RESERVE_TIMEZONE));
+        //$dateTime = new \DateTime($filterDate . " " . $filterTime, new \DateTimeZone(ActiveTableOrder::RESERVE_TIMEZONE));
+        $dateTime = new \DateTime($filterDate . " " . $filterTime);
         
         // get Current user
         $user = $this->container->get('security.context')->getToken()->getUser();
@@ -775,7 +776,8 @@ class TableDashboardController extends Controller
             $reserveMin = $activeTableOrder->getReserveTime()->format('i');
             
             // get reserve date and time
-            $reserveDateTime = new \DateTime($activeTableOrder->getReserveDate(), new \DateTimeZone(ActiveTableOrder::RESERVE_TIMEZONE));
+            //$reserveDateTime = new \DateTime($activeTableOrder->getReserveDate(), new \DateTimeZone(ActiveTableOrder::RESERVE_TIMEZONE));
+            $reserveDateTime = new \DateTime($activeTableOrder->getReserveDate());
             $reserveDateTime->setTime($reserveHour, $reserveMin);
    
             if ($form->isValid()) {
@@ -788,13 +790,18 @@ class TableDashboardController extends Controller
                 }
                 // Check if we can reserve current table
                 // get Booked Tables 
-                $bookedActiveTables = $this->getActiveTableOrderManager()->getBookedTablesByRestaurant($activeTable->getTableMap()->getRestaurant()->getId(), $reserveDateTime);  
-                
+                $bookedActiveTables = $this->getActiveTableOrderManager()->getBookedTablesByRestaurant($activeTable->getTableMap()->getRestaurant()->getId(), $reserveDateTime);
+
                 if (in_array($activeTableOrder->getActiveTable(), $bookedActiveTables)) {
                     return $this->render('TableRestaurantBundle:TableDashboard:table.has.allready.booked.html.twig');
                 }
-                if ($userForm->isValid()) {
+                //check is user already register by phone
+                $userPhone = $activeTableOrder->getUserPhone();
+                $registerUser = $this->getUserManager()->findUserBy(array('phone' => $userPhone));
 
+                if (!is_null($registerUser)) {
+                    $user = $registerUser;
+                } else {
                     $user = $userForm->getData();
                     $user->setEnabled(true);
 
@@ -812,34 +819,33 @@ class TableDashboardController extends Controller
                     $em = $this->getDoctrine()->getManager();
                     $em->persist($user);
                     $em->flush();
-                    
+
                     // Let's add Order and connected it to a new user
-                    
                     // Get New User
                     $user = $this->getUserManager()->findUserBy(array("username" => $email));
-              
-                    // add Order
-                    // format reserve date
-                    //$activeTableOrder->setReserveDate(new \DateTime($activeTableOrder->getReserveDate(), new \DateTimeZone(ActiveTableOrder::RESERVE_TIMEZONE)));
-                    $activeTableOrder->setReserveDate(new \DateTime($activeTableOrder->getReserveDate()));
-                    // set User Data
-                    $activeTableOrder->setUser($user);
-                    // set Table Data
-                    $activeTableOrder->setActiveTable($activeTable);
-                    // Set Status (Accept)
-                    $activeTableOrder->setStatus(ActiveTableOrder::ORDER_ACCEPT_STATUS_CODE);
-
-                    $em = $this->getDoctrine()->getManager();
-                    $em->persist($activeTableOrder);
-                    $em->flush();
-                    // Send confirm messages
-                    //To customer
-                    $this->getActiveTableOrderManager()->sendAcceptTableOrderNotification4customer($activeTableOrder);
-                    // To admin
-                    $this->getActiveTableOrderManager()->sendAcceptTableOrderNotification4admin($activeTableOrder);
-                    
-                    return $this->render('TableRestaurantBundle:TableDashboard:table.order.success.html.twig'); 
                 }
+
+                // add Order
+                // format reserve date
+                //$activeTableOrder->setReserveDate(new \DateTime($activeTableOrder->getReserveDate(), new \DateTimeZone(ActiveTableOrder::RESERVE_TIMEZONE)));
+                $activeTableOrder->setReserveDate(new \DateTime($activeTableOrder->getReserveDate()));
+                // set User Data
+                $activeTableOrder->setUser($user);
+                // set Table Data
+                $activeTableOrder->setActiveTable($activeTable);
+                // Set Status (Accept)
+                $activeTableOrder->setStatus(ActiveTableOrder::ORDER_ACCEPT_STATUS_CODE);
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($activeTableOrder);
+                $em->flush();
+                // Send confirm messages
+                //To customer
+                $this->getActiveTableOrderManager()->sendAcceptTableOrderNotification4customer($activeTableOrder);
+                // To admin
+                $this->getActiveTableOrderManager()->sendAcceptTableOrderNotification4admin($activeTableOrder);
+
+                return $this->render('TableRestaurantBundle:TableDashboard:table.order.success.html.twig');
             }
         }
         
