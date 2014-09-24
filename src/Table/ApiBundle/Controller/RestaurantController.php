@@ -155,10 +155,10 @@ class RestaurantController extends Controller
             if (!is_null($menuPhoto->getFileName())) {
                 $imageURL = $this->container->getParameter('site_host') . 
                                 $this->container->getParameter('base_folder_url') . 
-                                $helper->asset($menuPhoto, 'file');
+                                $helper->asset($menuPhoto, 'restaurant_menu_photo');
                 $thumbImage = $menuPhoto->getThumbFileName();
                 $thumbURL = str_replace($menuPhoto->getFileName(), $thumbImage, $imageURL);
-                $thumbPath = str_replace($menuPhoto->getFileName(), $thumbImage, getcwd() . $helper->asset($menuPhoto, 'file'));
+                $thumbPath = str_replace($menuPhoto->getFileName(), $thumbImage, getcwd() . $helper->asset($menuPhoto, 'restaurant_menu_photo'));
                 $addMenuPhoto['big'] = $imageURL;
                 // check if file exist
                 if (file_exists($thumbPath)) {
@@ -201,11 +201,11 @@ class RestaurantController extends Controller
             if (!is_null($additionalPhoto->getFileName())) {
                 $imageURL = $this->container->getParameter('site_host') . 
                                 $this->container->getParameter('base_folder_url') . 
-                                $helper->asset($additionalPhoto, 'file');
+                                $helper->asset($additionalPhoto, 'restaurant_additional_photo');
                 
                 $thumbImage = $additionalPhoto->getThumbFileName();
                 $thumbURL = str_replace($additionalPhoto->getFileName(), $thumbImage, $imageURL);
-                $thumbPath = str_replace($additionalPhoto->getFileName(), $thumbImage, getcwd() . $helper->asset($additionalPhoto, 'file'));
+                $thumbPath = str_replace($additionalPhoto->getFileName(), $thumbImage, getcwd() . $helper->asset($additionalPhoto, 'restaurant_additional_photo'));
                 $addPhoto['big'] = $imageURL;
 
                 // check if file exist
