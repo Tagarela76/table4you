@@ -26,7 +26,7 @@ class ActiveTableDTO
         $helper = $container->get('vich_uploader.templating.helper.uploader_helper');
         $originTableTypePicture = $container->getParameter('site_host') . 
                         $container->getParameter('base_folder_url') . 
-                        $helper->asset($activeTable->getTableType(), 'file');
+                        $helper->asset($activeTable->getTableType(), 'table_type');
         $bigTableTypePicture = str_replace($activeTable->getTableType()->getFileName(), $activeTable->getTableType()->getBigFileName(), $originTableTypePicture);
 
         if (@getimagesize($bigTableTypePicture)) {

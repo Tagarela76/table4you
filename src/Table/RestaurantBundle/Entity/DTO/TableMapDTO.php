@@ -24,7 +24,7 @@ class TableMapDTO
         $helper = $container->get('vich_uploader.templating.helper.uploader_helper');
         $originImage = $container->getParameter('site_host') . 
                         $container->getParameter('base_folder_url') . 
-                        $helper->asset($tableMap, 'file');
+                        $helper->asset($tableMap, 'table_map');
         $bigImage = str_replace($tableMap->getFileName(), $tableMap->getBigFileName(), $originImage);
         
         if (@getimagesize($bigImage)) {
