@@ -73,6 +73,7 @@ main:
         pleaseAcceptOrder: "Подтвердите или предложите альтернативу"
         reserveRequest: "Стол зарезервирован"
         reserveReject: "Отказ от бронирования"
+        institution: "Заведение"
     registration:
       notification:
           greeting: Благодарим Вас за регистрацию на нашем сервисе, теперь вы можете резервировать столы он-лайн www.table4you.ru или через приложение в AppStore.
@@ -80,6 +81,9 @@ main:
           login: логин
           password: пароль
           wishes: "С наилучшими пожеланиями, команда сайта."
+    resetting:
+      notification:
+          resettingCode: "Код для восстановления доступа:" 
   breadcrumbs:
       label:
           home: Главная
