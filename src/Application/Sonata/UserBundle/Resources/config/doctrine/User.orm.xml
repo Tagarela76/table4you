@@ -9,7 +9,8 @@
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
-
+        <field name="resettingCode" column="resettingCode" type="string" length="50" nullable="true" unique="true" />
+        
     </entity>
 
 </doctrine-mapping>

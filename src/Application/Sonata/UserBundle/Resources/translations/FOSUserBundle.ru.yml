@@ -42,3 +42,14 @@ security:
   login:
     forgot_password: "Забыли пароль?"   
     email: "E-mail:"
+
+resetting:
+    request:
+        invalid_phone: Пользователь с телефоном "%phone%" не существует.
+        enter_code: Введите код из смс
+        password: Введине новый пароль
+        confirm_password: Повторите пароль
+        invalid_code: Неверный код
+        not_match_passwords: Пароли не совпадают
+        phone_or_email: Введите телефон или email
+        invalid_user: Пользователь с телефоном или email "%data%" не существует.
