@@ -37,6 +37,11 @@ class User extends BaseUser
     
     protected $publicName;
 
+    /**
+     *
+     * @var string 
+     */
+    protected $resettingCode;
 
     /**
      * @var Table\RestaurantBundle\Entity\Restaurant[] $restaurants
@@ -64,7 +69,17 @@ class User extends BaseUser
         return $this->id;
     }
     
-    /**
+    public function getResettingCode()
+    {
+        return $this->resettingCode;
+    }
+
+    public function setResettingCode($resettingCode)
+    {
+        $this->resettingCode = $resettingCode;
+    }
+
+        /**
      * Get public name
      * 
      * @return string

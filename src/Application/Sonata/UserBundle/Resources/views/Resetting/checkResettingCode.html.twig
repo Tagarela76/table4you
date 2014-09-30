@@ -1,0 +1,24 @@
+{% extends 'TableMainBundle::layout.html.twig' %}
+{% block content %}
+    <form action="{{ path('fos_user_check_resetting_code') }}" method="POST" class="fos_user_resetting_request">
+        <label for="username">{{ 'resetting.request.enter_code'|trans({}, 'FOSUserBundle') }}</label>
+        <div>
+            <input type="text" id="userPhone" name="userPhone" required="required" value="{{ userPhone }}" readonly/>
+        </div>
+        <div>
+            <input type="text" id="resettingCode" name="resettingCode" required="required" />
+        </div>
+        <div>
+            <input type="submit" value="{{ 'resetting.request.submit'|trans({}, 'FOSUserBundle') }}" />
+        </div>
+        <div>
+            <input type="hidden" id="id" name="id" value="{{userId}}" required="required" />
+        </div>
+    </form>
+    {% if invalid_phone is defined %}
+        <p>{{ 'resetting.request.invalid_phone'|trans({'%data%': invalid_user}, 'FOSUserBundle') }}</p>
+    {% endif %}
+    {% if invalid_code is defined %}
+        <p>{{ 'resetting.request.invalid_code'|trans({}, 'FOSUserBundle') }}</p>
+    {% endif %}    
+{% endblock %}

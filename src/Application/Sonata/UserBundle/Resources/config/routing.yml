@@ -27,6 +27,24 @@ fos_user_registration_register_custom:
     defaults: { _controller: SonataUserBundle:Registration:register }     
     options:
        expose: true
+
+fos_user_check_resetting_code:
+    pattern:  /checkResettingCode
+    defaults: { _controller: SonataUserBundle:Resetting:checkResettingCode }     
+    options:
+       expose: true
+
+fos_user_resetting_send_code:
+    pattern:  /resetting/send-code
+    defaults: { _controller: SonataUserBundle:Resetting:sendResettingCode }     
+    options:
+       expose: true
+
+fos_user_resetting_reset_password:
+    pattern:  /resetting/reset
+    defaults: { _controller: SonataUserBundle:Resetting:resetUserPassword }     
+    options:
+       expose: true
        
 sonata_user_profile_edit:
     pattern:  /profile/edit
