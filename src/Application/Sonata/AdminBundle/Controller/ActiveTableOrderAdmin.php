@@ -33,7 +33,7 @@ class ActiveTableOrderAdmin extends Admin
             $logo = $container->getParameter('site_url') . 'uploads/t4ylogo.png';
             $message = \Swift_Message::newInstance()
                     ->setSubject($subject)
-                    ->setFrom("noreply@table4you.com")
+                    ->setFrom($container->getParameter('mailer_user'))
                     ->setTo($userEmail)
                     ->setBody(
                     $container->get('templating')->render(
