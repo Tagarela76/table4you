@@ -186,7 +186,7 @@ class DefaultController extends Controller
         $tableMap = $this->getTableMapManager()->findOneById($tableMapId);
         // get image src
         $helper = $this->container->get('vich_uploader.templating.helper.uploader_helper');
-        $path = $helper->asset($tableMap, 'file');
+        $path = $helper->asset($tableMap, 'table_map');
         $baseUrl = $this->container->getParameter('base_folder_url');
         return new Response($baseUrl . $path);
     }
