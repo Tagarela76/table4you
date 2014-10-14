@@ -241,7 +241,7 @@ class TableDashboardController extends Controller
             
             // resize image
             $helper = $this->container->get('vich_uploader.templating.helper.uploader_helper');
-            $imagePath = getcwd() . $helper->asset($tableType, 'file');
+            $imagePath = getcwd() . $helper->asset($tableType, 'table_type');
             
             // check if file exist
             if (file_exists($imagePath) && getimagesize($imagePath)) {
@@ -295,7 +295,7 @@ class TableDashboardController extends Controller
         if (!is_null($file)) {
             // resize image
             $helper = $this->container->get('vich_uploader.templating.helper.uploader_helper');
-            $imagePath = getcwd() . $helper->asset($tableType, 'file');
+            $imagePath = getcwd() . $helper->asset($tableType, 'table_type');
             
             // check if file exist
             if (file_exists($imagePath) && getimagesize($imagePath)) {
@@ -472,7 +472,7 @@ class TableDashboardController extends Controller
         if (!is_null($file)) {
             // resize image
             $helper = $this->container->get('vich_uploader.templating.helper.uploader_helper');
-            $imagePath = getcwd() . $helper->asset($tableMap, 'file');
+            $imagePath = getcwd() . $helper->asset($tableMap, 'table_map');
             
             // check if file exist
             if (file_exists($imagePath) && getimagesize($imagePath)) {
@@ -558,7 +558,7 @@ class TableDashboardController extends Controller
         foreach ($activeTableList as $activeTable) {
             if (!is_null($activeTable)) {
                 $activeTableObj = array();
-                $path = $helper->asset($activeTable->getTableType(), 'file');
+                $path = $helper->asset($activeTable->getTableType(), 'table_type');
                 $activeTableObj['id'] = $activeTable->getId();
                 $activeTableObj['src'] = $baseUrl . $path;
                 $activeTableObj['left'] = $activeTable->getLeftPosition();
