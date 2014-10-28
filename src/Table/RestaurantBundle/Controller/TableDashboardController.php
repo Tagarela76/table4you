@@ -1020,7 +1020,7 @@ class TableDashboardController extends Controller
         $activeTableList = array();
         //get bookedTables id
         foreach($bookedTables as $bookedTableId){
-            $activeTables = $this->getActiveTableOrderManager()->getActiveTableOrderHistory($bookedTableId);
+            $activeTables = $this->getActiveTableOrderManager()->getActiveTableOrderHistoryByDate($bookedTableId, $dateTime);
             if(isset($activeTables) && !empty($activeTables)){
                 $activeTableList[$bookedTableId] = $activeTables;
             }
