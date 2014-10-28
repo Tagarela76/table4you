@@ -994,4 +994,40 @@ class TableDashboardController extends Controller
         }
         return $activeTableList;
     }
+    
+    /**
+     * 
+     * get table
+     * 
+     * @return Response
+     */
+    public function getActiveTableOrderListByDateAction()
+    {
+        $filterDate = $this->getRequest()->request->get('filterDate');
+        $filterTime = $this->getRequest()->request->get('filterTime');
+        
+        $mapId = $this->getRequest()->request->get('mapId');
+        // init map obj
+        $tableMap = $this->getTableMapManager()->findOneById($mapId);
+        
+        if($filterTime == ''){
+            $filterTime = "00:00";
+        }
+        $dateTime = new \DateTime($filterDate.' '.$filterTime);
+        $restaurantId = $tableMap->getRestaurant()->getId();
+        // get Booked Tables 
+        $bookedTables = $this->getActiveTableOrderManager()->getBookedTablesByRestaurant($restaurantId, $dateTime);
+        $activeTableList = array();
+        //get bookedTables id
+        foreach($bookedTables as $bookedTableId){
+            $activeTables = $this->getActiveTableOrderManager()->getActiveTableOrderHistory($bookedTableId);
+            if(isset($activeTables) && !empty($activeTables)){
+                $activeTableList[$bookedTableId] = $activeTables;
+            }
+        }
+        
+        return $this->render('TableRestaurantBundle:TableDashboard:viewBookedTablesList.html.twig', array(
+            'activeTableList' => $activeTableList
+        ));
+    }
 }

@@ -776,6 +776,7 @@ class DefaultController extends Controller
         $restaurant = $news->getRestaurant();
         // registration form (header)
         $regForm = $this->container->get('fos_user.registration.form');
+        
         return array(
             'news' => $news,
             'restaurant' => $restaurant,

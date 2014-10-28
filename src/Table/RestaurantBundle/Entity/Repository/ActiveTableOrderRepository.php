@@ -206,7 +206,12 @@ class ActiveTableOrderRepository extends EntityRepository
         $endTime = clone $dateTime; // first init
   
         switch (true) {
-            case ($dateTime->format("H:i") < "16:00") :           
+            case($dateTime->format("H:i") == "00:00") :
+                //get all tables
+                $startTime->setTime(0, 0);
+                $endTime->setTime(23, 59);
+                break;
+            case ($dateTime->format("H:i")>"00:00" && $dateTime->format("H:i") < "16:00") :           
                 // get start time (+-1.5h)
                 $startTime->modify("-90 minutes");
                 // get end time
@@ -240,6 +245,7 @@ class ActiveTableOrderRepository extends EntityRepository
                     ->setParameter('endTime', $endTime->format('H:i:s'));
         }
 
+        $query->orderBy('activeTable.tableNumber', 'ASC');
         return $query->getQuery()->getResult();
     }
     
