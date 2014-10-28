@@ -171,6 +171,17 @@ class ActiveTableOrderManager
     }
     
     /**
+     * @param integer $activeTable
+     * 
+     * 
+     * @return Table\RestaurantBundle\Entity\ActiveTableOrder[]
+     */
+    public function getActiveTableOrderHistoryByDate($activeTable, $dateTime)
+    {
+        return $this->getActiveTableOrderRepo()->getActiveTableOrderHistoryByDate($activeTable, $dateTime);
+    }
+    
+    /**
      * Send reject order notifiction to customer
      * 
      * @param Table\RestaurantBundle\Entity\ActiveTableOrder $activeTableOrder
