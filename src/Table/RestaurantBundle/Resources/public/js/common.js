@@ -557,6 +557,23 @@ function TableOrder() {
         });
     }
 
+    this.getActiveTableOrderListByDate = function()
+    {
+        // get map id
+        var mapId = $("#mapId").val();
+        var filterTime = $('#tableOrderTimepicker').val();
+        var filterDate = $('#tableOrderDatepicker').val();
+        $.ajax({
+            url: Routing.generate('table_getActiveTableOrderListByDate'),
+            data: {mapId: mapId, filterDate: filterDate, filterTime: filterTime},
+            type: "POST",
+            dataType: "html",
+            success: function(responce) {
+                $('#bookedTablesList').html(responce);
+            }
+        });
+    }
+    
     this.selectActiveTable = function(activeTableId) {
 
         // Get Table Number
