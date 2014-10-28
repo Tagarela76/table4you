@@ -284,5 +284,43 @@ class ActiveTableOrderRepository extends EntityRepository
 
         return $query->getQuery()->getResult();
     }
+    
+    /**
+     * 
+     * Get Order History by Active Table
+     * 
+     * @param integer $activeTable
+     * @param DateTime $dateTime
+     * 
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function getActiveTableOrderHistoryByDate($activeTable, $dateTime)
+    {
+        $query = $this->createQueryBuilder('tableOrder');
+        $query->where('tableOrder.activeTable = :activeTable')
+                ->setParameter('activeTable', $activeTable);
+        
+        // Show all completed and not processed orders
+        $orderNothingDidStatus = ActiveTableOrder::ORDER_NOTHING_DID_STATUS_CODE;
+        $orderAcceptStatus = ActiveTableOrder::ORDER_ACCEPT_STATUS_CODE;
+        $query->andWhere('tableOrder.status = :orderNothingDidStatus OR tableOrder.status = :orderAcceptStatus')
+              ->setParameter('orderNothingDidStatus', $orderNothingDidStatus)
+              ->setParameter('orderAcceptStatus', $orderAcceptStatus);  
+        
+        // Show only actual orders, not earlier that now
+        // Get current DateTime
+        if(is_null($dateTime)){
+            $dateTime = new \DateTime("now");
+        }
+        $currentDate = $dateTime->format("Y-m-d");
+        $currentTime = $dateTime->format("H:i");
+        $query->andWhere('(tableOrder.reserveDate = :currentDate) OR (tableOrder.reserveDate = :currentDate AND tableOrder.reserveTime > :currentTime)')
+              ->setParameter('currentDate', $currentDate)
+              ->setParameter('currentTime', $currentTime); 
+        
+        $query->orderBy('tableOrder.reserveDate, tableOrder.reserveTime', 'ASC');
+
+        return $query->getQuery()->getResult();
+    }
 
 }
