@@ -11,6 +11,8 @@
                 {% for tableOrder in tableOrderList %}  
                     <div class="span10">
                         <p>{{tableOrder.reserveDate|date('d.m.y')}} - {{tableOrder.reserveTime|date('H:i')}}</p>
+                        <p>{{tableOrder.userName}}</p>
+                        <p>{{tableOrder.userPhone}}</p>
                     </div>
                 {% endfor %}
             </div>
