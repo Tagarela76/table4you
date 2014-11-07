@@ -241,7 +241,7 @@ class TableDashboardController extends Controller
             
             // resize image
             $helper = $this->container->get('vich_uploader.templating.helper.uploader_helper');
-            $imagePath = getcwd() . $helper->asset($tableType, 'file');
+            $imagePath = getcwd() . $helper->asset($tableType, 'table_type');
             
             // check if file exist
             if (file_exists($imagePath) && getimagesize($imagePath)) {
@@ -295,7 +295,7 @@ class TableDashboardController extends Controller
         if (!is_null($file)) {
             // resize image
             $helper = $this->container->get('vich_uploader.templating.helper.uploader_helper');
-            $imagePath = getcwd() . $helper->asset($tableType, 'file');
+            $imagePath = getcwd() . $helper->asset($tableType, 'table_type');
             
             // check if file exist
             if (file_exists($imagePath) && getimagesize($imagePath)) {
@@ -472,7 +472,7 @@ class TableDashboardController extends Controller
         if (!is_null($file)) {
             // resize image
             $helper = $this->container->get('vich_uploader.templating.helper.uploader_helper');
-            $imagePath = getcwd() . $helper->asset($tableMap, 'file');
+            $imagePath = getcwd() . $helper->asset($tableMap, 'table_map');
             
             // check if file exist
             if (file_exists($imagePath) && getimagesize($imagePath)) {
@@ -558,7 +558,7 @@ class TableDashboardController extends Controller
         foreach ($activeTableList as $activeTable) {
             if (!is_null($activeTable)) {
                 $activeTableObj = array();
-                $path = $helper->asset($activeTable->getTableType(), 'file');
+                $path = $helper->asset($activeTable->getTableType(), 'table_type');
                 $activeTableObj['id'] = $activeTable->getId();
                 $activeTableObj['src'] = $baseUrl . $path;
                 $activeTableObj['left'] = $activeTable->getLeftPosition();
@@ -993,5 +993,41 @@ class TableDashboardController extends Controller
             $activeTableList[] = $activeTable;
         }
         return $activeTableList;
+    }
+    
+    /**
+     * 
+     * get table
+     * 
+     * @return Response
+     */
+    public function getActiveTableOrderListByDateAction()
+    {
+        $filterDate = $this->getRequest()->request->get('filterDate');
+        $filterTime = $this->getRequest()->request->get('filterTime');
+        
+        $mapId = $this->getRequest()->request->get('mapId');
+        // init map obj
+        $tableMap = $this->getTableMapManager()->findOneById($mapId);
+        
+        if($filterTime == ''){
+            $filterTime = "00:00";
+        }
+        $dateTime = new \DateTime($filterDate.' '.$filterTime);
+        $restaurantId = $tableMap->getRestaurant()->getId();
+        // get Booked Tables 
+        $bookedTables = $this->getActiveTableOrderManager()->getBookedTablesByRestaurant($restaurantId, $dateTime);
+        $activeTableList = array();
+        //get bookedTables id
+        foreach($bookedTables as $bookedTableId){
+            $activeTables = $this->getActiveTableOrderManager()->getActiveTableOrderHistoryByDate($bookedTableId, $dateTime);
+            if(isset($activeTables) && !empty($activeTables)){
+                $activeTableList[$bookedTableId] = $activeTables;
+            }
+        }
+        
+        return $this->render('TableRestaurantBundle:TableDashboard:viewBookedTablesList.html.twig', array(
+            'activeTableList' => $activeTableList
+        ));
     }
 }

@@ -6,7 +6,24 @@
     
     $(function() {       
         // Rating
-        page.rating.initRating();  
+        page.rating.initRating();
+        
+        // fancyBOX
+            $("#newsImg").fancybox({
+                    prevEffect	: 'none',
+                    nextEffect	: 'none',
+                    closeClick : true,
+                    padding: 0,
+                    helpers	: {
+                            title	: {
+                                    type: 'outside'
+                            },
+                            thumbs	: {
+                                    width	: 250,
+                                    height	: 150
+                            }
+                    }
+            });
     });
 
 </script> 
@@ -22,7 +39,11 @@
     {% include 'TableRestaurantBundle:Default:restaurant.html.twig' %}  
     <div class="news-container news-stock-page">
         <div class="news-img-container">
-            <div class="news-img">{% thumbnail news.photo, 'reference' %}</div>
+            <div class="news-img" >
+                <a  id="newsImg" href="{% path news.photo, 'reference' %}">
+                    {% thumbnail news.photo, 'reference' %}
+                </a>
+            </div>
         </div>
         <div class="news-content">
             <p class="news-content-title">

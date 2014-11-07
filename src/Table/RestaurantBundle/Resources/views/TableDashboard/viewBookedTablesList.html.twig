@@ -1,0 +1,21 @@
+
+{% if activeTableList is not null %}
+    {% for tableOrderList in activeTableList %}  
+        {% if tableOrderList is not null %}
+            <div class="row-fluid reserve-table-info">
+                {% if tableOrderList.0 is defined %}
+                    <div class="span10">
+                        {{tableOrderList.0.tableNumber}}
+                    </div>
+                {% endif %}
+                {% for tableOrder in tableOrderList %}  
+                    <div class="span10">
+                        <p>{{tableOrder.reserveDate|date('d.m.y')}} - {{tableOrder.reserveTime|date('H:i')}}</p>
+                        <p>{{tableOrder.userName}}</p>
+                        <p>{{tableOrder.userPhone}}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
