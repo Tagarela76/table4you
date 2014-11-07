@@ -27,7 +27,7 @@
         "knplabs/knp-menu": "1.1.*@dev",
         "sonata-project/core-bundle": "2.2.*@dev",
         "sonata-project/block-bundle": "2.2.*@dev",
-        "sonata-project/easy-extends-bundle": "2.1.x-dev",
+        "sonata-project/easy-extends-bundle": "2.1.7",
         "sonata-project/doctrine-orm-admin-bundle": "2.2.*@dev",
         "sonata-project/user-bundle": "2.2.x-dev",
         "sonata-project/media-bundle": "2.2.*@dev",
@@ -47,7 +47,7 @@
         "vich/uploader-bundle": "dev-master",
         "knplabs/gaufrette": "0.2.*@dev",
         "knplabs/knp-gaufrette-bundle" : "dev-master",
-        "hwi/oauth-bundle": "0.3.*@dev",
+        "hwi/oauth-bundle": "0.4.*@dev",
         "abeautifulsite/simpleimage": "dev-master",
         "willdurand/geocoder": "@stable"
     },
