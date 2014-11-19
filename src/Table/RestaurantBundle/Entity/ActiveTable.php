@@ -87,6 +87,14 @@ class ActiveTable
      */
     protected $topPositionResized;
 
+    /**
+     *
+     * @var boolean 
+     * 
+     * @ORM\Column(name="is_reserved", type="boolean", options={"default" = 0})
+     */
+    protected $isReserved = 0;
+    
     const MAP_SCALE = 1.25;
     
     const IMAGE_HEIGHT_CLIENT_SIDE = 48;
@@ -244,6 +252,28 @@ class ActiveTable
         $this->tableMap = $tableMap;
 
         return $this;
+    }
+
+    /**
+     * 
+     * get is reserved
+     * 
+     * @return boolean
+     */
+    function getIsReserved()
+    {
+        return $this->isReserved;
+    }
+
+    /**
+     * 
+     * set is reserved
+     * 
+     * @param boolean $isReserved
+     */
+    function setIsReserved($isReserved)
+    {
+        $this->isReserved = $isReserved;
     }
 
     /**

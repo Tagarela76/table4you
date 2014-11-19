@@ -101,4 +101,17 @@ class ActiveTableManager
     {
         return $this->getActiveTableRepo()->findByTableMapAndNumber($mapId, $tableNumber);
     }
+    
+    /**
+     * 
+     * get Active Table Reserved By Admin
+     * 
+     * @param int $restaurantId
+     * 
+     * @return Table\RestaurantBundle\Entity\ActiveTable
+     */
+    public function getActiveTableReservedByAdmin($restaurantId)
+    {
+        return $this->getActiveTableRepo()->getActiveTableReservedByAdmin($restaurantId);
+    }
 }
