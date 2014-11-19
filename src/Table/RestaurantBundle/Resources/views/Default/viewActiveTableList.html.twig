@@ -1,5 +1,5 @@
 {% for activeTable in activeTableList %}
-    {% if activeTable.id in bookedTables %}
+    {% if (activeTable.id in bookedTables) or (activeTable.isReserved == 1) %}
         {#BOOKED TABLE #}
         <img id="activeTable_{{activeTable.id}}" title="{{activeTable.tableNumber}} {% trans %}main.tableMap.createMap.table{% endtrans %}" 
              class="active-table-img active-table-booked"

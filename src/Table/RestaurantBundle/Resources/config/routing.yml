@@ -171,6 +171,14 @@ table_deleteActiveTable:
         _method: POST  
     options:
        expose: true  
+
+table_reserveActiveTableByAdmin:
+    pattern:  /reserveActiveTableByAdmin
+    defaults: { _controller: TableRestaurantBundle:TableDashboard:reserveActiveTableByAdmin, _format: json }
+    requirements:
+        _method: POST  
+    options:
+       expose: true  
        
 table_updateActiveTable:
     pattern:  /updateActiveTable
