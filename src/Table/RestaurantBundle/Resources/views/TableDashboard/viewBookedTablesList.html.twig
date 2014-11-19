@@ -19,3 +19,15 @@
         {% endif %}
     {% endfor %}
 {% endif %}
+
+{% if activeTableReservedByAdminList is not null %}
+    {% for activeTable in activeTableReservedByAdminList %} 
+        <div class="span10">
+            <p>
+                {{activeTable.tableNumber}} 
+                {% trans %}main.tableMap.createMap.table{% endtrans %} - 
+                {% trans %}main.tableMap.createMap.reservedByAdmin{% endtrans %}
+            </p>
+        </div>
+    {% endfor %}
+{% endif %}

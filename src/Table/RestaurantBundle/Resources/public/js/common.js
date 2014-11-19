@@ -97,6 +97,29 @@ function ActiveTable() {
             }
         });
     }
+    
+    this.reserveTableByAdmin = function(activeTableId)
+    {
+        if($('#reserveTableByAdmin_'+activeTableId).is(':checked')){
+           this.isChecked = 1;
+           $('#activeTableReservedContainer').hide();
+        }else{
+            this.isChecked = 0;
+            $('#activeTableReservedContainer').show();
+        }
+        $.ajax({
+            url: Routing.generate('table_reserveActiveTableByAdmin'),
+            data: {
+                    activeTableId: activeTableId,
+                    isReserved: this.isChecked,
+                },
+            type: "POST",
+            dataType: "text",
+            success: function(data) {
+                page.tableOrder.refreshBookedTableListInAdminDashboard($('#tableOrderDatepicker').val())
+            }
+        });
+    }
 }
 
 function TableMap() {
@@ -569,7 +592,9 @@ function TableOrder() {
             type: "POST",
             dataType: "html",
             success: function(responce) {
+                console.log(response);
                 $('#bookedTablesList').html(responce);
+                page.tableOrder.refreshBookedTableListInAdminDashboard($('#tableOrderDatepicker').val())
             }
         });
     }

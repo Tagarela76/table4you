@@ -78,7 +78,7 @@ main:
                 peopleCount: Укажите кол-во гостей
             errors: Ошибки при заполении формы
         choiceTable: Выбрать столик    
-        addTable: Добавить стол  
+        addTable: Добавить стол
       createMap:
         header: Создать карту
         restaurantList: Выбрать ресторан
@@ -107,6 +107,7 @@ main:
         save: Сохранить
         table: Стол
         cancel: Отменить
+        reservedByAdmin: забронирован администратором
       orders:
         header: Заказы
         restaurant: Ресторан
@@ -119,6 +120,7 @@ main:
             filter: Фильтровать
             reserve: Резервировать
             cancel: Отменить
+            book: Забронировать
         form:
             label:
                 date: "Дата:"
