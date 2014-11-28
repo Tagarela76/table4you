@@ -1026,8 +1026,24 @@ class TableDashboardController extends Controller
             }
         }
         
+        //get table list reserved by admin(checkbox in admin panel)
+        $activeTableReservedByAdminList = $this->getActiveTableManager()->getActiveTableReservedByAdmin($restaurantId);
         return $this->render('TableRestaurantBundle:TableDashboard:viewBookedTablesList.html.twig', array(
-            'activeTableList' => $activeTableList
+            'activeTableList' => $activeTableList,
+            'activeTableReservedByAdminList' => $activeTableReservedByAdminList
         ));
+    }
+    
+    public function reserveActiveTableByAdminAction()
+    {
+        $activeTableId= $this->getRequest()->request->get('activeTableId');
+        $isReserved = $this->getRequest()->request->get('isReserved');
+        $activeTable = $this->getActiveTableManager()->findOneById($activeTableId);
+        $activeTable->setIsReserved($isReserved);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($activeTable);
+        $em->flush();
+        
+        return new Response("success");
     }
 }

@@ -3,7 +3,12 @@
         <div class="span4">
             {% trans %}main.tableMap.orders.list.table{% endtrans %} {{activeTable.tableNumber}}
         </div>   
-        <div class="span7">
+        <div class="span7" 
+              {% if activeTable.isReserved %}
+                style='display:none' 
+             {% endif %} 
+             id='activeTableReservedContainer'
+             >
             {% if acceptReserve %}
                 <a onclick="page.tableOrder.initTableData({{activeTable.id}});" data-toggle="modal" href="#reservePopup4Admin">
             {% endif %} 
@@ -17,6 +22,22 @@
             <input class="button button-cancel" onclick='page.tableOrder.viewFilter(); return false;' value="{% trans %}main.tableMap.orders.list.cancel{% endtrans %}">
                 <!--<img src="{{ asset('bundles/tablerestaurant/images/return_arrow.png') }}" />-->
 
+        </div>
+    </div>
+    <div class="row-fluid active-Table-Order-Reserve">
+        <div class="span7">
+            <label class="book-table-label">
+                {% trans %}main.tableMap.orders.list.book{% endtrans %}
+            </label>
+        </div>
+        <div class="span4">
+            <input type="checkbox" 
+                   id="reserveTableByAdmin_{{activeTable.id}}" 
+                   onchange = "page.activeTable.reserveTableByAdmin({{activeTable.id}})"
+                   {% if activeTable.isReserved %}
+                       checked ="checked"
+                   {% endif %} 
+                   />
         </div>
     </div>
 {% endif %}
