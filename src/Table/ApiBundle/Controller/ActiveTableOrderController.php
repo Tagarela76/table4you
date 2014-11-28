@@ -159,12 +159,16 @@ class ActiveTableOrderController extends Controller
         $tableMap = $this->getTableMapManager()->findOneById($mapId);
         $restaurantId = $tableMap->getRestaurant()->getId();
         // transform to date time
-        $dateTime = new \DateTime("now", new \DateTimeZone(ActiveTableOrder::RESERVE_TIMEZONE));
+        //$dateTime = new \DateTime("now", new \DateTimeZone(ActiveTableOrder::RESERVE_TIMEZONE));
+        $dateTime = new \DateTime("now");
         $dateTime->setTimestamp($reserveTms);
 
         // get Booked Tables 
         $bookedTables = $this->getActiveTableOrderManager()->getBookedTablesByRestaurant($restaurantId, $dateTime); 
-
+        $activeTableReservedByAdminList = $this->getActiveTableManager()->getActiveTableReservedByAdmin($restaurantId);
+        foreach($activeTableReservedByAdminList as $activeTableReservedByAdmin){
+            $bookedTables[] = $activeTableReservedByAdmin->getId();
+        }
         return array(
             "success" => true,
             "response" => $bookedTables
