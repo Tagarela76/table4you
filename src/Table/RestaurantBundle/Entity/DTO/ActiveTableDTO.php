@@ -29,7 +29,7 @@ class ActiveTableDTO
                         $helper->asset($activeTable->getTableType(), 'table_type');
         $bigTableTypePicture = str_replace($activeTable->getTableType()->getFileName(), $activeTable->getTableType()->getBigFileName(), $originTableTypePicture);
 
-        if (@getimagesize($bigTableTypePicture)) {
+        if (file_exists($bigTableTypePicture)) {
             $this->tableTypePicture = $bigTableTypePicture;
         } else {
             $this->tableTypePicture = $bigTableTypePicture; //Temporary solution
