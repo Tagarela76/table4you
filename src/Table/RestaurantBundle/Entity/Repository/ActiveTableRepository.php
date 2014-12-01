@@ -43,7 +43,6 @@ class ActiveTableRepository extends EntityRepository
      */
     public function getActiveTableReservedByAdmin($restaurantId)
     {
-        $query = $this->createQueryBuilder('activeTable');
         $query = $this->createQueryBuilder('activeTable')
                 ->leftJoin('activeTable.tableMap', 'tableMap')
                 ->leftJoin('tableMap.restaurant', 'restaurant')
