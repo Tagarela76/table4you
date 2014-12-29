@@ -6,6 +6,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use Table\MainBundle\Controller\Controller;
 use Table\RestaurantBundle\Entity\Restaurant;
 use Symfony\Component\HttpFoundation\Request;
+use Table\RestaurantBundle\Entity\RatingStat;
 
 use Table\RestaurantBundle\Entity\DTO\RestaurantDTO;
 use Table\RestaurantBundle\Entity\DTO\GeoSearchDTO;
